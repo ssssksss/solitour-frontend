@@ -1,0 +1,80 @@
+import Link from "next/link";
+
+type MyProps = {
+  pathname: string;
+};
+
+const Header = ({ pathname }: MyProps) => {
+  return (
+    <header className="relative z-10 shadow flex flex-row justify-center">
+      <div className="w-[1440px] h-20 flex flex-row justify-between items-center fixed">
+        <Link className="font-black pl-[38px]" href="/">
+          Solitour
+        </Link>
+        <div className="flex flex-row justify-between w-[960px]">
+          <nav>
+            <ul className="flex flex-row space-x-10 font text-gray-500">
+              <li>
+                <Link
+                  className={
+                    `${pathname === "/" ? "font-black text-black " : " "}` +
+                    "hover:text-black"
+                  }
+                  href="/"
+                >
+                  홈
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={
+                    `${
+                      pathname.includes("/informations")
+                        ? "font-black text-black "
+                        : " "
+                    }` + "hover:text-black hover:font-black"
+                  }
+                  href="/informations"
+                >
+                  정보
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={
+                    `${
+                      pathname.includes("/meetings")
+                        ? "font-black text-black "
+                        : " "
+                    }` + "hover:text-black hover:font-black"
+                  }
+                  href="/meetings"
+                >
+                  모임
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <div className="flex flex-row space-x-2">
+            <Link
+              className="text-gray-500 hover:font-black hover:text-black"
+              href="/login"
+            >
+              로그인
+            </Link>
+            <div className="text-gray-400">|</div>
+            <Link className="font-black" href="/register">
+              회원가입
+            </Link>
+          </div>
+        </div>
+        <Link className="font-black pr-[38px]" href="/mypage">
+          마이페이지
+        </Link>
+      </div>
+      <div className="h-20" />
+    </header>
+  );
+};
+
+export default Header;
