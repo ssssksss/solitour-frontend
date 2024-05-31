@@ -6,19 +6,19 @@ type MyProps = {
 
 const Header = ({ pathname }: MyProps) => {
   return (
-    <header className="relative z-20 shadow flex flex-row justify-center">
-      <div className="w-[1440px] h-20 flex flex-row justify-between items-center">
-        <Link className="font-black pl-[38px]" href="/">
+    <header className="relative z-20 flex flex-row justify-center shadow">
+      <div className="flex h-20 w-[1440px] flex-row items-center justify-between">
+        <Link className="pl-[38px] font-black" href="/">
           Solitour
         </Link>
-        <div className="flex flex-row justify-between flex-grow px-36">
+        <div className="flex flex-grow flex-row justify-between px-36">
           <nav>
-            <ul className="flex flex-row space-x-10 font text-gray-500">
+            <ul className="font flex flex-row space-x-10 text-gray-500">
               <li>
                 <Link
                   className={
-                    `${pathname === "/" ? "font-black text-black " : " "}` +
-                    "hover:text-black hover:font-black"
+                    `${pathname === "/" ? "font-black text-black" : " "}` +
+                    "hover:font-black hover:text-black"
                   }
                   href="/"
                 >
@@ -30,9 +30,9 @@ const Header = ({ pathname }: MyProps) => {
                   className={
                     `${
                       pathname.includes("/informations")
-                        ? "font-black text-black "
+                        ? "font-black text-black"
                         : " "
-                    }` + "hover:text-black hover:font-black"
+                    }` + "hover:font-black hover:text-black"
                   }
                   href="/informations/restaurant"
                 >
@@ -44,9 +44,9 @@ const Header = ({ pathname }: MyProps) => {
                   className={
                     `${
                       pathname.includes("/meetings")
-                        ? "font-black text-black "
+                        ? "font-black text-black"
                         : " "
-                    }` + "hover:text-black hover:font-black"
+                    }` + "hover:font-black hover:text-black"
                   }
                   href="/meetings"
                 >
@@ -68,7 +68,7 @@ const Header = ({ pathname }: MyProps) => {
             </Link>
           </div>
         </div>
-        <Link className="font-black pr-[38px]" href="/mypage">
+        <Link className="pr-[38px] font-black" href="/mypage">
           마이페이지
         </Link>
       </div>

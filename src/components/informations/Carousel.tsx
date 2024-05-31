@@ -8,8 +8,8 @@ type MyProps = {
 // todo
 const Carousel = ({ pathname, onClick }: MyProps) => {
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="w-[1440px] pl-[240px] py-10 font-black text-3xl">
+    <div className="flex w-full flex-col items-center">
+      <div className="w-[1440px] py-10 pl-[240px] text-3xl font-black">
         정보
       </div>
       <nav className="w-[1440px] bg-white pl-[240px]">
@@ -19,9 +19,9 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
               className={
                 `${
                   pathname.includes("restaurant")
-                    ? "font-black text-black border-b-2 border-black pb-2"
+                    ? "border-b-2 border-black pb-2 font-black text-black"
                     : "text-gray-500"
-                }` + " hover:font-black hover:text-black"
+                }` + "hover:font-black hover:text-black"
               }
               href="/informations/restaurant"
             >
@@ -33,9 +33,9 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
               className={
                 `${
                   pathname.includes("accommondation")
-                    ? "font-black text-black border-b-2 border-black pb-2"
+                    ? "border-b-2 border-black pb-2 font-black text-black"
                     : "text-gray-500"
-                }` + " hover:font-black hover:text-black"
+                }` + "hover:font-black hover:text-black"
               }
               href="/informations/accommondation"
             >
@@ -47,9 +47,9 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
               className={
                 `${
                   pathname.includes("activity")
-                    ? "font-black text-black border-b-2 border-black pb-2"
+                    ? "border-b-2 border-black pb-2 font-black text-black"
                     : "text-gray-500"
-                }` + " hover:font-black hover:text-black"
+                }` + "hover:font-black hover:text-black"
               }
               href="/informations/activity"
             >
@@ -58,22 +58,22 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
           </li>
         </ul>
       </nav>
-      <div className="w-full bg-neutral-100 flex flex-row justify-center">
-        <div className="w-[1440px] h-96 px-[240px]">
-          <div className="flex flex-row justify-between items-center pt-20">
+      <div className="flex w-full flex-row justify-center bg-neutral-100">
+        <div className="h-96 w-[1440px] px-[240px]">
+          <div className="flex flex-row items-center justify-between pt-20">
             <div>
-              <div className="font-black text-2xl">
+              <div className="text-2xl font-black">
                 <p>유용한 맛집 정보를</p>
                 <p>등록해보세요!</p>
               </div>
               <button
-                className="bg-white rounded-full px-8 py-4 text-gray-500 font-black mt-6 hover:text-black shadow"
+                className="mt-6 rounded-full bg-white px-8 py-4 font-black text-gray-500 shadow hover:text-black"
                 onClick={onClick}
               >
                 맛집 등록하기
               </button>
             </div>
-            <div className="w-[468px] h-48 bg-neutral-200" />
+            <div className="h-48 w-[468px] bg-neutral-200" />
           </div>
         </div>
       </div>
