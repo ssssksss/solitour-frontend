@@ -1,3 +1,4 @@
+import InformationList from "@/components/informations/InformationList";
 import CarouselContainer from "@/containers/informations/CarouselContainer";
 import TopListContainer from "@/containers/informations/TopListContainer";
 import { Metadata } from "next";
@@ -12,6 +13,7 @@ export default function page() {
     <div className="flex flex-col items-center">
       <CarouselContainer />
       <TopListContainer />
+      <InformationList />
     </div>
   );
 }

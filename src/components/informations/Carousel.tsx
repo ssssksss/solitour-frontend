@@ -16,11 +16,13 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
         <ul className="flex flex-row space-x-10 pb-2">
           <li>
             <Link
-              className={`${
-                pathname.includes("restaurant")
-                  ? "font-black text-black border-b-2 border-black pb-2"
-                  : "text-gray-500"
-              }`}
+              className={
+                `${
+                  pathname.includes("restaurant")
+                    ? "font-black text-black border-b-2 border-black pb-2"
+                    : "text-gray-500"
+                }` + " hover:font-black hover:text-black"
+              }
               href="/informations/restaurant"
             >
               맛집
@@ -28,11 +30,13 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
           </li>
           <li>
             <Link
-              className={`${
-                pathname.includes("accommondation")
-                  ? "font-black text-black border-b-2 border-black pb-2"
-                  : "text-gray-500"
-              }`}
+              className={
+                `${
+                  pathname.includes("accommondation")
+                    ? "font-black text-black border-b-2 border-black pb-2"
+                    : "text-gray-500"
+                }` + " hover:font-black hover:text-black"
+              }
               href="/informations/accommondation"
             >
               숙박
@@ -40,11 +44,13 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
           </li>
           <li>
             <Link
-              className={`${
-                pathname.includes("activity")
-                  ? "font-black text-black border-b-2 border-black pb-2"
-                  : "text-gray-500"
-              }`}
+              className={
+                `${
+                  pathname.includes("activity")
+                    ? "font-black text-black border-b-2 border-black pb-2"
+                    : "text-gray-500"
+                }` + " hover:font-black hover:text-black"
+              }
               href="/informations/activity"
             >
               액티비티
@@ -61,7 +67,7 @@ const Carousel = ({ pathname, onClick }: MyProps) => {
                 <p>등록해보세요!</p>
               </div>
               <button
-                className="bg-white rounded-full px-8 py-4 text-gray-500 font-black mt-6 hover:text-black"
+                className="bg-white rounded-full px-8 py-4 text-gray-500 font-black mt-6 hover:text-black shadow"
                 onClick={onClick}
               >
                 맛집 등록하기

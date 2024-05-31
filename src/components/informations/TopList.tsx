@@ -1,10 +1,6 @@
 import Link from "next/link";
 
-type MyProps = {
-  onClick: () => void;
-};
-
-const TopList = ({ onClick }: MyProps) => {
+const TopList = () => {
   return (
     <div className="w-[960px] h-72 bg-white rounded-2xl -mt-16 shadow-md px-20 flex flex-col justify-center">
       <div className="border-b-2 border-neutral-200 font-semibold text-xl pb-3 mb-9">

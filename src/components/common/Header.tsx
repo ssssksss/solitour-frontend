@@ -18,7 +18,7 @@ const Header = ({ pathname }: MyProps) => {
                 <Link
                   className={
                     `${pathname === "/" ? "font-black text-black " : " "}` +
-                    "hover:text-black"
+                    "hover:text-black hover:font-black"
                   }
                   href="/"
                 >
