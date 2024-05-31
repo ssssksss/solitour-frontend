@@ -1,10 +1,14 @@
 import Link from "next/link";
 
-const TopList = () => {
+type MyProps = {
+  title: string;
+};
+
+const TopList = ({ title }: MyProps) => {
   return (
     <div className="-mt-16 flex h-72 w-[960px] flex-col justify-center rounded-2xl bg-white px-20 shadow-md">
       <div className="mb-9 border-b-2 border-neutral-200 pb-3 text-xl font-semibold">
-        맛집 정보 TOP 5
+        {title}
       </div>
       <div className="flex flex-row justify-between">
         <ol className="flex-grow space-y-6">

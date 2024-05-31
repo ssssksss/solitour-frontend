@@ -3,10 +3,15 @@ type MyProps = {
   onClick?: () => void;
 };
 
+// TODO: classname & onclick 수정 필요.
 const CategoryButton = ({ children, onClick }: MyProps) => {
   return (
     <button
-      className="rounded-full border-[1px] border-neutral-400 bg-white px-3 py-1 font-black text-neutral-400"
+      className={
+        `${children === "전체" ? "bg-neutral-950 text-white hover:text-white" : ""}` +
+        " " +
+        "rounded-full border-[1px] border-neutral-500 bg-white px-3 py-1 font-semibold text-neutral-500 hover:text-black"
+      }
       onClick={onClick}
     >
       {children}

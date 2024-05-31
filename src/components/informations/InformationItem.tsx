@@ -1,3 +1,4 @@
+import { CiBookmark } from "react-icons/ci";
 import ItemTag from "./ItemTag";
 
 type MyProps = {
@@ -8,12 +9,14 @@ type MyProps = {
 
 const InformationItem = ({ category, title, tags }: MyProps) => {
   return (
-    <div className="mt-4 flex h-[310px] w-[310px] flex-col justify-between rounded-2xl bg-neutral-100 p-6">
+    <div className="my-4 flex h-[300px] w-[300px] flex-col justify-between rounded-2xl bg-neutral-100 p-6 duration-300 hover:scale-105">
       <div className="flex flex-row items-center justify-between">
-        <div className="w-fit rounded-full bg-white px-4 py-1 text-sm font-black text-gray-500 shadow">
+        <div className="w-fit rounded-full bg-white px-4 py-1 text-sm font-semibold text-gray-500 shadow">
           {category}
         </div>
-        <div>북마크</div>
+        <div>
+          <CiBookmark size={"2rem"} />
+        </div>
       </div>
       <div>
         <div className="text-lg font-black">{title}</div>

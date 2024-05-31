@@ -1,9 +1,13 @@
 "use client";
 
-import TopList from "@/components/informations/TopList";
+import TopList from "@/components/common/TopList";
 
-const TopListContainer = () => {
-  return <TopList />;
+type MyProps = {
+  category: string;
+};
+
+const TopListContainer = ({ category }: MyProps) => {
+  return <TopList title={`${category} 정보 TOP 5`} />;
 };
 
 export default TopListContainer;
