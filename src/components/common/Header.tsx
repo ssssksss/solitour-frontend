@@ -6,12 +6,12 @@ type MyProps = {
 
 const Header = ({ pathname }: MyProps) => {
   return (
-    <header className="relative z-10 shadow flex flex-row justify-center">
-      <div className="w-[1440px] h-20 flex flex-row justify-between items-center fixed">
+    <header className="relative z-20 shadow flex flex-row justify-center">
+      <div className="w-[1440px] h-20 flex flex-row justify-between items-center">
         <Link className="font-black pl-[38px]" href="/">
           Solitour
         </Link>
-        <div className="flex flex-row justify-between w-[960px]">
+        <div className="flex flex-row justify-between flex-grow px-36">
           <nav>
             <ul className="flex flex-row space-x-10 font text-gray-500">
               <li>
@@ -34,7 +34,7 @@ const Header = ({ pathname }: MyProps) => {
                         : " "
                     }` + "hover:text-black hover:font-black"
                   }
-                  href="/informations"
+                  href="/informations/restaurant"
                 >
                   정보
                 </Link>
