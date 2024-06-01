@@ -74,23 +74,21 @@ const Carousel = ({
         </ul>
       </nav>
       <div className="flex w-full flex-row justify-center bg-neutral-100">
-        <div className="h-96 w-[1440px] px-[240px]">
-          <div className="flex flex-row items-center justify-between pt-20">
-            <div>
-              <div className="text-2xl font-black">
-                {content.map((str, index) => (
-                  <p key={index}>{str}</p>
-                ))}
-              </div>
-              <button
-                className="mt-6 rounded-full bg-white px-8 py-4 font-black text-gray-500 shadow hover:text-black"
-                onClick={onClick}
-              >
-                {buttonText}
-              </button>
+        <div className="flex h-96 w-[960px] flex-row items-center justify-between">
+          <div>
+            <div className="text-2xl font-black">
+              {content.map((str, index) => (
+                <p key={index}>{str}</p>
+              ))}
             </div>
-            <div className="h-48 w-[468px] bg-neutral-200" />
+            <button
+              className="mt-6 rounded-full bg-white px-8 py-4 font-black text-gray-500 shadow hover:text-black"
+              onClick={onClick}
+            >
+              {buttonText}
+            </button>
           </div>
+          <div className="h-48 w-[468px] bg-neutral-200" />
         </div>
       </div>
     </div>
