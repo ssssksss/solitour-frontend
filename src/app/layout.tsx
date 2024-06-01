@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import HeaderContainer from "@/containers/common/HeaderContainer";
+import FloatingButtonContainer from "@/containers/common/FloatingButtonContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <HeaderContainer />
         {children}
+        <FloatingButtonContainer />
       </body>
     </html>
   );
