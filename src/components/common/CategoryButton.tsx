@@ -10,7 +10,7 @@ const CategoryButton = ({ children, onClick }: MyProps) => {
       className={
         `${children === "전체" ? "bg-neutral-950 text-white hover:text-white" : ""}` +
         " " +
-        "rounded-full border-[1px] border-neutral-500 bg-white px-3 py-1 font-semibold text-neutral-500 hover:text-black"
+        "rounded-full border-[1px] border-neutral-500 px-3 py-1 font-semibold text-neutral-500 hover:text-black"
       }
       onClick={onClick}
     >

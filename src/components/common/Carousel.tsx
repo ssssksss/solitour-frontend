@@ -18,9 +18,9 @@ const Carousel = ({
 }: MyProps) => {
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="w-[1440px] py-10 pl-[240px] text-3xl font-black">
+      <h1 className="w-[1440px] py-10 pl-[240px] text-3xl font-black">
         {title}
-      </div>
+      </h1>
       <nav className="w-[1440px] bg-white pl-[240px]">
         <ul className="flex flex-row space-x-10 pb-2">
           <li>

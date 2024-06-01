@@ -13,7 +13,7 @@ const Header = ({ pathname }: MyProps) => {
         </Link>
         <div className="flex flex-grow flex-row justify-between px-36">
           <nav>
-            <ul className="font flex flex-row space-x-10 text-gray-500">
+            <ul className="font flex flex-row space-x-10">
               <li>
                 <Link
                   className={
