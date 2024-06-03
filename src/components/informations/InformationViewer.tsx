@@ -28,20 +28,20 @@ const InformationViewer = ({ category, id }: MyProps) => {
   };
 
   return (
-    <div className="w-[960px]">
+    <div className="w-[960px] max-[1024px]:w-[90%]">
       <h1 className="text-3xl font-semibold">{info.title}</h1>
       <div className="flex flex-row items-center space-x-2 py-8">
         <div className="h-12 w-12 rounded-full bg-neutral-200"></div>
         <p className="text-sm font-medium">{info.username}</p>
       </div>
-      <div className="flex flex-row items-center justify-between">
-        <div className="relative flex h-[470px] w-[470px] items-center justify-center rounded-2xl bg-neutral-100">
+      <div className="flex flex-row items-center justify-between max-[1024px]:flex-col">
+        <div className="relative flex h-[470px] w-[470px] items-center justify-center rounded-2xl bg-neutral-100 max-[1024px]:w-full">
           image
           <div className="absolute bottom-6 right-6 rounded-2xl bg-white px-4 py-2 text-xs font-semibold text-neutral-500">
             3/5
           </div>
         </div>
-        <div className="flex h-[470px] w-[470px] flex-col justify-center rounded-2xl p-4">
+        <div className="flex h-[470px] w-[470px] flex-col justify-center rounded-2xl p-4 max-[1024px]:w-full">
           <p className="text-xs text-neutral-500">{info.date}</p>
           <h2 className="py-4 text-lg font-semibold">{info.name}</h2>
           <p className="border-b-[1px] border-neutral-500 pb-6 font-medium">
@@ -65,7 +65,6 @@ const InformationViewer = ({ category, id }: MyProps) => {
               ))}
             </div>
           </div>
-
           <div className="flex flex-row items-center space-x-1">
             {info.tags.map((tag, index) => (
               <ItemTag key={index} tag={tag} />
@@ -98,9 +97,9 @@ const InformationViewer = ({ category, id }: MyProps) => {
           분위기를 선호하시는 혼밥러에게 추천드려요. 캐치 테이블로 웨이팅은
           필수! 1인 메뉴가 있는 돈까스 맛집이예요. 조용한 분위기보다
         </p>
-        <div className="flex w-full flex-row items-center justify-between py-8">
+        <div className="flex w-full flex-wrap items-center justify-between py-8">
           <div className="h-[470px] w-[470px] rounded-2xl bg-neutral-100"></div>
-          <div className="h-[470px] w-[470px] rounded-2xl bg-neutral-100"></div>
+          <div className="my-4 h-[470px] w-[470px] rounded-2xl bg-neutral-100"></div>
         </div>
         <p className="px-10">
           1인 메뉴가 있는 돈까스 맛집이예요. 조용한 분위기보다 시끌벅적한

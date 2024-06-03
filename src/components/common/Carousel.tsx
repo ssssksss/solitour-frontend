@@ -18,10 +18,10 @@ const Carousel = ({
 }: MyProps) => {
   return (
     <div className="flex w-full flex-col items-center">
-      <h1 className="w-[1440px] py-10 pl-[240px] text-3xl font-black">
+      <h1 className="w-[960px] px-4 py-10 text-3xl font-black max-[1024px]:w-full">
         {title}
       </h1>
-      <nav className="w-[1440px] bg-white pl-[240px]">
+      <nav className="w-[960px] bg-white px-4 max-[1024px]:w-full">
         <ul className="flex flex-row space-x-10 pb-2">
           <li>
             <Link
@@ -74,7 +74,7 @@ const Carousel = ({
         </ul>
       </nav>
       <div className="flex w-full flex-row justify-center bg-neutral-100">
-        <div className="flex h-96 w-[960px] flex-row items-center justify-between">
+        <div className="flex h-96 w-[960px] flex-row items-center justify-between px-4 max-[1024px]:flex max-[1024px]:h-fit max-[1024px]:flex-col max-[1024px]:space-y-8 max-[1024px]:pb-24 max-[1024px]:pt-16">
           <div>
             <div className="text-2xl font-black">
               {content.map((str, index) => (
@@ -88,7 +88,7 @@ const Carousel = ({
               {buttonText}
             </button>
           </div>
-          <div className="h-48 w-[468px] bg-neutral-200" />
+          <div className="h-48 w-[70%] bg-neutral-200 max-[1024px]:w-[90%]" />
         </div>
       </div>
     </div>
