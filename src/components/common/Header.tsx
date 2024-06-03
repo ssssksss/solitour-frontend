@@ -1,17 +1,29 @@
 import Link from "next/link";
+import HeaderSidebar from "./HeaderSidebar";
+import { MdOutlineMenu } from "react-icons/md";
 
 type MyProps = {
   pathname: string;
+  visible: boolean;
+  onMenuClicked: () => void;
+  onClose: () => void;
 };
 
-const Header = ({ pathname }: MyProps) => {
+const Header = ({ pathname, visible, onMenuClicked, onClose }: MyProps) => {
   return (
     <header className="relative z-20 flex flex-row justify-center shadow">
+      {visible && <HeaderSidebar onClose={onClose} />}
       <div className="flex h-20 w-[1440px] flex-row items-center justify-between">
-        <Link className="pl-[38px] font-black" href="/">
+        <div
+          className="hidden cursor-pointer pl-4 max-[1024px]:flex"
+          onClick={onMenuClicked}
+        >
+          <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
+        </div>
+        <Link className="pl-[38px] font-black max-[1024px]:pl-4" href="/">
           Solitour
         </Link>
-        <div className="flex flex-grow flex-row justify-between px-36">
+        <div className="flex flex-grow flex-row justify-between px-36 max-[1024px]:hidden">
           <nav>
             <ul className="font flex flex-row space-x-10">
               <li>
@@ -68,7 +80,7 @@ const Header = ({ pathname }: MyProps) => {
             </Link>
           </div>
         </div>
-        <Link className="pr-[38px] font-black" href="/mypage">
+        <Link className="pr-[38px] font-black max-[1024px]:pr-4" href="/mypage">
           마이페이지
         </Link>
       </div>
