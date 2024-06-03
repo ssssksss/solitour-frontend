@@ -11,7 +11,7 @@ type MyProps = {
 
 const Header = ({ pathname, visible, onMenuClicked, onClose }: MyProps) => {
   return (
-    <header className="relative z-20 flex flex-row justify-center shadow">
+    <header className="fixed top-0 z-20 flex w-full flex-row justify-center bg-white shadow">
       {visible && <HeaderSidebar onClose={onClose} />}
       <div className="flex h-20 w-[1440px] flex-row items-center justify-between">
         <div className="flex flex-row items-center">
