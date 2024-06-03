@@ -13,7 +13,7 @@ type MyProps = {
 
 const InformationItem = ({ id, category, title, tags }: MyProps) => {
   return (
-    <div className="my-4 flex h-[300px] w-[300px] flex-col justify-between rounded-2xl bg-neutral-100 p-6 duration-300 hover:scale-105">
+    <div className="mx-2 mt-8 flex h-[300px] w-[300px] flex-col justify-between rounded-2xl bg-neutral-100 p-6 duration-300 hover:scale-105">
       <div className="flex flex-row items-center justify-between">
         <p className="w-fit rounded-full bg-white px-4 py-1 text-sm font-semibold text-gray-500 shadow">
           {category}
@@ -24,7 +24,7 @@ const InformationItem = ({ id, category, title, tags }: MyProps) => {
       </div>
       <div>
         <Link
-          className="text-lg font-semibold"
+          className="font-semibold"
           href={`/informations/${CATEGORY.get(category)}/${id}`}
         >
           {title}
