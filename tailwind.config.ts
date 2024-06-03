@@ -19,7 +19,7 @@ const config: Config = {
       },
       keyframes: {
         sidebar: {
-          from: { left: "-200px" },
+          from: { left: "-300px" },
           to: { left: "0px" },
         },
       },

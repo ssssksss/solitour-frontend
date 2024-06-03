@@ -14,15 +14,17 @@ const Header = ({ pathname, visible, onMenuClicked, onClose }: MyProps) => {
     <header className="relative z-20 flex flex-row justify-center shadow">
       {visible && <HeaderSidebar onClose={onClose} />}
       <div className="flex h-20 w-[1440px] flex-row items-center justify-between">
-        <div
-          className="hidden cursor-pointer pl-4 max-[1024px]:flex"
-          onClick={onMenuClicked}
-        >
-          <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
+        <div className="flex flex-row items-center">
+          <div
+            className="hidden cursor-pointer pl-4 max-[1024px]:flex"
+            onClick={onMenuClicked}
+          >
+            <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
+          </div>
+          <Link className="pl-[38px] font-black max-[1024px]:pl-4" href="/">
+            Solitour
+          </Link>
         </div>
-        <Link className="pl-[38px] font-black max-[1024px]:pl-4" href="/">
-          Solitour
-        </Link>
         <div className="flex flex-grow flex-row justify-between px-36 max-[1024px]:hidden">
           <nav>
             <ul className="font flex flex-row space-x-10">
