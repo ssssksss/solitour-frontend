@@ -52,20 +52,20 @@ const InformationViewer = ({ category, id }: MyProps) => {
             <p className="text-xs font-medium">{info.location}</p>
             <CiMap className="cursor-pointer hover:scale-105" size={"2rem"} />
           </div>
-          <div className="flex flex-row items-center space-x-1">
+          <div className="flex flex-row items-start space-x-4">
             <AiTwotoneClockCircle />
-            <h3 className="text-xs font-bold">영업중</h3>
+            <div className="flex flex-col space-y-2 pb-4">
+              {info.hours.map((data, index) => (
+                <div key={index} className="flex flex-row items-center">
+                  <p className="w-32 text-xs font-medium text-neutral-500">
+                    {data[0]}
+                  </p>
+                  <p className="pl-2 text-xs font-medium">{data[1]}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-col pb-4 pl-5 pt-2">
-            {info.hours.map((data, index) => (
-              <div key={index} className="flex flex-row items-center space-y-2">
-                <p className="w-32 text-xs font-medium text-neutral-500">
-                  {data[0]}
-                </p>
-                <p className="text-xs font-medium">{data[1]}</p>
-              </div>
-            ))}
-          </div>
+
           <div className="flex flex-row items-center space-x-1">
             {info.tags.map((tag, index) => (
               <ItemTag key={index} tag={tag} />

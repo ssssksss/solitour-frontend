@@ -2,7 +2,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import CategoryButton from "../common/CategoryButton";
 import Pagination from "../common/Pagination";
 import InformationItem from "./InformationItem";
-import { LuSettings2 } from "react-icons/lu";
+import { VscSettings } from "react-icons/vsc";
 
 type MyProps = {
   category: string;
@@ -83,8 +83,17 @@ const InformationList = ({ category }: MyProps) => {
           <CategoryButton>혼술</CategoryButton>
         </div>
         <div className="flex flex-row items-center space-x-4">
+          <form>
+            <input
+              className="bg-search-icon w-80 border-b-[1px] border-black bg-[length:1rem] bg-left bg-no-repeat pl-8 outline-none"
+              type="text"
+              autoComplete="search"
+              name="search"
+              placeholder="검색하기"
+            />
+          </form>
           <button className="flex flex-row items-center text-sm font-black text-neutral-500">
-            <LuSettings2 size={"1.125rem"} />
+            <VscSettings size={"1.25rem"} />
             <p>지역별</p>
           </button>
           <button className="flex flex-row items-center text-sm font-black text-neutral-500">
