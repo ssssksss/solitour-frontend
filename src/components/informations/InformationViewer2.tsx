@@ -9,7 +9,7 @@ type MyProps = {
 };
 
 // TODO
-const InformationViewer = ({ category, id }: MyProps) => {
+const InformationViewer2 = ({ category, id }: MyProps) => {
   //const info = await fetch("")
   const info = {
     title: "서촌 분위기 있는 어쩌구 저쩌구 이건 제목",
@@ -118,4 +118,4 @@ const InformationViewer = ({ category, id }: MyProps) => {
   );
 };
 
-export default InformationViewer;
+export default InformationViewer2;
