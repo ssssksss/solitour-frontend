@@ -4,8 +4,8 @@ type MyProps = {
 
 const ItemTag = ({ tag }: MyProps) => {
   return (
-    <div className="rounded-full border-2 border-neutral-400">
-      <p className="p-1 text-[0.6rem] font-semibold text-neutral-400">#{tag}</p>
+    <div className="rounded-full border-2 border-white">
+      <p className="p-1 text-[0.6rem] font-semibold text-white">#{tag}</p>
     </div>
   );
 };

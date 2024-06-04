@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import HeaderContainer from "@/containers/common/HeaderContainer";
 import FloatingButtonContainer from "@/containers/common/FloatingButtonContainer";
 import Footer from "@/components/common/Footer";
 
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <HeaderContainer />
         {children}
         <Footer />
         <FloatingButtonContainer />

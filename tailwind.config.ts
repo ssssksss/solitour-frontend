@@ -22,9 +22,14 @@ const config: Config = {
           from: { left: "-300px" },
           to: { left: "0px" },
         },
+        carousel: {
+          from: { opacity: "0.75" },
+          to: { opacity: "1.0" },
+        },
       },
       animation: {
         sidebar: "sidebar 0.3s",
+        carousel: "carousel 1.0s ease",
       },
     },
   },

@@ -1,7 +1,7 @@
 import { IoIosArrowDown } from "react-icons/io";
 import CategoryButton from "../common/CategoryButton";
 import Pagination from "../common/Pagination";
-import InformationItem from "./InformationItem";
+import InformationItem from "../common/PostItem";
 import { VscSettings } from "react-icons/vsc";
 import { MdOutlineMenu } from "react-icons/md";
 
