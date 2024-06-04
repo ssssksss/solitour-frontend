@@ -54,7 +54,7 @@ const PopularList = ({ title }: MyProps) => {
         {data.map((post, index) => (
           <PostItem
             key={index}
-            id={index}
+            id={index + 1}
             category={post.category}
             title={post.title}
             tags={post.tags}

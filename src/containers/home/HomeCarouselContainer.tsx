@@ -1,7 +1,7 @@
 "use client";
 
 import HomeCarousel from "@/components/home/HomeCarousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomeCarouselContainer = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -10,6 +10,17 @@ const HomeCarouselContainer = () => {
   const onClick = (index: number) => {
     setCurrentIndex(index);
   };
+
+  useEffect(() => {
+    const timer = setInterval(
+      () => setCurrentIndex((currentIndex + 1) % 4),
+      5000,
+    );
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [currentIndex]);
 
   return (
     <HomeCarousel
