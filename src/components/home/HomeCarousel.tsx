@@ -1,20 +1,18 @@
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
-// TODO: 이미지 개수만큼 설정
-const HomeCarousel = () => {
-  // todo
-  const images = [
-    "/background.svg",
-    "/background.svg",
-    "/background.svg",
-    "/background.svg",
-  ];
+type MyProps = {
+  images: string[];
+  currentIndex: number;
+  onClick: (index: number) => void;
+};
 
+const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
   return (
     <div className="relative -mt-20 flex h-[600px] w-full items-center justify-center">
       <Image
         className="-z-10"
-        src={"/background.svg"}
+        src={images[currentIndex]}
         alt={"/background"}
         fill={true}
         style={{
@@ -27,7 +25,6 @@ const HomeCarousel = () => {
             <h1 className="text-[28px] text-white">새로운 나를 찾는 여행,</h1>
             <h1 className="text-[28px] font-bold text-white">솔리투어</h1>
           </div>
-
           <button className="h-[43px] w-[120px] rounded-3xl bg-black text-white">
             시작하기
           </button>
@@ -37,9 +34,10 @@ const HomeCarousel = () => {
             <button
               key={index}
               className={
-                "w-60" +
-                ` ${index === 0 ? "border-b-4 border-b-white" : "border-b-2 border-b-white/50"}`
+                "w-60 border-b-4" +
+                ` ${index === currentIndex ? "border-b-white" : "border-b-white/50"}`
               }
+              onClick={(e) => onClick(index)}
             />
           ))}
         </div>

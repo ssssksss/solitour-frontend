@@ -1,12 +1,16 @@
-import HomeCarousel from "@/components/home/HomeCarousel";
+import PopularList from "@/components/home/PopularList";
+import TabList from "@/components/home/TabList";
+import HomeCarouselContainer from "@/containers/home/HomeCarouselContainer";
 import HomeHeaderContainer from "@/containers/home/HomeHeaderContainer";
 
 // todo
 export default function Home() {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <HomeHeaderContainer />
-      <HomeCarousel />
+      <HomeCarouselContainer />
+      <TabList />
+      <PopularList />
     </div>
   );
 }
