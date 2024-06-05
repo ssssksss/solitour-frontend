@@ -82,25 +82,19 @@ const Header = ({ pathname, visible, onMenuClicked, onClose }: MyProps) => {
                 </li>
               </ul>
             </nav>
-            <div className="flex flex-row space-x-2">
-              <Link
-                className="text-gray-500 hover:font-black hover:text-black"
-                href="/login"
-              >
-                로그인
-              </Link>
-              <div className="text-gray-400">|</div>
-              <Link className="font-black" href="/register">
-                회원가입
-              </Link>
-            </div>
           </div>
-          <Link
-            className="pr-[38px] font-black max-[1024px]:pr-4"
-            href="/mypage"
-          >
-            마이페이지
-          </Link>
+          <div className="flex flex-row space-x-2 pr-[38px] max-[1024px]:pr-4">
+            <Link
+              className="text-gray-500 hover:font-black hover:text-black"
+              href="/login"
+            >
+              로그인
+            </Link>
+            <div className="text-gray-400">|</div>
+            <Link className="font-black" href="/register">
+              회원가입
+            </Link>
+          </div>
         </div>
       </div>
       <div className="h-20" />
