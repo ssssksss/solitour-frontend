@@ -11,66 +11,83 @@ type MyProps = {
 
 const InformationList = ({ category }: MyProps) => {
   // TODO: API 호출
-  const data: { category: string; title: string; tags: string[] }[] = [
+  const data: {
+    category: string;
+    title: string;
+    image: string;
+    tags: string[];
+  }[] = [
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
-      category: category,
-      title: "서촌 분위기 있는 혼술 카페 여기 있어!",
-      tags: ["혼술집", "서촌", "아늑한"],
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
     },
   ];
 
@@ -114,6 +131,7 @@ const InformationList = ({ category }: MyProps) => {
             id={index + 1}
             category={value.category}
             title={value.title}
+            image={value.image}
             tags={value.tags}
           />
         ))}

@@ -1,8 +1,8 @@
 <svg width="131" height="131" viewBox="0 0 131 131" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="1.26" y="1.26" width="98.2788" height="110.881" rx="5.03999" fill="#B7E7D7" stroke="#BFEEDE" stroke-width="2.52"/>
-<path d="M12.6006 18.8999H88.1997" stroke="#90D6BF" stroke-width="6.29999"/>
-<path d="M12.6006 37.7998H63" stroke="#90D6BF" stroke-width="6.29999"/>
-<path d="M12.6006 56.7007H50.4001" stroke="#90D6BF" stroke-width="6.29999"/>
+<rect width="100.799" height="113.401" rx="6.29999" fill="white"/>
+<path d="M12.6006 18.8999H88.1997" stroke="#CCECE2" stroke-width="6.29999"/>
+<path d="M12.6006 37.7998H63" stroke="#CCECE2" stroke-width="6.29999"/>
+<path d="M12.6006 56.7007H50.4001" stroke="#CCECE2" stroke-width="6.29999"/>
 <g filter="url(#filter0_bi_273_555)">
 <ellipse cx="85.9755" cy="85.9767" rx="35.5761" ry="35.5768" fill="url(#paint0_linear_273_555)" fill-opacity="0.78"/>
 <path d="M117.142 85.9767C117.142 103.19 103.188 117.143 85.9755 117.143C68.763 117.143 54.8094 103.19 54.8094 85.9767C54.8094 68.7637 68.763 54.8099 85.9755 54.8099C103.188 54.8099 117.142 68.7637 117.142 85.9767Z" stroke="#26B888" stroke-width="8.81999"/>

@@ -14,7 +14,7 @@ const HomeCarouselContainer = () => {
   useEffect(() => {
     const timer = setInterval(
       () => setCurrentIndex((currentIndex + 1) % 4),
-      5000,
+      3000,
     );
 
     return () => {

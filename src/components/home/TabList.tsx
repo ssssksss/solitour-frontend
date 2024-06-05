@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const TabList = () => {
   return (
-    <div className="mt-20 flex w-[960px] flex-row items-center justify-between">
+    <div className="mt-20 flex w-[960px] flex-row items-center justify-between max-[1024px]:w-[90%] max-[1024px]:flex-col max-[1024px]:space-y-4">
       <Link
-        className="flex h-72 w-[470px] flex-col justify-between rounded-2xl bg-[#E1F6EF] p-8 duration-300 hover:scale-105"
+        className="flex h-72 w-[470px] flex-col justify-between rounded-2xl bg-gradient-to-br from-[#EBE0FA] to-[#CBF6FF] p-8 duration-300 hover:scale-105 max-[1024px]:w-[90%]"
         href="/informations/restaurant"
       >
         <div className="space-y-2">
@@ -25,7 +25,7 @@ const TabList = () => {
         </div>
       </Link>
       <Link
-        className="flex h-72 w-[470px] flex-col justify-between rounded-2xl bg-[#D0E9F6] p-8 duration-300 hover:scale-105"
+        className="flex h-72 w-[470px] flex-col justify-between rounded-2xl bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF] p-8 duration-300 hover:scale-105 max-[1024px]:w-[90%]"
         href="/meetings"
       >
         <div className="space-y-2">

@@ -2,6 +2,7 @@ import { AiTwotoneClockCircle } from "react-icons/ai";
 import { CiMap } from "react-icons/ci";
 import { MdCheck, MdLocationOn } from "react-icons/md";
 import ItemTag from "./ItemTag";
+import Image from "next/image";
 
 type MyProps = {
   category: string;
@@ -35,8 +36,17 @@ const InformationViewer = ({ category, id }: MyProps) => {
         <p className="text-sm font-medium">{info.username}</p>
       </div>
       <div className="flex flex-row items-center justify-between max-[1024px]:flex-col">
-        <div className="relative flex h-[470px] w-[470px] items-center justify-center rounded-2xl bg-neutral-100 max-[1024px]:w-full">
-          image
+        <div className="relative flex h-[470px] w-[470px] items-center justify-center max-[1024px]:w-full">
+          <Image
+            className="-z-10 rounded-2xl"
+            src={"/PostImage.svg"}
+            alt={"/background"}
+            fill={true}
+            style={{
+              objectFit: "cover",
+            }}
+          />
+
           <div className="absolute bottom-6 right-6 rounded-2xl bg-white px-4 py-2 text-xs font-semibold text-neutral-500">
             3/5
           </div>

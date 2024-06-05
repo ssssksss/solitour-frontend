@@ -1,6 +1,7 @@
 import Link from "next/link";
 import HeaderSidebar from "../common/HeaderSidebar";
 import { MdOutlineMenu } from "react-icons/md";
+import Image from "next/image";
 
 type MyProps = {
   pathname: string;
@@ -22,8 +23,19 @@ const HomeHeader = ({ pathname, visible, onMenuClicked, onClose }: MyProps) => {
             >
               <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
             </div>
-            <Link className="pl-[38px] font-black max-[1024px]:pl-4" href="/">
-              Solitour
+            <Link
+              className="relative h-8 w-[92px] pl-[38px] font-black max-[1024px]:pl-4"
+              href="/"
+            >
+              <Image
+                className="ml-[38px] max-[1024px]:ml-4"
+                src={"/Solitour-logo.svg"}
+                alt={"/background"}
+                fill={true}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
             </Link>
           </div>
           <div className="flex flex-grow flex-row justify-between px-36 max-[1024px]:hidden">
