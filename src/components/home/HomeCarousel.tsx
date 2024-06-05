@@ -9,25 +9,16 @@ type MyProps = {
 const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
   return (
     <div className="relative -mt-20 flex h-[600px] w-full items-center justify-center">
-      {images.map((image, index) => {
-        if (currentIndex !== index) {
-          return null;
-        }
-
-        return (
-          <Image
-            key={index}
-            className="animate-carousel -z-10"
-            src={image}
-            alt={"/background"}
-            fill={true}
-            style={{
-              objectFit: "cover",
-            }}
-          />
-        );
-      })}
-      <div className="relative m-auto flex h-[540px] w-[960px] flex-col items-center justify-end">
+      <Image
+        className="-z-10"
+        src={images[currentIndex]}
+        alt={"/background"}
+        fill={true}
+        style={{
+          objectFit: "cover",
+        }}
+      />
+      <div className="relative m-auto flex h-[540px] w-[960px] flex-col items-center justify-end max-[1024px]:w-[90%]">
         <div className="absolute bottom-52 left-0 space-y-4">
           <div>
             <h1 className="text-[28px] text-white">새로운 나를 찾는 여행,</h1>
@@ -37,12 +28,12 @@ const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
             시작하기
           </button>
         </div>
-        <div className="flex flex-row items-center justify-center">
+        <div className="flex w-[960px] flex-row items-center justify-center max-[1024px]:w-[90%]">
           {images.map((image, index) => (
             <button
               key={index}
               className={
-                "w-60 border-b-4" +
+                "flex-grow border-b-4" +
                 ` ${index === currentIndex ? "border-b-white" : "border-b-white/50"}`
               }
               onClick={(e) => onClick(index)}

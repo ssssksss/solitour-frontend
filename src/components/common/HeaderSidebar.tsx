@@ -5,6 +5,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IoHome, IoPeople, IoRestaurant } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import { RiLoginBoxLine } from "react-icons/ri";
+import Image from "next/image";
 
 type MyProps = {
   onClose: () => void;
@@ -17,7 +18,16 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
       <div className="bg-black/10">
         <nav className="h-full w-[300px] rounded-r-2xl bg-white p-4">
           <div className="flex h-10 w-full items-center justify-between">
-            <div className="font-black">Solitour</div>
+            <div className="relative h-[38px] w-[92px]">
+              <Image
+                src={"/Solitour-logo.svg"}
+                alt={"/background"}
+                fill={true}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </div>
             <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main">
               <MdClose onClick={onClose} />
             </div>

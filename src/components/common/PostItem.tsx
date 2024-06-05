@@ -9,16 +9,17 @@ type MyProps = {
   id: number;
   category: string;
   title: string;
+  image: string;
   tags: string[];
 };
 
 // todo
-const InformationItem = ({ id, category, title, tags }: MyProps) => {
+const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
   return (
     <div className="relative mx-2 mt-8 flex h-[300px] w-[300px] flex-col justify-between rounded-2xl p-6 duration-300 hover:scale-105">
       <Image
         className="-z-10 rounded-2xl"
-        src={"/PostImage.svg"}
+        src={image}
         alt={"POstImage"}
         fill={true}
         style={{
