@@ -2,7 +2,7 @@ import { CiBookmark } from "react-icons/ci";
 import ItemTag from "../informations/ItemTag";
 import { FaEye, FaRegHeart } from "react-icons/fa";
 import Link from "next/link";
-import CATEGORY from "@/constants/informations/category";
+import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 
 type MyProps = {
@@ -14,20 +14,37 @@ type MyProps = {
 };
 
 // todo
-const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
+const PostItem = ({ id, category, title, image, tags }: MyProps) => {
+  let style = "";
+  switch (category) {
+    case "맛집":
+      style = "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]";
+      break;
+    case "숙박":
+      style = "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]";
+      break;
+    case "액티비티":
+      style = "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]";
+      break;
+    default:
+      break;
+  }
+
   return (
     <div className="relative mx-2 mt-8 flex h-[300px] w-[300px] flex-col justify-between rounded-2xl p-6 duration-300 hover:scale-105">
       <Image
         className="-z-10 rounded-2xl"
         src={image}
-        alt={"POstImage"}
+        alt={"PostImage"}
         fill={true}
         style={{
           objectFit: "cover",
         }}
       />
       <div className="flex flex-row items-center justify-between">
-        <p className="w-fit rounded-full bg-white px-4 py-1 text-sm font-semibold text-gray-500 shadow">
+        <p
+          className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow ${style}`}
+        >
           {category}
         </p>
         <div className="text-white">
@@ -37,7 +54,7 @@ const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
       <div>
         <Link
           className="font-semibold text-white"
-          href={`/informations/${CATEGORY.get(category)}/${id}`}
+          href={`/informations/${CATEGORY_TEXT.get(category)}/${id}`}
         >
           {title}
         </Link>
@@ -63,4 +80,4 @@ const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
   );
 };
 
-export default InformationItem;
+export default PostItem;

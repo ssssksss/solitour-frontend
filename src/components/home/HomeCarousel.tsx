@@ -24,7 +24,7 @@ const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
             <h1 className="text-[28px] text-white">새로운 나를 찾는 여행,</h1>
             <h1 className="text-[28px] font-bold text-white">솔리투어</h1>
           </div>
-          <button className="h-[43px] w-[120px] rounded-3xl bg-black text-white">
+          <button className="h-[43px] w-[120px] rounded-3xl bg-black text-white hover:scale-105">
             시작하기
           </button>
         </div>

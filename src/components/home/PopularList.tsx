@@ -42,19 +42,19 @@ const PopularList = ({ title }: MyProps) => {
       <div className="flex flex-row items-center justify-between">
         <div className="space-y-2">
           <div className="flex flex-row items-center space-x-2">
-            <IoMdInformationCircleOutline size={"1.5rem"} />
+            <div className="h-6 w-6 bg-[#D9D9D9]" />
             <h2 className="text-2xl font-bold">인기 여행 정보</h2>
           </div>
-          <p className="text-sm font-medium text-neutral-500">
-            다양한 여행 정보를 찾아보세요!
+          <p className="text-sm font-medium text-[#666666]">
+            솔리에서 다양한 여행 정보를 찾아보세요!
           </p>
         </div>
         <div className="flex flex-row items-center space-x-2">
           <button className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-neutral-300 hover:scale-105">
-            <IoIosArrowBack size={"1rem"} />
+            <IoIosArrowBack size={"1.25rem"} />
           </button>
-          <button className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-neutral-300 hover:scale-105">
-            <IoIosArrowForward size={"1rem"} />
+          <button className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white hover:scale-105">
+            <IoIosArrowForward size={"1.25rem"} />
           </button>
         </div>
       </div>
