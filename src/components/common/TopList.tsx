@@ -16,7 +16,7 @@ const TopList = ({ title }: MyProps) => {
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">1.</p>
             <Link
-              className="text-gray1 w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm hover:text-main max-[1024px]:w-full"
+              className="w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray1 hover:text-main max-[1024px]:w-full"
               href="/"
             >
               서촌 분위기 있는 혼술 카페 여기 있어! 서촌 분위기 있는 혼술 카페
@@ -26,7 +26,7 @@ const TopList = ({ title }: MyProps) => {
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">2.</p>
             <Link
-              className="text-gray1 w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm hover:text-main max-[1024px]:w-full"
+              className="w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray1 hover:text-main max-[1024px]:w-full"
               href="/"
             >
               커피와 프렌치토스트가 맛있는 재즈 카페 시노라 북촌점
@@ -35,10 +35,10 @@ const TopList = ({ title }: MyProps) => {
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">3.</p>
             <Link
-              className="text-gray1 w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm hover:text-main max-[1024px]:w-full"
+              className="w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray1 hover:text-main max-[1024px]:w-full"
               href="/"
             >
-              서촌 분위기 있는 혼술 카페 여기 있어!
+              다양한 프로그램이 있는 제주 월정리 게하
             </Link>
           </li>
         </ol>
@@ -46,7 +46,7 @@ const TopList = ({ title }: MyProps) => {
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">4.</p>
             <Link
-              className="text-gray1 w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm hover:text-main max-[1024px]:w-full"
+              className="w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray1 hover:text-main max-[1024px]:w-full"
               href="/"
             >
               서촌 분위기 있는 혼술 카페 여기 있어!
@@ -55,7 +55,7 @@ const TopList = ({ title }: MyProps) => {
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">5.</p>
             <Link
-              className="text-gray1 w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm hover:text-main max-[1024px]:w-full"
+              className="w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray1 hover:text-main max-[1024px]:w-full"
               href="/"
             >
               서촌 분위기 있는 혼술 카페 여기 있어!
