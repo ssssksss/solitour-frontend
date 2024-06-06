@@ -7,7 +7,7 @@ type MyProps = {
 };
 
 const TopListContainer = ({ category }: MyProps) => {
-  return <TopList title={`${category} 정보 TOP 5`} />;
+  return <TopList title={`${category}`} />;
 };
 
 export default TopListContainer;

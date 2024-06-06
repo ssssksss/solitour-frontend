@@ -94,7 +94,7 @@ const InformationList = ({ category }: MyProps) => {
   return (
     <div className="mt-32 flex w-[960px] flex-col max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
-        <button className="hidden items-center pr-8 text-sm font-black text-neutral-500 max-[1024px]:flex">
+        <button className="hidden items-center pr-8 text-sm font-black text-neutral-500 hover:text-main max-[1024px]:flex">
           <MdOutlineMenu size={"1.25rem"} />
           <p className="max-[768px]:hidden">태그</p>
         </button>
@@ -107,18 +107,18 @@ const InformationList = ({ category }: MyProps) => {
         <div className="flex flex-row items-center space-x-4">
           <form>
             <input
-              className="w-[95%] border-b-[1px] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 outline-none"
+              className="placeholder:text-gray2 w-64 border-b-[1px] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 text-sm outline-none placeholder:font-medium"
               type="text"
               autoComplete="search"
               name="search"
-              placeholder="검색하기"
+              placeholder="제목 또는 키워드를 검색해보세요."
             />
           </form>
-          <button className="flex flex-row items-center text-sm font-black text-neutral-500">
+          <button className="text-gray1 flex flex-row items-center text-sm font-black hover:text-main">
             <VscSettings size={"1.25rem"} />
             <p className="max-[768px]:hidden">지역별</p>
           </button>
-          <button className="flex flex-row items-center text-sm font-black text-neutral-500">
+          <button className="text-gray1 flex flex-row items-center text-sm font-black hover:text-main">
             <p className="max-[768px]:hidden">인기순</p>
             <IoIosArrowDown />
           </button>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type MyProps = {
@@ -28,11 +29,11 @@ const Carousel = ({
               className={
                 `${
                   category === "맛집"
-                    ? "border-b-2 border-black pb-2 font-black text-black"
+                    ? "border-b-4 border-main pb-2 font-black text-main"
                     : "text-gray-500"
                 }` +
                 " " +
-                "hover:font-black hover:text-black"
+                "hover:main hover:font-black"
               }
               href="/informations/restaurant"
             >
@@ -44,11 +45,11 @@ const Carousel = ({
               className={
                 `${
                   category === "숙박"
-                    ? "border-b-2 border-black pb-2 font-black text-black"
+                    ? "border-b-4 border-main pb-2 font-black text-main"
                     : "text-gray-500"
                 }` +
                 " " +
-                "hover:font-black hover:text-black"
+                "hover:font-black hover:text-main"
               }
               href="/informations/accommondation"
             >
@@ -60,11 +61,11 @@ const Carousel = ({
               className={
                 `${
                   category === "액티비티"
-                    ? "border-b-2 border-black pb-2 font-black text-black"
+                    ? "border-b-4 border-main pb-2 font-black text-main"
                     : "text-gray-500"
                 }` +
                 " " +
-                "hover:font-black hover:text-black"
+                "hover:font-black hover:text-main"
               }
               href="/informations/activity"
             >
@@ -73,22 +74,34 @@ const Carousel = ({
           </li>
         </ul>
       </nav>
-      <div className="flex w-full flex-row justify-center bg-neutral-100">
-        <div className="flex h-96 w-[960px] flex-row items-center justify-between px-4 max-[1024px]:flex max-[1024px]:h-fit max-[1024px]:flex-col max-[1024px]:space-y-8 max-[1024px]:pb-24 max-[1024px]:pt-16">
+      <div className="flex w-full flex-row justify-center bg-gradient-to-br from-[#EBE0FA] to-[#CBF6FF]">
+        <div className="flex h-96 w-[960px] flex-row items-center justify-between px-4 pb-12 max-[1024px]:flex max-[1024px]:h-fit max-[1024px]:flex-col max-[1024px]:space-y-8 max-[1024px]:pb-24 max-[1024px]:pt-16">
           <div>
-            <div className="text-2xl font-black">
-              {content.map((str, index) => (
-                <p key={index}>{str}</p>
-              ))}
-            </div>
+            {content.map((str, index) => (
+              <div
+                className="text-2xl font-medium"
+                key={index}
+                dangerouslySetInnerHTML={{ __html: str }}
+              />
+            ))}
             <button
-              className="mt-6 rounded-full bg-white px-8 py-4 font-black text-gray-500 shadow hover:text-black"
+              className="mt-6 rounded-full bg-[#111111] px-8 py-4 font-black text-white shadow hover:scale-105"
               onClick={onClick}
             >
               {buttonText}
             </button>
           </div>
-          <div className="h-48 w-[70%] bg-neutral-200 max-[1024px]:w-[90%]" />
+          <div className="relative h-[220px] w-[423px] max-[480px]:w-[95%]">
+            <Image
+              className=""
+              src={"/carousel-icon.svg"}
+              alt={"carousel-icon"}
+              fill={true}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
