@@ -58,12 +58,12 @@ const InformationViewer = ({ category, id }: MyProps) => {
             {info.body}
           </p>
           <div className="flex flex-row items-center space-x-1 py-6">
-            <MdLocationOn />
+            <MdLocationOn size={"1.5rem"} />
             <p className="text-xs font-medium">{info.location}</p>
             <CiMap className="cursor-pointer hover:scale-105" size={"2rem"} />
           </div>
           <div className="flex flex-row items-start space-x-4">
-            <AiTwotoneClockCircle />
+            <AiTwotoneClockCircle className="ml-[2px]" />
             <div className="flex flex-col space-y-2 pb-4">
               {info.hours.map((data, index) => (
                 <div key={index} className="flex flex-row items-center">
@@ -85,15 +85,15 @@ const InformationViewer = ({ category, id }: MyProps) => {
       <div className="my-20 flex w-full justify-center border-y-[1px] border-neutral-300 py-10">
         <div className="flex flex-col items-start space-y-4">
           <h2 className="text-lg font-semibold">유용한 정보 요약</h2>
-          <div className="flex flex-row items-center space-x-1">
-            <MdCheck />
+          <div className="flex flex-row items-start space-x-1">
+            <MdCheck size={"1.4rem"} />
             <p className="font-medium">
               혼밥러에게 유용한 정보. 혼밥러에게 유용한 정보. 혼밥러에게 유용한
               정보. 혼밥러에게 유용한 정보.
             </p>
           </div>
-          <div className="flex flex-row items-center space-x-1">
-            <MdCheck />
+          <div className="flex flex-row items-start space-x-1">
+            <MdCheck size={"1.4rem"} />
             <p className="font-medium">
               혼밥집에 대한 간략 정보. 혼밥집에 대한 간략 정보. 혼밥집에 대한
               간략 정보.

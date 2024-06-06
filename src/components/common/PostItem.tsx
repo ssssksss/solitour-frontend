@@ -47,13 +47,13 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
         >
           {category}
         </p>
-        <div className="text-white">
+        <div className="cursor-pointer text-white hover:scale-110">
           <CiBookmark size={"2rem"} />
         </div>
       </div>
       <div>
         <Link
-          className="font-semibold text-white"
+          className="font-semibold text-white hover:text-green-200"
           href={`/informations/${CATEGORY_TEXT.get(category)}/${id}`}
         >
           {title}
