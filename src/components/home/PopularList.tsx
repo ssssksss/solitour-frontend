@@ -1,8 +1,4 @@
-import {
-  IoIosArrowBack,
-  IoIosArrowForward,
-  IoMdInformationCircleOutline,
-} from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import PostItem from "../common/PostItem";
 
 type MyProps = {
@@ -38,7 +34,7 @@ const PopularList = ({ title }: MyProps) => {
   ];
 
   return (
-    <div className="my-20 w-[960px] max-[1024px]:w-[90%]">
+    <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
         <div className="space-y-2">
           <div className="flex flex-row items-center space-x-2">

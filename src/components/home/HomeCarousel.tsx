@@ -8,7 +8,7 @@ type MyProps = {
 
 const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
   return (
-    <div className="relative -mt-20 flex h-[600px] w-full items-center justify-center">
+    <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center">
       <Image
         className="-z-10"
         src={images[currentIndex]}
@@ -18,17 +18,19 @@ const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
           objectFit: "cover",
         }}
       />
-      <div className="relative m-auto flex h-[540px] w-[960px] flex-col items-center justify-end max-[1024px]:w-[90%]">
+      <div className="relative m-auto flex h-[33.75rem] w-[60rem] flex-col items-center justify-end max-[1024px]:w-[90%]">
         <div className="absolute bottom-52 left-0 space-y-4">
           <div>
-            <h1 className="text-[28px] text-white">새로운 나를 찾는 여행,</h1>
-            <h1 className="text-[28px] font-bold text-white">솔리투어</h1>
+            <h1 className="text-[1.75rem] text-white">
+              새로운 나를 찾는 여행,
+            </h1>
+            <h1 className="text-[1.75rem] font-bold text-white">솔리투어</h1>
           </div>
-          <button className="h-[43px] w-[120px] rounded-3xl bg-black text-white hover:scale-105">
+          <button className="h-[2.6875rem] w-[7.5rem] rounded-3xl bg-black text-white hover:scale-105">
             시작하기
           </button>
         </div>
-        <div className="flex w-[960px] flex-row items-center justify-center max-[1024px]:w-[90%]">
+        <div className="flex w-[60rem] flex-row items-center justify-center max-[1024px]:w-[90%]">
           {images.map((image, index) => (
             <button
               key={index}

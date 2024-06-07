@@ -6,13 +6,13 @@ type MyProps = {
 
 const TopList = ({ title }: MyProps) => {
   return (
-    <div className="-mt-16 flex h-fit w-[960px] flex-col justify-center rounded-2xl bg-white px-20 py-16 shadow shadow-[#CCECE2] max-[1024px]:w-[90%] max-[1024px]:px-8">
+    <div className="-mt-16 flex h-fit w-[60rem] flex-col justify-center rounded-2xl bg-white px-20 py-16 shadow shadow-[#CCECE2] max-[1024px]:w-[90%] max-[1024px]:px-8">
       <h2 className="mb-9 border-b-2 border-neutral-200 pb-3 text-2xl font-semibold">
         {`${title} 정보 `}
         <span className="font-bold text-main">Top 5</span>
       </h2>
       <div className="flex flex-row justify-between max-[1024px]:flex-col max-[1024px]:space-x-0 max-[1024px]:space-y-6">
-        <ol className="w-[390px] space-y-6 max-[1024px]:w-full">
+        <ol className="w-[24.375rem] space-y-6 max-[1024px]:w-full">
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">1.</p>
             <Link
@@ -42,7 +42,7 @@ const TopList = ({ title }: MyProps) => {
             </Link>
           </li>
         </ol>
-        <ol className="w-[390px] space-y-6 max-[1024px]:w-full">
+        <ol className="w-[24.375rem] space-y-6 max-[1024px]:w-full">
           <li className="flex flex-row items-center">
             <p className="w-6 font-bold text-main">4.</p>
             <Link

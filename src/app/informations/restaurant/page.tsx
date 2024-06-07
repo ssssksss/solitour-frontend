@@ -1,5 +1,6 @@
+import CategoryLinks from "@/components/informations/CategoryLinks";
 import InformationList from "@/components/informations/InformationList";
-import CarouselContainer from "@/containers/informations/CarouselContainer";
+import BannerContainer from "@/containers/informations/CarouselContainer";
 import TopListContainer from "@/containers/informations/TopListContainer";
 import { Metadata } from "next";
 
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div className="flex flex-col items-center">
-      <CarouselContainer category="맛집" />
+      <BannerContainer category="맛집" />
       <TopListContainer category="맛집" />
+      <CategoryLinks category="맛집" />
       <InformationList category="맛집" />
     </div>
   );
