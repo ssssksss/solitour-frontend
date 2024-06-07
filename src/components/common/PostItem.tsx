@@ -1,9 +1,9 @@
 import { CiBookmark } from "react-icons/ci";
-import ItemTag from "../informations/ItemTag";
 import { FaEye, FaRegHeart } from "react-icons/fa";
 import Link from "next/link";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
+import { MdLocationOn } from "react-icons/md";
 
 type MyProps = {
   id: number;
@@ -31,7 +31,7 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
   }
 
   return (
-    <div className="relative mx-2 mt-8 flex h-[18.75rem] w-[18.75rem] flex-col justify-between rounded-2xl p-6 duration-300 hover:scale-105">
+    <div className="relative mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl border-[0.0625rem] duration-300 hover:scale-105">
       <Image
         className="-z-10 rounded-2xl"
         src={image}
@@ -41,7 +41,7 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
           objectFit: "cover",
         }}
       />
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center justify-between px-6 pt-6">
         <p
           className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow ${style}`}
         >
@@ -51,27 +51,26 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
           <CiBookmark size={"2rem"} />
         </div>
       </div>
-      <div>
+      <div className="flex h-28 flex-col justify-center rounded-b-2xl border-[0.0625rem] bg-white p-6">
         <Link
-          className="font-semibold text-white hover:text-green-200"
+          className="font-bold hover:text-green-200"
           href={`/informations/${CATEGORY_TEXT.get(category)}/${id}`}
         >
           {title}
         </Link>
         <div className="flex flex-row justify-between pt-2">
-          <div className="flex flex-row items-center space-x-1">
-            {tags.map((tag, index) => (
-              <ItemTag key={index} tag={tag} />
-            ))}
+          <div className="flex flex-row items-center text-gray1">
+            <MdLocationOn />
+            <p className="text-xs">서울, 종로구</p>
           </div>
           <div className="flex flex-row items-center space-x-2">
-            <div className="flex flex-row items-center space-x-[0.125rem] text-white">
-              <FaEye />
-              <p className="text-xs">222K</p>
-            </div>
-            <div className="flex flex-row items-center space-x-[0.125rem] text-white">
+            <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
               <FaRegHeart size={"0.75rem"} />
               <p className="text-xs">666M</p>
+            </div>
+            <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
+              <FaEye />
+              <p className="text-xs">222K</p>
             </div>
           </div>
         </div>

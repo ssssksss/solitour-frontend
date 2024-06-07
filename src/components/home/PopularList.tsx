@@ -1,8 +1,4 @@
-import {
-  IoIosArrowBack,
-  IoIosArrowForward,
-  IoMdInformationCircleOutline,
-} from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import PostItem from "../common/PostItem";
 
 type MyProps = {

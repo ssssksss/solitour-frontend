@@ -1,19 +1,19 @@
 "use client";
 
-import Carousel from "@/components/common/Carousel";
+import Banner from "@/components/common/Banner";
 
 type MyProps = {
   category: string;
 };
 
-const CarouselContainer = ({ category }: MyProps) => {
+const BannerContainer = ({ category }: MyProps) => {
   const onClick = () => {
     // TODO
     alert("버튼 클릭");
   };
 
   return (
-    <Carousel
+    <Banner
       title="정보"
       content={[`유용한 <b>${category} 정보</b>를`, "<b>공유</b>해보세요!"]}
       buttonText={`${category} 등록하기`}
@@ -23,4 +23,4 @@ const CarouselContainer = ({ category }: MyProps) => {
   );
 };
 
-export default CarouselContainer;
+export default BannerContainer;
