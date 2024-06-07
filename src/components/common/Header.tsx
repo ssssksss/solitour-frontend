@@ -6,15 +6,27 @@ import Image from "next/image";
 type MyProps = {
   pathname: string;
   visible: boolean;
+  transparent: boolean;
   onMenuClicked: () => void;
   onClose: () => void;
 };
 
-const Header = ({ pathname, visible, onMenuClicked, onClose }: MyProps) => {
+const Header = ({
+  pathname,
+  visible,
+  transparent,
+  onMenuClicked,
+  onClose,
+}: MyProps) => {
   return (
     <header className="flex w-full flex-row justify-center">
       {visible && <HeaderSidebar onClose={onClose} />}
-      <div className="fixed top-0 z-40 flex w-full justify-center bg-white shadow">
+      <div
+        className={
+          "fixed top-0 z-40 flex w-full justify-center shadow" +
+          ` ${transparent ? "bg-transparent" : "bg-white"}`
+        }
+      >
         <div className="flex h-20 w-[1440px] flex-row items-center justify-between">
           <div className="flex flex-row items-center">
             <div
