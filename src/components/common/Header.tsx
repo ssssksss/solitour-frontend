@@ -27,7 +27,7 @@ const Header = ({
           ` ${transparent ? "bg-transparent" : "bg-white"}`
         }
       >
-        <div className="flex h-20 w-[1440px] flex-row items-center justify-between">
+        <div className="flex h-20 w-[90rem] flex-row items-center justify-between">
           <div className="flex flex-row items-center">
             <div
               className="hidden cursor-pointer pl-4 max-[1024px]:flex"
@@ -36,11 +36,11 @@ const Header = ({
               <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
             </div>
             <Link
-              className="relative h-8 w-[92px] pl-[38px] font-black max-[1024px]:pl-4"
+              className="relative h-8 w-[5.75rem] pl-[2.375rem] font-black max-[1024px]:pl-4"
               href="/"
             >
               <Image
-                className="ml-[38px] max-[1024px]:ml-4"
+                className="ml-[2.375rem] max-[1024px]:ml-4"
                 src={"/Solitour-logo.svg"}
                 alt={"/background"}
                 fill={true}
@@ -95,7 +95,7 @@ const Header = ({
               </ul>
             </nav>
           </div>
-          <div className="flex flex-row space-x-2 pr-[38px] max-[1024px]:pr-4">
+          <div className="flex flex-row space-x-2 pr-[2.375rem] max-[1024px]:pr-4">
             <Link
               className="text-gray-500 hover:font-black hover:text-black"
               href="/login"

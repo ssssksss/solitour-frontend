@@ -16,9 +16,9 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-full w-[200%] animate-sidebar">
       <div className="bg-black/10">
-        <nav className="h-full w-[300px] rounded-r-2xl bg-white p-4">
+        <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4">
           <div className="flex h-10 w-full items-center justify-between">
-            <div className="relative h-[38px] w-[92px]">
+            <div className="relative h-[2.375rem] w-[5.75rem]">
               <Image
                 src={"/Solitour-logo.svg"}
                 alt={"/background"}

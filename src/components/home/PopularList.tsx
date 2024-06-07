@@ -38,7 +38,7 @@ const PopularList = ({ title }: MyProps) => {
   ];
 
   return (
-    <div className="my-20 w-[960px] max-[1024px]:w-[90%]">
+    <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
         <div className="space-y-2">
           <div className="flex flex-row items-center space-x-2">

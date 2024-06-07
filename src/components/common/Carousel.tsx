@@ -19,10 +19,10 @@ const Carousel = ({
 }: MyProps) => {
   return (
     <div className="flex w-full flex-col items-center">
-      <h1 className="w-[960px] px-4 py-10 text-3xl font-black max-[1024px]:w-full">
+      <h1 className="w-[60rem] px-4 py-10 text-3xl font-black max-[1024px]:w-full">
         {title}
       </h1>
-      <nav className="w-[960px] bg-white px-4 max-[1024px]:w-full">
+      <nav className="w-[60rem] bg-white px-4 max-[1024px]:w-full">
         <ul className="flex flex-row space-x-10 pb-2">
           <li>
             <Link
@@ -75,7 +75,7 @@ const Carousel = ({
         </ul>
       </nav>
       <div className="flex w-full flex-row justify-center bg-gradient-to-br from-[#EBE0FA] to-[#CBF6FF]">
-        <div className="flex h-96 w-[960px] flex-row items-center justify-between px-4 pb-12 max-[1024px]:flex max-[1024px]:h-fit max-[1024px]:flex-col max-[1024px]:space-y-8 max-[1024px]:pb-24 max-[1024px]:pt-16">
+        <div className="flex h-96 w-[60rem] flex-row items-center justify-between px-4 pb-12 max-[1024px]:flex max-[1024px]:h-fit max-[1024px]:flex-col max-[1024px]:space-y-8 max-[1024px]:pb-24 max-[1024px]:pt-16">
           <div>
             {content.map((str, index) => (
               <div
@@ -91,7 +91,7 @@ const Carousel = ({
               {buttonText}
             </button>
           </div>
-          <div className="relative h-[220px] w-[423px] max-[480px]:w-[95%]">
+          <div className="relative h-[14rem] w-[27rem] max-[480px]:w-[95%]">
             <Image
               className=""
               src={"/carousel-icon.svg"}

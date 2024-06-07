@@ -31,7 +31,7 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
   }
 
   return (
-    <div className="relative mx-2 mt-8 flex h-[300px] w-[300px] flex-col justify-between rounded-2xl p-6 duration-300 hover:scale-105">
+    <div className="relative mx-2 mt-8 flex h-[18.75rem] w-[18.75rem] flex-col justify-between rounded-2xl p-6 duration-300 hover:scale-105">
       <Image
         className="-z-10 rounded-2xl"
         src={image}
@@ -65,11 +65,11 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
             ))}
           </div>
           <div className="flex flex-row items-center space-x-2">
-            <div className="flex flex-row items-center space-x-[2px] text-white">
+            <div className="flex flex-row items-center space-x-[0.125rem] text-white">
               <FaEye />
               <p className="text-xs">222K</p>
             </div>
-            <div className="flex flex-row items-center space-x-[2px] text-white">
+            <div className="flex flex-row items-center space-x-[0.125rem] text-white">
               <FaRegHeart size={"0.75rem"} />
               <p className="text-xs">666M</p>
             </div>

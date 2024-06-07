@@ -74,7 +74,7 @@ const InformationList = ({ category }: MyProps) => {
   ];
 
   return (
-    <div className="mt-32 flex w-[960px] flex-col max-[1024px]:w-[90%]">
+    <div className="mt-32 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
         <button className="hidden items-center pr-8 text-sm font-black text-neutral-500 hover:text-main max-[1024px]:flex">
           <MdOutlineMenu size={"1.25rem"} />
@@ -89,7 +89,7 @@ const InformationList = ({ category }: MyProps) => {
         <div className="flex flex-row items-center space-x-4">
           <form>
             <input
-              className="w-64 border-b-[1px] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2"
+              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2"
               type="text"
               autoComplete="search"
               name="search"
