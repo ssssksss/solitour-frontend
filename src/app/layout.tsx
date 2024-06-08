@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
     template: "Solitour | %s",
-    default: "Solitour - 나 혼자 여행자를 위한 공간",
+    default: "Solitour - 새로운 나를 찾는 여행",
   },
   description: "Solitour",
 };

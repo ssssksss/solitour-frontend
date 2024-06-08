@@ -15,7 +15,7 @@ type MyProps = {
 const HeaderSidebar = ({ onClose }: MyProps) => {
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-full w-[200%] animate-sidebar">
-      <div className="bg-black/10">
+      <div className="bg-black/25">
         <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4">
           <div className="flex h-10 w-full items-center justify-between">
             <div className="relative h-[2.375rem] w-[5.75rem]">
@@ -120,8 +120,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
           </ul>
         </nav>
       </div>
-
-      <div className="h-full w-full bg-black/10" onClick={onClose} />
+      <div className="h-full w-full bg-black/25" onClick={onClose} />
     </aside>
   );
 };

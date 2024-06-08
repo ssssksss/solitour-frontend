@@ -74,36 +74,34 @@ const InformationList = ({ category }: MyProps) => {
   ];
 
   return (
-    <div className="mt-4 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
-      <div className="flex flex-row items-center justify-between">
-        <button className="hidden items-center pr-8 text-sm font-black text-neutral-500 hover:text-main max-[1024px]:flex">
-          <MdOutlineMenu size={"1.25rem"} />
-          <p className="max-[768px]:hidden">태그</p>
-        </button>
-        <div className="space-x-2 text-sm max-[1024px]:hidden">
+    <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
+      <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
+        <div className="space-x-2 text-sm">
           <CategoryButton>전체</CategoryButton>
           <CategoryButton>혼밥</CategoryButton>
           <CategoryButton>혼카페</CategoryButton>
           <CategoryButton>혼술</CategoryButton>
         </div>
-        <div className="flex flex-row items-center space-x-4">
-          <form>
+        <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
+          <form className="max-[768px]:flex-1">
             <input
-              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2"
+              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[768px]:w-full"
               type="text"
               autoComplete="search"
               name="search"
               placeholder="제목 또는 키워드를 검색해보세요."
             />
           </form>
-          <button className="flex flex-row items-center text-sm font-black text-gray1 hover:text-main">
-            <VscSettings size={"1.25rem"} />
-            <p className="max-[768px]:hidden">지역별</p>
-          </button>
-          <button className="flex flex-row items-center text-sm font-black text-gray1 hover:text-main">
-            <p className="max-[768px]:hidden">인기순</p>
-            <IoIosArrowDown />
-          </button>
+          <div className="flex flex-row items-center space-x-4">
+            <button className="flex flex-row items-center text-sm font-black text-gray1 hover:text-main">
+              <VscSettings size={"1.25rem"} />
+              <p>지역별</p>
+            </button>
+            <button className="flex flex-row items-center text-sm font-black text-gray1 hover:text-main">
+              <p>인기순</p>
+              <IoIosArrowDown />
+            </button>
+          </div>
         </div>
       </div>
       <div className="flex flex-wrap justify-between max-[1024px]:justify-around">

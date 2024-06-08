@@ -5,7 +5,7 @@ const TabList = () => {
   return (
     <div className="mt-20 flex w-[60rem] flex-row items-center justify-between max-[1024px]:w-[90%] max-[1024px]:flex-col max-[1024px]:space-y-4">
       <Link
-        className="flex h-72 w-[29.375rem] flex-col justify-between rounded-2xl bg-gradient-to-br from-[#EBE0FA] to-[#CBF6FF] p-12 duration-300 hover:scale-105 max-[1024px]:w-[90%]"
+        className="flex h-72 w-[29.375rem] flex-col justify-between rounded-2xl bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA] p-12 duration-300 hover:scale-105 max-[1024px]:w-[90%]"
         href="/informations/restaurant"
       >
         <div className="space-y-2">

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 type MyProps = {
   title: string;
@@ -12,7 +11,7 @@ type MyProps = {
 // todo
 const Banner = ({ title, content, buttonText, category, onClick }: MyProps) => {
   return (
-    <div className="-mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center bg-gradient-to-br from-[#EBE0FA] to-[#CBF6FF] max-[1024px]:h-[43.75rem]">
+    <div className="-mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA] max-[1024px]:h-[43.75rem]">
       <div className="flex h-96 w-[60rem] flex-row items-center justify-between px-4 max-[1024px]:flex max-[1024px]:h-fit max-[1024px]:flex-col max-[1024px]:justify-center max-[1024px]:space-y-8">
         <div>
           {content.map((str, index) => (
