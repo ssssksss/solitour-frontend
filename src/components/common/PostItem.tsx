@@ -31,9 +31,9 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
   }
 
   return (
-    <div className="relative mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl border-[0.0625rem] duration-300 hover:scale-105">
+    <div className="relative mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-2 outline-gray3 duration-300 hover:outline-main">
       <Image
-        className="-z-10 rounded-2xl"
+        className="-z-10 rounded-[0.875rem]"
         src={image}
         alt={"PostImage"}
         fill={true}
@@ -41,7 +41,7 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
           objectFit: "cover",
         }}
       />
-      <div className="flex flex-row items-center justify-between px-6 pt-6">
+      <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
         <p
           className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow ${style}`}
         >
@@ -51,19 +51,19 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
           <CiBookmark size={"2rem"} />
         </div>
       </div>
-      <div className="flex h-28 flex-col justify-center rounded-b-2xl border-[0.0625rem] bg-white p-6">
+      <div className="flex h-28 flex-col justify-between bg-white px-5 py-4">
         <Link
-          className="font-bold hover:text-green-200"
+          className="p-1 font-bold hover:text-green-200"
           href={`/informations/${CATEGORY_TEXT.get(category)}/${id}`}
         >
           {title}
         </Link>
-        <div className="flex flex-row justify-between pt-2">
+        <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center text-gray1">
             <MdLocationOn />
-            <p className="text-xs">서울, 종로구</p>
+            <p className="text-xs">제주특별자치도, 제주시</p>
           </div>
-          <div className="flex flex-row items-center space-x-2">
+          <div className="flex flex-row items-center space-x-3">
             <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
               <FaRegHeart size={"0.75rem"} />
               <p className="text-xs">666M</p>
