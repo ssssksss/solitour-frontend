@@ -1,5 +1,4 @@
-import InformationViewer from "@/components/informations/InformationViewer";
-import PagePath from "@/components/informations/PagePath";
+import InformationViewerContainer from "@/containers/informations/InformationViewerContainer";
 
 type MyProps = {
   params: { id: string };
@@ -29,8 +28,7 @@ export default function page({ params: { id } }: MyProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <PagePath category="숙박" />
-      <InformationViewer category="숙박" id={postId} />
+      <InformationViewerContainer category="숙박" id={postId} />
     </div>
   );
 }
