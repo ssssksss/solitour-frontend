@@ -1,4 +1,4 @@
-import PostItem from "../common/PostItem";
+import InformationItem from "../common/InformationItem";
 
 const SimilarList = () => {
   // TODO
@@ -43,7 +43,7 @@ const SimilarList = () => {
       </div>
       <div className="flex flex-wrap items-center justify-around">
         {data.map((post, index) => (
-          <PostItem
+          <InformationItem
             key={index}
             id={index + 1}
             category={post.category}

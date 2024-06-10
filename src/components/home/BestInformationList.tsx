@@ -1,11 +1,7 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import PostItem from "../common/PostItem";
+import InformationItem from "../common/InformationItem";
 
-type MyProps = {
-  title?: string;
-};
-
-const PopularList = ({ title }: MyProps) => {
+const BestInformationList = () => {
   // TODO
   const data: {
     category: string;
@@ -34,29 +30,28 @@ const PopularList = ({ title }: MyProps) => {
   ];
 
   return (
-    <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
+    <div className="mt-20 w-[60rem] max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
         <div className="space-y-2">
-          <div className="flex flex-row items-center space-x-2">
-            <div className="h-6 w-6 bg-[#D9D9D9]" />
-            <h2 className="text-2xl font-bold">인기 여행 정보</h2>
-          </div>
-          <p className="text-sm font-semibold text-gray1">
-            솔리에서 다양한 여행 정보를 찾아보세요!
+          <h2 className="text-2xl font-bold max-[768px]:text-xl">
+            고민을 덜어줄, <span className="text-main">BEST</span> 여행 정보
+          </h2>
+          <p className="text-sm font-semibold text-gray1 max-[768px]:text-xs">
+            솔리투어에서 인기 여행 정보를 확인해보세요!
           </p>
         </div>
         <div className="flex flex-row items-center space-x-2">
-          <button className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-neutral-300 hover:scale-105">
+          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 hover:scale-105">
             <IoIosArrowBack size={"1.25rem"} />
           </button>
-          <button className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white hover:scale-105">
+          <button className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white hover:scale-105">
             <IoIosArrowForward size={"1.25rem"} />
           </button>
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-around">
         {data.map((post, index) => (
-          <PostItem
+          <InformationItem
             key={index}
             id={index + 1}
             category={post.category}
@@ -70,4 +65,4 @@ const PopularList = ({ title }: MyProps) => {
   );
 };
 
-export default PopularList;
+export default BestInformationList;
