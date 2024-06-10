@@ -71,6 +71,24 @@ const InformationList = ({ category }: MyProps) => {
       image: "/restaurant8.svg",
       tags: ["베이글 맛집", "애견동반"],
     },
+    {
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
+    },
+    {
+      category: "맛집",
+      title: "책과 공간이 매력적인 테라로사 포스코센터점",
+      image: "/restaurant1.svg",
+      tags: ["북카페", "선릉역", "카공"],
+    },
+    {
+      category: "맛집",
+      title: "강릉 오션뷰를 보며 연어덮밥을 먹을 수 있는 루이식당",
+      image: "/restaurant2.svg",
+      tags: ["혼카페", "서촌", "아늑한"],
+    },
   ];
 
   return (
