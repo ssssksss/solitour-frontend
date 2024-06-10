@@ -14,7 +14,7 @@ type MyProps = {
 };
 
 // todo
-const PostItem = ({ id, category, title, image, tags }: MyProps) => {
+const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
   let style = "";
   switch (category) {
     case "맛집":
@@ -79,4 +79,4 @@ const PostItem = ({ id, category, title, image, tags }: MyProps) => {
   );
 };
 
-export default PostItem;
+export default InformationItem;

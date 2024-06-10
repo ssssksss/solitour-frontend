@@ -1,9 +1,8 @@
 import { IoIosArrowDown } from "react-icons/io";
 import CategoryButton from "../common/CategoryButton";
 import Pagination from "../common/Pagination";
-import PostItem from "../common/PostItem";
+import InformationItem from "../common/InformationItem";
 import { VscSettings } from "react-icons/vsc";
-import { MdOutlineMenu } from "react-icons/md";
 
 type MyProps = {
   category: string;
@@ -124,7 +123,7 @@ const InformationList = ({ category }: MyProps) => {
       </div>
       <div className="flex flex-wrap justify-between max-[1024px]:justify-around">
         {data.map((value, index) => (
-          <PostItem
+          <InformationItem
             key={index}
             id={index + 1}
             category={value.category}
