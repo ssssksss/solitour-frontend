@@ -3,10 +3,10 @@
 import Banner from "@/components/common/Banner";
 
 type MyProps = {
-  category: string;
+  category?: string;
 };
 
-const BannerContainer = ({ category }: MyProps) => {
+const BannerContainer = ({ category = "여행" }: MyProps) => {
   const onClick = () => {
     // TODO
     alert("버튼 클릭");
