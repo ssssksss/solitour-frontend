@@ -15,6 +15,8 @@ type MyProps = {
   onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
+  mainImageIndex: number;
+  setMainImageIndex: (index: number) => void;
 };
 
 // TODO
@@ -28,6 +30,8 @@ const InformationViewer = ({
   onTouchStart,
   onTouchMove,
   onTouchEnd,
+  mainImageIndex,
+  setMainImageIndex,
 }: MyProps) => {
   //const info = await fetch("")
   const info = {
@@ -38,8 +42,13 @@ const InformationViewer = ({
     body: "선릉역과 삼성역 사이에 있는 테라로사 포스코센터점입니다. 제가 갔을 땐 사람이 많아도 공간이 워낙 넓어서 좋았어요! 책도 구경하고 핸드드립 커피가 있어 여유롭게 시간을 보낼 수 있어요. 도심 속에서 이런 대형카페에서 뷰도 감상하고 시간을 보내고 싶은신 분들에게 추천합니다!",
     tags: ["북카페", "뷰맛집", "핸드드립"],
     tips: ["대형카페로 책도 읽고 카공하기 좋아요", "2시간 주차가 가능해요"],
-    mainImage: "/PostImage.svg",
-    subImages: [
+    images: [
+      "/PostImage.svg",
+      "/restaurant1.svg",
+      "/restaurant2.svg",
+      "/restaurant3.svg",
+      "/restaurant4.svg",
+      "/PostImage.svg",
       "/restaurant1.svg",
       "/restaurant2.svg",
       "/restaurant3.svg",
@@ -51,11 +60,11 @@ const InformationViewer = ({
     <div className="w-[60rem] max-[1024px]:w-[90%]">
       <PagePath category={`${category}`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
-        <div className="w-[29.375rem] max-[1024px]:w-full">
+        <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full">
           <div className="relative h-[26.0625rem] w-full">
             <Image
               className="rounded-2xl"
-              src={info.mainImage}
+              src={info.images[mainImageIndex]}
               alt={"/background"}
               fill={true}
               style={{
@@ -64,7 +73,7 @@ const InformationViewer = ({
             />
           </div>
           <div
-            className="flex flex-row items-center space-x-[0.875rem] overflow-x-hidden pt-[0.875rem]"
+            className="flex flex-row items-center space-x-[0.875rem] overflow-x-auto pt-[0.875rem]"
             ref={listRef}
             onMouseDown={onDragStart}
             onMouseMove={onDragMove}
@@ -74,7 +83,7 @@ const InformationViewer = ({
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-            {info.subImages.map((image, index) => (
+            {info.images.map((image, index) => (
               <Image
                 key={index}
                 className="rounded-lg"
@@ -82,11 +91,17 @@ const InformationViewer = ({
                 alt={"/background"}
                 width={107}
                 height={107}
+                onClick={(e) => {
+                  setMainImageIndex(index);
+                }}
+                onTouchEnd={(e) => {
+                  setMainImageIndex(index);
+                }}
               />
             ))}
           </div>
         </div>
-        <div className="flex h-fit w-[29.375rem] flex-col justify-center rounded-2xl pl-[2.875rem] max-[1024px]:w-full max-[1024px]:pl-0 max-[1024px]:pt-8">
+        <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto rounded-2xl px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <h1 className="text-2xl font-bold">{info.title}</h1>
           <div className="flex flex-row items-center space-x-2 py-4">
             <div className="h-12 w-12 rounded-full bg-gray3"></div>
@@ -115,7 +130,10 @@ const InformationViewer = ({
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
             {info.tips.map((tip, index) => (
-              <li key={index} className="ml-6 marker:text-main">
+              <li
+                key={index}
+                className="ml-6 font-semibold text-gray1 marker:text-main"
+              >
                 {tip}
               </li>
             ))}

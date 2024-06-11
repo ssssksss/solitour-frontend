@@ -32,3 +32,33 @@ body {
     text-wrap: balance;
   }
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0.4rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+}
+
+/* vertical */
+::-webkit-scrollbar-thumb:vertical {
+  background: linear-gradient(to bottom, #ebe0fa, #cbf6ff);
+}
+
+/* horizontal */
+::-webkit-scrollbar-thumb:horizontal {
+  background: linear-gradient(to right, #ebe0fa, #cbf6ff);
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+  background: linear-gradient(to bottom, #dad0e9, #bae5ee);
+}

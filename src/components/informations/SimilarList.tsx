@@ -30,17 +30,7 @@ const SimilarList = () => {
 
   return (
     <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
-      <div className="flex flex-row items-center justify-between">
-        <div className="space-y-2">
-          <div className="flex flex-row items-center space-x-2">
-            <div className="h-6 w-6 bg-[#D9D9D9]" />
-            <h2 className="text-2xl font-bold text-black">비슷한 곳</h2>
-          </div>
-          <p className="text-sm font-semibold text-gray1">
-            솔리에서 다양한 여행 정보를 찾아보세요!
-          </p>
-        </div>
-      </div>
+      <h2 className="text-2xl font-bold text-black">게시물과 비슷한 곳</h2>
       <div className="flex flex-wrap items-center justify-around">
         {data.map((post, index) => (
           <InformationItem

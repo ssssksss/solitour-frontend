@@ -11,6 +11,8 @@ type MyProps = {
 const InformationViewerContainer = ({ category, id }: MyProps) => {
   const listRef = useRef<HTMLDivElement>(null);
 
+  const [mainImageIndex, setMainImageIndex] = useState<number>(0);
+
   // element를 드래그하고 있는지 여부 확인
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
@@ -95,6 +97,10 @@ const InformationViewerContainer = ({ category, id }: MyProps) => {
     setIsDragging(false);
   };
 
+  const onChangeImage = (index: number) => {
+    setMainImageIndex(index);
+  };
+
   return (
     <InformationViewer
       category={category}
@@ -106,6 +112,8 @@ const InformationViewerContainer = ({ category, id }: MyProps) => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      mainImageIndex={mainImageIndex}
+      setMainImageIndex={setMainImageIndex}
     />
   );
 };

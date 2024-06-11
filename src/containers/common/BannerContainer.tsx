@@ -6,7 +6,7 @@ type MyProps = {
   category?: string;
 };
 
-const BannerContainer = ({ category = "여행" }: MyProps) => {
+const BannerContainer = ({ category = "정보" }: MyProps) => {
   const onClick = () => {
     // TODO
     alert("버튼 클릭");
