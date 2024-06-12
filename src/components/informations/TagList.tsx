@@ -33,7 +33,7 @@ const TagList = ({ category, tag }: MyProps) => {
             `${tag === value.query ? "border-main bg-main text-white" : "text-gray1"} ` +
             "rounded-full border-2 border-[#E9EBED] px-3 py-1 font-semibold hover:scale-105"
           }
-          href={`/informations/${CATEGORY_TEXT.get(category)}?tag=${value.query}`}
+          href={`/informations/${CATEGORY_TEXT[category]}?tag=${value.query}`}
         >
           {value.buttonText}
         </Link>

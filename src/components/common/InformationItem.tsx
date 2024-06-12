@@ -54,7 +54,7 @@ const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
       <div className="flex h-28 flex-col justify-between bg-white px-5 py-4">
         <Link
           className="p-1 font-bold hover:text-green-200"
-          href={`/informations/${CATEGORY_TEXT.get(category)}/${id}`}
+          href={`/informations/${CATEGORY_TEXT[category]}/${id}`}
         >
           {title}
         </Link>
