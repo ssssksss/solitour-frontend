@@ -64,7 +64,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
             <li className="border-b-2 px-1 py-4">
               <Link
                 className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100"
-                href="/informations/restaurant"
+                href="/informations/restaurant?tag=all"
                 onClick={onClose}
               >
                 <IoMdInformationCircleOutline />
@@ -73,7 +73,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/restaurant"
+                  href="/informations/restaurant?tag=all"
                   onClick={onClose}
                 >
                   <IoRestaurant />
@@ -81,7 +81,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/accommondation"
+                  href="/informations/accommondation?tag=all"
                   onClick={onClose}
                 >
                   <FaHotel />
@@ -89,7 +89,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/activity"
+                  href="/informations/activity?tag=all"
                   onClick={onClose}
                 >
                   <FiActivity />

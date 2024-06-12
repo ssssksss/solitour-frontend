@@ -74,7 +74,7 @@ const InformationEditor = () => {
       </div>
       <div className="flex flex-col items-end">
         <button
-          className="mt-3 text-sm font-semibold text-gray1 hover:scale-105"
+          className="mt-3 text-sm font-semibold text-gray1 hover:scale-110"
           type="button"
         >
           <span className="text-main">+</span> 항목 추가

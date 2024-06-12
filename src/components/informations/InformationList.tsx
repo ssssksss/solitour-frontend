@@ -1,14 +1,15 @@
 import { IoIosArrowDown } from "react-icons/io";
-import CategoryButton from "../common/CategoryButton";
 import Pagination from "../common/Pagination";
 import InformationItem from "../common/InformationItem";
 import { VscSettings } from "react-icons/vsc";
+import TagList from "./TagList";
 
 type MyProps = {
   category: string;
+  tag?: string;
 };
 
-const InformationList = ({ category }: MyProps) => {
+const InformationList = ({ category, tag }: MyProps) => {
   // TODO: API 호출
   const data: {
     category: string;
@@ -93,12 +94,7 @@ const InformationList = ({ category }: MyProps) => {
   return (
     <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
-        <div className="space-x-2 text-sm">
-          <CategoryButton>전체</CategoryButton>
-          <CategoryButton>혼밥</CategoryButton>
-          <CategoryButton>혼카페</CategoryButton>
-          <CategoryButton>혼술</CategoryButton>
-        </div>
+        <TagList category={category} tag={tag} />
         <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
           <form className="max-[768px]:flex-1">
             <input
