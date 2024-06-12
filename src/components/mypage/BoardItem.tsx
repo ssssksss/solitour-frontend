@@ -32,50 +32,50 @@ const BoardItem = ({ id, category, title, image, tags }: MyProps) => {
 
   return (
     <Link
-          className="w-full max-w-[20rem] lg:max-w-[18.75rem] outline outline-[#d9d9d9] outline-offset-[1px] outline-[1px] rounded-2xl"
-        href={`/informations/${CATEGORY_TEXT.get(category)}/${id}`}
-      >
-    <div className="relative flex aspect-square w-full flex-col justify-between rounded-2xl p-[1.5rem] duration-300 hover:scale-105">
-      <Image
-        className="-z-10 rounded-2xl"
-        src={image}
-        alt={"BoardImage"}
-        fill={true}
-        style={{
-          objectFit: "cover",
-        }}
-      />
-      <div className="flex flex-row items-center justify-between">
-        <p
-          className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow ${style}`}
-        >
-          {category}
-        </p>
-        <div className="text-white">
-          <CiBookmark size={"2rem"} />
+      className="w-full max-w-[20rem] rounded-2xl outline outline-[1px] outline-offset-[1px] outline-[#d9d9d9] lg:max-w-[18.75rem]"
+      href={`/informations/${CATEGORY_TEXT[category]}/${id}`}
+    >
+      <div className="relative flex aspect-square w-full flex-col justify-between rounded-2xl p-[1.5rem] duration-300 hover:scale-105">
+        <Image
+          className="-z-10 rounded-2xl"
+          src={image}
+          alt={"BoardImage"}
+          fill={true}
+          style={{
+            objectFit: "cover",
+          }}
+        />
+        <div className="flex flex-row items-center justify-between">
+          <p
+            className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow ${style}`}
+          >
+            {category}
+          </p>
+          <div className="text-white">
+            <CiBookmark size={"2rem"} />
+          </div>
         </div>
-      </div>
-      <div className="font-semibold text-white">
+        <div className="font-semibold text-white">
           {title}
-        <div className="flex flex-row justify-between pt-2">
-          <div className="flex flex-row items-center space-x-1">
-            {tags.map((tag, index) => (
-              <ItemTag key={index} tag={tag} />
-            ))}
-          </div>
-          <div className="flex flex-row items-center space-x-2">
-            <div className="flex flex-row items-center space-x-[2px] text-white">
-              <FaEye />
-              <p className="text-xs">222K</p>
+          <div className="flex flex-row justify-between pt-2">
+            <div className="flex flex-row items-center space-x-1">
+              {tags.map((tag, index) => (
+                <ItemTag key={index} tag={tag} />
+              ))}
             </div>
-            <div className="flex flex-row items-center space-x-[2px] text-white">
-              <FaRegHeart size={"0.75rem"} />
-              <p className="text-xs">666M</p>
+            <div className="flex flex-row items-center space-x-2">
+              <div className="flex flex-row items-center space-x-[2px] text-white">
+                <FaEye />
+                <p className="text-xs">222K</p>
+              </div>
+              <div className="flex flex-row items-center space-x-[2px] text-white">
+                <FaRegHeart size={"0.75rem"} />
+                <p className="text-xs">666M</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </Link>
   );
 };
