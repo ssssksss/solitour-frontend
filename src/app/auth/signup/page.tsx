@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <main className={"w-full flex flex-col items-center pt-[3rem] px-[.5rem] lg:px-[0rem]"}>
+    <main className={"w-full flex flex-col items-center pt-[3rem] px-[.5rem] lg:px-[0rem]"} style={{ minHeight: 'calc(100vh - 30rem)' }}>
       <div className={"pt-[6rem] pb-[8.125rem] flex flex-col max-w-[17.5rem]"}>
         <h1 className={"text-3xl font-bold pb-[1rem]"}> 회원가입 </h1>
         <p className={"text-md pb-[3rem] text-[#666]"}> 1초 회원가입으로 입력없이 간편하게 솔리투어를 시작해보세요! </p>
