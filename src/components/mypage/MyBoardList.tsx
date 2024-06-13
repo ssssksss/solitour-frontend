@@ -21,6 +21,7 @@ type MyBoardListProps = {
   })[]
 }
 
+
 const MyBoardList = ({ data }: MyBoardListProps) => {
   return (
     <div className="flex flex-wrap gap-x-[1.25rem] gap-y-[1.75rem] pt-[2.5rem] justify-center md:justify-start pb-[5rem]">

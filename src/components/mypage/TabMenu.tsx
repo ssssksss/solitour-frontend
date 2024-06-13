@@ -7,7 +7,7 @@ interface TabMenuProps {
 const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
   return (
         <div className={"flex flex-col justify-end"}>
-            <div className={"flex gap-[1rem] border-gray-200 border-b-2 w-full"}>
+            <div className={"flex gap-[2rem] border-gray-200 border-b-2 w-full"}>
                 {tabs.map((tab, index) => (
                     <button
                         key={index}
