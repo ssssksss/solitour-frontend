@@ -1,4 +1,3 @@
-import HeaderContainer from "@/containers/common/HeaderContainer";
 
 export default function RootLayout({
   children,
@@ -7,7 +6,6 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <HeaderContainer />
       {children}
     </div>
   );

@@ -1,12 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
+import { AiTwotoneClockCircle } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import { FaEye, FaRegHeart } from "react-icons/fa";
-import Link from "next/link";
-import { CATEGORY_TEXT } from "@/constants/informations/category";
-import { MdLocationOn } from "react-icons/md";
-import { IoBookmark, IoPeople } from "react-icons/io5";
 import { FaRegCalendarCheck } from "react-icons/fa6";
-import { AiTwotoneClockCircle } from "react-icons/ai";
-import Image from "next/image";
+import { IoBookmark, IoPeople } from "react-icons/io5";
+import { MdLocationOn } from "react-icons/md";
 
 type MyProps = {
   id: number;
