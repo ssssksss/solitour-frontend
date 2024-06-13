@@ -1,7 +1,36 @@
+import { ChangeEvent } from "react";
 import PagePath from "../PagePath";
 import ImageAdditionList from "./ImageAdditionList";
 
-const InformationEditor = () => {
+type MyProps = {
+  title: string;
+  location: string;
+  category: string;
+  content: string;
+  tips: string[];
+  onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeLocation: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onChangeCategory: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
+  addTip: () => void;
+  removeTip: (index: number) => void;
+};
+
+const InformationEditor = ({
+  title,
+  location,
+  category,
+  content,
+  tips,
+  onChangeTitle,
+  onChangeLocation,
+  onChangeCategory,
+  onChangeContent,
+  onChangeTip,
+  addTip,
+  removeTip,
+}: MyProps) => {
   return (
     <form className="flex w-[60rem] flex-col max-[1024px]:w-[90%]">
       <PagePath category={"정보 등록하기"} />
@@ -20,6 +49,8 @@ const InformationEditor = () => {
           autoComplete="title"
           name="title"
           placeholder="제목을 입력하세요."
+          value={title}
+          onChange={onChangeTitle}
           required={true}
         />
       </div>
@@ -27,9 +58,11 @@ const InformationEditor = () => {
         <select
           className="cursor-pointer bg-white text-lg font-semibold outline-none"
           name="location"
+          value={location}
+          onChange={onChangeLocation}
           required={true}
         >
-          <option value="" disabled={true} selected={true}>
+          <option value="" disabled={true}>
             장소 선택*
           </option>
           <option value="seoul">서울</option>
@@ -39,9 +72,11 @@ const InformationEditor = () => {
         <select
           className="cursor-pointer bg-white text-lg font-semibold outline-none"
           name="category"
+          value={category}
+          onChange={onChangeCategory}
           required={true}
         >
-          <option value="" disabled={true} selected={true}>
+          <option value="" disabled={true}>
             카테고리 선택*
           </option>
           <option value="restaurant">맛집</option>
@@ -55,29 +90,46 @@ const InformationEditor = () => {
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         autoComplete="content"
         name="content"
+        value={content}
+        onChange={onChangeContent}
         maxLength={500}
         required={true}
       />
-      <p className="pt-3 text-end text-sm font-semibold text-gray1">0/500</p>
-      <div className="mt-10 flex flex-row items-center space-x-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:space-x-0 max-[768px]:space-y-2">
-        <h2 className="text-lg font-semibold text-black">
+      <p className="pt-3 text-end text-sm font-semibold text-gray1">
+        {content.length}/500
+      </p>
+      <div className="mt-10 flex flex-row items-start space-x-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:space-x-0 max-[768px]:space-y-2">
+        <h2 className="pt-3 text-lg font-semibold text-black">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
-        <input
-          className="h-[3.3125rem] flex-grow rounded-3xl border-2 border-gray3 pl-5 text-sm font-semibold outline-none hover:border-main focus:border-main max-[768px]:w-full"
-          type="text"
-          autoComplete="tip"
-          name="tip"
-          placeholder="나만의 혼플 팁을 알려주세요."
-          required={true}
-        />
+        <div className="flex flex-grow flex-col gap-4 max-[768px]:w-full">
+          {tips.map((tip, index) => (
+            <input
+              key={index}
+              className="h-[3.3125rem] rounded-3xl border-2 border-gray3 pl-5 text-sm font-semibold outline-none hover:border-main focus:border-main"
+              type="text"
+              autoComplete="tip"
+              name="tip"
+              placeholder="나만의 혼플 팁을 알려주세요."
+              value={tip}
+              onChange={(e) => onChangeTip(index, e)}
+              required={true}
+              onDoubleClick={() => {
+                alert(index);
+                removeTip(index);
+              }}
+            />
+          ))}
+        </div>
       </div>
       <div className="flex flex-col items-end">
         <button
           className="mt-3 text-sm font-semibold text-gray1 hover:scale-110"
           type="button"
+          onClick={addTip}
         >
-          <span className="text-main">+</span> 항목 추가
+          <span className="text-main">+</span>
+          항목 추가
         </button>
         <button
           className="mb-20 mt-10 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-gray1 font-black text-white shadow hover:scale-105"
