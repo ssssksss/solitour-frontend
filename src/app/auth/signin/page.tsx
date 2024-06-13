@@ -35,14 +35,16 @@ export default function page() {
             /> 
           </div>
           구글로 로그인 </button>
-        <p className={"w-full flex justify-center relative"}>
+        <div className={"w-full flex justify-center relative"}>
           <div className={"absolute top-[-.5rem] flex flex-col items-center"}>
             <div className={"bg-[#000] text-[#fff] text-[0.625rem] translate-y-[-100%] rounded-xl relative py-[0.5rem] px-[1rem]"}> 
               1초만의 빠른 회원가입
             <div className={"w-0 h-0 absolute left-[50%] translate-x-[-50%] translate-y-[-50%] top-[2rem] border-l-[7px] border-r-[7px] border-t-[7px] border-t-[black] border-x-transparent"}>  </div>
             </div>
           </div>
+                <p className={"w-full flex justify-center relative"}>
           아직 계정이 없으신가요? <Link href={"/auth/signup"} className={"text-[#00B488] font-bold px-[0.25rem] "}> 회원가입 </Link> </p>
+      </div>
       </div>
     </main>
   );
