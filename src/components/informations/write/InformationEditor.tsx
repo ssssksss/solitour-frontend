@@ -14,6 +14,7 @@ type MyProps = {
   onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
   addTip: () => void;
+  removeTip: (index: number) => void;
 };
 
 const InformationEditor = ({
@@ -28,6 +29,7 @@ const InformationEditor = ({
   onChangeContent,
   onChangeTip,
   addTip,
+  removeTip,
 }: MyProps) => {
   return (
     <form className="flex w-[60rem] flex-col max-[1024px]:w-[90%]">
@@ -112,6 +114,10 @@ const InformationEditor = ({
               value={tip}
               onChange={(e) => onChangeTip(index, e)}
               required={true}
+              onDoubleClick={() => {
+                alert(index);
+                removeTip(index);
+              }}
             />
           ))}
         </div>

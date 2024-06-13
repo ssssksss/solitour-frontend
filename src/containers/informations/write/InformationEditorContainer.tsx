@@ -12,29 +12,25 @@ const InformationEditorContainer = () => {
     content,
     tips,
     initialize,
-    setTitle,
-    setLocation,
-    setCategory,
-    setContent,
+    changeField,
     changeTip,
     addTip,
     removeTip,
   } = useEditorStore();
-
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+    changeField("title", e.target.value);
   };
 
   const onChangeLocation = (e: ChangeEvent<HTMLSelectElement>) => {
-    setLocation(e.target.value);
+    changeField("location", e.target.value);
   };
 
   const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCategory(e.target.value);
+    changeField("category", e.target.value);
   };
 
   const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
+    changeField("content", e.target.value);
   };
 
   const onChangeTip = (index: number, e: ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +57,7 @@ const InformationEditorContainer = () => {
       onChangeContent={onChangeContent}
       onChangeTip={onChangeTip}
       addTip={addTip}
+      removeTip={removeTip}
     />
   );
 };

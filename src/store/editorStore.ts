@@ -11,10 +11,7 @@ interface EditorState {
 
 interface EditorActions {
   initialize: () => void;
-  setTitle: (title: string) => void;
-  setLocation: (location: string) => void;
-  setCategory: (category: string) => void;
-  setContent: (content: string) => void;
+  changeField: (key: string, value: string) => void;
   changeTip: (index: number, tip: string) => void;
   addTip: () => void;
   removeTip: (target: number) => void;
@@ -33,10 +30,7 @@ const initialState: EditorState = {
 const editorStore: EditorStoreType = (set, get) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
-  setTitle: (title: string) => set({ title: title }),
-  setLocation: (location: string) => set({ location: location }),
-  setCategory: (category: string) => set({ category: category }),
-  setContent: (content: string) => set({ content: content }),
+  changeField: (key: string, value: string) => set({ [key]: value }),
   changeTip: (index: number, tip: string) =>
     set((state) => {
       const tips = [...state.tips];
@@ -47,14 +41,13 @@ const editorStore: EditorStoreType = (set, get) => ({
     }),
   addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
   removeTip: (target: number) =>
-    set((state) => ({
-      tips: state.tips.filter((tip, index) => {
-        index !== target;
-      }),
-    })),
+    set((state) => {
+      const tips = [...state.tips];
+      return { tips: tips.filter((tip, index) => target !== index) };
+    }),
 });
 
-const useEditorStore = create<EditorState & EditorActions>()(
+const useEditorStore = create<EditorState & EditorActions>()<any>(
   process.env.NODE_ENV === "development" ? devtools(editorStore) : editorStore,
 );
 

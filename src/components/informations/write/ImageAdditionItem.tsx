@@ -8,6 +8,13 @@ const ImageAdditionItem = () => {
         사진 추가
       </p>
       <p className="text-xs font-semibold text-gray2">0/12</p>
+      <input
+        className="hidden"
+        type="file"
+        id="photo"
+        name="photo"
+        accept=".png, .jpeg, .jpg"
+      />
     </div>
   );
 };
