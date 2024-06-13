@@ -1,7 +1,7 @@
-import Link from "next/link";
-import HeaderSidebar from "./HeaderSidebar";
-import { MdOutlineMenu } from "react-icons/md";
 import Image from "next/image";
+import Link from "next/link";
+import { MdOutlineMenu } from "react-icons/md";
+import HeaderSidebar from "./HeaderSidebar";
 
 type MyProps = {
   pathname: string;
@@ -98,12 +98,12 @@ const Header = ({
           <div className="flex flex-row space-x-2 pr-[2.375rem] max-[1024px]:pr-4">
             <Link
               className="text-gray-500 hover:font-black hover:text-black"
-              href="/login"
+              href="/auth/signin"
             >
               로그인
             </Link>
             <div className="text-gray-400">|</div>
-            <Link className="font-black" href="/register">
+            <Link className="font-black" href="/auth/signup">
               회원가입
             </Link>
           </div>
