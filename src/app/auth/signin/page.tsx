@@ -12,7 +12,7 @@ export default function page() {
     <main className={"w-full flex flex-col items-center pt-[3rem] px-[.5rem] lg:px-[0rem]"}>
       <div className={"pt-[6rem] pb-[8.125rem] flex flex-col max-w-[17.5rem]"}>
         <h1 className={"text-3xl font-bold pb-[1rem]"}> 로그인 </h1>
-        <p className={"text-md pb-[3rem]"}> SNS로 솔리투어에 로그인하고 더 많은 서비스를 즐겨보세요! </p>
+        <p className={"text-md pb-[3rem] text-[#666]"}> SNS로 솔리투어에 로그인하고 더 많은 서비스를 즐겨보세요! </p>
         <button className={"w-full h-[2.875rem] bg-[#FEE500] rounded-xl mb-[0.75rem] relative"}>
           <div
             className="w-[1rem] aspect-square left-[1rem] absolute top-[50%] translate-y-[-50%] "
