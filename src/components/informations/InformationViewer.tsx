@@ -86,7 +86,7 @@ const InformationViewer = ({
             {info.images.map((image, index) => (
               <Image
                 key={index}
-                className="rounded-lg"
+                className="cursor-pointer rounded-lg"
                 src={image}
                 alt={"/background"}
                 width={107}

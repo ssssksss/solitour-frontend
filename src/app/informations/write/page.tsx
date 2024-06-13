@@ -1,4 +1,4 @@
-import InformationEditor from "@/components/informations/write/InformationEditor";
+import InformationEditorContainer from "@/containers/informations/write/InformationEditorContainer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div className="flex flex-col items-center">
-      <InformationEditor />
+      <InformationEditorContainer />
     </div>
   );
 }
