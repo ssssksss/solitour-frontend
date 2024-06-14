@@ -14,7 +14,7 @@ interface EditorActions {
   changeField: (key: string, value: string) => void;
   changeTip: (index: number, tip: string) => void;
   addTip: () => void;
-  removeTip: (target: number) => void;
+  removeTip: () => void;
 }
 
 type EditorStoreType = StateCreator<EditorState & EditorActions>;
@@ -40,11 +40,8 @@ const editorStore: EditorStoreType = (set, get) => ({
       };
     }),
   addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
-  removeTip: (target: number) =>
-    set((state) => {
-      const tips = [...state.tips];
-      return { tips: tips.filter((tip, index) => target !== index) };
-    }),
+  removeTip: () =>
+    set((state) => ({ tips: state.tips.slice(0, state.tips.length - 1) })),
 });
 
 const useEditorStore = create<EditorState & EditorActions>()<any>(

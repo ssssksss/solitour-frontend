@@ -14,7 +14,7 @@ type MyProps = {
   onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
   addTip: () => void;
-  removeTip: (index: number) => void;
+  removeTip: () => void;
 };
 
 const InformationEditor = ({
@@ -114,23 +114,30 @@ const InformationEditor = ({
               value={tip}
               onChange={(e) => onChangeTip(index, e)}
               required={true}
-              onDoubleClick={() => {
-                alert(index);
-                removeTip(index);
-              }}
             />
           ))}
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <button
-          className="mt-3 text-sm font-semibold text-gray1 hover:scale-110"
-          type="button"
-          onClick={addTip}
-        >
-          <span className="text-main">+</span>
-          항목 추가
-        </button>
+        <div className="mt-3 flex flex-row items-center gap-5 text-sm font-semibold text-gray1">
+          <button
+            className={`${tips.length <= 1 ? "text-gray3" : "hover:scale-110"}`}
+            type="button"
+            onClick={removeTip}
+            disabled={tips.length <= 1}
+          >
+            <span
+              className={`${tips.length <= 1 ? "text-gray3" : "text-main"}`}
+            >
+              -
+            </span>
+            항목 삭제
+          </button>
+          <button className="hover:scale-110" type="button" onClick={addTip}>
+            <span className="text-main">+</span>
+            항목 추가
+          </button>
+        </div>
         <button
           className="mb-20 mt-10 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-gray1 font-black text-white shadow hover:scale-105"
           type="submit"
