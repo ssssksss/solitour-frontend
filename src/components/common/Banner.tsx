@@ -30,9 +30,8 @@ const Banner = ({ title, content, buttonText, category }: MyProps) => {
         </div>
         <div className="relative h-[14rem] w-[27rem] max-[480px]:w-[95%]">
           <Image
-            className=""
-            src={"/carousel-icon.svg"}
-            alt={"carousel-icon"}
+            src={"/banner-image.png"}
+            alt={"banner-image"}
             fill={true}
             style={{
               objectFit: "contain",
