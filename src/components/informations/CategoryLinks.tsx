@@ -6,9 +6,9 @@ type MyProps = {
 
 const CategoryLinks = ({ category }: MyProps) => {
   return (
-    <div className="mt-[5.5rem] w-[60rem] max-[1024px]:w-[90%]">
-      <nav className="w-[60rem] bg-white max-[1024px]:w-full">
-        <ul className="flex flex-row space-x-10 pb-2">
+    <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] max-[1024px]:w-[90%]">
+      <nav className="w-fit">
+        <ul className="flex flex-row items-center gap-9">
           <li>
             <Link
               className={
@@ -59,6 +59,12 @@ const CategoryLinks = ({ category }: MyProps) => {
           </li>
         </ul>
       </nav>
+      <Link
+        className="flex h-9 w-28 items-center justify-center rounded-full bg-main text-sm font-semibold text-white hover:scale-105"
+        href="/informations/write"
+      >
+        정보 등록하기
+      </Link>
     </div>
   );
 };
