@@ -1,13 +1,17 @@
 import { ChangeEvent } from "react";
 import PagePath from "../PagePath";
 import ImageAdditionList from "./ImageAdditionList";
+import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
+import { IoIosArrowDown } from "react-icons/io";
 
 type MyProps = {
   title: string;
   location: string;
   category: string;
+  subCategory: string;
   content: string;
   tips: string[];
+  visible: boolean;
   onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLocation: (e: ChangeEvent<HTMLSelectElement>) => void;
   onChangeCategory: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -15,14 +19,18 @@ type MyProps = {
   onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
   addTip: () => void;
   removeTip: () => void;
+  showModal: () => void;
+  closeModal: () => void;
 };
 
 const InformationEditor = ({
   title,
   location,
   category,
+  subCategory,
   content,
   tips,
+  visible,
   onChangeTitle,
   onChangeLocation,
   onChangeCategory,
@@ -30,9 +38,12 @@ const InformationEditor = ({
   onChangeTip,
   addTip,
   removeTip,
+  showModal,
+  closeModal,
 }: MyProps) => {
   return (
     <form className="flex w-[60rem] flex-col max-[1024px]:w-[90%]">
+      {visible && <CategoryModalContainer closeModal={closeModal} />}
       <PagePath category={"정보 등록하기"} />
       <h1 className="text-3xl font-bold text-black">정보 등록하기</h1>
       <p className="mt-6 font-semibold text-gray1">
@@ -69,20 +80,18 @@ const InformationEditor = ({
           <option value="busan">부산</option>
           <option value="other">기타</option>
         </select>
-        <select
-          className="cursor-pointer bg-white text-lg font-semibold outline-none"
-          name="category"
-          value={category}
-          onChange={onChangeCategory}
-          required={true}
-        >
-          <option value="" disabled={true}>
-            카테고리 선택*
-          </option>
-          <option value="restaurant">맛집</option>
-          <option value="accommondation">숙박</option>
-          <option value="activity">액티비티</option>
-        </select>
+        <div onClick={showModal}>
+          <button
+            className="flex flex-row items-center text-lg font-semibold"
+            type="button"
+          >
+            {category !== "" && subCategory !== ""
+              ? `${category} - ${subCategory}`
+              : "카테고리 선택"}
+            <span className="text-main">*</span>
+            <IoIosArrowDown />
+          </button>
+        </div>
       </div>
       <ImageAdditionList />
       <textarea

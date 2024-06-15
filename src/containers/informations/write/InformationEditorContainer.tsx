@@ -2,13 +2,24 @@
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useEditorStore from "@/store/editorStore";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const InformationEditorContainer = () => {
+  const [visible, setVisible] = useState<boolean>(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const closeModal = () => {
+    setVisible(false);
+  };
+
   const {
     title,
     location,
     category,
+    subCategory,
     content,
     tips,
     initialize,
@@ -49,8 +60,10 @@ const InformationEditorContainer = () => {
       title={title}
       location={location}
       category={category}
+      subCategory={subCategory}
       content={content}
       tips={tips}
+      visible={visible}
       onChangeTitle={onChangeTitle}
       onChangeLocation={onChangeLocation}
       onChangeCategory={onChangeCategory}
@@ -58,6 +71,8 @@ const InformationEditorContainer = () => {
       onChangeTip={onChangeTip}
       addTip={addTip}
       removeTip={removeTip}
+      showModal={showModal}
+      closeModal={closeModal}
     />
   );
 };

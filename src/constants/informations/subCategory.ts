@@ -1,8 +1,9 @@
-type TAGS_TYPE = {
+type SUBCATEGORY_TYPE = {
   [category: string]: Array<Readonly<{ query: string; buttonText: string }>>;
 };
 
-export const TAGS: TAGS_TYPE = {
+export const SUBCATEGORY: SUBCATEGORY_TYPE = {
+  "": [],
   맛집: [
     { query: "all", buttonText: "전체" },
     { query: "cafe", buttonText: "혼카페" },

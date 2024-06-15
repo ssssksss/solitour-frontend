@@ -73,7 +73,7 @@ const Header = ({
                           : " "
                       }` + "hover:font-black hover:text-black"
                     }
-                    href="/informations/restaurant?tag=all"
+                    href="/informations/restaurant?subCategory=all"
                   >
                     정보
                   </Link>

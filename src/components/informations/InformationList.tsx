@@ -2,99 +2,86 @@ import { IoIosArrowDown } from "react-icons/io";
 import Pagination from "../common/Pagination";
 import InformationItem from "../common/InformationItem";
 import { VscSettings } from "react-icons/vsc";
-import TagList from "./TagList";
+import SubCategoryList from "./SubCategoryList";
 
 type MyProps = {
   category: string;
-  tag?: string;
+  subCategory: string;
 };
 
-const InformationList = ({ category, tag }: MyProps) => {
+const InformationList = ({ category, subCategory }: MyProps) => {
   // TODO: API 호출
   const data: {
     category: string;
     title: string;
     image: string;
-    tags: string[];
   }[] = [
     {
       category: "맛집",
       title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
       image: "/PostImage.svg",
-      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
       category: "맛집",
       title: "책과 공간이 매력적인 테라로사 포스코센터점",
       image: "/restaurant1.svg",
-      tags: ["북카페", "선릉역", "카공"],
     },
     {
       category: "맛집",
       title: "강릉 오션뷰를 보며 연어덮밥을 먹을 수 있는 루이식당",
       image: "/restaurant2.svg",
-      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
       category: "맛집",
       title: "1인 사시미회가 맛있는 제주 애월 닻",
       image: "/restaurant3.svg",
-      tags: ["혼술", "애월", "딱새우회"],
     },
     {
       category: "맛집",
       title: "정갈한 한식 미필담 이북식 손만둣국",
       image: "/restaurant4.svg",
-      tags: ["이북식음식", "합정", "혼밥"],
     },
     {
       category: "맛집",
       title: "면과 국물이 무한리필 되는 쌀국수 맛집 미분당",
       image: "/restaurant5.svg",
-      tags: ["쌀국수", "공덕역"],
     },
     {
       category: "맛집",
       title: "강릉역 분위기 좋은 카페 비사이드그라운드",
       image: "/restaurant6.svg",
-      tags: ["혼카페", "강릉역", "아늑한"],
     },
     {
       category: "맛집",
       title: "제주 성산 단백",
       image: "/restaurant7.svg",
-      tags: ["흑돼지 맛집", "제주 성산"],
     },
     {
       category: "맛집",
       title: "애견동반이 가능한 경주 베이글베이 글러",
       image: "/restaurant8.svg",
-      tags: ["베이글 맛집", "애견동반"],
     },
     {
       category: "맛집",
       title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
       image: "/PostImage.svg",
-      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
       category: "맛집",
       title: "책과 공간이 매력적인 테라로사 포스코센터점",
       image: "/restaurant1.svg",
-      tags: ["북카페", "선릉역", "카공"],
     },
     {
       category: "맛집",
       title: "강릉 오션뷰를 보며 연어덮밥을 먹을 수 있는 루이식당",
       image: "/restaurant2.svg",
-      tags: ["혼카페", "서촌", "아늑한"],
     },
   ];
 
   return (
     <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
-        <TagList category={category} tag={tag} />
+        <SubCategoryList category={category} subCategory={subCategory} />
         <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
           <form className="max-[768px]:flex-1">
             <input
@@ -125,7 +112,6 @@ const InformationList = ({ category, tag }: MyProps) => {
             category={value.category}
             title={value.title}
             image={value.image}
-            tags={value.tags}
           />
         ))}
       </div>

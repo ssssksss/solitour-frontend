@@ -10,11 +10,10 @@ type MyProps = {
   category: string;
   title: string;
   image: string;
-  tags: string[];
 };
 
 // todo
-const InformationItem = ({ id, category, title, image, tags }: MyProps) => {
+const InformationItem = ({ id, category, title, image }: MyProps) => {
   let style = "";
   switch (category) {
     case "맛집":
