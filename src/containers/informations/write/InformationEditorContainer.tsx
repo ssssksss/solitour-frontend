@@ -19,6 +19,7 @@ const InformationEditorContainer = () => {
     title,
     location,
     category,
+    subCategory,
     content,
     tips,
     initialize,
@@ -59,6 +60,7 @@ const InformationEditorContainer = () => {
       title={title}
       location={location}
       category={category}
+      subCategory={subCategory}
       content={content}
       tips={tips}
       visible={visible}

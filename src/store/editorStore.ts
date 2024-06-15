@@ -5,6 +5,7 @@ interface EditorState {
   title: string;
   location: string;
   category: string;
+  subCategory: string;
   content: string;
   tips: string[];
 }
@@ -23,6 +24,7 @@ const initialState: EditorState = {
   title: "",
   location: "",
   category: "",
+  subCategory: "",
   content: "",
   tips: [""],
 };

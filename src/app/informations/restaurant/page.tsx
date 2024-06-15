@@ -19,7 +19,10 @@ export default function page({ searchParams }: MyProps) {
       <BannerContainer />
       <TopListContainer category="여행" />
       <CategoryLinks category="맛집" />
-      <InformationList category="맛집" tag={searchParams["tag"]} />
+      <InformationList
+        category="맛집"
+        subCategory={searchParams["subCategory"]!}
+      />
     </div>
   );
 }

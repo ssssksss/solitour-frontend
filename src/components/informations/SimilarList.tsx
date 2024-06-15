@@ -6,25 +6,21 @@ const SimilarList = () => {
     category: string;
     title: string;
     image: string;
-    tags: string[];
   }[] = [
     {
       category: "맛집",
       title: "빈티지 분위기의 카페 합정 앤트러사이트",
       image: "/PostImage.svg",
-      tags: ["혼카페", "서촌", "아늑한"],
     },
     {
       category: "맛집",
       title: "취향대로 골라 마시는 핸드드립커피 보사노바 잠실점",
       image: "/PostImage2.svg",
-      tags: ["제주 월정리", "1인 게하"],
     },
     {
       category: "맛집",
       title: "초록 창밖 뷰에 분위기까지 갖춘 연희동 혹스턴",
       image: "/PostImage3.svg",
-      tags: ["미술관", "안국역", "전시"],
     },
   ];
 
@@ -39,7 +35,6 @@ const SimilarList = () => {
             category={post.category}
             title={post.title}
             image={post.image}
-            tags={post.tags}
           />
         ))}
       </div>
