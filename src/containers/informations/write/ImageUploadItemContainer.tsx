@@ -1,0 +1,45 @@
+"use client";
+
+import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
+import useEditorStore from "@/store/editorStore";
+import { useRef } from "react";
+
+type MyProps = {
+  index: number;
+};
+
+const ImageUploadItemContainer = ({ index }: MyProps) => {
+  const imageRef = useRef<HTMLInputElement>(null);
+  const { images, changeImage, addImage } = useEditorStore();
+
+  const onUploadButtonClicked = () => {
+    imageRef.current?.click();
+  };
+
+  const previewImage = () => {
+    if (imageRef.current && imageRef.current.files) {
+      const file = imageRef.current.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        changeImage(index, reader.result as string);
+
+        if (index < 11 && images.length === index + 1) {
+          addImage();
+        }
+      };
+    }
+  };
+
+  return (
+    <ImageUploadItem
+      index={index}
+      image={images[index]}
+      imageRef={imageRef}
+      onUploadButtonClicked={onUploadButtonClicked}
+      previewImage={previewImage}
+    />
+  );
+};
+
+export default ImageUploadItemContainer;
