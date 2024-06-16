@@ -17,7 +17,11 @@ const ImageUploadItemContainer = ({ index }: MyProps) => {
   };
 
   const previewImage = () => {
-    if (imageRef.current && imageRef.current.files) {
+    if (
+      imageRef.current &&
+      imageRef.current.files &&
+      imageRef.current.files.length >= 1
+    ) {
       const file = imageRef.current.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(file);
