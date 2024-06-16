@@ -19,12 +19,10 @@ const CategoryModal = ({
   onCancel,
 }: MyProps) => {
   const subCategories = SUBCATEGORY[category];
-  console.log(`category: ${category}`);
-  console.log(`subCategories: ${subCategories}`);
 
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8">
+      <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%]">
         <h2 className="text-2xl font-black">카테고리 선택</h2>
         <div className="flex flex-col gap-1">
           <h3 className="text-lg font-bold text-black">카테고리</h3>
@@ -77,8 +75,8 @@ const CategoryModal = ({
           {subCategories.length !== 0 && (
             <h3 className="text-lg font-bold text-black">서브 카테고리</h3>
           )}
-          <div className="flex flex-row items-center gap-1">
-            {subCategories.map((value, index) => (
+          <div className="flex flex-wrap items-center gap-1">
+            {subCategories.slice(1).map((value, index) => (
               <button
                 key={index}
                 className={
