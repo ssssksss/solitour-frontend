@@ -2,10 +2,26 @@
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useEditorStore from "@/store/editorStore";
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  TouchEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 const InformationEditorContainer = () => {
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // 모달창이 보이는지 여부
   const [visible, setVisible] = useState<boolean>(false);
+
+  // element를 드래그하고 있는지 여부
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  // 드래그 시작 시점의 스크롤 포지션이 포함된 x축 좌표값
+  const [totalX, setTotalX] = useState<number>(0);
 
   const showModal = () => {
     setVisible(true);
@@ -15,11 +31,90 @@ const InformationEditorContainer = () => {
     setVisible(false);
   };
 
+  // 마우스 드래그 시작
+  const onDragStart = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+
+    const x = e.clientX;
+    if (listRef.current && "scrollLeft" in listRef.current) {
+      setTotalX(x + listRef.current.scrollLeft);
+    }
+  };
+
+  // 마우스 드래그 동작 중
+  const onDragMove = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!isDragging) {
+      return;
+    }
+
+    const scrollLeft = totalX - e.clientX;
+    if (listRef.current && "scrollLeft" in listRef.current) {
+      // 스크롤 발생
+      listRef.current.scrollLeft = scrollLeft;
+    }
+  };
+
+  // 마우스 드래그 종료
+  const onDragEnd = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!isDragging) {
+      return;
+    }
+
+    if (!listRef.current) {
+      return;
+    }
+
+    setIsDragging(false);
+  };
+
+  // 터치 드래그 시작
+  const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+
+    const x = e.touches[0].pageX;
+    if (listRef.current && "scrollLeft" in listRef.current) {
+      setTotalX(x + listRef.current.scrollLeft);
+    }
+  };
+
+  // 터치 드래그 동작 중
+  const onTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!isDragging) {
+      return;
+    }
+
+    const scrollLeft = totalX - e.touches[0].pageX;
+    if (listRef.current && "scrollLeft" in listRef.current) {
+      // 스크롤 발생
+      listRef.current.scrollLeft = scrollLeft;
+    }
+  };
+
+  // 터치 드래그 종료
+  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!isDragging) {
+      return;
+    }
+
+    if (!listRef.current) {
+      return;
+    }
+
+    setIsDragging(false);
+  };
+
   const {
     title,
     location,
     category,
     subCategory,
+    images,
     content,
     tips,
     initialize,
@@ -34,10 +129,6 @@ const InformationEditorContainer = () => {
 
   const onChangeLocation = (e: ChangeEvent<HTMLSelectElement>) => {
     changeField("location", e.target.value);
-  };
-
-  const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
-    changeField("category", e.target.value);
   };
 
   const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,18 +152,25 @@ const InformationEditorContainer = () => {
       location={location}
       category={category}
       subCategory={subCategory}
+      images={images}
       content={content}
       tips={tips}
       visible={visible}
       onChangeTitle={onChangeTitle}
       onChangeLocation={onChangeLocation}
-      onChangeCategory={onChangeCategory}
       onChangeContent={onChangeContent}
       onChangeTip={onChangeTip}
       addTip={addTip}
       removeTip={removeTip}
       showModal={showModal}
       closeModal={closeModal}
+      listRef={listRef}
+      onDragStart={onDragStart}
+      onDragMove={onDragMove}
+      onDragEnd={onDragEnd}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     />
   );
 };

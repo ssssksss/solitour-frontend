@@ -1,26 +1,33 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent, RefObject, TouchEvent } from "react";
 import PagePath from "../PagePath";
-import ImageAdditionList from "./ImageAdditionList";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
+import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 
 type MyProps = {
   title: string;
   location: string;
   category: string;
   subCategory: string;
+  images: string[];
   content: string;
   tips: string[];
   visible: boolean;
   onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLocation: (e: ChangeEvent<HTMLSelectElement>) => void;
-  onChangeCategory: (e: ChangeEvent<HTMLSelectElement>) => void;
   onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
   addTip: () => void;
   removeTip: () => void;
   showModal: () => void;
   closeModal: () => void;
+  listRef: RefObject<HTMLDivElement>;
+  onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
+  onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
+  onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
+  onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
+  onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
+  onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
 };
 
 const InformationEditor = ({
@@ -28,18 +35,25 @@ const InformationEditor = ({
   location,
   category,
   subCategory,
+  images,
   content,
   tips,
   visible,
   onChangeTitle,
   onChangeLocation,
-  onChangeCategory,
   onChangeContent,
   onChangeTip,
   addTip,
   removeTip,
   showModal,
   closeModal,
+  listRef,
+  onDragStart,
+  onDragMove,
+  onDragEnd,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
 }: MyProps) => {
   return (
     <form className="flex w-[60rem] flex-col max-[1024px]:w-[90%]">
@@ -93,7 +107,23 @@ const InformationEditor = ({
           </button>
         </div>
       </div>
-      <ImageAdditionList />
+      <div
+        className="my-10 flex flex-row items-center gap-4 overflow-x-auto"
+        ref={listRef}
+        onMouseDown={onDragStart}
+        onMouseMove={onDragMove}
+        onMouseUp={onDragEnd}
+        onMouseLeave={onDragEnd}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        {images.map((image, index) => (
+          <div key={index}>
+            <ImageUploadItemContainer index={index} />
+          </div>
+        ))}
+      </div>
       <textarea
         className="h-[17.5rem] resize-none rounded-3xl border-2 border-gray3 p-6 text-sm font-semibold outline-none hover:border-main focus:border-main"
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."

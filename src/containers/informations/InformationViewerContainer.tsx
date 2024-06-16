@@ -97,10 +97,6 @@ const InformationViewerContainer = ({ category, id }: MyProps) => {
     setIsDragging(false);
   };
 
-  const onChangeImage = (index: number) => {
-    setMainImageIndex(index);
-  };
-
   return (
     <InformationViewer
       category={category}
