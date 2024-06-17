@@ -10,7 +10,7 @@ type MyProps = {
 
 const ImageUploadItemContainer = ({ index }: MyProps) => {
   const imageRef = useRef<HTMLInputElement>(null);
-  const { images, changeImage, addImage } = useEditorStore();
+  const { images, changeImage, addImage, removeImage } = useEditorStore();
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
@@ -27,10 +27,7 @@ const ImageUploadItemContainer = ({ index }: MyProps) => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         changeImage(index, reader.result as string);
-
-        if (index < 11 && images.length === index + 1) {
-          addImage();
-        }
+        addImage();
       };
     }
   };
@@ -42,6 +39,7 @@ const ImageUploadItemContainer = ({ index }: MyProps) => {
       imageRef={imageRef}
       onUploadButtonClicked={onUploadButtonClicked}
       previewImage={previewImage}
+      onRemove={removeImage}
     />
   );
 };

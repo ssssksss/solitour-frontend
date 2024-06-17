@@ -21,6 +21,7 @@ interface EditorActions {
   addImage: () => void;
   addHashtag: () => void;
   addTip: () => void;
+  removeImage: (index: number) => void;
   removeTip: () => void;
 }
 
@@ -68,6 +69,13 @@ const editorStore: EditorStoreType = (set, get) => ({
   addImage: () => set((state) => ({ images: [...state.images, ""] })),
   addHashtag: () => set((state) => ({ hashtags: [...state.hashtags, ""] })),
   addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
+  removeImage: (index: number) =>
+    set((state) => {
+      const images = state.images.filter((_, i) => index !== i);
+      return {
+        images: images,
+      };
+    }),
   removeTip: () =>
     set((state) => ({ tips: state.tips.slice(0, state.tips.length - 1) })),
 });
