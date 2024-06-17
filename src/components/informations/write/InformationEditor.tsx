@@ -11,17 +11,21 @@ type MyProps = {
   subCategory: string;
   images: string[];
   content: string;
+  hashtags: string[];
   tips: string[];
   visible: boolean;
+  listRef: RefObject<HTMLDivElement>;
+  onSubmit: () => void;
   onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLocation: (e: ChangeEvent<HTMLSelectElement>) => void;
   onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeHashtag: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
+  addHashtag: () => void;
   addTip: () => void;
   removeTip: () => void;
   showModal: () => void;
   closeModal: () => void;
-  listRef: RefObject<HTMLDivElement>;
   onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
   onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
   onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
@@ -37,17 +41,21 @@ const InformationEditor = ({
   subCategory,
   images,
   content,
+  hashtags,
   tips,
   visible,
+  listRef,
+  onSubmit,
   onChangeTitle,
   onChangeLocation,
   onChangeContent,
+  onChangeHashtag,
   onChangeTip,
+  addHashtag,
   addTip,
   removeTip,
   showModal,
   closeModal,
-  listRef,
   onDragStart,
   onDragMove,
   onDragEnd,
@@ -56,7 +64,10 @@ const InformationEditor = ({
   onTouchEnd,
 }: MyProps) => {
   return (
-    <form className="flex w-[60rem] flex-col max-[1024px]:w-[90%]">
+    <form
+      className="flex w-[60rem] flex-col max-[1024px]:w-[90%]"
+      action={onSubmit}
+    >
       {visible && <CategoryModalContainer closeModal={closeModal} />}
       <PagePath category={"정보 등록하기"} />
       <h1 className="text-3xl font-bold text-black">정보 등록하기</h1>
@@ -138,7 +149,31 @@ const InformationEditor = ({
         {content.length}/500
       </p>
       <div className="mt-10 flex flex-row items-start space-x-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:space-x-0 max-[768px]:space-y-2">
-        <h2 className="pt-3 text-lg font-semibold text-black">
+        <h2 className="w-36 pt-3 text-lg font-semibold text-black">
+          해시태그<span className="text-main">*</span>
+        </h2>
+        <div className="flex flex-grow flex-row gap-4 rounded-3xl border-2 border-teal-300">
+          {hashtags.map((hashtag, index) => (
+            <input
+              key={index}
+              className="h-[3.3125rem] rounded-3xl border-2 border-gray3 pl-5 text-sm font-semibold outline-none hover:border-main focus:border-main"
+              type="text"
+              autoComplete="hashtag"
+              name="hashtag"
+              placeholder="#해시태그로 키워드를 써보세요!"
+              onKeyDown={(e) => {
+                e.preventDefault();
+                if (e.key === "Enter") {
+                  addHashtag();
+                }
+              }}
+              required={true}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-10 flex flex-row items-start space-x-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:space-x-0 max-[768px]:space-y-2">
+        <h2 className="w-36 pt-3 text-lg font-semibold text-black">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
         <div className="flex flex-grow flex-col gap-4 max-[768px]:w-full">

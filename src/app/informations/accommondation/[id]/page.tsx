@@ -1,3 +1,4 @@
+import RecommendationList from "@/components/informations/RecommendationList";
 import InformationViewerContainer from "@/containers/informations/InformationViewerContainer";
 
 type MyProps = {
@@ -29,6 +30,7 @@ export default function page({ params: { id } }: MyProps) {
   return (
     <div className="flex flex-col items-center">
       <InformationViewerContainer category="숙박" id={postId} />
+      <RecommendationList />
     </div>
   );
 }

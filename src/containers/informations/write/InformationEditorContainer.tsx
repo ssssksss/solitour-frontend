@@ -31,6 +31,10 @@ const InformationEditorContainer = () => {
     setVisible(false);
   };
 
+  const onSubmit = () => {
+    alert("Submit");
+  };
+
   // 마우스 드래그 시작
   const onDragStart = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -116,10 +120,13 @@ const InformationEditorContainer = () => {
     subCategory,
     images,
     content,
+    hashtags,
     tips,
     initialize,
     changeField,
+    changeHashtag,
     changeTip,
+    addHashtag,
     addTip,
     removeTip,
   } = useEditorStore();
@@ -133,6 +140,10 @@ const InformationEditorContainer = () => {
 
   const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     changeField("content", e.target.value);
+  };
+
+  const onChangeHashtag = (index: number, e: ChangeEvent<HTMLInputElement>) => {
+    changeHashtag(index, e.target.value);
   };
 
   const onChangeTip = (index: number, e: ChangeEvent<HTMLInputElement>) => {
@@ -154,17 +165,21 @@ const InformationEditorContainer = () => {
       subCategory={subCategory}
       images={images}
       content={content}
+      hashtags={hashtags}
       tips={tips}
       visible={visible}
+      listRef={listRef}
+      onSubmit={onSubmit}
       onChangeTitle={onChangeTitle}
       onChangeLocation={onChangeLocation}
       onChangeContent={onChangeContent}
+      onChangeHashtag={onChangeHashtag}
       onChangeTip={onChangeTip}
+      addHashtag={addHashtag}
       addTip={addTip}
       removeTip={removeTip}
       showModal={showModal}
       closeModal={closeModal}
-      listRef={listRef}
       onDragStart={onDragStart}
       onDragMove={onDragMove}
       onDragEnd={onDragEnd}

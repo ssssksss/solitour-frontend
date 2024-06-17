@@ -20,8 +20,9 @@ export const SUBCATEGORY: SUBCATEGORY_TYPE = {
   ],
   액티비티: [
     { query: "all", buttonText: "전체" },
-    { query: "shop", buttonText: "편집/소품샵" },
-    { query: "exhibition", buttonText: "전시" },
+    { query: "waterLeisure", buttonText: "수상레저" },
     { query: "sights", buttonText: "관광지" },
+    { query: "exhibition", buttonText: "전시" },
+    { query: "shop", buttonText: "편집/소품샵" },
   ],
 };
