@@ -5,35 +5,46 @@ import { MdClose } from "react-icons/md";
 type MyProps = {
   index: number;
   image: string;
+  mainImageIndex: number;
   imageRef: RefObject<HTMLInputElement>;
   onUploadButtonClicked: () => void;
   previewImage: () => void;
+  setMainImageIndex: (index: number) => void;
   onRemove: (index: number) => void;
 };
 
 const ImageUploadItem = ({
   index,
   image,
+  mainImageIndex,
   imageRef,
   onUploadButtonClicked,
   previewImage,
+  setMainImageIndex,
   onRemove,
 }: MyProps) => {
   if (image !== "") {
     return (
-      <div className="relative flex h-[9.375rem] w-40 cursor-pointer flex-row justify-end rounded-xl border-2 p-2 hover:border-main">
-        <MdClose
-          className="cursor-pointer rounded-full bg-main p-1 text-white hover:scale-110"
-          size={"1.75rem"}
-          onClick={() => onRemove(index)}
-        />
+      <div className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-2 hover:border-main">
+        <div className="flex w-full flex-row justify-end">
+          <MdClose
+            className="z-10 cursor-pointer rounded-full bg-main p-1 text-white hover:scale-110"
+            size={"1.75rem"}
+            onClick={() => onRemove(index)}
+          />
+        </div>
         <Image
-          className="-z-10 rounded-[0.625rem]"
+          className="rounded-[0.625rem]"
           src={image}
           alt={"image"}
           fill={true}
           style={{ objectFit: "cover" }}
+          onClick={() => setMainImageIndex(index)}
         />
+        {index === mainImageIndex && (
+          <p className="z-10 h-10 font-semibold text-white">대표 이미지</p>
+        )}
+        <div /> {/* empty tag */}
       </div>
     );
   }

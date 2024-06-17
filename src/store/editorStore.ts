@@ -7,6 +7,7 @@ interface EditorState {
   category: string;
   subCategory: string;
   images: string[];
+  mainImageIndex: number;
   content: string;
   hashtags: string[];
   tips: string[];
@@ -16,6 +17,7 @@ interface EditorActions {
   initialize: () => void;
   changeField: (key: string, value: string) => void;
   changeImage: (index: number, image: string) => void;
+  changeMainImageIndex: (index: number) => void;
   changeHashtag: (index: number, hashtag: string) => void;
   changeTip: (index: number, tip: string) => void;
   addImage: () => void;
@@ -33,6 +35,7 @@ const initialState: EditorState = {
   category: "",
   subCategory: "",
   images: [""],
+  mainImageIndex: 0,
   content: "",
   hashtags: [""],
   tips: [""],
@@ -50,6 +53,7 @@ const editorStore: EditorStoreType = (set, get) => ({
         images: images,
       };
     }),
+  changeMainImageIndex: (index: number) => set({ mainImageIndex: index }),
   changeHashtag: (index: number, hashtag: string) =>
     set((state) => {
       const hashtags = [...state.hashtags];
@@ -70,12 +74,7 @@ const editorStore: EditorStoreType = (set, get) => ({
   addHashtag: () => set((state) => ({ hashtags: [...state.hashtags, ""] })),
   addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
   removeImage: (index: number) =>
-    set((state) => {
-      const images = state.images.filter((_, i) => index !== i);
-      return {
-        images: images,
-      };
-    }),
+    set((state) => ({ images: state.images.filter((_, i) => index !== i) })),
   removeTip: () =>
     set((state) => ({ tips: state.tips.slice(0, state.tips.length - 1) })),
 });

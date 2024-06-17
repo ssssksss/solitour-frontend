@@ -10,7 +10,14 @@ type MyProps = {
 
 const ImageUploadItemContainer = ({ index }: MyProps) => {
   const imageRef = useRef<HTMLInputElement>(null);
-  const { images, changeImage, addImage, removeImage } = useEditorStore();
+  const {
+    images,
+    mainImageIndex,
+    changeImage,
+    changeMainImageIndex,
+    addImage,
+    removeImage,
+  } = useEditorStore();
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
@@ -32,14 +39,25 @@ const ImageUploadItemContainer = ({ index }: MyProps) => {
     }
   };
 
+  const onRemove = (index: number) => {
+    removeImage(index);
+    if (index < mainImageIndex) {
+      changeMainImageIndex(mainImageIndex - 1);
+    } else if (index === mainImageIndex) {
+      changeMainImageIndex(0);
+    }
+  };
+
   return (
     <ImageUploadItem
       index={index}
       image={images[index]}
+      mainImageIndex={mainImageIndex}
       imageRef={imageRef}
       onUploadButtonClicked={onUploadButtonClicked}
       previewImage={previewImage}
-      onRemove={removeImage}
+      setMainImageIndex={changeMainImageIndex}
+      onRemove={onRemove}
     />
   );
 };
