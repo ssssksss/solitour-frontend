@@ -17,13 +17,11 @@ const CategoryModalContainer = ({ closeModal }: MyProps) => {
     changeField("subCategory", subCategory);
   };
 
-  const onSave = () => {
-    closeModal();
-  };
-
-  const onCancel = () => {
-    changeField("category", "");
-    changeField("subCategory", "");
+  const onClick = () => {
+    if (category === "" || subCategory === "") {
+      changeField("category", "");
+      changeField("subCategory", "");
+    }
     closeModal();
   };
 
@@ -33,8 +31,7 @@ const CategoryModalContainer = ({ closeModal }: MyProps) => {
       subCategory={subCategory}
       setCategory={setCategory}
       setSubCategory={setSubCategory}
-      onSave={onSave}
-      onCancel={onCancel}
+      onClick={onClick}
     />
   );
 };

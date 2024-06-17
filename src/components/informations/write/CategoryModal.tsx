@@ -6,8 +6,7 @@ type MyProps = {
   subCategory: string;
   setCategory: (category: string) => void;
   setSubCategory: (subCategory: string) => void;
-  onSave: () => void;
-  onCancel: () => void;
+  onClick: () => void;
 };
 
 const CategoryModal = ({
@@ -15,17 +14,22 @@ const CategoryModal = ({
   subCategory,
   setCategory,
   setSubCategory,
-  onSave,
-  onCancel,
+  onClick,
 }: MyProps) => {
   const subCategories = SUBCATEGORY[category];
 
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%]">
-        <h2 className="text-2xl font-black">카테고리 선택</h2>
         <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-bold text-black">카테고리</h3>
+          <div className="flex flex-row items-center justify-between">
+            <h3 className="text-lg font-bold text-black">카테고리 선택</h3>
+            <MdClose
+              className="cursor-pointer text-gray2 hover:text-main"
+              size={"2.5rem"}
+              onClick={onClick}
+            />
+          </div>
           <div className="flex flex-row items-center gap-2">
             <button
               className={
@@ -73,7 +77,7 @@ const CategoryModal = ({
         </div>
         <div className="flex flex-col gap-1">
           {subCategories.length !== 0 && (
-            <h3 className="text-lg font-bold text-black">서브 카테고리</h3>
+            <h3 className="text-lg font-bold text-black">소분류 선택</h3>
           )}
           <div className="flex flex-wrap items-center gap-1">
             {subCategories.slice(1).map((value, index) => (
@@ -90,25 +94,6 @@ const CategoryModal = ({
               </button>
             ))}
           </div>
-        </div>
-        <div className="flex flex-row items-center justify-center gap-4">
-          <button
-            className={
-              `${category === "" || subCategory === "" ? "hidden" : ""} ` +
-              "flex h-11 w-20 items-center justify-center rounded-full bg-main font-black text-white shadow hover:scale-105"
-            }
-            type="button"
-            onClick={onSave}
-          >
-            저장
-          </button>
-          <button
-            className="flex h-11 w-20 items-center justify-center rounded-full bg-gray2 font-black text-white shadow hover:scale-105"
-            type="button"
-            onClick={onCancel}
-          >
-            취소
-          </button>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import InformationItem from "../common/InformationItem";
 
-const SimilarList = () => {
+const RecommendationList = () => {
   // TODO
   const data: {
     category: string;
@@ -26,7 +26,7 @@ const SimilarList = () => {
 
   return (
     <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
-      <h2 className="text-2xl font-bold text-black">게시물과 비슷한 곳</h2>
+      <h2 className="text-2xl font-bold text-black">추천 여행 정보</h2>
       <div className="flex flex-wrap items-center justify-around">
         {data.map((post, index) => (
           <InformationItem
@@ -42,4 +42,4 @@ const SimilarList = () => {
   );
 };
 
-export default SimilarList;
+export default RecommendationList;
