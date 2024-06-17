@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 
 const HomeCarouselContainer = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const images = ["/background.svg", "/1.jpg", "/2.jpg", "/3.jpg"];
+  const images = [
+    "/background1.svg",
+    "/background2.svg",
+    "/background3.svg",
+    "/background4.svg",
+  ];
 
   const onClick = (index: number) => {
     setCurrentIndex(index);
