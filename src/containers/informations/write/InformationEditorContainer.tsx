@@ -17,6 +17,8 @@ const InformationEditorContainer = () => {
   // 모달창이 보이는지 여부
   const [visible, setVisible] = useState<boolean>(false);
 
+  const [hashtag, setHashtag] = useState<string>("");
+
   // element를 드래그하고 있는지 여부
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
@@ -124,10 +126,10 @@ const InformationEditorContainer = () => {
     tips,
     initialize,
     changeField,
-    changeHashtag,
     changeTip,
     addHashtag,
     addTip,
+    removeHashtag,
     removeTip,
   } = useEditorStore();
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -140,10 +142,6 @@ const InformationEditorContainer = () => {
 
   const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     changeField("content", e.target.value);
-  };
-
-  const onChangeHashtag = (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    changeHashtag(index, e.target.value);
   };
 
   const onChangeTip = (index: number, e: ChangeEvent<HTMLInputElement>) => {
@@ -169,14 +167,15 @@ const InformationEditorContainer = () => {
       tips={tips}
       visible={visible}
       listRef={listRef}
+      hashtag={hashtag}
       onSubmit={onSubmit}
       onChangeTitle={onChangeTitle}
       onChangeLocation={onChangeLocation}
       onChangeContent={onChangeContent}
-      onChangeHashtag={onChangeHashtag}
       onChangeTip={onChangeTip}
       addHashtag={addHashtag}
       addTip={addTip}
+      removeHashtag={removeHashtag}
       removeTip={removeTip}
       showModal={showModal}
       closeModal={closeModal}
@@ -186,6 +185,7 @@ const InformationEditorContainer = () => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      setHashtag={setHashtag}
     />
   );
 };

@@ -1,4 +1,11 @@
-import { ChangeEvent, MouseEvent, RefObject, TouchEvent } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  RefObject,
+  SetStateAction,
+  TouchEvent,
+} from "react";
 import PagePath from "../PagePath";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
@@ -15,14 +22,15 @@ type MyProps = {
   tips: string[];
   visible: boolean;
   listRef: RefObject<HTMLDivElement>;
+  hashtag: string;
   onSubmit: () => void;
   onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeLocation: (e: ChangeEvent<HTMLSelectElement>) => void;
   onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onChangeHashtag: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
-  addHashtag: () => void;
+  addHashtag: (hashtag: string) => void;
   addTip: () => void;
+  removeHashtag: (index: number) => void;
   removeTip: () => void;
   showModal: () => void;
   closeModal: () => void;
@@ -32,6 +40,7 @@ type MyProps = {
   onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
+  setHashtag: Dispatch<SetStateAction<string>>;
 };
 
 const InformationEditor = ({
@@ -45,14 +54,15 @@ const InformationEditor = ({
   tips,
   visible,
   listRef,
+  hashtag,
   onSubmit,
   onChangeTitle,
   onChangeLocation,
   onChangeContent,
-  onChangeHashtag,
   onChangeTip,
   addHashtag,
   addTip,
+  removeHashtag,
   removeTip,
   showModal,
   closeModal,
@@ -62,6 +72,7 @@ const InformationEditor = ({
   onTouchStart,
   onTouchMove,
   onTouchEnd,
+  setHashtag,
 }: MyProps) => {
   return (
     <form
@@ -75,7 +86,7 @@ const InformationEditor = ({
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
         솔리들과 공유해보세요!
       </p>
-      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center space-x-7">
+      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-7">
         <h2 className="text-lg font-semibold text-black">
           제목<span className="text-main">*</span>
         </h2>
@@ -90,7 +101,7 @@ const InformationEditor = ({
           required={true}
         />
       </div>
-      <div className="mt-12 flex flex-row items-center space-x-[3.375rem]">
+      <div className="mt-12 flex flex-row items-center gap-[3.375rem]">
         <select
           className="cursor-pointer bg-white text-lg font-semibold outline-none"
           name="location"
@@ -148,31 +159,39 @@ const InformationEditor = ({
       <p className="pt-3 text-end text-sm font-semibold text-gray1">
         {content.length}/500
       </p>
-      <div className="mt-10 flex flex-row items-start space-x-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:space-x-0 max-[768px]:space-y-2">
-        <h2 className="w-36 pt-3 text-lg font-semibold text-black">
-          해시태그<span className="text-main">*</span>
-        </h2>
-        <div className="flex flex-grow flex-row gap-4 rounded-3xl border-2 border-teal-300">
-          {hashtags.map((hashtag, index) => (
-            <input
-              key={index}
-              className="h-[3.3125rem] rounded-3xl border-2 border-gray3 pl-5 text-sm font-semibold outline-none hover:border-main focus:border-main"
-              type="text"
-              autoComplete="hashtag"
-              name="hashtag"
-              placeholder="#해시태그로 키워드를 써보세요!"
-              onKeyDown={(e) => {
+      <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
+        <h2 className="w-44 pt-3 text-lg font-semibold text-black">해시태그</h2>
+        <div className="flex min-h-[3.3125rem] w-full flex-row items-center overflow-x-auto rounded-3xl border-2 hover:border-main">
+          <input
+            className="mx-5 w-[13rem] border-main py-2 text-sm font-semibold outline-none hover:border-b-2"
+            type="text"
+            autoComplete="hashtag"
+            name="hashtag"
+            placeholder="#해시태그로 키워드를 써보세요!"
+            value={hashtag}
+            onChange={(e) => setHashtag(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
                 e.preventDefault();
-                if (e.key === "Enter") {
-                  addHashtag();
-                }
-              }}
-              required={true}
-            />
-          ))}
+                addHashtag(hashtag);
+                setHashtag("");
+              }
+            }}
+          />
+          <div className="flex w-[32rem] flex-wrap items-center gap-4 overflow-x-auto p-4">
+            {hashtags.map((value, index) => (
+              <p
+                key={index}
+                className="cursor-pointer text-sm font-semibold text-gray1 hover:scale-110"
+                onClick={(e) => removeHashtag(index)}
+              >
+                #{value}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="mt-10 flex flex-row items-start space-x-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:space-x-0 max-[768px]:space-y-2">
+      <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
         <h2 className="w-36 pt-3 text-lg font-semibold text-black">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
