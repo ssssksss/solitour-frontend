@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CiBookmark } from "react-icons/ci";
-import { FaCalendar, FaClock, FaEye, FaRegHeart } from "react-icons/fa";
-import { FaLocationPin, FaPeopleGroup } from "react-icons/fa6";
+import { CiBookmark, CiHeart } from "react-icons/ci";
 
 type MyProps = {
   id: number;
@@ -30,82 +28,54 @@ const MeetingsItem = ({
 }: MyProps) => {
   return (
     <Link
-      className="w-full max-w-[20rem] rounded-2xl p-[1.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#00B488] hover:bg-[#F2FAF7] lg:max-w-[18.75rem]"
+      className="w-full max-w-[20rem] rounded-2xl outline outline-[1px] outline-offset-[-1px] outline-[#00B488] hover:bg-[#F2FAF7] lg:max-w-[18.75rem]"
       href={`/meetings/${category}/${id}`}
     >
-      <div className="relative flex aspect-square w-full flex-col rounded-2xl duration-300 hover:scale-105">
-        <div className="flex w-full justify-between">
-          <div
-            className={`w-fit rounded-full border-2 px-[1rem] py-[.5rem] text-sm font-semibold text-[#333]`}
+      <div className="relative flex aspect-square w-full flex-col justify-end rounded-2xl duration-300 hover:scale-105">
+        <div className="absolute top-[1.5rem] flex w-full flex-row items-center justify-between px-[1.5rem]">
+          <p
+            className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow`}
           >
-            {" "}
-            전시{" "}
-          </div>
-          <div className="text-[#000]">
+            활동
+          </p>
+          <div className="text-[#666]">
             <CiBookmark size={"2rem"} />
           </div>
         </div>
-        <div className={"mt-[1rem] text-lg font-semibold text-[#111]"}>
-          {title}
-        </div>
-        <div className={"text-sm text-[#666]"}> {userName} </div>
-        <div className="flex justify-between pt-[3.75rem]">
-          <div className={"flex flex-col gap-[.625rem]"}>
-            <div className={"flex h-[1rem] gap-[.75rem] text-sm"}>
-              {" "}
-              <FaCalendar /> <div className="flex items-center">
-                {" "}
-                {date}{" "}
-              </div>{" "}
+        <div className={"h-full w-full rounded-2xl p-[1.5rem] pt-[5rem]"}>
+          <div className={"text-lg font-bold text-[#111]"}>
+            동해 서핑 투게더
+          </div>
+          <div className={"pt-[.25rem] text-sm text-[#666]"}> waver </div>
+          <div className="flex flex-col gap-[.625rem] pt-[1.25rem]">
+            <div className={"flex gap-x-[.625rem] text-xs font-medium"}>
+              <Image alt="" src="/calendar-icon.svg" width={12} height={12} />
+              <span> 06.08(토) - 06.10(월) 중 미정 </span>
             </div>
-            <div className={"flex h-[1rem] gap-[.75rem] text-sm"}>
-              {" "}
-              <FaLocationPin />{" "}
-              <div className="flex items-center"> {place} </div>{" "}
+            <div className={"flex gap-x-[.625rem] text-xs font-medium"}>
+              <Image alt="" src="/location-icon.svg" width={12} height={12} />
+              <span> 강원, 동해시</span>
             </div>
-            <div className={"flex h-[1rem] gap-[.75rem] text-sm"}>
-              {" "}
-              <FaClock /> <div className="flex items-center"> {time} </div>
+            <div className={"flex gap-x-[.625rem] text-xs font-medium"}>
+              <Image alt="" src="/clock-icon.svg" width={12} height={12} />
+              <span> 08:00 </span>
+            </div>
+            <div className={"flex gap-x-[.625rem] text-xs font-medium"}>
+              <Image alt="" src="/people-icon.svg" width={12} height={12} />
+              <span> 1/6 (20-30대, 성별 상관없음) </span>
             </div>
           </div>
-          <div className="relative aspect-square h-[5rem] rounded-xl">
-            <Image
-              className="rounded-2xl"
-              src={"./meeting1.svg"}
-              alt={"MeetingImage"}
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-        </div>
-        <div className="flex flex-row justify-between pt-[1.25rem]">
           <div
             className={
-              "grid h-[1rem] w-full grid-cols-[3rem_auto_6.5rem] gap-[.125rem] text-xs"
+              "mt-[1.75rem] flex h-[1rem] w-full justify-end gap-[.5rem] text-xs font-medium items-center"
             }
           >
-            <div className="flex items-center gap-[0.125rem]">
-              <FaPeopleGroup />
-              <span className="text-[#00B488]"> {joinMember} </span>
-              <span> / {99} </span>
+            <div className={"h-[1rem] flex gap-[.25rem]"}>
+              <CiHeart size={"1rem"} className={"w-[1rem]"}/> <span> 52 </span>
             </div>
-            <div>
-              <span className="text-[#A3A3A3]">
-                {" "}
-                {"30대, 성별 상관없음".split(",").map((i) => (
-                  <p key={i}> {i} </p>
-                ))}{" "}
-              </span>
-            </div>
-            <div className="flex flex-row items-center space-x-3">
-              <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
-                <FaRegHeart size={"0.75rem"} />
-                <p className="text-xs">200K</p>
-              </div>
-              <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
-                <FaEye />
-                <p className="text-xs">200K</p>
-              </div>
+            <div className={"h-[1rem] flex gap-[.25rem] relative"}>
+              <Image alt="" src="/eyes-icon.svg" width={16} height={16} />
+              <span> 102 </span>
             </div>
           </div>
         </div>

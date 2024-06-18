@@ -14,10 +14,9 @@ const MyBoard = ({ menu, onClickMenu, activeBoardMenuIndex }: MyBoardProps) => {
           <button
             key={index}
             onClick={() => onClickMenu(index)}
-            className={`outline-[1px]] h-[2rem] w-[3.5rem] rounded-[4rem] font-semibold outline outline-offset-[1px] outline-[#E9EBED] ${activeBoardMenuIndex == index ? "bg-[#111] text-white" : "bg-white text-[#666]"} `}
+            className={`outline-[1px]] h-[2rem] w-[3.5rem] rounded-[4rem] font-semibold text-sm ${activeBoardMenuIndex == index ? "bg-[#00B488] text-white" : "bg-white text-[#666] outline outline-offset-[1px] outline-[#E9EBED]"} `}
           >
-            {" "}
-            {menu[index]}{" "}
+            {menu[index]}
           </button>
         ))}
       </div>
