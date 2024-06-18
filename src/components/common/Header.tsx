@@ -30,7 +30,7 @@ const Header = ({
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between">
           <div className="flex flex-row items-center">
             <div
-              className="hidden cursor-pointer pl-4 max-[1024px]:flex"
+              className="hidden cursor-pointer pl-4 hover:text-main max-[1024px]:flex"
               onClick={onMenuClicked}
             >
               <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
@@ -56,8 +56,8 @@ const Header = ({
                 <li>
                   <Link
                     className={
-                      `${pathname === "/" ? "font-black text-black" : " "}` +
-                      "hover:font-black hover:text-black"
+                      `${pathname === "/" ? "font-black text-black" : "text-gray1"} ` +
+                      "font-semibold hover:text-main"
                     }
                     href="/"
                   >
@@ -70,8 +70,8 @@ const Header = ({
                       `${
                         pathname.includes("/informations")
                           ? "font-black text-black"
-                          : " "
-                      }` + "hover:font-black hover:text-black"
+                          : "text-gray1"
+                      } ` + "font-semibold hover:text-main"
                     }
                     href="/informations/restaurant?subCategory=all"
                   >
@@ -84,8 +84,8 @@ const Header = ({
                       `${
                         pathname.includes("/meetings")
                           ? "font-black text-black"
-                          : " "
-                      }` + "hover:font-black hover:text-black"
+                          : "text-gray1"
+                      } ` + "font-semibold hover:text-main"
                     }
                     href="/meetings"
                   >
@@ -97,13 +97,16 @@ const Header = ({
           </div>
           <div className="flex flex-row space-x-2 pr-[2.375rem] max-[1024px]:pr-4">
             <Link
-              className="text-gray-500 hover:font-black hover:text-black"
+              className="font-semibold text-gray1 hover:text-main"
               href="/auth/signin"
             >
               로그인
             </Link>
             <div className="text-gray-400">|</div>
-            <Link className="font-black" href="/auth/signup">
+            <Link
+              className="font-semibold text-black hover:text-main"
+              href="/auth/signup"
+            >
               회원가입
             </Link>
           </div>

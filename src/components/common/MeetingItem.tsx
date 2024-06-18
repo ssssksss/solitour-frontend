@@ -54,8 +54,8 @@ const MeetingItem = ({
   }
 
   return (
-    <div className="mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl px-5 outline outline-2 outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main">
-      <div className="mt-5 flex flex-col">
+    <div className="mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl p-5 outline outline-2 outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main">
+      <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
             className={`w-fit rounded-full px-4 py-1 text-sm font-semibold shadow ${style}`}
@@ -74,43 +74,37 @@ const MeetingItem = ({
             />
           )}
         </div>
-        <Link className="pt-4 font-bold hover:text-green-200" href={`/`}>
+        <Link className="pb-3 pt-6 font-bold hover:text-green-200" href={`/`}>
           {title}
         </Link>
-        <p className="pt-2 text-sm font-semibold text-gray1">{username}</p>
+        <p className="text-sm font-semibold text-gray1">{username}</p>
       </div>
-      <div className="flex flex-col pb-5">
+      <div className="flex flex-col gap-6">
         <div className="flex flex-row items-center justify-between">
           <div className="space-y-[0.375rem] text-xs font-semibold">
-            <div className="flex flex-row items-center space-x-3">
+            <div className="flex flex-row items-center gap-3">
               <FaRegCalendarCheck />
-              <p className="text-gray1">{date.toLocaleDateString()}</p>
+              <p className="text-black">{date.toLocaleDateString()}</p>
             </div>
-            <div className="flex flex-row items-center space-x-3">
+            <div className="flex flex-row items-center gap-3">
               <MdLocationOn />
-              <p className="text-gray1">{location}</p>
+              <p className="text-black">{location}</p>
             </div>
-            <div className="flex flex-row items-center space-x-3">
+            <div className="flex flex-row items-center gap-3">
               <AiTwotoneClockCircle />
-              <p className="text-gray1">{time}</p>
+              <p className="text-balck">{time}</p>
             </div>
-          </div>
-          <div className="relative my-5 h-[4.875rem] w-[4.875rem] rounded-lg">
-            <Image
-              className="rounded-lg"
-              src={image}
-              alt={"image"}
-              fill={true}
-              style={{ objectFit: "cover" }}
-            />
+            <div className="flex flex-row items-center gap-3">
+              <IoPeople />
+              <p>
+                <span className="text-main">{current}</span>
+                <span className="text-black">{` / ${total} `}</span>
+                <span className="text-gray2">{`${qualification}`}</span>
+              </p>
+            </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center space-x-1 text-xs">
-            <IoPeople />
-            <p className="text-main">{current}</p>
-            <p className="text-gray2">{`/ ${total} ${qualification}`}</p>
-          </div>
+        <div className="flex flex-row items-center justify-end">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center space-x-3">
               <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
