@@ -24,12 +24,12 @@ type MyBoardListProps = {
 
 const MyBoardList = ({ data }: MyBoardListProps) => {
   return (
-    <div className="flex flex-wrap gap-x-[1.25rem] gap-y-[1.75rem] pt-[2.5rem] justify-center md:justify-start pb-[5rem]">
+    <div className="gap-x-[.5rem] gap-y-[1.75rem] pb-[5rem] pt-[2.5rem] grid grid-cols-1 min-[640px]:grid-cols-2 min-[960px]:grid-cols-3 max-[960px]:max-w-[616px] min-[961px]:max-w-[916px] w-full m-auto place-items-center">
       {data.map((post) => {
-        if ('image' in post) {
+        if ("image" in post) {
           return (
             <BoardItem
-              key={"post"+post.id}
+              key={"post" + post.id}
               id={post.id}
               category={post.category}
               title={post.title}

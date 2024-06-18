@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { RefObject } from "react";
-import { FaPencil } from "react-icons/fa6";
 
 interface IMyPageHeaderProps {
   imageUploadRef: RefObject<HTMLInputElement>;
@@ -39,7 +38,6 @@ const dummyData: IDummyData = {
 
 
 const MyPageHeader = (props: IMyPageHeaderProps) => {
-  console.log("MyPageHeader.tsx 파일 : ",props.imageUrl);
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
       <h1 className={"text-3xl font-semibold"}> 마이페이지 </h1>
@@ -47,7 +45,7 @@ const MyPageHeader = (props: IMyPageHeaderProps) => {
         <article className={"flex flex-col items-center"}>
           <label
             className={
-              "cursor-pointer relative mb-[1rem] aspect-square w-[6.75rem] rounded-[3rem] bg-[#D9D9D9]"
+              "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[3rem] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
             }
             htmlFor={"imageUpload"}
             onDragEnter={props.onDragEnter}
@@ -66,14 +64,14 @@ const MyPageHeader = (props: IMyPageHeaderProps) => {
               />
             ) : dummyData.user_sex == "man" ? (
               <Image
-                src={"/user_sex_man_default_image.png"}
+                src={"/user_sex_man_default_image.svg"}
                 alt={"user_image"}
                 width={108}
                 height={108}
               />
             ) : (
               <Image
-                src={"/user_sex_woman_default_image.png"}
+                src={"/user_sex_woman_default_image.svg"}
                 alt={"user_image"}
                 width={108}
                 height={108}
@@ -81,17 +79,24 @@ const MyPageHeader = (props: IMyPageHeaderProps) => {
             )}
             <div
               className={
-                "absolute bottom-0 right-0 flex aspect-square w-[2.5rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]"
+                "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]"
               }
             >
-              <FaPencil size={"1.25rem"} />
+              <div className="w-[1.25rem] h-[1.25rem] relative">
+              <Image
+                  src={"/edit-icon.svg"}
+                  alt={"edit-icon-image"}
+                  fill
+                />
+              </div>
             </div>
             <input
               type={"file"}
               id={"imageUpload"}
               ref={props.imageUploadRef}
               className="hidden"
-              onChange={(e)=>props.onChangeImageUploadInputHandler(e)}
+              onChange={(e) => props.onChangeImageUploadInputHandler(e)}
+              // TODO : 어떤 이미지 타입들을 받아올지 정해놓아야 한다.
             />
           </label>
           <div className={"text-2xl font-semibold text-[#111]"}>
