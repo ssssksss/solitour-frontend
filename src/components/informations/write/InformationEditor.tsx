@@ -1,5 +1,4 @@
 import {
-  ChangeEvent,
   Dispatch,
   MouseEvent,
   RefObject,
@@ -10,76 +9,59 @@ import PagePath from "../PagePath";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
+import { useEditorStoreType } from "@/store/editorStore";
+import LocationModalContainer from "@/containers/informations/write/LocationModalContainer";
 
 type MyProps = {
-  title: string;
-  location: string;
-  category: string;
-  subCategory: string;
-  images: string[];
-  content: string;
-  hashtags: string[];
-  tips: string[];
-  visible: boolean;
+  editorStore: useEditorStoreType;
+  locationModal: boolean;
+  categoryModal: boolean;
   listRef: RefObject<HTMLDivElement>;
   hashtag: string;
   onSubmit: () => void;
-  onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeLocation: (e: ChangeEvent<HTMLSelectElement>) => void;
-  onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onChangeTip: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
-  addHashtag: (hashtag: string) => void;
-  addTip: () => void;
-  removeHashtag: (index: number) => void;
-  removeTip: () => void;
-  showModal: () => void;
-  closeModal: () => void;
+  showLocationModal: () => void;
+  closeLocationModal: () => void;
+  showCategoryModal: () => void;
+  closeCategoryModal: () => void;
+  setHashtag: Dispatch<SetStateAction<string>>;
   onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
   onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
   onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
   onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
-  setHashtag: Dispatch<SetStateAction<string>>;
 };
 
 const InformationEditor = ({
-  title,
-  location,
-  category,
-  subCategory,
-  images,
-  content,
-  hashtags,
-  tips,
-  visible,
+  editorStore,
+  locationModal,
+  categoryModal,
   listRef,
   hashtag,
   onSubmit,
-  onChangeTitle,
-  onChangeLocation,
-  onChangeContent,
-  onChangeTip,
-  addHashtag,
-  addTip,
-  removeHashtag,
-  removeTip,
-  showModal,
-  closeModal,
+  showLocationModal,
+  closeLocationModal,
+  showCategoryModal,
+  closeCategoryModal,
+  setHashtag,
   onDragStart,
   onDragMove,
   onDragEnd,
   onTouchStart,
   onTouchMove,
   onTouchEnd,
-  setHashtag,
 }: MyProps) => {
   return (
     <form
       className="flex w-[60rem] flex-col max-[1024px]:w-[90%]"
       action={onSubmit}
     >
-      {visible && <CategoryModalContainer closeModal={closeModal} />}
+      {locationModal && (
+        <LocationModalContainer closeModal={closeLocationModal} />
+      )}
+      {categoryModal && (
+        <CategoryModalContainer closeModal={closeCategoryModal} />
+      )}
       <PagePath category={"정보 등록하기"} />
       <h1 className="text-3xl font-bold text-black">정보 등록하기</h1>
       <p className="mt-6 font-semibold text-gray1">
@@ -96,33 +78,37 @@ const InformationEditor = ({
           autoComplete="title"
           name="title"
           placeholder="제목을 입력하세요."
-          value={title}
-          onChange={onChangeTitle}
+          value={editorStore.title}
+          onChange={(e) => editorStore.changeField("title", e.target.value)}
           required={true}
         />
       </div>
-      <div className="mt-12 flex flex-row items-center gap-[3.375rem]">
-        <select
-          className="cursor-pointer bg-white text-lg font-semibold outline-none"
-          name="location"
-          value={location}
-          onChange={onChangeLocation}
-          required={true}
-        >
-          <option value="" disabled={true}>
-            장소 선택*
-          </option>
-          <option value="seoul">서울</option>
-          <option value="busan">부산</option>
-          <option value="other">기타</option>
-        </select>
-        <div onClick={showModal}>
+      <div className="mt-12 flex flex-row items-center gap-[3.375rem] max-[640px]:flex-col max-[640px]:items-start">
+        <div className="flex h-[3.3125rem] flex-row items-center gap-7 max-[640px]:w-full">
+          <h2 className="text-lg font-semibold text-black">
+            장소<span className="text-main">*</span>
+          </h2>
+          <input
+            className="h-full flex-grow rounded-3xl border-2 border-gray3 pl-5 text-sm font-semibold outline-none hover:border-main focus:border-main"
+            type="text"
+            autoComplete="location"
+            name="location"
+            placeholder="장소명을 입력하세요."
+            value={editorStore.location}
+            onChange={(e) =>
+              editorStore.changeField("location", e.target.value)
+            }
+            onClick={showLocationModal}
+            required={true}
+          />
+        </div>
+        <div onClick={showCategoryModal}>
           <button
             className="flex flex-row items-center text-lg font-semibold"
             type="button"
           >
-            {category !== "" && subCategory !== ""
-              ? `${category} - ${subCategory}`
+            {editorStore.category !== "" && editorStore.subCategory !== ""
+              ? `${editorStore.category} - ${editorStore.subCategory}`
               : "카테고리 선택"}
             <span className="text-main">*</span>
             <IoIosArrowDown />
@@ -140,7 +126,7 @@ const InformationEditor = ({
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {images.map((image, index) => (
+        {editorStore.images.map((image, index) => (
           <div key={index}>
             <ImageUploadItemContainer index={index} />
           </div>
@@ -151,13 +137,13 @@ const InformationEditor = ({
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         autoComplete="content"
         name="content"
-        value={content}
-        onChange={onChangeContent}
+        value={editorStore.content}
+        onChange={(e) => editorStore.changeField("content", e.target.value)}
         maxLength={500}
         required={true}
       />
       <p className="pt-3 text-end text-sm font-semibold text-gray1">
-        {content.length}/500
+        {editorStore.content.length}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
         <h2 className="w-44 pt-3 text-lg font-semibold text-black">해시태그</h2>
@@ -173,17 +159,17 @@ const InformationEditor = ({
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-                addHashtag(hashtag);
+                editorStore.addHashtag(hashtag);
                 setHashtag("");
               }
             }}
           />
           <div className="flex w-[32rem] flex-wrap items-center gap-4 overflow-x-auto p-4">
-            {hashtags.map((value, index) => (
+            {editorStore.hashtags.map((value, index) => (
               <p
                 key={index}
                 className="cursor-pointer text-sm font-semibold text-gray1 hover:scale-110"
-                onClick={(e) => removeHashtag(index)}
+                onClick={(e) => editorStore.removeHashtag(index)}
               >
                 #{value}
               </p>
@@ -196,7 +182,7 @@ const InformationEditor = ({
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
         <div className="flex flex-grow flex-col gap-4 max-[768px]:w-full">
-          {tips.map((tip, index) => (
+          {editorStore.tips.map((tip, index) => (
             <input
               key={index}
               className="h-[3.3125rem] rounded-3xl border-2 border-gray3 pl-5 text-sm font-semibold outline-none hover:border-main focus:border-main"
@@ -205,7 +191,7 @@ const InformationEditor = ({
               name="tip"
               placeholder="나만의 혼플 팁을 알려주세요."
               value={tip}
-              onChange={(e) => onChangeTip(index, e)}
+              onChange={(e) => editorStore.changeTip(index, e.target.value)}
               required={true}
             />
           ))}
@@ -214,19 +200,23 @@ const InformationEditor = ({
       <div className="flex flex-col items-end">
         <div className="mt-3 flex flex-row items-center gap-5 text-sm font-semibold text-gray1">
           <button
-            className={`${tips.length <= 1 ? "text-gray3" : "hover:scale-110"}`}
+            className={`${editorStore.tips.length <= 1 ? "text-gray3" : "hover:scale-110"}`}
             type="button"
-            onClick={removeTip}
-            disabled={tips.length <= 1}
+            onClick={(e) => editorStore.removeTip()}
+            disabled={editorStore.tips.length <= 1}
           >
             <span
-              className={`${tips.length <= 1 ? "text-gray3" : "text-main"}`}
+              className={`${editorStore.tips.length <= 1 ? "text-gray3" : "text-main"}`}
             >
               -
             </span>
             항목 삭제
           </button>
-          <button className="hover:scale-110" type="button" onClick={addTip}>
+          <button
+            className="hover:scale-110"
+            type="button"
+            onClick={(e) => editorStore.addTip()}
+          >
             <span className="text-main">+</span>
             항목 추가
           </button>

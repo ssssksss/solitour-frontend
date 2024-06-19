@@ -1,13 +1,15 @@
-import { MdLocationOn } from "react-icons/md";
+import { MdDelete, MdLocationOn } from "react-icons/md";
 import ItemTag from "./ItemTag";
 import Image from "next/image";
 import PagePath from "./PagePath";
 import { MouseEvent, RefObject, TouchEvent } from "react";
 import { CiMap } from "react-icons/ci";
+import { FaEdit, FaEye, FaRegHeart } from "react-icons/fa";
 
 type MyProps = {
   category: string;
   id: number;
+  mainImageIndex: number;
   listRef: RefObject<HTMLDivElement>;
   onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
   onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
@@ -15,7 +17,6 @@ type MyProps = {
   onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
   onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
-  mainImageIndex: number;
   setMainImageIndex: (index: number) => void;
 };
 
@@ -103,11 +104,36 @@ const InformationViewer = ({
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto rounded-2xl px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <h1 className="text-2xl font-bold">{info.title}</h1>
-          <div className="flex flex-row items-center space-x-2 py-4">
-            <div className="h-12 w-12 rounded-full bg-gray3"></div>
-            <div className="space-y-1">
-              <p className="text-xs font-semibold">{info.username}</p>
-              <p className="text-xs text-gray1">{info.date}</p>
+          <div className="flex flex-row items-center justify-between py-4">
+            <div className="flex flex-row items-center gap-2">
+              <div className="h-12 w-12 rounded-full bg-gray3"></div>
+              <div className="space-y-1">
+                <p className="text-xs font-semibold">{info.username}</p>
+                <p className="text-xs text-gray1">{info.date}</p>
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex flex-row items-center justify-center gap-1 rounded-md border-2 border-gray3 px-2 py-1 text-sm">
+                <button className="flex flex-row items-center gap-[0.125rem] font-semibold text-gray1 hover:text-main">
+                  <FaEdit />
+                  <p>수정</p>
+                </button>
+                <p className="font-semibold text-gray2">|</p>
+                <button className="flex flex-row items-center gap-[0.125rem] font-semibold text-gray1 hover:text-main">
+                  <MdDelete size={"1.05rem"} />
+                  <p>삭제</p>
+                </button>
+              </div>
+              <div className="flex flex-row items-center gap-3">
+                <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
+                  <FaRegHeart size={"0.75rem"} />
+                  <p className="text-xs">666M</p>
+                </div>
+                <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
+                  <FaEye />
+                  <p className="text-xs">222K</p>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex flex-row items-center space-x-1 py-[1.125rem]">

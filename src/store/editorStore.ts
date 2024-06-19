@@ -80,4 +80,6 @@ const useEditorStore = create<EditorState & EditorActions>()<any>(
   process.env.NODE_ENV === "development" ? devtools(editorStore) : editorStore,
 );
 
+export type useEditorStoreType = EditorState & EditorActions;
+
 export default useEditorStore;

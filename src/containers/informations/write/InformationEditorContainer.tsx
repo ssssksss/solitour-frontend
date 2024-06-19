@@ -2,20 +2,16 @@
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useEditorStore from "@/store/editorStore";
-import {
-  ChangeEvent,
-  MouseEvent,
-  TouchEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { MouseEvent, TouchEvent, useEffect, useRef, useState } from "react";
 
 const InformationEditorContainer = () => {
   const listRef = useRef<HTMLDivElement>(null);
 
-  // 모달창이 보이는지 여부
-  const [visible, setVisible] = useState<boolean>(false);
+  // 장소 선택 모달창이 보이는지 여부
+  const [locationModal, setLocationModal] = useState<boolean>(false);
+
+  // 카테고리 선택 모달창이 보이는지 여부
+  const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
   const [hashtag, setHashtag] = useState<string>("");
 
@@ -25,12 +21,20 @@ const InformationEditorContainer = () => {
   // 드래그 시작 시점의 스크롤 포지션이 포함된 x축 좌표값
   const [totalX, setTotalX] = useState<number>(0);
 
-  const showModal = () => {
-    setVisible(true);
+  const showLocationModal = () => {
+    setLocationModal(true);
   };
 
-  const closeModal = () => {
-    setVisible(false);
+  const closeLocationModal = () => {
+    setLocationModal(false);
+  };
+
+  const showCategoryModal = () => {
+    setCategoryModal(true);
+  };
+
+  const closeCategoryModal = () => {
+    setCategoryModal(false);
   };
 
   const onSubmit = () => {
@@ -115,38 +119,8 @@ const InformationEditorContainer = () => {
     setIsDragging(false);
   };
 
-  const {
-    title,
-    location,
-    category,
-    subCategory,
-    images,
-    content,
-    hashtags,
-    tips,
-    initialize,
-    changeField,
-    changeTip,
-    addHashtag,
-    addTip,
-    removeHashtag,
-    removeTip,
-  } = useEditorStore();
-  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    changeField("title", e.target.value);
-  };
-
-  const onChangeLocation = (e: ChangeEvent<HTMLSelectElement>) => {
-    changeField("location", e.target.value);
-  };
-
-  const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    changeField("content", e.target.value);
-  };
-
-  const onChangeTip = (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    changeTip(index, e.target.value);
-  };
+  const editorStore = useEditorStore();
+  const initialize = editorStore.initialize;
 
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {
@@ -157,35 +131,23 @@ const InformationEditorContainer = () => {
 
   return (
     <InformationEditor
-      title={title}
-      location={location}
-      category={category}
-      subCategory={subCategory}
-      images={images}
-      content={content}
-      hashtags={hashtags}
-      tips={tips}
-      visible={visible}
+      editorStore={editorStore}
+      locationModal={locationModal}
+      categoryModal={categoryModal}
       listRef={listRef}
       hashtag={hashtag}
       onSubmit={onSubmit}
-      onChangeTitle={onChangeTitle}
-      onChangeLocation={onChangeLocation}
-      onChangeContent={onChangeContent}
-      onChangeTip={onChangeTip}
-      addHashtag={addHashtag}
-      addTip={addTip}
-      removeHashtag={removeHashtag}
-      removeTip={removeTip}
-      showModal={showModal}
-      closeModal={closeModal}
+      showLocationModal={showLocationModal}
+      closeLocationModal={closeLocationModal}
+      showCategoryModal={showCategoryModal}
+      closeCategoryModal={closeCategoryModal}
+      setHashtag={setHashtag}
       onDragStart={onDragStart}
       onDragMove={onDragMove}
       onDragEnd={onDragEnd}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      setHashtag={setHashtag}
     />
   );
 };

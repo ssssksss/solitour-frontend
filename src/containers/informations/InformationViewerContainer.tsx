@@ -101,6 +101,7 @@ const InformationViewerContainer = ({ category, id }: MyProps) => {
     <InformationViewer
       category={category}
       id={id}
+      mainImageIndex={mainImageIndex}
       listRef={listRef}
       onDragStart={onDragStart}
       onDragMove={onDragMove}
@@ -108,7 +109,6 @@ const InformationViewerContainer = ({ category, id }: MyProps) => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      mainImageIndex={mainImageIndex}
       setMainImageIndex={setMainImageIndex}
     />
   );
