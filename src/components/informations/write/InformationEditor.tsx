@@ -11,45 +11,37 @@ import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/store/editorStore";
 import LocationModalContainer from "@/containers/informations/write/LocationModalContainer";
+import ItemTag from "../ItemTag";
+import { useDragScrollType } from "@/hooks/useDragScroll";
 
 type MyProps = {
   editorStore: useEditorStoreType;
   locationModal: boolean;
   categoryModal: boolean;
-  listRef: RefObject<HTMLDivElement>;
   hashtag: string;
+  imagesHook: useDragScrollType;
+  hashtagsHook: useDragScrollType;
   onSubmit: () => void;
   showLocationModal: () => void;
   closeLocationModal: () => void;
   showCategoryModal: () => void;
   closeCategoryModal: () => void;
   setHashtag: Dispatch<SetStateAction<string>>;
-  onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
-  onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
-  onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
-  onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
-  onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
-  onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
 };
 
 const InformationEditor = ({
   editorStore,
   locationModal,
   categoryModal,
-  listRef,
   hashtag,
+  imagesHook,
+  hashtagsHook,
   onSubmit,
   showLocationModal,
   closeLocationModal,
   showCategoryModal,
   closeCategoryModal,
   setHashtag,
-  onDragStart,
-  onDragMove,
-  onDragEnd,
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
 }: MyProps) => {
   return (
     <form
@@ -117,14 +109,14 @@ const InformationEditor = ({
       </div>
       <div
         className="my-10 flex flex-row items-center gap-4 overflow-x-auto"
-        ref={listRef}
-        onMouseDown={onDragStart}
-        onMouseMove={onDragMove}
-        onMouseUp={onDragEnd}
-        onMouseLeave={onDragEnd}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+        ref={imagesHook.listRef}
+        onMouseDown={imagesHook.onDragStart}
+        onMouseMove={imagesHook.onDragMove}
+        onMouseUp={imagesHook.onDragEnd}
+        onMouseLeave={imagesHook.onDragEnd}
+        onTouchStart={imagesHook.onTouchStart}
+        onTouchMove={imagesHook.onTouchMove}
+        onTouchEnd={imagesHook.onTouchEnd}
       >
         {editorStore.images.map((image, index) => (
           <div key={index}>
@@ -147,9 +139,21 @@ const InformationEditor = ({
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
         <h2 className="w-44 pt-3 text-lg font-bold text-black">해시태그</h2>
-        <div className="flex min-h-[3.3125rem] w-full flex-row items-center overflow-x-auto rounded-3xl border-2 hover:border-main">
+        <div className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-auto overflow-y-hidden rounded-3xl border-2 pl-5 hover:border-main">
+          {editorStore.hashtags.map((hashtag, index) => (
+            <div key={index} className="flex h-[3.3125rem] items-center">
+              <ItemTag
+                tag={hashtag}
+                borderColor="border-main"
+                textColor="text-main"
+                cursorPointer={true}
+                hover="hover:scale-105"
+                onClick={() => editorStore.removeHashtag(index)}
+              />
+            </div>
+          ))}
           <input
-            className="mx-5 w-[13rem] border-main py-2 text-sm font-medium outline-none hover:border-b-2"
+            className="w-[14rem] border-main py-2 text-sm font-medium outline-none hover:border-b-2"
             type="text"
             autoComplete="hashtag"
             name="hashtag"
@@ -164,17 +168,6 @@ const InformationEditor = ({
               }
             }}
           />
-          <div className="flex w-[32rem] flex-wrap items-center gap-4 overflow-x-auto p-4">
-            {editorStore.hashtags.map((value, index) => (
-              <p
-                key={index}
-                className="cursor-pointer text-sm font-medium text-gray1 hover:scale-110"
-                onClick={(e) => editorStore.removeHashtag(index)}
-              >
-                #{value}
-              </p>
-            ))}
-          </div>
         </div>
       </div>
       <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
