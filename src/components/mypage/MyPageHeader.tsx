@@ -1,15 +1,6 @@
 import Image from "next/image";
-import { RefObject } from "react";
+import Link from "next/link";
 
-interface IMyPageHeaderProps {
-  imageUploadRef: RefObject<HTMLInputElement>;
-  onDragEnter: (e: React.DragEvent<HTMLLabelElement>) => void;
-  onDragLeave: (e: React.DragEvent<HTMLLabelElement>) => void;
-  onDragOver: (e: React.DragEvent<HTMLLabelElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLLabelElement>) => void;
-  imageUrl: string;
-  onChangeImageUploadInputHandler: (e: any) => void;
-}
 interface IDummyData {
   user_id?: number,
   user_status_id?: string,
@@ -19,7 +10,7 @@ interface IDummyData {
   user_sex?: string | null,
   user_email?: string | null,
   user_phone_number?: string | null,
-  user_image?: string,
+  user_image?: string | null,
   // is_admin: boolean,
 }
 
@@ -33,31 +24,26 @@ const dummyData: IDummyData = {
   user_sex: "woman",
   user_email: "sola240@gmail.com",
   user_phone_number: "010-1234-5678",
-  // user_image: null,
+  user_image: null,
 }
 
 
-const MyPageHeader = (props: IMyPageHeaderProps) => {
+const MyPageHeader = () => {
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
       <h1 className={"text-3xl font-semibold"}> 마이페이지 </h1>
       <div className={"flex items-center justify-center pb-[5rem] pt-[6.5rem]"}>
         <article className={"flex flex-col items-center"}>
-          <label
+          <div
             className={
               "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[3rem] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
             }
-            htmlFor={"imageUpload"}
-            onDragEnter={props.onDragEnter}
-            onDragLeave={props.onDragLeave}
-            onDragOver={props.onDragOver}
-            onDrop={props.onDrop}
           >
             {/* ? 유저의 썸네일 이미지가 있는지? */}
             {/* ? 썸네일 이미지가 없다면 남자인지 여자인지? => 만약에 성별을 선택안하게 되면 어떻게 해야할지? */}
-            {props.imageUrl != "/" ? (
+            {dummyData.user_image ? (
               <Image
-                src={props.imageUrl}
+                src={dummyData.user_image}
                 alt={"user_image"}
                 width={108}
                 height={108}
@@ -77,28 +63,18 @@ const MyPageHeader = (props: IMyPageHeaderProps) => {
                 height={108}
               />
             )}
-            <div
-              className={
-                "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]"
-              }
-            >
-              <div className="w-[1.25rem] h-[1.25rem] relative">
-              <Image
-                  src={"/edit-icon.svg"}
-                  alt={"edit-icon-image"}
-                  fill
-                />
+            <Link href="/mypage/profile">
+              <div
+                className={
+                  "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]"
+                }
+              >
+                <div className="relative h-[1.25rem] w-[1.25rem]">
+                  <Image src={"/edit-icon.svg"} alt={"edit-icon-image"} fill />
+                </div>
               </div>
-            </div>
-            <input
-              type={"file"}
-              id={"imageUpload"}
-              ref={props.imageUploadRef}
-              className="hidden"
-              onChange={(e) => props.onChangeImageUploadInputHandler(e)}
-              // TODO : 어떤 이미지 타입들을 받아올지 정해놓아야 한다.
-            />
-          </label>
+            </Link>
+          </div>
           <div className={"text-2xl font-semibold text-[#111]"}>
             {dummyData.user_nickname}
           </div>
