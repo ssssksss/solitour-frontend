@@ -5,7 +5,17 @@ type MyProps = {
   title: string;
   content: string[];
   buttonText: string;
-  category: string;
+  category: "정보" | "모임";
+};
+
+const bannerImage = {
+  정보: "/banner-image.png",
+  모임: "/banner2-image.svg",
+};
+
+const buttonPath = {
+  정보: "/informations/write",
+  모임: "/meetings/write",
 };
 
 // todo
@@ -23,15 +33,15 @@ const Banner = ({ title, content, buttonText, category }: MyProps) => {
           ))}
           <Link
             className="mt-5 flex h-11 w-[9rem] items-center justify-center rounded-full bg-black text-[0.9375rem] font-medium text-white shadow hover:scale-105"
-            href="/informations/write"
+            href={buttonPath[category]}
           >
             {buttonText}
           </Link>
         </div>
         <div className="relative h-[14rem] w-[27rem] max-[480px]:w-[95%]">
           <Image
-            src={"/banner-image.png"}
-            alt={"banner-image"}
+            src={bannerImage[category]}
+            alt={"banner2-image"}
             fill={true}
             style={{
               objectFit: "contain",

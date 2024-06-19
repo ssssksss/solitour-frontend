@@ -3,7 +3,7 @@
 import TopList from "@/components/common/TopList";
 
 type MyProps = {
-  category: string;
+  category: "여행" | "모임";
 };
 
 const TopListContainer = ({ category }: MyProps) => {
