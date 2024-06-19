@@ -64,7 +64,13 @@ const editorStore: EditorStoreType = (set, get) => ({
     }),
   addImage: () => set((state) => ({ images: [...state.images, ""] })),
   addHashtag: (hashtag: string) =>
-    set((state) => ({ hashtags: [...state.hashtags, hashtag] })),
+    set((state) => {
+      if (!state.hashtags.includes(hashtag)) {
+        return { hashtags: [...state.hashtags, hashtag] };
+      } else {
+        return { hashtags: state.hashtags };
+      }
+    }),
   addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
   removeImage: (index: number) =>
     set((state) => ({ images: state.images.filter((_, i) => index !== i) })),

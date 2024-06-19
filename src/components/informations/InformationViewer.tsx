@@ -143,7 +143,7 @@ const InformationViewer = ({
             <p className="text-xs font-medium text-gray1">{info.location}</p>
           </div>
           <p className="py-4 font-medium text-gray1">{info.body}</p>
-          <div className="flex flex-row items-center space-x-1 pb-[2.6875rem]">
+          <div className="flex flex-row items-center gap-1 pb-[2.6875rem]">
             {info.tags.map((tag, index) => (
               <ItemTag
                 key={index}
