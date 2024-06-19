@@ -1,4 +1,5 @@
 import { IoIosArrowForward } from "react-icons/io";
+import { IoHome } from "react-icons/io5";
 
 type MyProps = {
   category: string;
@@ -6,12 +7,12 @@ type MyProps = {
 
 const PagePath = ({ category }: MyProps) => {
   return (
-    <div className="flex w-[60rem] flex-row items-center space-x-1 py-10 text-xs font-medium text-neutral-500 max-[1024px]:w-[90%]">
-      <p>홈</p>
+    <div className="flex w-[60rem] flex-row items-center space-x-1 py-10 text-xs font-medium text-gray2 max-[1024px]:w-[90%]">
+      <IoHome />
       <IoIosArrowForward />
       <p>정보</p>
       <IoIosArrowForward />
-      <p className="font-semibold text-black">{category}</p>
+      <p className="font-semibold text-gray1">{category}</p>
     </div>
   );
 };

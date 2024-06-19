@@ -31,7 +31,7 @@ const LocationModal = ({ location, onChangeLocation, closeModal }: MyProps) => {
               onChange={onChangeLocation}
             />
           </div>
-          <div className="flex flex-col items-start gap-[1.375rem] font-semibold text-gray1">
+          <div className="flex flex-col items-start gap-[1.375rem] font-medium text-gray1">
             <button className="hover:text-main" type="button">
               서울
             </button>

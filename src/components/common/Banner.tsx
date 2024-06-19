@@ -16,13 +16,13 @@ const Banner = ({ title, content, buttonText, category }: MyProps) => {
         <div className="flex flex-col max-[1024px]:items-center">
           {content.map((str, index) => (
             <div
-              className="text-2xl font-medium"
+              className="text-2xl"
               key={index}
               dangerouslySetInnerHTML={{ __html: str }}
             />
           ))}
           <Link
-            className="mt-5 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-black font-black text-white shadow hover:scale-105"
+            className="mt-5 flex h-11 w-[9rem] items-center justify-center rounded-full bg-black text-[0.9375rem] font-medium text-white shadow hover:scale-105"
             href="/informations/write"
           >
             {buttonText}

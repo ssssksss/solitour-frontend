@@ -42,7 +42,7 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
       />
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
         <p
-          className={`w-fit rounded-full border-2 px-4 py-1 text-sm font-semibold shadow ${style}`}
+          className={`w-fit rounded-full border-2 px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
         >
           {category}
         </p>
@@ -60,14 +60,14 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center text-gray1">
             <MdLocationOn />
-            <p className="text-xs">제주특별자치도, 제주시</p>
+            <p className="text-xs font-medium">제주특별자치도, 제주시</p>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
-              <FaRegHeart size={"0.75rem"} />
+            <div className="flex flex-row items-center gap-1 text-gray2">
+              <FaRegHeart size={"0.8rem"} />
               <p className="text-xs">666M</p>
             </div>
-            <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
+            <div className="flex flex-row items-center gap-1 text-gray2">
               <FaEye />
               <p className="text-xs">222K</p>
             </div>

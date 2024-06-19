@@ -59,7 +59,7 @@ const InformationViewer = ({
 
   return (
     <div className="w-[60rem] max-[1024px]:w-[90%]">
-      <PagePath category={`${category}`} />
+      <PagePath category={`${category} 상세`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full">
           <div className="relative h-[26.0625rem] w-full">
@@ -108,28 +108,30 @@ const InformationViewer = ({
             <div className="flex flex-row items-center gap-2">
               <div className="h-12 w-12 rounded-full bg-gray3"></div>
               <div className="space-y-1">
-                <p className="text-xs font-semibold">{info.username}</p>
+                <p className="text-xs font-medium text-black">
+                  {info.username}
+                </p>
                 <p className="text-xs text-gray1">{info.date}</p>
               </div>
             </div>
             <div className="flex flex-col items-center gap-1">
-              <div className="flex flex-row items-center justify-center gap-1 rounded-md border-2 border-gray3 px-2 py-1 text-sm">
-                <button className="flex flex-row items-center gap-[0.125rem] font-semibold text-gray1 hover:text-main">
+              <div className="flex flex-row items-center justify-center gap-1 rounded-md border-2 border-gray3 px-2 py-[0.125rem] text-sm">
+                <button className="flex flex-row items-center gap-1 font-medium text-gray1 hover:text-main">
                   <FaEdit />
                   <p>수정</p>
                 </button>
                 <p className="font-semibold text-gray2">|</p>
-                <button className="flex flex-row items-center gap-[0.125rem] font-semibold text-gray1 hover:text-main">
+                <button className="flex flex-row items-center gap-1 font-medium text-gray1 hover:text-main">
                   <MdDelete size={"1.05rem"} />
                   <p>삭제</p>
                 </button>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
-                  <FaRegHeart size={"0.75rem"} />
+                <div className="flex flex-row items-center gap-1 text-gray2">
+                  <FaRegHeart size={"0.8rem"} />
                   <p className="text-xs">666M</p>
                 </div>
-                <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
+                <div className="flex flex-row items-center gap-1 text-gray2">
                   <FaEye />
                   <p className="text-xs">222K</p>
                 </div>
@@ -138,9 +140,9 @@ const InformationViewer = ({
           </div>
           <div className="flex flex-row items-center space-x-1 py-[1.125rem]">
             <MdLocationOn className="text-main" size={"1.25rem"} />
-            <p className="text-xs font-semibold text-gray1">{info.location}</p>
+            <p className="text-xs font-medium text-gray1">{info.location}</p>
           </div>
-          <p className="py-4 font-semibold text-gray1">{info.body}</p>
+          <p className="py-4 font-medium text-gray1">{info.body}</p>
           <div className="flex flex-row items-center space-x-1 pb-[2.6875rem]">
             {info.tags.map((tag, index) => (
               <ItemTag
@@ -152,13 +154,13 @@ const InformationViewer = ({
             ))}
           </div>
           <div className="space-y-3 border-y-2 border-gray3 p-5">
-            <div className="text-lg font-bold text-black">
+            <div className="text-bold text-lg font-bold">
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
             {info.tips.map((tip, index) => (
               <li
                 key={index}
-                className="ml-6 font-semibold text-gray1 marker:text-main"
+                className="ml-6 align-baseline font-medium text-gray1 marker:text-main"
               >
                 {tip}
               </li>

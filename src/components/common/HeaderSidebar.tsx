@@ -18,7 +18,11 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
       <div className="bg-black/25">
         <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4">
           <div className="flex h-10 w-full items-center justify-between">
-            <div className="relative h-[2.375rem] w-[5.75rem]">
+            <Link
+              className="relative h-[2.375rem] w-[5rem]"
+              href="/"
+              onClick={onClose}
+            >
               <Image
                 src={"/Solitour-logo.svg"}
                 alt={"/background"}
@@ -27,7 +31,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                   objectFit: "contain",
                 }}
               />
-            </div>
+            </Link>
             <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main">
               <MdClose onClick={onClose} />
             </div>
@@ -45,7 +49,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/login"
+                  href="/auth/signin"
                   onClick={onClose}
                 >
                   <RiLoginBoxLine />
@@ -53,7 +57,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/register"
+                  href="/auth/signup"
                   onClick={onClose}
                 >
                   <FaUserPlus />

@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className="flex h-80 w-full flex-row items-center justify-center bg-neutral-100 max-[768px]:h-[350px]">
       <div className="flex w-[60rem] flex-col space-y-4 p-4">
-        <div className="relative h-8 w-[5.75rem]">
+        <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
             src={"/Solitour-logo.svg"}
             alt={"/background"}
@@ -16,8 +16,8 @@ const Footer = () => {
               objectFit: "contain",
             }}
           />
-        </div>
-        <div className="text-sm font-medium text-neutral-500">
+        </Link>
+        <div className="text-sm font-medium text-gray1">
           <p>솔리투어는 혼자여행에 유용한 정보와 모임을 제공합니다.</p>
           <p>
             일상 속의 휴식이 필요한 사람, 나를 위한 시간이 필요한 사람, 새로운
@@ -26,7 +26,7 @@ const Footer = () => {
           <p>솔리투어에서 새로운 나를 찾아 보세요.</p>
         </div>
         <div className="flex flex-row items-center justify-between">
-          <button className="h-[2.625rem] w-[7.5rem] rounded-3xl bg-neutral-950 text-sm font-medium text-white hover:scale-105">
+          <button className="h-[2.625rem] w-[7.5rem] rounded-3xl bg-black text-sm font-medium text-white hover:scale-105">
             시작하기
           </button>
           <div className="flex w-fit flex-row items-center space-x-4">
@@ -39,11 +39,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-row items-center justify-between pt-8 max-[768px]:flex-col max-[768px]:space-y-4">
-          <p className="text-xs font-medium text-neutral-500">
+          <p className="text-xs font-medium text-gray1">
             Copyright Solitour. All rights reserved
           </p>
           <nav>
-            <ul className="flex flex-row items-center space-x-8 text-sm font-semibold text-neutral-500">
+            <ul className="flex flex-row items-center gap-9 text-sm font-medium text-gray1">
               <li>
                 <Link className="hover:text-main" href="/terms">
                   이용약관

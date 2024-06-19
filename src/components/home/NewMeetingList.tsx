@@ -69,10 +69,10 @@ const NewMeetingList = () => {
     <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold max-[768px]:text-xl">
+          <h2 className="text-2xl font-bold text-black max-[768px]:text-xl">
             새로움을 발견할, <span className="text-main">NEW</span> 모임
           </h2>
-          <p className="text-sm font-semibold text-gray1 max-[768px]:text-xs">
+          <p className="text-sm font-medium text-gray1 max-[768px]:text-xs">
             솔리투어에서 새로운 사람들과 최신 모임을 찾아보세요!
           </p>
         </div>

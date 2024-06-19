@@ -14,8 +14,8 @@ const CategoryLinks = ({ category }: MyProps) => {
               className={
                 `${
                   category === "맛집"
-                    ? "border-b-2 border-main pb-2 font-black text-main"
-                    : "text-gray-500"
+                    ? "border-b-2 border-main pb-[0.375rem] font-bold text-main"
+                    : "text-gray1"
                 }` +
                 " " +
                 "hover:main hover:font-black"
@@ -30,8 +30,8 @@ const CategoryLinks = ({ category }: MyProps) => {
               className={
                 `${
                   category === "숙박"
-                    ? "border-b-2 border-main pb-2 font-black text-main"
-                    : "text-gray-500"
+                    ? "border-b-2 border-main pb-2 font-bold text-main"
+                    : "text-gray1"
                 }` +
                 " " +
                 "hover:font-black hover:text-main"
@@ -46,8 +46,8 @@ const CategoryLinks = ({ category }: MyProps) => {
               className={
                 `${
                   category === "액티비티"
-                    ? "border-b-2 border-main pb-2 font-black text-main"
-                    : "text-gray-500"
+                    ? "border-b-2 border-main pb-2 font-bold text-main"
+                    : "text-gray1"
                 }` +
                 " " +
                 "hover:font-black hover:text-main"
@@ -60,7 +60,7 @@ const CategoryLinks = ({ category }: MyProps) => {
         </ul>
       </nav>
       <Link
-        className="flex h-9 w-28 items-center justify-center rounded-full bg-main text-sm font-semibold text-white hover:scale-105"
+        className="flex h-9 w-28 items-center justify-center rounded-full bg-main text-sm font-medium text-white hover:scale-105"
         href="/informations/write"
       >
         정보 등록하기
