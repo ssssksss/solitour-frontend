@@ -1,9 +1,9 @@
+import Footer from "@/components/common/Footer";
+import FloatingButtonContainer from "@/containers/common/FloatingButtonContainer";
+import HeaderContainer from "@/containers/common/HeaderContainer";
+import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
-import "@/styles/globals.css";
-import FloatingButtonContainer from "@/containers/common/FloatingButtonContainer";
-import Footer from "@/components/common/Footer";
-import HeaderContainer from "@/containers/common/HeaderContainer";
 
 const notoSansKr = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
 
@@ -27,6 +27,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <FloatingButtonContainer />
+        <div id="modal-root"></div>
       </body>
     </html>
   );
