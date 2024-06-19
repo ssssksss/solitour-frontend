@@ -62,12 +62,12 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
             <MdLocationOn />
             <p className="text-xs">제주특별자치도, 제주시</p>
           </div>
-          <div className="flex flex-row items-center space-x-3">
-            <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
+          <div className="flex flex-row items-center gap-3">
+            <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
               <FaRegHeart size={"0.75rem"} />
               <p className="text-xs">666M</p>
             </div>
-            <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
+            <div className="flex flex-row items-center gap-[0.125rem] text-gray2">
               <FaEye />
               <p className="text-xs">222K</p>
             </div>
