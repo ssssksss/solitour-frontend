@@ -1,0 +1,53 @@
+  .rdrCalendarWrapper {
+    outline: solid #00B488 2px;
+    outline-offset: -2px;
+    border-radius: 1rem;
+    /* 6주가 채워진 달력의 높이 */
+    min-height: 25.75rem;
+  }
+  .rdrDefinedRangesWrapper {
+    display: none;
+  }
+  .rdrMonthAndYearWrapper {
+    margin-bottom: 0.8rem;
+  }
+  .rdrDateRangeWrapper {
+    width: 100%;
+    padding: 0.8rem 0rem;
+  }
+  .rdrMonthsVertical {
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .rdrStartEdge {
+  }
+  .rdrEndEdge {
+  }
+  .rdrWeekDays {
+    .rdrWeekDay {
+      color: #111;
+      font-weight: 600;
+    }
+    .rdrWeekDay:nth-of-type(1) {
+      color: red;
+      font-weight: 600;
+    }
+    .rdrWeekDay:nth-of-type(7) {
+      color: blue;
+      font-weight: 600;
+    }
+  }
+  .rdrDay {
+  }
+  .rdrDayToday {
+  }
+  .rdrDayActive {
+  }
+  .rdrInRange {
+  }
+   .rdrMonth {
+    font-size: 0.875rem;
+    @media (max-width: ${(props) => props.theme.deviceSizes.tablet}) {
+      font-size: 1rem;
+    }
+  }
