@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { AiTwotoneClockCircle } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";

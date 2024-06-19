@@ -1,55 +1,66 @@
-import MeetingsItem from "../meettings/MeetingsItem";
-import BoardItem from "./BoardItem";
 
+import InformationItem from '../common/InformationItem';
+import MeetingItem from './../common/MeetingItem';
 type MyBoardListProps = {
-    data: (| {
+  data: (
+    | {
         id: number;
         category: string;
         title: string;
         image: string;
-        tags: string[];
-  } | {
-    id: number;
-      category: string;
-      title: string;
-      userName: string;
-      date: string;
-      place: string;
-      time: string;
-      joinMember: number;
-      limitMember: number;
-  })[]
-}
+      }
+    | {
+        id: number;
+        category: string;
+        bookmark: boolean;
+        title: string;
+        username: string;
+        date: Date;
+        location: string;
+        time: string;
+        image: string;
+        current: number;
+        total: number;
+        qualification: string;
+        likes: number;
+        views: number;
+      }
+  )[];
+};
 
-
+// 628 + 952
 const MyBoardList = ({ data }: MyBoardListProps) => {
   return (
-    <div className="gap-x-[.5rem] gap-y-[1.75rem] pb-[5rem] pt-[2.5rem] grid grid-cols-1 min-[640px]:grid-cols-2 min-[960px]:grid-cols-3 max-[960px]:max-w-[616px] min-[961px]:max-w-[916px] w-full m-auto place-items-center">
-      {data.map((post) => {
-        if ("image" in post) {
+    <div className="gap-x-[1.25rem] gap-y-[0.875rem] pb-[5rem] pt-[2.5rem] grid grid-cols-1 min-[708px]:grid-cols-2 min-[1024px]:grid-cols-3 min-[708px]:max-w-[628px] min-[1024px]:max-w-[60.5rem] w-full m-auto place-items-center">
+      {data.map((post, index) => {
+        if (!("qualification" in post)) {
           return (
-            <BoardItem
+            <InformationItem
               key={"post" + post.id}
               id={post.id}
               category={post.category}
               title={post.title}
               image={post.image}
-              tags={post.tags}
             />
           );
         } else {
           return (
-            <MeetingsItem
-              key={"meeting" + post.id}
-              id={post.id}
+            <MeetingItem
+              key={index}
+              id={index + 1}
               category={post.category}
+              bookmark={post.bookmark}
               title={post.title}
-              userName={post.userName}
+              username={post.username}
               date={post.date}
-              place={post.place}
+              location={post.location}
               time={post.time}
-              joinMember={post.joinMember}
-              limitMember={post.limitMember}
+              image={post.image}
+              current={post.current}
+              total={post.total}
+              qualification={post.qualification}
+              likes={post.likes}
+              views={post.views}
             />
           );
         }
