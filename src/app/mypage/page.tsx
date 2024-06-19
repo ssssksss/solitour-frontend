@@ -9,7 +9,11 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <main className={"w-full flex flex-col items-center pt-[2rem] pb-[2rem] px-[.5rem] lg:px-[0rem] "}>
+    <main
+      className={
+        "flex min-h-[calc(100vh-25rem)] w-full flex-col items-center px-[5%] pb-[2rem] pt-[2rem] lg:px-[0rem]"
+      }
+    >
       <MyPageHeaderContainer />
       <MyPageMainContainer />
     </main>

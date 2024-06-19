@@ -1,8 +1,8 @@
-import { CiBookmark } from "react-icons/ci";
-import { FaEye, FaRegHeart } from "react-icons/fa";
-import Link from "next/link";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
+import Link from "next/link";
+import { CiBookmark } from "react-icons/ci";
+import { FaEye, FaRegHeart } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 
 type MyProps = {

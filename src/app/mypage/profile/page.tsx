@@ -10,7 +10,7 @@ export default function page() {
   return (
     <main
       className={
-        "flex w-full flex-col items-center px-[.5rem] pb-[2rem] pt-[2rem] lg:px-[0rem]"
+        "flex w-full flex-col items-center px-[.5rem] pb-[2rem] pt-[2rem] lg:px-[0rem] min-h-[calc(100vh-25rem)]"
       }
     >
       <MyProfileContainer />
