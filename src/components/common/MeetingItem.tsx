@@ -57,7 +57,7 @@ const MeetingItem = ({
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`w-fit rounded-full px-4 py-1 text-sm font-semibold shadow ${style}`}
+            className={`w-fit rounded-full border-2 px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
           >
             {category}
           </p>
@@ -76,11 +76,11 @@ const MeetingItem = ({
         <Link className="pb-3 pt-6 font-bold hover:text-green-200" href={`/`}>
           {title}
         </Link>
-        <p className="text-sm font-semibold text-gray1">{username}</p>
+        <p className="text-sm font-medium text-gray1">{username}</p>
       </div>
       <div className="flex flex-col gap-6">
         <div className="flex flex-row items-center justify-between">
-          <div className="space-y-[0.375rem] text-xs font-semibold">
+          <div className="space-y-[0.375rem] text-xs font-medium">
             <div className="flex flex-row items-center gap-3">
               <FaRegCalendarCheck />
               <p className="text-black">{date.toLocaleDateString()}</p>
@@ -98,7 +98,7 @@ const MeetingItem = ({
               <p>
                 <span className="text-main">{current}</span>
                 <span className="text-black">{` / ${total} `}</span>
-                <span className="text-gray2">{`${qualification}`}</span>
+                <span className="font-medium text-gray2">{`${qualification}`}</span>
               </p>
             </div>
           </div>
@@ -106,11 +106,11 @@ const MeetingItem = ({
         <div className="flex flex-row items-center justify-end">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center space-x-3">
-              <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
-                <FaRegHeart size={"0.75rem"} />
+              <div className="flex flex-row items-center gap-1 text-gray2">
+                <FaRegHeart size={"0.8rem"} />
                 <p className="text-xs">{likes}</p>
               </div>
-              <div className="flex flex-row items-center space-x-[0.125rem] text-gray2">
+              <div className="flex flex-row items-center gap-1 text-gray2">
                 <FaEye />
                 <p className="text-xs">{views}</p>
               </div>

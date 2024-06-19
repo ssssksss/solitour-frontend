@@ -23,7 +23,7 @@ const CategoryModal = ({
       <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%]">
         <div className="flex flex-col gap-1">
           <div className="flex flex-row items-center justify-between">
-            <h3 className="text-lg font-bold text-black">카테고리 선택</h3>
+            <h3 className="text-lg font-medium text-black">카테고리 선택</h3>
             <MdClose
               className="cursor-pointer text-gray2 hover:text-main"
               size={"2.5rem"}
@@ -36,9 +36,9 @@ const CategoryModal = ({
                 `${
                   category === "맛집"
                     ? "border-main bg-main font-black text-white"
-                    : "text-gray-500"
+                    : "text-gray1"
                 } ` +
-                "rounded-full border-2 border-[#E9EBED] px-3 py-1 font-semibold hover:scale-105"
+                "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
               onClick={() => setCategory("맛집")}
@@ -50,9 +50,9 @@ const CategoryModal = ({
                 `${
                   category === "숙박"
                     ? "border-main bg-main font-black text-white"
-                    : "text-gray-500"
+                    : "text-gray1"
                 } ` +
-                "rounded-full border-2 border-[#E9EBED] px-3 py-1 font-semibold hover:scale-105"
+                "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
               onClick={() => setCategory("숙박")}
@@ -64,9 +64,9 @@ const CategoryModal = ({
                 `${
                   category === "액티비티"
                     ? "border-main bg-main font-black text-white"
-                    : "text-gray-500"
+                    : "text-gray1"
                 } ` +
-                "rounded-full border-2 border-[#E9EBED] px-3 py-1 font-semibold hover:scale-105"
+                "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
               onClick={() => setCategory("액티비티")}
@@ -75,9 +75,9 @@ const CategoryModal = ({
             </button>
           </div>
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           {subCategories.length !== 0 && (
-            <h3 className="text-lg font-bold text-black">소분류 선택</h3>
+            <h3 className="text-lg font-medium text-black">소분류 선택</h3>
           )}
           <div className="flex flex-wrap items-center gap-1">
             {subCategories.slice(1).map((value, index) => (
@@ -85,7 +85,7 @@ const CategoryModal = ({
                 key={index}
                 className={
                   `${subCategory === value.buttonText ? "border-main bg-main text-white" : "text-gray1"} ` +
-                  "rounded-full border-2 border-[#E9EBED] px-3 py-1 font-semibold hover:scale-105"
+                  "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                 }
                 type="button"
                 onClick={() => setSubCategory(value.buttonText)}

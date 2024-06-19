@@ -29,10 +29,10 @@ const BestInformationList = () => {
     <div className="mt-20 w-[60rem] max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold max-[768px]:text-xl">
+          <h2 className="text-2xl font-bold text-black max-[768px]:text-xl">
             고민을 덜어줄, <span className="text-main">BEST</span> 여행 정보
           </h2>
-          <p className="text-sm font-semibold text-gray1 max-[768px]:text-xs">
+          <p className="text-sm font-medium text-gray1 max-[768px]:text-xs">
             솔리투어에서 인기 여행 정보를 확인해보세요!
           </p>
         </div>

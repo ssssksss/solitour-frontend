@@ -10,8 +10,10 @@ const ItemTag = ({
   textColor = "text-white",
 }: MyProps) => {
   return (
-    <div className={`rounded-full border-2 ${borderColor}`}>
-      <p className={`p-1 text-[0.6rem] font-semibold ${textColor}`}>#{tag}</p>
+    <div className={`rounded-full border-[0.0625rem] ${borderColor}`}>
+      <p className={`px-2 py-1 text-[0.6rem] font-medium ${textColor}`}>
+        #{tag}
+      </p>
     </div>
   );
 };

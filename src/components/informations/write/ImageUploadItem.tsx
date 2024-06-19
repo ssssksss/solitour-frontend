@@ -59,10 +59,10 @@ const ImageUploadItem = ({
       <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-main text-xl text-main">
         +
       </div>
-      <p className="pb-[0.375rem] pt-3 text-xs font-semibold text-gray1">
+      <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1">
         사진 추가
       </p>
-      <p className="text-xs font-semibold text-gray2">{index}/12</p>
+      <p className="text-xs font-medium text-gray2">{index}/12</p>
       <input
         className="hidden"
         type="file"

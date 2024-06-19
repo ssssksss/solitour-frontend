@@ -33,10 +33,10 @@ const Header = ({
               className="hidden cursor-pointer pl-4 hover:text-main max-[1024px]:flex"
               onClick={onMenuClicked}
             >
-              <MdOutlineMenu size="2rem" onClick={onMenuClicked} />
+              <MdOutlineMenu size="1.5rem" onClick={onMenuClicked} />
             </div>
             <Link
-              className="relative h-8 w-[5.75rem] pl-[2.375rem] font-black max-[1024px]:pl-4"
+              className="relative h-8 w-[5rem] pl-[2.375rem] font-black max-[1024px]:pl-4"
               href="/"
             >
               <Image
@@ -56,8 +56,8 @@ const Header = ({
                 <li>
                   <Link
                     className={
-                      `${pathname === "/" ? "font-black text-black" : "text-gray1"} ` +
-                      "font-semibold hover:text-main"
+                      `${pathname === "/" ? "font-bold text-black" : "font-medium text-gray1"} ` +
+                      "text-sm hover:text-main"
                     }
                     href="/"
                   >
@@ -69,9 +69,9 @@ const Header = ({
                     className={
                       `${
                         pathname.includes("/informations")
-                          ? "font-black text-black"
-                          : "text-gray1"
-                      } ` + "font-semibold hover:text-main"
+                          ? "font-bold text-black"
+                          : "font-medium text-gray1"
+                      } ` + "text-sm hover:text-main"
                     }
                     href="/informations/restaurant?subCategory=all"
                   >
@@ -83,9 +83,9 @@ const Header = ({
                     className={
                       `${
                         pathname.includes("/meetings")
-                          ? "font-black text-black"
-                          : "text-gray1"
-                      } ` + "font-semibold hover:text-main"
+                          ? "font-bold text-black"
+                          : "font-medium text-gray1"
+                      } ` + "text-sm hover:text-main"
                     }
                     href="/meetings"
                   >
@@ -95,9 +95,9 @@ const Header = ({
               </ul>
             </nav>
           </div>
-          <div className="flex flex-row space-x-2 pr-[2.375rem] max-[1024px]:pr-4">
+          <div className="flex flex-row items-center space-x-2 pr-[2.375rem] text-sm max-[1024px]:pr-4">
             <Link
-              className="font-semibold text-gray1 hover:text-main"
+              className="font-medium text-gray1 hover:text-main"
               href="/auth/signin"
             >
               로그인

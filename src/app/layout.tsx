@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google";
 import "@/styles/globals.css";
 import FloatingButtonContainer from "@/containers/common/FloatingButtonContainer";
 import Footer from "@/components/common/Footer";
 import HeaderContainer from "@/containers/common/HeaderContainer";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSansKr = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
+      <body className={notoSansKr.className}>
         <HeaderContainer />
         {children}
         <Footer />

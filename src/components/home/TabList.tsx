@@ -9,10 +9,9 @@ const TabList = () => {
         href="/informations/restaurant?subCategory=all"
       >
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold">여행 정보</h2>
-          <p className="text-sm text-neutral-500">
-            <span className="font-medium text-main">399</span>개의 맛집, 숙박,
-            액티비티
+          <h2 className="text-2xl font-bold text-black">여행 정보</h2>
+          <p className="text-sm text-gray1">
+            <span className="text-main">399</span>개의 맛집, 숙박, 액티비티
           </p>
         </div>
         <div className="flex items-center justify-end">
@@ -29,10 +28,9 @@ const TabList = () => {
         href="/meetings"
       >
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold">모임 정보</h2>
-          <p className="text-sm text-neutral-500">
-            <span className="font-medium text-main">1204</span>개의 다양한
-            테마의 모임
+          <h2 className="text-2xl font-bold text-black">모임 정보</h2>
+          <p className="text-sm text-gray1">
+            <span className="text-main">1204</span>개의 다양한 테마의 모임
           </p>
         </div>
         <div className="flex items-center justify-end">

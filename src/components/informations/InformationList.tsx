@@ -85,19 +85,19 @@ const InformationList = ({ category, subCategory }: MyProps) => {
         <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
           <form className="max-[768px]:flex-1">
             <input
-              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-left bg-no-repeat pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[768px]:w-full"
+              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[768px]:w-full"
               type="text"
               autoComplete="search"
               name="search"
               placeholder="제목 또는 키워드를 검색해보세요."
             />
           </form>
-          <div className="flex flex-row items-center space-x-4">
-            <button className="flex flex-row items-center text-sm font-black text-gray1 hover:text-main">
+          <div className="flex flex-row items-center gap-4 text-sm font-medium text-gray1">
+            <button className="flex flex-row items-center hover:text-main">
               <VscSettings size={"1.25rem"} />
               <p>지역별</p>
             </button>
-            <button className="flex flex-row items-center text-sm font-black text-gray1 hover:text-main">
+            <button className="flex flex-row items-center hover:text-main">
               <p>인기순</p>
               <IoIosArrowDown />
             </button>
