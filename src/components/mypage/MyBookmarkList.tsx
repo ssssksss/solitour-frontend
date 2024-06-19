@@ -1,7 +1,7 @@
 
 import InformationItem from '../common/InformationItem';
-import MeetingItem from './../common/MeetingItem';
-type MyBoardListProps = {
+import MeetingItem from '../common/MeetingItem';
+type MyBookmarkListProps = {
   data: (
     | {
         id: number;
@@ -27,7 +27,8 @@ type MyBoardListProps = {
       }
   )[];
 };
-const MyBoardList = ({ data }: MyBoardListProps) => {
+
+const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
   return (
     <div className="gap-x-[1.25rem] gap-y-[0.875rem] pb-[5rem] pt-[2.5rem] grid grid-cols-1 min-[708px]:grid-cols-2 min-[1024px]:grid-cols-3 min-[708px]:max-w-[628px] min-[1024px]:max-w-[60.5rem] w-full m-auto place-items-center">
       {data.map((post, index) => {
@@ -67,4 +68,4 @@ const MyBoardList = ({ data }: MyBoardListProps) => {
   );
 };
 
-export default MyBoardList;
+export default MyBookmarkList;
