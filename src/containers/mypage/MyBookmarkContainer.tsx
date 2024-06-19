@@ -1,9 +1,9 @@
 
 'use client'
 
-import MyBookMarkFolderList from "@/components/mypage/MyBookMarkFolderList";
 import MyBookmark from "@/components/mypage/MyBookmark";
 import { useState } from "react";
+import MyBookmarkListContainer from "./MyBookmarkListContainer";
 
 const menu = ["전체", "정보", "모임"];
 
@@ -15,11 +15,16 @@ const MyBookmarkContainer = () => {
     }
 
   return (
-      <div className={"pb-[5rem]"}>
-      <MyBookmark menu={menu} onClickMenu={onClickMenu} activeBookmarkMenuIndex={activeBookmarkMenuIndex} />
-      <MyBookMarkFolderList />
-      </div>
-
+    <>
+      <MyBookmark
+        menu={menu}
+        onClickMenu={onClickMenu}
+        activeBookmarkMenuIndex={activeBookmarkMenuIndex}
+      />
+      <MyBookmarkListContainer
+        activeBookmarkMenuIndex={activeBookmarkMenuIndex}
+      />
+    </>
   );
 };
 export default MyBookmarkContainer
