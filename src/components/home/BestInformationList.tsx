@@ -45,7 +45,7 @@ const BestInformationList = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-around">
+      <div className="mt-6 flex flex-wrap items-center justify-around">
         {data.map((post, index) => (
           <InformationItem
             key={index}

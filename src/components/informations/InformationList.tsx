@@ -118,7 +118,7 @@ const InformationList = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap justify-between max-[1024px]:justify-around">
+      <div className="mt-6 flex flex-wrap justify-center gap-4">
         {data.map((value, index) => (
           <InformationItem
             key={index}
