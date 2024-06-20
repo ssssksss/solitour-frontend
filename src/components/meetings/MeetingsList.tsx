@@ -31,25 +31,22 @@ const MeetingsList = (props: IMeetingsList) => {
     qualification: string;
     likes: number;
     views: number;
-  } = 
-    {
-      id: 1,
-      category: "활동",
-      bookmark: true,
-      title: "동해 서핑 투게더",
-      username: "waver",
-      date: new Date(),
-      location: "강원, 동해시",
-      time: "08:00",
-      image: "/dataImage2.svg",
-      current: 1,
-      total: 6,
-      qualification: "(30대, 성별 상관없음)",
-      likes: 52,
-      views: 102,
-    }
-  ;
-
+  } = {
+    id: 1,
+    category: "활동",
+    bookmark: true,
+    title: "동해 서핑 투게더",
+    username: "waver",
+    date: new Date(),
+    location: "강원, 동해시",
+    time: "08:00",
+    image: "/dataImage2.svg",
+    current: 1,
+    total: 6,
+    qualification: "(30대, 성별 상관없음)",
+    likes: 52,
+    views: 102,
+  };
   return (
     <div className="flex w-[60rem] flex-col pt-[5.5rem] max-[1024px]:w-[90%]">
       <div className="flex w-full justify-end">
@@ -87,7 +84,7 @@ const MeetingsList = (props: IMeetingsList) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap justify-between max-[1024px]:justify-around">
+      <div className="mt-6 flex flex-wrap justify-center gap-4">
         {[1, 2, 3, 4, 5, 6].map((_, index) => (
           <MeetingItem
             key={index}
@@ -112,4 +109,4 @@ const MeetingsList = (props: IMeetingsList) => {
     </div>
   );
 };
-export default MeetingsList
+export default MeetingsList;
