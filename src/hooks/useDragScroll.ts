@@ -86,7 +86,8 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 종료
   const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
+    // TODO: InformationEditor에서 태그 입력칸에 이벤트가 전달되지 않는 문제를 해결하기 위해 주석 처리함.
+    //e.preventDefault();
     if (!isDragging) {
       return;
     }

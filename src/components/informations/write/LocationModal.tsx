@@ -20,10 +20,10 @@ const LocationModal = ({ location, onChangeLocation, closeModal }: MyProps) => {
           />
         </div>
         <div className="flex flex-col gap-9 p-5">
-          <div className="flex h-[3.3125rem] flex-row items-center gap-9">
+          <div className="ma flex flex-row items-center gap-9 max-[480px]:flex-col max-[480px]:items-start max-[480px]:gap-2">
             <h3 className="text-lg font-bold text-black">장소</h3>
             <input
-              className="h-full flex-grow rounded-3xl border-2 border-gray3 bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm font-semibold outline-none hover:border-main focus:border-main"
+              className="h-[3.3125rem] flex-grow rounded-3xl border-2 border-gray3 bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm font-semibold outline-none hover:border-main focus:border-main max-[480px]:w-full"
               type="text"
               autoComplete="location"
               name="location"

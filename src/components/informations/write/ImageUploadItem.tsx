@@ -40,9 +40,12 @@ const ImageUploadItem = ({
           fill={true}
           style={{ objectFit: "cover" }}
           onClick={() => setMainImageIndex(index)}
+          onTouchEnd={() => setMainImageIndex(index)}
         />
         {index === mainImageIndex && (
-          <p className="z-10 h-10 font-semibold text-white">대표 이미지</p>
+          <p className="z-10 mb-6 rounded-full bg-main px-3 py-[0.375rem] text-sm font-semibold text-white">
+            대표 이미지
+          </p>
         )}
         <div /> {/* empty tag */}
       </div>
