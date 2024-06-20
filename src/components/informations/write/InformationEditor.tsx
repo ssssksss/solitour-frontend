@@ -133,20 +133,24 @@ const InformationEditor = ({
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
         <h2 className="w-44 pt-3 text-lg font-bold text-black">해시태그</h2>
-        <div
-          className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden overflow-y-hidden rounded-3xl border-2 pl-5 hover:border-main"
-          ref={hashtagsHook.listRef}
-          onMouseDown={hashtagsHook.onDragStart}
-          onMouseMove={hashtagsHook.onDragMove}
-          onMouseUp={hashtagsHook.onDragEnd}
-          onMouseLeave={hashtagsHook.onDragEnd}
-          onTouchStart={hashtagsHook.onTouchStart}
-          onTouchMove={hashtagsHook.onTouchMove}
-          onTouchEnd={hashtagsHook.onTouchEnd}
-        >
-          {editorStore.hashtags.map((hashtag, index) => (
-            <div key={index} className="flex h-[3.3125rem] items-center">
+        <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
+          <div
+            className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden rounded-3xl border-2 pl-5 hover:border-main"
+            ref={hashtagsHook.listRef}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              hashtagsHook.onDragStart(e);
+            }}
+            onMouseMove={hashtagsHook.onDragMove}
+            onMouseUp={hashtagsHook.onDragEnd}
+            onMouseLeave={hashtagsHook.onDragEnd}
+            onTouchStart={hashtagsHook.onTouchStart}
+            onTouchMove={hashtagsHook.onTouchMove}
+            onTouchEnd={hashtagsHook.onTouchEnd}
+          >
+            {editorStore.hashtags.map((hashtag, index) => (
               <ItemTag
+                key={index}
                 tag={hashtag}
                 borderColor="border-main"
                 textColor="text-main"
@@ -154,24 +158,35 @@ const InformationEditor = ({
                 hover="hover:scale-110"
                 onClick={() => editorStore.removeHashtag(index)}
               />
-            </div>
-          ))}
-          <input
-            className="w-[14rem] border-main py-2 text-sm font-medium outline-none hover:border-b-2"
-            type="text"
-            autoComplete="hashtag"
-            name="hashtag"
-            placeholder="#해시태그로 키워드를 써보세요!"
-            value={hashtag}
-            onChange={(e) => setHashtag(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                editorStore.addHashtag(hashtag);
-                setHashtag("");
-              }
+            ))}
+            <input
+              className="w-[14rem] border-main py-2 text-sm font-medium outline-none hover:border-b-2"
+              type="text"
+              autoComplete="hashtag"
+              name="hashtag"
+              placeholder="#해시태그로 키워드를 써보세요!"
+              value={hashtag}
+              onChange={(e) => setHashtag(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  editorStore.addHashtag(hashtag);
+                  setHashtag("");
+                }
+              }}
+            />
+          </div>
+          <button
+            className="text-sm font-medium text-gray1 hover:text-main"
+            type="button"
+            onClick={() => {
+              editorStore.addHashtag(hashtag);
+              setHashtag("");
             }}
-          />
+          >
+            <span className="text-main">+</span>
+            {" 해시태그 추가"}
+          </button>
         </div>
       </div>
       <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
@@ -197,7 +212,7 @@ const InformationEditor = ({
       <div className="flex flex-col items-end">
         <div className="mt-3 flex flex-row items-center gap-5 text-sm font-medium text-gray1">
           <button
-            className={`${editorStore.tips.length <= 1 ? "text-gray3" : "hover:scale-110"}`}
+            className={`${editorStore.tips.length <= 1 ? "text-gray3" : "hover:text-main"}`}
             type="button"
             onClick={(e) => editorStore.removeTip()}
             disabled={editorStore.tips.length <= 1}
@@ -210,7 +225,7 @@ const InformationEditor = ({
             {" 항목 삭제"}
           </button>
           <button
-            className="hover:scale-110"
+            className="hover:text-main"
             type="button"
             onClick={(e) => editorStore.addTip()}
           >

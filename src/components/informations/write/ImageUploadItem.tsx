@@ -25,7 +25,12 @@ const ImageUploadItem = ({
 }: MyProps) => {
   if (image !== "") {
     return (
-      <div className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-2 hover:border-main">
+      <div
+        className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-2 hover:border-main"
+        onDragStart={(e) => e.preventDefault()}
+        onClick={() => setMainImageIndex(index)}
+        onTouchEnd={() => setMainImageIndex(index)}
+      >
         <div className="flex w-full flex-row justify-end">
           <MdClose
             className="z-10 cursor-pointer rounded-full bg-main p-1 text-white hover:scale-110"
@@ -39,10 +44,11 @@ const ImageUploadItem = ({
           alt={"image"}
           fill={true}
           style={{ objectFit: "cover" }}
-          onClick={() => setMainImageIndex(index)}
         />
         {index === mainImageIndex && (
-          <p className="z-10 h-10 font-semibold text-white">대표 이미지</p>
+          <p className="z-10 mb-6 rounded-full bg-main px-3 py-[0.375rem] text-sm font-semibold text-white">
+            대표 이미지
+          </p>
         )}
         <div /> {/* empty tag */}
       </div>
@@ -50,11 +56,10 @@ const ImageUploadItem = ({
   }
 
   return (
-    <button
-      className="flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 hover:border-main"
-      type="button"
+    <label
+      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 hover:border-main`}
+      htmlFor="file"
       onClick={onUploadButtonClicked}
-      disabled={index >= 12}
     >
       <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-main text-xl text-main">
         +
@@ -72,7 +77,7 @@ const ImageUploadItem = ({
         onChange={previewImage}
         ref={imageRef}
       />
-    </button>
+    </label>
   );
 };
 
