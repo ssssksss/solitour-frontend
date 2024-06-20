@@ -3,13 +3,23 @@ import Pagination from "../common/Pagination";
 import InformationItem from "../common/InformationItem";
 import { VscSettings } from "react-icons/vsc";
 import SubCategoryList from "./SubCategoryList";
+import InformationFilterModal from "./InformationFilterModal";
 
 type MyProps = {
   category: string;
   subCategory: string;
+  isModal: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 };
 
-const InformationList = ({ category, subCategory }: MyProps) => {
+const InformationList = ({
+  category,
+  subCategory,
+  isModal,
+  closeModal,
+  openModal,
+}: MyProps) => {
   // TODO: API 호출
   const data: {
     category: string;
@@ -80,6 +90,7 @@ const InformationList = ({ category, subCategory }: MyProps) => {
 
   return (
     <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
+      {isModal && <InformationFilterModal closeModal={closeModal} />}
       <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
         <SubCategoryList category={category} subCategory={subCategory} />
         <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
@@ -93,7 +104,10 @@ const InformationList = ({ category, subCategory }: MyProps) => {
             />
           </form>
           <div className="flex flex-row items-center gap-4 text-sm font-medium text-gray1">
-            <button className="flex flex-row items-center hover:text-main">
+            <button
+              className="flex flex-row items-center hover:text-main"
+              onClick={openModal}
+            >
               <VscSettings size={"1.25rem"} />
               <p>지역별</p>
             </button>

@@ -1,3 +1,4 @@
+import { LOCATION } from "@/constants/informations/location";
 import { ChangeEvent } from "react";
 import { MdClose } from "react-icons/md";
 
@@ -10,7 +11,7 @@ type MyProps = {
 const LocationModal = ({ location, onChangeLocation, closeModal }: MyProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[34rem] flex-col rounded-xl bg-white p-6 max-[560px]:w-[90%]">
+      <div className="flex h-fit w-[34rem] flex-col rounded-xl bg-white p-6 max-[600px]:w-[90%]">
         <div className="flex flex-row items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
@@ -32,33 +33,11 @@ const LocationModal = ({ location, onChangeLocation, closeModal }: MyProps) => {
             />
           </div>
           <div className="flex flex-col items-start gap-[1.375rem] font-medium text-gray1">
-            <button className="hover:text-main" type="button">
-              서울
-            </button>
-            <button className="hover:text-main" type="button">
-              부산
-            </button>
-            <button className="hover:text-main" type="button">
-              경기
-            </button>
-            <button className="hover:text-main" type="button">
-              제주
-            </button>
-            <button className="hover:text-main" type="button">
-              충청
-            </button>
-            <button className="hover:text-main" type="button">
-              강원
-            </button>
-            <button className="hover:text-main" type="button">
-              인천
-            </button>
-            <button className="hover:text-main" type="button">
-              경상
-            </button>
-            <button className="hover:text-main" type="button">
-              전라
-            </button>
+            {LOCATION.map((location, index) => (
+              <button key={index} className="hover:text-main" type="button">
+                {location}
+              </button>
+            ))}
           </div>
         </div>
       </div>

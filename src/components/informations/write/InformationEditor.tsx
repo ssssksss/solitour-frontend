@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  MouseEvent,
-  RefObject,
-  SetStateAction,
-  TouchEvent,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 import PagePath from "../PagePath";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
@@ -139,7 +133,17 @@ const InformationEditor = ({
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
         <h2 className="w-44 pt-3 text-lg font-bold text-black">해시태그</h2>
-        <div className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-auto overflow-y-hidden rounded-3xl border-2 pl-5 hover:border-main">
+        <div
+          className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden overflow-y-hidden rounded-3xl border-2 pl-5 hover:border-main"
+          ref={hashtagsHook.listRef}
+          onMouseDown={hashtagsHook.onDragStart}
+          onMouseMove={hashtagsHook.onDragMove}
+          onMouseUp={hashtagsHook.onDragEnd}
+          onMouseLeave={hashtagsHook.onDragEnd}
+          onTouchStart={hashtagsHook.onTouchStart}
+          onTouchMove={hashtagsHook.onTouchMove}
+          onTouchEnd={hashtagsHook.onTouchEnd}
+        >
           {editorStore.hashtags.map((hashtag, index) => (
             <div key={index} className="flex h-[3.3125rem] items-center">
               <ItemTag
@@ -147,7 +151,7 @@ const InformationEditor = ({
                 borderColor="border-main"
                 textColor="text-main"
                 cursorPointer={true}
-                hover="hover:scale-105"
+                hover="hover:scale-110"
                 onClick={() => editorStore.removeHashtag(index)}
               />
             </div>

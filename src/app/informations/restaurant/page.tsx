@@ -1,6 +1,6 @@
 import CategoryLinks from "@/components/informations/CategoryLinks";
-import InformationList from "@/components/informations/InformationList";
 import BannerContainer from "@/containers/common/BannerContainer";
+import InformationListContainer from "@/containers/informations/InformationListContainer";
 import TopListContainer from "@/containers/informations/TopListContainer";
 import { Metadata } from "next";
 
@@ -19,7 +19,7 @@ export default function page({ searchParams }: MyProps) {
       <BannerContainer />
       <TopListContainer category="여행" />
       <CategoryLinks category="맛집" />
-      <InformationList
+      <InformationListContainer
         category="맛집"
         subCategory={searchParams["subCategory"]!}
       />

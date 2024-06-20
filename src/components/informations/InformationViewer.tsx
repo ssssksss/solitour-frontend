@@ -76,7 +76,10 @@ const InformationViewer = ({
           <div
             className="flex flex-row items-center space-x-[0.875rem] overflow-x-auto pt-[0.875rem]"
             ref={listRef}
-            onMouseDown={onDragStart}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              onDragStart(e);
+            }}
             onMouseMove={onDragMove}
             onMouseUp={onDragEnd}
             onMouseLeave={onDragEnd}

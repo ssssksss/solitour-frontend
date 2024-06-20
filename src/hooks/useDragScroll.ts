@@ -21,7 +21,8 @@ export default function useDragScroll(): useDragScrollType {
 
   // 마우스 드래그 시작
   const onDragStart = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
+    // TODO: InformationEditor에서 태그 입력칸에 이벤트가 전달되지 않는 문제를 해결하기 위해 주석 처리함.
+    //e.preventDefault();
     setIsDragging(true);
 
     const x = e.clientX;
