@@ -3,42 +3,41 @@ import Link from "next/link";
 import { FaEye, FaRegHeart } from "react-icons/fa";
 
 const MeetingsViewer = () => {
+  type dataType = {
+    id: number;
+    category: string;
+    bookmark: boolean;
+    title: string;
+    username: string;
+    date: Date;
+    location: string;
+    time: string;
+    image: string;
+    current: number;
+    total: number;
+    qualification: string;
+    likes: number;
+    views: number;
+    createdAt: string;
+  };
 
-    type dataType = {
-      id: number;
-      category: string;
-      bookmark: boolean;
-      title: string;
-      username: string;
-      date: Date;
-      location: string;
-      time: string;
-      image: string;
-      current: number;
-      total: number;
-      qualification: string;
-      likes: number;
-      views: number;
-      createdAt: string;
-    };
-
-    const data: dataType = {
-      id: 4,
-      category: "활동",
-      bookmark: true,
-      title: "동해 서핑 투게더",
-      username: "waver",
-      date: new Date(),
-      location: "강원, 동해시",
-      time: "08:00",
-      image: "/PostImage2.svg",
-      current: 1,
-      total: 6,
-      qualification: "(30대, 성별 상관없음)",
-      likes: 52,
-      views: 102,
-      createdAt: "2024.06.07"
-    };
+  const data: dataType = {
+    id: 4,
+    category: "활동",
+    bookmark: true,
+    title: "동해 서핑 투게더",
+    username: "waver",
+    date: new Date(),
+    location: "강원, 동해시",
+    time: "08:00",
+    image: "/PostImage2.svg",
+    current: 1,
+    total: 6,
+    qualification: "(30대, 성별 상관없음)",
+    likes: 52,
+    views: 102,
+    createdAt: "2024.06.07",
+  };
 
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
@@ -144,7 +143,10 @@ const MeetingsViewer = () => {
       </div>
       <div className={"flex gap-x-[.25rem] pt-[1.125rem] text-sm"}>
         {["#동해바다", "#서핑"].map((i) => (
-          <div className="max-w-max px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main rounded-xl">
+          <div
+            key={i}
+            className="max-w-max rounded-xl px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main"
+          >
             {i}
           </div>
         ))}
@@ -153,4 +155,4 @@ const MeetingsViewer = () => {
     </div>
   );
 };
-export default MeetingsViewer
+export default MeetingsViewer;

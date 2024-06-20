@@ -137,10 +137,7 @@ const InformationEditor = ({
           <div
             className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden rounded-3xl border-2 pl-5 hover:border-main"
             ref={hashtagsHook.listRef}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              hashtagsHook.onDragStart(e);
-            }}
+            onMouseDown={hashtagsHook.onDragStart}
             onMouseMove={hashtagsHook.onDragMove}
             onMouseUp={hashtagsHook.onDragEnd}
             onMouseLeave={hashtagsHook.onDragEnd}
