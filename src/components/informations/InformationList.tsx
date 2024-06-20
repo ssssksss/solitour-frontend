@@ -91,12 +91,12 @@ const InformationList = ({
   return (
     <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[90%]">
       {isModal && <InformationFilterModal closeModal={closeModal} />}
-      <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
+      <div className="flex flex-row items-center justify-between max-[1024px]:flex-col-reverse max-[1024px]:items-start max-[1024px]:space-y-6 max-[1024px]:space-y-reverse">
         <SubCategoryList category={category} subCategory={subCategory} />
-        <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
-          <form className="max-[768px]:flex-1">
+        <div className="flex flex-row items-center space-x-4 max-[1024px]:w-full max-[1024px]:justify-between">
+          <form className="max-[1024px]:flex-1">
             <input
-              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[768px]:w-full"
+              className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
               type="text"
               autoComplete="search"
               name="search"

@@ -30,7 +30,7 @@ const CategoryLinks = ({ category }: MyProps) => {
               className={
                 `${
                   category === "숙박"
-                    ? "border-b-2 border-main pb-2 font-bold text-main"
+                    ? "border-b-2 border-main pb-[0.375rem] font-bold text-main"
                     : "text-gray1"
                 }` +
                 " " +
@@ -46,7 +46,7 @@ const CategoryLinks = ({ category }: MyProps) => {
               className={
                 `${
                   category === "액티비티"
-                    ? "border-b-2 border-main pb-2 font-bold text-main"
+                    ? "border-b-2 border-main pb-[0.375rem] font-bold text-main"
                     : "text-gray1"
                 }` +
                 " " +
