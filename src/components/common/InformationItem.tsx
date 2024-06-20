@@ -30,7 +30,7 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
   }
 
   return (
-    <div className="relative mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-2 outline-gray3 duration-300 hover:outline-main">
+    <div className="relative flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-2 outline-gray3 duration-300 hover:outline-main">
       <Image
         className="-z-10 rounded-[0.875rem]"
         src={image}
