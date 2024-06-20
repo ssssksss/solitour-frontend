@@ -32,6 +32,7 @@ const TopList = ({ title }: MyProps) => {
         <ol className="grid grid-cols-2 gap-y-[1.5rem] max-[1024px]:flex max-[1024px]:flex-col">
           {titleList[title].map((title: string, index: number) => (
             <li
+              key={index}
               className={`flex items-center ${index > 2 ? `col-start-2` : `col-start-1`}`}
               style={{ gridRowStart: index > 2 ? index - 2 : index + 1 }}
             >
