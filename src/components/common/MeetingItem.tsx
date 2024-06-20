@@ -53,7 +53,7 @@ const MeetingItem = ({
   }
 
   return (
-    <div className="mt-6 flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl p-5 outline outline-2 outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main">
+    <div className="flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl p-5 outline outline-2 outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main">
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
@@ -73,7 +73,10 @@ const MeetingItem = ({
             />
           )}
         </div>
-        <Link className="pb-3 pt-6 font-bold hover:text-green-200" href={`/meetings/1`}>
+        <Link
+          className="pb-3 pt-6 font-bold hover:text-green-200"
+          href={`/meetings/1`}
+        >
           {title}
         </Link>
         <p className="text-sm font-medium text-gray1">{username}</p>

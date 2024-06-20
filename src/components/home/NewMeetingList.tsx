@@ -63,6 +63,51 @@ const NewMeetingList = () => {
       likes: 38,
       views: 65,
     },
+    {
+      category: "취향",
+      bookmark: true,
+      title: "🍞강릉 빵지순례 같이 해요!",
+      username: "빵빵이",
+      date: new Date(),
+      location: "강원특별자치도, 강원",
+      time: "13:00",
+      image: "/meeting1.svg",
+      current: 2,
+      total: 4,
+      qualification: "(20대, 성별 상관없음)",
+      likes: 58,
+      views: 113,
+    },
+    {
+      category: "활동",
+      bookmark: true,
+      title: "동해 서핑 투게더",
+      username: "waver",
+      date: new Date(),
+      location: "강원, 동해시",
+      time: "08:00",
+      image: "/PostImage2.svg",
+      current: 1,
+      total: 6,
+      qualification: "(30대, 성별 상관없음)",
+      likes: 52,
+      views: 102,
+    },
+    {
+      category: "활동",
+      bookmark: false,
+      title: "제주 한라산 같이 등산 할래?",
+      username: "등린이",
+      date: new Date(),
+      location: "제주",
+      time: "10:00",
+      image: "/PostImage3.svg",
+      current: 1,
+      total: 4,
+      qualification: "(2-30대, 성별 상관없음)",
+      likes: 38,
+      views: 65,
+    },
   ];
 
   return (
@@ -85,7 +130,7 @@ const NewMeetingList = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-around">
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
         {data.map((post, index) => (
           <MeetingItem
             key={index}

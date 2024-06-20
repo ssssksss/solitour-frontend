@@ -23,6 +23,21 @@ const BestInformationList = () => {
       title: "혼자 놀기 초보도 가능한 국립현대미술관",
       image: "/PostImage3.svg",
     },
+    {
+      category: "맛집",
+      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
+      image: "/PostImage.svg",
+    },
+    {
+      category: "숙박",
+      title: "다양한 프로그램이 있는 제주 월정리 게하",
+      image: "/PostImage2.svg",
+    },
+    {
+      category: "액티비티",
+      title: "혼자 놀기 초보도 가능한 국립현대미술관",
+      image: "/PostImage3.svg",
+    },
   ];
 
   return (
@@ -45,7 +60,7 @@ const BestInformationList = () => {
           </button>
         </div>
       </div>
-      <div className="mt-6 flex flex-wrap items-center justify-around">
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
         {data.map((post, index) => (
           <InformationItem
             key={index}
