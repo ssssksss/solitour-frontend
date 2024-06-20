@@ -73,7 +73,7 @@ const MeetingItem = ({
             />
           )}
         </div>
-        <Link className="pb-3 pt-6 font-bold hover:text-green-200" href={`/`}>
+        <Link className="pb-3 pt-6 font-bold hover:text-green-200" href={`/meetings/1`}>
           {title}
         </Link>
         <p className="text-sm font-medium text-gray1">{username}</p>
