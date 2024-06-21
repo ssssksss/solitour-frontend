@@ -122,10 +122,10 @@ const NewMeetingList = () => {
           </p>
         </div>
         <div className="flex flex-row items-center space-x-2">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 hover:scale-105">
+          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
             <IoIosArrowBack size={"1.25rem"} />
           </button>
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-neutral-300 hover:scale-105">
+          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
             <IoIosArrowForward size={"1.25rem"} />
           </button>
         </div>

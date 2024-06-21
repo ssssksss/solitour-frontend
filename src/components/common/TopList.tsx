@@ -29,7 +29,7 @@ const TopList = ({ title }: MyProps) => {
         <span className="font-bold text-main">Top 5</span>
       </h2>
       <div className="w-full max-[1024px]:space-x-0">
-        <ol className="grid grid-cols-2 gap-y-[1.5rem] max-[1024px]:flex max-[1024px]:flex-col">
+        <ol className="grid grid-cols-2 gap-x-4 gap-y-[1.5rem] max-[1024px]:flex max-[1024px]:flex-col">
           {titleList[title].map((title: string, index: number) => (
             <li
               key={index}

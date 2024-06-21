@@ -98,8 +98,8 @@ const InformationList = ({
             <input
               className="w-64 border-b-[0.0625rem] border-black bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
               type="text"
-              autoComplete="search"
-              name="search"
+              autoComplete="solitour_search"
+              name="solitour_search"
               placeholder="제목 또는 키워드를 검색해보세요."
             />
           </form>

@@ -4,7 +4,8 @@ import Image from "next/image";
 import PagePath from "./PagePath";
 import { MouseEvent, RefObject, TouchEvent } from "react";
 import { CiMap } from "react-icons/ci";
-import { FaEdit, FaEye, FaRegHeart } from "react-icons/fa";
+import { FaEdit, FaRegHeart } from "react-icons/fa";
+import { TiLocation } from "react-icons/ti";
 
 type MyProps = {
   category: string;
@@ -135,14 +136,19 @@ const InformationViewer = ({
                   <p className="text-xs">666M</p>
                 </div>
                 <div className="flex flex-row items-center gap-1 text-gray2">
-                  <FaEye />
+                  <Image
+                    src="/eyes-icon.svg"
+                    alt="eyes-icon"
+                    width={15}
+                    height={15}
+                  />
                   <p className="text-xs">222K</p>
                 </div>
               </div>
             </div>
           </div>
           <div className="flex flex-row items-center space-x-1 py-[1.125rem]">
-            <MdLocationOn className="text-main" size={"1.25rem"} />
+            <TiLocation className="text-main" size={"1.1rem"} />
             <p className="text-xs font-medium text-gray1">{info.location}</p>
           </div>
           <p className="py-4 font-medium text-gray1">{info.body}</p>

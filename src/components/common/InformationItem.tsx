@@ -2,8 +2,7 @@ import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
 import { CiBookmark } from "react-icons/ci";
-import { FaEye, FaRegHeart } from "react-icons/fa";
-import { MdLocationOn } from "react-icons/md";
+import { FaRegHeart } from "react-icons/fa";
 
 type MyProps = {
   id: number;
@@ -52,14 +51,19 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
       </div>
       <div className="flex h-28 flex-col justify-between bg-white px-5 py-4">
         <Link
-          className="p-1 font-bold hover:text-green-200"
+          className="p-1 font-bold hover:text-main"
           href={`/informations/${CATEGORY_TEXT[category]}/${id}`}
         >
           {title}
         </Link>
         <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center text-gray1">
-            <MdLocationOn />
+          <div className="flex flex-row items-center gap-1 text-gray1">
+            <Image
+              src="/location-icon.svg"
+              alt="location-icon.svg"
+              width={10}
+              height={10}
+            />
             <p className="text-xs font-medium">제주특별자치도, 제주시</p>
           </div>
           <div className="flex flex-row items-center gap-3">
@@ -68,7 +72,12 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
               <p className="text-xs">666M</p>
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">
-              <FaEye />
+              <Image
+                src="/eyes-icon.svg"
+                alt="eyes-icon.svg"
+                width={15}
+                height={15}
+              />
               <p className="text-xs">222K</p>
             </div>
           </div>
