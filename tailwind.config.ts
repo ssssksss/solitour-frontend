@@ -8,10 +8,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        main: "#00B488",
+        black: "#111111",
+        gray1: "#666666",
+        gray2: "#A3A3A3",
+        gray3: "#d9d9d9",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "search-icon": "url('/search-icon.png')",
+      },
+      keyframes: {
+        sidebar: {
+          from: { left: "-300px" },
+          to: { left: "0px" },
+        },
+      },
+      animation: {
+        sidebar: "sidebar 0.3s",
       },
     },
   },
