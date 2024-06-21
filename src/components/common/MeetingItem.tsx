@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { AiTwotoneClockCircle } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
@@ -74,7 +75,7 @@ const MeetingItem = ({
           )}
         </div>
         <Link
-          className="pb-3 pt-6 font-bold hover:text-green-200"
+          className="pb-3 pt-6 font-bold hover:text-main"
           href={`/meetings/1`}
         >
           {title}
@@ -85,19 +86,39 @@ const MeetingItem = ({
         <div className="flex flex-row items-center justify-between">
           <div className="space-y-[0.375rem] text-xs font-medium">
             <div className="flex flex-row items-center gap-3">
-              <FaRegCalendarCheck />
+              <Image
+                src="/calendar-icon.svg"
+                alt="calendar-icon"
+                width={10}
+                height={10}
+              />
               <p className="text-black">{date.toLocaleDateString()}</p>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <MdLocationOn />
+              <Image
+                src="/location-icon.svg"
+                alt="location-icon"
+                width={10}
+                height={10}
+              />
               <p className="text-black">{location}</p>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <AiTwotoneClockCircle />
+              <Image
+                src="/clock-icon.svg"
+                alt="clock-icon"
+                width={10}
+                height={10}
+              />
               <p className="text-balck">{time}</p>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <IoPeople />
+              <Image
+                src="/people-icon.svg"
+                alt="people-icon"
+                width={10}
+                height={10}
+              />
               <p>
                 <span className="text-main">{current}</span>
                 <span className="text-black">{` / ${total} `}</span>
@@ -114,7 +135,12 @@ const MeetingItem = ({
                 <p className="text-xs">{likes}</p>
               </div>
               <div className="flex flex-row items-center gap-1 text-gray2">
-                <FaEye />
+                <Image
+                  src="/eyes-icon.svg"
+                  alt="eyes-icon"
+                  width={15}
+                  height={15}
+                />
                 <p className="text-xs">{views}</p>
               </div>
             </div>

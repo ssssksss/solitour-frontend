@@ -9,37 +9,37 @@ const Pagination = () => {
         <IoIosArrowBack size={"1rem"} />
       </div>
       <Link
-        className="rounded-full bg-main px-2 py-1 text-white hover:text-main"
+        className="flex h-6 w-6 items-center justify-center rounded-full bg-main text-white hover:text-main"
         href="/informations/restaurant"
       >
         1
       </Link>
       <Link
-        className="rounded-full px-2 py-1 text-gray1 hover:text-main"
+        className="flex h-6 w-6 items-center justify-center rounded-full text-gray1 hover:text-main"
         href="/informations/restaurant"
       >
         2
       </Link>
       <Link
-        className="rounded-full px-2 py-1 text-gray1 hover:text-main"
+        className="flex h-6 w-6 items-center justify-center rounded-full text-gray1 hover:text-main"
         href="/informations/restaurant"
       >
         3
       </Link>
       <Link
-        className="rounded-full px-2 py-1 text-gray1 hover:text-main"
+        className="flex h-6 w-6 items-center justify-center rounded-full text-gray1 hover:text-main"
         href="/informations/restaurant"
       >
         4
       </Link>
       <Link
-        className="rounded-full px-2 py-1 text-gray1 hover:text-main"
+        className="flex h-6 w-6 items-center justify-center rounded-full text-gray1 hover:text-main"
         href="/informations/restaurant"
       >
         5
       </Link>
       <Link
-        className="rounded-full px-2 py-1 text-gray1 hover:text-main"
+        className="flex h-6 w-6 items-center justify-center rounded-full text-gray1 hover:text-main"
         href="/informations/restaurant"
       >
         6

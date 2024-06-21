@@ -26,9 +26,12 @@ const Footer = () => {
           <p>솔리투어에서 새로운 나를 찾아 보세요.</p>
         </div>
         <div className="flex flex-row items-center justify-between">
-          <button className="h-[2.625rem] w-[7.5rem] rounded-3xl bg-black text-sm font-medium text-white hover:scale-105">
+          <Link
+            className="flex h-[2.625rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black text-sm font-medium text-white hover:scale-105"
+            href="/auth/signin"
+          >
             시작하기
-          </button>
+          </Link>
           <div className="flex w-fit flex-row items-center space-x-4">
             <button className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-200 hover:scale-105">
               <RiKakaoTalkFill size={"1.5rem"} />

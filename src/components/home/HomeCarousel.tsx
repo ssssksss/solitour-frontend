@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type MyProps = {
   images: string[];
@@ -19,16 +20,19 @@ const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
         }}
       />
       <div className="relative m-auto flex h-[33.75rem] w-[60rem] flex-col items-center justify-end max-[1024px]:w-[90%]">
-        <div className="absolute bottom-52 left-0 space-y-4">
+        <div className="absolute bottom-52 left-0 flex flex-col gap-4">
           <div>
             <h1 className="text-[1.75rem] text-white">
               새로운 나를 찾는 여행,
             </h1>
             <h1 className="text-[1.75rem] font-bold text-white">솔리투어</h1>
           </div>
-          <button className="h-[2.6875rem] w-[7.5rem] rounded-3xl bg-black font-medium text-white hover:scale-105">
+          <Link
+            className="flex h-[2.6875rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black font-medium text-white hover:scale-105"
+            href="/auth/signin"
+          >
             시작하기
-          </button>
+          </Link>
         </div>
         <div className="flex w-[60rem] flex-row items-center justify-center max-[1024px]:w-[90%]">
           {images.map((image, index) => (

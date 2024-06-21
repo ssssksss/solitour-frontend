@@ -20,9 +20,7 @@ const ItemTag = ({
       className={`rounded-full border-[0.0625rem] ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}
       onClick={onClick}
     >
-      <p className={`px-2 py-1 text-[0.6rem] font-medium ${textColor}`}>
-        #{tag}
-      </p>
+      <p className={`px-2 py-1 text-xs font-medium ${textColor}`}>#{tag}</p>
     </div>
   );
 };
