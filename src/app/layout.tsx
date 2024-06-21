@@ -4,6 +4,7 @@ import HeaderContainer from "@/containers/common/HeaderContainer";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
+import Script from "next/script";
 
 const notoSansKr = Noto_Sans_KR({ weight: "400", subsets: ["latin"] });
 
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
   },
   description: "Solitour",
 };
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 export default function RootLayout({
   children,
@@ -28,6 +35,11 @@ export default function RootLayout({
         <Footer />
         <FloatingButtonContainer />
         <div id="modal-root"></div>
+        <Script
+          type="text/javascript"
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_API_KEY}&autoload=false&libraries=services,clusterer,drawing`}
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );

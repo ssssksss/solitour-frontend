@@ -6,6 +6,7 @@ import { MouseEvent, RefObject, TouchEvent } from "react";
 import { CiMap } from "react-icons/ci";
 import { FaEdit, FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
+import KakaoMapContainer from "@/containers/common/KakaoMapContainer";
 
 type MyProps = {
   category: string;
@@ -25,6 +26,7 @@ type MyProps = {
 const InformationViewer = ({
   category,
   id,
+  mainImageIndex,
   listRef,
   onDragStart,
   onDragMove,
@@ -32,7 +34,6 @@ const InformationViewer = ({
   onTouchStart,
   onTouchMove,
   onTouchEnd,
-  mainImageIndex,
   setMainImageIndex,
 }: MyProps) => {
   //const info = await fetch("")
@@ -177,9 +178,12 @@ const InformationViewer = ({
           </div>
         </div>
       </div>
-      <div className="mt-20 flex h-40 flex-col items-center justify-center bg-neutral-100">
-        <CiMap size={"2rem"} />
-        지도 링크
+      <div className="mt-20 flex h-80">
+        <KakaoMapContainer
+          title={"포스코센터"}
+          latitude={37.505793}
+          longitude={127.056149}
+        />
       </div>
     </div>
   );
