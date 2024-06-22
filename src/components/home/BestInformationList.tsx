@@ -1,5 +1,6 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import InformationItem from "../common/InformationItem";
+import Link from "next/link";
 
 const BestInformationList = () => {
   // TODO
@@ -51,14 +52,12 @@ const BestInformationList = () => {
             솔리투어에서 인기 여행 정보를 확인해보세요!
           </p>
         </div>
-        <div className="flex flex-row items-center space-x-2">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
-            <IoIosArrowBack size={"1.25rem"} />
-          </button>
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
-            <IoIosArrowForward size={"1.25rem"} />
-          </button>
-        </div>
+        <Link
+          className="border-b-[0.0625rem] border-gray1 text-gray1 hover:border-main hover:text-main"
+          href="/informations/restaurant?subCategory=all"
+        >
+          전체보기
+        </Link>
       </div>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
         {data.map((post, index) => (

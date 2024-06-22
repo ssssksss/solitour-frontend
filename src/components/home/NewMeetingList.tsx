@@ -1,5 +1,6 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import MeetingItem from "../common/MeetingItem";
+import Link from "next/link";
 
 const NewMeetingList = () => {
   // TODO
@@ -121,14 +122,12 @@ const NewMeetingList = () => {
             솔리투어에서 새로운 사람들과 최신 모임을 찾아보세요!
           </p>
         </div>
-        <div className="flex flex-row items-center space-x-2">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
-            <IoIosArrowBack size={"1.25rem"} />
-          </button>
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
-            <IoIosArrowForward size={"1.25rem"} />
-          </button>
-        </div>
+        <Link
+          className="border-b-[0.0625rem] border-gray1 text-gray1 hover:border-main hover:text-main"
+          href="/meetings"
+        >
+          전체보기
+        </Link>
       </div>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
         {data.map((post, index) => (
