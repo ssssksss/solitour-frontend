@@ -37,7 +37,14 @@ const KakaoMapContainer = ({ title, latitude, longitude }: MyProps) => {
 
   // 지도를 담을 영역
   // 반드시 width, height 값을 지정해야 지도가 출력된다.
-  return <div id="map" className="h-80 w-full" />;
+  return (
+    <a
+      id="map"
+      className="h-48 w-full border-2"
+      href={`https://map.kakao.com/link/map/${latitude},${longitude}`}
+      target="_blank"
+    />
+  );
 };
 
 export default KakaoMapContainer;

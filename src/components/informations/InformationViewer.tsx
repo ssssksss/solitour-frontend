@@ -111,7 +111,13 @@ const InformationViewer = ({
           <h1 className="text-2xl font-bold">{info.title}</h1>
           <div className="flex flex-row items-center justify-between py-4">
             <div className="flex flex-row items-center gap-2">
-              <div className="h-12 w-12 rounded-full bg-gray3"></div>
+              <Image
+                className="rounded-full shadow"
+                src="/user_sex_woman_default_image.svg"
+                alt="user_sex_woman_default_image"
+                width={48}
+                height={48}
+              />
               <div className="space-y-1">
                 <p className="text-xs font-medium text-black">
                   {info.username}
@@ -119,41 +125,28 @@ const InformationViewer = ({
                 <p className="text-xs text-gray1">{info.date}</p>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-1">
-              <div className="flex flex-row items-center justify-center gap-1 rounded-md border-2 border-gray3 px-2 py-[0.125rem] text-sm">
-                <button className="flex flex-row items-center gap-1 font-medium text-gray1 hover:text-main">
-                  <FaEdit />
-                  <p>수정</p>
-                </button>
-                <p className="font-semibold text-gray2">|</p>
-                <button className="flex flex-row items-center gap-1 font-medium text-gray1 hover:text-main">
-                  <MdDelete size={"1.05rem"} />
-                  <p>삭제</p>
-                </button>
+            <div className="flex flex-row items-center gap-3">
+              <div className="flex flex-row items-center gap-1 text-gray2">
+                <FaRegHeart size={"0.8rem"} />
+                <p className="text-xs">666M</p>
               </div>
-              <div className="flex flex-row items-center gap-3">
-                <div className="flex flex-row items-center gap-1 text-gray2">
-                  <FaRegHeart size={"0.8rem"} />
-                  <p className="text-xs">666M</p>
-                </div>
-                <div className="flex flex-row items-center gap-1 text-gray2">
-                  <Image
-                    src="/eyes-icon.svg"
-                    alt="eyes-icon"
-                    width={15}
-                    height={15}
-                  />
-                  <p className="text-xs">222K</p>
-                </div>
+              <div className="flex flex-row items-center gap-1 text-gray2">
+                <Image
+                  src="/eyes-icon.svg"
+                  alt="eyes-icon"
+                  width={15}
+                  height={15}
+                />
+                <p className="text-xs">222K</p>
               </div>
             </div>
           </div>
-          <div className="flex flex-row items-center space-x-1 py-[1.125rem]">
+          <div className="flex flex-row items-center gap-1 py-3">
             <TiLocation className="text-main" size={"1.1rem"} />
             <p className="text-xs font-medium text-gray1">{info.location}</p>
           </div>
           <p className="py-4 font-medium text-gray1">{info.body}</p>
-          <div className="flex flex-row items-center gap-1 pb-[2.6875rem]">
+          <div className="flex flex-row items-center gap-1 pb-8">
             {info.tags.map((tag, index) => (
               <ItemTag
                 key={index}
@@ -163,7 +156,7 @@ const InformationViewer = ({
               />
             ))}
           </div>
-          <div className="space-y-3 border-y-2 border-gray3 p-5">
+          <div className="flex flex-col gap-3 border-y-2 border-gray3 px-6 py-4">
             <div className="text-bold text-lg font-bold">
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
@@ -176,15 +169,36 @@ const InformationViewer = ({
               </li>
             ))}
           </div>
+          <div className="mt-3 flex flex-row items-center justify-end gap-3">
+            <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
+              <Image
+                src="/edit-icon.svg"
+                alt="edit-icon"
+                width={15}
+                height={15}
+              />
+              수정
+            </button>
+            <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
+              <Image
+                src="/delete-icon.svg"
+                alt="delete-icon.svg"
+                width={15}
+                height={15}
+              />
+              삭제
+            </button>
+          </div>
         </div>
       </div>
-      <div className="mt-20 flex h-80">
+      <div className="mt-20 flex h-48 flex-col">
         <KakaoMapContainer
           title={"포스코센터"}
           latitude={37.505793}
           longitude={127.056149}
         />
       </div>
+      <div className="h-32 w-full bg-blue-100"></div>
     </div>
   );
 };
