@@ -41,7 +41,7 @@ const InformationViewer = ({
     title: "책과 공간이 매력적인 선릉역 테라로사",
     username: "하몽",
     date: new Date().toLocaleDateString(),
-    location: "서울, 강남구",
+    address: "서울 강남구 테헤란로 440 포스코센터 1,2층 (우)06194",
     body: "선릉역과 삼성역 사이에 있는 테라로사 포스코센터점입니다. 제가 갔을 땐 사람이 많아도 공간이 워낙 넓어서 좋았어요! 책도 구경하고 핸드드립 커피가 있어 여유롭게 시간을 보낼 수 있어요. 도심 속에서 이런 대형카페에서 뷰도 감상하고 시간을 보내고 싶은신 분들에게 추천합니다!",
     tags: ["북카페", "뷰맛집", "핸드드립"],
     tips: ["대형카페로 책도 읽고 카공하기 좋아요", "2시간 주차가 가능해요"],
@@ -57,6 +57,7 @@ const InformationViewer = ({
       "/restaurant3.svg",
       "/restaurant4.svg",
     ],
+    placeId: 1860681564,
   };
 
   return (
@@ -107,7 +108,7 @@ const InformationViewer = ({
             ))}
           </div>
         </div>
-        <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto rounded-2xl px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
+        <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <h1 className="text-2xl font-bold">{info.title}</h1>
           <div className="flex flex-row items-center justify-between py-4">
             <div className="flex flex-row items-center gap-2">
@@ -143,7 +144,7 @@ const InformationViewer = ({
           </div>
           <div className="flex flex-row items-center gap-1 py-3">
             <TiLocation className="text-main" size={"1.1rem"} />
-            <p className="text-xs font-medium text-gray1">{info.location}</p>
+            <p className="text-xs font-medium text-gray1">{info.address}</p>
           </div>
           <p className="py-4 font-medium text-gray1">{info.body}</p>
           <div className="flex flex-row items-center gap-1 pb-8">
@@ -192,13 +193,28 @@ const InformationViewer = ({
         </div>
       </div>
       <div className="mt-20 flex h-48 flex-col">
-        <KakaoMapContainer
-          title={"포스코센터"}
-          latitude={37.505793}
-          longitude={127.056149}
-        />
+        <KakaoMapContainer address={info.address} placeId={info.placeId} />
       </div>
-      <div className="h-32 w-full bg-blue-100"></div>
+      <a
+        className="-mt-4 flex h-36 w-full flex-col justify-center gap-2 rounded-b-2xl border-x-2 border-b-2 px-6"
+        href={`https://map.kakao.com/link/map/${info.placeId}`}
+        target="_blank"
+      >
+        <h2 className="text-lg font-bold text-black">
+          {"테라로사 포스코센터"}
+        </h2>
+        <div className="flex flex-row items-center gap-1">
+          <Image
+            src="/location-icon.svg"
+            alt="location-icon"
+            width={10}
+            height={10}
+          />
+          <p className="text-sm text-gray1">
+            {"서울 강남구 테헤란로 440 포스코센터 1층"}
+          </p>
+        </div>
+      </a>
     </div>
   );
 };
