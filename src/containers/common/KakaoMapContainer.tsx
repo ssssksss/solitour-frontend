@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 type MyProps = {
-  address: string; // 주소
+  placeName: string; // 장소명
   placeId: number; // 장소 id 값
 };
 
-const KakaoMapContainer = ({ address, placeId }: MyProps) => {
+const KakaoMapContainer = ({ placeName, placeId }: MyProps) => {
   const [loading, isLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -29,11 +29,11 @@ const KakaoMapContainer = ({ address, placeId }: MyProps) => {
         // 지도 생성
         const map = new window.kakao.maps.Map(container, options);
 
-        // 주소-좌표 변환 객체 생성
-        const geocoder = new window.kakao.maps.services.Geocoder();
+        // 장소 검색 객체 생성
+        const ps = new window.kakao.maps.services.Places();
 
-        // 주소로 좌표를 검색합니다.
-        geocoder.addressSearch(address, (result: any, status: any) => {
+        // 키워드로 장소를 검색합니다.
+        ps.keywordSearch(placeName, (result: any, status: any) => {
           // 정상적으로 검색이 완료됐으면
           if (status === window.kakao.maps.services.Status.OK) {
             const coords = new window.kakao.maps.LatLng(
@@ -42,7 +42,7 @@ const KakaoMapContainer = ({ address, placeId }: MyProps) => {
             );
 
             // 결과값으로 받은 위치를 마커로 표시합니다.
-            const marker = new window.kakao.maps.Marker({
+            new window.kakao.maps.Marker({
               // 마커가 표시될 지도
               map: map,
 
@@ -59,7 +59,7 @@ const KakaoMapContainer = ({ address, placeId }: MyProps) => {
         });
       });
     }
-  }, [address]);
+  }, [placeName]);
 
   // 지도를 담을 영역
   // 반드시 width, height 값을 지정해야 지도가 출력된다.
