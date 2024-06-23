@@ -1,10 +1,8 @@
-import { MdDelete, MdLocationOn } from "react-icons/md";
 import ItemTag from "./ItemTag";
 import Image from "next/image";
 import PagePath from "./PagePath";
 import { MouseEvent, RefObject, TouchEvent } from "react";
-import { CiMap } from "react-icons/ci";
-import { FaEdit, FaRegHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapContainer from "@/containers/common/KakaoMapContainer";
 
@@ -57,6 +55,7 @@ const InformationViewer = ({
       "/restaurant3.svg",
       "/restaurant4.svg",
     ],
+    placeName: "테라로사 포스코센터",
     placeId: 1860681564,
   };
 
@@ -193,16 +192,14 @@ const InformationViewer = ({
         </div>
       </div>
       <div className="mt-20 flex h-48 flex-col">
-        <KakaoMapContainer address={info.address} placeId={info.placeId} />
+        <KakaoMapContainer placeName={info.placeName} placeId={info.placeId} />
       </div>
       <a
         className="-mt-4 flex h-36 w-full flex-col justify-center gap-2 rounded-b-2xl border-x-2 border-b-2 px-6"
         href={`https://map.kakao.com/link/map/${info.placeId}`}
         target="_blank"
       >
-        <h2 className="text-lg font-bold text-black">
-          {"테라로사 포스코센터"}
-        </h2>
+        <h2 className="text-lg font-bold text-black">{info.placeName}</h2>
         <div className="flex flex-row items-center gap-1">
           <Image
             src="/location-icon.svg"
@@ -210,9 +207,7 @@ const InformationViewer = ({
             width={10}
             height={10}
           />
-          <p className="text-sm text-gray1">
-            {"서울 강남구 테헤란로 440 포스코센터 1층"}
-          </p>
+          <p className="text-sm text-gray1">{info.address}</p>
         </div>
       </a>
     </div>

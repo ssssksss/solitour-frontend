@@ -4,9 +4,9 @@ import CategoryModalContainer from "@/containers/informations/write/CategoryModa
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/store/editorStore";
-import LocationModalContainer from "@/containers/informations/write/LocationModalContainer";
 import ItemTag from "../ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
+import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
 
 type MyProps = {
   editorStore: useEditorStoreType;
@@ -42,9 +42,7 @@ const InformationEditor = ({
       className="flex w-[60rem] flex-col max-[1024px]:w-[90%]"
       action={onSubmit}
     >
-      {locationModal && (
-        <LocationModalContainer closeModal={closeLocationModal} />
-      )}
+      {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
       )}
@@ -80,7 +78,7 @@ const InformationEditor = ({
             autoComplete="location"
             name="location"
             placeholder="장소명을 입력하세요."
-            value={editorStore.location}
+            value={editorStore.placeName}
             onChange={(e) =>
               editorStore.changeField("location", e.target.value)
             }
