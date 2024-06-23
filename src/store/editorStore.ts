@@ -3,7 +3,13 @@ import { devtools } from "zustand/middleware";
 
 interface EditorState {
   title: string;
-  location: string;
+  address: string;
+  province: number;
+  city: number;
+  placeId: string; // 장소 id
+  placeName: string; // 장소명
+  placeXAxis: number; // 위도 (latitude)
+  placeYAxis: number; // 경도 (longitude)
   category: string;
   subCategory: string;
   images: string[];
@@ -31,7 +37,13 @@ type EditorStoreType = StateCreator<EditorState & EditorActions>;
 
 const initialState: EditorState = {
   title: "",
-  location: "",
+  address: "",
+  province: 0,
+  city: 0,
+  placeId: "",
+  placeXAxis: 37.566826,
+  placeYAxis: 126.9786567,
+  placeName: "",
   category: "",
   subCategory: "",
   images: [""],

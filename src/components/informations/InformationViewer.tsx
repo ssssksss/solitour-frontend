@@ -1,10 +1,8 @@
-import { MdDelete, MdLocationOn } from "react-icons/md";
 import ItemTag from "./ItemTag";
 import Image from "next/image";
 import PagePath from "./PagePath";
 import { MouseEvent, RefObject, TouchEvent } from "react";
-import { CiMap } from "react-icons/ci";
-import { FaEdit, FaRegHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapContainer from "@/containers/common/KakaoMapContainer";
 
