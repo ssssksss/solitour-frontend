@@ -1,6 +1,6 @@
 import PlaceModal from "@/components/informations/write/PlaceModal";
 import useEditorStore from "@/store/editorStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 type MyProps = {
@@ -35,10 +35,10 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     }[]
   >();
 
-  const handleSearch = useDebouncedCallback((search: string) => {
-    // 장소 검색 객체 생성
-    const ps = new window.kakao.maps.services.Places();
+  // 장소 검색 객체 (place search)
+  const [ps, setPs] = useState<any>();
 
+  const handleSearch = useDebouncedCallback((search: string) => {
     // 키워드로 장소를 검색합니다.
     ps.keywordSearch(search, (result: any, status: any) => {
       // 정상적으로 검색이 완료됐으면
@@ -47,6 +47,15 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
       }
     });
   }, 300);
+
+  useEffect(() => {
+    if (window.kakao) {
+      window.kakao.maps.load(() => {
+        // 장소 검색 객체 생성
+        setPs(new window.kakao.maps.services.Places());
+      });
+    }
+  }, []);
 
   return (
     <PlaceModal
