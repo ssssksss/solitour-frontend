@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AiTwotoneClockCircle } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
-import { FaEye, FaRegHeart } from "react-icons/fa";
-import { FaRegCalendarCheck } from "react-icons/fa6";
-import { IoBookmark, IoPeople } from "react-icons/io5";
-import { MdLocationOn } from "react-icons/md";
+import { FaRegHeart } from "react-icons/fa";
+import { IoBookmark } from "react-icons/io5";
 
 type MyProps = {
   id: number;
@@ -92,7 +89,13 @@ const MeetingItem = ({
                 width={10}
                 height={10}
               />
-              <p className="text-black">{date.toLocaleDateString()}</p>
+              <p className="text-black">
+                {date.getFullYear() +
+                  "." +
+                  (date.getMonth() + 1) +
+                  "." +
+                  date.getDate()}
+              </p>
             </div>
             <div className="flex flex-row items-center gap-3">
               <Image
