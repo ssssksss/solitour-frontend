@@ -15,6 +15,7 @@ interface IMeetingsList {
   openModal: () => void;
 }
 
+
 const MeetingsList = (props: IMeetingsList) => {
   const data: {
     id: number;
@@ -70,13 +71,16 @@ const MeetingsList = (props: IMeetingsList) => {
             />
           </form>
           <div className="flex flex-row items-center gap-4 text-sm font-medium text-gray1">
-            <button className="flex flex-row items-center hover:text-main">
+            <button
+              className="flex flex-row items-center hover:text-main"
+              onClick={() => props.openModal()}
+            >
               <VscSettings size={"1.25rem"} />
-              <button onClick={() => props.openModal()}>필터</button>
-              <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
-                <MeetingFilterModal closeModal={() => props.closeModal()} />
-              </Modal>
+              <div>필터</div>
             </button>
+            <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
+              <MeetingFilterModal closeModal={() => props.closeModal()} />
+            </Modal>
             <button className="flex flex-row items-center hover:text-main">
               <p>인기순</p>
               <IoIosArrowDown />
