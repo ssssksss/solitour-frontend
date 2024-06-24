@@ -70,7 +70,7 @@ const MyPageHeader = () => {
                 }
               >
                 <div className="relative h-[1.25rem] w-[1.25rem]">
-                  <Image src={"/edit-icon.svg"} alt={"edit-icon-image"} fill />
+                  <Image src={"/setting-icon.svg"} alt={"setting-icon-image"} fill />
                 </div>
               </div>
             </Link>
