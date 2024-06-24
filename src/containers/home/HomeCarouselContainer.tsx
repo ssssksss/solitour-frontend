@@ -9,7 +9,7 @@ const HomeCarouselContainer = () => {
     "/background1.svg",
     "/background2.svg",
     "/background3.svg",
-    "/background4.png",
+    "/background4.svg",
   ];
 
   const onClick = (index: number) => {

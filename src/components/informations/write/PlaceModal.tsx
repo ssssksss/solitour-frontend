@@ -1,13 +1,34 @@
-import { ChangeEvent } from "react";
+import Image from "next/image";
 import { MdClose } from "react-icons/md";
+import { DebouncedState } from "use-debounce";
 
 type MyProps = {
-  placeName: string;
-  onChangePlaceName: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeInfos:
+    | {
+        place_name: string;
+        address_name: string;
+        id: string;
+        x: string;
+        y: string;
+      }[]
+    | undefined;
+  handleSearch: DebouncedState<(search: string) => void>;
+  onChangePlace: (value: {
+    place_name: string;
+    address_name: string;
+    id: string;
+    x: string;
+    y: string;
+  }) => void;
   closeModal: () => void;
 };
 
-const PlaceModal = ({ placeName, onChangePlaceName, closeModal }: MyProps) => {
+const PlaceModal = ({
+  placeInfos,
+  handleSearch,
+  onChangePlace,
+  closeModal,
+}: MyProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-[25rem] flex-col rounded-xl bg-white p-6 max-[600px]:w-[90%]">
@@ -42,18 +63,27 @@ const PlaceModal = ({ placeName, onChangePlaceName, closeModal }: MyProps) => {
                 autoComplete="location"
                 name="location"
                 placeholder="장소명을 입력하세요."
-                value={placeName}
-                onChange={onChangePlaceName}
+                onChange={(e) => handleSearch(e.target.value)}
               />
+              <div className="flex flex-col items-start gap-2 px-6 py-4">
+                {placeInfos?.map((placeInfo, index) => (
+                  <button
+                    key={index}
+                    className="flex flex-row items-center gap-2 text-sm hover:text-main"
+                    onClick={() => onChangePlace(placeInfo)}
+                  >
+                    <Image
+                      src="/location-icon.svg"
+                      alt="location-icon"
+                      width={10}
+                      height={10}
+                    />
+                    {placeInfo.place_name}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-          <button
-            className="h-11 w-full rounded-full bg-main text-white hover:scale-105"
-            type="button"
-            onClick={closeModal}
-          >
-            장소 적용하기
-          </button>
         </div>
       </div>
     </div>

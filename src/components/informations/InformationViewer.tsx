@@ -195,13 +195,14 @@ const InformationViewer = ({
         <KakaoMapContainer placeName={info.placeName} placeId={info.placeId} />
       </div>
       <a
-        className="-mt-4 flex h-36 w-full flex-col justify-center gap-2 rounded-b-2xl border-x-2 border-b-2 px-6"
+        className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-2 border-b-2 px-6 pb-10 pt-12"
         href={`https://map.kakao.com/link/map/${info.placeId}`}
         target="_blank"
       >
         <h2 className="text-lg font-bold text-black">{info.placeName}</h2>
-        <div className="flex flex-row items-center gap-1">
+        <div className="flex flex-row items-start gap-1">
           <Image
+            className="pt-1"
             src="/location-icon.svg"
             alt="location-icon"
             width={10}
