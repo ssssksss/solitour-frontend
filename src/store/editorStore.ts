@@ -8,8 +8,8 @@ interface EditorState {
   city: number;
   placeId: string; // 장소 id
   placeName: string; // 장소명
-  placeXAxis: number; // 위도 (latitude)
-  placeYAxis: number; // 경도 (longitude)
+  placeXAxis: string; // 위도 (latitude)
+  placeYAxis: string; // 경도 (longitude)
   category: string;
   subCategory: string;
   images: string[];
@@ -41,8 +41,8 @@ const initialState: EditorState = {
   province: 0,
   city: 0,
   placeId: "",
-  placeXAxis: 37.566826,
-  placeYAxis: 126.9786567,
+  placeXAxis: "37.566826",
+  placeYAxis: "126.9786567",
   placeName: "",
   category: "",
   subCategory: "",
