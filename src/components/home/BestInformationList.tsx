@@ -53,7 +53,7 @@ const BestInformationList = () => {
           </p>
         </div>
         <Link
-          className="border-b-[0.0625rem] border-gray1 text-gray1 hover:border-main hover:text-main"
+          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white"
           href="/informations/restaurant?subCategory=all"
         >
           전체보기

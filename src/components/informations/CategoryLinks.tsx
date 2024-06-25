@@ -6,7 +6,7 @@ type MyProps = {
 
 const CategoryLinks = ({ category }: MyProps) => {
   return (
-    <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] max-[1024px]:w-[90%]">
+    <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] pb-[0.375rem] max-[1024px]:w-[90%]">
       <nav className="w-fit">
         <ul className="flex flex-row items-center gap-9">
           <li>
@@ -18,7 +18,7 @@ const CategoryLinks = ({ category }: MyProps) => {
                     : "text-gray1"
                 }` +
                 " " +
-                "hover:main hover:font-black"
+                "hover:main"
               }
               href="/informations/restaurant?subCategory=all"
             >
@@ -34,7 +34,7 @@ const CategoryLinks = ({ category }: MyProps) => {
                     : "text-gray1"
                 }` +
                 " " +
-                "hover:font-black hover:text-main"
+                "hover:text-main"
               }
               href="/informations/accommondation?subCategory=all"
             >
@@ -50,7 +50,7 @@ const CategoryLinks = ({ category }: MyProps) => {
                     : "text-gray1"
                 }` +
                 " " +
-                "hover:font-black hover:text-main"
+                "hover:text-main"
               }
               href="/informations/activity?subCategory=all"
             >
@@ -59,12 +59,6 @@ const CategoryLinks = ({ category }: MyProps) => {
           </li>
         </ul>
       </nav>
-      <Link
-        className="flex h-9 w-28 items-center justify-center rounded-full bg-main text-sm font-medium text-white hover:scale-105"
-        href="/informations/write"
-      >
-        정보 등록하기
-      </Link>
     </div>
   );
 };
