@@ -1,3 +1,5 @@
+"use client";
+
 import CategoryModal from "@/components/informations/write/CategoryModal";
 import useEditorStore from "@/store/editorStore";
 

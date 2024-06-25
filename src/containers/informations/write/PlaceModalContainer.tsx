@@ -1,3 +1,5 @@
+"use client";
+
 import PlaceModal from "@/components/informations/write/PlaceModal";
 import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
@@ -48,6 +50,12 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     });
   }, 300);
 
+  const [isCustom, setIsCustom] = useState<boolean>(false);
+
+  const onClick = (isCustom: boolean) => {
+    setIsCustom(isCustom);
+  };
+
   useEffect(() => {
     if (window.kakao) {
       window.kakao.maps.load(() => {
@@ -61,6 +69,8 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     <PlaceModal
       placeInfos={placeInfos}
       handleSearch={handleSearch}
+      isCustom={isCustom}
+      onClick={onClick}
       onChangePlace={onChangePlace}
       closeModal={closeModal}
     />

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 type MyProps = {
@@ -5,7 +7,7 @@ type MyProps = {
   placeId: number; // 장소 id 값
 };
 
-const KakaoMapContainer = ({ placeName, placeId }: MyProps) => {
+const KakaoMapLinkContainer = ({ placeName, placeId }: MyProps) => {
   const [loading, isLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -13,7 +15,7 @@ const KakaoMapContainer = ({ placeName, placeId }: MyProps) => {
       window.kakao.maps.load(() => {
         isLoading(false);
 
-        // id가 "map"인 요소에 지도를 생성한다.
+        // id가 "map"인 요소에 지도를 생성합니다.
         const container = document.getElementById("map");
         const options = {
           // 지도 좌표값 설정
@@ -74,4 +76,4 @@ const KakaoMapContainer = ({ placeName, placeId }: MyProps) => {
   );
 };
 
-export default KakaoMapContainer;
+export default KakaoMapLinkContainer;
