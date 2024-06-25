@@ -1,3 +1,4 @@
+import KakaoMapAddressContainer from "@/containers/common/KakaoMapAddressContainer";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { DebouncedState } from "use-debounce";
@@ -13,6 +14,8 @@ type MyProps = {
       }[]
     | undefined;
   handleSearch: DebouncedState<(search: string) => void>;
+  isCustom: boolean;
+  onClick: (isCustom: boolean) => void;
   onChangePlace: (value: {
     place_name: string;
     address_name: string;
@@ -26,12 +29,14 @@ type MyProps = {
 const PlaceModal = ({
   placeInfos,
   handleSearch,
+  isCustom,
+  onClick,
   onChangePlace,
   closeModal,
 }: MyProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[25rem] flex-col rounded-xl bg-white p-6 max-[600px]:w-[90%]">
+      <div className="flex h-fit w-[48rem] flex-col rounded-xl bg-white p-6 max-[600px]:w-[90%]">
         <div className="flex flex-row items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
@@ -44,17 +49,22 @@ const PlaceModal = ({
             <h3 className="text-lg font-medium text-black">장소 선택</h3>
             <div className="flex h-11 flex-row items-center border-2 text-sm">
               <button
-                className="h-11 flex-[50%] bg-main text-white"
+                className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
+                onClick={() => onClick(false)}
               >
                 검색으로 찾기
               </button>
-              <button className="h-11 flex-[50%] text-gray1" type="button">
-                직접 주소 입력하기
+              <button
+                className={`h-11 flex-[50%] ${isCustom ? "bg-main text-white" : "text-gray1"}`}
+                type="button"
+                onClick={() => onClick(true)}
+              >
+                직접 장소 입력하기
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className={`${isCustom ? "hidden" : ""} flex flex-col gap-2`}>
             <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
             <div className="flex h-56 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
               <input
@@ -83,6 +93,12 @@ const PlaceModal = ({
                 ))}
               </div>
             </div>
+          </div>
+          <div
+            className={`${isCustom ? "" : "hidden"} flex h-56 w-full flex-col gap-2`}
+          >
+            <h3 className="text-lg font-medium text-black">장소 입력하기</h3>
+            <KakaoMapAddressContainer />
           </div>
         </div>
       </div>
