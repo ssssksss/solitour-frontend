@@ -61,4 +61,3 @@ const Banner = ({ title, content, buttonText, category }: MyProps) => {
   );
 };
 export default Banner;
-
