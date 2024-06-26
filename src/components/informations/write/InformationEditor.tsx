@@ -39,7 +39,7 @@ const InformationEditor = ({
 }: MyProps) => {
   return (
     <form
-      className="flex w-[60rem] flex-col max-[1024px]:w-[90%]"
+      className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]"
       action={onSubmit}
     >
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
@@ -67,8 +67,8 @@ const InformationEditor = ({
           required={true}
         />
       </div>
-      <div className="mt-12 flex flex-row items-center gap-[3.375rem] max-[640px]:flex-col max-[640px]:items-start">
-        <div className="flex h-[3.3125rem] flex-row items-center gap-7 max-[640px]:w-full">
+      <div className="mt-12 flex flex-row items-center gap-[3.375rem] max-[744px]:flex-col max-[744px]:items-start">
+        <div className="flex h-[3.3125rem] flex-row items-center gap-7 max-[744px]:w-full">
           <h2 className="text-lg font-semibold text-black">
             장소<span className="text-2xl text-main">*</span>
           </h2>
@@ -129,7 +129,7 @@ const InformationEditor = ({
       <p className="pt-3 text-end text-sm font-medium text-gray1">
         {editorStore.content.length}/500
       </p>
-      <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
+      <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
         <h2 className="w-44 pt-3 text-lg font-bold text-black">해시태그</h2>
         <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
           <div
@@ -184,11 +184,11 @@ const InformationEditor = ({
           </button>
         </div>
       </div>
-      <div className="mt-10 flex flex-row items-start gap-7 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-2">
+      <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
         <h2 className="w-36 pt-3 text-lg font-bold text-black">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
-        <div className="flex flex-grow flex-col gap-4 max-[768px]:w-full">
+        <div className="flex flex-grow flex-col gap-4 max-[744px]:w-full">
           {editorStore.tips.map((tip, index) => (
             <input
               key={index}

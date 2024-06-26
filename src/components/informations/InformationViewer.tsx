@@ -64,7 +64,7 @@ const InformationViewer = ({
   };
 
   return (
-    <div className="w-[60rem] max-[1024px]:w-[90%]">
+    <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
       <PagePath category={`${category} 상세`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
@@ -102,8 +102,8 @@ const InformationViewer = ({
             </div>
           </div>
         </div>
-        <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full">
-          <div className="relative h-[26.0625rem] w-full">
+        <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
+          <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
             <Image
               className="rounded-2xl"
               src={info.images[mainImageIndex]}
