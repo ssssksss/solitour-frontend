@@ -42,7 +42,11 @@ const InformationViewer = ({
     address: "서울 강남구 테헤란로 440 포스코센터 1,2층 (우)06194",
     body: "선릉역과 삼성역 사이에 있는 테라로사 포스코센터점입니다. 제가 갔을 땐 사람이 많아도 공간이 워낙 넓어서 좋았어요! 책도 구경하고 핸드드립 커피가 있어 여유롭게 시간을 보낼 수 있어요. 도심 속에서 이런 대형카페에서 뷰도 감상하고 시간을 보내고 싶은신 분들에게 추천합니다!",
     tags: ["북카페", "뷰맛집", "핸드드립"],
-    tips: ["대형카페로 책도 읽고 카공하기 좋아요", "2시간 주차가 가능해요"],
+    tips: [
+      "대형카페로 책도 읽고 카공하기 좋아요",
+      "2시간 주차가 가능해요",
+      "사람이 많지만 공간이 워낙 넓고 책도 구경하고 커피가 있어 여유롭게 시간을 보낼 수 있어요.",
+    ],
     images: [
       "/PostImage.svg",
       "/restaurant1.svg",
@@ -63,6 +67,41 @@ const InformationViewer = ({
     <div className="w-[60rem] max-[1024px]:w-[90%]">
       <PagePath category={`${category} 상세`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
+        <div className="w-full pb-4 lg:hidden">
+          <h1 className="text-2xl font-bold">{info.title}</h1>
+          <div className="flex flex-row items-end justify-between py-4">
+            <div className="flex flex-row items-center gap-2">
+              <Image
+                className="rounded-full shadow"
+                src="/user_sex_woman_default_image.svg"
+                alt="user_sex_woman_default_image"
+                width={48}
+                height={48}
+              />
+              <div className="space-y-1">
+                <p className="text-xs font-medium text-black">
+                  {info.username}
+                </p>
+                <p className="text-xs text-gray1">{info.date}</p>
+              </div>
+            </div>
+            <div className="flex flex-row items-center gap-3">
+              <div className="flex flex-row items-center gap-1 text-gray2">
+                <FaRegHeart size={"0.8rem"} />
+                <p className="text-xs">666M</p>
+              </div>
+              <div className="flex flex-row items-center gap-1 text-gray2">
+                <Image
+                  src="/eyes-icon.svg"
+                  alt="eyes-icon"
+                  width={15}
+                  height={15}
+                />
+                <p className="text-xs">222K</p>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full">
           <div className="relative h-[26.0625rem] w-full">
             <Image
@@ -108,36 +147,38 @@ const InformationViewer = ({
           </div>
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
-          <h1 className="text-2xl font-bold">{info.title}</h1>
-          <div className="flex flex-row items-center justify-between py-4">
-            <div className="flex flex-row items-center gap-2">
-              <Image
-                className="rounded-full shadow"
-                src="/user_sex_woman_default_image.svg"
-                alt="user_sex_woman_default_image"
-                width={48}
-                height={48}
-              />
-              <div className="space-y-1">
-                <p className="text-xs font-medium text-black">
-                  {info.username}
-                </p>
-                <p className="text-xs text-gray1">{info.date}</p>
-              </div>
-            </div>
-            <div className="flex flex-row items-center gap-3">
-              <div className="flex flex-row items-center gap-1 text-gray2">
-                <FaRegHeart size={"0.8rem"} />
-                <p className="text-xs">666M</p>
-              </div>
-              <div className="flex flex-row items-center gap-1 text-gray2">
+          <div className="max-[1024px]:hidden">
+            <h1 className="text-2xl font-bold">{info.title}</h1>
+            <div className="flex flex-row items-end justify-between py-4">
+              <div className="flex flex-row items-center gap-2">
                 <Image
-                  src="/eyes-icon.svg"
-                  alt="eyes-icon"
-                  width={15}
-                  height={15}
+                  className="rounded-full shadow"
+                  src="/user_sex_woman_default_image.svg"
+                  alt="user_sex_woman_default_image"
+                  width={48}
+                  height={48}
                 />
-                <p className="text-xs">222K</p>
+                <div className="space-y-1">
+                  <p className="text-xs font-medium text-black">
+                    {info.username}
+                  </p>
+                  <p className="text-xs text-gray1">{info.date}</p>
+                </div>
+              </div>
+              <div className="flex flex-row items-center gap-3">
+                <div className="flex flex-row items-center gap-1 text-gray2">
+                  <FaRegHeart size={"0.8rem"} />
+                  <p className="text-xs">666M</p>
+                </div>
+                <div className="flex flex-row items-center gap-1 text-gray2">
+                  <Image
+                    src="/eyes-icon.svg"
+                    alt="eyes-icon"
+                    width={15}
+                    height={15}
+                  />
+                  <p className="text-xs">222K</p>
+                </div>
               </div>
             </div>
           </div>
@@ -169,26 +210,6 @@ const InformationViewer = ({
               </li>
             ))}
           </div>
-          <div className="mt-3 flex flex-row items-center justify-end gap-3">
-            <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
-              <Image
-                src="/edit-icon.svg"
-                alt="edit-icon"
-                width={15}
-                height={15}
-              />
-              수정
-            </button>
-            <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
-              <Image
-                src="/delete-icon.svg"
-                alt="delete-icon.svg"
-                width={15}
-                height={15}
-              />
-              삭제
-            </button>
-          </div>
         </div>
       </div>
       <div className="mt-20 flex h-48 flex-col">
@@ -214,6 +235,21 @@ const InformationViewer = ({
           <p className="text-sm text-gray1">{info.address}</p>
         </div>
       </a>
+      <div className="mt-6 flex flex-row items-center justify-end gap-3">
+        <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
+          <Image src="/edit-icon.svg" alt="edit-icon" width={15} height={15} />
+          수정
+        </button>
+        <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
+          <Image
+            src="/delete-icon.svg"
+            alt="delete-icon.svg"
+            width={15}
+            height={15}
+          />
+          삭제
+        </button>
+      </div>
     </div>
   );
 };

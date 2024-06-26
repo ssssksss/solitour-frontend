@@ -112,23 +112,35 @@ const NewMeetingList = () => {
   ];
 
   return (
-    <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
+    <div className="my-20 w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
       <div className="flex flex-row items-center justify-between">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-black max-[768px]:text-xl">
-            새로움을 발견할, <span className="text-main">NEW</span> 모임
-          </h2>
-          <p className="text-sm font-medium text-gray1 max-[768px]:text-xs">
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-row items-center justify-between gap-1 max-[744px]:w-[21.5625rem]">
+            <h2 className="flex flex-row items-center gap-2 text-2xl font-bold text-black max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-0">
+              <p>{"새로움을 발견할,"}</p>
+              <p>
+                <span className="text-main">NEW</span> 모임
+              </p>
+            </h2>
+            <Link
+              className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
+              href="/meetings"
+            >
+              전체보기
+            </Link>
+          </div>
+          <p className="text-sm font-medium text-gray1">
             솔리투어에서 새로운 사람들과 최신 모임을 찾아보세요!
           </p>
         </div>
         <Link
-          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white"
+          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
           href="/meetings"
         >
           전체보기
         </Link>
       </div>
+
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
         {data.map((post, index) => (
           <MeetingItem
