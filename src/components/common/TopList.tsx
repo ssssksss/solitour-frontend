@@ -23,7 +23,7 @@ const titleList: { [key: string]: string[] } = {
 
 const TopList = ({ title }: MyProps) => {
   return (
-    <div className="-mt-24 flex h-fit w-[60rem] flex-col justify-center rounded-2xl bg-white px-20 py-16 shadow shadow-[#CCECE2] max-[1024px]:w-[90%] max-[1024px]:px-8 z-10">
+    <div className="z-10 -mt-28 flex h-fit w-[60rem] flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow shadow-[#CCECE2] max-[1024px]:w-[39.75rem] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24 max-[744px]:w-[21.5625rem]">
       <h2 className="mb-9 border-b-2 border-gray3 pb-3 text-2xl font-semibold text-black">
         {`${title} 정보 `}
         <span className="font-bold text-main">Top 5</span>

@@ -10,7 +10,7 @@ type MyProps = {
 
 const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
   return (
-    <div className="fixed bottom-8 right-0 flex w-24 flex-col items-center gap-6">
+    <div className="fixed bottom-8 right-0 z-40 flex w-24 flex-col items-center gap-6">
       {visible && (
         <div className="-mb-4 flex animate-bgFadeIn flex-col items-center gap-6 rounded-full bg-[#F2FAF7] px-4 pb-4 pt-[1.875rem]">
           <Link

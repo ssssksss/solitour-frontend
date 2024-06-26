@@ -5,8 +5,8 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="flex h-80 w-full flex-row items-center justify-center bg-neutral-100 max-[768px]:h-[350px]">
-      <div className="flex w-[60rem] flex-col space-y-4 p-4">
+    <div className="flex h-80 w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px]">
+      <div className="flex w-[60rem] flex-col gap-4 p-4">
         <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
             src={"/Solitour-logo.svg"}
@@ -32,7 +32,7 @@ const Footer = () => {
           >
             시작하기
           </Link>
-          <div className="flex w-fit flex-row items-center space-x-4">
+          <div className="flex w-fit flex-row items-center gap-4">
             <button className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-200 hover:scale-105">
               <RiKakaoTalkFill size={"1.5rem"} />
             </button>
@@ -41,7 +41,7 @@ const Footer = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between pt-8 max-[768px]:flex-col max-[768px]:space-y-4">
+        <div className="flex flex-row items-center justify-between pt-8 max-[744px]:flex-col-reverse max-[744px]:gap-4">
           <p className="text-xs font-medium text-gray1">
             Copyright Solitour. All rights reserved
           </p>
