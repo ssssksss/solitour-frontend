@@ -25,6 +25,7 @@ const useOutsideClick = <T extends HTMLElement = HTMLElement>(
       document.removeEventListener("mouseup", listener as EventListener);
       document.addEventListener("mousedown", listener1 as EventListener);
     };
-  }, [ref, callback]);
+  }, [callback, isDragging, ref]);
 };
+
 export default useOutsideClick;
