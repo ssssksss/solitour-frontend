@@ -10,7 +10,27 @@ type MyProps = {
 };
 
 const PlaceModalContainer = ({ closeModal }: MyProps) => {
-  const { changeField } = useEditorStore();
+  const { address, placeName, changeField, resetPlaceInfo } = useEditorStore();
+  const [isCustom, setIsCustom] = useState<boolean>(true);
+
+  // 검색으로 얻어진 장소 목록
+  const [placeInfos, setPlaceInfos] = useState<
+    {
+      place_name: string;
+      address_name: string;
+      id: string;
+      x: string;
+      y: string;
+    }[]
+  >();
+
+  // 장소 검색 객체 (place search)
+  const [ps, setPs] = useState<any>();
+
+  const onResetPlace = () => {
+    resetPlaceInfo();
+    closeModal();
+  };
 
   const onChangePlace = (placeInfo: {
     place_name: string;
@@ -27,19 +47,6 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     closeModal();
   };
 
-  const [placeInfos, setPlaceInfos] = useState<
-    {
-      place_name: string;
-      address_name: string;
-      id: string;
-      x: string;
-      y: string;
-    }[]
-  >();
-
-  // 장소 검색 객체 (place search)
-  const [ps, setPs] = useState<any>();
-
   const handleSearch = useDebouncedCallback((search: string) => {
     // 키워드로 장소를 검색합니다.
     ps.keywordSearch(search, (result: any, status: any) => {
@@ -50,7 +57,9 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     });
   }, 300);
 
-  const [isCustom, setIsCustom] = useState<boolean>(false);
+  const onChangeCustomPlaceName = (placeName: string) => {
+    changeField("placeName", placeName);
+  };
 
   const onClick = (isCustom: boolean) => {
     setIsCustom(isCustom);
@@ -70,8 +79,11 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
       placeInfos={placeInfos}
       handleSearch={handleSearch}
       isCustom={isCustom}
+      canRegister={address !== "" && placeName !== ""}
       onClick={onClick}
+      onResetPlace={onResetPlace}
       onChangePlace={onChangePlace}
+      onChangeCustomPlaceName={onChangeCustomPlaceName}
       closeModal={closeModal}
     />
   );
