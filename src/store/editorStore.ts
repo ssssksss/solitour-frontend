@@ -3,13 +3,13 @@ import { devtools } from "zustand/middleware";
 
 interface EditorState {
   title: string;
-  address: string;
+  address: string; // 도로명주소
   province: number;
   city: number;
   placeId: string; // 장소 id
   placeName: string; // 장소명
-  placeXAxis: string; // 위도 (latitude)
-  placeYAxis: string; // 경도 (longitude)
+  placeXAxis: string; // 경도 (longitude)
+  placeYAxis: string; // 위도 (latitude)
   category: string;
   subCategory: string;
   images: string[];
@@ -28,6 +28,7 @@ interface EditorActions {
   addImage: () => void;
   addHashtag: (hashtag: string) => void;
   addTip: () => void;
+  resetPlaceInfo: () => void;
   removeImage: (index: number) => void;
   removeHashtag: (index: number) => void;
   removeTip: () => void;
@@ -41,8 +42,8 @@ const initialState: EditorState = {
   province: 0,
   city: 0,
   placeId: "",
-  placeXAxis: "37.566826",
-  placeYAxis: "126.9786567",
+  placeXAxis: "", // "126.9786567"
+  placeYAxis: "", // "37.566826"
   placeName: "",
   category: "",
   subCategory: "",
@@ -84,6 +85,14 @@ const editorStore: EditorStoreType = (set, get) => ({
       }
     }),
   addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
+  resetPlaceInfo: () =>
+    set({
+      address: "",
+      placeId: "",
+      placeXAxis: "",
+      placeYAxis: "",
+      placeName: "",
+    }),
   removeImage: (index: number) =>
     set((state) => ({ images: state.images.filter((_, i) => index !== i) })),
   removeHashtag: (index: number) =>

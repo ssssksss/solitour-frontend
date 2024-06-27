@@ -6,6 +6,7 @@ import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
 
 const InformationEditorContainer = () => {
+  const { resetPlaceInfo } = useEditorStore();
   const imagesHook = useDragScroll();
   const hashtagsHook = useDragScroll();
 
@@ -18,6 +19,7 @@ const InformationEditorContainer = () => {
   const [hashtag, setHashtag] = useState<string>("");
 
   const showLocationModal = () => {
+    resetPlaceInfo();
     setLocationModal(true);
   };
 

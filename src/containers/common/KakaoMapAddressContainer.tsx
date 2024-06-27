@@ -1,5 +1,6 @@
 "use client";
 
+import useEditorStore from "@/store/editorStore";
 import {
   displayCenterInfo,
   searchAddrFromCoords,
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 
 const KakaoMapAddressContainer = () => {
   const [loading, isLoading] = useState<boolean>(true);
+  const { changeField } = useEditorStore();
 
   useEffect(() => {
     if (window.kakao) {
@@ -21,8 +23,8 @@ const KakaoMapAddressContainer = () => {
           // 지도 좌표값을 설정합니다.
           center: new window.kakao.maps.LatLng(37.566826, 126.9786567),
 
-          // 줌 레벨을 1로 설정합니다.
-          level: 1,
+          // 줌 레벨을 10으로 설정합니다.
+          level: 10,
         };
 
         // 지도를 생성합니다.
@@ -46,14 +48,21 @@ const KakaoMapAddressContainer = () => {
             geocoder,
             mouseEvent.latLng,
             (result: any, status: any) => {
+              if (!!result[0] === false) {
+                return;
+              }
+
+              const coords = map.getCenter();
               let detailAddr = !!result[0].road_address
                 ? `<div>도로명주소: ${result[0].road_address.address_name}</div>`
                 : "";
 
               detailAddr += `<div>지번 주소: ${result[0].address.address_name}</div>`;
+              detailAddr += `<div>위도: ${coords.getLat()}</div>`;
+              detailAddr += `<div>경도: ${coords.getLng()}</div>`;
 
               const content =
-                '<div class="p-1 text-ellipsis overflow-hidden whitespace-nowrap">' +
+                '<div class="p-1 text-ellipsis overflow-hidden whitespace-nowrap text-xs">' +
                 '<span class="font-bold block">법정동 주소정보</span>' +
                 detailAddr +
                 "</div>";
@@ -65,6 +74,16 @@ const KakaoMapAddressContainer = () => {
               // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다.
               infoWindow.setContent(content);
               infoWindow.open(map, marker);
+
+              changeField(
+                "address",
+                !!result[0].road_address
+                  ? result[0].road_address.address_name
+                  : "",
+              );
+              changeField("placeId", "0");
+              changeField("placeXAxis", coords.getLng());
+              changeField("placeYAxis", coords.getLat());
             },
           );
         });
@@ -75,14 +94,14 @@ const KakaoMapAddressContainer = () => {
         });
       });
     }
-  }, []);
+  }, [changeField]);
 
   return (
     <div
-      className={`${loading ? "animate-pulse" : ""} relative h-48 w-full rounded-2xl border-2 bg-slate-200`}
+      className={`${loading ? "animate-pulse" : ""} relative h-96 w-full border-2 bg-slate-200`}
     >
       <div id="addressMap" className="relative h-full w-full overflow-hidden" />
-      <div className="absolute left-0 top-2 z-10 flex flex-col rounded-sm bg-white/80 p-1">
+      <div className="absolute top-0 z-10 flex flex-col border-2 border-main bg-white p-2">
         <p className="text-sm font-bold">지도중심기준 행정동 주소정보</p>
         <p id="centerAddr" className="mt-1 text-sm font-medium"></p>
       </div>
