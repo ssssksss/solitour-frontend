@@ -26,7 +26,7 @@ const ImageUploadItem = ({
   if (image !== "") {
     return (
       <div
-        className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-2 hover:border-main"
+        className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-[0.0625rem] p-2 hover:border-main"
         onDragStart={(e) => e.preventDefault()}
         onClick={() => setMainImageIndex(index)}
         onTouchEnd={() => setMainImageIndex(index)}
@@ -57,11 +57,11 @@ const ImageUploadItem = ({
 
   return (
     <label
-      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 hover:border-main`}
+      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main`}
       htmlFor="file"
       onClick={onUploadButtonClicked}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-main text-xl text-main">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full border-[0.0625rem] border-main text-xl text-main">
         +
       </div>
       <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1">

@@ -29,7 +29,7 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
   }
 
   return (
-    <div className="relative flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-2 outline-gray3 duration-300 hover:outline-main">
+    <div className="relative flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main">
       <Image
         className="-z-10 rounded-[0.875rem]"
         src={image}
@@ -41,7 +41,7 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
       />
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
         <p
-          className={`w-fit rounded-full border-2 px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
+          className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
         >
           {category}
         </p>

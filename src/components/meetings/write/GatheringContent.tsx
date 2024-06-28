@@ -109,4 +109,4 @@ const GatheringContent = () => {
     </>
   );
 };
-export default GatheringContent
+export default GatheringContent;

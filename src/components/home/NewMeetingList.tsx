@@ -123,7 +123,7 @@ const NewMeetingList = () => {
               </p>
             </h2>
             <Link
-              className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
+              className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
               href="/meetings"
             >
               전체보기
@@ -134,7 +134,7 @@ const NewMeetingList = () => {
           </p>
         </div>
         <Link
-          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
+          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
           href="/meetings"
         >
           전체보기
