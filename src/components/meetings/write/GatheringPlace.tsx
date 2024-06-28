@@ -34,13 +34,8 @@ const GatheringPlace = (props: IGatheringPlaceProps) => {
         </button>
         <div>{formContext.getValues("placeName") && "OK"}</div>
         {typeof window != undefined && (
-          <Modal
-            isOpen={props.isModal}
-            onClose={() => props.closeModal()}
-          >
-            <GatheringPlaceModal
-              closeModal={() => props.closeModal()}
-            />
+          <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
+            <GatheringPlaceModal closeModal={() => props.closeModal()} />
           </Modal>
         )}
       </div>
@@ -69,18 +64,23 @@ const GatheringPlace = (props: IGatheringPlaceProps) => {
                 "flex h-[6rem] w-full flex-col justify-between gap-[1rem] rounded-[1rem] bg-white p-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
             >
-              <div className={"flex items-center text-2xl font-bold"}>
-                {formContext.getValues("placeName")}
-              </div>
-              <div className={"flex items-center gap-[1rem]"}>
-                <Image
-                  src={"/location-icon.svg"}
-                  alt={"location-icon"}
-                  width={14}
-                  height={14}
-                />
-                <span> {formContext.getValues("placeAddress")} </span>
-              </div>
+              {
+                formContext.getValues("placeName") &&
+                <>
+                <div className={"flex items-center text-2xl font-bold"}>
+                  {formContext.getValues("placeName")}
+                </div>
+                <div className={"flex items-center gap-[1rem]"}>
+                  <Image
+                    src={"/location-icon.svg"}
+                    alt={"location-icon"}
+                    width={14}
+                    height={14}
+                    />
+                  <span> {formContext.getValues("placeAddress")} </span>
+                </div>
+              </>
+                  }
             </div>
           </Link>
         )}
