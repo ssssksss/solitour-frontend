@@ -17,7 +17,7 @@ const SubCategoryList = ({ category, subCategory }: MyProps) => {
           key={index}
           className={
             `${subCategory === value.query ? "border-main bg-main text-white" : "text-gray1"} ` +
-            "rounded-full border-2 border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105"
+            "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105"
           }
           href={`/informations/${CATEGORY_TEXT[category]}?subCategory=${value.query}`}
         >

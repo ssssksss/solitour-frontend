@@ -38,10 +38,7 @@ const InformationEditor = ({
   setHashtag,
 }: MyProps) => {
   return (
-    <form
-      className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]"
-      action={onSubmit}
-    >
+    <form className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
@@ -57,7 +54,7 @@ const InformationEditor = ({
           제목<span className="text-2xl text-main">*</span>
         </h2>
         <input
-          className="h-full flex-grow rounded-3xl border-2 border-gray3 pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+          className="h-full flex-grow rounded-3xl border-[0.0625rem] border-gray3 pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
           type="text"
           autoComplete="title"
           name="title"
@@ -73,7 +70,7 @@ const InformationEditor = ({
             장소<span className="text-2xl text-main">*</span>
           </h2>
           <input
-            className="h-full flex-grow rounded-3xl border-2 border-gray3 pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+            className="h-full flex-grow rounded-3xl border-[0.0625rem] border-gray3 pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
             type="text"
             autoComplete="location"
             name="location"
@@ -117,7 +114,7 @@ const InformationEditor = ({
         ))}
       </div>
       <textarea
-        className="h-[17.5rem] resize-none rounded-3xl border-2 border-gray3 p-6 text-sm font-medium outline-none hover:border-main focus:border-main"
+        className="h-[17.5rem] resize-none rounded-3xl border-[0.0625rem] border-gray3 p-6 text-sm font-medium outline-none hover:border-main focus:border-main"
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         autoComplete="content"
         name="content"
@@ -133,7 +130,7 @@ const InformationEditor = ({
         <h2 className="w-44 pt-3 text-lg font-bold text-black">해시태그</h2>
         <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
           <div
-            className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden rounded-3xl border-2 pl-5 hover:border-main"
+            className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden rounded-3xl border-[0.0625rem] pl-5 hover:border-main"
             ref={hashtagsHook.listRef}
             onMouseDown={hashtagsHook.onDragStart}
             onMouseMove={hashtagsHook.onDragMove}
@@ -155,7 +152,7 @@ const InformationEditor = ({
               />
             ))}
             <input
-              className="w-[14rem] border-main py-2 text-sm font-medium outline-none hover:border-b-2"
+              className="w-[14rem] border-main py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
               type="text"
               autoComplete="hashtag"
               name="hashtag"
@@ -165,6 +162,7 @@ const InformationEditor = ({
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
+                  e.persist();
                   editorStore.addHashtag(hashtag);
                   setHashtag("");
                 }
@@ -192,7 +190,7 @@ const InformationEditor = ({
           {editorStore.tips.map((tip, index) => (
             <input
               key={index}
-              className="h-[3.3125rem] rounded-3xl border-2 border-gray3 pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+              className="h-[3.3125rem] rounded-3xl border-[0.0625rem] border-gray3 pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
               type="text"
               autoComplete="tip"
               name="tip"

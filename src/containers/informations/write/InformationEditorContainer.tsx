@@ -3,7 +3,7 @@
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useDragScroll from "@/hooks/useDragScroll";
 import useEditorStore from "@/store/editorStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const InformationEditorContainer = () => {
   const { resetPlaceInfo } = useEditorStore();

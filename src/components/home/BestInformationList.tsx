@@ -53,7 +53,7 @@ const BestInformationList = () => {
               </p>
             </h2>
             <Link
-              className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
+              className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
               href="/informations/restaurant?subCategory=all"
             >
               전체보기
@@ -64,7 +64,7 @@ const BestInformationList = () => {
           </p>
         </div>
         <Link
-          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-2 border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
+          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
           href="/informations/restaurant?subCategory=all"
         >
           전체보기

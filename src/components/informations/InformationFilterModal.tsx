@@ -18,11 +18,11 @@ const InformationFilterModal = ({ closeModal }: MyProps) => {
         </div>
         <div className="flex flex-col gap-4 px-5 pb-2">
           <h3 className="text-lg font-bold text-black">지역별</h3>
-          <div className="flex flex-wrap items-start gap-1 font-medium text-gray1">
+          <div className="flex flex-wrap items-start gap-2 font-medium text-gray1">
             {LOCATION.map((location, index) => (
               <button
                 key={index}
-                className="rounded-full border-2 border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 hover:text-main"
+                className="rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 hover:text-main"
                 type="button"
               >
                 {location}

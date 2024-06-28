@@ -38,7 +38,7 @@ const CategoryModal = ({
                     ? "border-main bg-main font-black text-white"
                     : "text-gray1"
                 } ` +
-                "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
+                "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
               onClick={() => setCategory("맛집")}
@@ -52,7 +52,7 @@ const CategoryModal = ({
                     ? "border-main bg-main font-black text-white"
                     : "text-gray1"
                 } ` +
-                "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
+                "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
               onClick={() => setCategory("숙박")}
@@ -66,7 +66,7 @@ const CategoryModal = ({
                     ? "border-main bg-main font-black text-white"
                     : "text-gray1"
                 } ` +
-                "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
+                "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
               onClick={() => setCategory("액티비티")}
@@ -79,13 +79,13 @@ const CategoryModal = ({
           {subCategories.length !== 0 && (
             <h3 className="text-lg font-medium text-black">소분류 선택</h3>
           )}
-          <div className="flex flex-wrap items-center gap-1">
+          <div className="flex flex-wrap items-center gap-2">
             {subCategories.slice(1).map((value, index) => (
               <button
                 key={index}
                 className={
                   `${subCategory === value.buttonText ? "border-main bg-main text-white" : "text-gray1"} ` +
-                  "rounded-full border-2 border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
+                  "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                 }
                 type="button"
                 onClick={() => setSubCategory(value.buttonText)}

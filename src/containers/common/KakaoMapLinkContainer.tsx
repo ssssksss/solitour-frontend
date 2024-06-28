@@ -69,7 +69,7 @@ const KakaoMapLinkContainer = ({ placeName, placeId }: MyProps) => {
   return (
     <a
       id="map"
-      className={`${loading ? "animate-pulse" : ""} h-48 w-full rounded-2xl border-2 bg-slate-200`}
+      className={`${loading ? "animate-pulse" : ""} h-48 w-full rounded-2xl border-[0.0625rem] bg-slate-200`}
       href={`https://map.kakao.com/link/map/${placeId}`}
       target="_blank"
     />

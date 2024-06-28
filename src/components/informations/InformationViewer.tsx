@@ -219,7 +219,7 @@ const InformationViewer = ({
         />
       </div>
       <a
-        className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-2 border-b-2 px-6 pb-10 pt-12"
+        className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pb-10 pt-12"
         href={`https://map.kakao.com/link/map/${info.placeId}`}
         target="_blank"
       >

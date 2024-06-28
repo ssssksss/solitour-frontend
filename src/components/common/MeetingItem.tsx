@@ -55,7 +55,7 @@ const MeetingItem = ({
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`w-fit rounded-full border-2 px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
+            className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
           >
             {category}
           </p>
@@ -117,6 +117,7 @@ const MeetingItem = ({
             </div>
             <div className="flex flex-row items-center gap-3">
               <Image
+                className="scale-150"
                 src="/people-icon.svg"
                 alt="people-icon"
                 width={10}

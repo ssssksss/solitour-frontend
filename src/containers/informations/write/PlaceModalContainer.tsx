@@ -11,7 +11,7 @@ type MyProps = {
 
 const PlaceModalContainer = ({ closeModal }: MyProps) => {
   const { address, placeName, changeField, resetPlaceInfo } = useEditorStore();
-  const [isCustom, setIsCustom] = useState<boolean>(true);
+  const [isCustom, setIsCustom] = useState<boolean>(false);
 
   // 검색으로 얻어진 장소 목록
   const [placeInfos, setPlaceInfos] = useState<

@@ -1,4 +1,3 @@
-import KakaoMapAddressContainer from "@/containers/common/KakaoMapAddressContainer";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { DebouncedState } from "use-debounce";
@@ -53,7 +52,7 @@ const PlaceModal = ({
         <div className="flex flex-col gap-8 px-5">
           <div className="flex flex-col gap-2">
             <h3 className="text-lg font-medium text-black">장소 선택</h3>
-            <div className="flex h-11 flex-row items-center border-2 text-sm">
+            <div className="flex h-11 flex-row items-center border-[0.0625rem] text-sm">
               <button
                 className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
@@ -106,7 +105,7 @@ const PlaceModal = ({
             <h3 className="text-lg font-medium text-black">
               지도에서 주소 찾기
             </h3>
-            <KakaoMapAddressContainer />
+            {/* <KakaoMapAddressContainer /> */}
             <div className="mt-4 flex flex-row items-center justify-between gap-2">
               <input
                 className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
