@@ -34,10 +34,7 @@ export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
     return createPortal(
       <div className="fixed inset-0 z-10 flex h-full w-full items-center justify-center">
         <div className="absolute h-full w-full bg-black/30"> </div>
-        <div ref={ref} className="h-full pt-[6rem] overflow-scroll" style={{
-          "msOverflowStyle": "none", 
-          "scrollbarWidth": "none",
-        }}>
+        <div ref={ref} className="flex h-full py-[6rem]  justify-center items-center">
           {children}
         </div>
       </div>,
