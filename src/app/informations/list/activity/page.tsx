@@ -9,18 +9,16 @@ type MyProps = {
 };
 
 export const metadata: Metadata = {
-  title: "정보 - 맛집",
+  title: "정보 - 액티비티",
   description: "Solitour의 정보(탭)",
 };
 
 export default function page({ searchParams }: MyProps) {
   return (
     <div className="flex flex-col items-center">
-      <BannerContainer />
-      <TopListContainer category="여행" />
-      <CategoryLinks category="맛집" />
+      <CategoryLinks category="액티비티" />
       <InformationListContainer
-        category="맛집"
+        category="액티비티"
         subCategory={searchParams["subCategory"]!}
       />
     </div>

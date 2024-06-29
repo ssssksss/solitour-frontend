@@ -20,7 +20,7 @@ const CategoryLinks = ({ category }: MyProps) => {
                 " " +
                 "hover:main"
               }
-              href="/informations/restaurant?subCategory=all"
+              href="/informations/list/restaurant?subCategory=all"
             >
               맛집
             </Link>
@@ -36,7 +36,7 @@ const CategoryLinks = ({ category }: MyProps) => {
                 " " +
                 "hover:text-main"
               }
-              href="/informations/accommondation?subCategory=all"
+              href="/informations/list/accommondation?subCategory=all"
             >
               숙박
             </Link>
@@ -52,7 +52,7 @@ const CategoryLinks = ({ category }: MyProps) => {
                 " " +
                 "hover:text-main"
               }
-              href="/informations/activity?subCategory=all"
+              href="/informations/list/activity?subCategory=all"
             >
               액티비티
             </Link>

@@ -13,7 +13,7 @@ type MyProps = {
 
 const HeaderSidebar = ({ onClose }: MyProps) => {
   return (
-    <aside className="animate-sidebarFadeIn fixed left-0 top-0 z-50 flex h-full w-[200%]">
+    <aside className="fixed left-0 top-0 z-50 flex h-full w-[200%] animate-sidebarFadeIn">
       <div className="bg-black/25">
         <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4">
           <div className="flex h-10 w-full items-center justify-between">
@@ -67,7 +67,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
             <li className="border-b-2 px-1 py-4">
               <Link
                 className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100"
-                href="/informations/restaurant?subCategory=all"
+                href="/informations/list/restaurant?subCategory=all"
                 onClick={onClose}
               >
                 <IoMdInformationCircleOutline />
@@ -76,7 +76,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/restaurant?subCategory=all"
+                  href="/informations/list/restaurant?subCategory=all"
                   onClick={onClose}
                 >
                   <IoRestaurant />
@@ -84,7 +84,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/accommondation?subCategory=all"
+                  href="/informations/list/accommondation?subCategory=all"
                   onClick={onClose}
                 >
                   <FaHotel />
@@ -92,7 +92,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/activity?tag=all"
+                  href="/informations/list/activity?tag=all"
                   onClick={onClose}
                 >
                   <FiActivity />

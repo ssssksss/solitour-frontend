@@ -73,7 +73,7 @@ const Header = ({
                           : "font-medium text-gray1"
                       } ` + "text-sm hover:text-main"
                     }
-                    href="/informations/restaurant?subCategory=all"
+                    href="/informations/list/restaurant?subCategory=all"
                   >
                     정보
                   </Link>
