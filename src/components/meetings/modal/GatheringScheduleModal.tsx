@@ -142,7 +142,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
             >
               {Array.from([...Array(24).fill(0)], (i, index) => index).map(
                 (i) => (
-                  <option value={i} selected={i == 0}>
+                  <option value={i} selected={i == 0} key={i}>
                     {i}
                   </option>
                 ),
@@ -163,7 +163,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
             >
               {Array.from([...Array(6).fill(0)], (i, index) => index * 10).map(
                 (i) => (
-                  <option value={i} selected={i == 0}>
+                  <option value={i} selected={i == 0} key={i}>
                     {i}
                   </option>
                 ),
@@ -194,7 +194,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
             >
               {Array.from([...Array(24).fill(0)], (i, index) => index).map(
                 (i) => (
-                  <option value={23 - i} selected={i == 0}>
+                  <option value={23 - i} selected={i == 0} key={i}>
                     {23 - i}
                   </option>
                 ),
@@ -215,7 +215,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
             >
               {Array.from([...Array(6).fill(0)], (i, index) => index * 10).map(
                 (i) => (
-                  <option value={i} selected={i == 0}>
+                  <option value={i} selected={i == 0} key={i}>
                     {i}
                   </option>
                 ),
