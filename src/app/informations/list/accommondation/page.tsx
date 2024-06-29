@@ -16,8 +16,6 @@ export const metadata: Metadata = {
 export default function page({ searchParams }: MyProps) {
   return (
     <div className="flex flex-col items-center">
-      <BannerContainer />
-      <TopListContainer category="여행" />
       <CategoryLinks category="숙박" />
       <InformationListContainer
         category="숙박"
