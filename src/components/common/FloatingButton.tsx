@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdAdd, MdClose } from "react-icons/md";
@@ -42,7 +43,13 @@ const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
           className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
           onClick={onClick}
         >
-          <MdAdd size={"1.5rem"} />
+          <Image
+            className="-ml-1"
+            src="/pencil-icon.png"
+            alt="pencil-icon"
+            width={24}
+            height={24}
+          />
         </button>
       )}
       <button

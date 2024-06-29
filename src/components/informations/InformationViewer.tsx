@@ -64,7 +64,7 @@ const InformationViewer = ({
   };
 
   return (
-    <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
+    <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <PagePath category={`${category} 상세`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
@@ -115,7 +115,7 @@ const InformationViewer = ({
             />
           </div>
           <div
-            className="flex flex-row items-center space-x-[0.875rem] overflow-x-auto pt-[0.875rem]"
+            className="flex flex-row items-center gap-[0.875rem] overflow-x-auto pt-[0.875rem]"
             ref={listRef}
             onMouseDown={(e) => {
               e.preventDefault();

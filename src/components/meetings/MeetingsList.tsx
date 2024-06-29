@@ -15,7 +15,6 @@ interface IMeetingsList {
   openModal: () => void;
 }
 
-
 const MeetingsList = (props: IMeetingsList) => {
   const data: {
     id: number;
@@ -26,7 +25,6 @@ const MeetingsList = (props: IMeetingsList) => {
     date: Date;
     location: string;
     time: string;
-    image: string;
     current: number;
     total: number;
     qualification: string;
@@ -41,7 +39,6 @@ const MeetingsList = (props: IMeetingsList) => {
     date: new Date(),
     location: "강원, 동해시",
     time: "08:00",
-    image: "/dataImage2.svg",
     current: 1,
     total: 6,
     qualification: "(30대, 성별 상관없음)",
@@ -100,7 +97,6 @@ const MeetingsList = (props: IMeetingsList) => {
             date={data.date}
             location={data.location}
             time={data.time}
-            image={data.image}
             current={data.current}
             total={data.total}
             qualification={data.qualification}

@@ -1,7 +1,7 @@
-import BestInformationList from "@/components/home/BestInformationList";
-import NewMeetingList from "@/components/home/NewMeetingList";
 import TabList from "@/components/home/TabList";
+import BestInformationListContainer from "@/containers/home/BestInformationListContainer";
 import HomeCarouselContainer from "@/containers/home/HomeCarouselContainer";
+import NewMeetingListContainer from "@/containers/home/NewMeetingListContainer";
 
 // todo
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
     <div className="flex flex-col items-center">
       <HomeCarouselContainer />
       <TabList />
-      <BestInformationList />
-      <NewMeetingList />
+      <BestInformationListContainer />
+      <NewMeetingListContainer />
     </div>
   );
 }

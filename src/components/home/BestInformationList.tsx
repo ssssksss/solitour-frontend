@@ -1,8 +1,12 @@
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useDragScrollType } from "@/hooks/useDragScroll";
 import InformationItem from "../common/InformationItem";
 import Link from "next/link";
 
-const BestInformationList = () => {
+type MyProps = {
+  scrollHook: useDragScrollType;
+};
+
+const BestInformationList = ({ scrollHook }: MyProps) => {
   // TODO
   const data: {
     category: string;
@@ -42,10 +46,10 @@ const BestInformationList = () => {
   ];
 
   return (
-    <div className="mt-20 w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-row items-center justify-between gap-1 max-[744px]:w-[21.5625rem]">
+    <div className="mt-20 flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+      <div className="flex flex-row items-center justify-between max-[744px]:justify-center">
+        <div className="flex flex-col gap-2 max-[744px]:w-full">
+          <div className="flex flex-row items-center justify-between gap-1">
             <h2 className="flex flex-row items-center gap-2 text-2xl font-bold text-black max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-0">
               <p>{"고민을 덜어줄,"}</p>
               <p>
@@ -70,16 +74,31 @@ const BestInformationList = () => {
           전체보기
         </Link>
       </div>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-        {data.map((post, index) => (
-          <InformationItem
-            key={index}
-            id={index + 1}
-            category={post.category}
-            title={post.title}
-            image={post.image}
-          />
-        ))}
+      <div
+        className="overflow-x-auto"
+        ref={scrollHook.listRef}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          scrollHook.onDragStart(e);
+        }}
+        onMouseMove={scrollHook.onDragMove}
+        onMouseUp={scrollHook.onDragEnd}
+        onMouseLeave={scrollHook.onDragEnd}
+        onTouchStart={scrollHook.onTouchStart}
+        onTouchMove={scrollHook.onTouchMove}
+        onTouchEnd={scrollHook.onTouchEnd}
+      >
+        <div className="mt-6 flex w-fit flex-wrap items-center justify-center gap-4 p-1 max-[744px]:flex-row max-[744px]:flex-nowrap">
+          {data.map((post, index) => (
+            <InformationItem
+              key={index}
+              id={index + 1}
+              category={post.category}
+              title={post.title}
+              image={post.image}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
