@@ -15,13 +15,13 @@ type MyProps = {
 const InformationItem = ({ id, category, title, image }: MyProps) => {
   let style = "";
   switch (category) {
-    case "맛집":
+    case "restaurant":
       style = "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]";
       break;
-    case "숙박":
+    case "accommodation":
       style = "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]";
       break;
-    case "액티비티":
+    case "activity":
       style = "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]";
       break;
     default:
@@ -43,7 +43,7 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
         <p
           className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
         >
-          {category}
+          {CATEGORY_TEXT[category]}
         </p>
         <div className="cursor-pointer text-white hover:scale-110">
           <CiBookmark size={"2rem"} />
@@ -52,7 +52,7 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
       <div className="flex h-28 flex-col justify-between bg-white px-5 py-4">
         <Link
           className="p-1 font-bold hover:text-main"
-          href={`/informations/${CATEGORY_TEXT[category]}/${id}`}
+          href={`/informations/${category}/${id}`}
         >
           {title}
         </Link>

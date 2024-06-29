@@ -7,6 +7,7 @@ import { useEditorStoreType } from "@/store/editorStore";
 import ItemTag from "../ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
+import { CATEGORY_TEXT } from "@/constants/informations/category";
 
 type MyProps = {
   editorStore: useEditorStoreType;
@@ -89,7 +90,7 @@ const InformationEditor = ({
             type="button"
           >
             {editorStore.category !== "" && editorStore.subCategory !== ""
-              ? `${editorStore.category} - ${editorStore.subCategory}`
+              ? `${CATEGORY_TEXT[editorStore.category]} - ${editorStore.subCategory}`
               : "카테고리 선택"}
             <span className="text-2xl text-main">*</span>
             <IoIosArrowDown />

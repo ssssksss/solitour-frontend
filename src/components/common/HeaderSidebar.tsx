@@ -84,7 +84,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/list/accommondation?subCategory=all"
+                  href="/informations/list/accommodation?subCategory=all"
                   onClick={onClose}
                 >
                   <FaHotel />
@@ -92,7 +92,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
-                  href="/informations/list/activity?tag=all"
+                  href="/informations/list/activity?subCategory=all"
                   onClick={onClose}
                 >
                   <FiActivity />

@@ -4,13 +4,13 @@ type SUBCATEGORY_TYPE = {
 
 export const SUBCATEGORY: SUBCATEGORY_TYPE = {
   "": [],
-  맛집: [
+  restaurant: [
     { query: "all", buttonText: "전체" },
     { query: "cafe", buttonText: "혼카페" },
     { query: "meal", buttonText: "혼밥" },
     { query: "bar", buttonText: "혼술" },
   ],
-  숙박: [
+  accommodation: [
     { query: "all", buttonText: "전체" },
     { query: "hotel_pension", buttonText: "호텔/펜션" },
     { query: "guestHouse", buttonText: "게하" },
@@ -18,7 +18,7 @@ export const SUBCATEGORY: SUBCATEGORY_TYPE = {
     { query: "home_villa", buttonText: "홈/빌라" },
     { query: "hanok", buttonText: "한옥" },
   ],
-  액티비티: [
+  activity: [
     { query: "all", buttonText: "전체" },
     { query: "waterLeisure", buttonText: "수상레저" },
     { query: "sights", buttonText: "관광지" },

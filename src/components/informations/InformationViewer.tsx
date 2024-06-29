@@ -5,6 +5,7 @@ import { MouseEvent, RefObject, TouchEvent } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
+import { CATEGORY_TEXT } from "@/constants/informations/category";
 
 type MyProps = {
   category: string;
@@ -65,7 +66,7 @@ const InformationViewer = ({
 
   return (
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
-      <PagePath category={`${category} 상세`} />
+      <PagePath category={`${CATEGORY_TEXT[category]} 상세`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
           <h1 className="text-2xl font-bold">{info.title}</h1>

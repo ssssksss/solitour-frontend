@@ -13,7 +13,7 @@ const CategoryLinks = ({ category }: MyProps) => {
             <Link
               className={
                 `${
-                  category === "맛집"
+                  category === "restaurant"
                     ? "border-b-2 border-main pb-[0.375rem] font-bold text-main"
                     : "text-gray1"
                 }` +
@@ -29,14 +29,14 @@ const CategoryLinks = ({ category }: MyProps) => {
             <Link
               className={
                 `${
-                  category === "숙박"
+                  category === "accommodation"
                     ? "border-b-2 border-main pb-[0.375rem] font-bold text-main"
                     : "text-gray1"
                 }` +
                 " " +
                 "hover:text-main"
               }
-              href="/informations/list/accommondation?subCategory=all"
+              href="/informations/list/accommodation?subCategory=all"
             >
               숙박
             </Link>
@@ -45,7 +45,7 @@ const CategoryLinks = ({ category }: MyProps) => {
             <Link
               className={
                 `${
-                  category === "액티비티"
+                  category === "activity"
                     ? "border-b-2 border-main pb-[0.375rem] font-bold text-main"
                     : "text-gray1"
                 }` +

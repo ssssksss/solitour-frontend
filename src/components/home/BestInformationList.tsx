@@ -7,6 +7,8 @@ type MyProps = {
 };
 
 const BestInformationList = ({ scrollHook }: MyProps) => {
+  //await new Promise((resolve) => setTimeout(resolve, 1000));
+
   // TODO
   const data: {
     category: string;
@@ -14,32 +16,32 @@ const BestInformationList = ({ scrollHook }: MyProps) => {
     image: string;
   }[] = [
     {
-      category: "맛집",
+      category: "restaurant",
       title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
       image: "/PostImage.svg",
     },
     {
-      category: "숙박",
+      category: "accommodation",
       title: "다양한 프로그램이 있는 제주 월정리 게하",
       image: "/PostImage2.svg",
     },
     {
-      category: "액티비티",
+      category: "activity",
       title: "혼자 놀기 초보도 가능한 국립현대미술관",
       image: "/PostImage3.svg",
     },
     {
-      category: "맛집",
+      category: "restaurant",
       title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
       image: "/PostImage.svg",
     },
     {
-      category: "숙박",
+      category: "accommodation",
       title: "다양한 프로그램이 있는 제주 월정리 게하",
       image: "/PostImage2.svg",
     },
     {
-      category: "액티비티",
+      category: "activity",
       title: "혼자 놀기 초보도 가능한 국립현대미술관",
       image: "/PostImage3.svg",
     },
@@ -58,7 +60,7 @@ const BestInformationList = ({ scrollHook }: MyProps) => {
             </h2>
             <Link
               className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
-              href="/informations/restaurant?subCategory=all"
+              href="/informations/list/restaurant?subCategory=all"
             >
               전체보기
             </Link>
@@ -69,7 +71,7 @@ const BestInformationList = ({ scrollHook }: MyProps) => {
         </div>
         <Link
           className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
-          href="/informations/restaurant?subCategory=all"
+          href="/informations/list/restaurant?subCategory=all"
         >
           전체보기
         </Link>
