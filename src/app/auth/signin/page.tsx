@@ -20,15 +20,15 @@ export default function page() {
     >
       <div className={"flex max-w-[17.5rem] flex-col pb-[8.125rem] pt-[6rem]"}>
         <h1 className={"pb-[1rem] text-3xl font-bold"}> 로그인 </h1>
-        <p className={"text-md pb-[3rem] text-[#666]"}>
+        <p className={"text-md text-[#666]"}>
           SNS로 솔리투어에 로그인하고 더 많은 서비스를 즐겨보세요!
         </p>
-        <div className={"relative h-[245px] w-[275px] py-[.75rem] "}>
+        <div className={"relative h-[245px] w-[275px] py-[.75rem]"}>
           <LottieComponent
             lottieFile={introLottie}
             className="h-full w-[275px]"
           />
-          <div className="absolute top-[6.25rem] left-[4.5rem]">
+          <div className="absolute left-[4.5rem] top-[6.25rem]">
             <Image
               src={"/solitour-intro-image.svg"}
               alt={"kakao-logo-image"}
@@ -37,10 +37,11 @@ export default function page() {
             />
           </div>
         </div>
-        <button
+        <Link
           className={
-            "relative mb-[0.75rem] h-[2.875rem] w-full rounded-xl bg-[#FEE500]"
+            "relative mb-[0.75rem] flex h-[2.875rem] w-full items-center justify-center rounded-xl bg-[#FEE500]"
           }
+          href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&prompt=login`}
         >
           <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
             <Image
@@ -50,11 +51,12 @@ export default function page() {
             />
           </div>
           카카오로 로그인
-        </button>
-        <button
+        </Link>
+        <Link
           className={
-            "relative mb-[3rem] h-[2.875rem] w-full rounded-xl outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
+            "relative mb-[3rem] h-[2.875rem] w-full rounded-xl outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9] items-center justify-center flex"
           }
+          href={`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL}&scope=email profile&prompt=select_account`}
         >
           <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
             <Image
@@ -64,7 +66,7 @@ export default function page() {
             />
           </div>
           구글로 로그인
-        </button>
+        </Link>
         <div className={"relative flex w-full justify-center"}>
           <div className={"absolute top-[-.5rem] flex flex-col items-center"}>
             <div
