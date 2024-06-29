@@ -38,7 +38,7 @@ const InformationEditor = ({
   setHashtag,
 }: MyProps) => {
   return (
-    <form className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
+    <form className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />

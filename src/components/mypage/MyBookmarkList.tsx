@@ -1,6 +1,5 @@
-
-import InformationItem from '../common/InformationItem';
-import MeetingItem from '../common/MeetingItem';
+import InformationItem from "../common/InformationItem";
+import MeetingItem from "../common/MeetingItem";
 type MyBookmarkListProps = {
   data: (
     | {
@@ -30,7 +29,7 @@ type MyBookmarkListProps = {
 
 const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
   return (
-    <div className="gap-x-[1.25rem] gap-y-[0.875rem] pb-[5rem] pt-[2.5rem] grid grid-cols-1 min-[708px]:grid-cols-2 min-[1024px]:grid-cols-3 min-[708px]:max-w-[628px] min-[1024px]:max-w-[60.5rem] w-full m-auto place-items-center">
+    <div className="m-auto grid w-full grid-cols-1 place-items-center gap-x-[1.25rem] gap-y-[0.875rem] pb-[5rem] pt-[2.5rem] min-[708px]:max-w-[628px] min-[708px]:grid-cols-2 min-[1024px]:max-w-[60.5rem] min-[1024px]:grid-cols-3">
       {data.map((post, index) => {
         if (!("qualification" in post)) {
           return (
@@ -54,7 +53,6 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
               date={post.date}
               location={post.location}
               time={post.time}
-              image={post.image}
               current={post.current}
               total={post.total}
               qualification={post.qualification}

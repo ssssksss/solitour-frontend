@@ -11,7 +11,6 @@ const RecommendationList = () => {
     date: Date;
     location: string;
     time: string;
-    image: string;
     current: number;
     total: number;
     qualification: string;
@@ -26,7 +25,6 @@ const RecommendationList = () => {
     date: new Date(),
     location: "강원, 동해시",
     time: "08:00",
-    image: "/dataImage2.svg",
     current: 1,
     total: 6,
     qualification: "(30대, 성별 상관없음)",
@@ -37,7 +35,7 @@ const RecommendationList = () => {
     <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
       <h2 className="text-2xl font-bold text-black">추천 여행 정보</h2>
       <div className="flex flex-wrap items-center justify-around">
-        {[1, 2, 3,4,5,6].map((_, index) => (
+        {[1, 2, 3, 4, 5, 6].map((_, index) => (
           <MeetingItem
             key={index}
             id={index + 1}
@@ -48,7 +46,6 @@ const RecommendationList = () => {
             date={data.date}
             location={data.location}
             time={data.time}
-            image={data.image}
             current={data.current}
             total={data.total}
             qualification={data.qualification}

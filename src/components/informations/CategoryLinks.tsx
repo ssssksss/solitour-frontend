@@ -6,7 +6,7 @@ type MyProps = {
 
 const CategoryLinks = ({ category }: MyProps) => {
   return (
-    <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] pb-[0.375rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
+    <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] pb-[0.375rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <nav className="w-fit">
         <ul className="flex flex-row items-center gap-9">
           <li>

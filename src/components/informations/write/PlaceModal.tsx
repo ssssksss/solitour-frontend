@@ -41,7 +41,7 @@ const PlaceModal = ({
 }: MyProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[39.75rem] flex-col rounded-xl bg-white p-6 max-[744px]:w-[90%]">
+      <div className="flex h-fit w-[39.75rem] flex-col rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)]">
         <div className="flex flex-row items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"

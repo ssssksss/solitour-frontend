@@ -13,7 +13,6 @@ type MyProps = {
   date: Date;
   location: string;
   time: string;
-  image: string;
   current: number;
   total: number;
   qualification: string;
@@ -31,7 +30,6 @@ const MeetingItem = ({
   date,
   location,
   time,
-  image,
   current,
   total,
   qualification,
@@ -72,16 +70,16 @@ const MeetingItem = ({
           )}
         </div>
         <Link
-          className="pb-3 pt-6 font-bold hover:text-main"
+          className="pb-1 pt-6 text-lg font-bold hover:text-main"
           href={`/meetings/1`}
         >
           {title}
         </Link>
         <p className="text-sm font-medium text-gray1">{username}</p>
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-5">
         <div className="flex flex-row items-center justify-between">
-          <div className="space-y-[0.375rem] text-xs font-medium">
+          <div className="space-y-[0.375rem] text-sm font-medium">
             <div className="flex flex-row items-center gap-3">
               <Image
                 src="/calendar-icon.svg"
@@ -131,12 +129,17 @@ const MeetingItem = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-end">
+        <div className="flex flex-row items-center justify-between">
+          <div className="-ml-1 flex flex-row items-center gap-1">
+            <Image src="/pin-icon.png" alt="pin-icon" width={16} height={16} />
+            <p className="text-sm">모집마감일: 06.07(금)</p>
+          </div>
+
           <div className="flex flex-row justify-between">
-            <div className="flex flex-row items-center space-x-3">
+            <div className="flex flex-row items-center gap-3">
               <div className="flex flex-row items-center gap-1 text-gray2">
                 <FaRegHeart size={"0.8rem"} />
-                <p className="text-xs">{likes}</p>
+                <p className="text-sm">{likes}</p>
               </div>
               <div className="flex flex-row items-center gap-1 text-gray2">
                 <Image
@@ -145,7 +148,7 @@ const MeetingItem = ({
                   width={15}
                   height={15}
                 />
-                <p className="text-xs">{views}</p>
+                <p className="text-sm">{views}</p>
               </div>
             </div>
           </div>

@@ -89,7 +89,7 @@ const InformationList = ({
   ];
 
   return (
-    <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[21.5625rem]">
+    <div className="mt-6 flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       {isModal && <InformationFilterModal closeModal={closeModal} />}
       <div className="flex flex-row items-center justify-between max-[1024px]:flex-col-reverse max-[1024px]:items-start max-[1024px]:space-y-6 max-[1024px]:space-y-reverse">
         <SubCategoryList category={category} subCategory={subCategory} />
