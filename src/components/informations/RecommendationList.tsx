@@ -1,6 +1,8 @@
 import InformationItem from "../common/InformationItem";
 
-const RecommendationList = () => {
+const RecommendationList = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   // TODO
   const data: {
     category: string;
@@ -8,27 +10,27 @@ const RecommendationList = () => {
     image: string;
   }[] = [
     {
-      category: "맛집",
+      category: "restaurant",
       title: "빈티지 분위기의 카페 합정 앤트러사이트",
       image: "/PostImage.svg",
     },
     {
-      category: "맛집",
+      category: "restaurant",
       title: "취향대로 골라 마시는 핸드드립커피 보사노바 잠실점",
       image: "/PostImage2.svg",
     },
     {
-      category: "맛집",
+      category: "restaurant",
       title: "초록 창밖 뷰에 분위기까지 갖춘 연희동 혹스턴",
       image: "/PostImage3.svg",
     },
     {
-      category: "맛집",
+      category: "restaurant",
       title: "빈티지 분위기의 카페 합정 앤트러사이트",
       image: "/PostImage.svg",
     },
     {
-      category: "맛집",
+      category: "restaurant",
       title: "취향대로 골라 마시는 핸드드립커피 보사노바 잠실점",
       image: "/PostImage2.svg",
     },

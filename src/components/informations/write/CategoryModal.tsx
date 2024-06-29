@@ -34,42 +34,42 @@ const CategoryModal = ({
             <button
               className={
                 `${
-                  category === "맛집"
+                  category === "restaurant"
                     ? "border-main bg-main font-black text-white"
                     : "text-gray1"
                 } ` +
                 "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
-              onClick={() => setCategory("맛집")}
+              onClick={() => setCategory("restaurant")}
             >
               맛집
             </button>
             <button
               className={
                 `${
-                  category === "숙박"
+                  category === "accommodation"
                     ? "border-main bg-main font-black text-white"
                     : "text-gray1"
                 } ` +
                 "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
-              onClick={() => setCategory("숙박")}
+              onClick={() => setCategory("accommodation")}
             >
               숙박
             </button>
             <button
               className={
                 `${
-                  category === "액티비티"
+                  category === "activity"
                     ? "border-main bg-main font-black text-white"
                     : "text-gray1"
                 } ` +
                 "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
               }
               type="button"
-              onClick={() => setCategory("액티비티")}
+              onClick={() => setCategory("activity")}
             >
               액티비티
             </button>

@@ -21,7 +21,9 @@ const titleList: { [key: string]: string[] } = {
   ],
 };
 
-const TopList = ({ title }: MyProps) => {
+const TopList = async ({ title }: MyProps) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   return (
     <div className="z-10 -mt-28 flex h-fit w-[60rem] flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow shadow-[#CCECE2] max-[1024px]:w-[39.75rem] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24 max-[744px]:w-[calc(100%_-_48px)]">
       <h2 className="mb-9 border-b-2 border-gray3 pb-3 text-2xl font-semibold text-black">
