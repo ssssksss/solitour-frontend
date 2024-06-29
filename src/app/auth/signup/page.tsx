@@ -40,7 +40,7 @@ export default function page() {
           className={
             "relative mb-[0.75rem] flex h-[2.875rem] w-full items-center justify-center rounded-xl bg-[#FEE500]"
           }
-          href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&prompt=login`}
+          href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_REST_API_KEY}&redirect_uri=${process.env.KAKAO_REDIRECT_URL}&prompt=login`}
         >
           <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
             <Image
@@ -55,7 +55,7 @@ export default function page() {
           className={
             "relative mb-[3rem] flex h-[2.875rem] w-full items-center justify-center rounded-xl outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
           }
-          href={`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL}&scope=email profile&prompt=select_account`}
+          href={`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${process.env.GOOGLE_REDIRECT_URL}&scope=email profile&prompt=select_account`}
         >
           <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
             <Image
