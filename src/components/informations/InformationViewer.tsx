@@ -1,41 +1,14 @@
 import ItemTag from "./ItemTag";
 import Image from "next/image";
-import PagePath from "./PagePath";
-import { MouseEvent, RefObject, TouchEvent } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
-import { CATEGORY_TEXT } from "@/constants/informations/category";
-
-type MyProps = {
-  category: string;
-  id: number;
-  mainImageIndex: number;
-  listRef: RefObject<HTMLDivElement>;
-  onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
-  onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
-  onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
-  onTouchStart: (e: TouchEvent<HTMLDivElement>) => void;
-  onTouchMove: (e: TouchEvent<HTMLDivElement>) => void;
-  onTouchEnd: (e: TouchEvent<HTMLDivElement>) => void;
-  setMainImageIndex: (index: number) => void;
-};
+import ImageViewerContainer from "@/containers/informations/ImageViewerContainer";
 
 // TODO
-const InformationViewer = ({
-  category,
-  id,
-  mainImageIndex,
-  listRef,
-  onDragStart,
-  onDragMove,
-  onDragEnd,
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
-  setMainImageIndex,
-}: MyProps) => {
-  //const info = await fetch("")
+const InformationViewer = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const info = {
     title: "책과 공간이 매력적인 선릉역 테라로사",
     username: "하몽",
@@ -66,7 +39,6 @@ const InformationViewer = ({
 
   return (
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
-      <PagePath category={`${CATEGORY_TEXT[category]} 상세`} />
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
           <h1 className="text-2xl font-bold">{info.title}</h1>
@@ -104,48 +76,7 @@ const InformationViewer = ({
           </div>
         </div>
         <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
-          <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
-            <Image
-              className="rounded-2xl"
-              src={info.images[mainImageIndex]}
-              alt={"/background"}
-              fill={true}
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          </div>
-          <div
-            className="flex flex-row items-center gap-[0.875rem] overflow-x-auto pt-[0.875rem]"
-            ref={listRef}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              onDragStart(e);
-            }}
-            onMouseMove={onDragMove}
-            onMouseUp={onDragEnd}
-            onMouseLeave={onDragEnd}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          >
-            {info.images.map((image, index) => (
-              <Image
-                key={index}
-                className="cursor-pointer rounded-lg"
-                src={image}
-                alt={"/background"}
-                width={107}
-                height={107}
-                onClick={(e) => {
-                  setMainImageIndex(index);
-                }}
-                onTouchEnd={(e) => {
-                  setMainImageIndex(index);
-                }}
-              />
-            ))}
-          </div>
+          <ImageViewerContainer images={info.images} />
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <div className="max-[1024px]:hidden">

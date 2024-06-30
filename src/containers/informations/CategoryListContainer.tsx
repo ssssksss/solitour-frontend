@@ -1,6 +1,6 @@
 "use client";
 
-import InformationList from "@/components/informations/InformationList";
+import CategoryList from "@/components/informations/CategoryList";
 import { useState } from "react";
 
 type MyProps = {
@@ -8,11 +8,11 @@ type MyProps = {
   subCategory: string;
 };
 
-const InformationListContainer = ({ category, subCategory }: MyProps) => {
+const CategoryListContainer = ({ category, subCategory }: MyProps) => {
   const [isModal, setIsModal] = useState<boolean>(false);
 
   return (
-    <InformationList
+    <CategoryList
       category={category}
       subCategory={subCategory}
       isModal={isModal}
@@ -22,4 +22,4 @@ const InformationListContainer = ({ category, subCategory }: MyProps) => {
   );
 };
 
-export default InformationListContainer;
+export default CategoryListContainer;
