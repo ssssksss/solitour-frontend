@@ -1,5 +1,5 @@
 import Banner from "@/components/common/Banner";
-import TopListContainer from "@/containers/informations/TopListContainer";
+import TopList from "@/components/common/TopList";
 import MeetingsListContainer from "@/containers/meetings/MeetingsListContainer";
 import { Metadata } from "next";
 
@@ -21,7 +21,7 @@ export default function page({ searchParams }: MyProps) {
         category={"모임"}
       />
       {/* TODO : 나중에 API 연결하게 되면 그때 가서 공통컴포넌트 수정하기 */}
-      <TopListContainer category="모임" />
+      <TopList title="모임" />
       <MeetingsListContainer />
     </div>
   );
