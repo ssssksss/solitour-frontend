@@ -41,25 +41,29 @@ const InformationViewer = async () => {
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
-          <h1 className="text-2xl font-bold">{info.title}</h1>
+          <h1 className="text-2xl font-bold dark:text-slate-200">
+            {info.title}
+          </h1>
           <div className="flex flex-row items-end justify-between py-4">
             <div className="flex flex-row items-center gap-2">
               <Image
-                className="rounded-full shadow"
+                className="rounded-full shadow dark:bg-slate-200"
                 src="/user_sex_woman_default_image.svg"
                 alt="user_sex_woman_default_image"
                 width={48}
                 height={48}
               />
               <div className="space-y-1">
-                <p className="text-xs font-medium text-black">
+                <p className="text-xs font-medium text-black dark:text-slate-400">
                   {info.username}
                 </p>
-                <p className="text-xs text-gray1">{info.date}</p>
+                <p className="text-xs text-gray1 dark:text-slate-400">
+                  {info.date}
+                </p>
               </div>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <div className="flex flex-row items-center gap-1 text-gray2">
+              <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <FaRegHeart size={"0.8rem"} />
                 <p className="text-xs">666M</p>
               </div>
@@ -80,29 +84,33 @@ const InformationViewer = async () => {
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <div className="max-[1024px]:hidden">
-            <h1 className="text-2xl font-bold">{info.title}</h1>
+            <h1 className="text-2xl font-bold dark:text-slate-200">
+              {info.title}
+            </h1>
             <div className="flex flex-row items-end justify-between py-4">
               <div className="flex flex-row items-center gap-2">
                 <Image
-                  className="rounded-full shadow"
+                  className="rounded-full shadow dark:bg-slate-200"
                   src="/user_sex_woman_default_image.svg"
                   alt="user_sex_woman_default_image"
                   width={48}
                   height={48}
                 />
                 <div className="space-y-1">
-                  <p className="text-xs font-medium text-black">
+                  <p className="text-xs font-medium text-black dark:text-slate-400">
                     {info.username}
                   </p>
-                  <p className="text-xs text-gray1">{info.date}</p>
+                  <p className="text-xs text-gray1 dark:text-slate-400">
+                    {info.date}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <div className="flex flex-row items-center gap-1 text-gray2">
+                <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                   <FaRegHeart size={"0.8rem"} />
                   <p className="text-xs">666M</p>
                 </div>
-                <div className="flex flex-row items-center gap-1 text-gray2">
+                <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                   <Image
                     src="/eyes-icon.svg"
                     alt="eyes-icon"
@@ -116,9 +124,13 @@ const InformationViewer = async () => {
           </div>
           <div className="flex flex-row items-center gap-1 py-3">
             <TiLocation className="text-main" size={"1.1rem"} />
-            <p className="text-xs font-medium text-gray1">{info.address}</p>
+            <p className="text-xs font-medium text-gray1 dark:text-slate-400">
+              {info.address}
+            </p>
           </div>
-          <p className="py-4 font-medium text-gray1">{info.body}</p>
+          <p className="py-4 font-medium text-gray1 dark:text-slate-400">
+            {info.body}
+          </p>
           <div className="flex flex-row items-center gap-1 pb-8">
             {info.tags.map((tag, index) => (
               <ItemTag
@@ -130,13 +142,13 @@ const InformationViewer = async () => {
             ))}
           </div>
           <div className="flex flex-col gap-3 border-y-2 border-gray3 px-6 py-4">
-            <div className="text-bold text-lg font-bold">
+            <div className="text-bold text-lg font-bold dark:text-slate-200">
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
             {info.tips.map((tip, index) => (
               <li
                 key={index}
-                className="ml-6 align-baseline font-medium text-gray1 marker:text-main"
+                className="ml-6 align-baseline font-medium text-gray1 marker:text-main dark:text-slate-400"
               >
                 {tip}
               </li>
@@ -155,24 +167,20 @@ const InformationViewer = async () => {
         href={`https://map.kakao.com/link/map/${info.placeId}`}
         target="_blank"
       >
-        <h2 className="text-lg font-bold text-black">{info.placeName}</h2>
-        <div className="flex flex-row items-start gap-1">
-          <Image
-            className="pt-1"
-            src="/location-icon.svg"
-            alt="location-icon"
-            width={10}
-            height={10}
-          />
-          <p className="text-sm text-gray1">{info.address}</p>
+        <h2 className="text-lg font-bold text-black dark:text-slate-200">
+          {info.placeName}
+        </h2>
+        <div className="flex flex-row items-center gap-1 text-sm text-gray1 dark:text-slate-400">
+          <TiLocation />
+          <p>{info.address}</p>
         </div>
       </a>
       <div className="mt-6 flex flex-row items-center justify-end gap-3">
-        <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
+        <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
           <Image src="/edit-icon.svg" alt="edit-icon" width={15} height={15} />
           수정
         </button>
-        <button className="flex flex-row items-center gap-1 text-sm hover:text-main">
+        <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
           <Image
             src="/delete-icon.svg"
             alt="delete-icon.svg"

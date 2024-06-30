@@ -57,14 +57,14 @@ const ImageUploadItem = ({
 
   return (
     <label
-      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main`}
+      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main dark:bg-slate-800`}
       htmlFor="file"
       onClick={onUploadButtonClicked}
     >
       <div className="flex h-12 w-12 items-center justify-center rounded-full border-[0.0625rem] border-main text-xl text-main">
         +
       </div>
-      <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1">
+      <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1 dark:text-slate-400">
         사진 추가
       </p>
       <p className="text-xs font-medium text-gray2">{index}/12</p>

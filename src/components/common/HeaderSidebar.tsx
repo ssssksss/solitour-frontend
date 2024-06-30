@@ -15,7 +15,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-full w-[200%] animate-sidebarFadeIn">
       <div className="bg-black/25">
-        <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4">
+        <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4 dark:bg-slate-800">
           <div className="flex h-10 w-full items-center justify-between">
             <Link
               className="relative h-[2.375rem] w-[5rem]"
@@ -23,6 +23,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               onClick={onClose}
             >
               <Image
+                className="dark:hidden"
                 src={"/Solitour-logo.svg"}
                 alt={"/background"}
                 fill={true}
@@ -30,15 +31,24 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                   objectFit: "contain",
                 }}
               />
+              <Image
+                className="hidden dark:block"
+                src={"/solitour-logo-dark-mode.png"}
+                alt={"/background"}
+                fill={true}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
             </Link>
-            <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main">
+            <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main dark:bg-slate-600">
               <MdClose onClick={onClose} />
             </div>
           </div>
           <ul>
-            <li className="border-b-2 px-1 py-4">
+            <li className="border-b-2 px-1 py-4 dark:border-b-slate-200">
               <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100"
+                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
                 href="/"
                 onClick={onClose}
               >
@@ -47,7 +57,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               </Link>
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
                   href="/auth/signin"
                   onClick={onClose}
                 >
@@ -55,7 +65,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                   <p>로그인</p>
                 </Link>
                 <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
                   href="/auth/signup"
                   onClick={onClose}
                 >
@@ -64,9 +74,9 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
               </div>
             </li>
-            <li className="border-b-2 px-1 py-4">
+            <li className="border-b-2 px-1 py-4 dark:border-b-slate-200">
               <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100"
+                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
                 href="/informations/list/restaurant?subCategory=all"
                 onClick={onClose}
               >
@@ -75,7 +85,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               </Link>
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
                   href="/informations/list/restaurant?subCategory=all"
                   onClick={onClose}
                 >
@@ -83,7 +93,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                   <p>맛집</p>
                 </Link>
                 <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
                   href="/informations/list/accommodation?subCategory=all"
                   onClick={onClose}
                 >
@@ -91,7 +101,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                   <p>숙박</p>
                 </Link>
                 <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
                   href="/informations/list/activity?subCategory=all"
                   onClick={onClose}
                 >
@@ -100,9 +110,9 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
               </div>
             </li>
-            <li className="border-b-2 px-1 py-4">
+            <li className="border-b-2 px-1 py-4 dark:border-b-slate-200">
               <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100"
+                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
                 href="/meetings"
                 onClick={onClose}
               >
@@ -111,7 +121,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               </Link>
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100"
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
                   href="/"
                   onClick={onClose}
                 >
