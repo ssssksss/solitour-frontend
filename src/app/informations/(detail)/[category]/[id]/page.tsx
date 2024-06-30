@@ -1,7 +1,9 @@
+import InformationViewer from "@/components/informations/InformationViewer";
+import PagePath from "@/components/informations/PagePath";
 import RecommendationList from "@/components/informations/RecommendationList";
+import InformationViewerSkeleton from "@/components/skeleton/informations/InformationViewerSkeleton";
 import RecommendationListSkeleton from "@/components/skeleton/informations/RecommendationListSkeleton";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
-import InformationViewerContainer from "@/containers/informations/InformationViewerContainer";
 import { Suspense } from "react";
 
 type MyProps = {
@@ -36,7 +38,10 @@ export default function page({ params: { category, id } }: MyProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <InformationViewerContainer category={category} id={postId} />
+      <PagePath category={`${CATEGORY_TEXT[category]} 상세`} />
+      <Suspense fallback={<InformationViewerSkeleton />}>
+        <InformationViewer />
+      </Suspense>
       <Suspense fallback={<RecommendationListSkeleton />}>
         <RecommendationList />
       </Suspense>
