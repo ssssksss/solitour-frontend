@@ -1,4 +1,3 @@
-import { CATEGORY_TEXT } from "@/constants/informations/category";
 import { SUBCATEGORY } from "@/constants/informations/subCategory";
 import Link from "next/link";
 
@@ -7,7 +6,7 @@ type MyProps = {
   subCategory: string;
 };
 
-const SubCategoryList = ({ category, subCategory }: MyProps) => {
+const SubCategoryLinks = ({ category, subCategory }: MyProps) => {
   const subCategories = SUBCATEGORY[category];
 
   return (
@@ -28,4 +27,4 @@ const SubCategoryList = ({ category, subCategory }: MyProps) => {
   );
 };
 
-export default SubCategoryList;
+export default SubCategoryLinks;
