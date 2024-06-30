@@ -12,8 +12,17 @@ type MyProps = {
         y: string;
       }[]
     | undefined;
-  handleSearch: DebouncedState<(search: string) => void>;
+  addressInfos:
+    | {
+        address_name: string;
+        x: string;
+        y: string;
+      }[]
+    | undefined;
+  handleLocationSearch: DebouncedState<(search: string) => void>;
+  handleAddressSearch: DebouncedState<(search: string) => void>;
   isCustom: boolean;
+  canTypePlaceName: boolean;
   canRegister: boolean;
   onClick: (isCustom: boolean) => void;
   onResetPlace: () => void;
@@ -24,18 +33,27 @@ type MyProps = {
     x: string;
     y: string;
   }) => void;
+  onChangeAddress: (value: {
+    address_name: string;
+    x: string;
+    y: string;
+  }) => void;
   onChangeCustomPlaceName: (placeName: string) => void;
   closeModal: () => void;
 };
 
 const PlaceModal = ({
   placeInfos,
-  handleSearch,
+  addressInfos,
+  handleLocationSearch,
+  handleAddressSearch,
   isCustom,
+  canTypePlaceName,
   canRegister,
   onClick,
   onResetPlace,
   onChangePlace,
+  onChangeAddress,
   onChangeCustomPlaceName,
   closeModal,
 }: MyProps) => {
@@ -69,44 +87,86 @@ const PlaceModal = ({
               </button>
             </div>
           </div>
-          <div className={`${isCustom ? "hidden" : ""} flex flex-col gap-2`}>
+          <div
+            className={`${isCustom ? "hidden" : ""} flex w-full flex-col gap-2`}
+          >
             <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
-            <div className="flex h-56 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
+            <div className="flex h-80 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
               <input
                 className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="location"
                 name="location"
-                placeholder="장소명을 입력하세요."
-                onChange={(e) => handleSearch(e.target.value)}
+                placeholder="장소명을 입력하세요. (Ex. 테라로사 포스코센터점)"
+                onChange={(e) => handleLocationSearch(e.target.value)}
               />
-              <div className="flex flex-col items-start gap-2 px-6 py-4">
+              <div className="flex h-64 flex-col items-start gap-2 overflow-y-auto px-6 py-4">
                 {placeInfos?.map((placeInfo, index) => (
                   <button
                     key={index}
-                    className="flex flex-row items-center gap-2 text-sm hover:text-main"
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    type="button"
                     onClick={() => onChangePlace(placeInfo)}
                   >
-                    <Image
-                      src="/location-icon.svg"
-                      alt="location-icon"
-                      width={10}
-                      height={10}
-                    />
-                    {placeInfo.place_name}
+                    <div className="flex flex-row items-center gap-2 text-sm">
+                      <Image
+                        src="/location-icon.svg"
+                        alt="location-icon"
+                        width={10}
+                        height={10}
+                      />
+                      {placeInfo.place_name}
+                    </div>
+                    <span className="text-xs text-gray1">
+                      {placeInfo.address_name}
+                    </span>
                   </button>
                 ))}
               </div>
             </div>
           </div>
           <div
-            className={`${isCustom ? "" : "hidden"} flex h-fit w-full flex-col gap-2`}
+            className={`${isCustom ? "" : "hidden"} flex w-full flex-col gap-2`}
           >
-            <h3 className="text-lg font-medium text-black">
-              지도에서 주소 찾기
-            </h3>
-            {/* <KakaoMapAddressContainer /> */}
-            <div className="mt-4 flex flex-row items-center justify-between gap-2">
+            <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
+            <div
+              className={`${canTypePlaceName ? "h-fit" : "h-80"} flex flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]`}
+            >
+              <input
+                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                type="text"
+                autoComplete="address"
+                name="address"
+                placeholder="도로명주소를 입력하세요. (Ex. 용산구 청파로)"
+                onChange={(e) => handleAddressSearch(e.target.value)}
+                disabled={canTypePlaceName}
+              />
+              <div
+                className={`${canTypePlaceName ? "hidden" : ""} flex h-64 flex-col items-start gap-2 overflow-y-auto px-6 py-4`}
+              >
+                {addressInfos?.map((addressInfo, index) => (
+                  <button
+                    key={index}
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    type="button"
+                    onClick={() => onChangeAddress(addressInfo)}
+                  >
+                    <div className="flex flex-row items-center gap-2 text-sm">
+                      <Image
+                        src="/location-icon.svg"
+                        alt="location-icon"
+                        width={10}
+                        height={10}
+                      />
+                      {addressInfo.address_name}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div
+              className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
+            >
               <input
                 className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
@@ -115,7 +175,6 @@ const PlaceModal = ({
                 placeholder="장소명을 입력하세요."
                 onChange={(e) => onChangeCustomPlaceName(e.target.value)}
               />
-
               <button
                 className={`h-[3.3125rem] w-40 rounded-full bg-main text-[0.9375rem] text-white hover:scale-105 ${canRegister ? "" : "hidden"}`}
                 type="button"

@@ -10,10 +10,17 @@ type MyProps = {
 };
 
 const PlaceModalContainer = ({ closeModal }: MyProps) => {
-  const { address, placeName, changeField, resetPlaceInfo } = useEditorStore();
+  const { address, placeName, placeId, changeField, resetPlaceInfo } =
+    useEditorStore();
   const [isCustom, setIsCustom] = useState<boolean>(false);
 
-  // 검색으로 얻어진 장소 목록
+  // 장소 검색 객체 (place search)
+  const [ps, setPs] = useState<any>();
+
+  // 주소-좌표 변환 객체
+  const [geocoder, setGeocoder] = useState<any>();
+
+  // 장소 검색으로 얻어진 장소 목록
   const [placeInfos, setPlaceInfos] = useState<
     {
       place_name: string;
@@ -24,8 +31,34 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     }[]
   >();
 
-  // 장소 검색 객체 (place search)
-  const [ps, setPs] = useState<any>();
+  // 주소 검색으로 얻어진 주소 목록
+  const [addressInfos, setAddressInfos] = useState<
+    {
+      address_name: string;
+      x: string;
+      y: string;
+    }[]
+  >();
+
+  const handleLocationSearch = useDebouncedCallback((search: string) => {
+    // 키워드로 장소를 검색합니다.
+    ps.keywordSearch(search, (result: any, status: any) => {
+      // 정상적으로 검색이 완료됐으면
+      if (status === window.kakao.maps.services.Status.OK) {
+        setPlaceInfos(result);
+      }
+    });
+  }, 300);
+
+  const handleAddressSearch = useDebouncedCallback((search: string) => {
+    // 주소로 좌표를 검색합니다.
+    geocoder.addressSearch(search, (result: any, status: any) => {
+      // 정상적으로 검색이 완료됐으면
+      if (status === window.kakao.maps.services.Status.OK) {
+        setAddressInfos(result);
+      }
+    });
+  }, 300);
 
   const onResetPlace = () => {
     resetPlaceInfo();
@@ -47,15 +80,16 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     closeModal();
   };
 
-  const handleSearch = useDebouncedCallback((search: string) => {
-    // 키워드로 장소를 검색합니다.
-    ps.keywordSearch(search, (result: any, status: any) => {
-      // 정상적으로 검색이 완료됐으면
-      if (status === window.kakao.maps.services.Status.OK) {
-        setPlaceInfos(result.slice(0, 5));
-      }
-    });
-  }, 300);
+  const onChangeAddress = (addressInfo: {
+    address_name: string;
+    x: string;
+    y: string;
+  }) => {
+    changeField("address", addressInfo.address_name);
+    changeField("placeXAxis", addressInfo.x);
+    changeField("placeYAxis", addressInfo.y);
+    changeField("placeId", "0");
+  };
 
   const onChangeCustomPlaceName = (placeName: string) => {
     changeField("placeName", placeName);
@@ -70,6 +104,9 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
       window.kakao.maps.load(() => {
         // 장소 검색 객체 생성
         setPs(new window.kakao.maps.services.Places());
+
+        // 주소-좌표 변환 객체 생성
+        setGeocoder(new window.kakao.maps.services.Geocoder());
       });
     }
   }, []);
@@ -77,12 +114,16 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
   return (
     <PlaceModal
       placeInfos={placeInfos}
-      handleSearch={handleSearch}
+      addressInfos={addressInfos}
+      handleLocationSearch={handleLocationSearch}
+      handleAddressSearch={handleAddressSearch}
       isCustom={isCustom}
+      canTypePlaceName={placeId === "0"}
       canRegister={address !== "" && placeName !== ""}
       onClick={onClick}
       onResetPlace={onResetPlace}
       onChangePlace={onChangePlace}
+      onChangeAddress={onChangeAddress}
       onChangeCustomPlaceName={onChangeCustomPlaceName}
       closeModal={closeModal}
     />
