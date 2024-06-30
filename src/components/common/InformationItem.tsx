@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CiBookmark } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
+import { TiLocation } from "react-icons/ti";
 
 type MyProps = {
   id: number;
@@ -29,9 +30,9 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
   }
 
   return (
-    <div className="relative flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main">
+    <div className="relative flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
       <Image
-        className="-z-10 rounded-[0.875rem]"
+        className="-z-10 rounded-[0.875rem] dark:opacity-65"
         src={image}
         alt={"PostImage"}
         fill={true}
@@ -45,33 +46,28 @@ const InformationItem = ({ id, category, title, image }: MyProps) => {
         >
           {CATEGORY_TEXT[category]}
         </p>
-        <div className="cursor-pointer text-white hover:scale-110">
+        <div className="cursor-pointer text-white hover:scale-110 dark:text-slate-200">
           <CiBookmark size={"2rem"} />
         </div>
       </div>
-      <div className="flex h-28 flex-col justify-between bg-white px-5 py-4">
+      <div className="flex h-28 flex-col justify-between rounded-b-2xl bg-white px-5 py-4 dark:bg-slate-800">
         <Link
-          className="p-1 font-bold hover:text-main"
+          className="p-1 font-bold hover:text-main dark:text-slate-200"
           href={`/informations/${category}/${id}`}
         >
           {title}
         </Link>
         <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center gap-1 text-gray1">
-            <Image
-              src="/location-icon.svg"
-              alt="location-icon.svg"
-              width={10}
-              height={10}
-            />
+          <div className="flex flex-row items-center gap-1 text-gray1 dark:text-slate-400">
+            <TiLocation />
             <p className="text-xs font-medium">제주특별자치도, 제주시</p>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <div className="flex flex-row items-center gap-1 text-gray2">
+            <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
               <FaRegHeart size={"0.8rem"} />
               <p className="text-xs">666M</p>
             </div>
-            <div className="flex flex-row items-center gap-1 text-gray2">
+            <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
               <Image
                 src="/eyes-icon.svg"
                 alt="eyes-icon.svg"

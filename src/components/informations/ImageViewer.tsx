@@ -15,8 +15,8 @@ const ImageViewer = ({
   setMainImageIndex,
 }: MyProps) => {
   return (
-    <div>
-      <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
+    <div className="dark:opacity-65">
+      <div className="relative h-[26.0625rem] w-full text-slate-200 max-[744px]:h-[19.125rem]">
         <Image
           className="rounded-2xl"
           src={images[mainImageIndex]}

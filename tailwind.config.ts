@@ -30,14 +30,6 @@ const config: Config = {
           from: { transform: "rotate(-45deg)", "background-color": "black" },
           to: { transform: "rotate(0deg)", "background-color": "bg-main" },
         },
-        bgFadeIn: {
-          from: {
-            "background-color": "rgba(242, 250, 247, 0)",
-          },
-          to: {
-            "background-color": "rgba(242, 250, 247, 1)",
-          },
-        },
         fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },
@@ -50,7 +42,6 @@ const config: Config = {
       animation: {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
         buttonRotation: "buttonRotation 0.3s",
-        bgFadeIn: "bgFadeIn 0.5s",
         fadeIn: "fadeIn 0.5s",
         fadeOut: "fadeOut 0.5s",
       },

@@ -13,7 +13,7 @@ const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
   return (
     <div className="fixed bottom-8 right-0 z-40 flex w-24 flex-col items-center gap-6">
       {visible && (
-        <div className="-mb-4 flex animate-bgFadeIn flex-col items-center gap-6 rounded-full bg-[#F2FAF7] px-4 pb-4 pt-[1.875rem]">
+        <div className="-mb-4 flex flex-col items-center gap-6 rounded-full bg-[#F2FAF7] px-4 pb-4 pt-[1.875rem] dark:bg-slate-500">
           <Link
             className="flex animate-fadeIn flex-col items-center text-sm hover:text-main"
             href="/meetings/write"
@@ -40,7 +40,7 @@ const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
       )}
       {!visible && (
         <button
-          className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
+          className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105 dark:bg-slate-600"
           onClick={onClick}
         >
           <Image
@@ -53,7 +53,7 @@ const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
         </button>
       )}
       <button
-        className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
+        className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105 dark:bg-slate-600"
         onClick={onScrollToTop}
       >
         <IoIosArrowUp size={"1.5rem"} />
