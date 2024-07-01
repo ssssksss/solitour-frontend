@@ -39,7 +39,7 @@ const InformationEditor = ({
   setHashtag,
 }: MyProps) => {
   return (
-    <form className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
@@ -75,7 +75,6 @@ const InformationEditor = ({
           <input
             className="h-full flex-grow rounded-3xl border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
             type="text"
-            autoComplete="location"
             name="location"
             placeholder="장소명을 입력하세요."
             value={editorStore.placeName}
@@ -234,11 +233,12 @@ const InformationEditor = ({
         <button
           className="mb-20 mt-10 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
           type="submit"
+          onClick={() => onSubmit()}
         >
           정보 등록하기
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 

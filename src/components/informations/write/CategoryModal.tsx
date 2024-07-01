@@ -6,7 +6,8 @@ type MyProps = {
   subCategory: string;
   setCategory: (category: string) => void;
   setSubCategory: (subCategory: string) => void;
-  onClick: () => void;
+  onCancel: () => void;
+  onSave: () => void;
 };
 
 const CategoryModal = ({
@@ -14,7 +15,8 @@ const CategoryModal = ({
   subCategory,
   setCategory,
   setSubCategory,
-  onClick,
+  onCancel,
+  onSave,
 }: MyProps) => {
   const subCategories = SUBCATEGORY[category];
 
@@ -29,7 +31,7 @@ const CategoryModal = ({
             <MdClose
               className="cursor-pointer text-gray2 hover:text-main dark:text-slate-400"
               size={"2.5rem"}
-              onClick={onClick}
+              onClick={onCancel}
             />
           </div>
           <div className="flex flex-row items-center gap-2">
@@ -97,6 +99,17 @@ const CategoryModal = ({
                 {value.buttonText}
               </button>
             ))}
+          </div>
+          <div
+            className={`${category === "" || subCategory === "" ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
+          >
+            <button
+              className="h-11 w-[9.5rem] rounded-full bg-main font-medium text-white shadow hover:scale-105"
+              type="button"
+              onClick={onSave}
+            >
+              적용하기
+            </button>
           </div>
         </div>
       </div>
