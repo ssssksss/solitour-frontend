@@ -113,7 +113,7 @@ const MeetingItem = ({
               <p>{time}</p>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <BsFillPeopleFill className="text-black dark:text-slate-400" />
+              <BsFillPeopleFill className="-ml-[0.125rem] text-black dark:text-slate-400" />
               <p>
                 <span className="text-main">{current}</span>
                 <span className="text-black dark:text-slate-400">{` / ${total} `}</span>

@@ -4,6 +4,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import ImageViewerContainer from "@/containers/informations/ImageViewerContainer";
+import { LuEye } from "react-icons/lu";
+import { GoPencil } from "react-icons/go";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 // TODO
 const InformationViewer = async () => {
@@ -67,13 +70,8 @@ const InformationViewer = async () => {
                 <FaRegHeart size={"0.8rem"} />
                 <p className="text-xs">666M</p>
               </div>
-              <div className="flex flex-row items-center gap-1 text-gray2">
-                <Image
-                  src="/eyes-icon.svg"
-                  alt="eyes-icon"
-                  width={15}
-                  height={15}
-                />
+              <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
+                <LuEye />
                 <p className="text-xs">222K</p>
               </div>
             </div>
@@ -111,12 +109,7 @@ const InformationViewer = async () => {
                   <p className="text-xs">666M</p>
                 </div>
                 <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-                  <Image
-                    src="/eyes-icon.svg"
-                    alt="eyes-icon"
-                    width={15}
-                    height={15}
-                  />
+                  <LuEye />
                   <p className="text-xs">222K</p>
                 </div>
               </div>
@@ -177,16 +170,11 @@ const InformationViewer = async () => {
       </a>
       <div className="mt-6 flex flex-row items-center justify-end gap-3">
         <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
-          <Image src="/edit-icon.svg" alt="edit-icon" width={15} height={15} />
+          <GoPencil />
           수정
         </button>
         <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
-          <Image
-            src="/delete-icon.svg"
-            alt="delete-icon.svg"
-            width={15}
-            height={15}
-          />
+          <FaRegTrashCan />
           삭제
         </button>
       </div>

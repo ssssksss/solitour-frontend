@@ -23,7 +23,7 @@ const Header = ({
       {visible && <HeaderSidebar onClose={onClose} />}
       <div
         className={
-          "fixed top-0 z-40 flex w-full justify-center" +
+          "fixed top-0 z-40 flex w-full justify-center shadow" +
           ` ${transparent ? "bg-transparent" : "bg-white dark:bg-slate-800"}`
         }
       >
@@ -36,11 +36,11 @@ const Header = ({
               <MdOutlineMenu size="1.5rem" onClick={onMenuClicked} />
             </div>
             <Link
-              className="relative h-8 w-[5rem] pl-[2.375rem] font-black max-[1024px]:pl-4"
+              className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4"
               href="/"
             >
               <Image
-                className="ml-[2.375rem] max-[1024px]:ml-4 dark:hidden"
+                className="dark:hidden"
                 src={"/Solitour-logo.svg"}
                 alt={"/background"}
                 fill={true}
@@ -49,7 +49,7 @@ const Header = ({
                 }}
               />
               <Image
-                className="ml-[2.375rem] hidden max-[1024px]:ml-4 dark:block"
+                className="hidden dark:block"
                 src={"/solitour-logo-dark-mode.png"}
                 alt={"/background"}
                 fill={true}
@@ -59,7 +59,7 @@ const Header = ({
               />
             </Link>
           </div>
-          <div className="flex flex-grow flex-row justify-between px-36 max-[1024px]:hidden">
+          <div className="flex flex-grow flex-row justify-between px-28 max-[1024px]:hidden">
             <nav>
               <ul className="font flex flex-row space-x-10">
                 <li>

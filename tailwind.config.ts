@@ -20,6 +20,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "search-icon": "url('/search-icon.png')",
+        "search-icon-dark-mode": "url('/search-icon-dark-mode.png')",
       },
       keyframes: {
         sidebarFadeIn: {
