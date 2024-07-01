@@ -23,7 +23,7 @@ const Header = ({
       {visible && <HeaderSidebar onClose={onClose} />}
       <div
         className={
-          "fixed top-0 z-40 flex w-full justify-center" +
+          "fixed top-0 z-40 flex w-full justify-center shadow" +
           ` ${transparent ? "bg-transparent" : "bg-white dark:bg-slate-800"}`
         }
       >

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const HomeCarouselContainer = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const images = [
-    "/background1.svg",
+    "/background1.png",
     "/background2.svg",
     "/background3.svg",
     "/background4.svg",

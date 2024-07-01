@@ -67,7 +67,7 @@ const InformationViewer = async () => {
                 <FaRegHeart size={"0.8rem"} />
                 <p className="text-xs">666M</p>
               </div>
-              <div className="flex flex-row items-center gap-1 text-gray2">
+              <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <Image
                   src="/eyes-icon.svg"
                   alt="eyes-icon"

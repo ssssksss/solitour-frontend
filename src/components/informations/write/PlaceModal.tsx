@@ -113,7 +113,7 @@ const PlaceModal = ({
                     type="button"
                     onClick={() => onChangePlace(placeInfo)}
                   >
-                    <div className="flex flex-row items-center gap-2 text-sm text-white dark:text-slate-200">
+                    <div className="flex flex-row items-center gap-2 text-sm text-black dark:text-slate-200">
                       <TiLocation />
                       {placeInfo.place_name}
                     </div>
@@ -153,7 +153,7 @@ const PlaceModal = ({
                     type="button"
                     onClick={() => onChangeAddress(addressInfo)}
                   >
-                    <div className="flex flex-row items-center gap-2 text-sm text-white dark:text-slate-200">
+                    <div className="flex flex-row items-center gap-2 text-sm text-black dark:text-slate-200">
                       <TiLocation />
                       {addressInfo.address_name}
                     </div>
@@ -165,7 +165,7 @@ const PlaceModal = ({
               className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
             >
               <input
-                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="location"
                 name="location"
