@@ -3,10 +3,10 @@
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useDragScroll from "@/hooks/useDragScroll";
 import useEditorStore from "@/store/editorStore";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const InformationEditorContainer = () => {
-  const { resetPlaceInfo } = useEditorStore();
+  const { resetPlaceInfo, resetCategoryInfo } = useEditorStore();
   const imagesHook = useDragScroll();
   const hashtagsHook = useDragScroll();
 
@@ -28,6 +28,7 @@ const InformationEditorContainer = () => {
   };
 
   const showCategoryModal = () => {
+    resetCategoryInfo();
     setCategoryModal(true);
   };
 

@@ -72,6 +72,9 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     x: string;
     y: string;
   }) => {
+    const temp = placeInfo.address_name.split(" ");
+    changeField("province", temp[0] ?? "");
+    changeField("city", temp[1] ?? "");
     changeField("address", placeInfo.address_name);
     changeField("placeId", placeInfo.id);
     changeField("placeXAxis", placeInfo.x);
@@ -85,6 +88,9 @@ const PlaceModalContainer = ({ closeModal }: MyProps) => {
     x: string;
     y: string;
   }) => {
+    const temp = addressInfo.address_name.split(" ");
+    changeField("province", temp[0] ?? "");
+    changeField("city", temp[1] ?? "");
     changeField("address", addressInfo.address_name);
     changeField("placeXAxis", addressInfo.x);
     changeField("placeYAxis", addressInfo.y);

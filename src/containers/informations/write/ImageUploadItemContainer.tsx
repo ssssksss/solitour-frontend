@@ -34,7 +34,7 @@ const ImageUploadItemContainer = ({ index }: MyProps) => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         changeImage(index, reader.result as string); // Base64 Encoded String
-        addImage();
+        addImage(file);
       };
     }
   };
