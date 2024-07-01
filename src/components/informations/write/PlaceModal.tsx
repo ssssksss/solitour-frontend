@@ -98,7 +98,7 @@ const PlaceModal = ({
             </h3>
             <div className="flex h-80 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="dark:bg-search-icon-dark-mode h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="location"
                 name="location"
@@ -109,7 +109,7 @@ const PlaceModal = ({
                 {placeInfos?.map((placeInfo, index) => (
                   <button
                     key={index}
-                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100 dark:hover:bg-slate-600"
                     type="button"
                     onClick={() => onChangePlace(placeInfo)}
                   >
@@ -132,10 +132,10 @@ const PlaceModal = ({
               도로명주소 찾기
             </h3>
             <div
-              className={`${canTypePlaceName ? "h-fit" : "h-80"} flex flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]`}
+              className={`${canTypePlaceName ? "h-fit" : "h-80 border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]"} flex flex-col rounded-3xl`}
             >
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="dark:bg-search-icon-dark-mode h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="address"
                 name="address"
@@ -149,7 +149,7 @@ const PlaceModal = ({
                 {addressInfos?.map((addressInfo, index) => (
                   <button
                     key={index}
-                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100 dark:hover:bg-slate-600"
                     type="button"
                     onClick={() => onChangeAddress(addressInfo)}
                   >
@@ -165,7 +165,7 @@ const PlaceModal = ({
               className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
             >
               <input
-                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="dark:bg-search-icon-dark-mode h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="location"
                 name="location"
