@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="flex h-80 w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px] dark:bg-slate-800">
+    <footer className="flex h-80 w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px] dark:bg-slate-800">
       <div className="flex w-[60rem] flex-col gap-4 p-4">
         <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
@@ -76,7 +76,7 @@ const Footer = () => {
           </nav>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 
