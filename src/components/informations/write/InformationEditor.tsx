@@ -75,7 +75,7 @@ const InformationEditor = ({
           <input
             className="h-full flex-grow rounded-3xl border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
             type="text"
-            name="location"
+            name="placeName"
             placeholder="장소명을 입력하세요."
             value={editorStore.placeName}
             onChange={(e) =>

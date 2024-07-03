@@ -18,8 +18,6 @@ interface EditorState {
   content: string;
   hashtags: string[];
   tips: string[];
-  loading: boolean;
-  error: string | null;
 }
 
 interface EditorActions {
@@ -36,7 +34,6 @@ interface EditorActions {
   removeImage: (index: number) => void;
   removeHashtag: (index: number) => void;
   removeTip: () => void;
-  write: () => void;
 }
 
 type EditorStoreType = StateCreator<EditorState & EditorActions>;
@@ -58,8 +55,6 @@ const initialState: EditorState = {
   content: "",
   hashtags: [],
   tips: [""],
-  loading: false,
-  error: null,
 };
 
 const editorStore: EditorStoreType = (set, get) => ({
@@ -121,29 +116,6 @@ const editorStore: EditorStoreType = (set, get) => ({
     })),
   removeTip: () =>
     set((state) => ({ tips: state.tips.slice(0, state.tips.length - 1) })),
-  write: async () => {
-    /**
-     * TODO: 수정 필요
-     */
-
-    set({ loading: true, error: null });
-
-    try {
-      const response = await fetch("/api/information/write", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({}),
-      });
-
-      const data = await response.json();
-
-      set({ loading: false });
-    } catch (e) {
-      set({ loading: false, error: (e as Error).message });
-    }
-  },
 });
 
 const useEditorStore = create<EditorState & EditorActions>()<any>(
