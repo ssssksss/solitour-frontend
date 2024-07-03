@@ -2,11 +2,11 @@
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useDragScroll from "@/hooks/useDragScroll";
+import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
 
 const InformationEditorContainer = () => {
-  const { resetPlaceInfo, resetCategoryInfo } = useEditorStore();
   const imagesHook = useDragScroll();
   const hashtagsHook = useDragScroll();
   const editorStore = useEditorStore();
@@ -20,7 +20,7 @@ const InformationEditorContainer = () => {
   const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
   const showLocationModal = () => {
-    resetPlaceInfo();
+    editorStore.resetPlaceInfo();
     setLocationModal(true);
   };
 
@@ -29,7 +29,7 @@ const InformationEditorContainer = () => {
   };
 
   const showCategoryModal = () => {
-    resetCategoryInfo();
+    editorStore.resetCategoryInfo();
     setCategoryModal(true);
   };
 
@@ -38,55 +38,75 @@ const InformationEditorContainer = () => {
   };
 
   const onSubmit = async () => {
-    if (editorStore.title === "") {
-      alert("제목을 입력해 주세요.");
+    // Validate from fields using Zod
+    const validatedFields = InformationCreateFormSchema.safeParse({
+      userId: 0,
+      informationTitle: editorStore.title,
+      informationAddress: editorStore.address,
+      province: editorStore.province,
+      city: editorStore.city,
+      placeId: editorStore.placeId,
+      placeXAxis: editorStore.placeXAxis,
+      placeYAxis: editorStore.placeYAxis,
+      placeName: editorStore.placeName,
+      category: editorStore.category,
+      subCategory: editorStore.subCategory,
+      thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
+      contentImages: editorStore.imageFiles.filter(
+        (_value, index) => index !== editorStore.mainImageIndex,
+      ),
+      informationContent: editorStore.content,
+      hashtags: editorStore.hashtags,
+      tips: editorStore.tips,
+    });
+
+    // If validation fails, return errors early. Otherwise, continue;
+    if (!validatedFields.success) {
+      console.log(validatedFields.error.flatten().fieldErrors);
+      alert("Invalid Fields. Failed to write.");
       return;
     }
 
-    if (editorStore.placeName === "") {
-      alert("장소를 입력해 주세요");
-      return;
-    }
+    const formData = new FormData();
+    formData.append("userId", validatedFields.data.userId.toString());
+    formData.append("informationTitle", validatedFields.data.informationTitle);
+    formData.append(
+      "informationAddress",
+      validatedFields.data.informationAddress,
+    );
+    formData.append("province", validatedFields.data.province);
+    formData.append("city", validatedFields.data.city);
+    formData.append("placeId", validatedFields.data.placeId);
+    formData.append("placeXAxis", validatedFields.data.placeXAxis);
+    formData.append("placeYAxis", validatedFields.data.placeYAxis);
+    formData.append("placeName", validatedFields.data.placeName);
+    formData.append("category", validatedFields.data.category);
+    formData.append("subCategory", validatedFields.data.subCategory);
+    formData.append("thumbnailImage", validatedFields.data.thumbnailImage);
+    validatedFields.data.contentImages?.forEach((contentImage) => {
+      formData.append("contentImages", contentImage);
+    });
+    formData.append(
+      "informationContent",
+      validatedFields.data.informationContent,
+    );
+    validatedFields.data.hashtags.forEach((hashtag) => {
+      formData.append("hashtags", hashtag);
+    });
+    validatedFields.data.tips.forEach((tip) => {
+      formData.append("tips", tip);
+    });
 
-    if (editorStore.category === "") {
-      alert("카테고리를 선택해 주세요.");
-      return;
-    }
-
-    if (editorStore.imageFiles.length === 0) {
-      alert("최소 1장의 사진을 추가해 주세요.");
-      return;
-    }
-
-    if (editorStore.content === "") {
-      alert("내용을 입력해 주세요.");
-      return;
-    }
-
-    if (editorStore.hashtags.length === 0) {
-      alert("최소 하나의 해시태그를 입력해 주세요.");
-      return;
-    }
-
-    if (editorStore.tips.filter((value) => value !== "").length === 0) {
-      alert("최소 하나의 Tip을 입력해 주세요.");
-      return;
-    }
-
-    editorStore.write();
-    /*
     const response = await fetch("http://localhost:3000/api/informations", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
-      body: JSON.stringify({ title: "1111" }),
+      body: formData,
       cache: "no-store",
     });
 
-    const data = await response.json();
-    alert(data);
-    */
+    return;
   };
 
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
