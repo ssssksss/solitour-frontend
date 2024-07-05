@@ -101,6 +101,20 @@ const Header = ({
                     모임
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className={
+                      `${
+                        pathname.includes("/journal")
+                          ? "font-bold text-black dark:text-slate-200"
+                          : "font-medium text-gray1 dark:text-slate-400"
+                      } ` + "text-sm hover:text-main"
+                    }
+                    href="/journals/list"
+                  >
+                    여행일기
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
