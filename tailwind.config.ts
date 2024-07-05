@@ -35,16 +35,19 @@ const config: Config = {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
-        fadeOut: {
-          from: { opacity: "1" },
-          to: { opacity: "0" },
+        bannerImage: {
+          "0%": { bottom: "-20px", opacity: "0.5" },
+          "50%": { bottom: "0px", opacity: "1" },
+          "100%": { bottom: "20px", opacity: "0" },
         },
       },
       animation: {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
         buttonRotation: "buttonRotation 0.3s",
         fadeIn: "fadeIn 0.5s",
-        fadeOut: "fadeOut 0.5s",
+        bannerImage1: "bannerImage 2s linear infinite",
+        bannerImage2: "bannerImage 2.5s linear infinite",
+        bannerImage3: "bannerImage 3s linear infinite",
       },
     },
   },
