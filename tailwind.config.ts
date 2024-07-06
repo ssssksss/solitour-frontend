@@ -40,6 +40,14 @@ const config: Config = {
           "50%": { bottom: "0px", opacity: "1" },
           "100%": { bottom: "20px", opacity: "0" },
         },
+        cardFlip: {
+          from: { transform: "rotateY(-90deg)" },
+          to: { transform: "rotateY(0deg)" },
+        },
+        cardFlip2: {
+          from: { transform: "rotateY(0deg)" },
+          to: { transform: "rotateY(90deg)" },
+        },
       },
       animation: {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
@@ -48,6 +56,8 @@ const config: Config = {
         bannerImage1: "bannerImage 2s linear infinite",
         bannerImage2: "bannerImage 2.5s linear infinite",
         bannerImage3: "bannerImage 3s linear infinite",
+        cardFlip: "cardFlip 0.5s linear",
+        cardFlip2: "cardFlip2 0.5s linear",
       },
     },
   },

@@ -1,19 +1,14 @@
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import Link from "next/link";
 
-type MyProps = {
+interface Props {
   titles: string[];
   description: string;
   scrollHook: useDragScrollType;
   children: React.ReactNode;
-};
+}
 
-const ListTemplate = ({
-  titles,
-  description,
-  scrollHook,
-  children,
-}: MyProps) => {
+const ListTemplate = ({ titles, description, scrollHook, children }: Props) => {
   return (
     <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <div className="flex flex-row items-center justify-between max-[744px]:justify-center">
