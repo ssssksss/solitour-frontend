@@ -1,6 +1,6 @@
-import JournalCard from "./JournalCard";
+import DiaryCard from "./DiaryCard";
 
-const JournalList = () => {
+const DiaryList = () => {
   return (
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <h1 className="py-[2.375rem] text-[1.75rem] font-bold">여행 일기</h1>
@@ -11,11 +11,11 @@ const JournalList = () => {
       </div>
       <div className="flex flex-wrap justify-center gap-5">
         {[1, 2, 3, 4].map((value) => (
-          <JournalCard key={value} />
+          <DiaryCard key={value} />
         ))}
       </div>
     </div>
   );
 };
 
-export default JournalList;
+export default DiaryList;
