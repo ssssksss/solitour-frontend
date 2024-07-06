@@ -40,7 +40,7 @@ const TopList = async ({ title }: MyProps) => {
             >
               <p className="w-6 font-bold text-main">{index + 1}.</p>
               <Link
-                className="w-96 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1 hover:text-main max-[1024px]:w-full dark:text-slate-400"
+                className="w-96 truncate text-sm font-medium text-gray1 hover:text-main max-[1024px]:w-full dark:text-slate-400"
                 href="/"
               >
                 {title}

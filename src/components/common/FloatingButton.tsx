@@ -17,7 +17,7 @@ const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
           <div className="flex animate-fadeIn flex-col items-center gap-6 rounded-full bg-[#F2FAF7] px-4 py-[1.875rem] dark:bg-slate-500">
             <Link
               className="flex flex-col items-center text-sm hover:text-main"
-              href="/journals/write"
+              href="/diary/write"
               onClick={onClick}
             >
               <p>일기</p>

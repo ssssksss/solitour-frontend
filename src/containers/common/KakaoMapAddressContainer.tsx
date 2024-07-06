@@ -62,7 +62,7 @@ const KakaoMapAddressContainer = () => {
               detailAddr += `<div>경도: ${coords.getLng()}</div>`;
 
               const content =
-                '<div class="p-1 text-ellipsis overflow-hidden whitespace-nowrap text-xs">' +
+                '<div class="p-1 truncate text-xs">' +
                 '<span class="font-bold block">법정동 주소정보</span>' +
                 detailAddr +
                 "</div>";

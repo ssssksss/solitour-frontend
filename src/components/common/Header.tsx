@@ -105,12 +105,12 @@ const Header = ({
                   <Link
                     className={
                       `${
-                        pathname.includes("/journal")
+                        pathname.includes("/diary")
                           ? "font-bold text-black dark:text-slate-200"
                           : "font-medium text-gray1 dark:text-slate-400"
                       } ` + "text-sm hover:text-main"
                     }
-                    href="/journals/list"
+                    href="/diary/list"
                   >
                     여행일기
                   </Link>

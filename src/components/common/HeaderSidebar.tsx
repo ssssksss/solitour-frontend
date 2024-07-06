@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaHotel, FaList, FaUserPlus } from "react-icons/fa";
 import { FiActivity } from "react-icons/fi";
-import { IoMdInformationCircleOutline } from "react-icons/io";
+import { IoIosJournal, IoMdInformationCircleOutline } from "react-icons/io";
 import { IoHome, IoPeople, IoRestaurant } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import { RiLoginBoxLine } from "react-icons/ri";
@@ -46,7 +46,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
             </div>
           </div>
           <ul>
-            <li className="border-b-2 px-1 py-4 dark:border-b-slate-200">
+            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
               <Link
                 className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
                 href="/"
@@ -74,7 +74,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
               </div>
             </li>
-            <li className="border-b-2 px-1 py-4 dark:border-b-slate-200">
+            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
               <Link
                 className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
                 href="/informations/list/restaurant?subCategory=all"
@@ -110,7 +110,7 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
                 </Link>
               </div>
             </li>
-            <li className="border-b-2 px-1 py-4 dark:border-b-slate-200">
+            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
               <Link
                 className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
                 href="/meetings"
@@ -122,11 +122,31 @@ const HeaderSidebar = ({ onClose }: MyProps) => {
               <div className="flex flex-col space-y-2 pl-4 pt-4">
                 <Link
                   className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/"
+                  href="/meetings"
                   onClick={onClose}
                 >
                   <FaList />
                   <p>모임 목록</p>
+                </Link>
+              </div>
+            </li>
+            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
+              <Link
+                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
+                href="/diary/list"
+                onClick={onClose}
+              >
+                <IoIosJournal />
+                <p>여행일기</p>
+              </Link>
+              <div className="flex flex-col space-y-2 pl-4 pt-4">
+                <Link
+                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
+                  href="/diary/list"
+                  onClick={onClose}
+                >
+                  <FaList />
+                  <p>여행일기 목록</p>
                 </Link>
               </div>
             </li>
