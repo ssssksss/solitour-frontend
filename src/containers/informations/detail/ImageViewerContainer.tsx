@@ -1,6 +1,6 @@
 "use client";
 
-import ImageViewer from "@/components/informations/ImageViewer";
+import ImageViewer from "@/components/informations/detail/ImageViewer";
 import useDragScroll from "@/hooks/useDragScroll";
 import { useState } from "react";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import DiaryCard from "@/components/diary/DiaryCard";
+import DiaryCard from "@/components/diary/list/DiaryCard";
 import { DiaryResponseDto } from "@/types/DiaryDto";
 import { useState } from "react";
 

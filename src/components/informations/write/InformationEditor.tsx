@@ -1,10 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
-import PagePath from "../PagePath";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/store/editorStore";
-import ItemTag from "../ItemTag";
+import ItemTag from "../common/ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
@@ -44,7 +43,7 @@ const InformationEditor = ({
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
       )}
-      <PagePath category={"정보 등록하기"} />
+
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
         정보 등록하기
       </h1>
@@ -57,7 +56,7 @@ const InformationEditor = ({
           제목<span className="text-2xl text-main">*</span>
         </h2>
         <input
-          className="h-full flex-grow rounded-3xl border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+          className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
           type="text"
           autoComplete="title"
           name="title"
@@ -73,7 +72,7 @@ const InformationEditor = ({
             장소<span className="text-2xl text-main">*</span>
           </h2>
           <input
-            className="h-full flex-grow rounded-3xl border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+            className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
             type="text"
             name="placeName"
             placeholder="장소명을 입력하세요."

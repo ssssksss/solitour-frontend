@@ -1,5 +1,5 @@
-import Pagination from "../common/Pagination";
-import InformationItem from "../common/InformationItem";
+import InformationItem from "@/components/common/InformationItem";
+import Pagination from "@/components/common/Pagination";
 
 const InformationList = async () => {
   // TODO: API 호출

@@ -1,3 +1,4 @@
+import PagePath from "@/components/common/PagePath";
 import InformationEditorContainer from "@/containers/informations/write/InformationEditorContainer";
 import { Metadata } from "next";
 
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div className="flex flex-col items-center">
+      <PagePath first="정보" second={"정보 등록하기"} />
       <InformationEditorContainer />
     </div>
   );
