@@ -1,4 +1,4 @@
-import DiaryCardContainer from "@/containers/diary/DiaryCardContainer";
+import DiaryCardContainer from "@/containers/diary/list/DiaryCardContainer";
 import DiaryWriteButton from "./DiaryWriteButton";
 import { DiaryResponseDto } from "@/types/DiaryDto";
 import Link from "next/link";
