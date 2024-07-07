@@ -1,6 +1,7 @@
 import DiaryCardContainer from "@/containers/diary/DiaryCardContainer";
 import DiaryWriteButton from "./DiaryWriteButton";
 import { DiaryResponseDto } from "@/types/DiaryDto";
+import Link from "next/link";
 
 const DiaryList = async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -39,9 +40,12 @@ const DiaryList = async () => {
         여행 일기
       </h1>
       <div className="flex flex-row justify-end pb-4">
-        <button className="h-[2.625rem] w-[7.6875rem] rounded-full bg-black text-white hover:scale-105 dark:bg-slate-600">
+        <Link
+          className="flex h-[2.625rem] w-[7.6875rem] items-center justify-center rounded-full bg-black text-white hover:scale-105 dark:bg-slate-600"
+          href="/diary/write"
+        >
           일기 쓰기
-        </button>
+        </Link>
       </div>
       <div className="flex flex-wrap justify-center gap-5">
         <DiaryWriteButton />

@@ -34,7 +34,7 @@ const RecommendationList = () => {
   return (
     <div className="my-20 w-[60rem] max-[1024px]:w-[90%]">
       <h2 className="text-2xl font-bold text-black">추천 여행 정보</h2>
-      <div className="flex flex-wrap items-center justify-around">
+      <div className="mt-4 flex flex-wrap items-center justify-around gap-4">
         {[1, 2, 3, 4, 5, 6].map((_, index) => (
           <MeetingItem
             key={index}

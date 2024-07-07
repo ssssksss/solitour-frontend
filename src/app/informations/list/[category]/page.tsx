@@ -1,7 +1,7 @@
-import InformationList from "@/components/informations/InformationList";
-import InformationListSkeleton from "@/components/skeleton/informations/InformationListSkeleton";
+import InformationList from "@/components/informations/list/InformationList";
+import InformationListSkeleton from "@/components/skeleton/informations/list/InformationListSkeleton";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
-import CategoryListContainer from "@/containers/informations/CategoryListContainer";
+import CategoryListContainer from "@/containers/informations/list/CategoryListContainer";
 import { Suspense } from "react";
 
 type MyProps = {

@@ -1,9 +1,9 @@
-import ItemTag from "./ItemTag";
+import ItemTag from "../common/ItemTag";
 import Image from "next/image";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
-import ImageViewerContainer from "@/containers/informations/ImageViewerContainer";
+import ImageViewerContainer from "@/containers/informations/detail/ImageViewerContainer";
 import { LuEye } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { FaRegTrashCan } from "react-icons/fa6";

@@ -1,6 +1,6 @@
 "use client";
 
-import CategoryList from "@/components/informations/CategoryList";
+import CategoryList from "@/components/informations/list/CategoryList";
 import { useState } from "react";
 
 type MyProps = {

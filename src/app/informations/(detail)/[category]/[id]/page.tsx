@@ -1,8 +1,8 @@
-import InformationViewer from "@/components/informations/InformationViewer";
-import PagePath from "@/components/informations/PagePath";
-import RecommendationList from "@/components/informations/RecommendationList";
-import InformationViewerSkeleton from "@/components/skeleton/informations/InformationViewerSkeleton";
-import RecommendationListSkeleton from "@/components/skeleton/informations/RecommendationListSkeleton";
+import PagePath from "@/components/common/PagePath";
+import InformationViewer from "@/components/informations/detail/InformationViewer";
+import RecommendationList from "@/components/informations/detail/RecommendationList";
+import InformationViewerSkeleton from "@/components/skeleton/informations/detail/InformationViewerSkeleton";
+import RecommendationListSkeleton from "@/components/skeleton/informations/detail/RecommendationListSkeleton";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import { Suspense } from "react";
 
@@ -38,7 +38,7 @@ export default function page({ params: { category, id } }: MyProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <PagePath category={`${CATEGORY_TEXT[category]} 상세`} />
+      <PagePath first="정보" second={`${CATEGORY_TEXT[category]} 상세`} />
       <Suspense fallback={<InformationViewerSkeleton />}>
         <InformationViewer />
       </Suspense>
