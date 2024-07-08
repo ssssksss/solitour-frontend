@@ -69,7 +69,7 @@ const DiaryEditor = ({ content, onChange }: Props) => {
             (value, index) => (
               <button
                 key={index + 1}
-                className="flex h-[4.625rem] flex-col items-center justify-between text-[0.9375rem] text-gray1 hover:text-main"
+                className="flex h-[4.625rem] flex-col items-center justify-between text-[0.9375rem] text-gray1 hover:text-main dark:text-slate-400"
               >
                 <div className="relative h-10 w-8">
                   <Image

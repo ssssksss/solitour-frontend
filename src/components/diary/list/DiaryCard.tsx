@@ -21,7 +21,20 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         }}
       >
         <div className="flex flex-row items-center gap-14">
-          <Image src="/day-text.svg" alt="day-text" width={41} height={25} />
+          <Image
+            className="hidden dark:block"
+            src="/day-text-dark-mode.svg"
+            alt="day-text"
+            width={41}
+            height={25}
+          />
+          <Image
+            className="dark:hidden"
+            src="/day-text.svg"
+            alt="day-text"
+            width={41}
+            height={25}
+          />
           <div className="flex flex-row items-center gap-8 truncate">
             {[1, 2, 3, 4, 5, 6, 7].map((value) => (
               <p
