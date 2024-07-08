@@ -1,4 +1,3 @@
-import HeaderContainer from "@/containers/common/HeaderContainer";
 
 export default function RootLayout({
   children,
@@ -6,8 +5,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <HeaderContainer />
+    <div className={"pt-[6rem]"}>
       {children}
     </div>
   );
