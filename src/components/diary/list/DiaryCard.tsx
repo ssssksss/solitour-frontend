@@ -44,6 +44,9 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         <Link
           className="mt-12 w-full truncate text-2xl font-bold hover:text-main dark:text-slate-200"
           href="/diary/1"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           {diaryData.title}
         </Link>

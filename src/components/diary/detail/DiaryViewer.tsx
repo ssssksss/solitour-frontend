@@ -8,7 +8,10 @@ interface Props {
   id: number;
 }
 
-const DiaryViewer = ({ id }: Props) => {
+const DiaryViewer = async ({ id }: Props) => {
+  // TODO
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   return (
     <div className="flex w-[60rem] flex-col items-start max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <div className="flex flex-row items-center gap-14">
@@ -35,7 +38,7 @@ const DiaryViewer = ({ id }: Props) => {
       <div className="mt-6 flex w-full flex-row items-center justify-between text-lg">
         <p>2024.06.07</p>
         <div className="flex flex-row items-center gap-1">
-          <TiLocation className="text-main" size={"1.1rem"} />
+          <TiLocation className="text-main" size={"1.3rem"} />
           <p className="font-medium text-gray1 dark:text-slate-400">
             제주특별자치도, 제주도
           </p>
