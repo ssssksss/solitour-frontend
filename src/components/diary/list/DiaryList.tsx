@@ -35,7 +35,7 @@ const DiaryList = async () => {
   ];
 
   return (
-    <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="w-[60rem] max-[1024px]:w-[29.375rem] max-[518px]:w-[calc(100%_-_48px)]">
       <h1 className="py-[2.375rem] text-[1.75rem] font-bold dark:text-slate-200">
         여행 일기
       </h1>

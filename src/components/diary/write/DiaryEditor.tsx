@@ -27,28 +27,28 @@ const DiaryEditor = ({ content, onChange }: Props) => {
           placeholder="제목을 입력하세요."
         />
       </div>
-      <div className="mt-12 flex flex-row items-center gap-[6.75rem]">
-        <div className="flex flex-row items-center gap-7">
+      <div className="mt-12 flex flex-row items-center gap-[6.75rem] max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-12">
+        <div className="flex flex-row items-center gap-7 max-[1024px]:items-start">
           <h2 className="text-lg font-semibold text-black dark:text-slate-200">
             날짜<span className="text-2xl text-main">*</span>
           </h2>
-          <div className="flex h-[3.3125rem] flex-row items-center gap-[1.125rem]">
+          <div className="flex flex-row items-center gap-[1.125rem] max-[585px]:flex-col">
             <input
-              className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
+              className="h-[3.3125rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
               type="text"
               name="placeName"
               placeholder="YYYY.MM.DD"
             />
             <p className="text-lg font-semibold text-black">~</p>
             <input
-              className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
+              className="h-[3.3125rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
               type="text"
               name="placeName"
               placeholder="YYYY.MM.DD"
             />
           </div>
         </div>
-        <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7">
+        <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
           <h2 className="text-lg font-semibold text-black dark:text-slate-200">
             장소<span className="text-2xl text-main">*</span>
           </h2>
@@ -64,7 +64,7 @@ const DiaryEditor = ({ content, onChange }: Props) => {
         <h2 className="text-lg font-semibold text-black dark:text-slate-200">
           하루 기분은 어땠나요?
         </h2>
-        <div className="flex flex-row items-center gap-[2.375rem]">
+        <div className="flex flex-wrap items-center gap-[2.375rem]">
           {["신나요", "좋아요", "그냥 그래요", "슬퍼요", "화나요"].map(
             (value, index) => (
               <button

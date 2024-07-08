@@ -1,5 +1,5 @@
 import DiaryList from "@/components/diary/list/DiaryList";
-import DiaryListSkeleton from "@/components/skeleton/diary/DiaryListSkeleton";
+import DiaryListSkeleton from "@/components/skeleton/diary/list/DiaryListSkeleton";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
