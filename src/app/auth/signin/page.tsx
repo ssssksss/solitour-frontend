@@ -11,7 +11,7 @@ export default function page() {
   return (
     <main
       className={
-        "flex w-full flex-col items-center px-[.5rem] pt-[3rem] lg:px-[0rem]"
+        "flex w-full flex-col items-center "
       }
       style={{ minHeight: "calc(100vh - 30rem)" }}
     >
