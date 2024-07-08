@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import "@/styles/quillEditor.css";
+import QuillEditorSkeleton from "@/components/skeleton/diary/write/QuillEditorSkeleton";
 
 interface Props {
   content: string;
@@ -14,7 +15,7 @@ interface Props {
 // 이를 통해 "document is not found" 에러를 방지할 수 있다.
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
-  loading: () => <div>loading...</div>,
+  loading: () => <QuillEditorSkeleton />,
 });
 
 const QuillEditor = ({ content, onChange }: Props) => {
