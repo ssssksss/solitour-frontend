@@ -1,5 +1,7 @@
 import PagePath from "@/components/common/PagePath";
 import DiaryViewer from "@/components/diary/detail/DiaryViewer";
+import DiaryViewerSkeleton from "@/components/skeleton/diary/detail/DiaryViewerSkeleton";
+import { Suspense } from "react";
 
 interface Props {
   params: { id: string };
@@ -26,7 +28,9 @@ export default function page({ params: { id } }: Props) {
   return (
     <div className="flex flex-col items-center">
       <PagePath first="여행 일기" second="일기 상세" />
-      <DiaryViewer id={diaryId} />
+      <Suspense fallback={<DiaryViewerSkeleton />}>
+        <DiaryViewer id={diaryId} />
+      </Suspense>
     </div>
   );
 }
