@@ -15,12 +15,12 @@ const SignIn = () => {
           lottieFile={introLottie}
           className="h-full w-[275px]"
         />
-        <div className="absolute left-[4.5rem] top-[6.25rem]">
+        <div className="absolute left-[4.5rem] top-[6.25rem] h-[107px] w-[177px]">
           <Image
-            src={"/solitour-intro-image.svg"}
+            src={"/test.png"}
             alt={"kakao-logo-image"}
-            width={177}
-            height={107}
+            fill={true}
+            style={{ objectFit: "cover" }}
           />
         </div>
       </div>
