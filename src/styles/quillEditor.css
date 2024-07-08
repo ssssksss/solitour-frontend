@@ -21,3 +21,10 @@
 .ql-editor.ql-blank::before {
   left: 1rem;
 }
+
+@media (prefers-color-scheme: dark) {
+  .ql-editor.ql-blank::before {
+    --tw-text-opacity: 1;
+    color: rgb(148 163 184 / var(--tw-text-opacity)) /* #94a3b8 */;
+  }
+}

@@ -47,7 +47,7 @@ const QuillEditor = ({ content, onChange }: Props) => {
         imageResize: {
           modules: ["Resize", "DisplaySize", "Toolbar"],
           handleStyles: {
-            backgroundColor: "black",
+            backgroundColor: "#00B488",
             border: "none",
             // other camelCase styles for size display
           },
