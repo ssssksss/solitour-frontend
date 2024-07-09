@@ -10,15 +10,14 @@ const AuthKaKaoContainer = () => {
   const router = useRouter();
   const authStore = useAuthStore();
 
-  useEffect(() => {
-    const _queryStringObject = UrlQueryStringToObject<{
-      [key: string]: string;
-    }>(window.location.href);
-    const kakaoLogin = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}
-              &code=${_queryStringObject?.code}`,
+    useEffect(() => {
+        const _queryStringObject = UrlQueryStringToObject<{
+          [key: string]: string;
+        }>(window.location.href);
+        const kakaoLogin = async () => {
+          try {
+            const response = await fetch(
+              `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.KAKAO_REDIRECT_URL}&code=${_queryStringObject?.code}`,
           {
             method: "GET",
             headers: {
