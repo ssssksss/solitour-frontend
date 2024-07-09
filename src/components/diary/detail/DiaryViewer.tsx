@@ -14,7 +14,7 @@ const DiaryViewer = async ({ id }: Props) => {
 
   return (
     <div className="flex w-[60rem] flex-col items-start max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
-      <div className="flex flex-row items-center gap-14">
+      <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
         <Image
           className="hidden dark:block"
           src="/day-text-dark-mode.svg"
@@ -102,7 +102,6 @@ const DiaryViewer = async ({ id }: Props) => {
           많고 가보길 잘한...
         </p>
       </div>
-
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
         <button className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400">
           <GoPencil />
