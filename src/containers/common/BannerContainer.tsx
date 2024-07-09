@@ -2,11 +2,11 @@
 
 import Banner from "@/components/common/Banner";
 
-type MyProps = {
+interface Props {
   category?: string;
-};
+}
 
-const BannerContainer = ({ category = "정보" }: MyProps) => {
+const BannerContainer = ({ category = "정보" }: Props) => {
   return (
     <Banner
       content={[`유용한 <b>여행 정보</b>를`, "<b>공유</b>해보세요!"]}

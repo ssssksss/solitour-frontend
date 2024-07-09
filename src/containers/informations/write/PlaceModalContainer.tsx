@@ -5,11 +5,11 @@ import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-type MyProps = {
+interface Props {
   closeModal: () => void;
-};
+}
 
-const PlaceModalContainer = ({ closeModal }: MyProps) => {
+const PlaceModalContainer = ({ closeModal }: Props) => {
   const { address, placeName, placeId, changeField, resetPlaceInfo } =
     useEditorStore();
   const [isCustom, setIsCustom] = useState<boolean>(false);

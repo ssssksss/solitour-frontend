@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
 import HeaderSidebar from "./HeaderSidebar";
 
-type MyProps = {
+interface Props {
   pathname: string;
   visible: boolean;
   transparent: boolean;
@@ -11,7 +11,7 @@ type MyProps = {
   onClose: () => void;
   logoutHandler: () => void;
   nickName?: string;
-};
+}
 
 const Header = ({
   pathname,
@@ -21,7 +21,7 @@ const Header = ({
   onClose,
   nickName,
   logoutHandler,
-}: MyProps) => {
+}: Props) => {
   return (
     <header className="flex w-full flex-row justify-center">
       {visible && <HeaderSidebar onClose={onClose} />}

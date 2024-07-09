@@ -2,12 +2,12 @@ import { CATEGORY_TEXT } from "@/constants/meetings/category";
 import { SUBCATEGORY } from "@/constants/meetings/subCategory";
 import Link from "next/link";
 
-type MyProps = {
+interface Props {
   category: string;
   subCategory: string;
-};
+}
 
-const MeetingSubCategoryList = ({ category, subCategory }: MyProps) => {
+const MeetingSubCategoryList = ({ category, subCategory }: Props) => {
   const subCategories = SUBCATEGORY[category];
 
   return (

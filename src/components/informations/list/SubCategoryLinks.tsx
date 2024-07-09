@@ -1,12 +1,12 @@
 import { SUBCATEGORY } from "@/constants/informations/subCategory";
 import Link from "next/link";
 
-type MyProps = {
+interface Props {
   category: string;
   subCategory: string;
-};
+}
 
-const SubCategoryLinks = ({ category, subCategory }: MyProps) => {
+const SubCategoryLinks = ({ category, subCategory }: Props) => {
   const subCategories = SUBCATEGORY[category];
 
   return (

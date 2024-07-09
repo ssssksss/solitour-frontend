@@ -3,33 +3,32 @@ import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { DateRangePicker, RangeKeyDict } from 'react-date-range';
-;
+import { DateRangePicker, RangeKeyDict } from "react-date-range";
 
 interface IMeetingFilterModalProps {
-    closeModal: () => void;
+  closeModal: () => void;
 }
 
 const LOCATION = [
-  ["전체","all"],
-  ["서울","seoul"],
-  ["부산","busan"],
-  ["경기","gyeonggi"],
-  ["제주","jeju"],
-  ["충청","chungcheong"],
-  ["강원","gangwon"],
-  ["인천","incheon"],
-  ["경상","gyeongsang"],
-  ["전라","jeolla"],
-  ["기타지역","etc"],
+  ["전체", "all"],
+  ["서울", "seoul"],
+  ["부산", "busan"],
+  ["경기", "gyeonggi"],
+  ["제주", "jeju"],
+  ["충청", "chungcheong"],
+  ["강원", "gangwon"],
+  ["인천", "incheon"],
+  ["경상", "gyeongsang"],
+  ["전라", "jeolla"],
+  ["기타지역", "etc"],
 ];
 const SEX = [
-  ["전체","all"],
-  ["남성","man"],
-  ["여성","woman"],
+  ["전체", "all"],
+  ["남성", "man"],
+  ["여성", "woman"],
 ];
 const AGE = {
-  "전체": {
+  전체: {
     startAge: 20,
     endAge: 59,
   },
@@ -49,15 +48,15 @@ const AGE = {
     startAge: 50,
     endAge: 59,
   },
-}
+};
 const CATEGORY = {
-  "전체": {
+  전체: {
     value: "all",
   },
-  "취향": {
+  취향: {
     value: "liking",
   },
-  "활동": {
+  활동: {
     value: "activity",
   },
 };
@@ -82,17 +81,22 @@ function calculateDateDifference(startDate: Date, endDate: Date): number {
   return differenceInDays;
 }
 
-
 const MeetingFilterModal = (props: IMeetingFilterModalProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams(); 
-  const [location, setLocation] = useState(searchParams.get("location") || "all");
+  const searchParams = useSearchParams();
+  const [location, setLocation] = useState(
+    searchParams.get("location") || "all",
+  );
   const [sex, setSex] = useState(searchParams.get("sex") || "all");
-  const [startAge, setStartAge] = useState(searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20);
+  const [startAge, setStartAge] = useState(
+    searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
+  );
   const [endAge, setEndAge] = useState(
     searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
   );
-  const [category, setCategory] = useState(searchParams.get("category") || "all");
+  const [category, setCategory] = useState(
+    searchParams.get("category") || "all",
+  );
   const [calendarDate, setCalendarDate] = useState([
     {
       startDate: searchParams.get("startDate")
@@ -108,8 +112,12 @@ const MeetingFilterModal = (props: IMeetingFilterModalProps) => {
   const initFilterOptionHandler = () => {
     setLocation(searchParams.get("location") || "all");
     setSex(searchParams.get("sex") || "all");
-    setStartAge(searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20);
-    setEndAge(searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59);
+    setStartAge(
+      searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
+    );
+    setEndAge(
+      searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
+    );
     setCategory(searchParams.get("category") || "all");
     setCalendarDate([
       {
@@ -122,14 +130,14 @@ const MeetingFilterModal = (props: IMeetingFilterModalProps) => {
         key: "selection",
       },
     ]);
-  }
+  };
 
   const submitApplyFilter = () => {
     router.replace(
       `/meetings?location=${location}&sex=${sex}&startAge=${startAge}&endAge=${endAge}&category=${category}&startDate=${dateFormat4y2m2d(calendarDate[0].startDate)}&endDate=${dateFormat4y2m2d(calendarDate[0].endDate)}`,
     );
     props.closeModal();
-  }
+  };
 
   return (
     <div
@@ -335,4 +343,4 @@ const MeetingFilterModal = (props: IMeetingFilterModalProps) => {
     </div>
   );
 };
-export default MeetingFilterModal
+export default MeetingFilterModal;

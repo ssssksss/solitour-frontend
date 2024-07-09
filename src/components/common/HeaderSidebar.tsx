@@ -7,11 +7,11 @@ import { MdClose } from "react-icons/md";
 import { RiLoginBoxLine } from "react-icons/ri";
 import Image from "next/image";
 
-type MyProps = {
+interface Props {
   onClose: () => void;
-};
+}
 
-const HeaderSidebar = ({ onClose }: MyProps) => {
+const HeaderSidebar = ({ onClose }: Props) => {
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-full w-[200%] animate-sidebarFadeIn">
       <div className="bg-black/25">

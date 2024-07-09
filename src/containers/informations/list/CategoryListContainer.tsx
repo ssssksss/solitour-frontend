@@ -3,12 +3,12 @@
 import CategoryList from "@/components/informations/list/CategoryList";
 import { useState } from "react";
 
-type MyProps = {
+interface Props {
   category: string;
   subCategory: string;
-};
+}
 
-const CategoryListContainer = ({ category, subCategory }: MyProps) => {
+const CategoryListContainer = ({ category, subCategory }: Props) => {
   const [isModal, setIsModal] = useState<boolean>(false);
 
   return (

@@ -2,12 +2,8 @@
 
 import SignUp from "@/components/auth/SignUp";
 
-
 const SignUpContainer = () => {
-
-  return (
-    <SignUp />    
-  );
+  return <SignUp />;
 };
 
 export default SignUpContainer;

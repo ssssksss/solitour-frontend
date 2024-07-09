@@ -3,13 +3,13 @@ import Link from "next/link";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 
-type MyProps = {
+interface Props {
   visible: boolean;
   onClick: () => void;
   onScrollToTop: () => void;
-};
+}
 
-const FloatingButton = ({ visible, onClick, onScrollToTop }: MyProps) => {
+const FloatingButton = ({ visible, onClick, onScrollToTop }: Props) => {
   return (
     <div className="fixed bottom-8 right-0 z-40 flex w-24 flex-col items-center gap-3">
       {visible && (

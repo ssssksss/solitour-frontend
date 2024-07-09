@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-type MyProps = {
+interface Props {
   placeName: string; // 장소명
   placeId: number; // 장소 id 값
-};
+}
 
-const KakaoMapLinkContainer = ({ placeName, placeId }: MyProps) => {
+const KakaoMapLinkContainer = ({ placeName, placeId }: Props) => {
   const [loading, isLoading] = useState<boolean>(true);
 
   useEffect(() => {

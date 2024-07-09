@@ -4,13 +4,13 @@ import { useFormContext } from "react-hook-form";
 import GatheringScheduleModal from "../modal/GatheringScheduleModal";
 
 interface IGatheringScheduleProps {
-    isModal: boolean;
-    closeModal: () => void;
-    openModal: () => void;
+  isModal: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 }
 
 const GatheringSchedule = (props: IGatheringScheduleProps) => {
-    const formContext = useFormContext();
+  const formContext = useFormContext();
 
   return (
     <article className={"flex flex-col gap-[2rem]"}>
@@ -32,13 +32,8 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
           일정 선택
         </button>
         <div>{formContext.getValues("startDateTime") && "OK"}</div>
-        <Modal
-          isOpen={props.isModal}
-          onClose={() => props.closeModal()}
-        >
-          <GatheringScheduleModal
-            closeModal={() => props.closeModal()}
-          />
+        <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
+          <GatheringScheduleModal closeModal={() => props.closeModal()} />
         </Modal>
       </div>
       <div
@@ -103,4 +98,4 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
     </article>
   );
 };
-export default GatheringSchedule
+export default GatheringSchedule;

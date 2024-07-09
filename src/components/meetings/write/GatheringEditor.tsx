@@ -1,14 +1,13 @@
-
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { useFormContext } from 'react-hook-form';
-import GatheringCategory from './GatheringCategory';
-import GatheringContent from './GatheringContent';
-import GatheringPlace from './GatheringPlace';
-import GatheringSchedule from './GatheringSchedule';
-import GatheringSetting from './GatheringSetting';
+import { useFormContext } from "react-hook-form";
+import GatheringCategory from "./GatheringCategory";
+import GatheringContent from "./GatheringContent";
+import GatheringPlace from "./GatheringPlace";
+import GatheringSchedule from "./GatheringSchedule";
+import GatheringSetting from "./GatheringSetting";
 
 interface IGatheringEditorProps {
   categoryModal: {
@@ -64,24 +63,24 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         </p>
       </div>
       <section className={"flex flex-col gap-[2rem] pt-[3rem]"}>
-      <GatheringCategory {...props.categoryModal} />
-      <GatheringSetting {...props.settingModal} / >
-      <GatheringSchedule {...props.scheduleModal} / >
-      <GatheringPlace {...props.placeModal} />
-      <GatheringContent />
-      <div className={"flex w-full justify-end"}>
-        <button
-          className={
-            "h-[3.825rem] max-w-[10.825rem] rounded-[2rem] bg-gray1 px-[2rem] py-[.5rem] text-white disabled:bg-gray1"
-          }
-          onClick={() => console.log(formContext.getValues())}
-          disabled={!formContext.formState.isValid}
-        >
-          모임 등록하기
-        </button>
-      </div>
+        <GatheringCategory {...props.categoryModal} />
+        <GatheringSetting {...props.settingModal} />
+        <GatheringSchedule {...props.scheduleModal} />
+        <GatheringPlace {...props.placeModal} />
+        <GatheringContent />
+        <div className={"flex w-full justify-end"}>
+          <button
+            className={
+              "h-[3.825rem] max-w-[10.825rem] rounded-[2rem] bg-gray1 px-[2rem] py-[.5rem] text-white disabled:bg-gray1"
+            }
+            onClick={() => console.log(formContext.getValues())}
+            disabled={!formContext.formState.isValid}
+          >
+            모임 등록하기
+          </button>
+        </div>
       </section>
     </div>
   );
 };
-export default GatheringEditor
+export default GatheringEditor;

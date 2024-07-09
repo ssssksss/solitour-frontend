@@ -4,13 +4,13 @@ import SubCategoryLinks from "./SubCategoryLinks";
 import { IoIosArrowDown } from "react-icons/io";
 import CategoryLinks from "./CategoryLinks";
 
-type MyProps = {
+interface Props {
   category: string;
   subCategory: string;
   isModal: boolean;
   closeModal: () => void;
   openModal: () => void;
-};
+}
 
 const CategoryList = ({
   category,
@@ -18,7 +18,7 @@ const CategoryList = ({
   isModal,
   closeModal,
   openModal,
-}: MyProps) => {
+}: Props) => {
   return (
     <div className="mt-6 flex w-[60rem] flex-col gap-6 max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       {isModal && <InformationFilterModal closeModal={closeModal} />}

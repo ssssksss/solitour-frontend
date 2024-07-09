@@ -1,10 +1,10 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-type MyProps = {
+interface Props {
   router: AppRouterInstance;
-};
+}
 
-const BackButton = ({ router }: MyProps) => {
+const BackButton = ({ router }: Props) => {
   return (
     <button
       className="h-[2.625rem] w-[9.4375rem] rounded-full bg-main text-white hover:scale-105"

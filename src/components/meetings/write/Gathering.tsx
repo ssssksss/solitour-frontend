@@ -4,13 +4,13 @@ import { useFormContext } from "react-hook-form";
 import GatheringSettingModal from "../modal/GatheringSettingModal";
 
 interface IGatheringSettingProps {
-    isModal: boolean;
-    closeModal: () => void;
-    openModal: () => void;
+  isModal: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 }
 
 const GatheringSetting = (props: IGatheringSettingProps) => {
-    const formContext = useFormContext();
+  const formContext = useFormContext();
 
   return (
     <article className={"flex flex-col gap-[2rem]"}>
@@ -32,13 +32,8 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
           모임 제한 선택
         </button>
         <div>{formContext.getValues("expirationDate") && "OK"}</div>
-        <Modal
-          isOpen={props.isModal}
-          onClose={() => props.closeModal()}
-        >
-          <GatheringSettingModal
-            closeModal={() => props.closeModal()}
-          />
+        <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
+          <GatheringSettingModal closeModal={() => props.closeModal()} />
         </Modal>
       </div>
       <div
@@ -84,4 +79,4 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
     </article>
   );
 };
-export default GatheringSetting
+export default GatheringSetting;

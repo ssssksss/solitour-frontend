@@ -5,15 +5,15 @@ import { CiBookmark } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 
-type MyProps = {
+interface Props {
   id: number;
   category: string;
   title: string;
   image: string;
-};
+}
 
 // todo
-const InformationItem = ({ id, category, title, image }: MyProps) => {
+const InformationItem = ({ id, category, title, image }: Props) => {
   let style = "";
   switch (category) {
     case "restaurant":

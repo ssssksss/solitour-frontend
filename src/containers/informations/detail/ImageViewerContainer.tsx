@@ -4,11 +4,11 @@ import ImageViewer from "@/components/informations/detail/ImageViewer";
 import useDragScroll from "@/hooks/useDragScroll";
 import { useState } from "react";
 
-type MyProps = {
+interface Props {
   images: string[];
-};
+}
 
-const ImageViewerContainer = ({ images }: MyProps) => {
+const ImageViewerContainer = ({ images }: Props) => {
   const [mainImageIndex, setMainImageIndex] = useState<number>(0);
   const scrollHook = useDragScroll();
 

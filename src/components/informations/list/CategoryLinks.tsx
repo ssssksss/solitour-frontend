@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-type MyProps = {
+interface Props {
   category: string;
-};
+}
 
-const CategoryLinks = ({ category }: MyProps) => {
+const CategoryLinks = ({ category }: Props) => {
   return (
     <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] pb-[0.375rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)] dark:border-slate-200">
       <nav className="w-fit">

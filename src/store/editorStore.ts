@@ -1,6 +1,7 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
 
+// 1. 상태 인터페이스 정의
 interface EditorState {
   title: string;
   address: string; // 도로명주소
@@ -20,6 +21,7 @@ interface EditorState {
   tips: string[];
 }
 
+// 2. 액션 인터페이스 정의
 interface EditorActions {
   initialize: () => void;
   changeField: (key: string, value: string) => void;
@@ -36,8 +38,7 @@ interface EditorActions {
   removeTip: () => void;
 }
 
-type EditorStoreType = StateCreator<EditorState & EditorActions>;
-
+// 3. 초기 상태 정의
 const initialState: EditorState = {
   title: "",
   address: "",
@@ -57,7 +58,8 @@ const initialState: EditorState = {
   tips: [""],
 };
 
-const editorStore: EditorStoreType = (set, get) => ({
+// 4. 상태 및 액션 생성
+const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
   changeField: (key: string, value: string) => set({ [key]: value }),

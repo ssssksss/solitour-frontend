@@ -6,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { IoBookmark } from "react-icons/io5";
 import { TiLocation } from "react-icons/ti";
 
-type MyProps = {
+interface Props {
   id: number;
   category: string;
   bookmark: boolean;
@@ -20,7 +20,7 @@ type MyProps = {
   qualification: string;
   likes: number;
   views: number;
-};
+}
 
 // todo
 const MeetingItem = ({
@@ -37,7 +37,7 @@ const MeetingItem = ({
   qualification,
   likes,
   views,
-}: MyProps) => {
+}: Props) => {
   let style = "";
   switch (category) {
     case "취향":
@@ -82,7 +82,7 @@ const MeetingItem = ({
         </p>
       </div>
       <div className="flex flex-col gap-5">
-        <div className="flex flex-col text-sm font-medium ">
+        <div className="flex flex-col text-sm font-medium">
           <div
             className={
               "grid w-full grid-cols-[15rem_auto] gap-y-[.5rem] max-[520px]:flex max-[520px]:flex-col"

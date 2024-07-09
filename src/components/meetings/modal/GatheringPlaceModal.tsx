@@ -7,7 +7,6 @@ interface IGatheringPlaceModalProps {
   closeModal: () => void;
 }
 
-
 type placeElement = {
   address_name: string;
   category_group_code: string;
@@ -25,19 +24,19 @@ type placeElement = {
 
 type placeElement1 = {
   address: {
-    address_name: string,
-    b_code: string,
-    h_code: string,
-    main_address_no: string,
-    mountain_yn: string,
-    region_1depth_name: string,
-    region_2depth_name: string,
-    region_3depth_h_name: string,
-    region_3depth_name: string,
-    sub_address_no: string,
-    x: string,
-    y: string,
-  },
+    address_name: string;
+    b_code: string;
+    h_code: string;
+    main_address_no: string;
+    mountain_yn: string;
+    region_1depth_name: string;
+    region_2depth_name: string;
+    region_3depth_h_name: string;
+    region_3depth_name: string;
+    sub_address_no: string;
+    x: string;
+    y: string;
+  };
   address_name: string;
   address_type: string;
   road_address: {
@@ -125,7 +124,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
   };
 
   const pickAddress = (element: placeElement1) => {
-    console.log("GatheringPlaceModal.tsx 파일 : ",element);
+    console.log("GatheringPlaceModal.tsx 파일 : ", element);
     setRoadAddress(element.road_address.address_name);
     setPlaceData(element);
   };
@@ -357,7 +356,6 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                           i?.road_address?.address_name != undefined,
                       ).length == 0 && (
                         <div className={"flex justify-center py-[2rem]"}>
-                          
                           결과가 없습니다.
                         </div>
                       )}
@@ -376,11 +374,9 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
               }
             >
               <span className={"text-lg font-bold text-black"}>
-                
                 장소명 입력
               </span>
               <span className={"text-gray1"}>
-                
                 {placeData?.road_address.address_name}
               </span>
             </h3>

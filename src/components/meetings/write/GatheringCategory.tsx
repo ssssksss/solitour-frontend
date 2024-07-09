@@ -4,13 +4,13 @@ import { useFormContext } from "react-hook-form";
 import GatheringCategoryModal from "../modal/GatheringCategoryModal";
 
 interface IGatheringCategoryProps {
-    isModal: boolean;
-    closeModal: () => void;
-    openModal: () => void;
+  isModal: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 }
 
 const GatheringCategory = (props: IGatheringCategoryProps) => {
-    const formContext = useFormContext();
+  const formContext = useFormContext();
 
   return (
     <article className={"flex flex-col gap-[2rem]"}>
@@ -36,13 +36,8 @@ const GatheringCategory = (props: IGatheringCategoryProps) => {
             formContext.getValues("subCategory") &&
             "OK"}
         </div>
-        <Modal
-          isOpen={props.isModal}
-          onClose={() => props.closeModal()}
-        >
-          <GatheringCategoryModal
-            closeModal={() => props.closeModal()}
-          />
+        <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
+          <GatheringCategoryModal closeModal={() => props.closeModal()} />
         </Modal>
       </div>
       <div
@@ -66,4 +61,4 @@ const GatheringCategory = (props: IGatheringCategoryProps) => {
     </article>
   );
 };
-export default GatheringCategory
+export default GatheringCategory;

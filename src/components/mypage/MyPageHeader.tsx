@@ -2,21 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface IDummyData {
-  user_id?: number,
-  user_status_id?: string,
-  user_oauth_id?: string,
-  user_nickname?: string,
-  user_age?: number | null,
-  user_sex?: string | null,
-  user_email?: string | null,
-  user_phone_number?: string | null,
-  user_image?: string | null,
+  user_id?: number;
+  user_status_id?: string;
+  user_oauth_id?: string;
+  user_nickname?: string;
+  user_age?: number | null;
+  user_sex?: string | null;
+  user_email?: string | null;
+  user_phone_number?: string | null;
+  user_image?: string | null;
   // is_admin: boolean,
 }
 
-
 const dummyData: IDummyData = {
-    user_id: 1,
+  user_id: 1,
   user_status_id: "1",
   user_oauth_id: "1",
   user_nickname: "하몽님",
@@ -25,8 +24,7 @@ const dummyData: IDummyData = {
   user_email: "sola240@gmail.com",
   user_phone_number: "010-1234-5678",
   user_image: null,
-}
-
+};
 
 const MyPageHeader = () => {
   return (
@@ -70,7 +68,11 @@ const MyPageHeader = () => {
                 }
               >
                 <div className="relative h-[1.25rem] w-[1.25rem]">
-                  <Image src={"/setting-icon.svg"} alt={"setting-icon-image"} fill />
+                  <Image
+                    src={"/setting-icon.svg"}
+                    alt={"setting-icon-image"}
+                    fill
+                  />
                 </div>
               </div>
             </Link>
@@ -84,4 +86,4 @@ const MyPageHeader = () => {
     </div>
   );
 };
-export default MyPageHeader
+export default MyPageHeader;

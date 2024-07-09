@@ -5,13 +5,13 @@ import { useFormContext } from "react-hook-form";
 import GatheringPlaceModal from "../modal/GatheringPlaceModal";
 
 interface IGatheringPlaceProps {
-    isModal: boolean;
-    closeModal: () => void;
-    openModal: () => void;
+  isModal: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 }
 
 const GatheringPlace = (props: IGatheringPlaceProps) => {
-    const formContext = useFormContext();
+  const formContext = useFormContext();
 
   return (
     <article className={"flex flex-col gap-[2rem]"}>
@@ -64,23 +64,22 @@ const GatheringPlace = (props: IGatheringPlaceProps) => {
                 "flex h-[6rem] w-full flex-col justify-between gap-[1rem] rounded-[1rem] bg-white p-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
             >
-              {
-                formContext.getValues("placeName") &&
+              {formContext.getValues("placeName") && (
                 <>
-                <div className={"flex items-center text-2xl font-bold"}>
-                  {formContext.getValues("placeName")}
-                </div>
-                <div className={"flex items-center gap-[1rem]"}>
-                  <Image
-                    src={"/location-icon.svg"}
-                    alt={"location-icon"}
-                    width={14}
-                    height={14}
+                  <div className={"flex items-center text-2xl font-bold"}>
+                    {formContext.getValues("placeName")}
+                  </div>
+                  <div className={"flex items-center gap-[1rem]"}>
+                    <Image
+                      src={"/location-icon.svg"}
+                      alt={"location-icon"}
+                      width={14}
+                      height={14}
                     />
-                  <span> {formContext.getValues("placeAddress")} </span>
-                </div>
-              </>
-                  }
+                    <span> {formContext.getValues("placeAddress")} </span>
+                  </div>
+                </>
+              )}
             </div>
           </Link>
         )}
@@ -88,4 +87,4 @@ const GatheringPlace = (props: IGatheringPlaceProps) => {
     </article>
   );
 };
-export default GatheringPlace
+export default GatheringPlace;
