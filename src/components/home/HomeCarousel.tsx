@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type MyProps = {
+interface Props {
   images: string[];
   currentIndex: number;
   onClick: (index: number) => void;
-};
+}
 
-const HomeCarousel = ({ images, currentIndex, onClick }: MyProps) => {
+const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
   return (
     <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80 dark:opacity-65">
       <Image

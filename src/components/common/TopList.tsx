@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-type MyProps = {
+interface Props {
   title: "여행" | "모임";
-};
+}
 
 const titleList: { [key: string]: string[] } = {
   여행: [
@@ -21,7 +21,7 @@ const titleList: { [key: string]: string[] } = {
   ],
 };
 
-const TopList = async ({ title }: MyProps) => {
+const TopList = async ({ title }: Props) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return (

@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
 import { DebouncedState } from "use-debounce";
 
-type MyProps = {
+interface Props {
   placeInfos:
     | {
         place_name: string;
@@ -41,7 +40,7 @@ type MyProps = {
   }) => void;
   onChangeCustomPlaceName: (placeName: string) => void;
   closeModal: () => void;
-};
+}
 
 const PlaceModal = ({
   placeInfos,
@@ -57,7 +56,7 @@ const PlaceModal = ({
   onChangeAddress,
   onChangeCustomPlaceName,
   closeModal,
-}: MyProps) => {
+}: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-[39.75rem] flex-col rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)] dark:bg-slate-800">
@@ -98,7 +97,7 @@ const PlaceModal = ({
             </h3>
             <div className="flex h-80 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
               <input
-                className="dark:bg-search-icon-dark-mode h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full dark:bg-search-icon-dark-mode"
                 type="text"
                 autoComplete="location"
                 name="location"
@@ -135,7 +134,7 @@ const PlaceModal = ({
               className={`${canTypePlaceName ? "h-fit" : "h-80 border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]"} flex flex-col rounded-3xl`}
             >
               <input
-                className="dark:bg-search-icon-dark-mode h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full dark:bg-search-icon-dark-mode"
                 type="text"
                 autoComplete="address"
                 name="address"
@@ -165,7 +164,7 @@ const PlaceModal = ({
               className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
             >
               <input
-                className="dark:bg-search-icon-dark-mode h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full dark:bg-search-icon-dark-mode"
                 type="text"
                 autoComplete="location"
                 name="location"

@@ -105,7 +105,7 @@ const NewMeetingList = async () => {
   ];
 
   return (
-    <div className="mt-6 flex w-fit flex-wrap items-center justify-center gap-4 p-1 max-[744px]:flex-row max-[744px]:flex-nowrap">
+    <div className="mt-6 flex w-fit flex-wrap items-center justify-center gap-4 p-[0.125rem] max-[744px]:flex-row max-[744px]:flex-nowrap">
       {data.map((post, index) => (
         <MeetingItem
           key={index}

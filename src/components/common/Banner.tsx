@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import LottieComponent from "./lottie/LottieComponent";
 
-type MyProps = {
+interface Props {
   content: string[];
   buttonText: string;
   category: "정보" | "모임";
-};
+}
 
 const bannerImage = {
   정보: "/banner-image.png",
@@ -20,7 +20,7 @@ const buttonPath = {
 };
 
 // todo
-const Banner = ({ content, buttonText, category }: MyProps) => {
+const Banner = ({ content, buttonText, category }: Props) => {
   return (
     <div
       className={`-mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center max-[744px]:h-[36rem] ${category == "모임" ? "bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF]" : "bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA]"} dark:opacity-65`}
@@ -50,7 +50,7 @@ const Banner = ({ content, buttonText, category }: MyProps) => {
             {category === "정보" && (
               <div className="flex h-[13.4375rem] w-[24.8125rem] flex-col max-[1024px]:h-[10.6875rem] max-[1024px]:w-[19.8125rem]">
                 <div className="flex justify-end pr-6">
-                  <div className="animate-bannerImage1 relative h-[5.8125rem] w-[11.75rem] max-[1024px]:h-[5.0625rem] max-[1024px]:w-[10.1875rem]">
+                  <div className="relative h-[5.8125rem] w-[11.75rem] animate-bannerImage1 max-[1024px]:h-[5.0625rem] max-[1024px]:w-[10.1875rem]">
                     <Image
                       src="/banner-image1.png"
                       alt="banner-image1"
@@ -61,7 +61,7 @@ const Banner = ({ content, buttonText, category }: MyProps) => {
                     />
                   </div>
                 </div>
-                <div className="animate-bannerImage2 relative z-10 -mt-[1.875rem] h-[5.75rem] w-[14.375rem] max-[1024px]:h-[4.5625rem] max-[1024px]:w-[11.5rem]">
+                <div className="relative z-10 -mt-[1.875rem] h-[5.75rem] w-[14.375rem] animate-bannerImage2 max-[1024px]:h-[4.5625rem] max-[1024px]:w-[11.5rem]">
                   <Image
                     src="/banner-image2.png"
                     alt="banner-image2"
@@ -72,7 +72,7 @@ const Banner = ({ content, buttonText, category }: MyProps) => {
                   />
                 </div>
                 <div className="-mt-8 flex justify-end">
-                  <div className="animate-bannerImage3 relative h-[5.8125rem] w-[14.75rem] max-[1024px]:h-[4.625rem] max-[1024px]:w-[11.75rem]">
+                  <div className="relative h-[5.8125rem] w-[14.75rem] animate-bannerImage3 max-[1024px]:h-[4.625rem] max-[1024px]:w-[11.75rem]">
                     <Image
                       src="/banner-image3.png"
                       alt="banner-image3"

@@ -8,7 +8,7 @@ import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 
-type MyProps = {
+interface Props {
   editorStore: useEditorStoreType;
   locationModal: boolean;
   categoryModal: boolean;
@@ -21,7 +21,7 @@ type MyProps = {
   showCategoryModal: () => void;
   closeCategoryModal: () => void;
   setHashtag: Dispatch<SetStateAction<string>>;
-};
+}
 
 const InformationEditor = ({
   editorStore,
@@ -36,7 +36,7 @@ const InformationEditor = ({
   showCategoryModal,
   closeCategoryModal,
   setHashtag,
-}: MyProps) => {
+}: Props) => {
   return (
     <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}

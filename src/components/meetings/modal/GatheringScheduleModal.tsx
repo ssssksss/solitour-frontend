@@ -8,8 +8,6 @@ interface IGatheringScheduleModalProps {
   closeModal: () => void;
 }
 
-
-
 const dateFormat4y2m2d = (date1: string | Date) => {
   const date = new Date(date1);
   const month: number | string = date.getMonth() + 1;
@@ -35,17 +33,17 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
   const [startDateTime, setStartDateTime] = useState({
     hour: "00",
     minute: "00",
-  })
+  });
   const [endDateTime, setEndDateTime] = useState({
     hour: "23",
     minute: "00",
-  })
+  });
   const formContext = useFormContext();
 
   const submitHandler = () => {
     const _dateTime = (date: string, hour: string, minute: string) => {
       return date + " " + hour + ":" + minute;
-    }
+    };
     formContext.setValue(
       "startDateTime",
       _dateTime(
@@ -55,14 +53,14 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
       ),
     );
     if (calendarDate[0].startDate == calendarDate[0].endDate) {
-    formContext.setValue(
-      "endDateTime",
-      _dateTime(
-        dateFormat4y2m2d(calendarDate[0].startDate),
-        startDateTime.hour,
-        startDateTime.minute,
-      ),
-    )
+      formContext.setValue(
+        "endDateTime",
+        _dateTime(
+          dateFormat4y2m2d(calendarDate[0].startDate),
+          startDateTime.hour,
+          startDateTime.minute,
+        ),
+      );
     } else {
       formContext.setValue(
         "endDateTime",
@@ -75,7 +73,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
     }
     formContext.watch();
     props.closeModal();
-  }
+  };
 
   return (
     <div
@@ -233,11 +231,9 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
           onClick={() => submitHandler()}
           disabled={
             Number(calendarDate[0].startDate) ==
-            Number(calendarDate[0].endDate) &&
-            (
-              Number(startDateTime.hour + startDateTime.minute) >
+              Number(calendarDate[0].endDate) &&
+            Number(startDateTime.hour + startDateTime.minute) >
               Number(endDateTime.hour + endDateTime.minute)
-            )
           }
         >
           적용하기

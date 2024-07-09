@@ -1,4 +1,7 @@
-import { SETTING_MODAL_AGE, SETTING_MODAL_SEX } from "@/constants/meetings/GatheringConstant";
+import {
+  SETTING_MODAL_AGE,
+  SETTING_MODAL_SEX,
+} from "@/constants/meetings/GatheringConstant";
 import "@/styles/reactDataRange.css";
 import Image from "next/image";
 import { useState } from "react";
@@ -6,7 +9,6 @@ import { useFormContext } from "react-hook-form";
 interface IGatheringSettingModalProps {
   closeModal: () => void;
 }
-
 
 const dateFormat4y2m2d = (date1: string | Date) => {
   const date = new Date(date1);
@@ -31,12 +33,8 @@ function calculateDateDifference(startDate: Date, endDate: Date): number {
 const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
   const [peopleCount, setPeopleCount] = useState(10);
   const [sex, setSex] = useState("all");
-  const [startAge, setStartAge] = useState(
-    20,
-  );
-  const [endAge, setEndAge] = useState(
-    59,
-  );
+  const [startAge, setStartAge] = useState(20);
+  const [endAge, setEndAge] = useState(59);
   const [expirationDate, setExpirationDate] = useState<String>("");
   const [expirationHour, setExpirationHour] = useState<String>("23");
   const [expirationMinute, setExpirationMinute] = useState<String>("0");
@@ -59,8 +57,8 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
       new Date().getFullYear() - endAge,
     );
     formContext.watch();
-    props.closeModal(); 
-  }
+    props.closeModal();
+  };
 
   return (
     <div

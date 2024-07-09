@@ -4,11 +4,11 @@ import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
 import useEditorStore from "@/store/editorStore";
 import { useRef } from "react";
 
-type MyProps = {
+interface Props {
   index: number;
-};
+}
 
-const ImageUploadItemContainer = ({ index }: MyProps) => {
+const ImageUploadItemContainer = ({ index }: Props) => {
   const imageRef = useRef<HTMLInputElement>(null);
   const {
     images,

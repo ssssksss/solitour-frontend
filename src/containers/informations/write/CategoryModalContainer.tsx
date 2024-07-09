@@ -3,11 +3,11 @@
 import CategoryModal from "@/components/informations/write/CategoryModal";
 import useEditorStore from "@/store/editorStore";
 
-type MyProps = {
+interface Props {
   closeModal: () => void;
-};
+}
 
-const CategoryModalContainer = ({ closeModal }: MyProps) => {
+const CategoryModalContainer = ({ closeModal }: Props) => {
   const { category, subCategory, changeField } = useEditorStore();
 
   const setCategory = (category: string) => {

@@ -52,7 +52,9 @@ const SignUp = () => {
             fill={true}
           />
         </div>
-        <span className="text-sm font-semibold text-black">구글로 1초만에 시작하기</span>
+        <span className="text-sm font-semibold text-black">
+          구글로 1초만에 시작하기
+        </span>
       </Link>
       <div className={"relative flex w-full justify-center"}>
         <p

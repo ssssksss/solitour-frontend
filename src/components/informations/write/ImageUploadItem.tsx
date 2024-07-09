@@ -2,7 +2,7 @@ import Image from "next/image";
 import { RefObject } from "react";
 import { MdClose } from "react-icons/md";
 
-type MyProps = {
+interface Props {
   index: number;
   image: string;
   mainImageIndex: number;
@@ -11,7 +11,7 @@ type MyProps = {
   previewImage: () => void;
   setMainImageIndex: (index: number) => void;
   onRemove: (index: number) => void;
-};
+}
 
 const ImageUploadItem = ({
   index,
@@ -22,7 +22,7 @@ const ImageUploadItem = ({
   previewImage,
   setMainImageIndex,
   onRemove,
-}: MyProps) => {
+}: Props) => {
   if (image !== "") {
     return (
       <div
@@ -35,7 +35,10 @@ const ImageUploadItem = ({
           <MdClose
             className="z-10 cursor-pointer rounded-full bg-main p-1 text-white hover:scale-110"
             size={"1.75rem"}
-            onClick={() => onRemove(index)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemove(index);
+            }}
           />
         </div>
         <Image

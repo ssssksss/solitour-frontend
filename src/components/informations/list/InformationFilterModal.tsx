@@ -1,11 +1,11 @@
 import { LOCATION } from "@/constants/informations/location";
 import { MdClose } from "react-icons/md";
 
-type MyProps = {
+interface Props {
   closeModal: () => void;
-};
+}
 
-const InformationFilterModal = ({ closeModal }: MyProps) => {
+const InformationFilterModal = ({ closeModal }: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-80 flex-col rounded-xl bg-white p-6 dark:bg-slate-800">

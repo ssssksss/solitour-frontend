@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import MyProfile from "@/components/mypage/MyProfile";
 import { ChangeEvent, useRef, useState } from "react";

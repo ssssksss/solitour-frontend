@@ -29,7 +29,7 @@ const HeaderContainer = () => {
   const logoutHandler = () => {
     // api로 로그아웃 요청해서 쿠키제거
     authStore.initialize();
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);

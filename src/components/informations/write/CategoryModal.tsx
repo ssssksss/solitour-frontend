@@ -1,14 +1,14 @@
 import { SUBCATEGORY } from "@/constants/informations/subCategory";
 import { MdClose } from "react-icons/md";
 
-type MyProps = {
+interface Props {
   category: string;
   subCategory: string;
   setCategory: (category: string) => void;
   setSubCategory: (subCategory: string) => void;
   onCancel: () => void;
   onSave: () => void;
-};
+}
 
 const CategoryModal = ({
   category,
@@ -17,7 +17,7 @@ const CategoryModal = ({
   setSubCategory,
   onCancel,
   onSave,
-}: MyProps) => {
+}: Props) => {
   const subCategories = SUBCATEGORY[category];
 
   return (

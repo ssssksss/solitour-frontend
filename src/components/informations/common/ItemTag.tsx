@@ -1,11 +1,11 @@
-type MyProps = {
+interface Props {
   tag: string;
   borderColor?: string;
   textColor?: string;
   cursorPointer?: boolean;
   hover?: string;
   onClick?: () => void;
-};
+}
 
 const ItemTag = ({
   tag,
@@ -14,7 +14,7 @@ const ItemTag = ({
   cursorPointer,
   hover,
   onClick,
-}: MyProps) => {
+}: Props) => {
   return (
     <div
       className={`rounded-full border-[0.0625rem] ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}

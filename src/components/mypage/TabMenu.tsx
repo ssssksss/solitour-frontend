@@ -1,7 +1,7 @@
 interface TabMenuProps {
-    tabs: { label: string, content: React.ReactNode }[];
-    activeIndex: number;
-    handleTabClick: (_index: number) => void;
+  tabs: { label: string; content: React.ReactNode }[];
+  activeIndex: number;
+  handleTabClick: (_index: number) => void;
 }
 
 const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
@@ -21,8 +21,7 @@ const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
             {tab.label}
             <div
               className={`absolute bottom-0 w-full ${activeIndex == index ? "h-[2px] bg-[#00B488]" : "opacity-0"}`}
-            >
-            </div>
+            ></div>
           </button>
         ))}
       </div>
@@ -37,4 +36,4 @@ const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
     </div>
   );
 };
-export default TabMenu
+export default TabMenu;

@@ -40,7 +40,7 @@ const InformationEditorContainer = () => {
   const onSubmit = async () => {
     // Validate from fields using Zod
     const validatedFields = InformationCreateFormSchema.safeParse({
-      userId: 0,
+      userId: 1, // TODO: 실제 로그인 정보 입력할 것.
       informationTitle: editorStore.title,
       informationAddress: editorStore.address,
       province: editorStore.province,
@@ -63,7 +63,7 @@ const InformationEditorContainer = () => {
     // If validation fails, return errors early. Otherwise, continue;
     if (!validatedFields.success) {
       console.log(validatedFields.error.flatten().fieldErrors);
-      alert("Invalid Fields. Failed to write.");
+      alert("모든 정보를 입력해 주세요.");
       return;
     }
 
@@ -94,18 +94,24 @@ const InformationEditorContainer = () => {
       formData.append("hashtags", hashtag);
     });
     validatedFields.data.tips.forEach((tip) => {
-      formData.append("tips", tip);
+      formData.append("informationTips", tip);
     });
 
+    // headers: {
+    //   "Content-Type": "multipart/form-data"
+    // }
+    // 위의 코드를 빼야 정상적으로 작동함.
     const response = await fetch("http://localhost:3000/api/informations", {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       body: formData,
       cache: "no-store",
     });
 
+    if (!response.ok) {
+      throw new Error("Failed to write data.");
+    }
+
+    alert("테스트 성공");
     return;
   };
 

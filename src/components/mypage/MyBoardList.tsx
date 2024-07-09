@@ -1,5 +1,6 @@
 import InformationItem from "../common/InformationItem";
 import MeetingItem from "./../common/MeetingItem";
+
 type MyBoardListProps = {
   data: (
     | {
@@ -26,6 +27,7 @@ type MyBoardListProps = {
       }
   )[];
 };
+
 const MyBoardList = ({ data }: MyBoardListProps) => {
   return (
     <div className="m-auto grid w-full grid-cols-1 place-items-center gap-x-[1.25rem] gap-y-[0.875rem] pb-[5rem] pt-[2.5rem] min-[708px]:max-w-[628px] min-[708px]:grid-cols-2 min-[1024px]:max-w-[60.5rem] min-[1024px]:grid-cols-3">
