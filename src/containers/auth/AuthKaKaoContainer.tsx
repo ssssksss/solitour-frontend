@@ -17,16 +17,16 @@ const AuthKaKaoContainer = () => {
         const kakaoLogin = async () => {
           try {
             const response = await fetch(
-              `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.KAKAO_REDIRECT_URL}&code=${_queryStringObject?.code}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-              "Access-Control-Allow-Origin": "*",
-            },
-            credentials: "include",
-          },
-        );
+              `${process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_BACKEND_URL : process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI : process.env.KAKAO_REDIRECT_URI}&code=${_queryStringObject?.code}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json;charset=utf-8",
+                  "Access-Control-Allow-Origin": "*",
+                },
+                credentials: "include",
+              },
+            );
 
         if (!response.ok) {
           throw new Error("Network response was not ok");

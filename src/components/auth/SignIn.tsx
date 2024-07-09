@@ -30,7 +30,7 @@ const SignIn = () => {
         className={
           "relative mb-[0.75rem] flex h-[2.875rem] w-full items-center justify-center rounded-3xl bg-[#FEE500]"
         }
-        href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_REST_API_KEY}&redirect_uri=${process.env.KAKAO_REDIRECT_URL}`}
+        href="/api/auth/kakao"
       >
         <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
           <Image src={"/kakao-icon.svg"} alt={"kakao-logo-image"} fill={true} />
