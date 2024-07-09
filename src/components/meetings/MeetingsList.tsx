@@ -1,5 +1,4 @@
 import { Modal } from "@/components/common/modal/Modal";
-import Link from "next/link";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { IoIosArrowDown } from "react-icons/io";
@@ -22,7 +21,7 @@ const MeetingsList = (props: IMeetingsList) => {
     bookmark: boolean;
     title: string;
     username: string;
-    date: Date;
+    date: Date | string;
     location: string;
     time: string;
     current: number;
@@ -36,25 +35,17 @@ const MeetingsList = (props: IMeetingsList) => {
     bookmark: true,
     title: "동해 서핑 투게더",
     username: "waver",
-    date: new Date(),
-    location: "강원, 동해시",
+    date: "2024.07.09(화) ~ 2024.07.10(수)",
+    location: "제주특별자치도, 제주시",
     time: "08:00",
     current: 1,
     total: 6,
-    qualification: "(30대, 성별 상관없음)",
+    qualification: "(20 ~ 50세, 성별 무관)",
     likes: 52,
     views: 102,
   };
   return (
     <div className="flex w-[60rem] flex-col pt-[5.5rem] max-[1024px]:w-[90%]">
-      <div className="flex w-full justify-end">
-        <Link
-          className="flex h-9 w-28 items-center justify-center rounded-full bg-main text-sm font-medium text-white hover:scale-105"
-          href="/meetings/write"
-        >
-          모임 생성하기
-        </Link>
-      </div>
       <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
         <MeetingSubCategoryList category={"모임"} subCategory={"all"} />
         <div className="flex flex-row items-center space-x-4 max-[768px]:w-full max-[768px]:justify-between">
@@ -85,7 +76,7 @@ const MeetingsList = (props: IMeetingsList) => {
           </div>
         </div>
       </div>
-      <div className="mt-6 flex flex-wrap justify-center gap-4">
+      <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-7">
         {[1, 2, 3, 4, 5, 6].map((_, index) => (
           <MeetingItem
             key={index}
