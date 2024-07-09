@@ -12,7 +12,7 @@ type MyProps = {
   bookmark: boolean;
   title: string;
   username: string;
-  date: Date;
+  date: Date | string;
   location: string;
   time: string;
   current: number;
@@ -51,7 +51,7 @@ const MeetingItem = ({
   }
 
   return (
-    <div className="flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl p-5 outline outline-2 outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600">
+    <div className="flex w-[29.375rem] flex-col gap-[1.25rem] rounded-2xl p-6 outline outline-2 outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600">
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
@@ -82,44 +82,59 @@ const MeetingItem = ({
         </p>
       </div>
       <div className="flex flex-col gap-5">
-        <div className="flex flex-row items-center justify-between">
-          <div className="space-y-[0.375rem] text-sm font-medium">
-            <div className="flex flex-row items-center gap-3">
+        <div className="flex flex-col text-sm font-medium ">
+          <div
+            className={
+              "grid w-full grid-cols-[15rem_auto] gap-y-[.5rem] max-[520px]:flex max-[520px]:flex-col"
+            }
+          >
+            <article className="flex flex-row items-center gap-2">
               <Image
                 src="/calendar-icon.svg"
                 alt="calendar-icon"
-                width={10}
-                height={10}
+                width={14}
+                height={14}
               />
-              <p className="text-black dark:text-slate-400">
-                {date.getFullYear() +
-                  "." +
-                  (date.getMonth() + 1) +
-                  "." +
-                  date.getDate()}
-              </p>
-            </div>
-            <div className="-ml-[2px] flex flex-row items-center gap-2 text-black dark:text-slate-400">
-              <TiLocation />
+              {date instanceof Date ? (
+                <p className="text-black dark:text-slate-400">
+                  {(date as Date).getFullYear() +
+                    "." +
+                    ((date as Date).getMonth() + 1) +
+                    "." +
+                    (date as Date).getDate()}
+                </p>
+              ) : (
+                <p className="text-black dark:text-slate-400">
+                  {date as string}
+                </p>
+              )}
+            </article>
+            <article className="flex flex-row items-center gap-2 text-black dark:text-slate-400">
+              <div className={"aspect-square w-[.825rem]"}>
+                <TiLocation />
+              </div>
               <p>{location}</p>
-            </div>
-            <div className="flex flex-row items-center gap-3 text-black dark:text-slate-400">
-              <Image
-                src="/clock-icon.svg"
-                alt="clock-icon"
-                width={10}
-                height={10}
-              />
-              <p>{time}</p>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              <BsFillPeopleFill className="-ml-[0.125rem] text-black dark:text-slate-400" />
-              <p>
+            </article>
+            <article className="flex flex-row items-center gap-2">
+              <div className={"aspect-square w-[.825rem]"}>
+                <BsFillPeopleFill className="text-black dark:text-slate-400" />
+              </div>
+              <p className={"w-full"}>
                 <span className="text-main">{current}</span>
                 <span className="text-black dark:text-slate-400">{` / ${total} `}</span>
                 <span className="font-medium text-gray2 dark:text-slate-400">{`${qualification}`}</span>
               </p>
-            </div>
+            </article>
+            <article className="flex flex-row items-center gap-[.4375rem] text-black dark:text-slate-400">
+              <Image
+                src="/clock-icon.svg"
+                alt="clock-icon"
+                width={14}
+                height={14}
+                className="ml-[.0625rem]"
+              />
+              <p>{time}</p>
+            </article>
           </div>
         </div>
         <div className="flex flex-row items-center justify-between">

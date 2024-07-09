@@ -1,5 +1,7 @@
+import LottieImage from "@/../public/lottie/solitour-mettings-intro-image1.json";
 import Image from "next/image";
 import Link from "next/link";
+import LottieComponent from "./lottie/LottieComponent";
 
 type MyProps = {
   content: string[];
@@ -84,14 +86,11 @@ const Banner = ({ content, buttonText, category }: MyProps) => {
               </div>
             )}
             {category === "모임" && (
-              <Image
-                src={bannerImage[category]}
-                alt={"banner-image"}
-                fill={true}
-                style={{
-                  objectFit: "contain",
-                }}
+              <LottieComponent
+                lottieFile={LottieImage}
+                className="object-contain"
               />
+              // </div>
             )}
           </div>
         </div>
