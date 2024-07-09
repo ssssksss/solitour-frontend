@@ -18,7 +18,7 @@ const AuthKaKaoContainer = () => {
         const kakaoLogin = async () => {
           try {
             const response = await fetch(
-              `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}
+              `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.KAKAO_REDIRECT_URL}
               &code=${_queryStringObject?.code}`,
               {
                 method: "GET",
