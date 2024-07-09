@@ -9,6 +9,8 @@ type MyProps = {
   transparent: boolean;
   onMenuClicked: () => void;
   onClose: () => void;
+  logoutHandler: () => void;
+  nickName?: string;
 };
 
 const Header = ({
@@ -17,6 +19,8 @@ const Header = ({
   transparent,
   onMenuClicked,
   onClose,
+  nickName,
+  logoutHandler,
 }: MyProps) => {
   return (
     <header className="flex w-full flex-row justify-center">
@@ -119,19 +123,42 @@ const Header = ({
             </nav>
           </div>
           <div className="flex flex-row items-center space-x-2 pr-[2.375rem] text-sm max-[1024px]:pr-4">
-            <Link
-              className="font-medium text-gray1 hover:text-main dark:text-slate-400"
-              href="/auth/signin"
-            >
-              로그인
-            </Link>
-            <div className="text-gray-400">|</div>
-            <Link
-              className="font-semibold text-black hover:text-main dark:text-slate-200"
-              href="/auth/signup"
-            >
-              회원가입
-            </Link>
+            {nickName == "" ? (
+              <>
+                <Link
+                  className="font-medium text-gray1 hover:text-main dark:text-slate-400"
+                  href="/auth/signin"
+                >
+                  로그인
+                </Link>
+                <div className="text-gray-400">|</div>
+                <Link
+                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                  href="/auth/signup"
+                >
+                  회원가입
+                </Link>
+              </>
+            ) : (
+              <>
+                <div className={"relative rounded-[50%]"}>
+                  <Image
+                    className="rounded-full shadow dark:bg-slate-200"
+                    src="/user_sex_man_default_image.svg"
+                    alt="user_sex_man_default_image"
+                    width={30}
+                    height={30}
+                  />
+                </div>
+                <div className="text-gray-400">|</div>
+                <button
+                  onClick={logoutHandler}
+                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                >
+                  로그아웃
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

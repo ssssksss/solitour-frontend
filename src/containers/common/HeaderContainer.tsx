@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/common/Header";
+import useAuthStore from "@/store/authStore";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,7 @@ const HeaderContainer = () => {
   const pathname = usePathname();
   const [visible, setVisible] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(true);
-
+  const authStore = useAuthStore();
   const onScroll = () => {
     if (window.scrollY >= 500) {
       setTransparent(false);
@@ -25,6 +26,11 @@ const HeaderContainer = () => {
     setVisible(false);
   };
 
+  const logoutHandler = () => {
+    // api로 로그아웃 요청해서 쿠키제거
+    authStore.initialize();
+  }
+
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
     return () => {
@@ -39,6 +45,8 @@ const HeaderContainer = () => {
       transparent={transparent}
       onMenuClicked={onMenuClicked}
       onClose={onClose}
+      nickName={authStore.nickname}
+      logoutHandler={logoutHandler}
     />
   );
 };

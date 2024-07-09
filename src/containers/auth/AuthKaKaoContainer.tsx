@@ -1,6 +1,7 @@
 "use client";
 
 import AuthLoading from "@/components/auth/AuthLoading";
+import useAuthStore from "@/store/authStore";
 import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -8,6 +9,7 @@ import { useEffect } from "react";
 
 const AuthKaKaoContainer = () => {
   const router = useRouter();
+  const authStore = useAuthStore();
 
     useEffect(() => {
         const _queryStringObject = UrlQueryStringToObject<{
@@ -16,7 +18,7 @@ const AuthKaKaoContainer = () => {
         const kakaoLogin = async () => {
           try {
             const response = await fetch(
-              `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.KAKAO_REDIRECT_URL}
+              `${process.env.BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}
               &code=${_queryStringObject?.code}`,
               {
                 method: "GET",
@@ -32,9 +34,9 @@ const AuthKaKaoContainer = () => {
               throw new Error("Network response was not ok");
             }
 
-            const res = await response.json();
-            console.log(res);
+            // const res = await response.json();
             // res.accessToken 받아서 사용자 정보 받아오고 홈으로 이동
+            authStore.setUser({"nickname":"성공"})
             router.push("/");
           } catch (error) {
             console.error(
