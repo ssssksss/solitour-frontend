@@ -6,7 +6,7 @@ import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const AuthKaKaoContainer = () => {
+const AuthGoogleContainer = () => {
   const router = useRouter();
   const authStore = useAuthStore();
 
@@ -14,10 +14,10 @@ const AuthKaKaoContainer = () => {
         const _queryStringObject = UrlQueryStringToObject<{
           [key: string]: string;
         }>(window.location.href);
-        const kakaoLogin = async () => {
+        const googleLogin = async () => {
           try {
             const response = await fetch(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${_queryStringObject?.code}`,
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=google&redirectUrl=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL}&code=${_queryStringObject?.code}`,
               {
                 method: "GET",
                 headers: {
@@ -42,10 +42,10 @@ const AuthKaKaoContainer = () => {
       }
     };
 
-    kakaoLogin();
+    googleLogin();
   }, []);
 
   return <AuthLoading />;
 };
 
-export default AuthKaKaoContainer;
+export default AuthGoogleContainer;
