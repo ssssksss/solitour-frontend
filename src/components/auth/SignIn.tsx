@@ -43,7 +43,7 @@ const SignIn = () => {
         className={
           "relative mb-[3rem] flex h-[2.875rem] w-full items-center justify-center rounded-3xl outline outline-[1px] outline-offset-[-1px] outline-gray3"
         }
-        href={`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${process.env.GOOGLE_REDIRECT_URL}&scope=email profile&prompt=select_account`}
+        href="/api/auth/google"
       >
         <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
           <Image
