@@ -6,7 +6,11 @@ import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateF
 import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
 
-const InformationEditorContainer = () => {
+interface Props {
+  id: number;
+}
+
+const InformationEditorContainer = ({ id }: Props) => {
   const imagesHook = useDragScroll();
   const hashtagsHook = useDragScroll();
   const editorStore = useEditorStore();
@@ -101,19 +105,46 @@ const InformationEditorContainer = () => {
     //   "Content-Type": "multipart/form-data"
     // }
     // 위의 코드를 빼야 정상적으로 작동함.
-    const response = await fetch("/api/informations", {
-      method: "POST",
+    const response = await fetch(`/api/informations/${id}`, {
+      method: "PUT",
       body: formData,
       cache: "no-store",
     });
 
     if (!response.ok) {
-      throw new Error("Failed to write data.");
+      throw new Error("Failed to update data.");
     }
 
     alert("테스트 성공");
     return;
   };
+
+  // 페이지에 들어왔을 때 수정할 정보 글 데이터를 가져옴.
+  useEffect(() => {
+    const getInformation = async (id: number) => {
+      const response = await fetch(`/api/informations/${id}`, {
+        method: "GET",
+        cache: "force-cache",
+        next: { tags: [`getInformation/${id}`] },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data.");
+      }
+
+      const data = await response.json();
+
+      console.log(data);
+      console.log(data.informationTitle);
+
+      // TODO: 수정 필요
+      editorStore.title = data.informationTitle;
+      editorStore.content = data.informationContent;
+      setHashtag("테스트 태그");
+    };
+
+    getInformation(id);
+  }, [editorStore, id]);
 
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {

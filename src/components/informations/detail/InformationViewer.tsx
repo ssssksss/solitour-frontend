@@ -7,12 +7,14 @@ import ImageViewerContainer from "@/containers/informations/detail/ImageViewerCo
 import { LuEye } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { FaRegTrashCan } from "react-icons/fa6";
+import Link from "next/link";
 
 // TODO
 const InformationViewer = async () => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const info = {
+    id: 1,
     title: "책과 공간이 매력적인 선릉역 테라로사",
     username: "하몽",
     date: new Date().toLocaleDateString(),
@@ -169,10 +171,13 @@ const InformationViewer = async () => {
         </div>
       </a>
       <div className="mt-6 flex flex-row items-center justify-end gap-3">
-        <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
+        <Link
+          className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
+          href={`/informations/edit/${info.id}`}
+        >
           <GoPencil />
           수정
-        </button>
+        </Link>
         <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
           <FaRegTrashCan />
           삭제

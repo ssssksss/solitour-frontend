@@ -6,23 +6,23 @@ import RecommendationListSkeleton from "@/components/skeleton/informations/detai
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import { Suspense } from "react";
 
-type MyProps = {
+interface Props {
   params: { category: string; id: string };
-};
+}
 
-export async function generateMetadata({ params: { category, id } }: MyProps) {
-  const postId = Number(id);
-  if (postId <= 0 || !Number.isSafeInteger(postId)) {
+export async function generateMetadata({ params: { category, id } }: Props) {
+  const informationId = Number(id);
+  if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
 
   return {
-    title: `정보 - ${CATEGORY_TEXT[category]} - ${postId}`,
+    title: `정보 - ${CATEGORY_TEXT[category]} - ${informationId}`,
     description: "Solitour의 정보 상세 페이지",
   };
 }
 
-export default function page({ params: { category, id } }: MyProps) {
+export default function page({ params: { category, id } }: Props) {
   if (
     category !== "restaurant" &&
     category !== "accommodation" &&
@@ -31,8 +31,8 @@ export default function page({ params: { category, id } }: MyProps) {
     throw Error("Not Found");
   }
 
-  const postId = Number(id);
-  if (postId < 1 || !Number.isSafeInteger(postId)) {
+  const informationId = Number(id);
+  if (informationId < 1 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
 
