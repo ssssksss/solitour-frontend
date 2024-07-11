@@ -19,4 +19,40 @@ export interface InformationRequestDto {
 }
 
 // Request 요청 결과 Dto
-export interface InformationResponseDto {}
+export interface InformationResponseDto {
+  id: number;
+  title: string;
+  address: string;
+  createdDate: Date;
+  viewCount: number;
+  content: string;
+  tips: string[];
+  userPostingResponse: {
+    id: number;
+    name: string;
+  };
+  tagResponses: Array<Readonly<{ id: number; name: string }>>;
+  placeResponse: {
+    id: number;
+    searchId: string;
+    name: string;
+    xaxis: number;
+    yaxis: number;
+    address: string;
+  };
+  zoneCategoryResponse: {
+    id: number;
+    parentZoneCategory: {
+      id: number;
+      parentZoneCategory: string | null;
+      name: string;
+    };
+    name: string;
+  };
+  imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
+}
+
+export interface TopInformationResponseDto {
+  id: number;
+  title: string;
+}

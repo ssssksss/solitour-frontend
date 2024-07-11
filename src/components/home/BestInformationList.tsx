@@ -1,6 +1,26 @@
+import { InformationResponseDto } from "@/types/InformationDto";
 import InformationItem from "../common/InformationItem";
 
+async function getBestInformationList() {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/greatInformation`,
+    {
+      method: "GET",
+      next: { revalidate: 60, tags: ["getBestInformationList"] },
+    },
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<InformationResponseDto>;
+}
+
 const BestInformationList = async () => {
+  //const data = await getBestInformationList();
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   // TODO

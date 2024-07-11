@@ -40,7 +40,7 @@ export default function page({ params: { category, id } }: Props) {
     <div className="flex flex-col items-center">
       <PagePath first="정보" second={`${CATEGORY_TEXT[category]} 상세`} />
       <Suspense fallback={<InformationViewerSkeleton />}>
-        <InformationViewer />
+        <InformationViewer id={informationId} />
       </Suspense>
       <Suspense fallback={<RecommendationListSkeleton />}>
         <RecommendationList />
