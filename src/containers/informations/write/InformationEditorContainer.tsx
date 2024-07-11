@@ -67,34 +67,42 @@ const InformationEditorContainer = () => {
       return;
     }
 
+    // TODO: 수정 필요
     const formData = new FormData();
-    formData.append("userId", validatedFields.data.userId.toString());
-    formData.append("informationTitle", validatedFields.data.informationTitle);
     formData.append(
-      "informationAddress",
-      validatedFields.data.informationAddress,
+      "request",
+      new Blob(
+        [
+          JSON.stringify({
+            informationTitle: validatedFields.data.informationTitle,
+            informationAddress: validatedFields.data.informationAddress,
+            informationContent: validatedFields.data.informationContent,
+            informationTips: validatedFields.data.tips.join(" "),
+            userId: 1, // TODO: 수정 필요
+            placeRegisterRequest: {
+              searchId: validatedFields.data.placeId,
+              name: validatedFields.data.placeName,
+              xAxis: validatedFields.data.placeXAxis,
+              yAxis: validatedFields.data.placeYAxis,
+              address: validatedFields.data.informationAddress,
+            },
+            categoryId: 1,
+            zoneCategoryId: 2,
+            tagRegisterRequests: validatedFields.data.hashtags.map(
+              (tag, index) => ({
+                [index]: tag,
+              }),
+            ),
+          }),
+        ],
+        {
+          type: "application/json",
+        },
+      ),
     );
-    formData.append("province", validatedFields.data.province);
-    formData.append("city", validatedFields.data.city);
-    formData.append("placeId", validatedFields.data.placeId);
-    formData.append("placeXAxis", validatedFields.data.placeXAxis);
-    formData.append("placeYAxis", validatedFields.data.placeYAxis);
-    formData.append("placeName", validatedFields.data.placeName);
-    formData.append("category", validatedFields.data.category);
-    formData.append("subCategory", validatedFields.data.subCategory);
-    formData.append("thumbnailImage", validatedFields.data.thumbnailImage);
+    formData.append("thumbNailImage", validatedFields.data.thumbnailImage);
     validatedFields.data.contentImages?.forEach((contentImage) => {
       formData.append("contentImages", contentImage);
-    });
-    formData.append(
-      "informationContent",
-      validatedFields.data.informationContent,
-    );
-    validatedFields.data.hashtags.forEach((hashtag) => {
-      formData.append("hashtags", hashtag);
-    });
-    validatedFields.data.tips.forEach((tip) => {
-      formData.append("informationTips", tip);
     });
 
     // headers: {
@@ -108,6 +116,7 @@ const InformationEditorContainer = () => {
     });
 
     if (!response.ok) {
+      alert("테스트 실패");
       throw new Error("Failed to write data.");
     }
 
