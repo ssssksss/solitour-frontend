@@ -1,6 +1,26 @@
+import { GatheringResponseDto } from "@/types/GatheringDto";
 import MeetingItem from "../common/MeetingItem";
 
+async function getNewMeetingList() {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/greatGathering`,
+    {
+      method: "GET",
+      next: { revalidate: 60, tags: ["getNewMeetingList"] },
+    },
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<GatheringResponseDto>;
+}
+
 const NewMeetingList = async () => {
+  //const data = await getNewMeetingList();
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   // TODO

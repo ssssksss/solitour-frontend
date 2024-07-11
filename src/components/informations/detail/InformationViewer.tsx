@@ -8,9 +8,33 @@ import { LuEye } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
+import { InformationResponseDto } from "@/types/InformationDto";
+
+async function getInformation(id: number) {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${id}`,
+    {
+      method: "GET",
+      next: { revalidate: 60, tags: [`getInformation/${id}`] },
+    },
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<InformationResponseDto>;
+}
+
+interface Props {
+  id: number;
+}
 
 // TODO
-const InformationViewer = async () => {
+const InformationViewer = async ({ id }: Props) => {
+  //const data = await getInformation(id);
+
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const info = {

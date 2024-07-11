@@ -1,3 +1,6 @@
+import { TopGatheringResponseDto } from "@/types/GatheringDto";
+import { TopInformationResponseDto } from "@/types/InformationDto";
+
 import Link from "next/link";
 
 interface Props {
@@ -21,7 +24,48 @@ const titleList: { [key: string]: string[] } = {
   ],
 };
 
+async function getTopInformationList() {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/???????????????????????????`,
+    {
+      method: "GET",
+      next: { revalidate: 3600, tags: ["getTopInformationList"] },
+    },
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<TopInformationResponseDto>;
+}
+
+async function getTopGatheringList() {
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/?????????????????????????`,
+    {
+      method: "GET",
+      next: { revalidate: 3600, tags: ["getTopGatheringList"] },
+    },
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<TopGatheringResponseDto>;
+}
+
 const TopList = async ({ title }: Props) => {
+  /*
+  const data =
+    title === "여행"
+      ? await getTopInformationList()
+      : await getTopGatheringList();
+  */
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return (

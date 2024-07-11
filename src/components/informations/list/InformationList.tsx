@@ -1,7 +1,24 @@
 import InformationItem from "@/components/common/InformationItem";
 import Pagination from "@/components/common/Pagination";
+import { InformationResponseDto } from "@/types/InformationDto";
+
+async function getInformationList() {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/informations`, {
+    method: "GET",
+    next: { revalidate: 60, tags: ["getInformationList"] },
+  });
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<InformationResponseDto>;
+}
 
 const InformationList = async () => {
+  //const data = await getInformationList();
+
   // TODO: API 호출
   await new Promise((resolve) => setTimeout(resolve, 1000));
 

@@ -3,7 +3,23 @@ import DiaryWriteButton from "./DiaryWriteButton";
 import { DiaryResponseDto } from "@/types/DiaryDto";
 import Link from "next/link";
 
+async function getDiaryList() {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
+    method: "GET",
+    cache: "force-cache",
+  });
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json() as Promise<Array<DiaryResponseDto>>;
+}
+
 const DiaryList = async () => {
+  //const data = await getDiaryList();
+
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   // TODO

@@ -68,6 +68,7 @@ export async function PUT(
   { params }: { params: { id: string } },
 ) {
   try {
+    const cookie = request.cookies.get("access_token");
     const formData = await request.formData();
 
     // TODO: 삭제 필요
@@ -80,6 +81,9 @@ export async function PUT(
       `${process.env.BACKEND_URL}/api/informations/${params.id}`,
       {
         method: "PUT",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
         body: formData,
         cache: "no-store",
       },
@@ -92,7 +96,7 @@ export async function PUT(
     // Revalidate the cache for the list page and redirect the user.
     // TODO: 수정 필요
     revalidateTag("getInformationList");
-    revalidateTag(`getInformation/${id}`)
+    revalidateTag(`getInformation/${params.id}`);
 
     // 외부 API의 응답을 JSON 형식으로 변환
     return response;
@@ -110,6 +114,46 @@ export async function PUT(
     );
   } catch (e) {
     return new Response(JSON.stringify({ error: "Failed to write data." }), {
+      status: 500, // Internal Server Error
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+}
+
+/**
+ * 정보 글 삭제
+ * @param request
+ * @param param
+ * @returns
+ */
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) {
+  try {
+    const cookie = request.cookies.get("access_token");
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/informations/${params.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
+        cache: "no-store",
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Internal Server Error");
+    }
+
+    revalidateTag("getInformationList");
+
+    return response;
+  } catch (e) {
+    return new Response(JSON.stringify({ error: "Failed to delete data." }), {
       status: 500, // Internal Server Error
       headers: {
         "Content-Type": "application/json",
