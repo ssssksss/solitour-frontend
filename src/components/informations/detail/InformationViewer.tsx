@@ -8,14 +8,14 @@ import { LuEye } from "react-icons/lu";
 import { GoPencil } from "react-icons/go";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link";
-import { InformationResponseDto } from "@/types/InformationDto";
+import { InformationDetailDto } from "@/types/InformationDto";
 
 async function getInformation(id: number) {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
       method: "GET",
-      next: { revalidate: 60, tags: [`getInformation/${id}`] },
+      next: { revalidate: 1, tags: [`getInformation/${id}`] },
     },
   );
 
@@ -24,7 +24,7 @@ async function getInformation(id: number) {
     throw new Error("Failed to fetch data");
   }
 
-  return response.json() as Promise<InformationResponseDto>;
+  return response.json() as Promise<InformationDetailDto>;
 }
 
 interface Props {
@@ -33,11 +33,12 @@ interface Props {
 
 // TODO
 const InformationViewer = async ({ id }: Props) => {
-  //const data = await getInformation(id);
+  const data = await getInformation(id);
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  //await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  const info = {
+  /*
+  const data = {
     id: 1,
     title: "책과 공간이 매력적인 선릉역 테라로사",
     username: "하몽",
@@ -65,13 +66,14 @@ const InformationViewer = async ({ id }: Props) => {
     placeName: "테라로사 포스코센터",
     placeId: 1860681564,
   };
+  */
 
   return (
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
           <h1 className="text-2xl font-bold dark:text-slate-200">
-            {info.title}
+            {data.title}
           </h1>
           <div className="flex flex-row items-end justify-between py-4">
             <div className="flex flex-row items-center gap-2">
@@ -84,10 +86,10 @@ const InformationViewer = async ({ id }: Props) => {
               />
               <div className="space-y-1">
                 <p className="text-xs font-medium text-black dark:text-slate-400">
-                  {info.username}
+                  {data.userPostingResponse.name}
                 </p>
                 <p className="text-xs text-gray1 dark:text-slate-400">
-                  {info.date}
+                  {`${data.createdDate}`}
                 </p>
               </div>
             </div>
@@ -104,12 +106,12 @@ const InformationViewer = async ({ id }: Props) => {
           </div>
         </div>
         <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
-          <ImageViewerContainer images={info.images} />
+          <ImageViewerContainer images={data.imageResponses} />
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <div className="max-[1024px]:hidden">
             <h1 className="text-2xl font-bold dark:text-slate-200">
-              {info.title}
+              {data.title}
             </h1>
             <div className="flex flex-row items-end justify-between py-4">
               <div className="flex flex-row items-center gap-2">
@@ -122,10 +124,10 @@ const InformationViewer = async ({ id }: Props) => {
                 />
                 <div className="space-y-1">
                   <p className="text-xs font-medium text-black dark:text-slate-400">
-                    {info.username}
+                    {data.userPostingResponse.name}
                   </p>
                   <p className="text-xs text-gray1 dark:text-slate-400">
-                    {info.date}
+                    {`${data.createdDate}`}
                   </p>
                 </div>
               </div>
@@ -144,17 +146,17 @@ const InformationViewer = async ({ id }: Props) => {
           <div className="flex flex-row items-center gap-1 py-3">
             <TiLocation className="text-main" size={"1.1rem"} />
             <p className="text-xs font-medium text-gray1 dark:text-slate-400">
-              {info.address}
+              {data.address}
             </p>
           </div>
           <p className="py-4 font-medium text-gray1 dark:text-slate-400">
-            {info.body}
+            {data.content}
           </p>
           <div className="flex flex-row items-center gap-1 pb-8">
-            {info.tags.map((tag, index) => (
+            {data.tagResponses.map((tag, index) => (
               <ItemTag
                 key={index}
-                tag={tag}
+                tag={tag.name}
                 borderColor="border-main"
                 textColor="text-main"
               />
@@ -164,7 +166,7 @@ const InformationViewer = async ({ id }: Props) => {
             <div className="text-bold text-lg font-bold dark:text-slate-200">
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
-            {info.tips.map((tip, index) => (
+            {data.tip.split(" ").map((tip, index) => (
               <li
                 key={index}
                 className="ml-6 align-baseline font-medium text-gray1 marker:text-main dark:text-slate-400"
@@ -177,27 +179,27 @@ const InformationViewer = async ({ id }: Props) => {
       </div>
       <div className="mt-20 flex h-48 flex-col">
         <KakaoMapLinkContainer
-          placeName={info.placeName}
-          placeId={info.placeId}
+          placeName={data.placeResponse.name}
+          placeId={data.placeResponse.searchId}
         />
       </div>
       <a
         className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pb-10 pt-12"
-        href={`https://map.kakao.com/link/map/${info.placeId}`}
+        href={`https://map.kakao.com/link/map/${data.placeResponse.searchId}`}
         target="_blank"
       >
         <h2 className="text-lg font-bold text-black dark:text-slate-200">
-          {info.placeName}
+          {data.placeResponse.name}
         </h2>
         <div className="flex flex-row items-center gap-1 text-sm text-gray1 dark:text-slate-400">
           <TiLocation />
-          <p>{info.address}</p>
+          <p>{data.address}</p>
         </div>
       </a>
       <div className="mt-6 flex flex-row items-center justify-end gap-3">
         <Link
           className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
-          href={`/informations/edit/${info.id}`}
+          href={`/informations/edit/${1}`}
         >
           <GoPencil />
           수정

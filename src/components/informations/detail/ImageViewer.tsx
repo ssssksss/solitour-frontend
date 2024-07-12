@@ -2,7 +2,7 @@ import { useDragScrollType } from "@/hooks/useDragScroll";
 import Image from "next/image";
 
 interface Props {
-  images: string[];
+  images: Array<Readonly<{ imageStatus: string; address: string }>>;
   mainImageIndex: number;
   scrollHook: useDragScrollType;
   setMainImageIndex: (index: number) => void;
@@ -19,7 +19,9 @@ const ImageViewer = ({
       <div className="relative h-[26.0625rem] w-full text-slate-200 max-[744px]:h-[19.125rem]">
         <Image
           className="rounded-2xl"
-          src={images[mainImageIndex]}
+          src={
+            images.filter((image) => image.imageStatus === "썸네일")[0].address
+          }
           alt={"/background"}
           fill={true}
           style={{
@@ -45,7 +47,7 @@ const ImageViewer = ({
           <Image
             key={index}
             className="cursor-pointer rounded-lg"
-            src={image}
+            src={image.address}
             alt={"/background"}
             width={107}
             height={107}

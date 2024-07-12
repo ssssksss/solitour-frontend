@@ -5,7 +5,7 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { useState } from "react";
 
 interface Props {
-  images: string[];
+  images: Array<Readonly<{ imageStatus: string; address: string }>>;
 }
 
 const ImageViewerContainer = ({ images }: Props) => {
