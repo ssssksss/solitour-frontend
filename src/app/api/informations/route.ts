@@ -15,6 +15,9 @@ export async function POST(request: NextRequest) {
       `${process.env.BACKEND_URL}/api/informations`,
       {
         method: "POST",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
         body: formData,
         cache: "no-store",
       },
