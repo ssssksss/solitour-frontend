@@ -63,7 +63,7 @@ const Header = ({
               />
             </Link>
           </div>
-          <div className="flex flex-grow flex-row justify-between px-28 max-[1024px]:hidden">
+          <div className="flex flex-grow flex-row justify-between px-28 max-[744px]:hidden">
             <nav>
               <ul className="font flex flex-row space-x-10">
                 <li>
@@ -141,7 +141,10 @@ const Header = ({
               </>
             ) : (
               <>
-                <Link href={"/mypage/profile"} className={"relative rounded-[50%]"}>
+                <Link
+                  href={"/mypage/profile"}
+                  className={"relative rounded-[50%]"}
+                >
                   <Image
                     className="rounded-full shadow dark:bg-slate-200"
                     src="/user_sex_man_default_image.svg"
@@ -155,7 +158,7 @@ const Header = ({
                   onClick={logoutHandler}
                   className="font-semibold text-black hover:text-main dark:text-slate-200"
                 >
-                    로그아웃
+                  로그아웃
                 </button>
               </>
             )}

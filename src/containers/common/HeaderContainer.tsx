@@ -48,9 +48,9 @@ const HeaderContainer = () => {
       user.json().then((res: userResponseDto) => {
         authStore.setUser(res);
       });
-    }  
+    };
     login();
-  },[])
+  }, []);
 
   return (
     <Header

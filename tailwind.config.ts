@@ -24,8 +24,8 @@ const config: Config = {
       },
       keyframes: {
         sidebarFadeIn: {
-          from: { left: "-300px" },
-          to: { left: "0px" },
+          from: { top: "-17.5rem" },
+          to: { top: "0px" },
         },
         buttonRotation: {
           from: { transform: "rotate(-45deg)", "background-color": "black" },
