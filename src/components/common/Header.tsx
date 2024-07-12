@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
-import HeaderSidebar from "./HeaderSidebar";
+import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
 
 interface Props {
   pathname: string;
@@ -24,23 +24,17 @@ const Header = ({
 }: Props) => {
   return (
     <header className="flex w-full flex-row justify-center">
-      {visible && <HeaderSidebar onClose={onClose} />}
+      {visible && <HeaderSidebarContainer onClose={onClose} />}
       <div
         className={
           "fixed top-0 z-40 flex w-full justify-center shadow" +
           ` ${transparent ? "bg-transparent" : "bg-white dark:bg-slate-800"}`
         }
       >
-        <div className="flex h-20 w-[90rem] flex-row items-center justify-between">
+        <div className="flex h-20 w-[90rem] flex-row items-center justify-between max-[1024px]:px-6">
           <div className="flex flex-row items-center">
-            <div
-              className="hidden cursor-pointer pl-4 hover:text-main max-[1024px]:flex dark:text-slate-200"
-              onClick={onMenuClicked}
-            >
-              <MdOutlineMenu size="1.5rem" onClick={onMenuClicked} />
-            </div>
             <Link
-              className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4"
+              className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4 max-[744px]:ml-0"
               href="/"
             >
               <Image
@@ -122,7 +116,12 @@ const Header = ({
               </ul>
             </nav>
           </div>
-          <div className="flex flex-row items-center space-x-2 pr-[2.375rem] text-sm max-[1024px]:pr-4">
+          <MdOutlineMenu
+            className="hidden cursor-pointer hover:text-main max-[744px]:flex dark:text-slate-200"
+            size="1.5rem"
+            onClick={onMenuClicked}
+          />
+          <div className="flex flex-row items-center gap-2 pr-[2.375rem] text-sm max-[1024px]:pr-4 max-[744px]:hidden">
             {nickName == "" ? (
               <>
                 <Link
