@@ -86,11 +86,11 @@ const InformationEditorContainer = () => {
               yAxis: validatedFields.data.placeYAxis,
               address: validatedFields.data.informationAddress,
             },
-            categoryId: 1,
+            categoryId: 2,
             zoneCategoryId: 2,
             tagRegisterRequests: validatedFields.data.hashtags.map(
               (tag, index) => ({
-                [index]: tag,
+                name: tag,
               }),
             ),
           }),
