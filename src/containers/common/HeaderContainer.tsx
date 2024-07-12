@@ -2,6 +2,7 @@
 
 import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
+import { userResponseDto } from "@/types/UserDto";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -26,9 +27,10 @@ const HeaderContainer = () => {
     setVisible(false);
   };
 
-  const logoutHandler = () => {
+  const logoutHandler = async () => {
     // api로 로그아웃 요청해서 쿠키제거
     authStore.initialize();
+    await fetch("/api/auth/logout");
   };
 
   useEffect(() => {
@@ -37,6 +39,18 @@ const HeaderContainer = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const login = async () => {
+      const user = await fetch("/api/auth/user", {
+        credentials: "include",
+      });
+      user.json().then((res: userResponseDto) => {
+        authStore.setUser(res);
+      });
+    }  
+    login();
+  },[])
 
   return (
     <Header
