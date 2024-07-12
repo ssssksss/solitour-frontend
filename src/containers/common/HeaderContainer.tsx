@@ -48,9 +48,10 @@ const HeaderContainer = () => {
       user.json().then((res: userResponseDto) => {
         authStore.setUser(res);
       });
-    }  
+    };
     login();
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Header

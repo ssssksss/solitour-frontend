@@ -1,159 +1,203 @@
-import Link from "next/link";
-import { FaHotel, FaList, FaUserPlus } from "react-icons/fa";
-import { FiActivity } from "react-icons/fi";
-import { IoIosJournal, IoMdInformationCircleOutline } from "react-icons/io";
-import { IoHome, IoPeople, IoRestaurant } from "react-icons/io5";
-import { MdClose } from "react-icons/md";
-import { RiLoginBoxLine } from "react-icons/ri";
 import Image from "next/image";
+import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
+import { CiLogout } from "react-icons/ci";
+import { MdClose } from "react-icons/md";
 
 interface Props {
+  signedIn: boolean;
+  hoverNum: number;
+  setHoverNum: Dispatch<SetStateAction<number>>;
+  logoutHandler: () => void;
   onClose: () => void;
 }
 
-const HeaderSidebar = ({ onClose }: Props) => {
+const HeaderSidebar = ({
+  signedIn,
+  hoverNum,
+  setHoverNum,
+  logoutHandler,
+  onClose,
+}: Props) => {
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-full w-[200%] animate-sidebarFadeIn">
-      <div className="bg-black/25">
-        <nav className="h-full w-[18.75rem] rounded-r-2xl bg-white p-4 dark:bg-slate-800">
-          <div className="flex h-10 w-full items-center justify-between">
-            <Link
-              className="relative h-[2.375rem] w-[5rem]"
-              href="/"
-              onClick={onClose}
-            >
-              <Image
-                className="dark:hidden"
-                src={"/Solitour-logo.svg"}
-                alt={"/background"}
-                fill={true}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <Image
-                className="hidden dark:block"
-                src={"/solitour-logo-dark-mode.png"}
-                alt={"/background"}
-                fill={true}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </Link>
-            <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main dark:bg-slate-600">
-              <MdClose onClick={onClose} />
-            </div>
+    <aside className="fixed left-0 top-0 z-50 flex h-[200%] w-full animate-sidebarFadeIn flex-row justify-end bg-black/25">
+      <nav className="flex h-fit w-[9.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6 dark:bg-slate-800">
+        <div className="flex h-10 w-full items-center justify-end">
+          <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main dark:bg-slate-600">
+            <MdClose onClick={onClose} />
           </div>
-          <ul>
-            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
+        </div>
+        <div className="flex flex-col gap-4 px-2">
+          <Link
+            className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
+            href="/"
+            onClick={onClose}
+            onMouseEnter={() => setHoverNum(1)}
+            onMouseLeave={() => setHoverNum(0)}
+            onTouchStart={() => setHoverNum(1)}
+          >
+            {hoverNum === 1 ? (
+              <Image
+                src="/home/home-icon-hover.svg"
+                alt="home-icon"
+                width={16}
+                height={16}
+              />
+            ) : (
+              <Image
+                src="/home/home-icon.svg"
+                alt="home-icon"
+                width={16}
+                height={16}
+              />
+            )}
+            <p>홈</p>
+          </Link>
+          <Link
+            className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
+            href="/informations/list/restaurant?subCategory=all"
+            onClick={onClose}
+            onMouseEnter={() => setHoverNum(2)}
+            onMouseLeave={() => setHoverNum(0)}
+            onTouchStart={() => setHoverNum(2)}
+          >
+            {hoverNum === 2 ? (
+              <Image
+                src="/home/information-icon-hover.svg"
+                alt="information-icon"
+                width={16}
+                height={16}
+              />
+            ) : (
+              <Image
+                src="/home/information-icon.svg"
+                alt="information-icon"
+                width={16}
+                height={16}
+              />
+            )}
+            <p>여행 정보</p>
+          </Link>
+          <Link
+            className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
+            href="/meetings"
+            onClick={onClose}
+            onMouseEnter={() => setHoverNum(3)}
+            onMouseLeave={() => setHoverNum(0)}
+            onTouchStart={() => setHoverNum(3)}
+          >
+            {hoverNum === 3 ? (
+              <Image
+                src="/home/gathering-icon-hover.svg"
+                alt="gathering-icon"
+                width={16}
+                height={16}
+              />
+            ) : (
+              <Image
+                src="/home/gathering-icon.svg"
+                alt="gathering-icon"
+                width={16}
+                height={16}
+              />
+            )}
+            <p>모임 정보</p>
+          </Link>
+          <Link
+            className="flex flex-row items-center gap-[0.375rem] text-sm hover:text-main dark:text-slate-200"
+            href="/diary/list"
+            onClick={onClose}
+            onMouseEnter={() => setHoverNum(4)}
+            onMouseLeave={() => setHoverNum(0)}
+            onTouchStart={() => setHoverNum(4)}
+          >
+            {hoverNum === 4 ? (
+              <Image
+                className="ml-[0.125rem]"
+                src="/home/diary-icon-hover.svg"
+                alt="diary-icon"
+                width={16}
+                height={16}
+              />
+            ) : (
+              <Image
+                className="ml-[0.125rem]"
+                src="/home/diary-icon.svg"
+                alt="diary-icon"
+                width={16}
+                height={16}
+              />
+            )}
+            <p>여행일기</p>
+          </Link>
+          {signedIn ? (
+            <div className="flex flex-col gap-4">
               <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
-                href="/"
+                className="flex flex-row items-center gap-[0.5625rem] text-sm hover:text-main dark:text-slate-200"
+                href="/mypage"
                 onClick={onClose}
+                onMouseEnter={() => setHoverNum(5)}
+                onMouseLeave={() => setHoverNum(0)}
+                onTouchStart={() => setHoverNum(5)}
               >
-                <IoHome />
-                <p>홈</p>
+                {hoverNum === 5 ? (
+                  <Image
+                    className="ml-[0.0625rem]"
+                    src="/home/mypage-icon-hover.svg"
+                    alt="signin-icon"
+                    width={14}
+                    height={14}
+                  />
+                ) : (
+                  <Image
+                    className="ml-[0.0625rem]"
+                    src="/home/mypage-icon.svg"
+                    alt="signin-icon"
+                    width={14}
+                    height={14}
+                  />
+                )}
+                <p>마이페이지</p>
               </Link>
-              <div className="flex flex-col space-y-2 pl-4 pt-4">
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/auth/signin"
-                  onClick={onClose}
-                >
-                  <RiLoginBoxLine />
-                  <p>로그인</p>
-                </Link>
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/auth/signup"
-                  onClick={onClose}
-                >
-                  <FaUserPlus />
-                  <p>회원가입</p>
-                </Link>
-              </div>
-            </li>
-            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
-              <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
-                href="/informations/list/restaurant?subCategory=all"
-                onClick={onClose}
+              <button
+                className="flex flex-row items-center gap-[0.4375rem] text-sm hover:text-main dark:text-slate-200"
+                onClick={logoutHandler}
               >
-                <IoMdInformationCircleOutline />
-                <p>정보</p>
-              </Link>
-              <div className="flex flex-col space-y-2 pl-4 pt-4">
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/informations/list/restaurant?subCategory=all"
-                  onClick={onClose}
-                >
-                  <IoRestaurant />
-                  <p>맛집</p>
-                </Link>
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/informations/list/accommodation?subCategory=all"
-                  onClick={onClose}
-                >
-                  <FaHotel />
-                  <p>숙박</p>
-                </Link>
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/informations/list/activity?subCategory=all"
-                  onClick={onClose}
-                >
-                  <FiActivity />
-                  <p>액티비티</p>
-                </Link>
-              </div>
-            </li>
-            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
-              <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
-                href="/meetings"
-                onClick={onClose}
-              >
-                <IoPeople />
-                <p>모임</p>
-              </Link>
-              <div className="flex flex-col space-y-2 pl-4 pt-4">
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/meetings"
-                  onClick={onClose}
-                >
-                  <FaList />
-                  <p>모임 목록</p>
-                </Link>
-              </div>
-            </li>
-            <li className="border-b-[0.0625rem] px-1 py-4 dark:border-b-slate-200">
-              <Link
-                className="flex flex-row items-center space-x-2 text-xl hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-600"
-                href="/diary/list"
-                onClick={onClose}
-              >
-                <IoIosJournal />
-                <p>여행일기</p>
-              </Link>
-              <div className="flex flex-col space-y-2 pl-4 pt-4">
-                <Link
-                  className="flex flex-row items-center space-x-2 text-sm hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-600"
-                  href="/diary/list"
-                  onClick={onClose}
-                >
-                  <FaList />
-                  <p>여행일기 목록</p>
-                </Link>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div className="h-full w-full bg-black/25" onClick={onClose} />
+                <CiLogout className="-ml-[0.125rem]" size={"1.2rem"} />
+                <p>로그아웃</p>
+              </button>
+            </div>
+          ) : (
+            <Link
+              className="flex flex-row items-center gap-[0.5625rem] text-sm hover:text-main dark:text-slate-200"
+              href="/auth/signin"
+              onClick={onClose}
+              onMouseEnter={() => setHoverNum(5)}
+              onMouseLeave={() => setHoverNum(0)}
+              onTouchStart={() => setHoverNum(5)}
+            >
+              {hoverNum === 5 ? (
+                <Image
+                  className="-ml-[0.0625rem]"
+                  src="/home/signin-icon-hover.svg"
+                  alt="signin-icon"
+                  width={16}
+                  height={16}
+                />
+              ) : (
+                <Image
+                  className="-ml-[0.0625rem]"
+                  src="/home/signin-icon.svg"
+                  alt="signin-icon"
+                  width={16}
+                  height={16}
+                />
+              )}
+              <p>로그인</p>
+            </Link>
+          )}
+        </div>
+      </nav>
     </aside>
   );
 };
