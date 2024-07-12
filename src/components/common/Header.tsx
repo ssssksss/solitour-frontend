@@ -141,7 +141,7 @@ const Header = ({
               </>
             ) : (
               <>
-                <div className={"relative rounded-[50%]"}>
+                <Link href={"/mypage/profile"} className={"relative rounded-[50%]"}>
                   <Image
                     className="rounded-full shadow dark:bg-slate-200"
                     src="/user_sex_man_default_image.svg"
@@ -149,13 +149,13 @@ const Header = ({
                     width={30}
                     height={30}
                   />
-                </div>
+                </Link>
                 <div className="text-gray-400">|</div>
                 <button
                   onClick={logoutHandler}
                   className="font-semibold text-black hover:text-main dark:text-slate-200"
                 >
-                  로그아웃
+                    로그아웃
                 </button>
               </>
             )}

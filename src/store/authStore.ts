@@ -3,16 +3,19 @@ import { devtools } from "zustand/middleware";
 
 // 1. 상태 인터페이스 정의
 interface AuthState {
-  id: number;
-  userStatus: string; // "활성화" | "휴먼" | "삭제" | "관리자" | "";
-  nickname: string;
-  name: string;
   age: number; // 연도
-  sex: string;
   email: string;
-  phoneNumber: string;
+  id: number;
   isAdmin: boolean;
-  createdAt: string;
+  nickname: string;
+  phoneNumber: string;
+  sex: string; // "male, female"
+  userImage: {
+    id: number;
+    address: string;
+    createdDate: string; // "2024-07-12",
+  };
+  userStatus: string; // "활성화" | "휴먼" | "삭제" | "관리자" | "";
 }
 
 // 2. 액션 인터페이스 정의
@@ -26,13 +29,16 @@ const initialState: AuthState = {
   id: NaN,
   userStatus: "",
   nickname: "",
-  name: "",
   age: 0,
   sex: "",
   email: "",
   phoneNumber: "",
   isAdmin: false,
-  createdAt: "",
+  userImage: {
+    id: NaN,
+    address: "",
+    createdDate: "",
+  }
 };
 
 // 4. 상태 및 액션 생성
