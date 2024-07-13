@@ -24,7 +24,7 @@ interface EditorState {
 // 2. 액션 인터페이스 정의
 interface EditorActions {
   initialize: () => void;
-  changeField: (key: string, value: string) => void;
+  setEditor: (data: Partial<EditorState>) => void;
   changeImage: (index: number, image: string) => void;
   changeMainImageIndex: (index: number) => void;
   changeTip: (index: number, tip: string) => void;
@@ -62,7 +62,7 @@ const initialState: EditorState = {
 const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
-  changeField: (key: string, value: string) => set({ [key]: value }),
+  setEditor: (data: Partial<EditorState>) => set(() => ({ ...data })),
   changeImage: (index: number, image: string) =>
     set((state) => {
       const images = [...state.images];

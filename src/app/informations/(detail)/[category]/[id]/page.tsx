@@ -4,6 +4,7 @@ import RecommendationList from "@/components/informations/detail/RecommendationL
 import InformationViewerSkeleton from "@/components/skeleton/informations/detail/InformationViewerSkeleton";
 import RecommendationListSkeleton from "@/components/skeleton/informations/detail/RecommendationListSkeleton";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
+import InformationViewerContainer from "@/containers/informations/detail/InformationViewerContainer";
 import { Suspense } from "react";
 
 interface Props {
@@ -40,7 +41,7 @@ export default function page({ params: { category, id } }: Props) {
     <div className="flex flex-col items-center">
       <PagePath first="정보" second={`${CATEGORY_TEXT[category]} 상세`} />
       <Suspense fallback={<InformationViewerSkeleton />}>
-        <InformationViewer id={informationId} />
+        <InformationViewerContainer informationId={informationId} />
       </Suspense>
       <Suspense fallback={<RecommendationListSkeleton />}>
         <RecommendationList />

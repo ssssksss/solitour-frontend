@@ -26,7 +26,7 @@ export default function page({ params: { id } }: Props) {
   return (
     <div className="flex flex-col items-center">
       <PagePath first="정보" second={"정보 수정하기"} />
-      <InformationEditorContainer id={informationId} />
+      <InformationEditorContainer informationId={informationId} />
     </div>
   );
 }

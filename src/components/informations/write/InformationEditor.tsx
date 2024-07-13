@@ -62,7 +62,7 @@ const InformationEditor = ({
           name="title"
           placeholder="제목을 입력하세요."
           value={editorStore.title}
-          onChange={(e) => editorStore.changeField("title", e.target.value)}
+          onChange={(e) => editorStore.setEditor({ title: e.target.value })}
           required={true}
         />
       </div>
@@ -77,9 +77,9 @@ const InformationEditor = ({
             name="placeName"
             placeholder="장소명을 입력하세요."
             value={editorStore.placeName}
-            onChange={(e) =>
-              editorStore.changeField("location", e.target.value)
-            }
+            onChange={(e) => {
+              editorStore.setEditor({ placeName: e.target.value });
+            }}
             onClick={showLocationModal}
             required={true}
           />
@@ -120,7 +120,7 @@ const InformationEditor = ({
         autoComplete="content"
         name="content"
         value={editorStore.content}
-        onChange={(e) => editorStore.changeField("content", e.target.value)}
+        onChange={(e) => editorStore.setEditor({ content: e.target.value })}
         maxLength={500}
         required={true}
       />

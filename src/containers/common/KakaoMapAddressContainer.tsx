@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 const KakaoMapAddressContainer = () => {
   const [loading, isLoading] = useState<boolean>(true);
-  const { changeField } = useEditorStore();
+  const { setEditor } = useEditorStore();
 
   useEffect(() => {
     if (window.kakao) {
@@ -75,15 +75,14 @@ const KakaoMapAddressContainer = () => {
               infoWindow.setContent(content);
               infoWindow.open(map, marker);
 
-              changeField(
-                "address",
-                !!result[0].road_address
+              setEditor({
+                address: !!result[0].road_address
                   ? result[0].road_address.address_name
                   : "",
-              );
-              changeField("placeId", "0");
-              changeField("placeXAxis", coords.getLng());
-              changeField("placeYAxis", coords.getLat());
+                placeId: "0",
+                placeXAxis: coords.getLng(),
+                placeYAxis: coords.getLat(),
+              });
             },
           );
         });
@@ -94,7 +93,8 @@ const KakaoMapAddressContainer = () => {
         });
       });
     }
-  }, [changeField]);
+    ``;
+  }, [setEditor]);
 
   return (
     <div
