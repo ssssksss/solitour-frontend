@@ -35,7 +35,7 @@ const RecommendationList = async () => {
       image: "/PostImage2.svg",
     },
     {
-      category: "맛집",
+      category: "restaurant",
       title: "초록 창밖 뷰에 분위기까지 갖춘 연희동 혹스턴",
       image: "/PostImage3.svg",
     },

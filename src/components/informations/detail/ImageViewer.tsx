@@ -44,20 +44,24 @@ const ImageViewer = ({
         onTouchEnd={scrollHook.onTouchEnd}
       >
         {images.map((image, index) => (
-          <Image
+          <div
             key={index}
-            className="cursor-pointer rounded-lg"
-            src={image.address}
-            alt={"/background"}
-            width={107}
-            height={107}
-            onClick={(e) => {
+            className="relative h-[6.6875rem] w-[6.6875rem]"
+            onClick={() => {
               setMainImageIndex(index);
             }}
-            onTouchEnd={(e) => {
+            onTouchEnd={() => {
               setMainImageIndex(index);
             }}
-          />
+          >
+            <Image
+              className="cursor-pointer rounded-lg"
+              src={image.address}
+              alt={"/background"}
+              fill={true}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         ))}
       </div>
     </div>

@@ -5,10 +5,8 @@ import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import ImageViewerContainer from "@/containers/informations/detail/ImageViewerContainer";
 import { LuEye } from "react-icons/lu";
-import { GoPencil } from "react-icons/go";
-import { FaRegTrashCan } from "react-icons/fa6";
-import Link from "next/link";
 import { InformationDetailDto } from "@/types/InformationDto";
+import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 
 async function getInformation(id: number) {
   const response = await fetch(
@@ -29,10 +27,9 @@ async function getInformation(id: number) {
 
 interface Props {
   informationId: number;
-  userId: number;
 }
 
-const InformationViewer = async ({ informationId, userId }: Props) => {
+const InformationViewer = async ({ informationId }: Props) => {
   const data = await getInformation(informationId);
 
   return (
@@ -163,21 +160,10 @@ const InformationViewer = async ({ informationId, userId }: Props) => {
           <p>{data.address}</p>
         </div>
       </a>
-      {userId === data.userPostingResponse.id && (
-        <div className="mt-6 flex flex-row items-center justify-end gap-3">
-          <Link
-            className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
-            href={`/informations/edit/${1}`}
-          >
-            <GoPencil />
-            수정
-          </Link>
-          <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
-            <FaRegTrashCan />
-            삭제
-          </button>
-        </div>
-      )}
+      <ButtonListContainer
+        userId={data.userPostingResponse.id}
+        informationId={informationId}
+      />
     </div>
   );
 };
