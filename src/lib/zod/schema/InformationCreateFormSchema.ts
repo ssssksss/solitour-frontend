@@ -7,7 +7,7 @@ export const InformationCreateFormSchema = z.object({
       invalid_type_error: "UserId must be a integer.",
     })
     .int()
-    .min(1),
+    .positive(),
   informationTitle: z
     .string({
       required_error: "Title is required.",

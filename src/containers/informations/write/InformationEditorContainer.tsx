@@ -3,12 +3,14 @@
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
+import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
 
 const InformationEditorContainer = () => {
   const imagesHook = useDragScroll();
   const hashtagsHook = useDragScroll();
+  const { id } = useAuthStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
   const [hashtag, setHashtag] = useState<string>("");
@@ -40,7 +42,7 @@ const InformationEditorContainer = () => {
   const onSubmit = async () => {
     // Validate from fields using Zod
     const validatedFields = InformationCreateFormSchema.safeParse({
-      userId: 1, // TODO: 실제 로그인 정보 입력할 것.
+      userId: id,
       informationTitle: editorStore.title,
       informationAddress: editorStore.address,
       province: editorStore.province,
@@ -78,7 +80,7 @@ const InformationEditorContainer = () => {
             informationAddress: validatedFields.data.informationAddress,
             informationContent: validatedFields.data.informationContent,
             informationTips: validatedFields.data.tips.join(" "),
-            userId: 1, // TODO: 수정 필요
+            userId: id,
             placeRegisterRequest: {
               searchId: validatedFields.data.placeId,
               name: validatedFields.data.placeName,
@@ -86,8 +88,8 @@ const InformationEditorContainer = () => {
               yAxis: validatedFields.data.placeYAxis,
               address: validatedFields.data.informationAddress,
             },
-            categoryId: 1,
-            zoneCategoryId: 1,
+            categoryId: 1, // TODO
+            zoneCategoryId: 1, // TODO
             tagRegisterRequests: validatedFields.data.hashtags.map(
               (tag, index) => ({
                 name: tag,

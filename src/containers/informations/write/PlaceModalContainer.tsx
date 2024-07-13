@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PlaceModalContainer = ({ closeModal }: Props) => {
-  const { address, placeName, placeId, changeField, resetPlaceInfo } =
+  const { address, placeName, placeId, setEditor, resetPlaceInfo } =
     useEditorStore();
   const [isCustom, setIsCustom] = useState<boolean>(false);
 
@@ -73,13 +73,15 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     y: string;
   }) => {
     const temp = placeInfo.address_name.split(" ");
-    changeField("province", temp[0] ?? "");
-    changeField("city", temp[1] ?? "");
-    changeField("address", placeInfo.address_name);
-    changeField("placeId", placeInfo.id);
-    changeField("placeXAxis", placeInfo.x);
-    changeField("placeYAxis", placeInfo.y);
-    changeField("placeName", placeInfo.place_name);
+    setEditor({
+      province: temp[0] ?? "",
+      city: temp[1] ?? "",
+      address: placeInfo.address_name,
+      placeId: placeInfo.id,
+      placeXAxis: placeInfo.x,
+      placeYAxis: placeInfo.y,
+      placeName: placeInfo.place_name,
+    });
     closeModal();
   };
 
@@ -89,16 +91,18 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     y: string;
   }) => {
     const temp = addressInfo.address_name.split(" ");
-    changeField("province", temp[0] ?? "");
-    changeField("city", temp[1] ?? "");
-    changeField("address", addressInfo.address_name);
-    changeField("placeXAxis", addressInfo.x);
-    changeField("placeYAxis", addressInfo.y);
-    changeField("placeId", "0");
+    setEditor({
+      province: temp[0] ?? "",
+      city: temp[1] ?? "",
+      address: addressInfo.address_name,
+      placeXAxis: addressInfo.x,
+      placeYAxis: addressInfo.y,
+      placeId: "0",
+    });
   };
 
   const onChangeCustomPlaceName = (placeName: string) => {
-    changeField("placeName", placeName);
+    setEditor({ placeName: placeName });
   };
 
   const onClick = (isCustom: boolean) => {

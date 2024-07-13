@@ -5,17 +5,15 @@ import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import ImageViewerContainer from "@/containers/informations/detail/ImageViewerContainer";
 import { LuEye } from "react-icons/lu";
-import { GoPencil } from "react-icons/go";
-import { FaRegTrashCan } from "react-icons/fa6";
-import Link from "next/link";
 import { InformationDetailDto } from "@/types/InformationDto";
+import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 
 async function getInformation(id: number) {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
       method: "GET",
-      next: { revalidate: 1, tags: [`getInformation/${id}`] },
+      next: { revalidate: 60, tags: [`getInformation/${id}`] },
     },
   );
 
@@ -28,45 +26,11 @@ async function getInformation(id: number) {
 }
 
 interface Props {
-  id: number;
+  informationId: number;
 }
 
-// TODO
-const InformationViewer = async ({ id }: Props) => {
-  const data = await getInformation(id);
-
-  //await new Promise((resolve) => setTimeout(resolve, 3000));
-
-  /*
-  const data = {
-    id: 1,
-    title: "책과 공간이 매력적인 선릉역 테라로사",
-    username: "하몽",
-    date: new Date().toLocaleDateString(),
-    address: "서울 강남구 테헤란로 440 포스코센터 1,2층 (우)06194",
-    body: "선릉역과 삼성역 사이에 있는 테라로사 포스코센터점입니다. 제가 갔을 땐 사람이 많아도 공간이 워낙 넓어서 좋았어요! 책도 구경하고 핸드드립 커피가 있어 여유롭게 시간을 보낼 수 있어요. 도심 속에서 이런 대형카페에서 뷰도 감상하고 시간을 보내고 싶은신 분들에게 추천합니다!",
-    tags: ["북카페", "뷰맛집", "핸드드립"],
-    tips: [
-      "대형카페로 책도 읽고 카공하기 좋아요",
-      "2시간 주차가 가능해요",
-      "사람이 많지만 공간이 워낙 넓고 책도 구경하고 커피가 있어 여유롭게 시간을 보낼 수 있어요.",
-    ],
-    images: [
-      "/PostImage.svg",
-      "/restaurant1.svg",
-      "/restaurant2.svg",
-      "/restaurant3.svg",
-      "/restaurant4.svg",
-      "/PostImage.svg",
-      "/restaurant1.svg",
-      "/restaurant2.svg",
-      "/restaurant3.svg",
-      "/restaurant4.svg",
-    ],
-    placeName: "테라로사 포스코센터",
-    placeId: 1860681564,
-  };
-  */
+const InformationViewer = async ({ informationId }: Props) => {
+  const data = await getInformation(informationId);
 
   return (
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
@@ -96,11 +60,11 @@ const InformationViewer = async ({ id }: Props) => {
             <div className="flex flex-row items-center gap-3">
               <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <FaRegHeart size={"0.8rem"} />
-                <p className="text-xs">666M</p>
+                <p className="text-xs">{data.likeCount}</p>
               </div>
               <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <LuEye />
-                <p className="text-xs">222K</p>
+                <p className="text-xs">{data.viewCount}</p>
               </div>
             </div>
           </div>
@@ -134,11 +98,11 @@ const InformationViewer = async ({ id }: Props) => {
               <div className="flex flex-row items-center gap-3">
                 <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                   <FaRegHeart size={"0.8rem"} />
-                  <p className="text-xs">666M</p>
+                  <p className="text-xs">{data.likeCount}</p>
                 </div>
                 <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                   <LuEye />
-                  <p className="text-xs">222K</p>
+                  <p className="text-xs">{data.viewCount}</p>
                 </div>
               </div>
             </div>
@@ -196,19 +160,10 @@ const InformationViewer = async ({ id }: Props) => {
           <p>{data.address}</p>
         </div>
       </a>
-      <div className="mt-6 flex flex-row items-center justify-end gap-3">
-        <Link
-          className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
-          href={`/informations/edit/${1}`}
-        >
-          <GoPencil />
-          수정
-        </Link>
-        <button className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400">
-          <FaRegTrashCan />
-          삭제
-        </button>
-      </div>
+      <ButtonListContainer
+        userId={data.userPostingResponse.id}
+        informationId={informationId}
+      />
     </div>
   );
 };

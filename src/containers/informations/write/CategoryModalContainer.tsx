@@ -8,20 +8,21 @@ interface Props {
 }
 
 const CategoryModalContainer = ({ closeModal }: Props) => {
-  const { category, subCategory, changeField } = useEditorStore();
+  const { category, subCategory, setEditor } = useEditorStore();
 
   const setCategory = (category: string) => {
-    changeField("category", category);
-    changeField("subCategory", "");
+    setEditor({
+      category: category,
+      subCategory: "",
+    });
   };
 
   const setSubCategory = (subCategory: string) => {
-    changeField("subCategory", subCategory);
+    setEditor({ subCategory: subCategory });
   };
 
   const onCancel = () => {
-    changeField("category", "");
-    changeField("subCategory", "");
+    setEditor({ category: "", subCategory: "" });
     closeModal();
   };
 
