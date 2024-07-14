@@ -126,11 +126,11 @@ const InformationViewer = async ({ informationId }: Props) => {
               />
             ))}
           </div>
-          <div className="flex flex-col gap-3 border-y-2 border-gray3 px-6 py-4">
+          <div className="flex flex-col gap-3 border-y-[0.0625rem] border-gray3 px-6 py-4">
             <div className="text-bold text-lg font-bold dark:text-slate-200">
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
-            {data.tip.split(" ").map((tip, index) => (
+            {data.tip.split(";").map((tip, index) => (
               <li
                 key={index}
                 className="ml-6 align-baseline font-medium text-gray1 marker:text-main dark:text-slate-400"

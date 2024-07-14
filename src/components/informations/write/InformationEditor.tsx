@@ -58,7 +58,6 @@ const InformationEditor = ({
         <input
           className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
           type="text"
-          autoComplete="title"
           name="title"
           placeholder="제목을 입력하세요."
           value={editorStore.title}
@@ -117,7 +116,6 @@ const InformationEditor = ({
       <textarea
         className="h-[17.5rem] resize-none rounded-3xl border-[0.0625rem] border-gray3 bg-transparent p-6 text-sm font-medium outline-none hover:border-main focus:border-main"
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
-        autoComplete="content"
         name="content"
         value={editorStore.content}
         onChange={(e) => editorStore.setEditor({ content: e.target.value })}
@@ -157,7 +155,6 @@ const InformationEditor = ({
             <input
               className="w-[14rem] border-main bg-transparent py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
               type="text"
-              autoComplete="hashtag"
               name="hashtag"
               placeholder="#해시태그로 키워드를 써보세요!"
               value={hashtag}
@@ -195,12 +192,17 @@ const InformationEditor = ({
               key={index}
               className="h-[3.3125rem] rounded-3xl border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
               type="text"
-              autoComplete="tip"
               name="tip"
               placeholder="나만의 혼플 팁을 알려주세요."
               value={tip}
               onChange={(e) => editorStore.changeTip(index, e.target.value)}
               required={true}
+              onKeyDown={(e) => {
+                if (e.key === ";") {
+                  e.preventDefault();
+                  e.persist();
+                }
+              }}
             />
           ))}
         </div>
@@ -223,7 +225,7 @@ const InformationEditor = ({
           <button
             className="hover:text-main"
             type="button"
-            onClick={(e) => editorStore.addTip()}
+            onClick={() => editorStore.addTip()}
           >
             <span className="text-main">+</span>
             {" 항목 추가"}

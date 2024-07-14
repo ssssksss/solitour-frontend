@@ -56,10 +56,12 @@ export const InformationCreateFormSchema = z.object({
       invalid_type_error: "PlaceName must be a string.",
     })
     .min(1),
-  category: z.string({
-    required_error: "Category is required.",
-    invalid_type_error: "Category must be a string.",
-  }),
+  category: z
+    .string({
+      required_error: "Category is required.",
+      invalid_type_error: "Category must be a string.",
+    })
+    .min(1),
   subCategory: z
     .string({
       required_error: "SubCategory is required.",
@@ -80,6 +82,7 @@ export const InformationCreateFormSchema = z.object({
       required_error: "Content is required.",
       invalid_type_error: "Content must be a string.",
     })
+    .min(1)
     .max(500, { message: "Must be 500 or fewer characters long" }),
   hashtags: z
     .string({

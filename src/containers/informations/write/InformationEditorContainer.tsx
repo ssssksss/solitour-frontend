@@ -5,6 +5,7 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const InformationEditorContainer = () => {
@@ -14,6 +15,7 @@ const InformationEditorContainer = () => {
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
   const [hashtag, setHashtag] = useState<string>("");
+  const router = useRouter();
 
   // 장소 선택 모달창이 보이는지 여부
   const [locationModal, setLocationModal] = useState<boolean>(false);
@@ -69,7 +71,6 @@ const InformationEditorContainer = () => {
       return;
     }
 
-    // TODO: 수정 필요
     const formData = new FormData();
     formData.append(
       "request",
@@ -79,7 +80,7 @@ const InformationEditorContainer = () => {
             informationTitle: validatedFields.data.informationTitle,
             informationAddress: validatedFields.data.informationAddress,
             informationContent: validatedFields.data.informationContent,
-            informationTips: validatedFields.data.tips.join(" "),
+            informationTips: validatedFields.data.tips.join(";"),
             userId: id,
             placeRegisterRequest: {
               searchId: validatedFields.data.placeId,
@@ -89,12 +90,11 @@ const InformationEditorContainer = () => {
               address: validatedFields.data.informationAddress,
             },
             categoryId: 1, // TODO
-            zoneCategoryId: 1, // TODO
-            tagRegisterRequests: validatedFields.data.hashtags.map(
-              (tag, index) => ({
-                name: tag,
-              }),
-            ),
+            zoneCategoryNameParent: validatedFields.data.province,
+            zoneCategoryNameChild: validatedFields.data.city,
+            tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
+              name: tag,
+            })),
           }),
         ],
         {
@@ -119,12 +119,20 @@ const InformationEditorContainer = () => {
 
     if (!response.ok) {
       alert("테스트 실패");
-      throw new Error("Failed to write data.");
+      throw new Error(response.statusText);
     }
 
     alert("테스트 성공");
     return;
   };
+
+  // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
+  // 로그아웃 시 로그인 페이지로 이동.
+  useEffect(() => {
+    if (Number.isNaN(id)) {
+      router.replace("/auth/signin");
+    }
+  }, [id, router]);
 
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {

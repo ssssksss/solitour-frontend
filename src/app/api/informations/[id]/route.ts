@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
 /**
@@ -149,8 +149,7 @@ export async function DELETE(
       throw new Error("Internal Server Error");
     }
 
-    revalidateTag("getInformationList");
-
+    revalidatePath("/informations/list");
     return response;
   } catch (e) {
     return new Response(JSON.stringify({ error: "Failed to delete data." }), {

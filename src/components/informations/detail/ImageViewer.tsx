@@ -8,17 +8,12 @@ interface Props {
   setMainImageIndex: (index: number) => void;
 }
 
-const ImageViewer = ({
-  images,
-  mainImageIndex,
-  scrollHook,
-  setMainImageIndex,
-}: Props) => {
+const ImageViewer = ({ images, scrollHook, setMainImageIndex }: Props) => {
   return (
     <div className="dark:opacity-65">
       <div className="relative h-[26.0625rem] w-full text-slate-200 max-[744px]:h-[19.125rem]">
         <Image
-          className="rounded-2xl"
+          className="rounded-2xl border-[0.0625rem]"
           src={
             images.filter((image) => image.imageStatus === "썸네일")[0].address
           }
@@ -46,7 +41,7 @@ const ImageViewer = ({
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative h-[6.6875rem] w-[6.6875rem]"
+            className="relative h-[6.6875rem] w-[6.6875rem] rounded-lg border-[0.0625rem]"
             onClick={() => {
               setMainImageIndex(index);
             }}
