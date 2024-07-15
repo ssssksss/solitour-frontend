@@ -5,6 +5,7 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
+import { InformationRegisterResponseDto } from "@/types/InformationDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -118,12 +119,12 @@ const InformationEditorContainer = () => {
     });
 
     if (!response.ok) {
-      alert("테스트 실패");
+      alert("정보 등록에 실패하였습니다.");
       throw new Error(response.statusText);
     }
 
-    alert("테스트 성공");
-    return;
+    const result: InformationRegisterResponseDto = await response.json();
+    router.push(`/informations/${result.id}`);
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
