@@ -1,6 +1,6 @@
 import InformationItem from "@/components/common/InformationItem";
 import Pagination from "@/components/common/Pagination";
-import { InformationResponseDto } from "@/types/InformationDto";
+import { InformationListResponseDto } from "@/types/InformationDto";
 
 async function getInformationList() {
   const response = await fetch(`${process.env.BACKEND_URL}/api/informations`, {
@@ -13,7 +13,7 @@ async function getInformationList() {
     throw new Error("Failed to fetch data");
   }
 
-  return response.json() as Promise<InformationResponseDto>;
+  return response.json() as Promise<InformationListResponseDto>;
 }
 
 const InformationList = async () => {

@@ -7,30 +7,22 @@ import { CATEGORY_TEXT } from "@/constants/informations/category";
 import { Suspense } from "react";
 
 interface Props {
-  params: { category: string; id: string };
+  params: { id: string };
 }
 
-export async function generateMetadata({ params: { category, id } }: Props) {
+export async function generateMetadata({ params: { id } }: Props) {
   const informationId = Number(id);
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
 
   return {
-    title: `정보 - ${CATEGORY_TEXT[category]} - ${informationId}`,
+    title: `정보 - ${informationId}`,
     description: "Solitour의 정보 상세 페이지",
   };
 }
 
-export default function page({ params: { category, id } }: Props) {
-  if (
-    category !== "restaurant" &&
-    category !== "accommodation" &&
-    category !== "activity"
-  ) {
-    throw Error("Not Found");
-  }
-
+export default function page({ params: { id } }: Props) {
   const informationId = Number(id);
   if (informationId < 1 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
@@ -38,7 +30,7 @@ export default function page({ params: { category, id } }: Props) {
 
   return (
     <div className="flex flex-col items-center">
-      <PagePath first="정보" second={`${CATEGORY_TEXT[category]} 상세`} />
+      <PagePath first="정보" second="정보 상세" />
       <Suspense fallback={<InformationViewerSkeleton />}>
         <InformationViewer informationId={informationId} />
       </Suspense>

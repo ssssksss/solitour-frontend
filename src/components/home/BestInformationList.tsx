@@ -1,4 +1,4 @@
-import { InformationResponseDto } from "@/types/InformationDto";
+import { InformationListResponseDto } from "@/types/InformationDto";
 import InformationItem from "../common/InformationItem";
 
 async function getBestInformationList() {
@@ -15,7 +15,7 @@ async function getBestInformationList() {
     throw new Error("Failed to fetch data");
   }
 
-  return response.json() as Promise<InformationResponseDto>;
+  return response.json() as Promise<InformationListResponseDto>;
 }
 
 const BestInformationList = async () => {

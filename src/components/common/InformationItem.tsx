@@ -53,7 +53,7 @@ const InformationItem = ({ id, category, title, image }: Props) => {
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4 dark:bg-slate-800">
         <Link
           className="p-1 font-bold hover:text-main dark:text-slate-200"
-          href={`/informations/${category}/${id}`}
+          href={`/informations/${id}`}
         >
           {title}
         </Link>
