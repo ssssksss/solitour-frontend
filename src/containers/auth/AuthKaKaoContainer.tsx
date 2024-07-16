@@ -23,22 +23,26 @@ const AuthKaKaoContainer = () => {
               {
                 method: "GET",
                 headers: {
-                  "Content-Type": "application/json;charset=utf-8",
+                  "Content-Type": "application/json",
                   "Access-Control-Allow-Origin": "*",
                 },
                 credentials: "include",
               },
             );
             // 액세스 토큰을 이용해서 사용자 정보 조회
-            const user = await fetch("/api/auth/user", {
-              credentials: "include",
-            });
-            user.json().then((res: userResponseDto) => {
-              authStore.setUser(res);
-            })
-        router.push("/");
+            const data = await fetch("/api/auth/user");
+            if (data.status == 200) {
+              data.json().then((res: userResponseDto) => {
+                authStore.setUser(res);
+              });
+              router.push("/");
+            }
+            else {
+              throw "";
+            }
       } catch (error) {
         console.error("로그인 실패", error);
+        alert("로그인에 실패했습니다.")
         router.push("/auth/signin");
       }
     };
