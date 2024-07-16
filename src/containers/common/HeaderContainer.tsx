@@ -3,8 +3,9 @@
 import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
 import { userResponseDto } from "@/types/UserDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const HeaderContainer = () => {
   const pathname = usePathname();
@@ -40,16 +41,17 @@ const HeaderContainer = () => {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // 자동 로그인
     const login = async () => {
-      const user = await fetch("/api/auth/user", {
-        credentials: "include",
-      });
-      user.json().then((res: userResponseDto) => {
-        authStore.setUser(res);
-      });
+      const data = await fetchWithAuth("/api/auth/user");
+        if (data.status == 200) {
+          data.json().then((res: userResponseDto) => {
+            authStore.setUser(res);
+          });
+        }
     };
-    login();
+      login();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
