@@ -45,13 +45,13 @@ const HeaderContainer = () => {
     // 자동 로그인
     const login = async () => {
       const data = await fetchWithAuth("/api/auth/user");
-        if (data.status == 200) {
-          data.json().then((res: userResponseDto) => {
-            authStore.setUser(res);
-          });
-        }
+      if (data.status == 200) {
+        data.json().then((res: userResponseDto) => {
+          authStore.setUser(res);
+        });
+      }
     };
-      login();
+    login();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

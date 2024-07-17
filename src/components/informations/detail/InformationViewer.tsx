@@ -53,7 +53,7 @@ const InformationViewer = async ({ informationId }: Props) => {
                   {data.userPostingResponse.name}
                 </p>
                 <p className="text-xs text-gray1 dark:text-slate-400">
-                  {`${data.createdDate}`}
+                  {`${new Date(data.createdDate).toLocaleDateString()}`}
                 </p>
               </div>
             </div>
@@ -91,7 +91,7 @@ const InformationViewer = async ({ informationId }: Props) => {
                     {data.userPostingResponse.name}
                   </p>
                   <p className="text-xs text-gray1 dark:text-slate-400">
-                    {`${data.createdDate}`}
+                    {`${new Date(data.createdDate).toLocaleDateString()}`}
                   </p>
                 </div>
               </div>
