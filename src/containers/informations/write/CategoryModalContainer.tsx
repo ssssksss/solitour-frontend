@@ -2,27 +2,25 @@
 
 import CategoryModal from "@/components/informations/write/CategoryModal";
 import useEditorStore from "@/store/editorStore";
+import { useState } from "react";
 
 interface Props {
   closeModal: () => void;
 }
 
 const CategoryModalContainer = ({ closeModal }: Props) => {
-  const { category, subCategory, setEditor } = useEditorStore();
+  const [parentCategory, setParentCategory] = useState<number>(0);
+  const { categoryId, setEditor } = useEditorStore();
 
-  const setCategory = (category: string) => {
+  const setCategoryId = (categoryId: number) => {
     setEditor({
-      category: category,
-      subCategory: "",
+      categoryId: categoryId,
     });
   };
 
-  const setSubCategory = (subCategory: string) => {
-    setEditor({ subCategory: subCategory });
-  };
-
   const onCancel = () => {
-    setEditor({ category: "", subCategory: "" });
+    setParentCategory(0);
+    setEditor({ categoryId: 0 });
     closeModal();
   };
 
@@ -32,10 +30,10 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
 
   return (
     <CategoryModal
-      category={category}
-      subCategory={subCategory}
-      setCategory={setCategory}
-      setSubCategory={setSubCategory}
+      parentCategory={parentCategory}
+      categoryId={categoryId}
+      setParentCategory={setParentCategory}
+      setCategoryId={setCategoryId}
       onCancel={onCancel}
       onSave={onSave}
     />

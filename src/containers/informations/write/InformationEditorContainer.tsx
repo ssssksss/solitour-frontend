@@ -54,7 +54,7 @@ const InformationEditorContainer = () => {
       placeXAxis: editorStore.placeXAxis,
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
-      category: editorStore.category,
+      category: editorStore.categoryId,
       subCategory: editorStore.subCategory,
       thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
       contentImages: editorStore.imageFiles.filter(

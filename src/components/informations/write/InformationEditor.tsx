@@ -88,8 +88,8 @@ const InformationEditor = ({
             className="flex flex-row items-center text-lg font-semibold dark:text-slate-200"
             type="button"
           >
-            {editorStore.category !== "" && editorStore.subCategory !== ""
-              ? `${CATEGORY_TEXT[editorStore.category]} - ${editorStore.subCategory}`
+            {editorStore.categoryId !== 0
+              ? "수정 필요" // TODO
               : "카테고리 선택"}
             <span className="text-2xl text-main">*</span>
             <IoIosArrowDown />

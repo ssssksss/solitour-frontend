@@ -35,7 +35,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
   };
 
   const showCategoryModal = () => {
-    editorStore.resetCategoryInfo();
+    editorStore.setEditor({ categoryId: 0 });
     setCategoryModal(true);
   };
 
@@ -55,8 +55,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
       placeXAxis: editorStore.placeXAxis,
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
-      category: editorStore.category,
-      subCategory: editorStore.subCategory,
+      category: editorStore.categoryId,
       thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
       contentImages: editorStore.imageFiles.filter(
         (_value, index) => index !== editorStore.mainImageIndex,
@@ -92,8 +91,8 @@ const InformationEditorContainer = ({ informationId }: Props) => {
               yAxis: validatedFields.data.placeYAxis,
               address: validatedFields.data.informationAddress,
             },
-            categoryId: 1, // TODO
-            zoneCategoryId: 1, // TODO
+            categoryId: validatedFields.data.categoryId,
+
             tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
               name: tag,
             })),

@@ -2,7 +2,7 @@
 
 import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
-import { userResponseDto } from "@/types/UserDto";
+import { userResponseDto } from "@/dtos/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -32,8 +32,8 @@ const HeaderContainer = () => {
     // api로 로그아웃 요청해서 쿠키제거
     authStore.initialize();
     authStore.setUser({
-      id: -1
-    })
+      id: -1,
+    });
     await fetch("/api/auth/logout");
   };
 
@@ -54,8 +54,8 @@ const HeaderContainer = () => {
         });
       } else {
         authStore.setUser({
-          id: -1
-        })
+          id: -1,
+        });
       }
     };
     login();
