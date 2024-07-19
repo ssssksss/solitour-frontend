@@ -12,6 +12,7 @@ interface EditorState {
   placeXAxis: string; // 경도 (longitude)
   placeYAxis: string; // 위도 (latitude)
   categoryId: number;
+  categoryName: string;
   images: string[];
   imageFiles: File[];
   mainImageIndex: number;
@@ -47,6 +48,7 @@ const initialState: EditorState = {
   placeYAxis: "", // "37.566826"
   placeName: "",
   categoryId: 0,
+  categoryName: "",
   images: [""],
   imageFiles: [],
   mainImageIndex: 0,

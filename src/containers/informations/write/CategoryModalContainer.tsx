@@ -18,12 +18,14 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
     setParentCategory(parentCategoryId);
     setEditor({
       categoryId: 0,
+      categoryName: "",
     });
   };
 
-  const setCategoryId = (categoryId: number) => {
+  const setCategory = (categoryId: number, categoryName: string) => {
     setEditor({
       categoryId: categoryId,
+      categoryName: categoryName,
     });
   };
 
@@ -57,7 +59,7 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
       parentCategory={parentCategory}
       categoryId={categoryId}
       setParentCategoryId={setParentCategoryId}
-      setCategoryId={setCategoryId}
+      setCategory={setCategory}
       onCancel={onCancel}
       onSave={onSave}
     />

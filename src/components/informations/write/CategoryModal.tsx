@@ -1,5 +1,4 @@
 import { CategoryResponseDto } from "@/types/CategoryDto";
-import { Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
 
 interface Props {
@@ -7,7 +6,7 @@ interface Props {
   parentCategory: number;
   categoryId: number;
   setParentCategoryId: (parentCategoryId: number) => void;
-  setCategoryId: (categoryId: number) => void;
+  setCategory: (categoryId: number, categoryName: string) => void;
   onCancel: () => void;
   onSave: () => void;
 }
@@ -17,7 +16,7 @@ const CategoryModal = ({
   parentCategory,
   categoryId,
   setParentCategoryId,
-  setCategoryId,
+  setCategory,
   onCancel,
   onSave,
 }: Props) => {
@@ -68,7 +67,12 @@ const CategoryModal = ({
                     "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                   }
                   type="button"
-                  onClick={() => setCategoryId(category.id)}
+                  onClick={() =>
+                    setCategory(
+                      category.id,
+                      `${categories.find((category) => category.id === parentCategory)?.name} - ${category.name}`,
+                    )
+                  }
                 >
                   {category.name}
                 </button>

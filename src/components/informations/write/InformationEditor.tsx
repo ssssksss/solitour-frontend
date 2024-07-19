@@ -88,7 +88,7 @@ const InformationEditor = ({
             type="button"
           >
             {editorStore.categoryId !== 0
-              ? "수정 필요" // TODO
+              ? editorStore.categoryName
               : "카테고리 선택"}
             <span className="text-2xl text-main">*</span>
             <IoIosArrowDown />
