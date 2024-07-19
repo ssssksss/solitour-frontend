@@ -1,7 +1,7 @@
+import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
-import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
 
 interface Props {
   pathname: string;
@@ -10,7 +10,7 @@ interface Props {
   onMenuClicked: () => void;
   onClose: () => void;
   logoutHandler: () => void;
-  nickName?: string;
+  userId: number;
 }
 
 const Header = ({
@@ -19,7 +19,7 @@ const Header = ({
   transparent,
   onMenuClicked,
   onClose,
-  nickName,
+  userId,
   logoutHandler,
 }: Props) => {
   return (
@@ -121,24 +121,17 @@ const Header = ({
             size="1.5rem"
             onClick={onMenuClicked}
           />
-          <div className="flex flex-row items-center gap-2 pr-[2.375rem] text-sm max-[1024px]:pr-4 max-[744px]:hidden">
-            {nickName == "" ? (
+          <div className={"mr-[3.375rem] flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem]  text-sm max-[744px]:hidden backdrop-blur-[120px]"}>
+            {userId == 0 ? (
               <>
-                <Link
-                  className="font-medium text-gray1 hover:text-main dark:text-slate-400"
-                  href="/auth/signin"
-                >
-                  로그인
-                </Link>
-                <div className="text-gray-400">|</div>
-                <Link
-                  className="font-semibold text-black hover:text-main dark:text-slate-200"
-                  href="/auth/signup"
-                >
-                  회원가입
-                </Link>
+                <div
+                  className={
+                    "relative aspect-square w-[1.875rem] animate-pulse rounded-[50%] shadow dark:bg-slate-200"
+                  }
+                ></div>
+                <div className="h-[1.875rem] w-[4rem] animate-pulse font-semibold text-black hover:text-main dark:text-slate-200"></div>
               </>
-            ) : (
+            ) : userId > 0 ? (
               <>
                 <Link
                   href={"/mypage/profile"}
@@ -159,6 +152,22 @@ const Header = ({
                 >
                   로그아웃
                 </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                  href="/auth/signin"
+                >
+                  로그인
+                </Link>
+                <div className="text-gray-400">|</div>
+                <Link
+                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                  href="/auth/signup"
+                >
+                  회원가입
+                </Link>
               </>
             )}
           </div>
