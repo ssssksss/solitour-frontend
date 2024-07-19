@@ -130,7 +130,7 @@ const InformationEditorContainer = () => {
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
   // 로그아웃 시 로그인 페이지로 이동.
   useEffect(() => {
-    if (Number.isNaN(id)) {
+    if (id === -1) {
       router.replace("/auth/signin");
     }
   }, [id, router]);
