@@ -31,6 +31,9 @@ const HeaderContainer = () => {
   const logoutHandler = async () => {
     // api로 로그아웃 요청해서 쿠키제거
     authStore.initialize();
+    authStore.setUser({
+      id: -1
+    })
     await fetch("/api/auth/logout");
   };
 
@@ -49,6 +52,10 @@ const HeaderContainer = () => {
         data.json().then((res: userResponseDto) => {
           authStore.setUser(res);
         });
+      } else {
+        authStore.setUser({
+          id: -1
+        })
       }
     };
     login();
@@ -62,7 +69,7 @@ const HeaderContainer = () => {
       transparent={transparent}
       onMenuClicked={onMenuClicked}
       onClose={onClose}
-      nickName={authStore.nickname}
+      userId={authStore.id}
       logoutHandler={logoutHandler}
     />
   );
