@@ -34,7 +34,7 @@ const InformationEditorContainer = () => {
   };
 
   const showCategoryModal = () => {
-    editorStore.resetCategoryInfo();
+    editorStore.setEditor({ categoryId: 0 });
     setCategoryModal(true);
   };
 
@@ -54,8 +54,7 @@ const InformationEditorContainer = () => {
       placeXAxis: editorStore.placeXAxis,
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
-      category: editorStore.category,
-      subCategory: editorStore.subCategory,
+      categoryId: editorStore.categoryId,
       thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
       contentImages: editorStore.imageFiles.filter(
         (_value, index) => index !== editorStore.mainImageIndex,
@@ -90,7 +89,7 @@ const InformationEditorContainer = () => {
               yAxis: validatedFields.data.placeYAxis,
               address: validatedFields.data.informationAddress,
             },
-            categoryId: 1, // TODO
+            categoryId: validatedFields.data.categoryId,
             zoneCategoryNameParent: validatedFields.data.province,
             zoneCategoryNameChild: validatedFields.data.city,
             tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
@@ -108,10 +107,6 @@ const InformationEditorContainer = () => {
       formData.append("contentImages", contentImage);
     });
 
-    // headers: {
-    //   "Content-Type": "multipart/form-data"
-    // }
-    // 위의 코드를 빼야 정상적으로 작동함.
     const response = await fetch("/api/informations", {
       method: "POST",
       body: formData,
@@ -130,7 +125,7 @@ const InformationEditorContainer = () => {
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
   // 로그아웃 시 로그인 페이지로 이동.
   useEffect(() => {
-    if (Number.isNaN(id)) {
+    if (id === -1) {
       router.replace("/auth/signin");
     }
   }, [id, router]);

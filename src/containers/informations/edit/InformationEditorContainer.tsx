@@ -35,7 +35,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
   };
 
   const showCategoryModal = () => {
-    editorStore.resetCategoryInfo();
+    editorStore.setEditor({ categoryId: 0 });
     setCategoryModal(true);
   };
 
@@ -55,8 +55,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
       placeXAxis: editorStore.placeXAxis,
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
-      category: editorStore.category,
-      subCategory: editorStore.subCategory,
+      categoryId: editorStore.categoryId,
       thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
       contentImages: editorStore.imageFiles.filter(
         (_value, index) => index !== editorStore.mainImageIndex,
@@ -73,7 +72,6 @@ const InformationEditorContainer = ({ informationId }: Props) => {
       return;
     }
 
-    // TODO: 수정 필요
     const formData = new FormData();
     formData.append(
       "request",
@@ -83,7 +81,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
             informationTitle: validatedFields.data.informationTitle,
             informationAddress: validatedFields.data.informationAddress,
             informationContent: validatedFields.data.informationContent,
-            informationTips: validatedFields.data.tips.join(" "),
+            informationTips: validatedFields.data.tips.join(";"),
             userId: id,
             placeRegisterRequest: {
               searchId: validatedFields.data.placeId,
@@ -92,8 +90,9 @@ const InformationEditorContainer = ({ informationId }: Props) => {
               yAxis: validatedFields.data.placeYAxis,
               address: validatedFields.data.informationAddress,
             },
-            categoryId: 1, // TODO
-            zoneCategoryId: 1, // TODO
+            categoryId: validatedFields.data.categoryId,
+            zoneCategoryNameParent: validatedFields.data.province,
+            zoneCategoryNameChild: validatedFields.data.city,
             tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
               name: tag,
             })),

@@ -11,8 +11,8 @@ interface EditorState {
   placeName: string; // 장소명
   placeXAxis: string; // 경도 (longitude)
   placeYAxis: string; // 위도 (latitude)
-  category: string;
-  subCategory: string;
+  categoryId: number;
+  categoryName: string;
   images: string[];
   imageFiles: File[];
   mainImageIndex: number;
@@ -32,7 +32,6 @@ interface EditorActions {
   addHashtag: (hashtag: string) => void;
   addTip: () => void;
   resetPlaceInfo: () => void;
-  resetCategoryInfo: () => void;
   removeImage: (index: number) => void;
   removeHashtag: (index: number) => void;
   removeTip: () => void;
@@ -48,8 +47,8 @@ const initialState: EditorState = {
   placeXAxis: "", // "126.9786567"
   placeYAxis: "", // "37.566826"
   placeName: "",
-  category: "",
-  subCategory: "",
+  categoryId: 0,
+  categoryName: "",
   images: [""],
   imageFiles: [],
   mainImageIndex: 0,
@@ -104,9 +103,6 @@ const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
       placeYAxis: "",
       placeName: "",
     }),
-  resetCategoryInfo: () => {
-    set({ category: "", subCategory: "" });
-  },
   removeImage: (index: number) =>
     set((state) => ({
       images: state.images.filter((_, i) => index !== i),

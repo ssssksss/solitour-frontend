@@ -1,12 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
-import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/store/editorStore";
 import ItemTag from "../common/ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
-import { CATEGORY_TEXT } from "@/constants/informations/category";
+import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 
 interface Props {
   editorStore: useEditorStoreType;
@@ -88,8 +87,8 @@ const InformationEditor = ({
             className="flex flex-row items-center text-lg font-semibold dark:text-slate-200"
             type="button"
           >
-            {editorStore.category !== "" && editorStore.subCategory !== ""
-              ? `${CATEGORY_TEXT[editorStore.category]} - ${editorStore.subCategory}`
+            {editorStore.categoryId !== 0
+              ? editorStore.categoryName
               : "카테고리 선택"}
             <span className="text-2xl text-main">*</span>
             <IoIosArrowDown />

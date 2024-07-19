@@ -2,27 +2,36 @@
 
 import CategoryModal from "@/components/informations/write/CategoryModal";
 import useEditorStore from "@/store/editorStore";
+import { CategoryResponseDto } from "@/types/CategoryDto";
+import { useEffect, useState } from "react";
 
 interface Props {
   closeModal: () => void;
 }
 
 const CategoryModalContainer = ({ closeModal }: Props) => {
-  const { category, subCategory, setEditor } = useEditorStore();
+  const [parentCategory, setParentCategory] = useState<number>(0);
+  const [categories, setCategories] = useState<CategoryResponseDto[]>();
+  const { categoryId, setEditor } = useEditorStore();
 
-  const setCategory = (category: string) => {
+  const setParentCategoryId = (parentCategoryId: number) => {
+    setParentCategory(parentCategoryId);
     setEditor({
-      category: category,
-      subCategory: "",
+      categoryId: 0,
+      categoryName: "",
     });
   };
 
-  const setSubCategory = (subCategory: string) => {
-    setEditor({ subCategory: subCategory });
+  const setCategory = (categoryId: number, categoryName: string) => {
+    setEditor({
+      categoryId: categoryId,
+      categoryName: categoryName,
+    });
   };
 
   const onCancel = () => {
-    setEditor({ category: "", subCategory: "" });
+    setParentCategory(0);
+    setEditor({ categoryId: 0 });
     closeModal();
   };
 
@@ -30,12 +39,27 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
     closeModal();
   };
 
+  useEffect(() => {
+    (async function () {
+      const response = await fetch("/api/categories", {
+        method: "GET",
+        cache: "force-cache",
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      setCategories(await (response.json() as Promise<CategoryResponseDto[]>));
+    })();
+  }, []);
+
   return (
     <CategoryModal
-      category={category}
-      subCategory={subCategory}
+      categories={categories}
+      parentCategory={parentCategory}
+      categoryId={categoryId}
+      setParentCategoryId={setParentCategoryId}
       setCategory={setCategory}
-      setSubCategory={setSubCategory}
       onCancel={onCancel}
       onSave={onSave}
     />

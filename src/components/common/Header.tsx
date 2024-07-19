@@ -121,7 +121,11 @@ const Header = ({
             size="1.5rem"
             onClick={onMenuClicked}
           />
-          <div className={"mr-[3.375rem] flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem]  text-sm max-[744px]:hidden backdrop-blur-[120px]"}>
+          <div
+            className={
+              "mr-[3.375rem] flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem] text-sm backdrop-blur-[120px] max-[744px]:hidden"
+            }
+          >
             {userId == 0 ? (
               <>
                 <div

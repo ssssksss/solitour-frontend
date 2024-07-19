@@ -56,18 +56,13 @@ export const InformationCreateFormSchema = z.object({
       invalid_type_error: "PlaceName must be a string.",
     })
     .min(1),
-  category: z
-    .string({
+  categoryId: z
+    .number({
       required_error: "Category is required.",
-      invalid_type_error: "Category must be a string.",
+      invalid_type_error: "Category must be a. integer.",
     })
-    .min(1),
-  subCategory: z
-    .string({
-      required_error: "SubCategory is required.",
-      invalid_type_error: "SubCategory must be a string.",
-    })
-    .min(1),
+    .int()
+    .positive(),
   thumbnailImage: z.custom<File>((file) => file instanceof File, {
     message: "Expected a File",
   }),
