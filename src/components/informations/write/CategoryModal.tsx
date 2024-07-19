@@ -2,39 +2,25 @@ import { CategoryResponseDto } from "@/types/CategoryDto";
 import { Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
 
-async function getCategoryList() {
-  const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
-    method: "GET",
-    next: { revalidate: 60, tags: ["getCategoryList"] },
-  });
-
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error("Failed to fetch data");
-  }
-
-  return response.json() as Promise<Array<CategoryResponseDto>>;
-}
-
 interface Props {
+  categories?: CategoryResponseDto[];
   parentCategory: number;
   categoryId: number;
-  setParentCategory: Dispatch<SetStateAction<number>>;
+  setParentCategoryId: (parentCategoryId: number) => void;
   setCategoryId: (categoryId: number) => void;
   onCancel: () => void;
   onSave: () => void;
 }
 
-const CategoryModal = async ({
+const CategoryModal = ({
+  categories,
   parentCategory,
   categoryId,
-  setParentCategory,
+  setParentCategoryId,
   setCategoryId,
   onCancel,
   onSave,
 }: Props) => {
-  const categories = await getCategoryList();
-
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%] dark:bg-slate-800">
@@ -50,15 +36,15 @@ const CategoryModal = async ({
             />
           </div>
           <div className="flex flex-row items-center gap-2">
-            {categories.map((category, index) => (
+            {categories?.map((category, index) => (
               <button
                 key={index}
                 className={
-                  `${parentCategory === category.id ? "border-main bg-main font-black text-white" : "text-gray1 dark:bg-slate-600 dark:text-slate-400"}` +
+                  `${parentCategory === category.id ? "border-main bg-main font-black text-white" : "text-gray1 dark:bg-slate-600 dark:text-slate-400"} ` +
                   "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                 }
                 type="button"
-                onClick={() => setParentCategory(category.id)}
+                onClick={() => setParentCategoryId(category.id)}
               >
                 {category.name}
               </button>
@@ -73,12 +59,12 @@ const CategoryModal = async ({
           )}
           <div className="flex flex-wrap items-center gap-2">
             {categories
-              .find((category) => parentCategory === category.id)
+              ?.find((category) => parentCategory === category.id)
               ?.childrenCategories?.map((category, index) => (
                 <button
                   key={index}
                   className={
-                    `${categoryId === category.id ? "border-main bg-main text-white" : "text-gray1 dark:bg-slate-600 dark:text-slate-400"}` +
+                    `${categoryId === category.id ? "border-main bg-main text-white" : "text-gray1 dark:bg-slate-600 dark:text-slate-400"} ` +
                     "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                   }
                   type="button"
@@ -89,7 +75,7 @@ const CategoryModal = async ({
               ))}
           </div>
           <div
-            className={`${parentCategory !== 0 || categoryId !== 0 ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
+            className={`${parentCategory === 0 || categoryId === 0 ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
           >
             <button
               className="h-11 w-[9.5rem] rounded-full bg-main font-medium text-white shadow hover:scale-105"

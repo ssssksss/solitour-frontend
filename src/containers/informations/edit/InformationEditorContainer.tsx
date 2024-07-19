@@ -55,7 +55,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
       placeXAxis: editorStore.placeXAxis,
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
-      category: editorStore.categoryId,
+      categoryId: editorStore.categoryId,
       thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
       contentImages: editorStore.imageFiles.filter(
         (_value, index) => index !== editorStore.mainImageIndex,
@@ -72,7 +72,6 @@ const InformationEditorContainer = ({ informationId }: Props) => {
       return;
     }
 
-    // TODO: 수정 필요
     const formData = new FormData();
     formData.append(
       "request",
@@ -82,7 +81,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
             informationTitle: validatedFields.data.informationTitle,
             informationAddress: validatedFields.data.informationAddress,
             informationContent: validatedFields.data.informationContent,
-            informationTips: validatedFields.data.tips.join(" "),
+            informationTips: validatedFields.data.tips.join(";"),
             userId: id,
             placeRegisterRequest: {
               searchId: validatedFields.data.placeId,
@@ -92,7 +91,8 @@ const InformationEditorContainer = ({ informationId }: Props) => {
               address: validatedFields.data.informationAddress,
             },
             categoryId: validatedFields.data.categoryId,
-
+            zoneCategoryNameParent: validatedFields.data.province,
+            zoneCategoryNameChild: validatedFields.data.city,
             tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
               name: tag,
             })),

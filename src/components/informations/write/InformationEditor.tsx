@@ -1,12 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
-import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/store/editorStore";
 import ItemTag from "../common/ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
-import { CATEGORY_TEXT } from "@/constants/informations/category";
+import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 
 interface Props {
   editorStore: useEditorStoreType;

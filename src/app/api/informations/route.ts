@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
     // Revalidate the cache
     revalidatePath("/informations/list");
     return response;
-  } catch (e: any) {
-    return new Response(JSON.stringify({ error: e.message }), {
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: err.message }), {
       status: 500, // Internal Server Error
       headers: {
         "Content-Type": "application/json",
