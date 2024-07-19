@@ -26,7 +26,7 @@ interface AuthActions {
 
 // 3. 초기 상태 정의
 const initialState: AuthState = {
-  id: NaN,
+  id: 0,
   userStatus: "",
   nickname: "",
   age: 0,
@@ -35,7 +35,7 @@ const initialState: AuthState = {
   phoneNumber: "",
   isAdmin: false,
   userImage: {
-    id: NaN,
+    id: 0,
     address: "",
     createdDate: "",
   }
