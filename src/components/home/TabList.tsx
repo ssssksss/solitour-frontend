@@ -6,7 +6,7 @@ const TabList = () => {
     <div className="flex w-[60rem] flex-row items-center justify-between max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)] max-[744px]:flex-col max-[744px]:gap-4">
       <Link
         className="flex h-72 w-[29.375rem] flex-col justify-between rounded-2xl bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA] p-12 duration-300 hover:scale-105 max-[1024px]:h-48 max-[1024px]:w-[19.25rem] max-[1024px]:p-6 max-[744px]:w-full dark:opacity-65"
-        href="/informations/list/restaurant?subCategory=all"
+        href="/informations/list/parent-category/1?page=1"
       >
         <div className="space-y-2">
           <h2 className="text-2xl font-bold text-black max-[1024px]:text-lg">

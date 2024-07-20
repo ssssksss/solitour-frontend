@@ -1,13 +1,11 @@
-
 export async function fetchWithAuth(url: string, options = {}, retries = 1) {
-
   try {
     const response = await fetch(url, options);
     if (response.status === 401 && retries > 0) {
       // 토큰 갱신
-      const data = await fetch(
-        `/api/auth/refresh-access-token`,
-      );
+      const data = await fetch(`/api/auth/refresh-access-token`, {
+        method: "POST",
+      });
       if (data.status == 401) {
         return Promise.reject({
           status: 401,

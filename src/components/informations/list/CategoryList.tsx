@@ -1,54 +1,54 @@
-import { VscSettings } from "react-icons/vsc";
-import InformationFilterModal from "./InformationFilterModal";
-import SubCategoryLinks from "./SubCategoryLinks";
-import { IoIosArrowDown } from "react-icons/io";
-import CategoryLinks from "./CategoryLinks";
+import { CategoryResponseDto } from "@/types/CategoryDto";
+import ParentCategoryList from "./ParentCategoryList";
+import ChildCategoryList from "./ChildCategoryList";
+import InformationSearchContainer from "@/containers/informations/list/InformationSearchContainer";
 
-interface Props {
-  category: string;
-  subCategory: string;
-  isModal: boolean;
-  closeModal: () => void;
-  openModal: () => void;
+async function getCategoryList() {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
+    method: "GET",
+    cache: "force-cache",
+    next: { tags: ["getCategoryList"] },
+  });
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return response.json() as Promise<CategoryResponseDto[]>;
 }
 
-const CategoryList = ({
-  category,
-  subCategory,
-  isModal,
-  closeModal,
-  openModal,
-}: Props) => {
+interface Props {
+  categoryId: number;
+}
+
+const CategoryList = async ({ categoryId }: Props) => {
+  const categories = await getCategoryList();
+  const parentCategoryId = categories
+    .map((parentCategory) => parentCategory.id)
+    .includes(categoryId)
+    ? categoryId
+    : categories.find((parentCategory) =>
+        parentCategory.childrenCategories
+          .map((childCategory) => childCategory.id)
+          .includes(categoryId),
+      )!.id;
+  const childCategoryId = categoryId;
+
   return (
     <div className="mt-6 flex w-[60rem] flex-col gap-6 max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
-      {isModal && <InformationFilterModal closeModal={closeModal} />}
-      <CategoryLinks category={category} />
+      <ParentCategoryList
+        categories={categories}
+        parentCategoryId={parentCategoryId}
+      />
       <div className="flex flex-row items-center justify-between max-[1024px]:flex-col-reverse max-[1024px]:items-start max-[1024px]:space-y-6 max-[1024px]:space-y-reverse">
-        <SubCategoryLinks category={category} subCategory={subCategory} />
-        <div className="flex flex-row items-center gap-4 max-[1024px]:w-full max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start">
-          <form className="max-[1024px]:flex-1 max-[744px]:w-full">
-            <input
-              className="w-64 border-b-[0.0625rem] border-black bg-transparent bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
-              type="text"
-              autoComplete="search"
-              name="search"
-              placeholder="제목 또는 키워드를 검색해보세요."
-            />
-          </form>
-          <div className="flex flex-row items-center gap-4 text-sm font-medium text-gray1 dark:text-slate-400">
-            <button
-              className="flex flex-row items-center hover:text-main"
-              onClick={openModal}
-            >
-              <VscSettings size={"1.25rem"} />
-              <p>지역별</p>
-            </button>
-            <button className="flex flex-row items-center hover:text-main">
-              <p>인기순</p>
-              <IoIosArrowDown />
-            </button>
-          </div>
-        </div>
+        <ChildCategoryList
+          categories={categories}
+          parentCategoryId={parentCategoryId}
+          childCategoryId={childCategoryId}
+        />
+        <InformationSearchContainer />
       </div>
     </div>
   );

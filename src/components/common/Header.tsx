@@ -80,7 +80,7 @@ const Header = ({
                           : "font-medium text-gray1 dark:text-slate-400"
                       } ` + "text-sm hover:text-main"
                     }
-                    href="/informations/list/restaurant?subCategory=all"
+                    href="/informations/list/parent-category/1?page=1"
                   >
                     정보
                   </Link>
@@ -130,10 +130,10 @@ const Header = ({
               <>
                 <div
                   className={
-                    "relative aspect-square w-[1.875rem] animate-pulse rounded-[50%] shadow dark:bg-slate-200"
+                    "animate-pulseAuth relative aspect-square w-[1.875rem] rounded-[50%] shadow dark:bg-slate-200"
                   }
                 ></div>
-                <div className="h-[1.875rem] w-[4rem] animate-pulse font-semibold text-black hover:text-main dark:text-slate-200"></div>
+                <div className="animate-pulseAuth h-[1.875rem] w-[4rem] font-semibold text-black hover:text-main dark:text-slate-200"></div>
               </>
             ) : userId > 0 ? (
               <>

@@ -2,7 +2,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const access_cookie = request.cookies.get("access_token");
     // 사용자 정보 조회 API

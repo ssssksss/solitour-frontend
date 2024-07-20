@@ -15,7 +15,7 @@ const HeaderSidebarContainer = ({ onClose }: Props) => {
   const logoutHandler = async () => {
     // api로 로그아웃 요청해서 쿠키제거
     initialize();
-    await fetch("/api/auth/logout");
+    await fetch("/api/auth/logout", { method: "POST" });
     onClose();
   };
 
