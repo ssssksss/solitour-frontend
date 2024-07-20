@@ -1,7 +1,7 @@
+import CategoryList from "@/components/informations/list/CategoryList";
 import InformationList from "@/components/informations/list/InformationList";
 import InformationListSkeleton from "@/components/skeleton/informations/list/InformationListSkeleton";
 import { CATEGORY_TEXT } from "@/constants/informations/category";
-import CategoryListContainer from "@/containers/informations/list/CategoryListContainer";
 import { Suspense } from "react";
 
 type MyProps = {
@@ -19,10 +19,9 @@ export async function generateMetadata({ params: { category } }: MyProps) {
 export default function page({ params, searchParams }: MyProps) {
   return (
     <div className="flex flex-col items-center">
-      <CategoryListContainer
-        category={params.category}
-        subCategory={searchParams["subCategory"]!}
-      />
+      <Suspense fallback={<div>loading...</div>}>
+        <CategoryList categoryId={1} /> {/* TODO */}
+      </Suspense>
       <Suspense fallback={<InformationListSkeleton />}>
         <InformationList />
       </Suspense>
