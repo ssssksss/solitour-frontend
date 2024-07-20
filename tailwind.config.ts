@@ -48,7 +48,7 @@ const config: Config = {
           from: { transform: "rotateY(0deg)" },
           to: { transform: "rotateY(90deg)" },
         },
-        pulse: {
+        pulseAuth: {
           "0%": {
             "background-image":
               "linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)",
@@ -72,7 +72,7 @@ const config: Config = {
         bannerImage3: "bannerImage 3s linear infinite",
         cardFlip: "cardFlip 0.5s linear",
         cardFlip2: "cardFlip2 0.5s linear",
-        pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        pulseAuth: "pulseAuth 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },
