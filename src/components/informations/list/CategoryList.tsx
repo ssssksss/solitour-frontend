@@ -9,6 +9,7 @@ async function getCategoryList() {
   const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
     method: "GET",
     cache: "force-cache",
+    next: { tags: ["getCategoryList"] },
   });
 
   if (!response.ok) {

@@ -2,7 +2,7 @@
 
 import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
-import { userResponseDto } from "@/dtos/UserDto";
+import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -34,7 +34,9 @@ const HeaderContainer = () => {
     authStore.setUser({
       id: -1,
     });
-    await fetch("/api/auth/logout");
+    await fetch("/api/auth/logout", {
+      method: "POST",
+    });
   };
 
   useEffect(() => {

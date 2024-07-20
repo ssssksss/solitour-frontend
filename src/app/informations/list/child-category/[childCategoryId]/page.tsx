@@ -1,23 +1,15 @@
 import CategoryList from "@/components/informations/list/CategoryList";
 import InformationList from "@/components/informations/list/InformationList";
+import CategoryListSkeleton from "@/components/skeleton/informations/list/CategoryListSkeleton";
 import InformationListSkeleton from "@/components/skeleton/informations/list/InformationListSkeleton";
 import { Suspense } from "react";
 
-type MyProps = {
+interface Props {
   params: { childCategoryId: string };
   searchParams: { [key: string]: string | undefined };
-};
-
-export async function generateMetadata({
-  params: { childCategoryId },
-}: MyProps) {
-  return {
-    title: `정보 - ${childCategoryId}`,
-    description: "Solitour의 정보 목록 페이지",
-  };
 }
 
-export default function page({ params, searchParams }: MyProps) {
+export default function page({ params, searchParams }: Props) {
   const categoryId = Number(params.childCategoryId);
   if (categoryId <= 0 || !Number.isSafeInteger(categoryId)) {
     throw new Error("Invalid CategoryId");
@@ -25,7 +17,7 @@ export default function page({ params, searchParams }: MyProps) {
 
   return (
     <div className="flex flex-col items-center">
-      <Suspense fallback={<div>loading...</div>}>
+      <Suspense fallback={<CategoryListSkeleton />}>
         <CategoryList categoryId={categoryId} />
       </Suspense>
       <Suspense fallback={<InformationListSkeleton />}>
