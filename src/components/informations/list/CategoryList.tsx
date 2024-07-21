@@ -4,8 +4,6 @@ import ChildCategoryList from "./ChildCategoryList";
 import InformationSearchContainer from "@/containers/informations/list/InformationSearchContainer";
 
 async function getCategoryList() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
     method: "GET",
     cache: "force-cache",
