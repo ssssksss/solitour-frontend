@@ -9,17 +9,11 @@ interface Props {
   category: "정보" | "모임";
 }
 
-const bannerImage = {
-  정보: "/banner-image.png",
-  모임: "/banner2-image.svg",
-};
-
 const buttonPath = {
   정보: "/informations/write",
   모임: "/meetings/write",
 };
 
-// todo
 const Banner = ({ content, buttonText, category }: Props) => {
   return (
     <div

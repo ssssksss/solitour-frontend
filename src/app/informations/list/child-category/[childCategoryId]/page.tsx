@@ -15,13 +15,24 @@ export default function page({ params, searchParams }: Props) {
     throw new Error("Invalid CategoryId");
   }
 
+  const page = Number(searchParams["page"]);
+  if (page <= 0 || !Number.isSafeInteger(page)) {
+    throw new Error("Invalid Page Number");
+  }
+
   return (
     <div className="flex flex-col items-center">
       <Suspense fallback={<CategoryListSkeleton />}>
         <CategoryList categoryId={categoryId} />
       </Suspense>
       <Suspense fallback={<InformationListSkeleton />}>
-        <InformationList />
+        <InformationList
+          isParentCategory={false}
+          categoryId={categoryId}
+          page={page}
+          place={searchParams["place"]}
+          order={searchParams["order"]}
+        />
       </Suspense>
     </div>
   );
