@@ -1,63 +1,26 @@
-import { useDragScrollType } from "@/hooks/useDragScroll";
 import Image from "next/image";
+import { MdClose } from "react-icons/md";
 
 interface Props {
-  images: Array<Readonly<{ imageStatus: string; address: string }>>;
-  mainImageIndex: number;
-  scrollHook: useDragScrollType;
-  setMainImageIndex: (index: number) => void;
+  imageUrl: string;
+  closeViewer: () => void;
 }
 
-const ImageViewer = ({ images, scrollHook, setMainImageIndex }: Props) => {
+const ImageViewer = ({ imageUrl, closeViewer }: Props) => {
   return (
-    <div className="dark:opacity-65">
-      <div className="relative h-[26.0625rem] w-full text-slate-200 max-[744px]:h-[19.125rem]">
-        <Image
-          className="rounded-2xl border-[0.0625rem]"
-          src={
-            images.filter((image) => image.imageStatus === "썸네일")[0].address
-          }
-          alt={"/background"}
-          fill={true}
-          style={{
-            objectFit: "cover",
-          }}
-        />
-      </div>
-      <div
-        className="flex flex-row items-center gap-[0.875rem] overflow-x-auto pt-[0.875rem]"
-        ref={scrollHook.listRef}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          scrollHook.onDragStart(e);
-        }}
-        onMouseMove={scrollHook.onDragMove}
-        onMouseUp={scrollHook.onDragEnd}
-        onMouseLeave={scrollHook.onDragEnd}
-        onTouchStart={scrollHook.onTouchStart}
-        onTouchMove={scrollHook.onTouchMove}
-        onTouchEnd={scrollHook.onTouchEnd}
-      >
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className="relative h-[6.6875rem] w-[6.6875rem] rounded-lg border-[0.0625rem]"
-            onClick={() => {
-              setMainImageIndex(index);
-            }}
-            onTouchEnd={() => {
-              setMainImageIndex(index);
-            }}
-          >
-            <Image
-              className="cursor-pointer rounded-lg"
-              src={image.address}
-              alt={"/background"}
-              fill={true}
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-        ))}
+    <div className="z-top fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
+      <div className="relative flex h-[calc(100%_-_48px)] w-[calc(100%_-_48px)] flex-col gap-3 rounded-2xl bg-gray-900 p-6">
+        <div className="absolute right-5 top-4 cursor-pointer self-end rounded-md text-white hover:text-main dark:bg-slate-600">
+          <MdClose size={"2rem"} onClick={() => closeViewer()} />
+        </div>
+        <div className="relative mt-8 h-full w-full">
+          <Image
+            src={imageUrl}
+            alt="image"
+            fill={true}
+            style={{ objectFit: "contain" }}
+          />
+        </div>
       </div>
     </div>
   );

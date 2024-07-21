@@ -3,10 +3,10 @@ import Image from "next/image";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
-import ImageViewerContainer from "@/containers/informations/detail/ImageViewerContainer";
 import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
 import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
+import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
 
 async function getInformation(id: number) {
   const response = await fetch(
@@ -70,7 +70,7 @@ const InformationViewer = async ({ informationId }: Props) => {
           </div>
         </div>
         <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
-          <ImageViewerContainer images={data.imageResponses} />
+          <ImageListContainer images={data.imageResponses} />
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <div className="max-[1024px]:hidden">
