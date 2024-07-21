@@ -1,12 +1,26 @@
 import InformationItem from "@/components/common/InformationItem";
 import Pagination from "@/components/common/Pagination";
 import { InformationListResponseDto } from "@/types/InformationDto";
+import { cookies } from "next/headers";
 
-async function getInformationList() {
-  const response = await fetch(`${process.env.BACKEND_URL}/api/informations`, {
-    method: "GET",
-    next: { revalidate: 60, tags: ["getInformationList"] },
-  });
+async function getInformationList(
+  isParentCategory: boolean,
+  categoryId: number,
+  page: number,
+  place?: string,
+  order?: string,
+) {
+  const cookie = cookies().get("access_token");
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}${place !== undefined ? "&place=" + place : ""}${order !== undefined ? "&order=" + order : ""}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: ["getInformationList"] },
+    },
+  );
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.
@@ -16,8 +30,22 @@ async function getInformationList() {
   return response.json() as Promise<InformationListResponseDto>;
 }
 
-const InformationList = async () => {
-  //const data = await getInformationList();
+interface Props {
+  isParentCategory: boolean;
+  categoryId: number;
+  page: number;
+  place?: string;
+  order?: string;
+}
+
+const InformationList = async ({
+  isParentCategory,
+  categoryId,
+  page,
+  place,
+  order,
+}: Props) => {
+  //const data = await getInformationList(isParentCategory, categoryId, page);
 
   // TODO: API 호출
   await new Promise((resolve) => setTimeout(resolve, 1000));

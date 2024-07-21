@@ -130,10 +130,10 @@ const Header = ({
               <>
                 <div
                   className={
-                    "animate-pulseAuth relative aspect-square w-[1.875rem] rounded-[50%] shadow dark:bg-slate-200"
+                    "relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow dark:bg-slate-200"
                   }
                 ></div>
-                <div className="animate-pulseAuth h-[1.875rem] w-[4rem] font-semibold text-black hover:text-main dark:text-slate-200"></div>
+                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main dark:text-slate-200"></div>
               </>
             ) : userId > 0 ? (
               <>
