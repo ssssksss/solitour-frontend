@@ -1,7 +1,7 @@
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
-import ImageViewer from "./ImageViewer";
+import ImageViewerContainer from "@/containers/informations/detail/ImageViewerContainer";
 
 interface Props {
   scrollHook: useDragScrollType;
@@ -25,7 +25,15 @@ const ImageList = ({
   return (
     <div className="dark:opacity-65">
       {viewerVisible && (
-        <ImageViewer imageUrl={mainImageUrl} closeViewer={closeViewer} />
+        <ImageViewerContainer
+          imageUrls={[
+            mainImageUrl,
+            ...images
+              .filter((image) => image.address !== mainImageUrl)
+              .map((image) => image.address),
+          ]}
+          closeViewer={closeViewer}
+        />
       )}
       <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
         <Image
