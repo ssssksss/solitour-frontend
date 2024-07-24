@@ -5,6 +5,8 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
+import { InformationDetailDto } from "@/types/InformationDto";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -18,6 +20,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
   const [hashtag, setHashtag] = useState<string>("");
+  const router = useRouter();
 
   // 장소 선택 모달창이 보이는지 여부
   const [locationModal, setLocationModal] = useState<boolean>(false);
@@ -132,27 +135,34 @@ const InformationEditorContainer = ({ informationId }: Props) => {
     const getInformation = async (id: number) => {
       const response = await fetch(`/api/informations/${id}`, {
         method: "GET",
-        cache: "force-cache",
-        next: { tags: [`getInformation/${id}`] },
+        next: { revalidate: 60, tags: [`getInformation/${id}`] },
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch data.");
+        throw new Error(response.statusText);
       }
 
-      const data = await response.json();
+      const data: InformationDetailDto = await response.json();
 
-      console.log(data);
-      console.log(data.informationTitle);
+      editorStore.title = data.title;
+      editorStore.content = data.content;
 
-      // TODO: 수정 필요
-      editorStore.title = data.informationTitle;
-      editorStore.content = data.informationContent;
-      setHashtag("테스트 태그");
+      console.log(editorStore.title);
+
+      // TODO:
+      //setHashtag("테스트 태그");
     };
 
     getInformation(informationId);
   }, [editorStore, informationId]);
+
+  // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
+  // 로그아웃 시 로그인 페이지로 이동.
+  useEffect(() => {
+    if (id === -1) {
+      router.replace("/auth/signin");
+    }
+  }, [id, router]);
 
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {
@@ -163,6 +173,7 @@ const InformationEditorContainer = ({ informationId }: Props) => {
 
   return (
     <InformationEditor
+      pathName="수정"
       editorStore={editorStore}
       locationModal={locationModal}
       categoryModal={categoryModal}
