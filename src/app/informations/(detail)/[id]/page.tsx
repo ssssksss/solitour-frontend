@@ -3,7 +3,6 @@ import InformationViewer from "@/components/informations/detail/InformationViewe
 import RecommendationList from "@/components/informations/detail/RecommendationList";
 import InformationViewerSkeleton from "@/components/skeleton/informations/detail/InformationViewerSkeleton";
 import RecommendationListSkeleton from "@/components/skeleton/informations/detail/RecommendationListSkeleton";
-import { CATEGORY_TEXT } from "@/constants/informations/category";
 import { Suspense } from "react";
 
 interface Props {
