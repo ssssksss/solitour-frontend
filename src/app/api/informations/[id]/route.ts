@@ -16,39 +16,21 @@ export async function GET(
   { params }: { params: { id: string } },
 ) {
   try {
-    // TODO: 추후 수정할 것.
-
-    /*
     const response = await fetch(
-      `${process.env.BACKEND_API}/api/informations/${params.id}`,
+      `${process.env.BACKEND_URL}/api/informations/${params.id}`,
       {
         method: "GET",
-        cache: "force-cache",
-        next: { tags: [`getInformation/${params.id}`] },
+        next: { revalidate: 60, tags: [`getInformation/${params.id}`] },
       },
     );
 
     if (!response.ok) {
-      throw new Error("Internal Server Error");
+      throw new Error(response.statusText);
     }
 
     return response;
-    */
-
-    return new Response(
-      JSON.stringify({
-        informationTitle: "테스트 제목입니다.",
-        informationContent: "테스트 내용입니다.",
-      }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-  } catch (e) {
-    return new Response(JSON.stringify({ error: "Failed to fetch data." }), {
+  } catch (e: any) {
+    return new Response(JSON.stringify({ error: e.message }), {
       status: 500, // Internal Server Error
       headers: {
         "Content-Type": "application/json",

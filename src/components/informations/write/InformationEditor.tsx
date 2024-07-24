@@ -8,6 +8,7 @@ import PlaceModalContainer from "@/containers/informations/write/PlaceModalConta
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 
 interface Props {
+  pathName: string;
   editorStore: useEditorStoreType;
   locationModal: boolean;
   categoryModal: boolean;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const InformationEditor = ({
+  pathName,
   editorStore,
   locationModal,
   categoryModal,
@@ -44,7 +46,7 @@ const InformationEditor = ({
       )}
 
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
-        정보 등록하기
+        {`정보 ${pathName}하기`}
       </h1>
       <p className="mt-6 font-medium text-gray1 dark:text-slate-400">
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른

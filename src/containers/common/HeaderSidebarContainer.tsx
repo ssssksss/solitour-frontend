@@ -21,7 +21,7 @@ const HeaderSidebarContainer = ({ onClose }: Props) => {
 
   return (
     <HeaderSidebar
-      signedIn={!Number.isNaN(id)}
+      signedIn={Number(id) > 0}
       hoverNum={hoverNum}
       setHoverNum={setHoverNum}
       logoutHandler={logoutHandler}
