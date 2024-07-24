@@ -1,20 +1,34 @@
+import DeleteModalContainer from "@/containers/informations/detail/DeleteModalContainer";
 import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
 
 interface Props {
   visible: boolean;
   informationId: number;
-  onDeleteClick: () => void;
+  modalVisible: boolean;
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const ButtonList = ({ visible, informationId, onDeleteClick }: Props) => {
+const ButtonList = ({
+  visible,
+  informationId,
+  modalVisible,
+  setModalVisible,
+}: Props) => {
   if (!visible) {
     return null;
   }
 
   return (
     <div className="mt-6 flex flex-row items-center justify-end gap-3">
+      {modalVisible && (
+        <DeleteModalContainer
+          informationId={informationId}
+          closeModal={() => setModalVisible(false)}
+        />
+      )}
       <Link
         className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
         href={`/informations/edit/${informationId}`}
@@ -24,7 +38,7 @@ const ButtonList = ({ visible, informationId, onDeleteClick }: Props) => {
       </Link>
       <button
         className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
-        onClick={() => onDeleteClick()}
+        onClick={() => setModalVisible(true)}
       >
         <FaRegTrashCan />
         삭제
