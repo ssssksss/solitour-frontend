@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
+        cache: "no-store",
         credentials: "include",
       },
     );
@@ -32,7 +33,6 @@ export async function POST(request: NextRequest) {
     }
     return result;
   } catch (error) {
-    console.error(error);
-    return new NextResponse("살려줘", { status: 500 });
+    return new NextResponse("서버 에러", { status: 500 });
   }
 }
