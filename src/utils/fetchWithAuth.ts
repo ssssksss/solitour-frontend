@@ -1,10 +1,11 @@
 export async function fetchWithAuth(url: string, options = {}, retries = 1) {
   try {
     const response = await fetch(url, options);
-    // 사용하는 api에서 return new NextResponse("Refresh token not found", {status: 401}); 처럼 response값에 401값을 담아주어야 한다.
     if (response.status === 401 && retries > 0) {
       // 토큰 갱신
-      const data = await fetch(`/api/auth/refresh-access-token`);
+      const data = await fetch(`/api/auth/refresh-access-token`, {
+        method: "POST",
+      });
       if (data.status == 401) {
         return Promise.reject({
           status: 401,
