@@ -55,7 +55,7 @@ const InformationList = async ({
 
   return (
     <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
-      <div className="mt-6 flex flex-wrap gap-4">
+      <div className="mt-6 flex flex-wrap gap-5">
         {data.content.map((value) => (
           <InformationItem
             key={value.informationId}

@@ -40,7 +40,7 @@ const InformationItem = ({
   }
 
   return (
-    <div className="relative flex h-[19rem] w-[19rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
+    <div className="relative flex h-[19.6875rem] w-[19.125rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
       <Image
         className="-z-10 rounded-[0.875rem] dark:opacity-65"
         src={image}
