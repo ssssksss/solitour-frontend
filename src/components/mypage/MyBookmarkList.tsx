@@ -36,9 +36,12 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
             <InformationItem
               key={"post" + post.id}
               informationId={post.id}
-              categoryId={post.category}
+              categoryId={1}
               title={post.title}
               image={post.image}
+              address="테스트 주소"
+              likeCount={33}
+              viewCount={44}
             />
           );
         } else {

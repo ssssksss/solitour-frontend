@@ -37,9 +37,12 @@ const MyBoardList = ({ data }: MyBoardListProps) => {
             <InformationItem
               key={"post" + post.id}
               informationId={post.id}
-              categoryId={post.category}
+              categoryId={1}
               title={post.title}
               image={post.image}
+              address="테스트 주소"
+              likeCount={12}
+              viewCount={66}
             />
           );
         } else {

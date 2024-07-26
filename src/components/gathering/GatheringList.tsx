@@ -4,9 +4,9 @@ import "react-date-range/dist/theme/default.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { VscSettings } from "react-icons/vsc";
 import GatheringItem from "../common/GatheringItem";
-import Pagination from "../common/Pagination";
 import GatheringFilterModal from "./GatheringFilterModal";
 import GatheringSubCategoryList from "./GatheringSubCategoryList";
+import PaginationContainer from "@/containers/common/PaginationContainer";
 
 interface IGatheringList {
   isModal: boolean;
@@ -96,7 +96,7 @@ const GatheringList = (props: IGatheringList) => {
           />
         ))}
       </div>
-      <Pagination />
+      <PaginationContainer currentPage={1} totalPages={6} />
     </div>
   );
 };
