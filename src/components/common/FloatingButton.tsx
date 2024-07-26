@@ -25,7 +25,7 @@ const FloatingButton = ({ visible, onClick, onScrollToTop }: Props) => {
             </Link>
             <Link
               className="flex flex-col items-center text-sm hover:text-main"
-              href="/meetings/write"
+              href="/gathering/write"
               onClick={onClick}
             >
               <p>모임</p>

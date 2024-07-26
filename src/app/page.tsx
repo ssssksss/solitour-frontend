@@ -1,8 +1,8 @@
 import BestInformationList from "@/components/home/BestInformationList";
-import NewMeetingList from "@/components/home/NewMeetingList";
+import NewGatheringList from "@/components/home/NewGatheringList";
 import TabList from "@/components/home/TabList";
 import BestInformationListSkeleton from "@/components/skeleton/home/BestInformationListSkeleton";
-import NewMeetingListSkeleton from "@/components/skeleton/home/NewMeetingListSkeleton";
+import NewGatheringListSkeleton from "@/components/skeleton/home/NewGatheringListSkeleton";
 import HomeCarouselContainer from "@/containers/home/HomeCarouselContainer";
 import ListTemplateContainer from "@/containers/home/ListTemplateContainer";
 import { Suspense } from "react";
@@ -24,8 +24,8 @@ export default function Home() {
         titles={["새로움을 발견할,", "NEW", "모임"]}
         description={"솔리투어에서 새로운 사람들과 최신 모임을 찾아보세요!"}
       >
-        <Suspense fallback={<NewMeetingListSkeleton />}>
-          <NewMeetingList />
+        <Suspense fallback={<NewGatheringListSkeleton />}>
+          <NewGatheringList />
         </Suspense>
       </ListTemplateContainer>
     </div>

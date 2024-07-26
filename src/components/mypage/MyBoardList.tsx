@@ -1,5 +1,5 @@
+import GatheringItem from "../common/GatheringItem";
 import InformationItem from "../common/InformationItem";
-import MeetingItem from "./../common/MeetingItem";
 
 type MyBoardListProps = {
   data: (
@@ -44,7 +44,7 @@ const MyBoardList = ({ data }: MyBoardListProps) => {
           );
         } else {
           return (
-            <MeetingItem
+            <GatheringItem
               key={index}
               id={index + 1}
               category={post.category}

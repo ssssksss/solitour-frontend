@@ -80,7 +80,7 @@ const HeaderSidebar = ({
           </Link>
           <Link
             className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
-            href="/meetings"
+            href="/gathering"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(3)}
             onMouseLeave={() => setHoverNum(0)}
