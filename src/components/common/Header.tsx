@@ -90,12 +90,12 @@ const Header = ({
                   <Link
                     className={
                       `${
-                        pathname.includes("/meetings")
+                        pathname.includes("/gathering")
                           ? "font-bold text-black dark:text-slate-200"
                           : "font-medium text-gray1 dark:text-slate-400"
                       } ` + "text-sm hover:text-main"
                     }
-                    href="/meetings"
+                    href="/gathering"
                   >
                     모임
                   </Link>

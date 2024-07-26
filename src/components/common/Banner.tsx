@@ -11,7 +11,7 @@ interface Props {
 
 const buttonPath = {
   정보: "/informations/write",
-  모임: "/meetings/write",
+  모임: "/gathering/write",
 };
 
 const Banner = ({ content, buttonText, category }: Props) => {

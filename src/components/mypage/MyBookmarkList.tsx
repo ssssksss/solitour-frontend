@@ -1,5 +1,5 @@
+import GatheringItem from "../common/GatheringItem";
 import InformationItem from "../common/InformationItem";
-import MeetingItem from "../common/MeetingItem";
 type MyBookmarkListProps = {
   data: (
     | {
@@ -43,7 +43,7 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
           );
         } else {
           return (
-            <MeetingItem
+            <GatheringItem
               key={index}
               id={index + 1}
               category={post.category}

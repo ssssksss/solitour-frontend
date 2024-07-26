@@ -31,7 +31,7 @@ const TabList = () => {
       </Link>
       <Link
         className="flex h-72 w-[29.375rem] flex-col justify-between rounded-2xl bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF] p-12 duration-300 hover:scale-105 max-[1024px]:h-48 max-[1024px]:w-[19.25rem] max-[1024px]:p-6 max-[744px]:w-full dark:opacity-65"
-        href="/meetings"
+        href="/gathering"
       >
         <div className="space-y-2">
           <h2 className="text-2xl font-bold text-black max-[1024px]:text-lg">
@@ -44,8 +44,8 @@ const TabList = () => {
         <div className="flex items-center justify-end">
           <div className="relative h-[7.5rem] w-24 max-[1024px]:h-[4.875rem] max-[1024px]:w-[3.8125rem]">
             <Image
-              src={"/Meeting-search-icon.svg"}
-              alt={"Meeting-search-icon"}
+              src={"/home/Gathering-search-icon.svg"}
+              alt={"Gathering-search-icon"}
               fill={true}
               style={{ objectFit: "cover" }}
             />
