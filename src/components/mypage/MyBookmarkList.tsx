@@ -35,8 +35,8 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
           return (
             <InformationItem
               key={"post" + post.id}
-              id={post.id}
-              category={post.category}
+              informationId={post.id}
+              categoryId={post.category}
               title={post.title}
               image={post.image}
             />

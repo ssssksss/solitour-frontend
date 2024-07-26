@@ -62,14 +62,17 @@ const BestInformationList = async () => {
   ];
 
   return (
-    <div className="mt-6 flex w-fit flex-wrap items-center justify-center gap-4 p-1 max-[744px]:flex-row max-[744px]:flex-nowrap">
+    <div className="mt-6 flex w-fit flex-wrap items-center gap-4 p-1 max-[744px]:flex-row max-[744px]:flex-nowrap">
       {data.map((post, index) => (
         <InformationItem
           key={index}
-          id={index + 1}
-          category={post.category}
+          informationId={index + 1}
+          categoryId={1}
           title={post.title}
           image={post.image}
+          address="테스트 주소"
+          likeCount={123}
+          viewCount={456}
         />
       ))}
     </div>

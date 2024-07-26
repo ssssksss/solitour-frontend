@@ -38,9 +38,9 @@ const Footer = () => {
         <div className="flex flex-row items-center justify-between">
           <Link
             className="flex h-[2.625rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black text-sm font-medium text-white hover:scale-105 dark:bg-slate-600"
-            href="/auth/signin"
+            href="/informations/list/parent-category/1?page=1"
           >
-            시작하기
+            둘러보기
           </Link>
           <div className="flex w-fit flex-row items-center gap-4">
             <button className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-200 hover:scale-105 dark:bg-slate-600">

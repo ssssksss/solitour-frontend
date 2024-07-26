@@ -27,9 +27,9 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
           </div>
           <Link
             className="flex h-[2.6875rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black font-medium text-white hover:scale-105"
-            href="/auth/signin"
+            href="/informations/list/parent-category/1?page=1"
           >
-            시작하기
+            둘러보기
           </Link>
         </div>
         <div className="flex w-[60rem] flex-row items-center justify-center max-[1024px]:w-[90%]">
