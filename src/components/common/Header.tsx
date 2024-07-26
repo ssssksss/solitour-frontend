@@ -31,10 +31,11 @@ const Header = ({
           ` ${transparent ? "bg-transparent" : "bg-white dark:bg-slate-800"}`
         }
       >
-        <div className="flex h-20 w-[90rem] flex-row items-center justify-between max-[1024px]:px-6">
+        <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
           <div className="flex flex-row items-center">
             <Link
-              className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4 max-[744px]:ml-0"
+              // className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4 max-[744px]:ml-0"
+              className="relative h-8 w-[5rem] font-black"
               href="/"
             >
               <Image
@@ -123,7 +124,7 @@ const Header = ({
           />
           <div
             className={
-              "mr-[3.375rem] flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem] text-sm backdrop-blur-[120px] max-[744px]:hidden"
+              "flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem] text-sm backdrop-blur-[120px] max-[744px]:hidden"
             }
           >
             {userId == 0 ? (
