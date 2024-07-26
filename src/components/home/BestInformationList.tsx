@@ -67,9 +67,12 @@ const BestInformationList = async () => {
         <InformationItem
           key={index}
           informationId={index + 1}
-          categoryId={post.category}
+          categoryId={1}
           title={post.title}
           image={post.image}
+          address="테스트 주소"
+          likeCount={123}
+          viewCount={456}
         />
       ))}
     </div>

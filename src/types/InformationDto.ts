@@ -7,6 +7,7 @@ export interface InformationRegisterResponseDto {
 
 // 정보 목록 조회 결과 Dto
 export interface InformationListResponseDto {
+  totalPages: number;
   content: Array<{
     informationId: number;
     title: string;

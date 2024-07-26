@@ -1,5 +1,5 @@
 import InformationItem from "@/components/common/InformationItem";
-import Pagination from "@/components/common/Pagination";
+import PaginationContainer from "@/containers/common/PaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
@@ -45,19 +45,18 @@ const InformationList = async ({
   place,
   order,
 }: Props) => {
-  const response = await getInformationList(
+  const data = await getInformationList(
     isParentCategory,
     categoryId,
-    page,
+    page - 1,
     place,
     order,
   );
-  const data = response.content;
 
   return (
     <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <div className="mt-6 flex flex-wrap gap-4">
-        {data.map((value) => (
+        {data.content.map((value) => (
           <InformationItem
             key={value.informationId}
             categoryId={categoryId}
@@ -72,7 +71,7 @@ const InformationList = async ({
           />
         ))}
       </div>
-      <Pagination />
+      <PaginationContainer currentPage={page} totalPages={data.totalPages} />
     </div>
   );
 };
