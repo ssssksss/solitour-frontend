@@ -50,8 +50,8 @@ const RecommendationList = async () => {
         {data.map((post, index) => (
           <InformationItem
             key={index}
-            id={index + 1}
-            category={post.category}
+            informationId={index + 1}
+            categoryId={post.category}
             title={post.title}
             image={post.image}
           />

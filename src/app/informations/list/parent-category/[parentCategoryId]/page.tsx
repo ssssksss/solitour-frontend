@@ -29,7 +29,7 @@ export default function page({ params, searchParams }: Props) {
         <InformationList
           isParentCategory={true}
           categoryId={categoryId}
-          page={page}
+          page={page - 1}
           place={searchParams["place"]}
           order={searchParams["order"]}
         />

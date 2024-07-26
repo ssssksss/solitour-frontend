@@ -7,43 +7,16 @@ export interface InformationRegisterResponseDto {
 
 // 정보 목록 조회 결과 Dto
 export interface InformationListResponseDto {
-  totalPages: number;
-  totalElements: number;
-  number: 0;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
-  first: boolean;
-  last: boolean;
-  size: number;
-  content: Array<
-    Readonly<{
-      informationId: number;
-      title: string;
-      zoneCategoryParentName: string;
-      zoneCategoryChildName: string;
-      viewCount: number;
-      isBookMark: boolean;
-      thumbNailImage: string;
-      likeCount: number;
-    }>
-  >;
-  numberOfElements: number;
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    offset: number;
-    paged: boolean;
-    unpaged: boolean;
-  };
-  empty: boolean;
+  content: Array<{
+    informationId: number;
+    title: string;
+    zoneCategoryParentName: string;
+    zoneCategoryChildName: string;
+    viewCount: number;
+    isBookMark: boolean;
+    thumbNailImage: string;
+    likeCount: number;
+  }>;
 }
 
 /**
