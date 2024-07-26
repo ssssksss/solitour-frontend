@@ -35,7 +35,7 @@ const Header = ({
           <div className="flex flex-row items-center">
             <Link
               // className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4 max-[744px]:ml-0"
-              className="relative h-8 w-[5rem] font-black"
+              className="relative h-8 w-[6.9375rem] font-black"
               href="/"
             >
               <Image
