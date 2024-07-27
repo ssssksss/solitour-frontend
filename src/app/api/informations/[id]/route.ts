@@ -131,7 +131,7 @@ export async function DELETE(
       throw new Error("Internal Server Error");
     }
 
-    revalidatePath("/informations/list");
+    revalidatePath("/informations", "layout");
     return response;
   } catch (e) {
     return new Response(JSON.stringify({ error: "Failed to delete data." }), {
