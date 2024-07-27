@@ -61,18 +61,21 @@ const InformationSearch = ({
             <Link
               className={`${order === "latest" && "text-main"} hover:text-main`}
               href={`${pathname}?page=1&order=latest`}
+              scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "like-count" && "text-main"} hover:text-main`}
               href={`${pathname}?page=1&order=like-count`}
+              scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "view-count" && "text-main"} hover:text-main`}
               href={`${pathname}?page=1&order=view-count`}
+              scroll={false}
             >
               조회순
             </Link>

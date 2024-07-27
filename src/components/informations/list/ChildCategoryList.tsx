@@ -21,6 +21,7 @@ const ChildCategoryList = ({
           "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105"
         }
         href={`/informations/list/parent-category/${parentCategoryId}?page=1`}
+        scroll={false}
       >
         전체
       </Link>
@@ -34,6 +35,7 @@ const ChildCategoryList = ({
               "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105"
             }
             href={`/informations/list/child-category/${childCategory.id}?page=1`}
+            scroll={false}
           >
             {childCategory.name}
           </Link>
