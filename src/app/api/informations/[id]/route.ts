@@ -9,6 +9,7 @@ import { NextRequest } from "next/server";
  *
  * 정보 상세 페이지에서 데이터를 가져올 때
  * 사용되지 않습니다.
+ *
  * @param request
  */
 export async function GET(
@@ -41,6 +42,7 @@ export async function GET(
 
 /**
  * 정보 글 수정
+ *
  * @param request
  * @param params
  * @returns
@@ -53,11 +55,6 @@ export async function PUT(
     const cookie = request.cookies.get("access_token");
     const formData = await request.formData();
 
-    // TODO: 삭제 필요
-    console.log("TEST 정보 글 수정");
-    console.log(formData);
-
-    /*
     // Back-end API 호출
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/informations/${params.id}`,
@@ -72,30 +69,14 @@ export async function PUT(
     );
 
     if (!response.ok) {
-      throw new Error("Internal Server Error");
+      throw new Error(response.statusText);
     }
 
-    // Revalidate the cache for the list page and redirect the user.
-    // TODO: 수정 필요
-    revalidateTag("getInformationList");
-    revalidateTag(`getInformation/${params.id}`);
-
-    // 외부 API의 응답을 JSON 형식으로 변환
+    // Revalidate the cache
+    revalidatePath("/informations", "layout");
     return response;
-    */
-
-    // TODO: 삭제 필요
-    return new Response(
-      JSON.stringify({ title: "1", content: "2", tips: ["3", "4"] }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
   } catch (e) {
-    return new Response(JSON.stringify({ error: "Failed to write data." }), {
+    return new Response(JSON.stringify({ error: "Failed to update data." }), {
       status: 500, // Internal Server Error
       headers: {
         "Content-Type": "application/json",
@@ -128,7 +109,7 @@ export async function DELETE(
     );
 
     if (!response.ok) {
-      throw new Error("Internal Server Error");
+      throw new Error(response.statusText);
     }
 
     revalidatePath("/informations", "layout");

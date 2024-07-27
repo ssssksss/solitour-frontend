@@ -1,5 +1,5 @@
 /**
- * 정보 등록 결과 Dto
+ * 정보 등록/정보 수정 결과 Dto
  */
 export interface InformationRegisterResponseDto {
   id: number;

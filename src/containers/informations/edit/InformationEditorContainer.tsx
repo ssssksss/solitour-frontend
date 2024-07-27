@@ -5,15 +5,19 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
-import { InformationDetailDto } from "@/types/InformationDto";
+import {
+  InformationDetailDto,
+  InformationRegisterResponseDto,
+} from "@/types/InformationDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
   informationId: number;
+  data: InformationDetailDto;
 }
 
-const InformationEditorContainer = ({ informationId }: Props) => {
+const InformationEditorContainer = ({ informationId, data }: Props) => {
   const imagesHook = useDragScroll();
   const hashtagsHook = useDragScroll();
   const { id } = useAuthStore();
@@ -111,50 +115,23 @@ const InformationEditorContainer = ({ informationId }: Props) => {
       formData.append("contentImages", contentImage);
     });
 
-    // headers: {
-    //   "Content-Type": "multipart/form-data"
-    // }
-    // 위의 코드를 빼야 정상적으로 작동함.
-    const response = await fetch("/api/informations", {
+    const response = await fetch(`/api/informations/${informationId}`, {
       method: "PUT",
       body: formData,
       cache: "no-store",
     });
 
     if (!response.ok) {
-      alert("테스트 실패");
-      throw new Error("Failed to write data.");
+      alert("정보 수정에 실패하였습니다.");
+      throw new Error(response.statusText);
     }
 
-    alert("테스트 성공");
-    return;
+    const result: InformationRegisterResponseDto = await response.json();
+    router.push(`/informations/${result.id}`);
+    router.refresh();
+
+    alert("정보 수정 작업 중");
   };
-
-  // 페이지에 들어왔을 때 수정할 정보 글 데이터를 가져옴.
-  useEffect(() => {
-    const getInformation = async (id: number) => {
-      const response = await fetch(`/api/informations/${id}`, {
-        method: "GET",
-        next: { revalidate: 60, tags: [`getInformation/${id}`] },
-      });
-
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-
-      const data: InformationDetailDto = await response.json();
-
-      editorStore.title = data.title;
-      editorStore.content = data.content;
-
-      console.log(editorStore.title);
-
-      // TODO:
-      //setHashtag("테스트 태그");
-    };
-
-    getInformation(informationId);
-  }, [editorStore, informationId]);
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
   // 로그아웃 시 로그인 페이지로 이동.
@@ -164,16 +141,40 @@ const InformationEditorContainer = ({ informationId }: Props) => {
     }
   }, [id, router]);
 
+  // 수정 페이지에 들어왔을 때 수정할 정보 글 데이터를 가져옴.
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {
+    editorStore.setEditor({
+      title: data.title,
+      address: data.address,
+      province: data.zoneCategoryResponse.parentZoneCategory.name,
+      city: data.zoneCategoryResponse.name,
+      placeId: data.placeResponse.searchId.toString(),
+      placeName: data.placeResponse.name,
+      placeXAxis: data.placeResponse.xaxis.toString(),
+      placeYAxis: data.placeResponse.yaxis.toString(),
+      categoryId: 0,
+      categoryName: "",
+      images: [...data.imageResponses.map((value) => value.address), ""],
+      imageFiles: [],
+      mainImageIndex: data.imageResponses.findIndex(
+        (value) => value.imageStatus === "썸네일",
+      ),
+      content: data.content,
+      hashtags: data.tagResponses.map((value) => value.name),
+      tips: data.tip.split(";"),
+    });
+
     return () => {
       initialize();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialize]);
 
   return (
     <InformationEditor
-      pathName="수정"
+      pathname="수정"
       editorStore={editorStore}
       locationModal={locationModal}
       categoryModal={categoryModal}
