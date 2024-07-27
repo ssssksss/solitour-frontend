@@ -8,7 +8,7 @@ import PlaceModalContainer from "@/containers/informations/write/PlaceModalConta
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 
 interface Props {
-  pathName: string;
+  pathname: string;
   editorStore: useEditorStoreType;
   locationModal: boolean;
   categoryModal: boolean;
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const InformationEditor = ({
-  pathName,
+  pathname,
   editorStore,
   locationModal,
   categoryModal,
@@ -46,7 +46,7 @@ const InformationEditor = ({
       )}
 
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
-        {`정보 ${pathName}하기`}
+        {`정보 ${pathname}하기`}
       </h1>
       <p className="mt-6 font-medium text-gray1 dark:text-slate-400">
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
@@ -150,7 +150,13 @@ const InformationEditor = ({
                 textColor="text-main"
                 cursorPointer={true}
                 hover="hover:scale-110"
-                onClick={() => editorStore.removeHashtag(index)}
+                onClick={() =>
+                  editorStore.setEditor({
+                    hashtags: editorStore.hashtags.filter(
+                      (_, i) => index !== i,
+                    ),
+                  })
+                }
               />
             ))}
             <input
@@ -213,7 +219,11 @@ const InformationEditor = ({
           <button
             className={`${editorStore.tips.length <= 1 ? "text-gray3 dark:text-slate-600" : "hover:text-main"}`}
             type="button"
-            onClick={(e) => editorStore.removeTip()}
+            onClick={() =>
+              editorStore.setEditor({
+                tips: editorStore.tips.slice(0, editorStore.tips.length - 1),
+              })
+            }
             disabled={editorStore.tips.length <= 1}
           >
             <span
@@ -226,7 +236,9 @@ const InformationEditor = ({
           <button
             className="hover:text-main"
             type="button"
-            onClick={() => editorStore.addTip()}
+            onClick={() =>
+              editorStore.setEditor({ tips: [...editorStore.tips, ""] })
+            }
           >
             <span className="text-main">+</span>
             {" 항목 추가"}
@@ -237,7 +249,7 @@ const InformationEditor = ({
           type="submit"
           onClick={() => onSubmit()}
         >
-          정보 등록하기
+          {`정보 ${pathname}하기`}
         </button>
       </div>
     </div>

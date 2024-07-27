@@ -140,7 +140,7 @@ const InformationEditorContainer = () => {
 
   return (
     <InformationEditor
-      pathName="등록"
+      pathname="등록"
       editorStore={editorStore}
       locationModal={locationModal}
       categoryModal={categoryModal}

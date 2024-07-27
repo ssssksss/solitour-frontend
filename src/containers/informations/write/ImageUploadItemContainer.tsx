@@ -10,14 +10,9 @@ interface Props {
 
 const ImageUploadItemContainer = ({ index }: Props) => {
   const imageRef = useRef<HTMLInputElement>(null);
-  const {
-    images,
-    mainImageIndex,
-    changeImage,
-    changeMainImageIndex,
-    addImage,
-    removeImage,
-  } = useEditorStore();
+  const { images, mainImageIndex, setEditor, changeImage, addImage } =
+    useEditorStore();
+  const editorStore = useEditorStore();
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
@@ -40,11 +35,15 @@ const ImageUploadItemContainer = ({ index }: Props) => {
   };
 
   const onRemove = (index: number) => {
-    removeImage(index);
+    setEditor({
+      images: editorStore.images.filter((_, i) => index !== i),
+      imageFiles: editorStore.imageFiles.filter((_, i) => index !== i),
+    });
+
     if (index < mainImageIndex) {
-      changeMainImageIndex(mainImageIndex - 1);
+      setEditor({ mainImageIndex: mainImageIndex - 1 });
     } else if (index === mainImageIndex) {
-      changeMainImageIndex(0);
+      setEditor({ mainImageIndex: 0 });
     }
   };
 
@@ -56,7 +55,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       imageRef={imageRef}
       onUploadButtonClicked={onUploadButtonClicked}
       previewImage={previewImage}
-      setMainImageIndex={changeMainImageIndex}
+      setMainImageIndex={(index) => setEditor({ mainImageIndex: index })}
       onRemove={onRemove}
     />
   );

@@ -26,15 +26,10 @@ interface EditorActions {
   initialize: () => void;
   setEditor: (data: Partial<EditorState>) => void;
   changeImage: (index: number, image: string) => void;
-  changeMainImageIndex: (index: number) => void;
   changeTip: (index: number, tip: string) => void;
   addImage: (file: File) => void;
   addHashtag: (hashtag: string) => void;
-  addTip: () => void;
   resetPlaceInfo: () => void;
-  removeImage: (index: number) => void;
-  removeHashtag: (index: number) => void;
-  removeTip: () => void;
 }
 
 // 3. 초기 상태 정의
@@ -70,7 +65,6 @@ const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
         images: images,
       };
     }),
-  changeMainImageIndex: (index: number) => set({ mainImageIndex: index }),
   changeTip: (index: number, tip: string) =>
     set((state) => {
       const tips = [...state.tips];
@@ -92,7 +86,6 @@ const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
         return { hashtags: state.hashtags };
       }
     }),
-  addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
   resetPlaceInfo: () =>
     set({
       province: "",
@@ -103,17 +96,6 @@ const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
       placeYAxis: "",
       placeName: "",
     }),
-  removeImage: (index: number) =>
-    set((state) => ({
-      images: state.images.filter((_, i) => index !== i),
-      imageFiles: state.imageFiles.filter((_, i) => index !== i),
-    })),
-  removeHashtag: (index: number) =>
-    set((state) => ({
-      hashtags: state.hashtags.filter((_, i) => index !== i),
-    })),
-  removeTip: () =>
-    set((state) => ({ tips: state.tips.slice(0, state.tips.length - 1) })),
 });
 
 const useEditorStore = create<EditorState & EditorActions>()<any>(
