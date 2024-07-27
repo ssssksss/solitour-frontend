@@ -1,4 +1,5 @@
 import InformationItem from "@/components/common/InformationItem";
+import { LOCATION_ID } from "@/constants/informations/location";
 import PaginationContainer from "@/containers/common/PaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
@@ -11,16 +12,44 @@ async function getInformationList(
   order?: string,
 ) {
   const cookie = cookies().get("access_token");
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}${place !== undefined ? "&place=" + place : ""}${order !== undefined ? "&order=" + order : ""}`,
-    {
-      method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
+  let response: Response;
+
+  if (place) {
+    // TODO
+    response = await fetch(
+      `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}/zone-category/${LOCATION_ID[place]}?page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
+        next: { revalidate: 60, tags: ["getInformationList"] },
       },
-      next: { revalidate: 60, tags: ["getInformationList"] },
-    },
-  );
+    );
+  } else if (order) {
+    // TODO
+    response = await fetch(
+      `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
+        next: { revalidate: 60, tags: ["getInformationList"] },
+      },
+    );
+  } else {
+    response = await fetch(
+      `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
+        next: { revalidate: 60, tags: ["getInformationList"] },
+      },
+    );
+  }
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.
@@ -28,6 +57,8 @@ async function getInformationList(
   }
 
   return response.json() as Promise<InformationListResponseDto>;
+
+  //${place !== undefined ? "&place=" + place : ""}${order !== undefined ? "&order=" + order : ""}
 }
 
 interface Props {
