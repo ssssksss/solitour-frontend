@@ -25,10 +25,9 @@ async function getInformationList(
         next: { revalidate: 60, tags: ["getInformationList"] },
       },
     );
-  } else if (order) {
-    // TODO
+  } else if (order && order !== "latest") {
     response = await fetch(
-      `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}`,
+      `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}/${order}?page=${page}`,
       {
         method: "GET",
         headers: {
