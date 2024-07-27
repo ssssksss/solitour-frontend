@@ -16,7 +16,7 @@ const InformationFilterModalContainer = ({ closeModal }: Props) => {
   const pathname = usePathname();
 
   const onClick = () => {
-    router.push(`${pathname}?page=1&place=${place}`);
+    router.push(`${pathname}?page=1&place=${place}`, { scroll: false });
     closeModal();
   };
 
