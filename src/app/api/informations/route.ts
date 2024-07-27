@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Revalidate the cache
-    revalidatePath("/informations/list");
+    revalidatePath("/informations", "layout");
     return response;
   } catch (err: any) {
     return new Response(JSON.stringify({ error: err.message }), {
