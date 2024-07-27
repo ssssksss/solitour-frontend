@@ -30,12 +30,17 @@ const HeaderContainer = () => {
 
   const logoutHandler = async () => {
     // api로 로그아웃 요청해서 쿠키제거
+    const response = await fetch("/api/auth/logout", {
+      method: "POST",
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
     authStore.initialize();
     authStore.setUser({
       id: -1,
-    });
-    await fetch("/api/auth/logout", {
-      method: "POST",
     });
   };
 
