@@ -50,6 +50,9 @@ export interface InformationDetailDto {
   likeCount: number;
 }
 
+/**
+ * 정보 Top 5 조회 결과 dto
+ */
 export interface TopInformationResponseDto {
   id: number;
   title: string;

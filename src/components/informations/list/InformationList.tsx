@@ -15,7 +15,6 @@ async function getInformationList(
   let response: Response;
 
   if (place) {
-    // TODO
     response = await fetch(
       `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}/zone-category/${LOCATION_ID[place]}?page=${page}`,
       {
