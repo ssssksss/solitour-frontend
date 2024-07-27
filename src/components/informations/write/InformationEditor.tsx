@@ -150,7 +150,13 @@ const InformationEditor = ({
                 textColor="text-main"
                 cursorPointer={true}
                 hover="hover:scale-110"
-                onClick={() => editorStore.removeHashtag(index)}
+                onClick={() =>
+                  editorStore.setEditor({
+                    hashtags: editorStore.hashtags.filter(
+                      (_, i) => index !== i,
+                    ),
+                  })
+                }
               />
             ))}
             <input
@@ -213,7 +219,11 @@ const InformationEditor = ({
           <button
             className={`${editorStore.tips.length <= 1 ? "text-gray3 dark:text-slate-600" : "hover:text-main"}`}
             type="button"
-            onClick={(e) => editorStore.removeTip()}
+            onClick={() =>
+              editorStore.setEditor({
+                tips: editorStore.tips.slice(0, editorStore.tips.length - 1),
+              })
+            }
             disabled={editorStore.tips.length <= 1}
           >
             <span
@@ -226,7 +236,9 @@ const InformationEditor = ({
           <button
             className="hover:text-main"
             type="button"
-            onClick={() => editorStore.addTip()}
+            onClick={() =>
+              editorStore.setEditor({ tips: [...editorStore.tips, ""] })
+            }
           >
             <span className="text-main">+</span>
             {" 항목 추가"}
