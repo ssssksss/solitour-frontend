@@ -51,11 +51,15 @@ const InformationItem = ({
         }}
       />
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
-        <p
-          className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
-        >
-          {CATEGORY_TEXT[categoryId]}
-        </p>
+        {style !== "" ? (
+          <p
+            className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
+          >
+            {CATEGORY_TEXT[categoryId]}
+          </p>
+        ) : (
+          <div />
+        )}
         <div className="cursor-pointer text-white hover:scale-110 dark:text-slate-200">
           <CiBookmark size={"2rem"} />
         </div>

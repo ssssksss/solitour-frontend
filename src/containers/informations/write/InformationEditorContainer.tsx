@@ -120,6 +120,7 @@ const InformationEditorContainer = () => {
 
     const result: InformationRegisterResponseDto = await response.json();
     router.push(`/informations/${result.id}`);
+    router.refresh();
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
