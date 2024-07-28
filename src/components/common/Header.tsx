@@ -58,9 +58,9 @@ const Header = ({
               />
             </Link>
           </div>
-          <div className="flex flex-grow flex-row justify-between px-28 max-[744px]:hidden">
+          <div className="flex flex-grow flex-row justify-between pl-28 max-[744px]:hidden">
             <nav>
-              <ul className="font flex flex-row space-x-10">
+              <ul className="flex flex-row gap-10">
                 <li>
                   <Link
                     className={
