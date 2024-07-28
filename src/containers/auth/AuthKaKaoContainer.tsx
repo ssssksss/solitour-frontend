@@ -26,6 +26,7 @@ const AuthKaKaoContainer = () => {
               "Content-Type": "application/json",
               "Access-Control-Allow-Origin": "*",
             },
+            cache: "no-store",
             credentials: "include",
           },
         );
