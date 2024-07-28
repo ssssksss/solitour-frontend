@@ -13,7 +13,9 @@ export function GET() {
 
   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
 
-  console.log("Redirecting to:", kakaoAuthUrl); // URL 확인을 위한 로그
-
-  return NextResponse.redirect(kakaoAuthUrl);
+  try {
+    return NextResponse.redirect(kakaoAuthUrl);
+  } catch (error) {
+    return NextResponse.redirect("/auth/signin");
+  }
 }
