@@ -34,7 +34,7 @@ const CategoryModal = ({
               onClick={onCancel}
             />
           </div>
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-row flex-wrap items-center gap-2">
             {categories?.map((category, index) => (
               <button
                 key={index}
@@ -56,7 +56,7 @@ const CategoryModal = ({
               소분류 선택
             </h3>
           )}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-row flex-wrap items-center gap-2">
             {categories
               ?.find((category) => parentCategory === category.id)
               ?.childrenCategories?.map((category, index) => (

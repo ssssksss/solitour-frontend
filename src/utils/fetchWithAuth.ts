@@ -6,6 +6,7 @@ export async function fetchWithAuth(url: string, options = {}, retries = 1) {
       const data = await fetch(`/api/auth/refresh-access-token`, {
         method: "POST",
       });
+
       if (data.status == 401) {
         return Promise.reject({
           status: 401,

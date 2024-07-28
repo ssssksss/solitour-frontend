@@ -21,7 +21,7 @@ const HeaderSidebar = ({
 }: Props) => {
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-[200%] w-full animate-sidebarFadeIn flex-row justify-end bg-black/25">
-      <nav className="flex h-fit w-[9.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6 dark:bg-slate-800">
+      <nav className="flex h-fit w-[12.875rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6 dark:bg-slate-800">
         <div className="flex h-10 w-full items-center justify-end">
           <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main dark:bg-slate-600">
             <MdClose onClick={onClose} />
@@ -29,7 +29,7 @@ const HeaderSidebar = ({
         </div>
         <div className="flex flex-col gap-4 px-2">
           <Link
-            className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
+            className="flex flex-row items-center gap-2 hover:text-main dark:text-slate-200"
             href="/"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(1)}
@@ -54,7 +54,7 @@ const HeaderSidebar = ({
             <p>홈</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
+            className="flex flex-row items-center gap-2 hover:text-main dark:text-slate-200"
             href="/informations/list/parent-category/1?page=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(2)}
@@ -79,7 +79,7 @@ const HeaderSidebar = ({
             <p>여행 정보</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-2 text-sm hover:text-main dark:text-slate-200"
+            className="flex flex-row items-center gap-2 hover:text-main dark:text-slate-200"
             href="/gathering"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(3)}
@@ -104,7 +104,7 @@ const HeaderSidebar = ({
             <p>모임 정보</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-[0.375rem] text-sm hover:text-main dark:text-slate-200"
+            className="flex flex-row items-center gap-[0.375rem] hover:text-main dark:text-slate-200"
             href="/diary/list"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(4)}
@@ -133,7 +133,7 @@ const HeaderSidebar = ({
           {signedIn ? (
             <div className="flex flex-col gap-4">
               <Link
-                className="flex flex-row items-center gap-[0.5625rem] text-sm hover:text-main dark:text-slate-200"
+                className="flex flex-row items-center gap-[0.5625rem] hover:text-main dark:text-slate-200"
                 href="/mypage"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(5)}
@@ -160,7 +160,7 @@ const HeaderSidebar = ({
                 <p>마이페이지</p>
               </Link>
               <button
-                className="flex flex-row items-center gap-[0.4375rem] text-sm hover:text-main dark:text-slate-200"
+                className="flex flex-row items-center gap-[0.4375rem] hover:text-main dark:text-slate-200"
                 onClick={logoutHandler}
               >
                 <CiLogout className="-ml-[0.125rem]" size={"1.2rem"} />
@@ -169,7 +169,7 @@ const HeaderSidebar = ({
             </div>
           ) : (
             <Link
-              className="flex flex-row items-center gap-[0.5625rem] text-sm hover:text-main dark:text-slate-200"
+              className="flex flex-row items-center gap-[0.5625rem] hover:text-main dark:text-slate-200"
               href="/auth/signin"
               onClick={onClose}
               onMouseEnter={() => setHoverNum(5)}

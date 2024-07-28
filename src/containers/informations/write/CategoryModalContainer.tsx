@@ -49,6 +49,7 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
+
       setCategories(await (response.json() as Promise<CategoryResponseDto[]>));
     })();
   }, []);
