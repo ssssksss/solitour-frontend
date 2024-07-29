@@ -3,11 +3,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDebounce } from "use-debounce";
+
 interface IGatheringPlaceModalProps {
   closeModal: () => void;
 }
 
-type placeElement = {
+type PlaceElement = {
   address_name: string;
   category_group_code: string;
   category_group_name: string;
@@ -22,7 +23,7 @@ type placeElement = {
   y: string;
 };
 
-type placeElement1 = {
+type PlaceElement1 = {
   address: {
     address_name: string;
     b_code: string;
@@ -63,11 +64,11 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
   const [placeCustomName, setPlaceCustomName] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [placeName, setPlaceName] = useState("");
   const [debouncedKeyword] = useDebounce(keyword, 600);
   const [_, setRoadAddress] = useState<string>();
-  const [placeData, setPlaceData] = useState<placeElement1>();
+  const [placeData, setPlaceData] = useState<PlaceElement1>();
   const formContext = useFormContext();
+
   const handleSearch = async (keyword: string) => {
     setLoading(true);
 
@@ -75,8 +76,8 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
       const response = await fetch(
         `/api/gathering/searchPlace?keyword=${encodeURIComponent(keyword)}`,
         {
-          credentials: "omit"
-        }
+          credentials: "omit",
+        },
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -108,30 +109,32 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     }
   };
 
-  const pickLocation = (element: placeElement) => {
+  const pickLocation = (element: PlaceElement) => {
     formContext.setValue("placeName", element.place_name);
-    formContext.setValue("placeSearchId", element.id);
-    formContext.setValue("placeXAxis", element.x);
-    formContext.setValue("placeYAxis", element.y);
-    formContext.setValue("placeAddress", element.road_address_name);
+    formContext.setValue("xAxis", element.x);
+    formContext.setValue("yAxis", element.y);
+    formContext.setValue("searchId", element.id);
+    formContext.setValue("roadAddressName", element.road_address_name);
     formContext.setValue("placeUrl", element.place_url);
     formContext.watch();
     props.closeModal();
   };
 
-  const pickAddress = (element: placeElement1) => {
-    console.log("GatheringPlaceModal.tsx 파일 : ", element);
+  const pickAddress = (element: PlaceElement1) => {
     setRoadAddress(element.road_address.address_name);
     setPlaceData(element);
   };
 
-  const submitHandler = () => {
-    formContext.setValue("placeName", placeName);
-    // formContext.setValue("placeSearchId", placeData);
-    formContext.setValue("placeXAxis", placeData?.x);
-    formContext.setValue("placeYAxis", placeData?.y);
-    formContext.setValue("placeAddress", placeData?.road_address.address_name);
-    // formContext.setValue("placeUrl", placeData.place_url);
+  const applyAddressHandler = () => {
+    formContext.setValue("placeName", placeCustomName);
+    formContext.setValue("xAxis", placeData?.x);
+    formContext.setValue("yAxis", placeData?.y);
+    formContext.setValue(
+      "roadAddressName",
+      placeData?.road_address.address_name,
+    );
+    formContext.setValue("searchId", "");
+    formContext.setValue("placeUrl", "");
     formContext.watch();
     props.closeModal();
   };
@@ -231,7 +234,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                     </p>
                   ) : (
                     <>
-                      {results.map((result: placeElement, index) => (
+                      {results.map((result: PlaceElement, index) => (
                         <li
                           key={index}
                           className="flex h-[3rem] w-full cursor-pointer flex-col px-[.5rem] py-[.25rem] outline-main hover:rounded-[1rem] hover:outline hover:outline-[2px] hover:outline-offset-[-1px]"
@@ -314,7 +317,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                           (i: { road_address: { address_name: string } }) =>
                             i?.road_address?.address_name != undefined,
                         )
-                        .map((result: placeElement1, index) => (
+                        .map((result: PlaceElement1, index) => (
                           <li
                             key={index}
                             className="grid h-[3rem] w-full cursor-pointer grid-cols-[auto_8rem] px-[.5rem] py-[.25rem] outline-main hover:rounded-[1rem] hover:outline hover:outline-[2px] hover:outline-offset-[-1px]"
@@ -379,7 +382,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
             <input
               type="text"
               placeholder="장소명을 입력하세요"
-              onChange={(e) => setPlaceName(e.target.value)}
+              onChange={(e) => setPlaceCustomName(e.target.value)}
               className={
                 "h-[3.25rem] rounded-[1rem] bg-transparent px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
@@ -388,9 +391,9 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
               className={
                 "h-[3rem] w-full rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
               }
-              onClick={() => submitHandler()}
+              onClick={() => applyAddressHandler()}
               disabled={
-                placeName == "" ||
+                placeCustomName == "" ||
                 placeData?.road_address.address_name == undefined
               }
             >
@@ -402,4 +405,5 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     </div>
   );
 };
+
 export default GatheringPlaceModal;

@@ -3,7 +3,8 @@
 import GatheringEditor from "@/components/gathering/write/GatheringEditor";
 import { gatheringCreateFormSchema } from "@/lib/examples/zod/schema/GatheringCreateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const GatheringEditorContainer = () => {
@@ -11,56 +12,60 @@ const GatheringEditorContainer = () => {
   const [isSettingModal, setIsSettingModal] = useState(false);
   const [isScheduleModal, setIsScheduleModal] = useState(false);
   const [isPlaceModal, setIsPlaceModal] = useState(false);
-
+  const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(gatheringCreateFormSchema),
     defaultValues: {
       title: "",
       content: "",
-      permitMinUserAgeYear: new Date().getFullYear() - 20,
-      permitMaxUserAgeYear: new Date().getFullYear() - 59,
-      permitSex: "all",
-      totalPersonCount: 10,
+      minAgeYear: new Date().getFullYear() - 20,
+      maxAgeYear: new Date().getFullYear() - 59,
+      allowedSex: "all",
+      participantCount: 10,
       placeName: "",
-      placeXAxis: "",
-      placeYAxis: "",
+      xAxis: "",
+      yAxis: "",
+      roadAddressName: "",
+      deadline: "",
+      scheduleStartDate: "",
+      scheduleEndDate: "",
+      hashtags: [],
+      searchId: "",
+      mainCategoryId: 0,
+      subCategoryId: 0,
+      placeUrl: "",
     },
   });
 
-  useEffect(() => {
-    if (
-      methods.getValues("placeName") == "" ||
-      methods.getValues("placeName") == undefined
-    )
-      return;
-    const lat = Number(methods.getValues("placeYAxis"));
-    const lng = Number(methods.getValues("placeXAxis"));
-    // 카카오 맵이 로드 된 후에 이동 되게 하는 코드
-    window.kakao.maps.load(function () {
-      const marker = {
-        position: new window.kakao.maps.LatLng(lat, lng),
-      };
-      // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
-      const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
-      const options = {
-        // 지도를 생성할 때 필요한 기본 옵션
-        center: new window.kakao.maps.LatLng(lat, lng), // 지도의 중심좌표.
-        level: 3, // 지도의 레벨(확대, 축소 정도)
-        marker: marker,
-      };
+  const createGatheringHandler = async () => {
+    const { hashtags, ...requestData } = methods.getValues();
+    try {
+      const response = await fetch("/api/gathering/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...requestData,
+          hashtags: JSON.stringify(hashtags),
+        }),
+      });
 
-      // const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-      new window.kakao.maps.StaticMap(container, options);
-    });
-  }, [methods.getValues("placeName")]);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=a7dc47d0e636bb16e3f8b6f5ed771c82&autoload=false";
-
-    document.head.appendChild(script);
-  }, []);
+      const data = await response.json();
+      const id = data.id;
+      if (id) {
+        router.replace(`/gathering/${id}`);
+      } else {
+        throw new Error("ID not found in the response");
+      }
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  }
 
   return (
     <FormProvider {...methods}>
@@ -85,6 +90,7 @@ const GatheringEditorContainer = () => {
           closeModal: () => setIsPlaceModal(false),
           openModal: () => setIsPlaceModal(true),
         }}
+        createGatheringHandler={createGatheringHandler}
       />
     </FormProvider>
   );

@@ -31,7 +31,7 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
         >
           모임 제한 선택
         </button>
-        <div>{formContext.getValues("expirationDate") && "OK"}</div>
+        <div>{formContext.getValues("deadline") && "OK"}</div>
         <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
           <GatheringSettingModal closeModal={() => props.closeModal()} />
         </Modal>
@@ -42,7 +42,7 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
         }
       >
         <div className={"flex h-[2.75rem] items-center"}>
-          모집 마감일 : {formContext.getValues("expirationDate")}
+          모집 마감일 : {formContext.getValues("deadline")}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           인원 : 1 /{formContext.getValues("totalPersonCount")}
@@ -57,16 +57,16 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
             </span>
             <span>
               {new Date().getFullYear() -
-                formContext.getValues("permitMaxUserAgeYear") +
+                formContext.getValues("maxAgeYear") +
                 "세"}
             </span>
             (
             <span>
-              {formContext.getValues("permitMaxUserAgeYear") + "년생"}
+              {formContext.getValues("maxAgeYear") + "년생"}
             </span>
             <span>~</span>
             <span>
-              {formContext.getValues("permitMinUserAgeYear") + "년생"}
+              {formContext.getValues("minAgeYear") + "년생"}
             </span>
             )
           </div>

@@ -1,8 +1,13 @@
 import { Modal } from "@/components/common/modal/Modal";
-import { CATEGORY_MODAL_CATEGORY_LIST } from "@/constants/gathering/GatheringConstant";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import GatheringCategoryModal from "../modal/GatheringCategoryModal";
 
+interface ICategory {
+  id: number;
+  name: string;
+  childrenCategories: ICategory[];
+}
 interface IGatheringCategoryProps {
   isModal: boolean;
   closeModal: () => void;
@@ -11,6 +16,25 @@ interface IGatheringCategoryProps {
 
 const GatheringCategory = (props: IGatheringCategoryProps) => {
   const formContext = useFormContext();
+  const [categoryList, setCategoryList] = useState<ICategory[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/gathering`,
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const result = await response.json();
+        setCategoryList(result)
+      } catch (error) {
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <article className={"flex flex-col gap-[2rem]"}>
@@ -32,12 +56,15 @@ const GatheringCategory = (props: IGatheringCategoryProps) => {
           카테고리 선택
         </button>
         <div>
-          {formContext.getValues("mainCategory") &&
-            formContext.getValues("subCategory") &&
+          {formContext.getValues("mainCategoryId") != 0 &&
+            formContext.getValues("subCategoryId") != 0 &&
             "OK"}
         </div>
         <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
-          <GatheringCategoryModal closeModal={() => props.closeModal()} />
+          <GatheringCategoryModal
+            closeModal={() => props.closeModal()}
+            categoryList={categoryList}
+          />
         </Modal>
       </div>
       <div
@@ -47,18 +74,28 @@ const GatheringCategory = (props: IGatheringCategoryProps) => {
       >
         <div className={"flex h-[2.75rem] items-center"}>
           <span className={"pr-[.5rem]"}> 메인 카테고리 : </span>
-          {formContext.getValues("mainCategory") &&
-            CATEGORY_MODAL_CATEGORY_LIST[formContext.getValues("mainCategory")]
-              .name}
+          {formContext.getValues("mainCategoryId") != 0 &&
+            categoryList.filter(
+              (i: { id: number }) =>
+                i.id == formContext.getValues("mainCategoryId"),
+            )[0].name}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           <span className={"pr-[.5rem]"}> 서브 카테고리 : </span>
-          {formContext.getValues("subCategory") &&
-            CATEGORY_MODAL_CATEGORY_LIST[formContext.getValues("mainCategory")]
-              .subCategory[formContext.getValues("subCategory")]}
+          {formContext.getValues("subCategoryId") != 0 &&
+            categoryList
+              .filter(
+                (i: { id: number }) =>
+                  i.id == formContext.getValues("mainCategoryId"),
+              )[0]
+              .childrenCategories.filter(
+                (i: { id: number }) =>
+                  i.id == formContext.getValues("subCategoryId"),
+              )[0].name}
         </div>
       </div>
     </article>
   );
 };
+
 export default GatheringCategory;

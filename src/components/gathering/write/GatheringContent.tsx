@@ -6,31 +6,24 @@ const GatheringContent = () => {
   const formContext = useFormContext();
   const [tags, setTags] = useState<string[]>([]);
   const inputTagRef = useRef<HTMLInputElement>(null);
-  // 태그 클릭해서 지울때
+
+  // 태그 클릭해서 지울 때
   const deleteTagHandler = (tagName: string) => {
-    setTags((prev) => prev.filter((i: string) => i != tagName));
+    setTags((prev) => prev.filter((i: string) => i !== tagName));
   };
 
   // 태그 입력시 ,나 Enter로 태그블록 만들어 주는 기능
   const onChangeInputTagHandler = (
     e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
-    if (e.key === "Enter") {
-      const tempTag = (inputTagRef.current as any).value + "";
-      if (tempTag == "") return;
+    if (e.key === "Enter" || e.key === ",") {
+      const tempTag = (inputTagRef.current as HTMLInputElement).value
+        .replace(/,$/, "")
+        .trim();
+      if (tempTag === "") return;
       setTags((prev) => Array.from(new Set([...prev, tempTag])));
-      (inputTagRef.current as any).value = "";
-      formContext.setValue("hashtag", Array.from(new Set([...tags, tempTag])));
-    } else if (e.key === ",") {
-      const tempTag =
-        (inputTagRef.current as any).value.substring(
-          0,
-          (inputTagRef.current as any).value.length - 1,
-        ) + "";
-      if (tempTag == "") return;
-      setTags((prev) => Array.from(new Set([...prev, tempTag])));
-      (inputTagRef.current as any).value = "";
-      formContext.setValue("hashtag", Array.from(new Set([...tags, tempTag])));
+      (inputTagRef.current as HTMLInputElement).value = "";
+      formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
     }
   };
 
@@ -109,4 +102,5 @@ const GatheringContent = () => {
     </>
   );
 };
+
 export default GatheringContent;

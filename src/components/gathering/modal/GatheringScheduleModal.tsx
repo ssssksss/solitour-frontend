@@ -45,7 +45,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
       return date + " " + hour + ":" + minute;
     };
     formContext.setValue(
-      "startDateTime",
+      "scheduleStartDate",
       _dateTime(
         dateFormat4y2m2d(calendarDate[0].startDate),
         startDateTime.hour,
@@ -54,7 +54,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
     );
     if (calendarDate[0].startDate == calendarDate[0].endDate) {
       formContext.setValue(
-        "endDateTime",
+        "scheduleEndDate",
         _dateTime(
           dateFormat4y2m2d(calendarDate[0].startDate),
           startDateTime.hour,
@@ -63,7 +63,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
       );
     } else {
       formContext.setValue(
-        "endDateTime",
+        "scheduleEndDate",
         _dateTime(
           dateFormat4y2m2d(calendarDate[0].endDate),
           endDateTime.hour,
