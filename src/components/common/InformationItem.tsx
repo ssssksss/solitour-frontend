@@ -41,7 +41,7 @@ const InformationItem = ({
 
   return (
     <div className="relative flex h-[19.6875rem] w-[19.125rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
-      {/* <Image
+      <Image
         className="-z-10 rounded-[0.875rem] dark:opacity-65"
         src={image || "/next.svg"}
         alt={"PostImage"}
@@ -49,7 +49,7 @@ const InformationItem = ({
         style={{
           objectFit: "cover",
         }}
-      /> */}
+      />
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
         {style !== "" ? (
           <p
