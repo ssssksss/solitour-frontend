@@ -3,8 +3,7 @@ export async function GET() {
   try {
     const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
       method: "GET",
-      cache: "no-store",
-      next: { tags: ["getCategoryList"] },
+      next: { revalidate: 60, tags: ["getCategoryList"] },
     });
 
     if (!response.ok) {
