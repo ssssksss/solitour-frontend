@@ -17,28 +17,29 @@ const AuthKaKaoContainer = () => {
     }>(window.location.href);
     const kakaoLogin = async () => {
       try {
-        // 액세스와 리프레시 토큰 발급
-        await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${_queryStringObject?.code}`,
+        const response = await fetch(
+          `/api/auth/kakao/getToken?code=${_queryStringObject?.code}`,
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
             },
-            cache: "no-store",
             credentials: "include",
           },
         );
+
+        if (response.status !== 200) {
+          throw new Error("Failed to login");
+        }
+
         // 액세스 토큰을 이용해서 사용자 정보 조회
-        const data = await fetch("/api/auth/user");
-        if (data.status == 200) {
-          data.json().then((res: userResponseDto) => {
-            authStore.setUser(res);
-          });
+        const userDataResponse = await fetch("/api/auth/user");
+        if (userDataResponse.status == 200) {
+          const userData = await userDataResponse.json();
+          authStore.setUser(userData as userResponseDto);
           router.push("/");
         } else {
-          throw "";
+          throw new Error("Failed to fetch user data");
         }
       } catch (error) {
         console.error("로그인 실패", error);
