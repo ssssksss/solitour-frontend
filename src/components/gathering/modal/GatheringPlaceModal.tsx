@@ -73,12 +73,10 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
 
     try {
       const response = await fetch(
-        `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}`,
+        `/api/gathering/searchPlace?keyword=${encodeURIComponent(keyword)}`,
         {
-          headers: {
-            Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}`,
-          },
-        },
+          credentials: "omit"
+        }
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -95,11 +93,9 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
 
     try {
       const response = await fetch(
-        `https://dapi.kakao.com/v2/local/search/address.json?query=${address}`,
+        `/api/gathering/searchAddress?address=${encodeURIComponent(address)}`,
         {
-          headers: {
-            Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}`,
-          },
+          credentials: "omit",
         },
       );
       if (!response.ok) {
