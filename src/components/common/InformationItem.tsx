@@ -9,7 +9,7 @@ interface Props {
   categoryId: number;
   informationId: number;
   title: string;
-  // image: string;
+  image: string;
   address: string;
   likeCount: number;
   viewCount: number;
@@ -19,7 +19,7 @@ const InformationItem = ({
   categoryId,
   informationId,
   title,
-  // image,
+  image,
   address,
   likeCount,
   viewCount,
@@ -43,7 +43,7 @@ const InformationItem = ({
     <div className="relative flex h-[19.6875rem] w-[19.125rem] flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
       {/* <Image
         className="-z-10 rounded-[0.875rem] dark:opacity-65"
-        src={image}
+        src={image || "/next.svg"}
         alt={"PostImage"}
         fill={true}
         style={{
