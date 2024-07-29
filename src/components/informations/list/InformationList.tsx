@@ -94,7 +94,7 @@ const InformationList = async ({
             categoryId={categoryId}
             informationId={value.informationId}
             title={value.title}
-            image={value.thumbNailImage}
+            // image={value.thumbNailImage}
             address={
               value.zoneCategoryParentName + ", " + value.zoneCategoryChildName
             }
