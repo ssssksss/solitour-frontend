@@ -2,7 +2,7 @@
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useDragScroll from "@/hooks/useDragScroll";
-import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
+import { InformationEditFormSchema } from "@/lib/zod/schema/InformationEditFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
 import {
@@ -52,7 +52,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
   const onSubmit = async () => {
     // Validate from fields using Zod
-    const validatedFields = InformationCreateFormSchema.safeParse({
+    const validatedFields = InformationEditFormSchema.safeParse({
       userId: id,
       informationTitle: editorStore.title,
       informationAddress: editorStore.address,
@@ -85,12 +85,10 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       new Blob(
         [
           JSON.stringify({
-            informationTitle: validatedFields.data.informationTitle,
-            informationAddress: validatedFields.data.informationAddress,
-            informationContent: validatedFields.data.informationContent,
-            informationTips: validatedFields.data.tips.join(";"),
-            userId: id,
-            placeRegisterRequest: {
+            title: validatedFields.data.informationTitle,
+            content: validatedFields.data.informationContent,
+            tips: validatedFields.data.tips.join(";"),
+            placeModifyRequest: {
               searchId: validatedFields.data.placeId,
               name: validatedFields.data.placeName,
               xAxis: validatedFields.data.placeXAxis,
@@ -100,6 +98,8 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
             categoryId: validatedFields.data.categoryId,
             zoneCategoryNameParent: validatedFields.data.province,
             zoneCategoryNameChild: validatedFields.data.city,
+            useImages: [{ address: "" }],
+            deletedImages: [{ address: "" }],
             tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
               name: tag,
             })),
@@ -115,6 +115,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       formData.append("contentImages", contentImage);
     });
 
+    /*
     const response = await fetch(`/api/informations/${informationId}`, {
       method: "PUT",
       body: formData,
@@ -129,8 +130,9 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     const result: InformationRegisterResponseDto = await response.json();
     router.push(`/informations/${result.id}`);
     router.refresh();
+    */
 
-    alert("정보 수정 작업 중");
+    alert("수정 테스트");
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
