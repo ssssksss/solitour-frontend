@@ -6,7 +6,7 @@ import InformationSearchContainer from "@/containers/informations/list/Informati
 async function getCategoryList() {
   const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
     method: "GET",
-    cache: "force-cache",
+    cache: "no-store",
     next: { tags: ["getCategoryList"] },
   });
 
