@@ -3,7 +3,7 @@ export async function GET() {
   try {
     const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
       method: "GET",
-      cache: "force-cache",
+      cache: "no-store",
       next: { tags: ["getCategoryList"] },
     });
 

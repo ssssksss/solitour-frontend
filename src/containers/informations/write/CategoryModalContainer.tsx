@@ -43,7 +43,7 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
     (async function () {
       const response = await fetch("/api/categories", {
         method: "GET",
-        cache: "force-cache",
+        cache: "no-store",
       });
 
       if (!response.ok) {
