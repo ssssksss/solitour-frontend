@@ -31,7 +31,7 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
         >
           일정 선택
         </button>
-        <div>{formContext.getValues("startDateTime") && "OK"}</div>
+        <div>{formContext.getValues("scheduleStartDate") && "OK"}</div>
         <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
           <GatheringScheduleModal closeModal={() => props.closeModal()} />
         </Modal>
@@ -44,26 +44,28 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
         <div className={"flex h-full flex-col justify-center gap-[1rem]"}>
           <div className={"flex items-center gap-[.5rem]"}>
             <span> 시작 : </span>
-            {formContext.getValues("startDateTime") && (
+            {formContext.getValues("scheduleStartDate") && (
               <div className={"flex items-center gap-[.5rem]"}>
                 <span>
-                  {formContext.getValues("startDateTime").substring(0, 10)}
+                  {formContext.getValues("scheduleStartDate").substring(0, 10)}
                 </span>
                 <span>
                   {"(" +
                     SETTING_MODAL_DAY_OF_THE_WEEK[
                       new Date(
-                        formContext.getValues("startDateTime").substring(0, 10),
+                        formContext
+                          .getValues("scheduleStartDate")
+                          .substring(0, 10),
                       ).getDay()
                     ] +
                     ")"}
                 </span>
                 <span>
                   {formContext
-                    .getValues("startDateTime")
+                    .getValues("scheduleStartDate")
                     .substring(
                       11,
-                      formContext.getValues("startDateTime").length,
+                      formContext.getValues("scheduleStartDate").length,
                     )}
                 </span>
               </div>
@@ -71,24 +73,29 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
           </div>
           <div className={"flex items-center gap-[.5rem]"}>
             <span> 종료 : </span>
-            {formContext.getValues("endDateTime") && (
+            {formContext.getValues("scheduleEndDate") && (
               <div className={"flex items-center gap-[.5rem]"}>
                 <span>
-                  {formContext.getValues("endDateTime").substring(0, 10)}
+                  {formContext.getValues("scheduleEndDate").substring(0, 10)}
                 </span>
                 <span>
                   {"(" +
                     SETTING_MODAL_DAY_OF_THE_WEEK[
                       new Date(
-                        formContext.getValues("endDateTime").substring(0, 10),
+                        formContext
+                          .getValues("scheduleEndDate")
+                          .substring(0, 10),
                       ).getDay()
                     ] +
                     ")"}
                 </span>
                 <span>
                   {formContext
-                    .getValues("endDateTime")
-                    .substring(11, formContext.getValues("endDateTime").length)}
+                    .getValues("scheduleEndDate")
+                    .substring(
+                      11,
+                      formContext.getValues("scheduleEndDate").length,
+                    )}
                 </span>
               </div>
             )}
@@ -98,4 +105,5 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
     </article>
   );
 };
+
 export default GatheringSchedule;

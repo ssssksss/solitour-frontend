@@ -35,25 +35,25 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
   const [sex, setSex] = useState("all");
   const [startAge, setStartAge] = useState(20);
   const [endAge, setEndAge] = useState(59);
-  const [expirationDate, setExpirationDate] = useState<String>("");
+  const [deadline, setdeadline] = useState<String>("");
   const [expirationHour, setExpirationHour] = useState<String>("23");
   const [expirationMinute, setExpirationMinute] = useState<String>("0");
   const formContext = useFormContext();
 
   const submitHandler = () => {
     const expiration =
-      expirationDate +
+      deadline +
       " " +
       expirationHour.padStart(2, "0") +
       ":" +
       expirationMinute.padStart(2, "0");
-    formContext.setValue("expirationDate", expiration);
+    formContext.setValue("deadline", expiration);
     formContext.setValue(
-      "permitMinUserAgeYear",
+      "minAgeYear",
       new Date().getFullYear() - startAge,
     );
     formContext.setValue(
-      "permitMaxUserAgeYear",
+      "maxAgeYear",
       new Date().getFullYear() - endAge,
     );
     formContext.watch();
@@ -87,7 +87,7 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
               className={
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
-              onChange={(e) => setExpirationDate(e.target.value)}
+              onChange={(e) => setdeadline(e.target.value)}
             />
             <select
               name="hour"
@@ -287,7 +287,7 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
           className={
             "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           }
-          disabled={expirationDate == "" && true}
+          disabled={deadline == "" && true}
           onClick={() => submitHandler()}
         >
           적용하기

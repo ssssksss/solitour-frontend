@@ -30,6 +30,7 @@ interface IGatheringEditorProps {
     closeModal: () => void;
     openModal: () => void;
   };
+  createGatheringHandler: () => void;
 }
 
 const GatheringEditor = (props: IGatheringEditorProps) => {
@@ -73,7 +74,9 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
             className={
               "h-[3.825rem] max-w-[10.825rem] rounded-[2rem] bg-gray1 px-[2rem] py-[.5rem] text-white disabled:bg-gray1"
             }
-            onClick={() => console.log(formContext.getValues())}
+            onClick={() => {
+              props.createGatheringHandler();
+            }}
             disabled={!formContext.formState.isValid}
           >
             모임 등록하기

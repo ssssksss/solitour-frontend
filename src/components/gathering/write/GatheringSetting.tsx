@@ -31,7 +31,8 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
         >
           모임 제한 선택
         </button>
-        <div>{formContext.getValues("expirationDate") && "OK"}</div>
+        <div>{formContext.getValues("deadline") && "OK"}</div>{" "}
+        {/* deadline로 수정 */}
         <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
           <GatheringSettingModal closeModal={() => props.closeModal()} />
         </Modal>
@@ -42,41 +43,36 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
         }
       >
         <div className={"flex h-[2.75rem] items-center"}>
-          모집 마감일 : {formContext.getValues("expirationDate")}
+          모집 마감일 : {formContext.getValues("deadline")}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
-          인원 : 1 /{formContext.getValues("totalPersonCount")}
+          인원 : 1 / {formContext.getValues("participantCount")}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           <span className="pr-[.5rem]"> 나이 : </span>
           <div className={"flex gap-[.25rem]"}>
             <span>
               {new Date().getFullYear() -
-                formContext.getValues("permitMinUserAgeYear") +
+                formContext.getValues("minAgeYear") +
                 "세 ~"}
             </span>
             <span>
               {new Date().getFullYear() -
-                formContext.getValues("permitMaxUserAgeYear") +
+                formContext.getValues("maxAgeYear") +
                 "세"}
             </span>
-            (
-            <span>
-              {formContext.getValues("permitMaxUserAgeYear") + "년생"}
-            </span>
+            (<span>{formContext.getValues("maxAgeYear") + "년생"}</span>
             <span>~</span>
-            <span>
-              {formContext.getValues("permitMinUserAgeYear") + "년생"}
-            </span>
-            )
+            <span>{formContext.getValues("minAgeYear") + "년생"}</span>)
           </div>
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           <span className="pr-[.5rem]"> 성별 : </span>
-          {SETTING_MODAL_SEX[formContext.getValues("permitSex")]}
+          {SETTING_MODAL_SEX[formContext.getValues("allowedSex")]}
         </div>
       </div>
     </article>
   );
 };
+
 export default GatheringSetting;
