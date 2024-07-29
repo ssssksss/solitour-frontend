@@ -22,8 +22,7 @@ async function getInformationList(
         headers: {
           Cookie: `${cookie?.name}=${cookie?.value}`,
         },
-        cache: "no-store",
-        //next: { revalidate: 60, tags: ["getInformationList"] },
+        next: { revalidate: 60, tags: ["getInformationList"] },
       },
     );
   } else if (order && order !== "latest") {
@@ -34,8 +33,7 @@ async function getInformationList(
         headers: {
           Cookie: `${cookie?.name}=${cookie?.value}`,
         },
-        cache: "no-store",
-        //next: { revalidate: 60, tags: ["getInformationList"] },
+        next: { revalidate: 60, tags: ["getInformationList"] },
       },
     );
   } else {
@@ -46,8 +44,7 @@ async function getInformationList(
         headers: {
           Cookie: `${cookie?.name}=${cookie?.value}`,
         },
-        cache: "no-store",
-        //next: { revalidate: 60, tags: ["getInformationList"] },
+        next: { revalidate: 60, tags: ["getInformationList"] },
       },
     );
   }
