@@ -37,7 +37,7 @@ export default function RootLayout({
         <div id="modal-root"></div>
         <Script
           type="text/javascript"
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_API_KEY}&autoload=false&libraries=services,clusterer,drawing`}
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=f856f711d05adede00b88e220cffe2eb&autoload=false&libraries=services,clusterer,drawing`}
           strategy="beforeInteractive"
         />
       </body>
