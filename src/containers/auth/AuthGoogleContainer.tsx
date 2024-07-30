@@ -10,23 +10,24 @@ const AuthGoogleContainer = () => {
   const router = useRouter();
   const authStore = useAuthStore();
 
-    useEffect(() => {
-        const _queryStringObject = UrlQueryStringToObject<{
-          [key: string]: string;
-        }>(window.location.href);
-        const googleLogin = async () => {
-          try {
-            const response = await fetch(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=google&redirectUrl=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL}&code=${_queryStringObject?.code}`,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json;charset=utf-8",
-                  "Access-Control-Allow-Origin": "*",
-                },
-                credentials: "include",
-              },
-            );
+  useEffect(() => {
+    const _queryStringObject = UrlQueryStringToObject<{
+      [key: string]: string;
+    }>(window.location.href);
+    const googleLogin = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=google&redirectUrl=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URL}&code=${_queryStringObject?.code}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              "Access-Control-Allow-Origin": "*",
+            },
+            cache: "no-store",
+            credentials: "include",
+          },
+        );
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
