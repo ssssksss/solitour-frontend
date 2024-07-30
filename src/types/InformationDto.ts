@@ -48,6 +48,18 @@ export interface InformationDetailDto {
   };
   imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
   likeCount: number;
+  recommendInformation: Array<
+    Readonly<{
+      informationId: number;
+      title: string;
+      zoneCategoryParentName: string;
+      zoneCategoryChildName: string;
+      viewCount: number;
+      isBookMark: boolean;
+      thumbNailImage: string;
+      likeCount: number;
+    }>
+  >;
 }
 
 /**

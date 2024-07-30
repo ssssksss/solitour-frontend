@@ -1,9 +1,29 @@
 import PagePath from "@/components/common/PagePath";
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";
-import InformationViewerSkeleton from "@/components/skeleton/informations/detail/InformationViewerSkeleton";
-import RecommendationListSkeleton from "@/components/skeleton/informations/detail/RecommendationListSkeleton";
-import { Suspense } from "react";
+import { InformationDetailDto } from "@/types/InformationDto";
+import { cookies } from "next/headers";
+
+async function getInformation(id: number) {
+  const cookie = cookies().get("access_token");
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${id}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: [`getInformation/${id}`] },
+    },
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error(response.statusText);
+  }
+
+  return response.json() as Promise<InformationDetailDto>;
+}
 
 interface Props {
   params: { id: string };
@@ -21,21 +41,19 @@ export async function generateMetadata({ params: { id } }: Props) {
   };
 }
 
-export default function page({ params: { id } }: Props) {
+export default async function page({ params: { id } }: Props) {
   const informationId = Number(id);
   if (informationId < 1 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
 
+  const data = await getInformation(informationId);
+
   return (
     <div className="flex flex-col items-center">
       <PagePath first="정보" second="정보 상세" />
-      <Suspense fallback={<InformationViewerSkeleton />}>
-        <InformationViewer informationId={informationId} />
-      </Suspense>
-      <Suspense fallback={<RecommendationListSkeleton />}>
-        <RecommendationList />
-      </Suspense>
+      <InformationViewer informationId={informationId} data={data} />
+      <RecommendationList data={data} />
     </div>
   );
 }
