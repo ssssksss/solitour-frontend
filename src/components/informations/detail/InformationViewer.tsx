@@ -7,12 +7,17 @@ import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
 import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
+import { cookies } from "next/headers";
 
 async function getInformation(id: number) {
+  const cookie = cookies().get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
       method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
       next: { revalidate: 60, tags: [`getInformation/${id}`] },
     },
   );
