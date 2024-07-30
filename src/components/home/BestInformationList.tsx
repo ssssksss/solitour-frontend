@@ -1,78 +1,47 @@
-import { InformationListResponseDto } from "@/types/InformationDto";
+import { BestInformationResponseDto } from "@/types/InformationDto";
 import InformationItem from "../common/InformationItem";
+import { CATEGORY_TEXT } from "@/constants/informations/category";
+import { cookies } from "next/headers";
 
+/**
+ * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.
+ */
 async function getBestInformationList() {
+  const cookie = cookies().get("access_token");
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/greatInformation`,
+    `${process.env.BACKEND_URL}/api/informations/main-page`,
     {
       method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
       next: { revalidate: 60, tags: ["getBestInformationList"] },
     },
   );
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error("Failed to fetch data");
+    throw new Error(response.statusText);
   }
 
-  return response.json() as Promise<InformationListResponseDto>;
+  return response.json() as Promise<BestInformationResponseDto[]>;
 }
 
 const BestInformationList = async () => {
-  //const data = await getBestInformationList();
-
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  // TODO
-  const data: {
-    category: string;
-    title: string;
-    image: string;
-  }[] = [
-    {
-      category: "restaurant",
-      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
-      image: "/PostImage.svg",
-    },
-    {
-      category: "accommodation",
-      title: "다양한 프로그램이 있는 제주 월정리 게하",
-      image: "/PostImage2.svg",
-    },
-    {
-      category: "activity",
-      title: "혼자 놀기 초보도 가능한 국립현대미술관",
-      image: "/PostImage3.svg",
-    },
-    {
-      category: "restaurant",
-      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
-      image: "/PostImage.svg",
-    },
-    {
-      category: "accommodation",
-      title: "다양한 프로그램이 있는 제주 월정리 게하",
-      image: "/PostImage2.svg",
-    },
-    {
-      category: "activity",
-      title: "혼자 놀기 초보도 가능한 국립현대미술관",
-      image: "/PostImage3.svg",
-    },
-  ];
+  const data = await getBestInformationList();
 
   return (
     <div className="mt-6 flex w-fit flex-wrap items-center gap-4 p-1 max-[744px]:flex-row max-[744px]:flex-nowrap">
-      {data.map((post, index) => (
+      {data.map((value, index) => (
         <InformationItem
           key={index}
-          informationId={index + 1}
-          categoryId={1}
-          title={post.title}
-          image={post.image}
-          address="테스트 주소"
-          likeCount={123}
-          viewCount={456}
+          informationId={value.informationId}
+          categoryId={Number(CATEGORY_TEXT[value.parentCategoryName])}
+          title={value.title}
+          image={value.thumbNailImage}
+          address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}
+          likeCount={value.likeCount}
+          viewCount={value.viewCount}
         />
       ))}
     </div>

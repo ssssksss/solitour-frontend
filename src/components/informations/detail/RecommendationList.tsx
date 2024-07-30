@@ -1,8 +1,6 @@
 import InformationItem from "@/components/common/InformationItem";
 
 const RecommendationList = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   // TODO
   const data: {
     category: string;
