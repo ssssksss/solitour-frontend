@@ -60,8 +60,15 @@ const InformationItem = ({
         ) : (
           <div />
         )}
-        <div className="cursor-pointer text-white hover:scale-110 dark:text-slate-200">
-          <CiBookmark size={"2rem"} />
+        <div className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200">
+          <Image
+            src="/bookmark-icon.svg"
+            alt="bookmark-icon"
+            fill={true}
+            style={{
+              objectFit: "contain",
+            }}
+          />
         </div>
       </div>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4 dark:bg-slate-800">
