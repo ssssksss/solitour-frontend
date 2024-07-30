@@ -19,7 +19,7 @@ async function getInformation(id: number) {
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error("Failed to fetch data");
+    throw new Error(response.statusText);
   }
 
   return response.json() as Promise<InformationDetailDto>;
