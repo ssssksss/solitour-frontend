@@ -17,6 +17,7 @@ const InformationEditorContainer = () => {
   const initialize = editorStore.initialize;
   const [hashtag, setHashtag] = useState<string>("");
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   // 장소 선택 모달창이 보이는지 여부
   const [locationModal, setLocationModal] = useState<boolean>(false);
@@ -107,6 +108,8 @@ const InformationEditorContainer = () => {
       formData.append("contentImages", contentImage);
     });
 
+    setLoading(true);
+
     const response = await fetch("/api/informations", {
       method: "POST",
       body: formData,
@@ -115,6 +118,7 @@ const InformationEditorContainer = () => {
 
     if (!response.ok) {
       alert("정보 등록에 실패하였습니다.");
+      setLoading(false);
       throw new Error(response.statusText);
     }
 
@@ -147,6 +151,7 @@ const InformationEditorContainer = () => {
       hashtag={hashtag}
       imagesHook={imagesHook}
       hashtagsHook={hashtagsHook}
+      loading={loading}
       onSubmit={onSubmit}
       showLocationModal={showLocationModal}
       closeLocationModal={closeLocationModal}

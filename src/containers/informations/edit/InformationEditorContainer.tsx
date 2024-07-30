@@ -25,6 +25,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const initialize = editorStore.initialize;
   const [hashtag, setHashtag] = useState<string>("");
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   // 장소 선택 모달창이 보이는지 여부
   const [locationModal, setLocationModal] = useState<boolean>(false);
@@ -183,6 +184,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       hashtag={hashtag}
       imagesHook={imagesHook}
       hashtagsHook={hashtagsHook}
+      loading={loading}
       onSubmit={onSubmit}
       showLocationModal={showLocationModal}
       closeLocationModal={closeLocationModal}

@@ -6,6 +6,7 @@ import ItemTag from "../common/ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
+import Image from "next/image";
 
 interface Props {
   pathname: string;
@@ -15,6 +16,7 @@ interface Props {
   hashtag: string;
   imagesHook: useDragScrollType;
   hashtagsHook: useDragScrollType;
+  loading: boolean;
   onSubmit: () => void;
   showLocationModal: () => void;
   closeLocationModal: () => void;
@@ -31,6 +33,7 @@ const InformationEditor = ({
   hashtag,
   imagesHook,
   hashtagsHook,
+  loading,
   onSubmit,
   showLocationModal,
   closeLocationModal,
@@ -248,8 +251,22 @@ const InformationEditor = ({
           className="mb-20 mt-10 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
           type="submit"
           onClick={() => onSubmit()}
+          disabled={loading}
         >
-          {`정보 ${pathname}하기`}
+          {loading ? (
+            <div className="flex flex-row items-center gap-3">
+              <Image
+                className="animate-spin"
+                src="/loading-icon.png"
+                alt="loading-icon"
+                width={20}
+                height={20}
+              />
+              <p>등록 중...</p>
+            </div>
+          ) : (
+            <p>{`정보 ${pathname}하기`}</p>
+          )}
         </button>
       </div>
     </div>
