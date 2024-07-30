@@ -9,7 +9,6 @@ import ButtonListContainer from "@/containers/informations/detail/ButtonListCont
 import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
 
 async function getInformation(id: number) {
-  console.log(process.env.BACKEND_URL);
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
