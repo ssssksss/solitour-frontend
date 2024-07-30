@@ -7,36 +7,13 @@ import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
 import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
-import { cookies } from "next/headers";
-
-async function getInformation(id: number) {
-  const cookie = cookies().get("access_token");
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-      next: { revalidate: 60, tags: [`getInformation/${id}`] },
-    },
-  );
-
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<InformationDetailDto>;
-}
 
 interface Props {
   informationId: number;
+  data: InformationDetailDto;
 }
 
-const InformationViewer = async ({ informationId }: Props) => {
-  const data = await getInformation(informationId);
-
+const InformationViewer = ({ informationId, data }: Props) => {
   return (
     <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
