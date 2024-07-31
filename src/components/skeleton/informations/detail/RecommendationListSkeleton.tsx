@@ -7,7 +7,7 @@ const RecommendationListSkeleton = () => {
         추천 정보
       </h2>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-        {[1, 2, 3, 4, 5, 6].map((value) => (
+        {[1, 2, 3].map((value) => (
           <InformationItemSkeleton key={value} />
         ))}
       </div>
