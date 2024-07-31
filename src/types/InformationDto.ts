@@ -1,11 +1,11 @@
 /**
- * 정보 등록/정보 수정 결과 Dto
+ * (정보 등록)/(정보 수정) 결과 DTO
  */
 export interface InformationRegisterResponseDto {
   id: number;
 }
 
-// 정보 목록 조회 결과 Dto
+// 정보 목록 조회 결과 DTO
 export interface InformationListResponseDto {
   totalPages: number;
   content: Array<{
@@ -21,7 +21,7 @@ export interface InformationListResponseDto {
 }
 
 /**
- * 정보 상세 조회 결과 dto
+ * 정보 상세 조회 결과 DTO
  */
 export interface InformationDetailDto {
   title: string;
@@ -63,13 +63,16 @@ export interface InformationDetailDto {
 }
 
 /**
- * 정보 Top 5 조회 결과 dto
+ * 정보 Top 5 조회 결과 DTO
  */
 export interface TopInformationResponseDto {
   id: number;
   title: string;
 }
 
+/**
+ * Best 여행 정보 조회 결과 DTO
+ */
 export interface BestInformationResponseDto {
   informationId: number; // 정보 아이디
   title: string; // 제목
