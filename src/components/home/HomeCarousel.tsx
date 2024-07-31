@@ -1,8 +1,8 @@
-import Image from "next/image";
+import { Banner } from "@/types/BannerDto";
 import Link from "next/link";
 
 interface Props {
-  images: string[];
+  images: Banner[];
   currentIndex: number;
   onClick: (index: number) => void;
 }
@@ -10,13 +10,18 @@ interface Props {
 const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
   return (
     <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80 dark:opacity-65">
-      <Image
+      <img
         className="-z-10"
-        src={images[currentIndex]}
+        src={images.length > 0 ? images[currentIndex].url : ""}
         alt={"/background"}
-        fill={true}
         style={{
           objectFit: "cover",
+          width: "100%", 
+          height: "100%", 
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -10, 
         }}
       />
       <div className="relative m-auto flex h-[33.75rem] w-[60rem] flex-col items-center justify-end max-[1024px]:h-72 max-[1024px]:w-[90%]">
