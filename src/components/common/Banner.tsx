@@ -36,7 +36,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
           </Link>
         </div>
         <div
-          className={`relative flex items-center justify-end max-[744px]:justify-center max-[480px]:w-[95%] ${category == "모임" ? "h-[18rem] w-[29rem]" : "h-[14rem] w-[27rem]"} ${category === "모임" ? "max-[744px]:h-[15rem]" : "max-[1024px]:h-[12rem]"}`}
+          className={`relative flex items-center justify-end max-[744px]:justify-center max-[480px]:w-[95%] ${category == "모임" ? "h-[18rem] w-[29rem]" : "h-[14rem] w-[27rem]"} ${category === "모임" ? "max-[744px]:h-[15rem]" : "mt-4 max-[1024px]:h-[12rem]"}`}
         >
           <div
             className={`absolute h-full w-full ${category == "모임" ? "top-[2.75rem] max-[1024px]:top-[4rem]" : "0px"} flex flex-row justify-center max-[1024px]:h-[85%] max-[1024px]:w-[85%]`}
@@ -44,7 +44,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
             {category === "정보" && (
               <div className="flex h-[13.4375rem] w-[24.8125rem] flex-col max-[1024px]:h-[10.6875rem] max-[1024px]:w-[19.8125rem]">
                 <div className="flex justify-end pr-6">
-                  <div className="relative h-[5.8125rem] w-[11.75rem] animate-bannerImage1 max-[1024px]:h-[5.0625rem] max-[1024px]:w-[10.1875rem]">
+                  <div className="animate-bannerImage relative h-[5.8125rem] w-[11.75rem] max-[1024px]:h-[5.0625rem] max-[1024px]:w-[10.1875rem]">
                     <Image
                       src="/banner-image1.png"
                       alt="banner-image1"
@@ -55,7 +55,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
                     />
                   </div>
                 </div>
-                <div className="relative z-10 -mt-[1.875rem] h-[5.75rem] w-[14.375rem] animate-bannerImage2 max-[1024px]:h-[4.5625rem] max-[1024px]:w-[11.5rem]">
+                <div className="animate-bannerImage relative z-10 -mt-[1.875rem] h-[5.75rem] w-[14.375rem] max-[1024px]:h-[4.5625rem] max-[1024px]:w-[11.5rem]">
                   <Image
                     src="/banner-image2.png"
                     alt="banner-image2"
@@ -66,7 +66,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
                   />
                 </div>
                 <div className="-mt-8 flex justify-end">
-                  <div className="relative h-[5.8125rem] w-[14.75rem] animate-bannerImage3 max-[1024px]:h-[4.625rem] max-[1024px]:w-[11.75rem]">
+                  <div className="animate-bannerImage relative h-[5.8125rem] w-[14.75rem] max-[1024px]:h-[4.625rem] max-[1024px]:w-[11.75rem]">
                     <Image
                       src="/banner-image3.png"
                       alt="banner-image3"

@@ -36,9 +36,9 @@ const config: Config = {
           to: { opacity: "1" },
         },
         bannerImage: {
-          "0%": { bottom: "-20px", opacity: "0.5" },
-          "50%": { bottom: "0px", opacity: "1" },
-          "100%": { bottom: "20px", opacity: "0" },
+          "0%": { bottom: "-16px" },
+          "46.6%": { bottom: "12px" },
+          "100%": { bottom: "-16px" },
         },
         cardFlip: {
           from: { transform: "rotateY(-90deg)" },
@@ -71,9 +71,7 @@ const config: Config = {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
         buttonRotation: "buttonRotation 0.3s",
         fadeIn: "fadeIn 0.5s",
-        bannerImage1: "bannerImage 2s linear infinite",
-        bannerImage2: "bannerImage 2.5s linear infinite",
-        bannerImage3: "bannerImage 3s linear infinite",
+        bannerImage: "bannerImage 1.5s ease-in-out infinite",
         cardFlip: "cardFlip 0.5s linear",
         cardFlip2: "cardFlip2 0.5s linear",
         pulseAuth: "pulseAuth 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
