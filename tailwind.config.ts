@@ -24,7 +24,7 @@ const config: Config = {
       },
       keyframes: {
         sidebarFadeIn: {
-          from: { top: "-17.5rem" },
+          from: { top: "-35.5rem" },
           to: { top: "0px" },
         },
         buttonRotation: {
