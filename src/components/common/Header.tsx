@@ -28,7 +28,7 @@ const Header = ({
       <div
         className={
           "fixed top-0 z-40 flex w-full justify-center shadow" +
-          ` ${transparent ? "bg-transparent" : "bg-white dark:bg-slate-800"}`
+          ` ${transparent ? "bg-transparent backdrop-blur-md" : "bg-white dark:bg-slate-800"}`
         }
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
@@ -124,7 +124,7 @@ const Header = ({
           />
           <div
             className={
-              "flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem] text-sm backdrop-blur-[120px] max-[744px]:hidden"
+              "flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
             }
           >
             {userId == 0 ? (
