@@ -28,12 +28,12 @@ const Footer = () => {
           />
         </Link>
         <div className="text-sm font-medium text-gray1 dark:text-slate-400">
-          <p>솔리투어는 혼자여행에 유용한 정보와 모임을 제공합니다.</p>
+          <p>솔리투어는 혼자 여행에 유용한 정보와 모임을 제공합니다.</p>
           <p>
             일상 속의 휴식이 필요한 사람, 나를 위한 시간이 필요한 사람, 새로운
             여정을 위한 모든 사람
           </p>
-          <p>솔리투어에서 새로운 나를 찾아 보세요.</p>
+          <p>솔리투어에서 새로운 나를 찾아보세요.</p>
         </div>
         <div className="flex flex-row items-center justify-between">
           <Link
