@@ -168,9 +168,14 @@ const InformationEditor = ({
               name="hashtag"
               placeholder="#해시태그로 키워드를 써보세요!"
               value={hashtag}
-              onChange={(e) => setHashtag(e.target.value)}
+              onChange={(e) => {
+                setHashtag(e.target.value.slice(0, 15));
+              }}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "#") {
+                  e.preventDefault();
+                  e.persist();
+                } else if (e.key === "Enter") {
                   e.preventDefault();
                   e.persist();
                   editorStore.addHashtag(hashtag);

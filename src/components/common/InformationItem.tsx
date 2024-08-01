@@ -53,7 +53,7 @@ const InformationItem = ({
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
         {style !== "" ? (
           <p
-            className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow ${style}`}
+            className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold ${style}`}
           >
             {CATEGORY_TEXT[categoryId]}
           </p>
