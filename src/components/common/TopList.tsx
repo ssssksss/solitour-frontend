@@ -58,7 +58,7 @@ const TopList = async ({ title }: Props) => {
       : await getTopGatheringList();
 
   return (
-    <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center shadow shadow-[#CCECE2] max-[744px]:-mt-24 dark:bg-slate-800">
+    <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow shadow-[#CCECE2] max-[744px]:-mt-24 dark:bg-slate-800">
       {title === "모임" && (
         <div
           className={
@@ -77,7 +77,7 @@ const TopList = async ({ title }: Props) => {
           />
         </div>
       )}
-      <div className="h-[20rem] w-full">
+      <div className="h-[20rem] w-full max-[1024px]:h-[24rem]">
         <div className="absolute h-full w-full rounded-2xl bg-white px-24 py-16 max-[1024px]:px-8 max-[1024px]:py-12">
           <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black dark:border-slate-200 dark:text-slate-200">
             {`${title} 정보 `}
