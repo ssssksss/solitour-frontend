@@ -13,7 +13,7 @@ const DiaryViewer = async ({ id }: Props) => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
   return (
-    <div className="flex w-[60rem] flex-col items-start max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-full flex-col items-start">
       <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
         <Image
           className="hidden dark:block"

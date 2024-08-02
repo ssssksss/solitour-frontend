@@ -42,7 +42,7 @@ const InformationEditor = ({
   setHashtag,
 }: Props) => {
   return (
-    <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-full flex-col">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />

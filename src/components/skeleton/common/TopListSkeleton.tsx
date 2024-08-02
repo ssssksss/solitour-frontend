@@ -4,7 +4,7 @@ interface Props {
 
 const TopListSkeleton = ({ title }: Props) => {
   return (
-    <div className="z-10 -mt-28 flex h-fit w-[60rem] flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow shadow-[#CCECE2] max-[1024px]:w-[39.75rem] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24 max-[744px]:w-[calc(100%_-_48px)] dark:bg-slate-800">
+    <div className="z-10 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow shadow-[#CCECE2] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24 dark:bg-slate-800">
       <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black dark:text-slate-200">
         {`${title} 정보 `}
         <span className="font-bold text-main">Top 5</span>

@@ -15,8 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <BannerContainer />
+      <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
       <Suspense fallback={<TopListSkeleton title="여행" />}>
         <TopList title="여행" />
       </Suspense>

@@ -8,7 +8,7 @@ interface Props {
 
 const DiaryEditor = ({ content, onChange }: Props) => {
   return (
-    <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-full flex-col">
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
         일기 등록하기
       </h1>

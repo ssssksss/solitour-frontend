@@ -21,7 +21,7 @@ export default function page({ params, searchParams }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <Suspense fallback={<CategoryListSkeleton />}>
         <CategoryList categoryId={categoryId} />
       </Suspense>

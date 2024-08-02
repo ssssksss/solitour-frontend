@@ -1,6 +1,6 @@
 const DiaryViewerSkeleton = () => {
   return (
-    <div className="flex w-[60rem] animate-pulse flex-col items-start max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-full animate-pulse flex-col items-start">
       <div className="flex flex-row items-center gap-14">
         <div className="h-6 w-[2.5625rem] bg-gray-100 dark:bg-slate-600" />
         {[1, 2, 3, 4, 5].map((value) => (

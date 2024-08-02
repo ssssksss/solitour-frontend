@@ -31,7 +31,12 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSansKr.className}>
         <HeaderContainer />
-        {children}
+        <div className="flex w-full items-center justify-center">
+          <div className="flex w-[60rem] flex-col items-center max-[1024px]:w-full max-[1024px]:px-[3.375rem] max-[744px]:px-6">
+            {children}
+          </div>
+        </div>
+
         <Footer />
         <FloatingButtonContainer />
         <div id="modal-root"></div>

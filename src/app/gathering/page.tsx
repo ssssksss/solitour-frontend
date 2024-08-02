@@ -21,6 +21,7 @@ export default function page({ searchParams }: MyProps) {
         category={"모임"}
       />
       {/* TODO : 나중에 API 연결하게 되면 그때 가서 공통컴포넌트 수정하기 */}
+      <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
       <TopList title="모임" />
       <GatheringListContainer />
     </div>

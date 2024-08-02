@@ -50,7 +50,7 @@ export default async function page({ params: { id } }: Props) {
   const data = await getInformation(informationId);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <PagePath first="정보" second="정보 상세" />
       <InformationViewer informationId={informationId} data={data} />
       <RecommendationList data={data} />
