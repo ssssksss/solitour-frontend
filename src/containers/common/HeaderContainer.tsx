@@ -54,8 +54,9 @@ const HeaderContainer = () => {
   useLayoutEffect(() => {
     // 자동 로그인
     const login = async () => {
-      const data = await fetchWithAuth("/api/auth/user");
-      if (data.status == 200) {
+      try {
+        const data = await fetchWithAuth("/api/auth/user");
+        if (data.status == 200) {
         data.json().then((res: userResponseDto) => {
           authStore.setUser(res);
         });
@@ -64,9 +65,13 @@ const HeaderContainer = () => {
           id: -1,
         });
       }
+    } catch {
+      authStore.setUser({
+        id: -1,
+        });
+     }
     };
     login();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
