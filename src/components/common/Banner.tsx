@@ -1,7 +1,5 @@
-import LottieImage from "@/../public/lottie/solitour-mettings-intro-image1.json";
 import Image from "next/image";
 import Link from "next/link";
-import LottieComponent from "./lottie/LottieComponent";
 
 interface Props {
   content: string[];
@@ -17,7 +15,7 @@ const buttonPath = {
 const Banner = ({ content, buttonText, category }: Props) => {
   return (
     <div
-      className={`-mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center max-[744px]:h-[36rem] ${category == "모임" ? "bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF]" : "bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA]"} dark:opacity-65`}
+      className={`relative -mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center max-[744px]:h-[36rem] ${category == "모임" ? "bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF]" : "bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA]"} dark:opacity-65`}
     >
       <div className="flex h-96 w-[60rem] flex-row items-center justify-between px-4 max-[1024px]:w-[39.75rem] max-[744px]:flex-col max-[744px]:justify-center">
         <div className="flex flex-col max-[744px]:items-center">
@@ -36,10 +34,10 @@ const Banner = ({ content, buttonText, category }: Props) => {
           </Link>
         </div>
         <div
-          className={`relative flex items-center justify-end max-[744px]:justify-center max-[480px]:w-[95%] ${category == "모임" ? "h-[18rem] w-[29rem]" : "h-[14rem] w-[27rem]"} ${category === "모임" ? "max-[744px]:h-[15rem]" : "max-[1024px]:h-[12rem]"}`}
+          className={`relative flex h-[14rem] w-[27rem] items-center justify-end max-[1024px]:h-[12rem] max-[744px]:justify-center max-[480px]:w-[95%]`}
         >
           <div
-            className={`absolute h-full w-full ${category == "모임" ? "top-[2.75rem] max-[1024px]:top-[4rem]" : "0px"} flex flex-row justify-center max-[1024px]:h-[85%] max-[1024px]:w-[85%]`}
+            className={`absolute flex h-full w-full flex-row justify-center max-[1024px]:h-[85%] max-[1024px]:w-[85%]`}
           >
             {category === "정보" && (
               <div className="flex h-[13.4375rem] w-[24.8125rem] flex-col max-[1024px]:h-[10.6875rem] max-[1024px]:w-[19.8125rem]">
@@ -78,13 +76,6 @@ const Banner = ({ content, buttonText, category }: Props) => {
                   </div>
                 </div>
               </div>
-            )}
-            {category === "모임" && (
-              <LottieComponent
-                lottieFile={LottieImage}
-                className="object-contain"
-              />
-              // </div>
             )}
           </div>
         </div>
