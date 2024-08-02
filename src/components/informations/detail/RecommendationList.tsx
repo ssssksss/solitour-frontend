@@ -11,7 +11,7 @@ const RecommendationList = ({ data }: Props) => {
       <h2 className="text-2xl font-bold text-black dark:text-slate-200">
         추천 정보
       </h2>
-      <div className="mt-6 flex flex-wrap items-center gap-5">
+      <div className="mt-6 grid grid-cols-3 items-center gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
         {data.recommendInformation.map((value, index) => (
           <InformationItem
             key={index}
