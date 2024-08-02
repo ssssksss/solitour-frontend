@@ -42,7 +42,7 @@ const InformationEditor = ({
   setHashtag,
 }: Props) => {
   return (
-    <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-full flex-col">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
@@ -168,9 +168,14 @@ const InformationEditor = ({
               name="hashtag"
               placeholder="#해시태그로 키워드를 써보세요!"
               value={hashtag}
-              onChange={(e) => setHashtag(e.target.value)}
+              onChange={(e) => {
+                setHashtag(e.target.value.slice(0, 15));
+              }}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "#") {
+                  e.preventDefault();
+                  e.persist();
+                } else if (e.key === "Enter") {
                   e.preventDefault();
                   e.persist();
                   editorStore.addHashtag(hashtag);

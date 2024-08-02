@@ -58,7 +58,7 @@ const TopList = async ({ title }: Props) => {
       : await getTopGatheringList();
 
   return (
-    <div className="z-1 relative -mt-28 flex h-fit w-[60rem] flex-col justify-center shadow shadow-[#CCECE2] max-[1024px]:w-[39.75rem] max-[744px]:-mt-24 max-[744px]:w-[calc(100%_-_48px)] dark:bg-slate-800">
+    <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center shadow shadow-[#CCECE2] max-[744px]:-mt-24 dark:bg-slate-800">
       {title === "모임" && (
         <div
           className={

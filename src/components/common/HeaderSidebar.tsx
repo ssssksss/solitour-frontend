@@ -131,7 +131,7 @@ const HeaderSidebar = ({
             <p>여행일기</p>
           </Link>
           {signedIn ? (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-7">
               <Link
                 className="flex flex-row items-center gap-4 hover:text-main dark:text-slate-200"
                 href="/mypage"

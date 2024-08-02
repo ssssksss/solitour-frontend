@@ -1,6 +1,6 @@
 const InformationViewerSkeleton = () => {
   return (
-    <div className="w-[60rem] animate-pulse max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="w-full animate-pulse">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
           <div className="h-10 w-96 bg-gray-100 dark:bg-slate-600" />

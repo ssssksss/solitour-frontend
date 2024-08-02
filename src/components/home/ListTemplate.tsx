@@ -10,7 +10,7 @@ interface Props {
 
 const ListTemplate = ({ titles, description, scrollHook, children }: Props) => {
   return (
-    <div className="flex w-[60rem] flex-col max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="flex w-full flex-col">
       <div className="flex flex-row items-center justify-between max-[744px]:justify-center">
         <div className="flex flex-col gap-2 max-[744px]:w-full">
           <div className="flex flex-row items-center justify-between gap-1">

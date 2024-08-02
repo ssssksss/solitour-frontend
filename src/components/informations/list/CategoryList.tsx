@@ -34,7 +34,7 @@ const CategoryList = async ({ categoryId }: Props) => {
   const childCategoryId = categoryId;
 
   return (
-    <div className="mt-6 flex w-[60rem] flex-col gap-6 max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="mt-6 flex w-full flex-col gap-6">
       <ParentCategoryList
         categories={categories}
         parentCategoryId={parentCategoryId}

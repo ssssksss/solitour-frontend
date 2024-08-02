@@ -8,7 +8,7 @@ interface Props {
 
 const PagePath = ({ first, second }: Props) => {
   return (
-    <div className="flex w-[60rem] flex-row items-center gap-1 py-10 text-xs font-medium text-gray2 max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)] dark:text-slate-400">
+    <div className="flex w-full flex-row items-center gap-1 py-10 text-xs font-medium text-gray2 dark:text-slate-400">
       <IoHome />
       <IoIosArrowForward />
       <p>{first}</p>

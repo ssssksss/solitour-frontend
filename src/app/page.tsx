@@ -27,16 +27,18 @@ import { Suspense } from "react";
 //   }
 // }
 
-
 export default async function Home() {
   // const initBannerList = await fetchBannerList();
 
   return (
-    <div className="mb-20 flex flex-col items-center gap-20">
-      <HomeCarouselContainer
-        // initBannerList={initBannerList.length > 0 ? initBannerList : []}
-        initBannerList={[]}
-      />
+    <div className="mb-20 flex w-full flex-col items-center gap-20">
+      <div className="absolute w-full">
+        <HomeCarouselContainer
+          // initBannerList={initBannerList.length > 0 ? initBannerList : []}
+          initBannerList={[]}
+        />
+      </div>
+      <div className="mt-[32.5rem] max-[1024px]:mt-60" />
       <TabList />
       <ListTemplateContainer
         titles={["고민을 덜어줄,", "BEST", "여행 정보"]}

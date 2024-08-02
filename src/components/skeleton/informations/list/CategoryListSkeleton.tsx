@@ -1,7 +1,7 @@
 const CategoryListSkeleton = () => {
   return (
-    <div className="mt-6 flex w-[60rem] animate-pulse flex-col gap-6 max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
-      <div className="mt-[5.5rem] flex w-[60rem] flex-row items-center justify-between border-b-[0.0625rem] pb-2 max-[1024px]:w-[39.75rem] max-[744px]:w-full dark:border-slate-200">
+    <div className="mt-6 flex w-full animate-pulse flex-col gap-6">
+      <div className="mt-[5.5rem] flex w-full flex-row items-center justify-between border-b-[0.0625rem] pb-2 dark:border-slate-200">
         <div className="flex flex-row items-center gap-9">
           {[1, 2, 3].map((value) => (
             <div

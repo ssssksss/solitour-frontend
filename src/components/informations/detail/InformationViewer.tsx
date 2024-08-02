@@ -15,7 +15,7 @@ interface Props {
 
 const InformationViewer = ({ informationId, data }: Props) => {
   return (
-    <div className="w-[60rem] max-[1024px]:w-[39.75rem] max-[744px]:w-[calc(100%_-_48px)]">
+    <div className="w-full">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
           <h1 className="text-2xl font-bold dark:text-slate-200">
