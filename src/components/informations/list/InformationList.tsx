@@ -79,7 +79,7 @@ const InformationList = async ({
   );
 
   return (
-    <div className="full flex flex-col">
+    <div className="flex w-full flex-col">
       <div className="mt-6 flex flex-wrap gap-5">
         {data.content.map((value) => (
           <InformationItem

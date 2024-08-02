@@ -19,7 +19,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
     <div
       className={`absolute -mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center max-[744px]:h-[36rem] ${category == "모임" ? "bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF]" : "bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA]"} dark:opacity-65`}
     >
-      <div className="flex h-96 w-[60rem] flex-row items-center justify-between px-4 max-[1024px]:w-[39.75rem] max-[744px]:flex-col max-[744px]:justify-center">
+      <div className="flex h-96 w-[60rem] flex-row items-center justify-between px-4 max-[1024px]:w-full max-[1024px]:px-[3.375rem] max-[744px]:flex-col max-[744px]:justify-center">
         <div className="flex flex-col max-[744px]:items-center">
           {content.map((str, index) => (
             <div
