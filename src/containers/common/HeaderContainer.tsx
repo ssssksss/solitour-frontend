@@ -4,10 +4,11 @@ import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 
 const HeaderContainer = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const [visible, setVisible] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(true);
@@ -42,6 +43,7 @@ const HeaderContainer = () => {
     authStore.setUser({
       id: -1,
     });
+    router.refresh();
   };
 
   useEffect(() => {
@@ -57,19 +59,19 @@ const HeaderContainer = () => {
       try {
         const data = await fetchWithAuth("/api/auth/user");
         if (data.status == 200) {
-        data.json().then((res: userResponseDto) => {
-          authStore.setUser(res);
-        });
-      } else {
+          data.json().then((res: userResponseDto) => {
+            authStore.setUser(res);
+          });
+        } else {
+          authStore.setUser({
+            id: -1,
+          });
+        }
+      } catch {
         authStore.setUser({
           id: -1,
         });
       }
-    } catch {
-      authStore.setUser({
-        id: -1,
-        });
-     }
     };
     login();
   }, []);

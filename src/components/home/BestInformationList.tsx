@@ -31,7 +31,7 @@ const BestInformationList = async () => {
   const data = await getBestInformationList();
 
   return (
-    <div className="mt-6 grid w-full grid-cols-3 items-center gap-4 p-1 max-[1024px]:grid-cols-2 max-[744px]:w-[120.5rem] max-[744px]:grid-cols-6 max-[744px]:grid-rows-1">
+    <div className="mt-6 grid w-full grid-cols-3 items-center gap-4 p-1 max-[1024px]:grid-cols-2 max-[744px]:w-[120.6rem] max-[744px]:grid-cols-6 max-[744px]:grid-rows-1">
       {data.map((value, index) => (
         <InformationItem
           key={index}
