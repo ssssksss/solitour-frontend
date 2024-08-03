@@ -80,8 +80,8 @@ const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
     })),
   addHashtag: (hashtag: string) =>
     set((state) => {
-      if (!state.hashtags.includes(hashtag) && hashtag !== "") {
-        return { hashtags: [...state.hashtags, hashtag] };
+      if (!state.hashtags.includes(hashtag) && hashtag.trim() !== "") {
+        return { hashtags: [...state.hashtags, hashtag.trim()] };
       } else {
         return { hashtags: state.hashtags };
       }
