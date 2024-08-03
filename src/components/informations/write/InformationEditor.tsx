@@ -153,6 +153,7 @@ const InformationEditor = ({
                 textColor="text-main"
                 cursorPointer={true}
                 hover="hover:scale-110"
+                removable={true}
                 onClick={() =>
                   editorStore.setEditor({
                     hashtags: editorStore.hashtags.filter(
@@ -162,29 +163,27 @@ const InformationEditor = ({
                 }
               />
             ))}
-            {editorStore.hashtags.length < 10 && (
-              <input
-                className="w-[14rem] border-main bg-transparent py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
-                type="text"
-                name="hashtag"
-                placeholder="#해시태그로 키워드를 써보세요!"
-                value={hashtag}
-                onChange={(e) => {
-                  setHashtag(e.target.value.slice(0, 15));
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "#") {
-                    e.preventDefault();
-                    e.persist();
-                  } else if (e.key === "Enter") {
-                    e.preventDefault();
-                    e.persist();
-                    editorStore.addHashtag(hashtag);
-                    setHashtag("");
-                  }
-                }}
-              />
-            )}
+            <input
+              className="w-[14rem] border-main bg-transparent py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
+              type="text"
+              name="hashtag"
+              placeholder="#해시태그로 키워드를 써보세요!"
+              value={hashtag}
+              onChange={(e) => {
+                setHashtag(e.target.value.slice(0, 15));
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "#") {
+                  e.preventDefault();
+                  e.persist();
+                } else if (e.key === "Enter") {
+                  e.preventDefault();
+                  e.persist();
+                  editorStore.addHashtag(hashtag);
+                  setHashtag("");
+                }
+              }}
+            />
           </div>
           <button
             className="text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
