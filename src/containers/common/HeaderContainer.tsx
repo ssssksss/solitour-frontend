@@ -4,11 +4,10 @@ import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 
 const HeaderContainer = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const [visible, setVisible] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(true);
@@ -43,7 +42,6 @@ const HeaderContainer = () => {
     authStore.setUser({
       id: -1,
     });
-    router.refresh();
   };
 
   useEffect(() => {
