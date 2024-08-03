@@ -130,8 +130,8 @@ const InformationEditor = ({
         {editorStore.content.length}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
-        <h2 className="w-44 pt-3 text-lg font-bold text-black dark:text-slate-200">
-          해시태그
+        <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-black dark:text-slate-200">
+          해시태그<span className="text-2xl text-main">*</span>
         </h2>
         <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
           <div
@@ -162,27 +162,29 @@ const InformationEditor = ({
                 }
               />
             ))}
-            <input
-              className="w-[14rem] border-main bg-transparent py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
-              type="text"
-              name="hashtag"
-              placeholder="#해시태그로 키워드를 써보세요!"
-              value={hashtag}
-              onChange={(e) => {
-                setHashtag(e.target.value.slice(0, 15));
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "#") {
-                  e.preventDefault();
-                  e.persist();
-                } else if (e.key === "Enter") {
-                  e.preventDefault();
-                  e.persist();
-                  editorStore.addHashtag(hashtag);
-                  setHashtag("");
-                }
-              }}
-            />
+            {editorStore.hashtags.length < 10 && (
+              <input
+                className="w-[14rem] border-main bg-transparent py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
+                type="text"
+                name="hashtag"
+                placeholder="#해시태그로 키워드를 써보세요!"
+                value={hashtag}
+                onChange={(e) => {
+                  setHashtag(e.target.value.slice(0, 15));
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "#") {
+                    e.preventDefault();
+                    e.persist();
+                  } else if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.persist();
+                    editorStore.addHashtag(hashtag);
+                    setHashtag("");
+                  }
+                }}
+              />
+            )}
           </div>
           <button
             className="text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
