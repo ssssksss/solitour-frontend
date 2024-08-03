@@ -134,68 +134,71 @@ const InformationEditor = ({
           해시태그<span className="text-2xl text-main">*</span>
         </h2>
         <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
-          <div
-            className="flex h-[3.3125rem] w-full flex-row items-center gap-2 overflow-x-hidden rounded-3xl border-[0.0625rem] pl-5 hover:border-main"
-            ref={hashtagsHook.listRef}
-            onMouseDown={hashtagsHook.onDragStart}
-            onMouseMove={hashtagsHook.onDragMove}
-            onMouseUp={hashtagsHook.onDragEnd}
-            onMouseLeave={hashtagsHook.onDragEnd}
-            onTouchStart={hashtagsHook.onTouchStart}
-            onTouchMove={hashtagsHook.onTouchMove}
-            onTouchEnd={hashtagsHook.onTouchEnd}
-          >
-            {editorStore.hashtags.map((hashtag, index) => (
-              <ItemTag
-                key={index}
-                tag={hashtag}
-                borderColor="border-main"
-                textColor="text-main"
-                cursorPointer={true}
-                hover="hover:scale-110"
-                removable={true}
-                onClick={() =>
-                  editorStore.setEditor({
-                    hashtags: editorStore.hashtags.filter(
-                      (_, i) => index !== i,
-                    ),
-                  })
-                }
-              />
-            ))}
-            <input
-              className="w-[14rem] border-main bg-transparent py-2 text-sm font-medium outline-none hover:border-b-[0.0625rem]"
-              type="text"
-              name="hashtag"
-              placeholder="#해시태그로 키워드를 써보세요!"
-              value={hashtag}
-              onChange={(e) => {
-                setHashtag(e.target.value.slice(0, 15));
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "#") {
-                  e.preventDefault();
-                  e.persist();
-                } else if (e.key === "Enter") {
-                  e.preventDefault();
-                  e.persist();
-                  editorStore.addHashtag(hashtag);
-                  setHashtag("");
-                }
-              }}
-            />
-          </div>
-          <button
-            className="text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
-            type="button"
-            onClick={() => {
-              editorStore.addHashtag(hashtag);
-              setHashtag("");
+          <input
+            className={`${editorStore.hashtags.length >= 10 ? "bg-gray-100" : "bg-transparent"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] border-main py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
+            type="text"
+            name="hashtag"
+            placeholder="#해시태그로 키워드를 써보세요!"
+            value={hashtag}
+            disabled={editorStore.hashtags.length >= 10}
+            onChange={(e) => {
+              setHashtag(e.target.value.slice(0, 15));
             }}
-          >
-            <span className="text-main">+</span>
-            {" 해시태그 추가"}
-          </button>
+            onKeyDown={(e) => {
+              if (e.key === "#") {
+                e.preventDefault();
+                e.persist();
+              } else if (e.key === "Enter") {
+                e.preventDefault();
+                e.persist();
+                editorStore.addHashtag(hashtag);
+                setHashtag("");
+              }
+            }}
+          />
+          <div className="flex h-[3.3125rem] w-full flex-row items-center justify-between gap-2 pl-5 hover:border-main">
+            <div
+              className="flex h-[3.3125rem] flex-1 flex-row items-center gap-2 overflow-auto"
+              ref={hashtagsHook.listRef}
+              onMouseDown={hashtagsHook.onDragStart}
+              onMouseMove={hashtagsHook.onDragMove}
+              onMouseUp={hashtagsHook.onDragEnd}
+              onMouseLeave={hashtagsHook.onDragEnd}
+              onTouchStart={hashtagsHook.onTouchStart}
+              onTouchMove={hashtagsHook.onTouchMove}
+              onTouchEnd={hashtagsHook.onTouchEnd}
+            >
+              {editorStore.hashtags.map((hashtag, index) => (
+                <ItemTag
+                  key={index}
+                  tag={hashtag}
+                  borderColor="border-main"
+                  textColor="text-main"
+                  cursorPointer={true}
+                  hover="hover:scale-110"
+                  removable={true}
+                  onClick={() =>
+                    editorStore.setEditor({
+                      hashtags: editorStore.hashtags.filter(
+                        (_, i) => index !== i,
+                      ),
+                    })
+                  }
+                />
+              ))}
+            </div>
+            <button
+              className="text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
+              type="button"
+              onClick={() => {
+                editorStore.addHashtag(hashtag);
+                setHashtag("");
+              }}
+            >
+              <span className="text-main">+</span>
+              {" 해시태그 추가"}
+            </button>
+          </div>
         </div>
       </div>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
