@@ -67,8 +67,8 @@ const InformationEditorContainer = () => {
 
     // If validation fails, return errors early. Otherwise, continue;
     if (!validatedFields.success) {
-      console.log(validatedFields.error.flatten().fieldErrors);
-      alert("모든 정보를 입력해 주세요.");
+      console.log(validatedFields.error.issues);
+      alert(validatedFields.error.issues[0].message);
       return;
     }
 
