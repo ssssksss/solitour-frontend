@@ -74,7 +74,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }) => {
     const temp = placeInfo.address_name.split(" ");
     setEditor({
-      province: temp[0] ?? "",
+      province: temp[0].slice(0, 2) ?? "",
       city: temp[1] ?? "",
       address: placeInfo.address_name,
       placeId: placeInfo.id,
@@ -92,7 +92,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }) => {
     const temp = addressInfo.address_name.split(" ");
     setEditor({
-      province: temp[0] ?? "",
+      province: temp[0].slice(0, 2) ?? "",
       city: temp[1] ?? "",
       address: addressInfo.address_name,
       placeXAxis: addressInfo.x,

@@ -57,19 +57,19 @@ const HeaderContainer = () => {
       try {
         const data = await fetchWithAuth("/api/auth/user");
         if (data.status == 200) {
-        data.json().then((res: userResponseDto) => {
-          authStore.setUser(res);
-        });
-      } else {
+          data.json().then((res: userResponseDto) => {
+            authStore.setUser(res);
+          });
+        } else {
+          authStore.setUser({
+            id: -1,
+          });
+        }
+      } catch {
         authStore.setUser({
           id: -1,
         });
       }
-    } catch {
-      authStore.setUser({
-        id: -1,
-        });
-     }
     };
     login();
   }, []);
