@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { MdFirstPage, MdLastPage } from "react-icons/md";
 
 interface Props {
   pathname: string;
@@ -12,9 +13,14 @@ const Pagination = ({ pathname, currentPage, totalPages }: Props) => {
 
   return (
     <div className="flex flex-row items-center justify-center gap-3 p-12 text-sm text-gray1 dark:text-slate-200">
-      <div className="cursor-pointer font-medium text-gray2 hover:text-main">
-        <IoIosArrowBack size={"1rem"} />
-      </div>
+      <Link href={`${pathname}?page=1`}>
+        <MdFirstPage
+          className="flex cursor-pointer flex-row items-center font-medium text-gray2 hover:text-main"
+          size={"1.1rem"}
+        />
+      </Link>
+
+      <IoIosArrowBack className="flex cursor-pointer flex-row items-center font-medium text-gray2 hover:text-main" />
       <div className="flex flex-row items-center gap-3">
         {pageList.map((pageNumber) => (
           <Link
@@ -26,9 +32,13 @@ const Pagination = ({ pathname, currentPage, totalPages }: Props) => {
           </Link>
         ))}
       </div>
-      <div className="cursor-pointer font-medium text-gray2 hover:text-main">
-        <IoIosArrowForward size={"1rem"} />
-      </div>
+      <IoIosArrowForward className="cursor-pointer font-medium text-gray2 hover:text-main" />
+      <Link href={`${pathname}?page=${totalPages}`}>
+        <MdLastPage
+          className="cursor-pointer font-medium text-gray2 hover:text-main"
+          size={"1.1rem"}
+        />
+      </Link>
     </div>
   );
 };

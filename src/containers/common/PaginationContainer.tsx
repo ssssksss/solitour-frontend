@@ -1,7 +1,7 @@
 "use client";
 
 import Pagination from "@/components/common/Pagination";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface Props {
   currentPage: number;
@@ -10,6 +10,7 @@ interface Props {
 
 const PaginationContainer = ({ currentPage, totalPages }: Props) => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   return (
     <Pagination
