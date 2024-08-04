@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div       className={
-        "flex w-full flex-col items-center px-[.5rem] pb-[2rem] pt-[2rem] lg:px-[0rem] min-h-[calc(100vh-25rem)] max-w-[60rem] m-auto"
+        "w-full pb-[2rem] pt-[2rem] min-h-[calc(100vh-25rem)]"
       }>
       <GatheringEditorContainer />
     </div>
