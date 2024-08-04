@@ -4,7 +4,7 @@ import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 
 const HeaderContainer = () => {
@@ -12,6 +12,8 @@ const HeaderContainer = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(true);
   const authStore = useAuthStore();
+  const router = useRouter();
+
   const onScroll = () => {
     if (window.scrollY >= 500) {
       setTransparent(false);
@@ -38,6 +40,8 @@ const HeaderContainer = () => {
       throw new Error(response.statusText);
     }
     authStore.initialize();
+    router.push("/");
+    router.refresh();
   };
 
   useEffect(() => {
