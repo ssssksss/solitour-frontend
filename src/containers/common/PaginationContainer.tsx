@@ -14,9 +14,12 @@ const PaginationContainer = ({ currentPage, totalPages }: Props) => {
 
   return (
     <Pagination
-      pathname={pathname}
       currentPage={currentPage}
       totalPages={totalPages}
+      pathname={pathname}
+      page={Number(searchParams.get("page") ?? 1)}
+      place={searchParams.get("place")}
+      order={searchParams.get("order")}
     />
   );
 };
