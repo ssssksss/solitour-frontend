@@ -96,7 +96,15 @@ const GatheringList = (props: IGatheringList) => {
           />
         ))}
       </div>
-      <PaginationContainer currentPage={1} totalPages={6} />
+
+      {/* Notice: 빌드 오류 문제로 주석 처리해 두었습니다. 현재 컴포넌트 구조가
+                  GatheringListContainer -> GatheringList 로 되어 있는데 
+                  modal을 열고 닫는 부분만 별도로 클라이언트 컴포넌트로 분리하고
+                  남은 부분인 모임 데이터를 불러오는 부분을 서버 컴포넌트로 분리하면 될 것 같습니다.
+                  Information 부분과 동일하게 해도 되고, 아니면 다른 방법이 있다면 그 방법으로
+                  해도 무방합니다.
+        <PaginationContainer currentPage={1} totalPages={6} /> 
+      */}
     </div>
   );
 };
