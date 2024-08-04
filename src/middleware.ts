@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
   // 로그인 페이지로 리다이렉트합니다.
   if (
     pathname.startsWith("/informations/write") ||
-    pathname.startsWith("/informations/edit")
+    pathname.startsWith("/informations/edit") ||
+    pathname.startsWith("/diary")
   ) {
     const token = request.cookies.get("access_token");
 
@@ -34,5 +35,10 @@ export function middleware(request: NextRequest) {
 
 // 미들웨어를 적용할 경로를 설정합니다.
 export const config = {
-  matchers: ["/informations/write", "/informations/edit", "/auth/:path*"],
+  matchers: [
+    "/informations/write",
+    "/informations/edit",
+    "/diary/:path*",
+    "/auth/:path*",
+  ],
 };
