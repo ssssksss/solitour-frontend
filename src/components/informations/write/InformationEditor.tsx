@@ -134,7 +134,7 @@ const InformationEditor = ({
         <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-black dark:text-slate-200">
           해시태그<span className="text-2xl text-main">*</span>
         </h2>
-        <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
+        <div className="flex w-full flex-col gap-2">
           <input
             className={`${editorStore.hashtags.length >= 10 ? "bg-gray-100" : "bg-transparent"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem] hover:border-main focus:border-main`}
             type="text"
@@ -157,9 +157,9 @@ const InformationEditor = ({
               }
             }}
           />
-          <div className="flex h-[3.3125rem] w-full flex-row items-center justify-between gap-2">
+          <div className="flex h-9 w-full flex-row items-center justify-between gap-2">
             <div
-              className="flex h-[3.3125rem] flex-1 flex-row items-center gap-2 overflow-auto pl-5"
+              className="flex flex-1 flex-row items-center gap-2 overflow-auto py-1 pl-5"
               ref={hashtagsHook.listRef}
               onMouseDown={hashtagsHook.onDragStart}
               onMouseMove={hashtagsHook.onDragMove}
