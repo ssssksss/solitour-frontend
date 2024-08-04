@@ -15,10 +15,10 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
         className="-z-10"
         src={images.length > 0 ? images[currentIndex].url : ""}
         alt="background"
-        layout="fill"
-        objectFit="cover"
+        fill={true}
         style={{
           zIndex: -10,
+          objectFit: "cover",
         }}
       />
       <div className="relative m-auto flex h-[33.75rem] w-[60rem] flex-col items-center justify-end max-[1024px]:h-72 max-[1024px]:w-[90%]">
