@@ -37,11 +37,7 @@ const HeaderContainer = () => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-
     authStore.initialize();
-    authStore.setUser({
-      id: -1,
-    });
   };
 
   useEffect(() => {
