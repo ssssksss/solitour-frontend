@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 const NotFound = () => {
   return (
-    <main className="flex flex-col items-center justify-center gap-6 px-6 py-20">
-      <div className="relative h-[14.375rem] w-[23.4375rem] max-[744px]:w-80">
+    <main className="flex flex-col items-center justify-center gap-6 py-20">
+      <div className="relative aspect-[75/46] w-[23.4375rem] max-[744px]:w-80">
         <Image
           src="/404.svg"
           alt="404"
@@ -19,16 +19,15 @@ const NotFound = () => {
           style={{ objectFit: "contain" }}
         />
       </div>
-
-      <div className="flex flex-row items-center gap-3 text-black max-[744px]:flex-col max-[744px]:gap-0 dark:text-slate-200">
-        <h1 className="text-[2.25rem] font-bold">앗..요청하신 페이지를</h1>
-        <h1 className="text-[2.25rem] font-bold">찾을 수 없습니다.</h1>
+      <div className="flex flex-row items-center justify-center gap-x-3 text-[2.25rem] font-bold text-black max-[744px]:flex-col dark:text-slate-200">
+        <h1>앗..요청하신 페이지를</h1>
+        <h1>찾을 수 없습니다.</h1>
       </div>
       <div className="flex flex-col items-center text-gray1 dark:text-slate-400">
         <p>존재하지 않는 주소를 입력하셨거나,</p>
-        <div className="flex flex-row items-center gap-1 max-[480px]:flex-col max-[480px]:gap-0">
-          <p>요청하신 페이지의 주소가 변경,</p>
-          <p>삭제되어 찾을 수 없습니다.</p>
+        <div className="flex flex-row flex-wrap items-center justify-center gap-x-1 max-[480px]:flex-col">
+          <p>{"요청하신 페이지의 주소가 변경, "}</p>
+          <p>{"삭제되어 찾을 수 없습니다."}</p>
         </div>
       </div>
       <div className="flex flex-row items-center gap-[0.625rem]">
