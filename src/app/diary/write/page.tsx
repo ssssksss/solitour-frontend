@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <PagePath first="여행 일기" second="일기 등록하기" />
       <DiaryEditorContainer />
     </div>

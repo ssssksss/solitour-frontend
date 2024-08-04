@@ -13,7 +13,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
   if (isFlipped) {
     return (
       <div
-        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} flex h-[38.9375rem] w-[29.375rem] flex-col rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-[#F2FAF7] max-[518px]:w-full dark:bg-slate-800 dark:hover:bg-slate-600`}
+        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} flex h-[38.9375rem] w-full flex-col rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-[#F2FAF7] dark:bg-slate-800 dark:hover:bg-slate-600`}
         onClick={() => {
           if (flag) {
             flip();
@@ -46,36 +46,38 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             ))}
           </div>
         </div>
-        <div className="relative mt-[8.75rem] h-20 w-16">
-          <Image
-            src={`/mood-icon${diaryData.moodLevel}.svg`}
-            alt="mood-icon"
-            fill={true}
-            style={{ objectFit: "contain" }}
-          />
+        <div className="mt-[8.75rem] flex flex-col">
+          <div className="relative h-20 w-16">
+            <Image
+              src={`/mood-icon${diaryData.moodLevel}.svg`}
+              alt="mood-icon"
+              fill={true}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+          <Link
+            className="mt-12 w-full truncate text-2xl font-bold hover:text-main dark:text-slate-200"
+            href="/diary/1"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            {diaryData.title}
+          </Link>
+          <p className="mt-3 text-lg text-gray1 dark:text-slate-400">
+            {diaryData.period.split("-")[0]}
+          </p>
+          <p className="truncate-vertical mt-6 text-black dark:text-slate-200">
+            {diaryData.description}
+          </p>
         </div>
-        <Link
-          className="mt-12 w-full truncate text-2xl font-bold hover:text-main dark:text-slate-200"
-          href="/diary/1"
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          {diaryData.title}
-        </Link>
-        <p className="mt-3 text-lg text-gray1 dark:text-slate-400">
-          {diaryData.period.split("-")[0]}
-        </p>
-        <p className="truncate-vertical mt-6 h-[11.5rem] text-black dark:text-slate-200">
-          {diaryData.description}
-        </p>
       </div>
     );
   }
 
   return (
     <button
-      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative h-[38.9375rem] w-[29.375rem] rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[518px]:w-full`}
+      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative h-[38.9375rem] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[518px]:w-full`}
       onClick={() => {
         if (!flag) {
           flip();
