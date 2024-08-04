@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <div className="flex flex-col items-center py-4">
+    <div className="flex w-full flex-col items-center">
       <Suspense fallback={<DiaryListSkeleton />}>
         <DiaryList />
       </Suspense>

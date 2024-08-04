@@ -26,7 +26,7 @@ export default function page({ params: { id } }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <PagePath first="여행 일기" second="일기 상세" />
       <Suspense fallback={<DiaryViewerSkeleton />}>
         <DiaryViewer id={diaryId} />
