@@ -22,7 +22,7 @@ const GatheringCategory = (props: IGatheringCategoryProps) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/gathering`,
+          `/api/gathering/category`,
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
