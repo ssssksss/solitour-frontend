@@ -3,6 +3,7 @@ import { TopInformationResponseDto } from "@/types/InformationDto";
 import Image from "next/image";
 import Link from "next/link";
 import LottieComponent from "./lottie/LottieComponent";
+
 interface Props {
   title: "여행" | "모임";
 }
@@ -12,7 +13,7 @@ async function getTopInformationList() {
     `${process.env.BACKEND_URL}/api/informations/ranks`,
     {
       method: "GET",
-      next: { revalidate: 86400, tags: ["getTopInformationList"] },
+      next: { revalidate: 3600, tags: ["getTopInformationList"] },
     },
   );
 
@@ -83,7 +84,7 @@ const TopList = async ({ title }: Props) => {
             {`${title} 정보 `}
             <span className="font-bold text-main">Top 5</span>
           </h2>
-          <div className="w-full max-[1024px]:space-x-0">
+          <div className="w-full">
             <ol className="grid grid-cols-2 gap-x-4 gap-y-[1.5rem] max-[1024px]:flex max-[1024px]:flex-col">
               {data.map((value, index) => (
                 <li

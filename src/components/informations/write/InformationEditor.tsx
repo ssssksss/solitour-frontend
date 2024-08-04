@@ -7,6 +7,7 @@ import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import Image from "next/image";
+import { MdClose } from "react-icons/md";
 
 interface Props {
   pathname: string;
@@ -133,9 +134,9 @@ const InformationEditor = ({
         <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-black dark:text-slate-200">
           해시태그<span className="text-2xl text-main">*</span>
         </h2>
-        <div className="flex w-full flex-col items-end gap-3 overflow-hidden">
+        <div className="flex w-full flex-col gap-2">
           <input
-            className={`${editorStore.hashtags.length >= 10 ? "bg-gray-100" : "bg-transparent"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] border-main py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
+            className={`${editorStore.hashtags.length >= 10 ? "bg-gray-100" : "bg-transparent"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem] hover:border-main focus:border-main`}
             type="text"
             name="hashtag"
             placeholder="#해시태그로 키워드를 써보세요!"
@@ -156,9 +157,9 @@ const InformationEditor = ({
               }
             }}
           />
-          <div className="flex h-[3.3125rem] w-full flex-row items-center justify-between gap-2 pl-5 hover:border-main">
+          <div className="flex h-9 w-full flex-row items-center justify-between gap-2">
             <div
-              className="flex h-[3.3125rem] flex-1 flex-row items-center gap-2 overflow-auto"
+              className="flex flex-1 flex-row items-center gap-2 overflow-auto py-1 pl-5"
               ref={hashtagsHook.listRef}
               onMouseDown={hashtagsHook.onDragStart}
               onMouseMove={hashtagsHook.onDragMove}
@@ -175,7 +176,7 @@ const InformationEditor = ({
                   borderColor="border-main"
                   textColor="text-main"
                   cursorPointer={true}
-                  hover="hover:scale-110"
+                  hover="hover:scale-105"
                   removable={true}
                   onClick={() =>
                     editorStore.setEditor({
@@ -207,22 +208,37 @@ const InformationEditor = ({
         </h2>
         <div className="flex flex-grow flex-col gap-4 max-[744px]:w-full">
           {editorStore.tips.map((tip, index) => (
-            <input
+            <div
               key={index}
-              className="h-[3.3125rem] rounded-3xl border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
-              type="text"
-              name="tip"
-              placeholder="나만의 혼플 팁을 알려주세요."
-              value={tip}
-              onChange={(e) => editorStore.changeTip(index, e.target.value)}
-              required={true}
-              onKeyDown={(e) => {
-                if (e.key === ";") {
-                  e.preventDefault();
-                  e.persist();
-                }
-              }}
-            />
+              className="flex h-[3.3125rem] flex-row items-center gap-2 rounded-3xl border-[0.0625rem] border-gray3 pl-5 pr-[0.625rem] hover:border-main active:border-main"
+            >
+              <input
+                className="w-full text-sm font-medium outline-none"
+                type="text"
+                name="tip"
+                placeholder="나만의 혼플 팁을 알려주세요."
+                value={tip}
+                onChange={(e) => editorStore.changeTip(index, e.target.value)}
+                required={true}
+                onKeyDown={(e) => {
+                  if (e.key === ";") {
+                    e.preventDefault();
+                    e.persist();
+                  }
+                }}
+              />
+              {index >= 1 && (
+                <MdClose
+                  className="cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
+                  size="2rem"
+                  onClick={() => {
+                    editorStore.setEditor({
+                      tips: editorStore.tips.filter((_, idx) => idx !== index),
+                    });
+                  }}
+                />
+              )}
+            </div>
           ))}
         </div>
       </div>

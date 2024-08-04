@@ -34,5 +34,5 @@ export function middleware(request: NextRequest) {
 
 // 미들웨어를 적용할 경로를 설정합니다.
 export const config = {
-  matchers: ["/informations/write", "/informations/edit", "auth/:path*"],
+  matchers: ["/informations/write", "/informations/edit", "/auth/:path*"],
 };
