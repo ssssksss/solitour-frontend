@@ -34,7 +34,7 @@ export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
     return createPortal(
       <div className="fixed inset-0 z-10 flex h-full w-full items-center justify-center">
         <div className="absolute h-full w-full bg-black/30"> </div>
-        <div ref={ref} className="flex h-full py-[6rem]  justify-center items-center">
+        <div ref={ref} className="flex h-full pt-[5rem] pb-[1rem] justify-center items-center">
           {children}
         </div>
       </div>,
