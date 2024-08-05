@@ -57,16 +57,16 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
             </span>
             <span>
               {new Date().getFullYear() -
-                formContext.getValues("maxAgeYear") +
+                formContext.getValues("endAge") +
                 "세"}
             </span>
             (
             <span>
-              {formContext.getValues("maxAgeYear") + "년생"}
+              {formContext.getValues("endAge") + "년생"}
             </span>
             <span>~</span>
             <span>
-              {formContext.getValues("minAgeYear") + "년생"}
+              {formContext.getValues("startAge") + "년생"}
             </span>
             )
           </div>

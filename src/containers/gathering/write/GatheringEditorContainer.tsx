@@ -2,6 +2,8 @@
 
 import GatheringEditor from "@/components/gathering/write/GatheringEditor";
 import { gatheringCreateFormSchema } from "@/lib/examples/zod/schema/GatheringCreateFormSchema";
+import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,10 +20,10 @@ const GatheringEditorContainer = () => {
     defaultValues: {
       title: "",
       content: "",
-      minAgeYear: new Date().getFullYear() - 20,
-      maxAgeYear: new Date().getFullYear() - 59,
-      allowedSex: "all",
-      participantCount: 10,
+      startAge: new Date().getFullYear() - 20,
+      endAge: new Date().getFullYear() - 59,
+      allowedSex: "",
+      personCount: 0,
       placeName: "",
       xAxis: "",
       yAxis: "",
@@ -38,30 +40,37 @@ const GatheringEditorContainer = () => {
   });
 
   const createGatheringHandler = async () => {
-    const { hashtags, ...requestData } = methods.getValues();
+
+    const { mainCategoryId, allowedSex, hashtags, searchId, placeName, xAxis, yAxis, roadAddressName, subCategoryId, ...requestData } = methods.getValues();
     try {
-      const response = await fetch("/api/gathering/create", {
+      const response = await fetchWithAuth("/api/gathering/write", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...requestData,
-          hashtags: JSON.stringify(hashtags),
-        }),
+          placeRegisterRequest: {
+            searchId: searchId,
+            name: placeName,
+            xAxis: Number(xAxis),
+            yAxis: Number(yAxis), 
+            address: roadAddressName,
+      },
+          allowedSex: allowedSex.toUpperCase(),
+          gatheringCategoryId: +subCategoryId,
+          zoneCategoryNameParent: convertRegionToTwoLetters(roadAddressName.split(" ")[0]),
+          zoneCategoryNameChild: roadAddressName.split(" ")[1],
+          tagRegisterRequests: hashtags.length > 0 ? hashtags.map(i=>{return {name: i}}) : []
+    }),
       });
-
+// TODO 에러 처리 작업 필요함
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
-      const id = data.id;
-      if (id) {
-        router.replace(`/gathering/${id}`);
-      } else {
-        throw new Error("ID not found in the response");
-      }
+      router.push(`/gathering/${data.data.id}`)
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }

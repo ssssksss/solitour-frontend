@@ -1,4 +1,5 @@
 import "@/styles/reactDataRange.css";
+import { format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useState } from "react";
@@ -7,20 +8,6 @@ import { useFormContext } from "react-hook-form";
 interface IGatheringScheduleModalProps {
   closeModal: () => void;
 }
-
-const dateFormat4y2m2d = (date1: string | Date) => {
-  const date = new Date(date1);
-  const month: number | string = date.getMonth() + 1;
-  const day: number | string = date.getDate();
-
-  return (
-    date.getFullYear() +
-    "-" +
-    month.toString().padStart(2, "0") +
-    "-" +
-    day.toString().padStart(2, "0")
-  );
-};
 
 const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
   const [calendarDate, setCalendarDate] = useState([
@@ -31,11 +18,11 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
     },
   ]);
   const [startDateTime, setStartDateTime] = useState({
-    hour: "00",
+    hour: "09",
     minute: "00",
   });
   const [endDateTime, setEndDateTime] = useState({
-    hour: "23",
+    hour: "18",
     minute: "00",
   });
   const formContext = useFormContext();
@@ -47,7 +34,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
     formContext.setValue(
       "scheduleStartDate",
       _dateTime(
-        dateFormat4y2m2d(calendarDate[0].startDate),
+        format(calendarDate[0].startDate, 'yyyy-MM-dd'),
         startDateTime.hour,
         startDateTime.minute,
       ),
@@ -56,7 +43,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
       formContext.setValue(
         "scheduleEndDate",
         _dateTime(
-          dateFormat4y2m2d(calendarDate[0].startDate),
+          format(calendarDate[0].startDate, 'yyyy-MM-dd'),
           startDateTime.hour,
           startDateTime.minute,
         ),
@@ -65,13 +52,14 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
       formContext.setValue(
         "scheduleEndDate",
         _dateTime(
-          dateFormat4y2m2d(calendarDate[0].endDate),
+          format(calendarDate[0].endDate, 'yyyy-MM-dd'),
           endDateTime.hour,
           endDateTime.minute,
         ),
       );
     }
     formContext.watch();
+    formContext.trigger();
     props.closeModal();
   };
 
@@ -124,7 +112,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
             >
-              {dateFormat4y2m2d(calendarDate[0].startDate)}
+              {format(calendarDate[0].startDate, 'yyyy-MM-dd')}
             </div>
             <select
               name="hour"
@@ -176,7 +164,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
             >
-              {dateFormat4y2m2d(calendarDate[0].endDate)}
+              {format(calendarDate[0].endDate, 'yyyy-MM-dd')}
             </div>
             <select
               name="hour"
