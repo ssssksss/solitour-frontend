@@ -117,14 +117,15 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     formContext.setValue("roadAddressName", element.road_address_name);
     formContext.setValue("placeUrl", element.place_url);
     formContext.watch();
+    formContext.trigger();
     props.closeModal();
   };
-
+  
   const pickAddress = (element: PlaceElement1) => {
     setRoadAddress(element.road_address.address_name);
     setPlaceData(element);
   };
-
+  
   const applyAddressHandler = () => {
     formContext.setValue("placeName", placeCustomName);
     formContext.setValue("xAxis", placeData?.x);
@@ -136,6 +137,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     formContext.setValue("searchId", "");
     formContext.setValue("placeUrl", "");
     formContext.watch();
+    formContext.trigger();
     props.closeModal();
   };
 

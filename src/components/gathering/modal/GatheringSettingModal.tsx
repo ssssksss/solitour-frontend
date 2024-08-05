@@ -3,62 +3,63 @@ import {
   SETTING_MODAL_SEX,
 } from "@/constants/gathering/GatheringConstant";
 import "@/styles/reactDataRange.css";
+import { format, isBefore, parse } from "date-fns";
+import { ko } from "date-fns/locale";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Calendar } from "react-date-range";
 import { useFormContext } from "react-hook-form";
+
 interface IGatheringSettingModalProps {
   closeModal: () => void;
 }
 
-const dateFormat4y2m2d = (date1: string | Date) => {
-  const date = new Date(date1);
-  const month: number | string = date.getMonth() + 1;
-  const day: number | string = date.getDate();
-
-  return (
-    date.getFullYear() +
-    "-" +
-    month.toString().padStart(2, "0") +
-    "-" +
-    day.toString().padStart(2, "0")
-  );
-};
-
-function calculateDateDifference(startDate: Date, endDate: Date): number {
-  const differenceInTime = endDate.getTime() - startDate.getTime();
-  const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-  return differenceInDays;
-}
-
 const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
-  const [peopleCount, setPeopleCount] = useState(10);
+  const [peopleCount, setPeopleCount] = useState(6);
   const [sex, setSex] = useState("all");
   const [startAge, setStartAge] = useState(20);
   const [endAge, setEndAge] = useState(59);
-  const [deadline, setdeadline] = useState<String>("");
-  const [expirationHour, setExpirationHour] = useState<String>("23");
-  const [expirationMinute, setExpirationMinute] = useState<String>("0");
+  const [deadlineDate, setDeadlineDate] = useState<Date>(new Date());
+  const [deadlineHour, setDeadlineHour] = useState<string>("23");
+  const [deadlineMinute, setDeadlineMinute] = useState<string>("0");
   const formContext = useFormContext();
+
+  const handleSelect = (date: Date) => {
+    setDeadlineDate(date);
+  };
 
   const submitHandler = () => {
     const expiration =
-      deadline +
+      format(deadlineDate, "yyyy-MM-dd") +
       " " +
-      expirationHour.padStart(2, "0") +
+      deadlineHour.padStart(2, "0") +
       ":" +
-      expirationMinute.padStart(2, "0");
+      deadlineMinute.padStart(2, "0");
     formContext.setValue("deadline", expiration);
-    formContext.setValue(
-      "minAgeYear",
-      new Date().getFullYear() - startAge,
-    );
-    formContext.setValue(
-      "maxAgeYear",
-      new Date().getFullYear() - endAge,
-    );
+    formContext.setValue("startAge", new Date().getFullYear() - startAge);
+    formContext.setValue("endAge", new Date().getFullYear() - endAge);
+    formContext.setValue("personCount", peopleCount);
+    formContext.setValue("allowedSex", sex);
     formContext.watch();
+    formContext.trigger();
     props.closeModal();
   };
+
+  const isToday = deadlineDate?.toDateString() === new Date().toDateString();
+
+  useEffect(() => {
+    if (isToday && parseInt(deadlineHour) < new Date().getHours()) {
+      setDeadlineHour(new Date().getHours().toString());
+    }
+    // 현재날짜와 현재시간이면 분을 변경해주어야 한다.
+    if (
+      isToday &&
+      parseInt(deadlineHour) === new Date().getHours() &&
+      parseInt(deadlineMinute) < new Date().getMinutes()
+    ) {
+        setDeadlineMinute(Array.from([...Array(6).fill(0)], (_, i) => i * 10).filter(j=> parseInt(deadlineHour) !== new Date().getHours() || parseInt(deadlineHour) === new Date().getHours() && j > new Date().getMinutes())[0].toString());
+    }
+  }, [deadlineDate, deadlineHour, deadlineMinute]);
 
   return (
     <div
@@ -81,28 +82,42 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
       <section className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
         <article className={"flex flex-col gap-y-[1rem]"}>
           <div className={"h-[2rem] font-bold text-black"}>모집 마감일 </div>
-          <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-            <input
-              type={"date"}
+          <div>
+            <Calendar
+              date={deadlineDate}
+              onChange={handleSelect}
+              minDate={new Date()}
+              locale={ko}
+              color={"#00B488"}
+            />
+          </div>
+          <div className={"flex w-full gap-[.5rem]"}>
+            <div className={"flex items-center"}> 마감일 : </div>
+            <div
               className={
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
-              onChange={(e) => setdeadline(e.target.value)}
-            />
+            >
+              {deadlineDate && format(deadlineDate as Date, "yyyy-MM-dd")}
+            </div>
             <select
               name="hour"
               className={
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
-              onChange={(e) => setExpirationHour(e.target.value)}
+              onChange={(e) => {
+                  setDeadlineHour(e.target.value);
+              }}
+              value={deadlineHour}
             >
-              {Array.from([...Array(24).fill(0)], (i, index) => index).map(
-                (i) => (
-                  <option value={23 - i} selected={i == 0} key={i}>
-                    {23 - i}
-                  </option>
-                ),
-              )}
+              {Array.from([...Array(24).fill(0)], (_, i) => i).filter(j=>!(isToday && j < new Date().getHours())).map((k) => (
+                <option
+                  value={k}
+                  key={k}
+                >
+                  {k}
+                </option>
+              ))}
             </select>
             <div className={"flex items-center"}> 시 </div>
             <select
@@ -110,22 +125,22 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
               className={
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
-              onChange={(e) => setExpirationMinute(e.target.value)}
+              onChange={(e) => setDeadlineMinute(e.target.value)}
+              value={deadlineMinute}
             >
-              {Array.from([...Array(6).fill(0)], (i, index) => index * 10).map(
-                (i) => (
-                  <option value={i} selected={i == 0} key={i}>
-                    {i}
-                  </option>
-                ),
-              )}
+              {Array.from([...Array(6).fill(0)], (_, i) => i * 10).filter(j=> parseInt(deadlineHour) !== new Date().getHours() || parseInt(deadlineHour) === new Date().getHours() && j > new Date().getMinutes()).map((k) => (
+                <option
+                  value={k}
+                  key={k}
+                >
+                  {k}
+                </option>
+              ))}
             </select>
             <div className={"flex items-center"}> 분 </div>
           </div>
         </article>
-        <article
-          className={"flex max-w-[16.25rem] justify-between gap-y-[1rem]"}
-        >
+        <article className={"flex max-w-[16.25rem] justify-between gap-y-[1rem]"}>
           <div className={"h-[2rem] font-bold text-black"}> 인원 </div>
           <div
             className={"flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]"}
@@ -136,12 +151,14 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
                 setPeopleCount(peopleCount <= 2 ? 2 : peopleCount - 1);
               }}
             >
-              <Image
-                src={"/minus-icon.svg"}
-                alt={"minus-icon"}
-                width={20}
-                height={20}
-              />
+              {peopleCount > 2 ? (
+                <Image
+                  src={"/minus-icon.svg"}
+                  alt={"minus-icon"}
+                  width={20}
+                  height={20}
+                />
+              ): <div className="w-[1.25rem] aspect-square">  </div>}
             </div>
             <div className="flex h-[2rem] w-[2.5rem] items-center justify-center">
               <div className={"w-[1rem]"}> {peopleCount} </div> 명
@@ -152,12 +169,14 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
                 setPeopleCount(peopleCount >= 10 ? 10 : peopleCount + 1);
               }}
             >
-              <Image
-                src={"/plus-icon.svg"}
-                alt={"plus-icon"}
-                width={20}
-                height={20}
-              />
+              {peopleCount < 10 ? (
+                <Image
+                  src={"/plus-icon.svg"}
+                  alt={"plus-icon"}
+                  width={20}
+                  height={20}
+                />
+              ) : <div className="w-[1.25rem] aspect-square">  </div>}
             </div>
           </div>
         </article>
@@ -274,7 +293,9 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
               <button
                 key={i[0]}
                 onClick={() => setSex(i[0])}
-                className={`${sex == i[0] ? "bg-main text-white" : "text-gray1"} flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                className={`${
+                  sex == i[0] ? "bg-main text-white" : "text-gray1"
+                } flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
               >
                 {i[1]}
               </button>
@@ -287,9 +308,9 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
           className={
             "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           }
-          disabled={deadline == "" && true}
+        disabled={isBefore(parse(`${format(deadlineDate as Date, "yyyy-MM-dd")+" "+deadlineHour.padStart(2, "0")+":"+deadlineMinute.padStart(2, "0")}`, 'yyyy-MM-dd HH:mm', new Date()),new Date())}
           onClick={() => submitHandler()}
-        >
+          >
           적용하기
         </button>
       </div>

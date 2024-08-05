@@ -46,24 +46,24 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
           모집 마감일 : {formContext.getValues("deadline")}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
-          인원 : 1 / {formContext.getValues("participantCount")}
+          인원 : 1 / {formContext.getValues("personCount")}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           <span className="pr-[.5rem]"> 나이 : </span>
           <div className={"flex gap-[.25rem]"}>
             <span>
               {new Date().getFullYear() -
-                formContext.getValues("minAgeYear") +
+                formContext.getValues("startAge") +
                 "세 ~"}
             </span>
             <span>
               {new Date().getFullYear() -
-                formContext.getValues("maxAgeYear") +
+                formContext.getValues("endAge") +
                 "세"}
             </span>
-            (<span>{formContext.getValues("maxAgeYear") + "년생"}</span>
+            (<span>{formContext.getValues("endAge") + "년생"}</span>
             <span>~</span>
-            <span>{formContext.getValues("minAgeYear") + "년생"}</span>)
+            <span>{formContext.getValues("startAge") + "년생"}</span>)
           </div>
         </div>
         <div className={"flex h-[2.75rem] items-center"}>

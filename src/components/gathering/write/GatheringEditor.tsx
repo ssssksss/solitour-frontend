@@ -72,7 +72,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         <div className={"flex w-full justify-end"}>
           <button
             className={
-              "h-[3.825rem] max-w-[10.825rem] rounded-[2rem] bg-gray1 px-[2rem] py-[.5rem] text-white disabled:bg-gray1"
+              "h-[3.825rem] max-w-[10.825rem] rounded-[2rem] bg-main px-[2rem] py-[.5rem] text-white disabled:bg-gray1"
             }
             onClick={() => {
               props.createGatheringHandler();

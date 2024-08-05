@@ -16,7 +16,7 @@ const GatheringContent = () => {
   const onChangeInputTagHandler = (
     e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
-    if (e.key === "Enter" || e.key === ",") {
+    if (e.key === "Enter") {
       const tempTag = (inputTagRef.current as HTMLInputElement).value
         .replace(/,$/, "")
         .trim();
@@ -24,6 +24,7 @@ const GatheringContent = () => {
       setTags((prev) => Array.from(new Set([...prev, tempTag])));
       (inputTagRef.current as HTMLInputElement).value = "";
       formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
+      formContext.trigger();
     }
   };
 
@@ -51,7 +52,7 @@ const GatheringContent = () => {
           {...formContext.register("content")}
           onChange={(e) => {
             formContext.setValue("content", e.target.value);
-            formContext.watch();
+            formContext.trigger();
           }}
           maxLength={500}
         />
@@ -72,6 +73,11 @@ const GatheringContent = () => {
             placeholder="#해시태그로 키워드를 써보세요!"
             className="h-[3.25rem] w-full rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
             onKeyUp={onChangeInputTagHandler}
+            onKeyDown={(e) => {
+              if (e.key === "#" || (inputTagRef.current as HTMLInputElement).value.length >= 15) {
+                e.preventDefault();
+              }
+            }}
             ref={inputTagRef}
           />
         </div>
@@ -92,6 +98,7 @@ const GatheringContent = () => {
                 "flex h-[3rem] min-w-[5rem] items-center justify-center gap-[.125rem] rounded-lg bg-main px-1 text-white"
               }
               onClick={() => deleteTagHandler(i)}
+              
             >
               <span> # </span>
               <span> {i} </span>
