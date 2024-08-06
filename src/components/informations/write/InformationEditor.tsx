@@ -75,28 +75,29 @@ const InformationEditor = ({
           <h2 className="text-lg font-semibold text-black dark:text-slate-200">
             장소<span className="text-2xl text-main">*</span>
           </h2>
-          <input
-            className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
-            type="text"
-            name="placeName"
-            placeholder="장소명을 입력하세요."
-            value={editorStore.placeName}
-            onChange={(e) => {
-              editorStore.setEditor({ placeName: e.target.value });
-            }}
+          <button
+            className={`${editorStore.placeName !== "" ? "text-black" : "text-gray2"} h-full w-[12.3125rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm font-medium outline-none hover:border-main focus:border-main`}
+            type="button"
             onClick={showLocationModal}
-            required={true}
-          />
+          >
+            {editorStore.placeName !== ""
+              ? editorStore.placeName
+              : "장소명을 입력하세요."}
+          </button>
         </div>
         <div onClick={showCategoryModal}>
           <button
-            className="flex h-[3.3125rem] flex-row items-center rounded-full border-[0.0625rem] border-gray3 px-7 py-3 text-lg font-semibold hover:border-main dark:text-slate-200"
+            className="flex h-[3.3125rem] flex-row items-center gap-1 rounded-full border-[0.0625rem] border-gray3 px-7 py-3 text-lg font-semibold hover:border-main dark:text-slate-200"
             type="button"
           >
-            {editorStore.categoryId !== 0
-              ? editorStore.categoryName
-              : "카테고리 선택"}
-            <span className="text-2xl text-main">*</span>
+            {editorStore.categoryId !== 0 ? (
+              editorStore.categoryName
+            ) : (
+              <p className="flex flex-row items-center">
+                {"카테고리 선택"}
+                <span className="text-2xl text-main">*</span>
+              </p>
+            )}
             <IoIosArrowDown />
           </button>
         </div>
@@ -204,7 +205,7 @@ const InformationEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
         <h2 className="w-36 pt-3 text-lg font-bold text-black dark:text-slate-200">
-          생생한 혼플 TIP<span className="text-main">*</span>
+          생생한 혼플 TIP<span className="text-2xl text-main">*</span>
         </h2>
         <div className="flex flex-grow flex-col gap-4 max-[744px]:w-full">
           {editorStore.tips.map((tip, index) => (
