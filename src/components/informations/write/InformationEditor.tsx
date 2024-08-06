@@ -70,7 +70,7 @@ const InformationEditor = ({
           required={true}
         />
       </div>
-      <div className="mt-12 flex flex-row items-center gap-[3.375rem] max-[744px]:flex-col max-[744px]:items-start">
+      <div className="mt-12 flex flex-row items-center gap-[2.625rem] max-[744px]:flex-col max-[744px]:items-start">
         <div className="flex h-[3.3125rem] flex-row items-center gap-7 max-[744px]:w-full">
           <h2 className="text-lg font-semibold text-black dark:text-slate-200">
             장소<span className="text-2xl text-main">*</span>
@@ -90,7 +90,7 @@ const InformationEditor = ({
         </div>
         <div onClick={showCategoryModal}>
           <button
-            className="flex flex-row items-center text-lg font-semibold dark:text-slate-200"
+            className="flex h-[3.3125rem] flex-row items-center rounded-full border-[0.0625rem] border-gray3 px-7 py-3 text-lg font-semibold hover:border-main dark:text-slate-200"
             type="button"
           >
             {editorStore.categoryId !== 0
@@ -112,7 +112,7 @@ const InformationEditor = ({
         onTouchMove={imagesHook.onTouchMove}
         onTouchEnd={imagesHook.onTouchEnd}
       >
-        {editorStore.images.map((image, index) => (
+        {editorStore.images.map((_, index) => (
           <div key={index}>
             <ImageUploadItemContainer index={index} />
           </div>
@@ -208,12 +208,9 @@ const InformationEditor = ({
         </h2>
         <div className="flex flex-grow flex-col gap-4 max-[744px]:w-full">
           {editorStore.tips.map((tip, index) => (
-            <div
-              key={index}
-              className="flex h-[3.3125rem] flex-row items-center gap-2 rounded-3xl border-[0.0625rem] border-gray3 pl-5 pr-[0.625rem] hover:border-main active:border-main"
-            >
+            <div key={index} className="relative w-full">
               <input
-                className="w-full text-sm font-medium outline-none"
+                className={`${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] border-gray3 pl-5 text-sm outline-none hover:border-main focus:border-main`}
                 type="text"
                 name="tip"
                 placeholder="나만의 혼플 팁을 알려주세요."
@@ -229,7 +226,7 @@ const InformationEditor = ({
               />
               {index >= 1 && (
                 <MdClose
-                  className="cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
+                  className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
                   size="2rem"
                   onClick={() => {
                     editorStore.setEditor({
