@@ -16,7 +16,7 @@ const SignUp = () => {
           1초 회원가입으로 입력없이 간편하게 솔리투어를 시작해보세요!
         </p>
       </div>
-      <div className={"relative h-[16.8125rem] w-full translate-x-[8%]"}>
+      <div className={"relative h-[16.8125rem] w-full"}>
         <LottieComponent lottieFile={introLottie} className="h-full w-full" />
         <div className="absolute left-[50%] top-[7.0625rem] h-[6.875rem] w-[11rem] translate-x-[-50%]">
           <Image

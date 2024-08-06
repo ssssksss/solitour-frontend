@@ -16,7 +16,7 @@ const SignIn = () => {
           SNS로 솔리투어에 로그인하고 더 많은 서비스를 즐겨보세요!
         </p>
       </div>
-      <div className={"relative h-[16.8125rem] w-full translate-x-[8%]"}>
+      <div className={"relative h-[16.8125rem] w-full"}>
         <LottieComponent lottieFile={introLottie} className="h-full w-full" />
         <div className="absolute left-[50%] top-[7.0625rem] h-[6.875rem] w-[11rem] translate-x-[-50%]">
           <Image
