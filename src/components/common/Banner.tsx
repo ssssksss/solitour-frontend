@@ -34,13 +34,13 @@ const Banner = ({ content, buttonText, category }: Props) => {
           </Link>
         </div>
         <div
-          className={`relative flex h-[14rem] w-[27rem] items-center justify-end max-[1024px]:h-[12rem] max-[744px]:justify-center max-[480px]:w-[95%]`}
+          className={`relative flex h-[14rem] w-[27rem] items-center justify-end max-[1024px]:h-[12rem] max-[744px]:justify-center`}
         >
           <div
-            className={`absolute flex h-full w-full flex-row justify-center max-[1024px]:h-[85%] max-[1024px]:w-[85%]`}
+            className={`absolute flex h-full w-full flex-row justify-center`}
           >
             {category === "정보" && (
-              <div className="flex h-[13.4375rem] w-[24.8125rem] flex-col max-[1024px]:h-[10.6875rem] max-[1024px]:w-[19.8125rem]">
+              <div className="flex h-[13.4375rem] w-[24.8125rem] flex-col max-[1024px]:mt-4 max-[1024px]:h-[10.6875rem] max-[1024px]:w-[19.8125rem] max-[744px]:mt-[1.875rem]">
                 <div className="flex justify-end pr-6">
                   <div className="relative h-[5.8125rem] w-[11.75rem] animate-bannerImage max-[1024px]:h-[5.0625rem] max-[1024px]:w-[10.1875rem]">
                     <Image
@@ -48,7 +48,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
                       alt="banner-image1"
                       fill={true}
                       style={{
-                        objectFit: "cover",
+                        objectFit: "contain",
                       }}
                     />
                   </div>
@@ -59,7 +59,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
                     alt="banner-image2"
                     fill={true}
                     style={{
-                      objectFit: "cover",
+                      objectFit: "contain",
                     }}
                   />
                 </div>
@@ -70,7 +70,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
                       alt="banner-image3"
                       fill={true}
                       style={{
-                        objectFit: "cover",
+                        objectFit: "contain",
                       }}
                     />
                   </div>

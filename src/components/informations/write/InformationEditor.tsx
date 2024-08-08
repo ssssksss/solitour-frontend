@@ -211,7 +211,6 @@ const InformationEditor = ({
               <input
                 className={`${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] border-gray3 pl-5 text-sm outline-none hover:border-main focus:border-main`}
                 type="text"
-                name="tip"
                 placeholder="나만의 혼플 팁을 알려주세요."
                 value={tip}
                 onChange={(e) => editorStore.changeTip(index, e.target.value)}
