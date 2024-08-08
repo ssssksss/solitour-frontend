@@ -71,7 +71,7 @@ const config: Config = {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
         buttonRotation: "buttonRotation 0.3s",
         fadeIn: "fadeIn 0.5s",
-        bannerImage: "bannerImage 1.5s ease-in-out infinite",
+        bannerImage: "bannerImage 1.8s ease-in-out infinite",
         cardFlip: "cardFlip 0.5s linear",
         cardFlip2: "cardFlip2 0.5s linear",
         pulseAuth: "pulseAuth 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
