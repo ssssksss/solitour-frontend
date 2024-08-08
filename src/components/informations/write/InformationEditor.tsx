@@ -122,10 +122,12 @@ const InformationEditor = ({
       </div>
       <QuillEditor
         content={editorStore.content}
-        onChange={(value) => editorStore.setEditor({ content: value })}
+        onChange={(value: string, length: number) =>
+          editorStore.setEditor({ content: value, contentLength: length })
+        }
       />
       <p className="pt-3 text-end text-sm font-medium text-gray1">
-        {editorStore.content.length}/500
+        {editorStore.contentLength}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
         <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-black dark:text-slate-200">

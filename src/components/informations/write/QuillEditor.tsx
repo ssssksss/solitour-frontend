@@ -7,7 +7,7 @@ import QuillEditorSkeleton from "@/components/skeleton/diary/write/QuillEditorSk
 
 interface Props {
   content: string;
-  onChange: (value: string) => void;
+  onChange: (value: string, length: number) => void;
 }
 
 // react-quill은 서버 사이드 렌더링을 지원하지 않기 때문에
@@ -31,7 +31,13 @@ const QuillEditor = ({ content, onChange }: Props) => {
     <ReactQuill
       theme="snow"
       placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
-      onChange={(value) => onChange(value)}
+      onChange={(value, delta, source, editor) => {
+        if (editor.getLength() - 1 >= 500) {
+          onChange(content, 500);
+        } else {
+          onChange(value, editor.getLength() - 1);
+        }
+      }}
       value={content}
       modules={{
         toolbar: false,
