@@ -17,6 +17,7 @@ interface EditorState {
   imageFiles: File[];
   mainImageIndex: number;
   content: string;
+  contentLength: number;
   hashtags: string[];
   tips: string[];
 }
@@ -48,6 +49,7 @@ const initialState: EditorState = {
   imageFiles: [],
   mainImageIndex: 0,
   content: "",
+  contentLength: 0,
   hashtags: [],
   tips: [""],
 };
