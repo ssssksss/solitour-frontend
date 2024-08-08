@@ -1,0 +1,36 @@
+.ql-container {
+  border-radius: 1.6rem;
+}
+
+/* 최소 크기 지정 및 padding 제거 */
+.ql-editor {
+  border: 1px solid gainsboro;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  min-height: 17.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.ql-editor:hover {
+  border-color: rgb(0, 180, 136);
+}
+
+.ql-editor:focus {
+  border-color: rgb(0, 180, 136);
+}
+
+.ql-editor.ql-blank::before {
+  left: 1.5rem;
+  color: darkgray;
+  font-style: normal;
+  font-weight: 550;
+  font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ql-editor.ql-blank::before {
+    --tw-text-opacity: 1;
+    color: rgb(148 163 184 / var(--tw-text-opacity)) /* #94a3b8 */;
+  }
+}

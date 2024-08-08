@@ -8,6 +8,7 @@ import PlaceModalContainer from "@/containers/informations/write/PlaceModalConta
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
+import QuillEditor from "./QuillEditor";
 
 interface Props {
   pathname: string;
@@ -119,14 +120,9 @@ const InformationEditor = ({
           </div>
         ))}
       </div>
-      <textarea
-        className="h-[17.5rem] resize-none rounded-3xl border-[0.0625rem] border-gray3 bg-transparent p-6 text-sm font-medium outline-none hover:border-main focus:border-main"
-        placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
-        name="content"
-        value={editorStore.content}
-        onChange={(e) => editorStore.setEditor({ content: e.target.value })}
-        maxLength={500}
-        required={true}
+      <QuillEditor
+        content={editorStore.content}
+        onChange={(value) => editorStore.setEditor({ content: value })}
       />
       <p className="pt-3 text-end text-sm font-medium text-gray1">
         {editorStore.content.length}/500
