@@ -7,16 +7,23 @@ type MyProps = {
   titles: string[];
   description: string;
   children: React.ReactNode;
+  category: "정보" | "모임";
 };
 
-const ListTemplateContainer = ({ titles, description, children }: MyProps) => {
+const ListTemplateContainer = ({ titles, description, children, category }: MyProps) => {
   const scrollHook = useDragScroll();
+  const path = {
+      "정보":  "/informations/list/parent-category/1?page=1",  
+      "모임":  "/gathering"  
+  };
+  
 
   return (
     <ListTemplate
       titles={titles}
       description={description}
       scrollHook={scrollHook}
+      path={path[category]}
     >
       {children}
     </ListTemplate>

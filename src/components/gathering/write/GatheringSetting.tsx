@@ -1,7 +1,7 @@
 import { Modal } from "@/components/common/modal/Modal";
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import { useFormContext } from "react-hook-form";
-import GatheringSettingModal from "../modal/GatheringSettingModal";
+import GatheringSettingModal from "../../../components/gathering/modal/GatheringSettingModal";
 
 interface IGatheringSettingProps {
   isModal: boolean;

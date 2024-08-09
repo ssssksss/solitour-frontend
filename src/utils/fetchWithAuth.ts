@@ -7,11 +7,11 @@ export async function fetchWithAuth(url: string, options = {}, retries = 1) {
         method: "POST",
       });
 
-      if (data.status == 401) {
+      if (data.status !== 200) {
         return Promise.reject({
-          status: 401,
+          status: data.status,
           message: "실패",
-        });
+        }); 
       }
       // TODO: 추가적인 에러처리 필요
       return await fetchWithAuth(url, options, 0); // 요청 재시도

@@ -14,9 +14,76 @@ export interface GatheringResponseDto {
   qualification: string;
   likes: number;
   views: number;
+  isLike: boolean;
 }
 
 export interface TopGatheringResponseDto {
   id: number;
   title: string;
 }
+
+
+// types.ts
+
+type UserPostingResponse = {
+  id: number;
+  name: string;
+};
+
+export type PlaceResponse = {
+  searchId: string;
+  name: string;
+  xaxis: number;
+  yaxis: number;
+  address: string;
+};
+
+type ZoneCategoryResponse = {
+  parentZoneCategory: { parentZoneCategory: null | ZoneCategoryResponse; name: string } | null;
+  name: string;
+};
+
+export type GatheringRecommend = {
+  gatheringId: number;
+  title: string;
+  zoneCategoryParentName: string;
+  zoneCategoryChildName: string;
+  viewCount: number;
+  isBookMark: boolean;
+  likeCount: number;
+  gatheringCategoryName: string;
+  userName: string;
+  scheduleStartDate: string;
+  scheduleEndDate: string;
+  deadline: string;
+  allowedSex: string;
+  startAge: number;
+  endAge: number;
+  personCount: number;
+  nowPersonCount: number;
+};
+
+// 모임 상세 페이지 타입
+
+export interface GatheringDetailResponseDto {
+  title: string;
+  content: string;
+  personCount: number;
+  viewCount: number;
+  createdAt: string;
+  scheduleStartDate: string;
+  scheduleEndDate: string;
+  deadline: string;
+  isFinish: boolean;
+  allowedSex: string;
+  startAge: number;
+  endAge: number;
+  tagResponses: {name: string}[];
+  userPostingResponse: UserPostingResponse;
+  placeResponse: PlaceResponse;
+  zoneCategoryResponse: ZoneCategoryResponse;
+  likeCount: number;
+  nowPersonCount: number;
+  gatheringApplicantsResponses: any[];
+  gatheringRecommend: GatheringRecommend[];
+};

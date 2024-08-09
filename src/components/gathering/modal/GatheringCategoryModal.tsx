@@ -22,6 +22,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
     formContext.setValue("mainCategoryId", mainCategoryId);
     formContext.setValue("subCategoryId", subCategoryId);
     formContext.watch();
+    formContext.trigger();
     props.closeModal();
   };
 

@@ -1,20 +1,20 @@
 import { Modal } from "@/components/common/modal/Modal";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import GatheringCategoryModal from "../modal/GatheringCategoryModal";
+import GatheringCategoryModal from "../../../components/gathering/modal/GatheringCategoryModal";
 
 interface ICategory {
   id: number;
   name: string;
   childrenCategories: ICategory[];
 }
-interface IGatheringCategoryProps {
+interface IGatheringCategoryContainerProps {
   isModal: boolean;
   closeModal: () => void;
   openModal: () => void;
 }
 
-const GatheringCategory = (props: IGatheringCategoryProps) => {
+const GatheringCategoryContainer = (props: IGatheringCategoryContainerProps) => {
   const formContext = useFormContext();
   const [categoryList, setCategoryList] = useState<ICategory[]>([]);
 
@@ -98,4 +98,4 @@ const GatheringCategory = (props: IGatheringCategoryProps) => {
   );
 };
 
-export default GatheringCategory;
+export default GatheringCategoryContainer;

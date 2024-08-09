@@ -1,4 +1,3 @@
-import GatheringItem from "../common/GatheringItem";
 import InformationItem from "../common/InformationItem";
 type MyBookmarkListProps = {
   data: (
@@ -46,22 +45,23 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
           );
         } else {
           return (
-            <GatheringItem
-              key={index}
-              id={index + 1}
-              category={post.category}
-              bookmark={post.bookmark}
-              title={post.title}
-              username={post.username}
-              date={post.date}
-              location={post.location}
-              time={post.time}
-              current={post.current}
-              total={post.total}
-              qualification={post.qualification}
-              likes={post.likes}
-              views={post.views}
-            />
+            // <GatheringItem
+            //   key={index}
+            //   id={index + 1}
+            //   category={post.category}
+            //   bookmark={post.bookmark}
+            //   title={post.title}
+            //   username={post.username}
+            //   date={post.date}
+            //   location={post.location}
+            //   time={post.time}
+            //   current={post.current}
+            //   total={post.total}
+            //   qualification={post.qualification}
+            //   likes={post.likes}
+            //   views={post.views}
+            // />
+            <div> </div>
           );
         }
       })}

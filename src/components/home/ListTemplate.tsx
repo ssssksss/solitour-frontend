@@ -6,9 +6,10 @@ interface Props {
   description: string;
   scrollHook: useDragScrollType;
   children: React.ReactNode;
+  path: string;
 }
 
-const ListTemplate = ({ titles, description, scrollHook, children }: Props) => {
+const ListTemplate = ({ titles, description, scrollHook, children, path }: Props) => {
   return (
     <div className="flex w-full flex-col">
       <div className="flex flex-row items-center justify-between max-[744px]:justify-center">
@@ -22,7 +23,7 @@ const ListTemplate = ({ titles, description, scrollHook, children }: Props) => {
             </h2>
             <Link
               className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex dark:border-slate-400 dark:bg-slate-800 dark:text-slate-400"
-              href="/informations/list/parent-category/1?page=1"
+              href={path}
             >
               전체보기
             </Link>
@@ -33,7 +34,7 @@ const ListTemplate = ({ titles, description, scrollHook, children }: Props) => {
         </div>
         <Link
           className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden dark:border-slate-400 dark:bg-slate-800 dark:text-slate-400"
-          href="/informations/list/parent-category/1?page=1"
+          href={path}
         >
           전체보기
         </Link>
