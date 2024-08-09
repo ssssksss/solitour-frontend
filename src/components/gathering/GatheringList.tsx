@@ -6,7 +6,6 @@ import { VscSettings } from "react-icons/vsc";
 import GatheringItem from "../common/GatheringItem";
 import GatheringFilterModal from "./GatheringFilterModal";
 import GatheringSubCategoryList from "./GatheringSubCategoryList";
-import PaginationContainer from "@/containers/common/PaginationContainer";
 
 interface IGatheringList {
   isModal: boolean;
@@ -15,35 +14,7 @@ interface IGatheringList {
 }
 
 const GatheringList = (props: IGatheringList) => {
-  const data: {
-    id: number;
-    category: string;
-    bookmark: boolean;
-    title: string;
-    username: string;
-    date: Date | string;
-    location: string;
-    time: string;
-    current: number;
-    total: number;
-    qualification: string;
-    likes: number;
-    views: number;
-  } = {
-    id: 1,
-    category: "활동",
-    bookmark: true,
-    title: "동해 서핑 투게더",
-    username: "waver",
-    date: "2024.07.09(화) ~ 2024.07.10(수)",
-    location: "제주특별자치도, 제주시",
-    time: "08:00",
-    current: 1,
-    total: 6,
-    qualification: "(20 ~ 50세, 성별 무관)",
-    likes: 52,
-    views: 102,
-  };
+
   return (
     <div className="flex w-[60rem] flex-col pt-[5.5rem] max-[1024px]:w-[90%]">
       <div className="flex flex-row items-center justify-between max-[768px]:flex-col-reverse max-[768px]:items-start max-[768px]:space-y-6 max-[768px]:space-y-reverse">
@@ -76,13 +47,12 @@ const GatheringList = (props: IGatheringList) => {
           </div>
         </div>
       </div>
-      <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-7">
-        {[1, 2, 3, 4, 5, 6].map((_, index) => (
+      <div className="mt-6 mb-6 flex flex-wrap justify-center gap-x-5 gap-y-7">
+        {/* {[1, 2, 3, 4, 5, 6].map((_, index) => (
           <GatheringItem
             key={index}
-            id={index + 1}
             category={data.category}
-            bookmark={data.bookmark}
+            isBookmark={data.isBookmark}
             title={data.title}
             username={data.username}
             date={data.date}
@@ -93,8 +63,9 @@ const GatheringList = (props: IGatheringList) => {
             qualification={data.qualification}
             likes={data.likes}
             views={data.views}
+            isLike={data.isLike}
           />
-        ))}
+        ))} */}
       </div>
 
       {/* Notice: 빌드 오류 문제로 주석 처리해 두었습니다. 현재 컴포넌트 구조가
