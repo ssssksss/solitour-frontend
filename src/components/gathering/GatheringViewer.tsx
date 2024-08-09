@@ -68,7 +68,7 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
         <div className="flex w-full items-end justify-end text-xs font-medium text-gray2">
           <div className="flex flex-row items-center space-x-3">
             <div className="flex flex-row items-center gap-2 text-gray2 mb-[.25rem]">
-              <GatheringLike likes={data.likeCount} isLike={true} id={postId} />
+              <GatheringLike likes={data.likeCount} isLike={true} gatheringId={postId} />
             <div className="flex items-center  gap-1 text-sm text-gray2">
                 <Image
                   src="/eyes-icon.svg"
