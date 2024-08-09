@@ -1,46 +1,28 @@
+import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { format } from "date-fns";
+import { ko } from 'date-fns/locale';
 import Image from "next/image";
 import Link from "next/link";
-import { FaEye, FaRegHeart } from "react-icons/fa";
+import GatheringLike from "../../containers/gathering/GatheringLikeContainer";
+import GatheringKakaoMap from "./GatheringKakaoMap";
 
-const GatheringViewer = () => {
-  type dataType = {
-    id: number;
-    category: string;
-    bookmark: boolean;
-    title: string;
-    username: string;
-    date: Date;
-    location: string;
-    time: string;
-    image: string;
-    current: number;
-    total: number;
-    qualification: string;
-    likes: number;
-    views: number;
-    createdAt: string;
-  };
+interface IGatheringViewer {
+  data: GatheringDetailResponseDto
+  postId: number;
+}
 
-  const data: dataType = {
-    id: 4,
-    category: "활동",
-    bookmark: true,
-    title: "동해 서핑 투게더",
-    username: "waver",
-    date: new Date(),
-    location: "강원, 동해시",
-    time: "08:00",
-    image: "/PostImage2.svg",
-    current: 1,
-    total: 6,
-    qualification: "(30대, 성별 상관없음)",
-    likes: 52,
-    views: 102,
-    createdAt: "2024.06.07",
-  };
+const SEX: { [key: string]: string } = {
+  "ALL": "성별무관",
+  "MALE": "남성분만",
+  "FEMALE": "여성분만",
+};
+const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
 
+  
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
+      {/* 제일 상단 */}
       <div className="flex gap-[.25rem] text-[.625rem] text-gray2">
         <div className="text-gray1">
           <Link href={"/"}>
@@ -59,36 +41,50 @@ const GatheringViewer = () => {
         <div> {">"} </div>
         <div className={"font-bold text-gray1"}> 모임 상세 </div>
       </div>
-      <h1 className={"pt-[2.25rem] text-3xl font-semibold"}> {data.title} </h1>
-      <div className="flex w-full justify-between pt-[1rem]">
+      {/* 제목 부분 */}
+      <article className="h-[11.375rem] w-full pt-[2.375rem] pb-[2.25rem] px-[.25rem]">
+      {/* 제목, 신청 버튼 */}
+        <div className="w-full flex justify-between items-end ">
+        <h1 className={"text-3xl font-semibold h-[3.125rem]"}> {data.title} </h1>
+        <button className={"bg-[#EE4C4A] text-white w-[7.5rem] h-[3.125rem] rounded-[2.125rem]"}> 신청 거부 </button>
+        </div>
+        {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
+      <div className="flex w-full justify-between mt-[0.375rem] h-[3.25rem]">
         <div className={"flex items-center gap-x-3"}>
           <Image
             src={"/user_sex_man_default_image.svg"}
             alt={"sex-default-icon-image"}
-            width={54}
-            height={54}
+            width={52}
+            height={52}
+            className="bg-[#F2FAF7] rounded-[50%]"
           />
-          <div className="flex flex-col gap-y-[.125rem]">
-            <div className="text-xs font-medium text-black">
-              {data.username}
+          <div className="flex flex-col gap-y-[0.125rem]">
+            <div className="text-xs font-semibold text-black">
+              {data.userPostingResponse.name}
             </div>
-            <div className="text-xs text-gray1"> {data.createdAt} </div>
+            <div className="text-xs text-gray1 w-[4rem]"> {data.createdAt.substring(0,10)} </div>
           </div>
         </div>
         <div className="flex w-full items-end justify-end text-xs font-medium text-gray2">
           <div className="flex flex-row items-center space-x-3">
-            <div className="flex flex-row items-center gap-1 text-gray2">
-              <FaRegHeart size={"0.8rem"} />
-              <p className="text-xs">{data.likes}</p>
+            <div className="flex flex-row items-center gap-2 text-gray2 mb-[.25rem]">
+              <GatheringLike likes={data.likeCount} isLike={true} id={postId} />
+            <div className="flex items-center  gap-1 text-sm text-gray2">
+                <Image
+                  src="/eyes-icon.svg"
+                  alt="eyes-icon"
+                  width={16}
+                    height={16}
+                  />
+              <p>{convertNumberToShortForm(data.viewCount)}</p>
             </div>
-            <div className="flex flex-row items-center gap-1 text-gray2">
-              <FaEye />
-              <p className="text-xs">{data.views}</p>
-            </div>
+                  </div>
           </div>
         </div>
       </div>
-      <article className="mt-[1.875rem] grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-xs sm:grid-cols-2">
+      </article>
+      {/* 제한 부분 */}
+      <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm sm:grid-cols-[320px_auto] min-[800px]:grid-cols-2">
         <div className="flex gap-x-3">
           <Image
             src={"/calendar-icon.svg"}
@@ -96,7 +92,7 @@ const GatheringViewer = () => {
             width={10}
             height={10}
           />
-          <div> 06.08(토)- 06.09(일) 중 미정 </div>
+          <div> {format(new Date(data.scheduleStartDate),"yyyy-MM-dd HH:mm (EE) ~ ",{locale: ko})} {data.scheduleEndDate && format(new Date(data.scheduleEndDate),"yyyy-MM-dd HH:mm (EE)",{locale: ko})} </div>
         </div>
         <div className="flex gap-x-3">
           <Image
@@ -105,7 +101,7 @@ const GatheringViewer = () => {
             width={10}
             height={10}
           />
-          <div> 강원, 동해시 </div>
+          <div> {data.zoneCategoryResponse.parentZoneCategory?.name} {","} {data.zoneCategoryResponse.name} </div>
         </div>
         <div className="flex gap-x-3">
           <Image
@@ -115,9 +111,9 @@ const GatheringViewer = () => {
             height={10}
           />
           <div>
-            {" "}
-            <span className="text-main"> 3 </span> / 6{" "}
-            <span className="text-gray2"> (30대, 성별 상관없음) </span>{" "}
+            
+            <span className="text-main"> {data.nowPersonCount} </span> / {data.personCount}
+            <span className="text-gray2"> {"(" + (new Date().getFullYear() - data.startAge) + "세 ~ " + (new Date().getFullYear() - data.endAge) + "세 ," + SEX[data.allowedSex] + ")"} </span>
           </div>
         </div>
         <div className="flex gap-x-3">
@@ -127,31 +123,38 @@ const GatheringViewer = () => {
             width={10}
             height={10}
           />
-          <div> 08:00 </div>
+          <div> {format(new Date(data.scheduleStartDate),"HH:mm")} </div>
         </div>
       </article>
-      <div className="pt-[2rem]">
-        안녕하세요! 서핑을 사랑하는 1인입니다 :{")"}
-        <br /> 이제 진짜 여름이네요! 여름에는 서핑하러 여행을 많이 다니게 되는
-        것 같아요. 저는 6월8일~9일 여행이라 날짜는 모여지면 정하려합니다.
-        <br /> 우리 같이 동해바다에서 여행도 하고 서핑해요!
-        <br /> <br /> 이런 사람과 함께하고싶어요!
-        <br /> *30대 서핑에 관심있는 누구나
-        <br /> *열정 있는 누구나
-        <br /> *개인 장비 필요
-        <br />
+      {/* 내용 부분 */}
+      <div className={"my-[1rem] text-gray1 flex gap-1"}>
+          <Image
+            src={"/gathering/green_pin.svg"}
+            alt={"clock-icon-image"}
+            width={16}
+            height={16}
+          />
+        모집 마감일: {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", { locale: ko })} </div>
+      <div className="pt-[2rem] whitespace-pre-wrap mb-[1.25rem]">
+        {data.content}
       </div>
-      <div className={"flex gap-x-[.25rem] pt-[1.125rem] text-sm"}>
-        {["#동해바다", "#서핑"].map((i) => (
+            {
+        data.tagResponses?.length > 0 &&
+        <div className={"flex gap-x-[.25rem] text-sm mb-[2.625rem]"}>
+        {data.tagResponses?.map((i) => (
           <div
-            key={i}
-            className="max-w-max rounded-xl px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main"
+          key={i.name}
+          className="max-w-max rounded-xl px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main"
           >
-            {i}
+            {"#"}{i.name}
           </div>
         ))}
       </div>
-      <div className={"flex flex-col"}></div>
+      }
+      {/* 지도 부분 */}
+      <div className="h-[19.875rem] w-full">
+        <GatheringKakaoMap {...data.placeResponse} />
+      </div>
     </div>
   );
 };
