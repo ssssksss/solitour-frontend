@@ -70,7 +70,7 @@ const GatheringEditorContainer = () => {
       }
 
       const data = await response.json();
-      router.push(`/gathering/${data.data.id}`)
+      router.replace(`/gathering/${data.data.id}`)
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
