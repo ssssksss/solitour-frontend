@@ -78,7 +78,7 @@ export interface GatheringDetailResponseDto {
   allowedSex: string;
   startAge: number;
   endAge: number;
-  tagResponses: string[];
+  tagResponses: {name: string}[];
   userPostingResponse: UserPostingResponse;
   placeResponse: PlaceResponse;
   zoneCategoryResponse: ZoneCategoryResponse;
