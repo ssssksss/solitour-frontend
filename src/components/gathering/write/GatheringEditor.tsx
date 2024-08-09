@@ -1,13 +1,13 @@
+import GatheringSetting from "@/components/gathering/write/GatheringSetting";
+import GatheringCategoryContainer from "@/containers/gathering/write/GatheringCategoryContainer";
+import GatheringContentContainer from "@/containers/gathering/write/GatheringContentContainer";
+import GatheringPlaceContainer from "@/containers/gathering/write/GatheringPlaceContainer";
 import Image from "next/image";
 import Link from "next/link";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useFormContext } from "react-hook-form";
-import GatheringCategory from "./GatheringCategory";
-import GatheringContent from "./GatheringContent";
-import GatheringPlace from "./GatheringPlace";
 import GatheringSchedule from "./GatheringSchedule";
-import GatheringSetting from "./GatheringSetting";
 
 interface IGatheringEditorProps {
   categoryModal: {
@@ -64,11 +64,11 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         </p>
       </div>
       <section className={"flex flex-col gap-[2rem] pt-[3rem]"}>
-        <GatheringCategory {...props.categoryModal} />
+        <GatheringCategoryContainer {...props.categoryModal} />
         <GatheringSetting {...props.settingModal} />
         <GatheringSchedule {...props.scheduleModal} />
-        <GatheringPlace {...props.placeModal} />
-        <GatheringContent />
+        <GatheringPlaceContainer {...props.placeModal} />
+        <GatheringContentContainer />
         <div className={"flex w-full justify-end"}>
           <button
             className={
