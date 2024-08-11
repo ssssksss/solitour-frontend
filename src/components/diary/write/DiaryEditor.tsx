@@ -3,23 +3,29 @@ import QuillEditor from "./QuillEditor";
 import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 
 interface Props {
-  content: string;
+  dateRangeModal: boolean;
   placeModal: boolean;
   currentDay: number;
-  onChange: (value: string) => void;
+  content: string;
+  showDateRangeModal: () => void;
+  closeDateRangeModal: () => void;
   showPlaceModal: () => void;
   closePlaceModal: () => void;
   setCurrentDay: (day: number) => void;
+  onChange: (value: string) => void;
 }
 
 const DiaryEditor = ({
-  content,
+  dateRangeModal,
   placeModal,
   currentDay,
-  onChange,
+  content,
+  showDateRangeModal,
+  closeDateRangeModal,
   showPlaceModal,
   closePlaceModal,
   setCurrentDay,
+  onChange,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
