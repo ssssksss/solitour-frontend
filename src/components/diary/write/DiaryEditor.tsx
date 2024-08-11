@@ -1,14 +1,25 @@
 import Image from "next/image";
 import QuillEditor from "./QuillEditor";
+import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 
 interface Props {
   content: string;
+  placeModal: boolean;
   onChange: (value: string) => void;
+  showPlaceModal: () => void;
+  closePlaceModal: () => void;
 }
 
-const DiaryEditor = ({ content, onChange }: Props) => {
+const DiaryEditor = ({
+  content,
+  placeModal,
+  onChange,
+  showPlaceModal,
+  closePlaceModal,
+}: Props) => {
   return (
     <div className="flex w-full flex-col">
+      {placeModal && <PlaceModalContainer closeModal={closePlaceModal} />}
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
         일기 등록하기
       </h1>
@@ -52,15 +63,40 @@ const DiaryEditor = ({ content, onChange }: Props) => {
           <h2 className="text-lg font-semibold text-black dark:text-slate-200">
             장소<span className="text-2xl text-main">*</span>
           </h2>
-          <input
-            className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
-            type="text"
-            name="placeName"
-            placeholder="장소명을 입력하세요."
-          />
+          <button
+            className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 outline-none hover:border-main"
+            type="button"
+            onClick={() => showPlaceModal()}
+          >
+            {"장소명을 입력하세요."}
+          </button>
         </div>
       </div>
-      <div className="mt-12 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
+      <div className="mt-14 flex w-full flex-row items-center gap-14 overflow-x-auto">
+        <Image
+          className="hidden dark:block"
+          src="/day-text-dark-mode.svg"
+          alt="day-text"
+          width={41}
+          height={25}
+        />
+        <Image
+          className="dark:hidden"
+          src="/day-text.svg"
+          alt="day-text"
+          width={41}
+          height={25}
+        />
+        {[1, 2, 3, 4, 5, 6, 7].map((value) => (
+          <p
+            key={value}
+            className={`${value === 1 ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
+          >
+            {value}
+          </p>
+        ))}
+      </div>
+      <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
         <h2 className="text-lg font-semibold text-black dark:text-slate-200">
           하루 기분은 어땠나요?
         </h2>
@@ -86,7 +122,6 @@ const DiaryEditor = ({ content, onChange }: Props) => {
         </div>
       </div>
       <QuillEditor content={content} onChange={onChange} />
-      <p className="mt-3 self-end text-sm">{content.length}/1000</p>
       <button className="mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full bg-main text-[0.9375rem] text-white hover:scale-105">
         일기 등록하기
       </button>
