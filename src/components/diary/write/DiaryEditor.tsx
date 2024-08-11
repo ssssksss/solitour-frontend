@@ -5,17 +5,21 @@ import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 interface Props {
   content: string;
   placeModal: boolean;
+  currentDay: number;
   onChange: (value: string) => void;
   showPlaceModal: () => void;
   closePlaceModal: () => void;
+  setCurrentDay: (day: number) => void;
 }
 
 const DiaryEditor = ({
   content,
   placeModal,
+  currentDay,
   onChange,
   showPlaceModal,
   closePlaceModal,
+  setCurrentDay,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
@@ -88,12 +92,13 @@ const DiaryEditor = ({
           height={25}
         />
         {[1, 2, 3, 4, 5, 6, 7].map((value) => (
-          <p
+          <button
             key={value}
-            className={`${value === 1 ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
+            className={`${value === currentDay ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
+            onClick={() => setCurrentDay(value)}
           >
             {value}
-          </p>
+          </button>
         ))}
       </div>
       <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
