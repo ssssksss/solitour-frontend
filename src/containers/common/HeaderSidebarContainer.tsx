@@ -2,8 +2,9 @@
 
 import HeaderSidebar from "@/components/common/HeaderSidebar";
 import useAuthStore from "@/store/authStore";
+import { debounce } from "@/utils/debounc";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   onClose: () => void;
@@ -22,6 +23,22 @@ const HeaderSidebarContainer = ({ onClose }: Props) => {
     router.push("/");
     router.refresh();
   };
+
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      if (window.innerWidth > 745) {
+        onClose();
+      }
+    }, 100);
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <HeaderSidebar
