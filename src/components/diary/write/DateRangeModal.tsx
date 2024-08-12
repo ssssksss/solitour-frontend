@@ -1,7 +1,7 @@
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { MdClose } from "react-icons/md";
-import { DateRange, RangeKeyDict } from "react-date-range";
+import { DateRange } from "react-date-range";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {

@@ -1,6 +1,7 @@
 "use client";
 
 import DateRangeModal from "@/components/diary/write/DateRangeModal";
+import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { useState } from "react";
 
 interface Props {
@@ -8,12 +9,24 @@ interface Props {
 }
 
 const DateRangeModalContainer = ({ closeModal }: Props) => {
+  const diaryEditorStore = useDiaryEditorStore();
   const [state, setState] = useState<
     { startDate: Date | null; endDate: Date | null; key: string }[]
   >([{ startDate: new Date(), endDate: null, key: "selection" }]);
 
+  const onChangeDateRange = () => {
+    diaryEditorStore.setDiaryEditor({
+      startDate: state[0].startDate,
+      endDate: state[0].endDate,
+    });
+    closeModal();
+  };
+
   const onResetDateRange = () => {
-    alert(`${state[0].startDate}, ${state[0].endDate}`);
+    diaryEditorStore.setDiaryEditor({
+      startDate: null,
+      endDate: null,
+    });
     closeModal();
   };
 

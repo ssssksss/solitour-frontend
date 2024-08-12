@@ -4,6 +4,8 @@ import { devtools } from "zustand/middleware";
 // 1. 상태 인터페이스 정의
 interface DiaryEditorState {
   title: string;
+  startDate: Date | null;
+  endDate: Date | null;
   address: string;
   province: string;
   city: string;
@@ -19,6 +21,8 @@ interface DiaryEditorActions {
 // 3. 초기 상태 정의
 const initialState: DiaryEditorState = {
   title: "",
+  startDate: null,
+  endDate: null,
   address: "",
   province: "",
   city: "",

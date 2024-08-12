@@ -1,13 +1,15 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
+import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { useState } from "react";
 
 const DiaryEditorContainer = () => {
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [placeModal, setPlaceModal] = useState<boolean>(false);
-  const [currentDay, setCurrentDay] = useState<number>(1);
-  const [content, setContent] = useState<string>("");
+  const diaryEditorStore = useDiaryEditorStore();
+  const [currentDay, setCurrentDay] = useState<number>(1); // TODO
+  const [content, setContent] = useState<string>(""); // TODO
 
   const onChange = (value: string) => {
     setContent(value);
@@ -15,6 +17,7 @@ const DiaryEditorContainer = () => {
 
   return (
     <DiaryEditor
+      diaryEditorStore={diaryEditorStore}
       dateRangeModal={dateRangeModal}
       placeModal={placeModal}
       currentDay={currentDay}

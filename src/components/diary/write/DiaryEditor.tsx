@@ -2,8 +2,10 @@ import Image from "next/image";
 import QuillEditor from "./QuillEditor";
 import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
+import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
 
 interface Props {
+  diaryEditorStore: useDiaryEditorStoreType;
   dateRangeModal: boolean;
   placeModal: boolean;
   currentDay: number;
@@ -17,6 +19,7 @@ interface Props {
 }
 
 const DiaryEditor = ({
+  diaryEditorStore,
   dateRangeModal,
   placeModal,
   currentDay,
@@ -59,31 +62,39 @@ const DiaryEditor = ({
           </h2>
           <div className="flex flex-row items-center gap-[1.125rem] max-[585px]:flex-col">
             <button
-              className="flex h-[3.3125rem] w-[11.375rem] flex-grow items-center gap-2 rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
+              className="h-[3.3125rem] w-[11.375rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
               type="button"
               onClick={() => showDateRangeModal()}
             >
-              {"YYYY.MM.DD"}
-              <Image
-                src={"/calendar-icon.svg"}
-                alt={"calendar-icon"}
-                width={16}
-                height={16}
-              />
+              {diaryEditorStore.startDate?.toLocaleDateString("ko-KR") ?? (
+                <div className="flex flex-row items-center gap-2">
+                  {"YYYY.MM.DD"}
+                  <Image
+                    src={"/calendar-icon.svg"}
+                    alt={"calendar-icon"}
+                    width={16}
+                    height={16}
+                  />
+                </div>
+              )}
             </button>
             <p className="text-lg font-semibold text-black">~</p>
             <button
-              className="flex h-[3.3125rem] w-[11.375rem] flex-grow flex-row items-center gap-2 rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
+              className="h-[3.3125rem] w-[11.375rem] rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
               type="button"
               onClick={() => showDateRangeModal()}
             >
-              {"YYYY.MM.DD"}
-              <Image
-                src={"/calendar-icon.svg"}
-                alt={"calendar-icon"}
-                width={16}
-                height={16}
-              />
+              {diaryEditorStore.endDate?.toLocaleDateString("ko-KR") ?? (
+                <div className="flex flex-row items-center gap-2">
+                  {"YYYY.MM.DD"}
+                  <Image
+                    src={"/calendar-icon.svg"}
+                    alt={"calendar-icon"}
+                    width={16}
+                    height={16}
+                  />
+                </div>
+              )}
             </button>
           </div>
         </div>
