@@ -10,22 +10,23 @@ interface Props {
 
 const DateRangeModalContainer = ({ closeModal }: Props) => {
   const diaryEditorStore = useDiaryEditorStore();
-  const [state, setState] = useState<
-    { startDate: Date | null; endDate: Date | null; key: string }[]
-  >([{ startDate: new Date(), endDate: null, key: "selection" }]);
+  const [state, setState] = useState([
+    { startDate: new Date(), endDate: new Date(), key: "selection" },
+  ]);
 
   const onChangeDateRange = () => {
+    const days = Math.floor(
+      (state[0].endDate.getTime() - state[0].startDate.getTime()) /
+        (1000 * 60 * 60 * 24) +
+        1,
+    );
+
     diaryEditorStore.setDiaryEditor({
       startDate: state[0].startDate,
       endDate: state[0].endDate,
-    });
-    closeModal();
-  };
-
-  const onResetDateRange = () => {
-    diaryEditorStore.setDiaryEditor({
-      startDate: null,
-      endDate: null,
+      days: days,
+      currentDay: 1,
+      contents: Array<string>(days).fill(""),
     });
     closeModal();
   };
@@ -34,7 +35,8 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
     <DateRangeModal
       state={state}
       setState={setState}
-      onResetDateRange={onResetDateRange}
+      closeModal={closeModal}
+      onChangeDateRange={onChangeDateRange}
     />
   );
 };

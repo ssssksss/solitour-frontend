@@ -8,8 +8,6 @@ interface Props {
   diaryEditorStore: useDiaryEditorStoreType;
   dateRangeModal: boolean;
   placeModal: boolean;
-  currentDay: number;
-  content: string;
   showDateRangeModal: () => void;
   closeDateRangeModal: () => void;
   showPlaceModal: () => void;
@@ -22,8 +20,6 @@ const DiaryEditor = ({
   diaryEditorStore,
   dateRangeModal,
   placeModal,
-  currentDay,
-  content,
   showDateRangeModal,
   closeDateRangeModal,
   showPlaceModal,
@@ -62,7 +58,7 @@ const DiaryEditor = ({
           </h2>
           <div className="flex flex-row items-center gap-[1.125rem] max-[585px]:flex-col">
             <button
-              className="h-[3.3125rem] w-[11.375rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
+              className={`${diaryEditorStore.startDate ? "text-black" : "text-gray2"} h-[3.3125rem] w-[11.375rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm hover:border-main`}
               type="button"
               onClick={() => showDateRangeModal()}
             >
@@ -80,7 +76,7 @@ const DiaryEditor = ({
             </button>
             <p className="text-lg font-semibold text-black">~</p>
             <button
-              className="h-[3.3125rem] w-[11.375rem] rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
+              className={`${diaryEditorStore.endDate ? "text-black" : "text-gray2"} h-[3.3125rem] w-[11.375rem] rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm hover:border-main`}
               type="button"
               onClick={() => showDateRangeModal()}
             >
@@ -111,7 +107,7 @@ const DiaryEditor = ({
           </button>
         </div>
       </div>
-      <div className="mt-14 flex w-full flex-row items-center gap-14 overflow-x-auto">
+      <div className="mt-14 flex h-6 w-full flex-row items-center gap-14 overflow-x-auto">
         <Image
           className="hidden dark:block"
           src="/day-text-dark-mode.svg"
@@ -126,10 +122,13 @@ const DiaryEditor = ({
           width={41}
           height={25}
         />
-        {[1, 2, 3, 4, 5, 6, 7].map((value) => (
+        {Array.from(
+          { length: diaryEditorStore.days },
+          (_, index) => index + 1,
+        ).map((value) => (
           <button
             key={value}
-            className={`${value === currentDay ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
+            className={`${value === diaryEditorStore.currentDay ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
             onClick={() => setCurrentDay(value)}
           >
             {value}
@@ -161,7 +160,12 @@ const DiaryEditor = ({
           )}
         </div>
       </div>
-      <QuillEditor content={content} onChange={onChange} />
+      {diaryEditorStore.contents && (
+        <QuillEditor
+          content={diaryEditorStore.contents[diaryEditorStore.currentDay]}
+          onChange={onChange}
+        />
+      )}
       <button className="mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full bg-main text-[0.9375rem] text-white hover:scale-105">
         일기 등록하기
       </button>

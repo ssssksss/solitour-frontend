@@ -6,10 +6,12 @@ interface DiaryEditorState {
   title: string;
   startDate: Date | null;
   endDate: Date | null;
+  days: number;
+  currentDay: number;
   address: string;
   province: string;
   city: string;
-  content: string[] | null;
+  contents: string[] | null;
 }
 
 // 2. 액션 인터페이스 정의
@@ -23,10 +25,12 @@ const initialState: DiaryEditorState = {
   title: "",
   startDate: null,
   endDate: null,
+  days: 0,
+  currentDay: 1,
   address: "",
   province: "",
   city: "",
-  content: null,
+  contents: null,
 };
 
 // 4. 상태 및 액션 생성
