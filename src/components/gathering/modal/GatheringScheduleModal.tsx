@@ -26,7 +26,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
     hour: formContext.getValues("scheduleEndDate") ? +format(new Date(formContext.getValues("scheduleEndDate")),"HH") : 18,
     minute: formContext.getValues("scheduleEndDate") ? +format(new Date(formContext.getValues("scheduleEndDate")),"mm") : 0,
   });
-
+  
   const submitHandler = () => {
     const _dateTime = (date: string, hour: string, minute: string) => {
       return date + " " + hour + ":" + minute;
@@ -128,7 +128,17 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
               }
               value={startDateTime.hour}
             >
-              {Array.from([...Array(24).fill(0)], (i, index) => index).filter(j=>new Date().getHours() <= j && j <= endDateTime.hour).map(
+              {Array.from([...Array(24).fill(0)], (i, index) => index).filter(j => {
+                if (format(new Date(calendarDate[0].startDate), "yyyy-MM-dd") == format(new Date(), "yyyy-MM-dd")) {
+                  if (format(new Date(calendarDate[0].startDate), "yyyy-MM-dd") == format(calendarDate[0].endDate, "yyyy-MM-dd")) {
+                    return new Date().getHours() <= j && j <= endDateTime.hour;  
+                  }
+                  return new Date().getHours() <= j;  
+                } else if(format(new Date(calendarDate[0].startDate), "yyyy-MM-dd") == format(calendarDate[0].endDate, "yyyy-MM-dd")) {
+                  return j <= endDateTime.hour;
+                }
+                return true;
+              }).map(
                 (i) => (
                   <option value={i} key={i}>
                     {i}
@@ -182,7 +192,12 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
               }
               value={endDateTime.hour}
             >
-              {Array.from([...Array(24).fill(0)], (i, index) => index).map(
+              {Array.from([...Array(24).fill(0)], (i, index) => index).filter(j => {
+                if (format(new Date(calendarDate[0].endDate), "yyyy-MM-dd") == format(new Date(), "yyyy-MM-dd")) {
+                  return new Date().getHours() <= j;  
+                }
+                return true;
+              }).map(
                 (i) => (
                   <option value={23 - i} selected={i == 18} key={i}>
                     {23 - i}
