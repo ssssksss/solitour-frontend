@@ -77,7 +77,6 @@ const GatheringPlaceContainer = (props: IGatheringPlaceContainerProps) => {
         disableDoubleClickZoom: true,
       };
 
-      // new window.kakao.maps.Map(container, options);
       const map = new window.kakao.maps.Map(container, options);
       const markerPosition = new window.kakao.maps.LatLng(lat,lng);
         new window.kakao.maps.Marker({
@@ -92,13 +91,13 @@ const GatheringPlaceContainer = (props: IGatheringPlaceContainerProps) => {
   return (
     <article className={"flex flex-col gap-[2rem]"}>
       <GatheringPlaceSettingPanel {...props} />
-      <GatheringPlace
+        <GatheringPlace
         placeName={formContext.getValues("placeName")}
-        placeUrl={formContext.getValues("placeUrl")}
+        searchId={formContext.getValues("searchId")}
         roadAddressName={formContext.getValues("roadAddressName")}
         yAxis={formContext.getValues("yAxis")}
         xAxis={formContext.getValues("xAxis")}
-      />
+        />
     </article>
   );
 };
