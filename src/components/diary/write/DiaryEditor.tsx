@@ -1,8 +1,12 @@
 import Image from "next/image";
-import QuillEditor from "./QuillEditor";
+// import QuillEditor from "./QuillEditor";
 import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
+
+import dynamic from "next/dynamic";
+
+const QuillEditor = dynamic(() => import("./QuillEditor"));
 
 interface Props {
   diaryEditorStore: useDiaryEditorStoreType;
