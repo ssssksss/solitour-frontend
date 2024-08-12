@@ -43,7 +43,7 @@
   }
   .rdrInRange {
   }
-  .rdrNextPrevButton {
+  .rdrMonthAndYearWrapper .rdrNextPrevButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,34 +52,34 @@
       visibility: hidden;
     }
   }
-  .rdrNextPrevButton:hover {
+  .rdrMonthAndYearWrapper .rdrNextPrevButton:hover {
     background: #00B488;
   }
-  .rdrPprevButton  {
+  .rdrMonthAndYearWrapper .rdrPprevButton  {
     background-image: url("/calendar-prev-arrow-icon.svg");
     background-repeat: no-repeat;
     background-size: 6px 12px;
     background-position: 50% 50%;
   }
-  .rdrNextButton {
+  .rdrMonthAndYearWrapper .rdrNextButton {
     background-image: url("/calendar-next-arrow-icon.svg");
     background-repeat: no-repeat;
-    background-size: 6px 12px;
     background-position: 50% 50%;
+    background-size: 6px 12px;
   }
-  .rdrPprevButton:hover {
+  .rdrMonthAndYearWrapper .rdrPprevButton:hover {
     background-image: url("/calendar-prev-arrow-white-icon.svg");
     background-repeat: no-repeat;
     background-size: 6px 12px;
     background-position: 50% 50%;
   }
-  .rdrNextButton:hover {
+  .rdrMonthAndYearWrapper .rdrNextButton:hover {
     background-image: url("/calendar-next-arrow-white-icon.svg");
     background-repeat: no-repeat;
     background-size: 6px 12px;
     background-position: 50% 50%;
   }
-   .rdrMonth {
+  .rdrMonth {
     font-size: 0.875rem;
     @media (max-width: ${(props) => props.theme.deviceSizes.tablet}) {
       font-size: 1rem;

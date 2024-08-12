@@ -2,7 +2,6 @@ import { Modal } from "@/components/common/modal/Modal";
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import { useFormContext } from "react-hook-form";
 import GatheringSettingModal from "../../../components/gathering/modal/GatheringSettingModal";
-
 interface IGatheringSettingProps {
   isModal: boolean;
   closeModal: () => void;
@@ -46,11 +45,12 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
           모집 마감일 : {formContext.getValues("deadline")}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
-          인원 : 1 / {formContext.getValues("personCount")}
+          <span className="pr-[.5rem]"> 인원 : </span> { formContext.getValues("personCount") > 0 && <span> 1 / {formContext.getValues("personCount")} 명 </span>}
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           <span className="pr-[.5rem]"> 나이 : </span>
-          <div className={"flex gap-[.25rem]"}>
+          {
+            formContext.getValues("deadline") && <div className={"flex gap-[.25rem]"}>
             <span>
               {new Date().getFullYear() -
                 formContext.getValues("startAge") +
@@ -65,6 +65,7 @@ const GatheringSetting = (props: IGatheringSettingProps) => {
             <span>~</span>
             <span>{formContext.getValues("startAge") + "년생"}</span>)
           </div>
+          }
         </div>
         <div className={"flex h-[2.75rem] items-center"}>
           <span className="pr-[.5rem]"> 성별 : </span>

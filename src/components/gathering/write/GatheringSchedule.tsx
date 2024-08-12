@@ -31,7 +31,7 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
         >
           일정 선택
         </button>
-        <div>{formContext.getValues("scheduleStartDate") && "OK"}</div>
+        <div className="text-main">{formContext.formState.errors.scheduleStartDate  == undefined && formContext.formState.errors.scheduleEndDate == undefined && formContext.getValues("scheduleStartDate") && "OK"}</div>
         <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
           <GatheringScheduleModal closeModal={() => props.closeModal()} />
         </Modal>
@@ -68,6 +68,7 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
                       formContext.getValues("scheduleStartDate").length,
                     )}
                 </span>
+                <span className="text-[#ff0000]"> {formContext.formState.errors.scheduleStartDate?.message as string} </span>
               </div>
             )}
           </div>
@@ -97,6 +98,7 @@ const GatheringSchedule = (props: IGatheringScheduleProps) => {
                       formContext.getValues("scheduleEndDate").length,
                     )}
                 </span>
+                <span className="text-[#ff0000]"> {formContext.formState.errors.scheduleEndDate?.message as string} </span>
               </div>
             )}
           </div>
