@@ -14,9 +14,9 @@ interface IGatheringCategoryModalProps {
 }
 
 const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
-  const [mainCategoryId, setMainCategoryId] = useState(0);
-  const [subCategoryId, setSubCategoryId] = useState(0);
   const formContext = useFormContext();
+  const [mainCategoryId, setMainCategoryId] = useState(formContext.getValues("mainCategoryId") || 0);
+  const [subCategoryId, setSubCategoryId] = useState(formContext.getValues("subCategoryId") || 0);
 
   const submitHandler = () => {
     formContext.setValue("mainCategoryId", mainCategoryId);
