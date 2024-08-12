@@ -1,16 +1,41 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
-import { useState } from "react";
+import useDiaryEditorStore from "@/store/diaryEditorStore";
+import { useEffect, useState } from "react";
 
 const DiaryEditorContainer = () => {
-  const [content, setContent] = useState<string>("");
+  const diaryEditorStore = useDiaryEditorStore();
+  const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
+  const [placeModal, setPlaceModal] = useState<boolean>(false);
 
-  const onChange = (value: string) => {
-    setContent(value);
+  const onContentChange = (value: string) => {
+    diaryEditorStore.changeContent(diaryEditorStore.currentDay - 1, value);
   };
 
-  return <DiaryEditor content={content} onChange={onChange} />;
+  // 화면에서 벗어났을 때 초기화
+  useEffect(() => {
+    return () => {
+      diaryEditorStore.initialize();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <DiaryEditor
+      diaryEditorStore={diaryEditorStore}
+      dateRangeModal={dateRangeModal}
+      placeModal={placeModal}
+      showDateRangeModal={() => setDateRangeModal(true)}
+      closeDateRangeModal={() => setDateRangeModal(false)}
+      showPlaceModal={() => setPlaceModal(true)}
+      closePlaceModal={() => setPlaceModal(false)}
+      setCurrentDay={(day: number) =>
+        diaryEditorStore.setDiaryEditor({ currentDay: day })
+      }
+      onContentChange={onContentChange}
+    />
+  );
 };
 
 export default DiaryEditorContainer;
