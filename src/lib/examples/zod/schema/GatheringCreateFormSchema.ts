@@ -13,7 +13,7 @@ export const gatheringCreateFormSchema = z
     personCount: z.number().min(2).max(10),
     startAge: z.number().min(1960).max(new Date().getFullYear()),
     endAge: z.number().min(1960).max(new Date().getFullYear()),
-    allowedSex: z.union([z.literal("male"), z.literal("female"), z.literal("all")]),
+    allowedSex: z.union([z.literal("MALE"), z.literal("FEMALE"), z.literal("ALL")]),
     scheduleStartDate: z.string()
       .refine((value) => {
         if (!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(value)) return false;

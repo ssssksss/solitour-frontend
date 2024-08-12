@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface GatheringPlaceProps {
   placeName: string;
-  placeUrl: string;
+  searchId: number;
   roadAddressName: string;
   yAxis: number;
   xAxis: number;
@@ -10,7 +10,7 @@ interface GatheringPlaceProps {
 
 const GatheringPlace = ({
   placeName,
-  placeUrl,
+  searchId,
   roadAddressName,
   yAxis,
   xAxis,
@@ -24,7 +24,10 @@ const GatheringPlace = ({
       {placeName && (
         <a
           className={"relative flex h-full flex-col items-center justify-center gap-[.25rem] rounded-[1rem]"}
-          href={placeUrl || `http://map.kakao.com/link/map/${placeName},${yAxis},${xAxis}`}
+            href={
+              searchId ? `https://place.map.kakao.com/${searchId}` :
+              `http://map.kakao.com/link/map/${placeName},${yAxis},${xAxis}`
+            }
           target="_blank"
           rel="noopener noreferrer"
         >

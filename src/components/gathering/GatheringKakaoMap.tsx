@@ -83,7 +83,12 @@ const GatheringKakaoMap = (placeResponse :PlaceResponse) => {
       disableDoubleClickZoom: true, // 더블클릭으로 확대 불가
     };
 
-    new window.kakao.maps.Map(container, options);
+      const map = new window.kakao.maps.Map(container, options);
+      const markerPosition = new window.kakao.maps.LatLng(lat,lng);
+        new window.kakao.maps.Marker({
+          position: markerPosition,
+          map: map,
+        });
   };
 
   window.kakao.maps.load(renderMap);
