@@ -3,39 +3,57 @@ import {
   SETTING_MODAL_SEX,
 } from "@/constants/gathering/GatheringConstant";
 import "@/styles/reactDataRange.css";
-import { format, isBefore, parse } from "date-fns";
+import { add, format, isBefore, parse } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Calendar } from "react-date-range";
 import { useFormContext } from "react-hook-form";
-
 interface IGatheringSettingModalProps {
   closeModal: () => void;
 }
 
 const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
-  const [peopleCount, setPeopleCount] = useState(6);
-  const [sex, setSex] = useState("all");
-  const [startAge, setStartAge] = useState(20);
-  const [endAge, setEndAge] = useState(59);
-  const [deadlineDate, setDeadlineDate] = useState<Date>(new Date());
-  const [deadlineHour, setDeadlineHour] = useState<string>("23");
-  const [deadlineMinute, setDeadlineMinute] = useState<string>("0");
   const formContext = useFormContext();
-
-  const handleSelect = (date: Date) => {
+  const [peopleCount, setPeopleCount] = useState(formContext.getValues("personCount") || 6);
+  const [sex, setSex] = useState(formContext.getValues("allowedSex") || "all");
+  const [startAge, setStartAge] = useState(formContext.getValues("startAge") ? new Date().getFullYear() - formContext.getValues("startAge") : 20);
+  const [endAge, setEndAge] = useState(formContext.getValues("endAge") ? new Date().getFullYear() - formContext.getValues("endAge") : 59);
+  const [deadlineDate, setDeadlineDate] = useState<Date>(formContext.getValues("deadline") ? new Date(formContext.getValues("deadline")) : new Date());
+  const [deadlineHour, setDeadlineHour] = useState<number>(formContext.getValues("deadline") ? +format(formContext.getValues("deadline"), "HH") : new Date().getHours());
+  const [deadlineMinute, setDeadlineMinute] = useState<number>(formContext.getValues("deadline") ? +format(formContext.getValues("deadline"), "mm") : -1);
+  const isToday = deadlineDate?.toDateString() === new Date().toDateString();
+  const [deadlineError, setDeadlineError] = useState<boolean>(false);
+  const handleDateSelect = (date: Date) => {
     setDeadlineDate(date);
+    setDeadlineError(false);
+
+    // 오늘 날짜이고
+    if (date.toDateString() === new Date().toDateString()) {
+      const currentHour = new Date().getHours();
+      const currentMinute = new Date().getMinutes();
+      if (deadlineHour < currentHour) {
+        // 현재시간보다 마감일 시간이 작다면 현재시간으로 변경
+        setDeadlineHour(currentHour);
+      } else if (deadlineHour === currentHour && deadlineMinute < currentMinute) {
+        // 현재시간보다 마감일 시간이 같은 경우에 minute가 현재 minute보다 작은지 판단, 50분보다 크게 되버리면 분을 선택 못하게 막아버림
+        setDeadlineMinute(currentMinute > 50 ? -1 : Math.ceil(currentMinute / 10) * 10);
+      }
+    }
   };
 
   const submitHandler = () => {
-    const expiration =
-      format(deadlineDate, "yyyy-MM-dd") +
-      " " +
-      deadlineHour.padStart(2, "0") +
-      ":" +
-      deadlineMinute.padStart(2, "0");
-    formContext.setValue("deadline", expiration);
+    const deadline =
+    format(deadlineDate, "yyyy-MM-dd") +
+    " " +
+    deadlineHour.toString().padStart(2,"0") +
+    ":" +
+      deadlineMinute.toString().padStart(2,"0");
+    if (new Date(deadline) < new Date()) {
+    setDeadlineError(true);
+    return;
+  }
+    formContext.setValue("deadline", deadline);
     formContext.setValue("startAge", new Date().getFullYear() - startAge);
     formContext.setValue("endAge", new Date().getFullYear() - endAge);
     formContext.setValue("personCount", peopleCount);
@@ -45,21 +63,21 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
     props.closeModal();
   };
 
-  const isToday = deadlineDate?.toDateString() === new Date().toDateString();
-
   useEffect(() => {
-    if (isToday && parseInt(deadlineHour) < new Date().getHours()) {
-      setDeadlineHour(new Date().getHours().toString());
-    }
-    // 현재날짜와 현재시간이면 분을 변경해주어야 한다.
-    if (
-      isToday &&
-      parseInt(deadlineHour) === new Date().getHours() &&
-      parseInt(deadlineMinute) < new Date().getMinutes()
-    ) {
-        setDeadlineMinute(Array.from([...Array(6).fill(0)], (_, i) => i * 10).filter(j=> parseInt(deadlineHour) !== new Date().getHours() || parseInt(deadlineHour) === new Date().getHours() && j > new Date().getMinutes())[0].toString());
-    }
-  }, [deadlineDate, deadlineHour, deadlineMinute]);
+    if(deadlineMinute == 0) {
+        const _minutes = Array.from([...Array(6).fill(0)], (_, i) => i * 10).filter(j => {
+        if (!isToday) {
+        return true
+      } else if (deadlineHour == new Date().getHours()) {
+        return j > new Date().getMinutes() ? true : false
+      } else {
+        return true
+      }
+    });
+      setDeadlineMinute(_minutes.length > 0 ?  _minutes[0] : 0); 
+  }
+  },[])
+
 
   return (
     <div
@@ -80,13 +98,14 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
       </button>
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 모임 설정 </h2>
       <section className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
-        <article className={"flex flex-col gap-y-[1rem]"}>
+        <article className={"flex flex-col gap-y-[1rem] relative"}>
           <div className={"h-[2rem] font-bold text-black"}>모집 마감일 </div>
           <div>
             <Calendar
               date={deadlineDate}
-              onChange={handleSelect}
+              onChange={handleDateSelect}
               minDate={new Date()}
+              maxDate={add(new Date(), { years: 1 })}
               locale={ko}
               color={"#00B488"}
             />
@@ -106,7 +125,9 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
               onChange={(e) => {
-                  setDeadlineHour(e.target.value);
+                setDeadlineHour(+e.target.value);
+                setDeadlineError(false);
+                setDeadlineMinute(-1);
               }}
               value={deadlineHour}
             >
@@ -125,10 +146,30 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
               className={
                 "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
-              onChange={(e) => setDeadlineMinute(e.target.value)}
+              onChange={(e) =>
+                {
+                setDeadlineMinute(+e.target.value);
+                setDeadlineError(false);
+                }
+              }
               value={deadlineMinute}
             >
-              {Array.from([...Array(6).fill(0)], (_, i) => i * 10).filter(j=> parseInt(deadlineHour) !== new Date().getHours() || parseInt(deadlineHour) === new Date().getHours() && j > new Date().getMinutes()).map((k) => (
+              <option
+                value={-1}
+                disabled={true}
+                selected={true}
+                >
+                  선택
+                </option>
+              {Array.from([...Array(6).fill(0)], (_, i) => i * 10).filter(j => {
+                if (!isToday) {
+                  return true
+                } else if(deadlineHour == new Date().getHours()){
+                  return j > new Date().getMinutes() ? true : false
+                } else {
+                  return true
+                }
+              }).map((k) => (
                 <option
                   value={k}
                   key={k}
@@ -139,6 +180,9 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
             </select>
             <div className={"flex items-center"}> 분 </div>
           </div>
+          {deadlineError && (
+            <div className="absolute text-red-500"> 마감일은 현재 시간보다 이후여야 합니다. </div>
+          )}
         </article>
         <article className={"flex max-w-[16.25rem] justify-between gap-y-[1rem]"}>
           <div className={"h-[2rem] font-bold text-black"}> 인원 </div>
@@ -287,7 +331,7 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
           </div>
         </article>
         <article className={"flex flex-col gap-y-[1rem] pt-[1rem]"}>
-          <div className={"h-[2rem] font-bold text-black"}> 성별 </div>
+          <div className={"h-[2rem] font-bold text-black"}> 성별 제한 </div>
           <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
             {Object.entries(SETTING_MODAL_SEX).map((i) => (
               <button
@@ -306,9 +350,9 @@ const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
         <button
           className={
-            "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
+            `h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${deadlineError && "bg-[#ff0000]"}`
           }
-        disabled={isBefore(parse(`${format(deadlineDate as Date, "yyyy-MM-dd")+" "+deadlineHour.padStart(2, "0")+":"+deadlineMinute.padStart(2, "0")}`, 'yyyy-MM-dd HH:mm', new Date()),new Date())}
+        disabled={isBefore(parse(`${format(deadlineDate as Date, "yyyy-MM-dd")+" "+deadlineHour.toString().padStart(2,"0")+":"+deadlineMinute.toString().padStart(2,"0")}`, 'yyyy-MM-dd HH:mm', new Date()),new Date()) || deadlineMinute < 0}
           onClick={() => submitHandler()}
           >
           적용하기

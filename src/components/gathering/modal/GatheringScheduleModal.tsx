@@ -1,5 +1,5 @@
 import "@/styles/reactDataRange.css";
-import { format } from "date-fns";
+import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useState } from "react";
@@ -10,22 +10,22 @@ interface IGatheringScheduleModalProps {
 }
 
 const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
+  const formContext = useFormContext();
   const [calendarDate, setCalendarDate] = useState([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: formContext.getValues("scheduleStartDate") ? new Date(formContext.getValues("scheduleStartDate")) : new Date(),
+      endDate: formContext.getValues("scheduleEndDate") ? new Date(formContext.getValues("scheduleEndDate")) : new Date(),
       key: "selection",
     },
   ]);
   const [startDateTime, setStartDateTime] = useState({
-    hour: "09",
-    minute: "00",
+    hour: formContext.getValues("scheduleStartDate") ? +format(new Date(formContext.getValues("scheduleStartDate")),"HH") : new Date().getHours(),
+    minute: formContext.getValues("scheduleStartDate") ? +format(new Date(formContext.getValues("scheduleStartDate")),"mm") : Math.min(50, Math.ceil(new Date().getMinutes() / 10) * 10),
   });
   const [endDateTime, setEndDateTime] = useState({
-    hour: "18",
-    minute: "00",
+    hour: formContext.getValues("scheduleEndDate") ? +format(new Date(formContext.getValues("scheduleEndDate")),"HH") : 18,
+    minute: formContext.getValues("scheduleEndDate") ? +format(new Date(formContext.getValues("scheduleEndDate")),"mm") : 0,
   });
-  const formContext = useFormContext();
 
   const submitHandler = () => {
     const _dateTime = (date: string, hour: string, minute: string) => {
@@ -35,8 +35,8 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
       "scheduleStartDate",
       _dateTime(
         format(calendarDate[0].startDate, 'yyyy-MM-dd'),
-        startDateTime.hour,
-        startDateTime.minute,
+        startDateTime.hour.toString().padStart(2,"0"),
+        startDateTime.minute.toString().padStart(2,"0"),
       ),
     );
     if (calendarDate[0].startDate == calendarDate[0].endDate) {
@@ -44,8 +44,8 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
         "scheduleEndDate",
         _dateTime(
           format(calendarDate[0].startDate, 'yyyy-MM-dd'),
-          startDateTime.hour,
-          startDateTime.minute,
+          startDateTime.hour.toString().padStart(2,"0"),
+          startDateTime.minute.toString().padStart(2,"0"),
         ),
       );
     } else {
@@ -53,8 +53,8 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
         "scheduleEndDate",
         _dateTime(
           format(calendarDate[0].endDate, 'yyyy-MM-dd'),
-          endDateTime.hour,
-          endDateTime.minute,
+          endDateTime.hour.toString().padStart(2,"0"),
+          endDateTime.minute.toString().padStart(2,"0"),
         ),
       );
     }
@@ -96,6 +96,7 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
               ]);
             }}
             minDate={new Date()}
+            maxDate={add(new Date(), { years: 1 })}
             showDateDisplay={false}
             months={1}
             ranges={calendarDate}
@@ -122,13 +123,14 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
               onChange={(e) =>
                 setStartDateTime((prev) => ({
                   ...prev,
-                  hour: e.target.value.padStart(2, "0"),
+                  hour: +e.target.value,
                 }))
               }
+              value={startDateTime.hour}
             >
-              {Array.from([...Array(24).fill(0)], (i, index) => index).map(
+              {Array.from([...Array(24).fill(0)], (i, index) => index).filter(j=>new Date().getHours() <= j && j <= endDateTime.hour).map(
                 (i) => (
-                  <option value={i} selected={i == 0} key={i}>
+                  <option value={i} key={i}>
                     {i}
                   </option>
                 ),
@@ -143,9 +145,10 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
               onChange={(e) =>
                 setStartDateTime((prev) => ({
                   ...prev,
-                  minute: e.target.value.padStart(2, "0"),
+                  minute: +e.target.value,
                 }))
               }
+              value={startDateTime.minute}
             >
               {Array.from([...Array(6).fill(0)], (i, index) => index * 10).map(
                 (i) => (
@@ -169,18 +172,19 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
             <select
               name="hour"
               className={
-                "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                "w-[4rem] rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
               onChange={(e) =>
                 setEndDateTime((prev) => ({
                   ...prev,
-                  hour: e.target.value.padStart(2, "0"),
+                  hour: +e.target.value,
                 }))
               }
+              value={endDateTime.hour}
             >
               {Array.from([...Array(24).fill(0)], (i, index) => index).map(
                 (i) => (
-                  <option value={23 - i} selected={i == 0} key={i}>
+                  <option value={23 - i} selected={i == 18} key={i}>
                     {23 - i}
                   </option>
                 ),
@@ -190,14 +194,15 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
             <select
               name="minute"
               className={
-                "rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                "w-[4rem] rounded-[1rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
               onChange={(e) =>
                 setEndDateTime((prev) => ({
                   ...prev,
-                  minute: e.target.value.padStart(2, "0"),
+                  minute: +e.target.value,
                 }))
               }
+              value={endDateTime.minute}
             >
               {Array.from([...Array(6).fill(0)], (i, index) => index * 10).map(
                 (i) => (
@@ -220,8 +225,8 @@ const GatheringScheduleModal = (props: IGatheringScheduleModalProps) => {
           disabled={
             Number(calendarDate[0].startDate) ==
               Number(calendarDate[0].endDate) &&
-            Number(startDateTime.hour + startDateTime.minute) >
-              Number(endDateTime.hour + endDateTime.minute)
+            Number(startDateTime.hour * 60 + startDateTime.minute) >
+              Number(endDateTime.hour * 60 + endDateTime.minute)
           }
         >
           적용하기
