@@ -1,6 +1,7 @@
 import Image from "next/image";
 import QuillEditor from "./QuillEditor";
 import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
+import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
 
 interface Props {
   dateRangeModal: boolean;
@@ -29,6 +30,9 @@ const DiaryEditor = ({
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
+      {dateRangeModal && (
+        <DateRangeModalContainer closeModal={closeDateRangeModal} />
+      )}
       {placeModal && <PlaceModalContainer closeModal={closePlaceModal} />}
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
         일기 등록하기
@@ -54,19 +58,33 @@ const DiaryEditor = ({
             날짜<span className="text-2xl text-main">*</span>
           </h2>
           <div className="flex flex-row items-center gap-[1.125rem] max-[585px]:flex-col">
-            <input
-              className="h-[3.3125rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
-              type="text"
-              name="placeName"
-              placeholder="YYYY.MM.DD"
-            />
+            <button
+              className="flex h-[3.3125rem] w-[11.375rem] flex-grow items-center gap-2 rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
+              type="button"
+              onClick={() => showDateRangeModal()}
+            >
+              {"YYYY.MM.DD"}
+              <Image
+                src={"/calendar-icon.svg"}
+                alt={"calendar-icon"}
+                width={16}
+                height={16}
+              />
+            </button>
             <p className="text-lg font-semibold text-black">~</p>
-            <input
-              className="h-[3.3125rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
-              type="text"
-              name="placeName"
-              placeholder="YYYY.MM.DD"
-            />
+            <button
+              className="flex h-[3.3125rem] w-[11.375rem] flex-grow flex-row items-center gap-2 rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 hover:border-main"
+              type="button"
+              onClick={() => showDateRangeModal()}
+            >
+              {"YYYY.MM.DD"}
+              <Image
+                src={"/calendar-icon.svg"}
+                alt={"calendar-icon"}
+                width={16}
+                height={16}
+              />
+            </button>
           </div>
         </div>
         <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
