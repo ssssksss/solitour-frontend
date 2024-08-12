@@ -16,7 +16,7 @@ interface IGatheringSettingModalProps {
 const GatheringSettingModal = (props: IGatheringSettingModalProps) => {
   const formContext = useFormContext();
   const [peopleCount, setPeopleCount] = useState(formContext.getValues("personCount") || 6);
-  const [sex, setSex] = useState(formContext.getValues("allowedSex") || "all");
+  const [sex, setSex] = useState(formContext.getValues("allowedSex") || "ALL");
   const [startAge, setStartAge] = useState(formContext.getValues("startAge") ? new Date().getFullYear() - formContext.getValues("startAge") : 20);
   const [endAge, setEndAge] = useState(formContext.getValues("endAge") ? new Date().getFullYear() - formContext.getValues("endAge") : 59);
   const [deadlineDate, setDeadlineDate] = useState<Date>(formContext.getValues("deadline") ? new Date(formContext.getValues("deadline")) : new Date());
