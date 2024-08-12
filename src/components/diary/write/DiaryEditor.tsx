@@ -107,38 +107,40 @@ const DiaryEditor = ({
           </button>
         </div>
       </div>
-      <div className="mt-14 flex h-6 w-full flex-row items-center gap-14 overflow-x-auto">
-        <Image
-          className="hidden dark:block"
-          src="/day-text-dark-mode.svg"
-          alt="day-text"
-          width={41}
-          height={25}
-        />
-        <Image
-          className="dark:hidden"
-          src="/day-text.svg"
-          alt="day-text"
-          width={41}
-          height={25}
-        />
-        {Array.from(
-          { length: diaryEditorStore.days },
-          (_, index) => index + 1,
-        ).map((value) => (
-          <button
-            key={value}
-            className={`${value === diaryEditorStore.currentDay ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
-            onClick={() => setCurrentDay(value)}
-          >
-            {value}
-          </button>
-        ))}
-      </div>
+      {diaryEditorStore.days > 0 && (
+        <div className="mt-14 flex h-6 w-full flex-row items-center gap-14 overflow-x-auto">
+          <Image
+            className="hidden dark:block"
+            src="/day-text-dark-mode.svg"
+            alt="day-text"
+            width={41}
+            height={25}
+          />
+          <Image
+            className="dark:hidden"
+            src="/day-text.svg"
+            alt="day-text"
+            width={41}
+            height={25}
+          />
+          {Array.from(
+            { length: diaryEditorStore.days },
+            (_, index) => index + 1,
+          ).map((value) => (
+            <button
+              key={value}
+              className={`${value === diaryEditorStore.currentDay ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
+              onClick={() => setCurrentDay(value)}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
+      )}
       {diaryEditorStore.days > 0 && (
         <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
           <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-            하루 기분은 어땠나요?
+            {`하루 기분은 어땠나요? (Day ${diaryEditorStore.currentDay})`}
           </h2>
           <div className="flex flex-wrap items-center gap-[2.375rem]">
             {["신나요", "좋아요", "그냥 그래요", "슬퍼요", "화나요"].map(
@@ -170,7 +172,7 @@ const DiaryEditor = ({
       )}
       {diaryEditorStore.days > 0 && (
         <QuillEditor
-          content={diaryEditorStore.contents[diaryEditorStore.currentDay]}
+          content={diaryEditorStore.contents[diaryEditorStore.currentDay - 1]}
           onChange={(value: string) => onContentChange(value)}
         />
       )}
