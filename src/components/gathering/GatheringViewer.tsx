@@ -111,8 +111,9 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
             height={10}
           />
           <div>
-            
-            <span className="text-main"> {data.nowPersonCount} </span> / {data.personCount}
+            <span className={`${(data.nowPersonCount + 1) == data.personCount && 'text-[#ff0000]'}`}>
+                <span className={`text-main ${(data.nowPersonCount + 1) / data.personCount > 0.5 && 'text-[#FC9F3A]'} ${(data.nowPersonCount + 1) == data.personCount && 'text-[#ff0000]'}`}> {data.nowPersonCount + 1} </span> / {data.personCount}
+            </span>
             <span className="text-gray2"> {"(" + (new Date().getFullYear() - data.startAge) + "세 ~ " + (new Date().getFullYear() - data.endAge) + "세 ," + SEX[data.allowedSex] + ")"} </span>
           </div>
         </div>
