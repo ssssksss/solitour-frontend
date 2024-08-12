@@ -9,12 +9,8 @@ const DiaryEditorContainer = () => {
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [placeModal, setPlaceModal] = useState<boolean>(false);
 
-  const onChange = (value: string) => {
-    const content = diaryEditorStore.contents;
-    if (content) {
-      content[diaryEditorStore.currentDay] = value;
-    }
-    diaryEditorStore.setDiaryEditor({ contents: content });
+  const onContentChange = (value: string) => {
+    diaryEditorStore.changeContent(diaryEditorStore.currentDay - 1, value);
   };
 
   // 화면에서 벗어났을 때 초기화
@@ -34,10 +30,10 @@ const DiaryEditorContainer = () => {
       closeDateRangeModal={() => setDateRangeModal(false)}
       showPlaceModal={() => setPlaceModal(true)}
       closePlaceModal={() => setPlaceModal(false)}
-      setCurrentDay={(day: number) => {
-        diaryEditorStore.setDiaryEditor({ currentDay: day });
-      }}
-      onChange={onChange}
+      setCurrentDay={(day: number) =>
+        diaryEditorStore.setDiaryEditor({ currentDay: day })
+      }
+      onContentChange={onContentChange}
     />
   );
 };

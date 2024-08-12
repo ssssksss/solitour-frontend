@@ -11,13 +11,16 @@ interface DiaryEditorState {
   address: string;
   province: string;
   city: string;
-  contents: string[] | null;
+  moodLevels: number[];
+  contents: string[];
 }
 
 // 2. 액션 인터페이스 정의
 interface DiaryEditorActions {
   initialize: () => void;
   setDiaryEditor: (data: Partial<DiaryEditorState>) => void;
+  changeMoodLevel: (index: number, value: number) => void;
+  changeContent: (index: number, value: string) => void;
 }
 
 // 3. 초기 상태 정의
@@ -26,11 +29,12 @@ const initialState: DiaryEditorState = {
   startDate: null,
   endDate: null,
   days: 0,
-  currentDay: 1,
+  currentDay: 0,
   address: "",
   province: "",
   city: "",
-  contents: null,
+  moodLevels: [],
+  contents: [],
 };
 
 // 4. 상태 및 액션 생성
@@ -41,6 +45,18 @@ const diaryEditorStore: StateCreator<DiaryEditorState & DiaryEditorActions> = (
   ...initialState,
   initialize: () => set({ ...initialState }),
   setDiaryEditor: (data: Partial<DiaryEditorState>) => set(() => ({ ...data })),
+  changeMoodLevel: (index: number, value: number) =>
+    set((state) => ({
+      moodLevels: state.moodLevels.map((moodLevel, idx) =>
+        idx === index ? value : moodLevel,
+      ),
+    })),
+  changeContent: (index: number, value: string) =>
+    set((state) => ({
+      contents: state.contents.map((content, idx) =>
+        idx === index ? value : content,
+      ),
+    })),
 });
 
 const useDiaryEditorStore = create<

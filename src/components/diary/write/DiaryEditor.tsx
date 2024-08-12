@@ -13,7 +13,7 @@ interface Props {
   showPlaceModal: () => void;
   closePlaceModal: () => void;
   setCurrentDay: (day: number) => void;
-  onChange: (value: string) => void;
+  onContentChange: (value: string) => void;
 }
 
 const DiaryEditor = ({
@@ -25,7 +25,7 @@ const DiaryEditor = ({
   showPlaceModal,
   closePlaceModal,
   setCurrentDay,
-  onChange,
+  onContentChange,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
@@ -135,35 +135,43 @@ const DiaryEditor = ({
           </button>
         ))}
       </div>
-      <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
-        <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-          하루 기분은 어땠나요?
-        </h2>
-        <div className="flex flex-wrap items-center gap-[2.375rem]">
-          {["신나요", "좋아요", "그냥 그래요", "슬퍼요", "화나요"].map(
-            (value, index) => (
-              <button
-                key={index + 1}
-                className="flex h-[4.625rem] flex-col items-center justify-between text-[0.9375rem] text-gray1 hover:text-main dark:text-slate-400"
-              >
-                <div className="relative h-10 w-8">
-                  <Image
-                    src={`/mood-icon${index + 1}.svg`}
-                    alt="mood-icon"
-                    fill={true}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-                <p>{value}</p>
-              </button>
-            ),
-          )}
+      {diaryEditorStore.days > 0 && (
+        <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
+          <h2 className="text-lg font-semibold text-black dark:text-slate-200">
+            하루 기분은 어땠나요?
+          </h2>
+          <div className="flex flex-wrap items-center gap-[2.375rem]">
+            {["신나요", "좋아요", "그냥 그래요", "슬퍼요", "화나요"].map(
+              (value, index) => (
+                <button
+                  key={index + 1}
+                  className={`${diaryEditorStore.moodLevels[diaryEditorStore.currentDay - 1] === index + 1 ? "text-main" : "text-gray1"} flex h-[4.625rem] flex-col items-center justify-between text-[0.9375rem] hover:text-main dark:text-slate-400`}
+                  onClick={() =>
+                    diaryEditorStore.changeMoodLevel(
+                      diaryEditorStore.currentDay - 1,
+                      index + 1,
+                    )
+                  }
+                >
+                  <div className="relative h-10 w-8">
+                    <Image
+                      src={`/mood-icon${index + 1}.svg`}
+                      alt="mood-icon"
+                      fill={true}
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                  <p>{value}</p>
+                </button>
+              ),
+            )}
+          </div>
         </div>
-      </div>
-      {diaryEditorStore.contents && (
+      )}
+      {diaryEditorStore.days > 0 && (
         <QuillEditor
           content={diaryEditorStore.contents[diaryEditorStore.currentDay]}
-          onChange={onChange}
+          onChange={(value: string) => onContentChange(value)}
         />
       )}
       <button className="mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full bg-main text-[0.9375rem] text-white hover:scale-105">

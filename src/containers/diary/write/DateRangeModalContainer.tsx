@@ -26,6 +26,7 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
       endDate: state[0].endDate,
       days: days,
       currentDay: 1,
+      moodLevels: Array<number>(days).fill(0),
       contents: Array<string>(days).fill(""),
     });
     closeModal();
