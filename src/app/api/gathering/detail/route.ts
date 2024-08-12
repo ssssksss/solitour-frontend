@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
-    // URLSearchParams를 사용하여 쿼리 파라미터를 추출합니다.
-//   const url = new URL(request.url);
-//   const id = url.searchParams.get('id');
-//   console.log("route.ts 파일 테스트 : ",id);
-    const id = 1;
+  const url = new URL(request.url);
+  const id = url.searchParams.get('id');
 
   if (!id) {
     return NextResponse.json({ error: 'ID가 제공되지 않았습니다.' }, { status: 400 });
@@ -24,7 +21,7 @@ export async function GET(request: NextRequest) {
   
 
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/gatherings/2`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/gatherings/${id}`, {
     method: "GET",
     headers: {
       Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
