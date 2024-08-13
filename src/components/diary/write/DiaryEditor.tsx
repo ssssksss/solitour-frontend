@@ -1,8 +1,12 @@
 import Image from "next/image";
-import QuillEditor from "./QuillEditor";
 import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
+import dynamic from "next/dynamic";
+
+const QuillEditorContainer = dynamic(
+  () => import("@/containers/diary/write/QuillEditorContainer"),
+);
 
 interface Props {
   diaryEditorStore: useDiaryEditorStoreType;
@@ -13,7 +17,6 @@ interface Props {
   showPlaceModal: () => void;
   closePlaceModal: () => void;
   setCurrentDay: (day: number) => void;
-  onContentChange: (value: string) => void;
 }
 
 const DiaryEditor = ({
@@ -25,7 +28,6 @@ const DiaryEditor = ({
   showPlaceModal,
   closePlaceModal,
   setCurrentDay,
-  onContentChange,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
@@ -170,13 +172,10 @@ const DiaryEditor = ({
           </div>
         </div>
       )}
-      {diaryEditorStore.days > 0 && (
-        <QuillEditor
-          content={diaryEditorStore.contents[diaryEditorStore.currentDay - 1]}
-          onChange={(value: string) => onContentChange(value)}
-        />
-      )}
-      <button className="mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full bg-main text-[0.9375rem] text-white hover:scale-105">
+      {diaryEditorStore.days > 0 && <QuillEditorContainer />}
+      <button
+        className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full text-[0.9375rem] text-white`}
+      >
         일기 등록하기
       </button>
     </div>

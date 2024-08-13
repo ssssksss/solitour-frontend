@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
           },
           cache: "no-store",
           credentials: "include",
-        }
+        },
       );
 
       if (backendResponse.status === 200) {
