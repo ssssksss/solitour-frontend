@@ -1,12 +1,12 @@
 import Image from "next/image";
-// import QuillEditor from "./QuillEditor";
 import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
-
 import dynamic from "next/dynamic";
 
-const QuillEditor = dynamic(() => import("./QuillEditor"));
+const QuillEditorContainer = dynamic(
+  () => import("@/containers/diary/write/QuillEditorContainer"),
+);
 
 interface Props {
   diaryEditorStore: useDiaryEditorStoreType;
@@ -175,7 +175,7 @@ const DiaryEditor = ({
         </div>
       )}
       {diaryEditorStore.days > 0 && (
-        <QuillEditor
+        <QuillEditorContainer
           content={diaryEditorStore.contents[diaryEditorStore.currentDay - 1]}
           onChange={(value: string) => onContentChange(value)}
         />
