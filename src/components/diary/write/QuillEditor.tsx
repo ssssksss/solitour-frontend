@@ -4,13 +4,13 @@ import ReactQuill from "react-quill";
 import { RefObject } from "react";
 
 interface Props {
-  content: string;
   quillRef: RefObject<ReactQuill>;
   modules: {};
+  content: string;
   onChange: (value: string) => void;
 }
 
-const QuillEditor = ({ content, quillRef, modules, onChange }: Props) => {
+const QuillEditor = ({ quillRef, modules, content, onChange }: Props) => {
   return (
     <ReactQuill
       ref={quillRef}

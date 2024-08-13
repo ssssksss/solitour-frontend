@@ -1,16 +1,13 @@
 "use client";
 
 import QuillEditor from "@/components/diary/write/QuillEditor";
+import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { ImageResize } from "quill-image-resize-module-ts";
 import { useMemo, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
 
-interface Props {
-  content: string;
-  onChange: (value: string) => void;
-}
-
-const QuillEditorContainer = ({ content, onChange }: Props) => {
+const QuillEditorContainer = () => {
+  const diaryEditorStore = useDiaryEditorStore();
   const quillRef = useRef<ReactQuill>(null);
 
   const imageHandler = () => {
@@ -73,10 +70,12 @@ const QuillEditorContainer = ({ content, onChange }: Props) => {
 
   return (
     <QuillEditor
-      content={content}
       quillRef={quillRef}
       modules={modules}
-      onChange={onChange}
+      content={diaryEditorStore.contents[diaryEditorStore.currentDay - 1]}
+      onChange={(value: string) =>
+        diaryEditorStore.changeContent(diaryEditorStore.currentDay - 1, value)
+      }
     />
   );
 };
