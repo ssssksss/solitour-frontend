@@ -35,6 +35,21 @@ const QuillEditorContainer = () => {
         if (range) {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 0);
+
+          // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout 사용합니다.
+          setTimeout(() => {
+            // Property 'style' does not exist on type 'Element'.ts(2339) 오류를
+            // 방지하기 위해 타입을 any로 지정합니다.
+            const imageElement: any = document.querySelector(
+              `img[src="${url}"]`,
+            );
+            if (imageElement) {
+              imageElement.style.borderRadius = "1rem";
+            }
+
+            // 메모리 누수를 방지하기 위해 URL을 해제합니다.
+            // URL.revokeObjectURL(url);
+          }, 100);
         }
       }
     });
