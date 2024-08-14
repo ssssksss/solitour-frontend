@@ -7,18 +7,14 @@ import { useRef, useState } from "react";
 
 interface IgatheringCategoryList {
   gatheringCategoryList: GatheringCategoryListType;
+  sortDefaultValue: string;
 }
 
-const GatheringListContainer = ({gatheringCategoryList}:IgatheringCategoryList) => {
+const GatheringListContainer = ({gatheringCategoryList, sortDefaultValue}:IgatheringCategoryList) => {
   const [isModal, setIsModal] = useState(false);
   const [isExcludeCompleted, setIsExcludeCompleted] = useState(true)
   const [activeGatheringCategoryId, setActiveGatheringCategoryId] = useState(0);
   const keywordRef = useRef<HTMLInputElement>(null);
-  const getSortValue = () => {
-    const queryParams = UrlQueryStringToObject(window.location.href) || {};
-    const sortValue = queryParams.sort as string || '';
-    return sortValue;
-  };
   const checkExcludeCompleteGatheringHandler = () => {
     setIsExcludeCompleted(prev => !prev);
     let _url = `/gathering?`;
@@ -101,7 +97,7 @@ const GatheringListContainer = ({gatheringCategoryList}:IgatheringCategoryList) 
       sortHandler={sortHandler}
       searchHandler={searchHandler}
       keywordRef={keywordRef}
-      sortDefaultValue={getSortValue()}
+      sortDefaultValue={sortDefaultValue}
     />
   );
 };
