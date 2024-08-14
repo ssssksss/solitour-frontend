@@ -39,7 +39,7 @@ export const DiaryCreateFormSchema = z.object({
       required_error: "모든 날짜의 기분 정보를 입력해 주세요.",
       invalid_type_error: "MoodLevel must be a integer.",
     })
-    .int()
+    .int({ message: "모든 날짜의 기분 정보를 입력해 주세요." })
     .positive()
     .array()
     .min(1, { message: "모든 날짜의 기분 정보를 입력해 주세요." }),

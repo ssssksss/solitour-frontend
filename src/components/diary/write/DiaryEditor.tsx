@@ -58,6 +58,10 @@ const DiaryEditor = ({
           type="text"
           name="title"
           placeholder="제목을 입력하세요."
+          value={diaryEditorStore.title}
+          onChange={(e) =>
+            diaryEditorStore.setDiaryEditor({ title: e.target.value })
+          }
         />
       </div>
       <div className="mt-12 flex flex-row items-center gap-[6.75rem] max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-12">
@@ -108,11 +112,13 @@ const DiaryEditor = ({
             장소<span className="text-2xl text-main">*</span>
           </h2>
           <button
-            className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 outline-none hover:border-main"
+            className={`${diaryEditorStore.address === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
             type="button"
             onClick={() => showPlaceModal()}
           >
-            {"장소명을 입력하세요."}
+            {diaryEditorStore.address === ""
+              ? "장소명을 입력하세요."
+              : diaryEditorStore.address}
           </button>
         </div>
       </div>
