@@ -76,7 +76,7 @@ const GatheringList = (props: IGatheringList) => {
               }, {
                 value: "views",
                 name: "조회순",
-              }]} dropdownHandler={props.sortHandler} defaultValue={props.sortDefaultValue} />
+                }]} dropdownHandler={props.sortHandler} defaultValue={props.sortDefaultValue} />
             </div>
             <button className={"flex gap-1 text-sm text-black font-medium min-[745px]:hidden"}  onClick={props.checkExcludeCompleteGatheringHandler}>
               {

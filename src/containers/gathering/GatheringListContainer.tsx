@@ -3,20 +3,18 @@
 import GatheringList from "@/components/gathering/GatheringList";
 import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
 import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
-import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 
 interface IgatheringCategoryList {
   gatheringCategoryList: GatheringCategoryListType;
+  sortDefaultValue: string;
 }
 
-const GatheringListContainer = ({gatheringCategoryList}:IgatheringCategoryList) => {
+const GatheringListContainer = ({gatheringCategoryList, sortDefaultValue}:IgatheringCategoryList) => {
   const [isModal, setIsModal] = useState(false);
   const [isExcludeCompleted, setIsExcludeCompleted] = useState(true)
   const [activeGatheringCategoryId, setActiveGatheringCategoryId] = useState(0);
   const keywordRef = useRef<HTMLInputElement>(null);
-  const searchParams = useSearchParams();
-  const sortDefaultValue = searchParams.get("sort") || "";
   const checkExcludeCompleteGatheringHandler = () => {
     setIsExcludeCompleted(prev => !prev);
     let _url = `/gathering?`;
@@ -85,8 +83,6 @@ const GatheringListContainer = ({gatheringCategoryList}:IgatheringCategoryList) 
     console.log("GatheringListContainer.tsx 파일 : ", _url);
     window.history.pushState(null, "", _url);
   }
-
-
 
   return (
     <GatheringList
