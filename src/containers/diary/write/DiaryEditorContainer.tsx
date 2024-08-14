@@ -17,6 +17,7 @@ const DiaryEditorContainer = () => {
   const diaryEditorStore = useDiaryEditorStore();
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [placeModal, setPlaceModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = async () => {
     // Validate from fields using Zod
@@ -48,6 +49,8 @@ const DiaryEditorContainer = () => {
       })),
     };
 
+    setLoading(true);
+
     const response = await fetch("/api/diary/create", {
       method: "POST",
       headers: {
@@ -59,6 +62,7 @@ const DiaryEditorContainer = () => {
 
     if (!response.ok) {
       alert("일기 작성에 실패하였습니다.");
+      setLoading(false);
       throw new Error(response.statusText);
     }
 
@@ -80,6 +84,7 @@ const DiaryEditorContainer = () => {
       diaryEditorStore={diaryEditorStore}
       dateRangeModal={dateRangeModal}
       placeModal={placeModal}
+      loading={loading}
       showDateRangeModal={() => setDateRangeModal(true)}
       closeDateRangeModal={() => setDateRangeModal(false)}
       showPlaceModal={() => setPlaceModal(true)}

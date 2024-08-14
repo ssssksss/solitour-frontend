@@ -17,6 +17,7 @@ interface Props {
   diaryEditorStore: useDiaryEditorStoreType;
   dateRangeModal: boolean;
   placeModal: boolean;
+  loading: boolean;
   showDateRangeModal: () => void;
   closeDateRangeModal: () => void;
   showPlaceModal: () => void;
@@ -29,6 +30,7 @@ const DiaryEditor = ({
   diaryEditorStore,
   dateRangeModal,
   placeModal,
+  loading,
   showDateRangeModal,
   closeDateRangeModal,
   showPlaceModal,
@@ -188,9 +190,23 @@ const DiaryEditor = ({
       {diaryEditorStore.days > 0 && <QuillEditorContainer />}
       <button
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full text-[0.9375rem] text-white`}
+        type="submit"
         onClick={() => onSubmit()}
       >
-        일기 등록하기
+        {loading ? (
+          <div className="flex flex-row items-center gap-3">
+            <Image
+              className="animate-spin"
+              src="/loading-icon.png"
+              alt="loading-icon"
+              width={20}
+              height={20}
+            />
+            <p>등록 중...</p>
+          </div>
+        ) : (
+          <p>일기 등록하기</p>
+        )}
       </button>
     </div>
   );

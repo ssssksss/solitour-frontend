@@ -62,9 +62,6 @@ const QuillEditorContainer = () => {
             if (imageElement) {
               imageElement.style.borderRadius = "1rem";
             }
-
-            // 메모리 누수를 방지하기 위해 URL을 해제합니다.
-            // URL.revokeObjectURL(url);
           }, 100);
         }
       }
