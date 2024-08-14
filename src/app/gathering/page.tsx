@@ -2,6 +2,7 @@ import Banner from "@/components/common/Banner";
 import TopList from "@/components/common/TopList";
 import GatheringListContainer from "@/containers/gathering/GatheringListContainer";
 import { Metadata } from "next";
+import { NextResponse } from "next/server";
 
 type MyProps = {
   searchParams: { [key: string]: string | undefined };
@@ -24,6 +25,13 @@ async function getData() {
   return res.json();
 }
 
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const sort = url.searchParams.get('sort') || '';
+
+  return NextResponse.json({ sort });
+}
+
 export default async function page({ searchParams }: MyProps) {
   const gatheringCategoryList = await getData();
 
@@ -36,7 +44,7 @@ export default async function page({ searchParams }: MyProps) {
       />
       <div className="mt-[26.25rem] max-[744px]:mt-[31rem] " />
       <TopList title="모임" />
-      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} />
+      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} sortDefaultValue={searchParams.sort || ""} />
     </div>
   );
 }

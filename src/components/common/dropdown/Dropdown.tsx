@@ -27,7 +27,7 @@ export default function Dropdown<T>({ options, dropdownHandler, defaultValue }: 
           onClick={toggleDropdown}
           className="items-center hover:text-main inline-flex justify-between w-full rounded-md px-0 py-2 bg-white text-sm font-medium text-gray-700  focus:outline-none "
         >
-          {options.map((i)=>i.name)[0]}
+          {options.filter(i=>i.value == selectedOption)[0].name}
           <IoIosArrowDown />
         </button>
       </div>
