@@ -6,11 +6,12 @@ import { TiLocation } from "react-icons/ti";
 
 interface Props {
   data: GetDiaryResponseDto;
+  days: number;
   currentDay: number;
   changeDay: (day: number) => void;
 }
 
-const DiaryViewer = ({ data, currentDay, changeDay }: Props) => {
+const DiaryViewer = ({ data, days, currentDay, changeDay }: Props) => {
   return (
     <div className="flex w-full flex-col items-start">
       <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
@@ -28,7 +29,7 @@ const DiaryViewer = ({ data, currentDay, changeDay }: Props) => {
           width={41}
           height={25}
         />
-        {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+        {Array.from({ length: days }, (_, index) => index + 1).map((day) => (
           <button
             key={day}
             className={`${day === 1 ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
@@ -40,7 +41,7 @@ const DiaryViewer = ({ data, currentDay, changeDay }: Props) => {
       </div>
       <div className="relative mt-[5.5rem] h-20 w-16">
         <Image
-          src={`/mood-icon${data.moodLevels[currentDay - 1]}.svg`}
+          src={`/mood-icon${data.diaryDays[currentDay - 1].moodLevel}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
@@ -50,7 +51,7 @@ const DiaryViewer = ({ data, currentDay, changeDay }: Props) => {
         {data.title}
       </h1>
       <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1 dark:text-slate-400">
-        <p>2024.06.07</p>
+        <p>{new Date(data.startDate).toLocaleDateString("ko-KR")}</p>
         <div className="flex flex-row items-center gap-1">
           <TiLocation className="text-main" size={"1.3rem"} />
           <p>{data.address}</p>
@@ -58,7 +59,9 @@ const DiaryViewer = ({ data, currentDay, changeDay }: Props) => {
       </div>
       <div
         className="mt-16"
-        dangerouslySetInnerHTML={{ __html: data.contents[currentDay - 1] }}
+        dangerouslySetInnerHTML={{
+          __html: data.diaryDays[currentDay - 1].content,
+        }}
       />
       {/* <div className="mt-16 flex w-full flex-col dark:text-slate-400">
         <p>7월 나 홀로 3박 4일 제주도 여행을 다녀왔다.</p>

@@ -8,15 +8,18 @@ export async function POST(request: NextRequest) {
     const cookie = request.cookies.get("access_token");
     const body: CreateDiaryRequestDto = await request.json();
 
-    const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `${cookie?.name}=${cookie?.value}`,
+    const response = await fetch(
+      `${process.env.LOCAL_BACKEND_URL}/api/diary/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
+        body: JSON.stringify(body),
+        cache: "no-store",
       },
-      body: JSON.stringify(body),
-      cache: "no-store",
-    });
+    );
 
     if (!response.ok) {
       throw new Error(response.statusText);

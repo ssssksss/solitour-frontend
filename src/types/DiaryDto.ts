@@ -28,8 +28,10 @@ export interface GetDiaryResponseDto {
   startDate: Date;
   endDate: Date;
   address: string;
-  moodLevels: number[];
-  contents: string[];
+  diaryDays: {
+    moodLevel: number;
+    content: string;
+  }[];
 }
 
 // TODO: 수정 필요
