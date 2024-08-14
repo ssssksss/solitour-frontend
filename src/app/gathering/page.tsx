@@ -25,9 +25,8 @@ async function getData() {
 }
 
 
-export default async function page() {
+export default async function Page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const gatheringCategoryList = await getData();
-
 
   return (
     <div className="w-full flex min-h-[calc(100vh-25rem)] flex-col items-center">
@@ -38,7 +37,7 @@ export default async function page() {
       />
       <div className="mt-[26.25rem] max-[744px]:mt-[31rem] " />
       <TopList title="모임" />
-      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} />
+      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} sortDefaultValue={searchParams.sort || ""} />
     </div>
   );
 }

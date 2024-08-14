@@ -1,3 +1,5 @@
+"use client"
+
 import { Modal } from "@/components/common/modal/Modal";
 import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
 import Image from "next/image";
