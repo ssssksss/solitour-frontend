@@ -1,7 +1,27 @@
 import PagePath from "@/components/common/PagePath";
-import DiaryViewer from "@/components/diary/detail/DiaryViewer";
-import DiaryViewerSkeleton from "@/components/skeleton/diary/detail/DiaryViewerSkeleton";
-import { Suspense } from "react";
+import DiaryViewerContainer from "@/containers/diary/detail/DiaryViewerContainer";
+import { GetDiaryResponseDto } from "@/types/DiaryDto";
+import { cookies } from "next/headers";
+
+async function getDiary(id: number) {
+  const cookie = cookies().get("access_token");
+  const response = await fetch(
+    `${process.env.LOCAL_BACKEND_URL}/api/diary/${id}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      cache: "force-cache",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return response.json() as Promise<GetDiaryResponseDto>;
+}
 
 interface Props {
   params: { id: string };
@@ -19,18 +39,18 @@ export async function generateMetadata({ params: { id } }: Props) {
   };
 }
 
-export default function page({ params: { id } }: Props) {
+export default async function page({ params: { id } }: Props) {
   const diaryId = Number(id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
     throw Error("Not Found");
   }
 
+  const data = await getDiary(diaryId);
+
   return (
     <div className="flex w-full flex-col items-center">
       <PagePath first="여행 일기" second="일기 상세" />
-      <Suspense fallback={<DiaryViewerSkeleton />}>
-        <DiaryViewer id={diaryId} />
-      </Suspense>
+      <DiaryViewerContainer data={data} />
     </div>
   );
 }

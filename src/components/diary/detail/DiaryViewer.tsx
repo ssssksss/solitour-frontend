@@ -1,17 +1,16 @@
+import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
-import Link from "next/link";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
 import { TiLocation } from "react-icons/ti";
 
 interface Props {
-  id: number;
+  data: GetDiaryResponseDto;
+  currentDay: number;
+  changeDay: (day: number) => void;
 }
 
-const DiaryViewer = async ({ id }: Props) => {
-  // TODO
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
+const DiaryViewer = ({ data, currentDay, changeDay }: Props) => {
   return (
     <div className="flex w-full flex-col items-start">
       <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
@@ -29,35 +28,39 @@ const DiaryViewer = async ({ id }: Props) => {
           width={41}
           height={25}
         />
-        {[1, 2, 3, 4, 5, 6, 7].map((value) => (
-          <Link
-            key={value}
-            className={`${value === 1 ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
-            href={`/diary/${id}?day=${value}`}
+        {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+          <button
+            key={day}
+            className={`${day === 1 ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
+            onClick={() => changeDay(day)}
           >
-            {value}
-          </Link>
+            {day}
+          </button>
         ))}
       </div>
       <div className="relative mt-[5.5rem] h-20 w-16">
         <Image
-          src="/mood-icon2.svg"
+          src={`/mood-icon${data.moodLevels[currentDay - 1]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
         />
       </div>
       <h1 className="mt-12 text-[1.75rem] font-bold dark:text-slate-200">
-        나 홀로 제주여행
+        {data.title}
       </h1>
       <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1 dark:text-slate-400">
         <p>2024.06.07</p>
         <div className="flex flex-row items-center gap-1">
           <TiLocation className="text-main" size={"1.3rem"} />
-          <p>제주특별자치도, 제주도</p>
+          <p>{data.address}</p>
         </div>
       </div>
-      <div className="mt-16 flex w-full flex-col dark:text-slate-400">
+      <div
+        className="mt-16"
+        dangerouslySetInnerHTML={{ __html: data.contents[currentDay - 1] }}
+      />
+      {/* <div className="mt-16 flex w-full flex-col dark:text-slate-400">
         <p>7월 나 홀로 3박 4일 제주도 여행을 다녀왔다.</p>
         <p>
           제주도는 언제가도 너무 좋아 자주 와봤는데 혼자 여행은 처음이라 많은
@@ -101,7 +104,7 @@ const DiaryViewer = async ({ id }: Props) => {
           그리고 솔리투어에서 추천해준 오셜록 티뮤지엄에 갔는데 생각보다 볼 것도
           많고 가보길 잘한...
         </p>
-      </div>
+      </div> */}
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
         <button className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400">
           <GoPencil />
