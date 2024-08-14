@@ -27,7 +27,9 @@ export const DiaryCreateFormSchema = z.object({
       required_error: "날짜를 입력해 주세요.",
       invalid_type_error: "endDate must be a date.",
     })
-    .max(new Date(), { message: "미래에 해당하는 날짜는 입력할 수 없습니다." }),
+    .max(new Date(new Date().getTime() + 1000 * 60 * 60 * 24), {
+      message: "미래에 해당하는 날짜는 입력할 수 없습니다.",
+    }),
   address: z
     .string({
       required_error: "주소를 입력해 주세요.",
