@@ -192,6 +192,7 @@ const DiaryEditor = ({
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
         type="submit"
         onClick={() => onSubmit()}
+        disabled={diaryEditorStore.days === 0 || loading}
       >
         {loading ? (
           <div className="flex flex-row items-center gap-3">
