@@ -44,9 +44,9 @@ const GatheringEditorContainer = ({gatheringData}: IGatheringEditorContainer) =>
       subCategoryName: "",
     },
   });
+  const params = useParams();
 
   const updateGatheringHandler = async () => {
-  const params = useParams();
   const { id } = params;
     const { mainCategoryName, subCategoryName, mainCategoryId, allowedSex, hashtags, searchId, placeName, xAxis, yAxis, roadAddressName, subCategoryId, ...requestData } = methods.getValues();
     try {
