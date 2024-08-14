@@ -5,7 +5,7 @@ import useAuthStore from "@/store/authStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const HeaderContainer = () => {
   const pathname = usePathname();
@@ -51,7 +51,7 @@ const HeaderContainer = () => {
     };
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // 자동 로그인
     const login = async () => {
       try {
