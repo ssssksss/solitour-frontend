@@ -1,3 +1,4 @@
+import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
@@ -5,14 +6,14 @@ import { NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const cookie = request.cookies.get("access_token");
-    const formData = await request.formData();
+    const body: CreateDiaryRequestDto = await request.json();
 
     const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
       method: "POST",
       headers: {
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-      body: formData,
+      body: JSON.stringify(body),
       cache: "no-store",
     });
 
