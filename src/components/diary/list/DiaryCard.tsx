@@ -1,15 +1,27 @@
-import { DiaryResponseDto } from "@/types/DiaryDto";
+import { GetDiaryListResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  diaryData: DiaryResponseDto;
+  diaryData: GetDiaryListResponseDto;
   flag: boolean;
   isFlipped: boolean;
+  days: number;
+  currentDay: number;
   flip: () => void;
+  setCurrentDay: (day: number) => void;
 }
 
-const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
+const DiaryCard = ({
+  diaryData,
+  flag,
+  isFlipped,
+  days,
+  currentDay,
+  flip,
+  setCurrentDay,
+}: Props) => {
+  // 뒷면
   if (isFlipped) {
     return (
       <div
@@ -36,20 +48,26 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             height={25}
           />
           <div className="flex flex-row items-center gap-8 truncate">
-            {[1, 2, 3, 4, 5, 6, 7].map((value) => (
-              <p
-                key={value}
-                className={`${value === 1 ? "text-main" : "text-gray2"} font-semibold`}
-              >
-                {value}
-              </p>
-            ))}
+            {Array.from({ length: days }, (_, index) => index + 1).map(
+              (day) => (
+                <button
+                  key={day}
+                  className={`${day === currentDay ? "text-main" : "text-gray2"} font-semibold`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentDay(day);
+                  }}
+                >
+                  {day}
+                </button>
+              ),
+            )}
           </div>
         </div>
         <div className="mt-[8.75rem] flex flex-col">
           <div className="relative h-20 w-16">
             <Image
-              src={`/mood-icon${diaryData.moodLevel}.svg`}
+              src={`/mood-icon${diaryData.diaryDays[currentDay - 1].moodLevel}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}
@@ -57,7 +75,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
           </div>
           <Link
             className="mt-12 w-full truncate text-2xl font-bold hover:text-main dark:text-slate-200"
-            href="/diary/1"
+            href={`/diary/${diaryData.diaryId}`}
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -65,16 +83,20 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             {diaryData.title}
           </Link>
           <p className="mt-3 text-lg text-gray1 dark:text-slate-400">
-            {diaryData.period.split("-")[0]}
+            {new Date(
+              new Date(diaryData.startDate).getTime() +
+                (1000 * 60 * 60 * 24 * currentDay - 1),
+            ).toLocaleDateString("ko-KR")}
           </p>
           <p className="truncate-vertical mt-6 text-black dark:text-slate-200">
-            {diaryData.description}
+            {diaryData.diaryDays[currentDay - 1].content}
           </p>
         </div>
       </div>
     );
   }
 
+  // 앞면
   return (
     <button
       className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative h-[38.9375rem] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[518px]:w-full`}
@@ -95,7 +117,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         <h2 className="text-start text-2xl font-bold dark:text-slate-200">
           {diaryData.title}
         </h2>
-        <p className="text-lg dark:text-slate-200">{diaryData.period}</p>
+        <p className="text-lg dark:text-slate-200">{`${new Date(diaryData.startDate).toLocaleDateString("ko-KR")} ~ ${new Date(diaryData.endDate).toLocaleDateString("ko-KR")}`}</p>
       </div>
     </button>
   );

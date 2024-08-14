@@ -1,16 +1,26 @@
 "use client";
 
 import DiaryCard from "@/components/diary/list/DiaryCard";
-import { DiaryResponseDto } from "@/types/DiaryDto";
-import { useState } from "react";
+import { GetDiaryListResponseDto } from "@/types/DiaryDto";
+import { useMemo, useState } from "react";
 
 interface Props {
-  diaryData: DiaryResponseDto;
+  diaryData: GetDiaryListResponseDto;
 }
 
 const DiaryCardContainer = ({ diaryData }: Props) => {
   const [flag, setFlag] = useState<boolean>(false);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [currentDay, setCurrentDay] = useState<number>(1);
+  const days = useMemo(
+    () =>
+      (new Date(diaryData.endDate).getTime() -
+        new Date(diaryData.startDate).getTime()) /
+        (1000 * 60 * 60 * 24) +
+      1,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   const flip = async () => {
     setFlag(!flag);
@@ -23,7 +33,10 @@ const DiaryCardContainer = ({ diaryData }: Props) => {
       diaryData={diaryData}
       flag={flag}
       isFlipped={isFlipped}
+      days={days}
+      currentDay={currentDay}
       flip={flip}
+      setCurrentDay={(day: number) => setCurrentDay(day)}
     />
   );
 };

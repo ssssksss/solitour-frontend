@@ -21,7 +21,7 @@ export interface CreateDiaryResponseDto {
 }
 
 /**
- * 일기 조회 응답 DTO
+ * 일기 상세 조회 응답 DTO
  */
 export interface GetDiaryResponseDto {
   title: string;
@@ -34,12 +34,15 @@ export interface GetDiaryResponseDto {
   }[];
 }
 
-// TODO: 수정 필요
-// Request 요청 결과 DTO
-export interface DiaryResponseDto {
-  title: string;
-  period: string;
+/**
+ * 일기 목록 조회 응답 DTO
+ */
+export interface GetDiaryListResponseDto {
+  diaryId: number;
   image: string;
-  moodLevel: number;
-  description: string;
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  address: string;
+  diaryDays: { moodLevel: number; content: string }[];
 }
