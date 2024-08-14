@@ -120,7 +120,7 @@ const DiaryEditor = ({
           >
             {diaryEditorStore.address === ""
               ? "장소명을 입력하세요."
-              : diaryEditorStore.address}
+              : diaryEditorStore.placeName}
           </button>
         </div>
       </div>

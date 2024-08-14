@@ -35,6 +35,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
 
   const onResetPlace = () => {
     diaryEditorStore.setDiaryEditor({
+      placeName: "",
       address: "",
       province: "",
       city: "",
@@ -48,6 +49,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }) => {
     const temp = placeInfo.address_name.split(" ");
     diaryEditorStore.setDiaryEditor({
+      placeName: placeInfo.place_name,
       address: placeInfo.address_name,
       province: temp[0].slice(0, 2) ?? "",
       city: temp[1] ?? "",

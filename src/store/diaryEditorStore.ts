@@ -8,6 +8,7 @@ interface DiaryEditorState {
   endDate: Date | null;
   days: number;
   currentDay: number;
+  placeName: string;
   address: string;
   province: string;
   city: string;
@@ -30,6 +31,7 @@ const initialState: DiaryEditorState = {
   endDate: null,
   days: 0,
   currentDay: 0,
+  placeName: "",
   address: "",
   province: "",
   city: "",
