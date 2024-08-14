@@ -15,8 +15,10 @@ const GatheringSubCategoryList = ({ gatheringCategoryList, activeGatheringCatego
               <button onClick={()=>changeGatheringCategoryHandler(0)} className={
             `rounded-full border-2 border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 ${activeGatheringCategoryId == 0 && "text-white bg-main"}`
           }> 전체 </button>
-      {gatheringCategoryList.map((i, index) => (
-        <button onClick={()=>changeGatheringCategoryHandler(i.id)} className={
+      {gatheringCategoryList.map((i) => (
+        <button
+          key={i.id}
+          onClick={() => changeGatheringCategoryHandler(i.id)} className={
             `rounded-full border-2 border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 ${activeGatheringCategoryId == i.id && "text-white bg-main"}`
           }> {i.name} </button>
       ))}

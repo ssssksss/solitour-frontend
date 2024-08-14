@@ -32,6 +32,7 @@ const GatheringPlaceContainer = (props: IGatheringPlaceContainerProps) => {
 
       new window.kakao.maps.StaticMap(container, options);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formContext.getValues("placeName")]);
 
   useEffect(() => {

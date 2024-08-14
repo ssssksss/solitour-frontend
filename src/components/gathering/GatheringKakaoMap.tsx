@@ -2,13 +2,10 @@
 
 import { PlaceResponse } from "@/types/GatheringDto";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
 
-const GatheringKakaoMap = (placeResponse :PlaceResponse) => {
-  const formContext = useFormContext();
-      const [scriptLoaded, setScriptLoaded] = useState(false);
-
+const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
+  
     useEffect(() => {
       if (
         placeResponse.name == "" ||
@@ -35,64 +32,6 @@ const GatheringKakaoMap = (placeResponse :PlaceResponse) => {
         new window.kakao.maps.StaticMap(container, options);
       });
     }, []);
-
-  useEffect(() => {
-    const loadScript = () => {
-      return new Promise<void>((resolve, reject) => {
-        const existingScript = document.getElementById("kakao-maps-sdk");
-        if (!existingScript) {
-          const script = document.createElement("script");
-          script.src = "/api/kakao-map"; // API 라우트에서 스크립트 로드
-          script.id = "kakao-maps-sdk";
-          script.onload = () => resolve();
-          script.onerror = () =>
-            reject(
-              new Error("Kakao Maps 스크립트를 로드하는 데 실패했습니다."),
-            );
-          document.head.appendChild(script);
-        } else {
-          resolve(); // 이미 스크립트가 로드된 경우
-        }
-      });
-    };
-
-    loadScript().then(() => {
-      setScriptLoaded(true);
-    });
-  }, []);
-
-  useEffect(() => {
-
-  if (!scriptLoaded) return;
-
-  const placeName = placeResponse.name;
-  if (!placeName) return;
-
-  const lat = Number(placeResponse.yaxis);
-  const lng = Number(placeResponse.xaxis);
-
-  const renderMap = () => {
-    const container = document.getElementById("map");
-    if (!container) return;
-
-    const options = {
-      center: new window.kakao.maps.LatLng(lat, lng),
-      level: 3,
-      draggable: false, // 지도를 움직이지 못하게 설정
-      scrollwheel: false, // 마우스 휠로 확대/축소 불가
-      disableDoubleClickZoom: true, // 더블클릭으로 확대 불가
-    };
-
-      const map = new window.kakao.maps.Map(container, options);
-      const markerPosition = new window.kakao.maps.LatLng(lat,lng);
-        new window.kakao.maps.Marker({
-          position: markerPosition,
-          map: map,
-        });
-  };
-
-  window.kakao.maps.load(renderMap);
-    }, [scriptLoaded, formContext]);
 
   return (
     <article className={"flex flex-col gap-[2rem]"}>

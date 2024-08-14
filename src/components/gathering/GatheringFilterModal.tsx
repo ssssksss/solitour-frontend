@@ -326,6 +326,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
                   {
                     SELECTED_SCHEDULE_DATA.map(i => (
                       <button
+                        key={i.name}
                         className={
                           "rounded-lg bg-main px-[.5rem] py-[.125rem] text-white"
                         }

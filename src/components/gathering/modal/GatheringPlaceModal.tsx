@@ -150,6 +150,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
         handleAddressSearch(debouncedKeyword);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedKeyword]);
 
   return (
