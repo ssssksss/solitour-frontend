@@ -16,7 +16,12 @@ const QuillEditor = ({ quillRef, modules, content, onChange }: Props) => {
       ref={quillRef}
       theme="snow"
       placeholder="여행은 어땠나요? 자유롭게 기록하고 싶은 것들을 작성해보세요."
-      onChange={(value) => onChange(value)}
+      onChange={(value, delta, source, editor) => {
+        if (source === "api" && value === "<p><br></p>") {
+          return;
+        }
+        onChange(value);
+      }}
       value={content}
       modules={modules}
     />
