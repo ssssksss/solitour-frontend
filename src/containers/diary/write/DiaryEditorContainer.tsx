@@ -9,6 +9,10 @@ const DiaryEditorContainer = () => {
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [placeModal, setPlaceModal] = useState<boolean>(false);
 
+  const onSubmit = () => {
+    alert("테스트");
+  };
+
   // 화면에서 벗어났을 때 초기화
   useEffect(() => {
     return () => {
@@ -29,6 +33,7 @@ const DiaryEditorContainer = () => {
       setCurrentDay={(day: number) =>
         diaryEditorStore.setDiaryEditor({ currentDay: day })
       }
+      onSubmit={onSubmit}
     />
   );
 };

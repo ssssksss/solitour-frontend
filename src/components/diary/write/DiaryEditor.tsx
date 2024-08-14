@@ -22,6 +22,7 @@ interface Props {
   showPlaceModal: () => void;
   closePlaceModal: () => void;
   setCurrentDay: (day: number) => void;
+  onSubmit: () => void;
 }
 
 const DiaryEditor = ({
@@ -33,6 +34,7 @@ const DiaryEditor = ({
   showPlaceModal,
   closePlaceModal,
   setCurrentDay,
+  onSubmit,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
@@ -180,6 +182,7 @@ const DiaryEditor = ({
       {diaryEditorStore.days > 0 && <QuillEditorContainer />}
       <button
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full text-[0.9375rem] text-white`}
+        onClick={() => onSubmit()}
       >
         일기 등록하기
       </button>
