@@ -1,3 +1,4 @@
+import DeleteModalContainer from "@/containers/diary/detail/DeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -8,12 +9,26 @@ interface Props {
   data: GetDiaryResponseDto;
   days: number;
   currentDay: number;
+  modalVisible: boolean;
   changeDay: (day: number) => void;
+  openModal: () => void;
+  closeModal: () => void;
 }
 
-const DiaryViewer = ({ data, days, currentDay, changeDay }: Props) => {
+const DiaryViewer = ({
+  data,
+  days,
+  currentDay,
+  modalVisible,
+  changeDay,
+  openModal,
+  closeModal,
+}: Props) => {
   return (
     <div className="flex w-full flex-col items-start">
+      {modalVisible && (
+        <DeleteModalContainer diaryId={data.diaryId} closeModal={closeModal} />
+      )}
       <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
         <Image
           className="hidden dark:block"
@@ -73,7 +88,10 @@ const DiaryViewer = ({ data, days, currentDay, changeDay }: Props) => {
           <GoPencil />
           수정
         </button>
-        <button className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400">
+        <button
+          className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
+          onClick={() => openModal()}
+        >
           <FaRegTrashCan />
           삭제
         </button>

@@ -18,6 +18,7 @@ const DiaryViewerContainer = ({ data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const changeDay = (day: number) => {
     setCurrentDay(day);
@@ -28,7 +29,10 @@ const DiaryViewerContainer = ({ data }: Props) => {
       data={data}
       days={days}
       currentDay={currentDay}
+      modalVisible={modalVisible}
       changeDay={changeDay}
+      openModal={() => setModalVisible(true)}
+      closeModal={() => setModalVisible(false)}
     />
   );
 };

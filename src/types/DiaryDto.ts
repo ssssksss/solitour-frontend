@@ -24,6 +24,7 @@ export interface CreateDiaryResponseDto {
  * 일기 상세 조회 응답 DTO
  */
 export interface GetDiaryResponseDto {
+  diaryId: number;
   title: string;
   startDate: Date;
   endDate: Date;

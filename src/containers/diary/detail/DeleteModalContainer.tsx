@@ -4,25 +4,26 @@ import DeleteModal from "@/components/common/DeleteModal";
 import { useRouter } from "next/navigation";
 
 interface Props {
-  informationId: number;
+  diaryId: number;
   closeModal: () => void;
 }
 
-const DeleteModalContainer = ({ informationId, closeModal }: Props) => {
+const DeleteModalContainer = ({ diaryId, closeModal }: Props) => {
   const router = useRouter();
 
   const onDeleteClick = async () => {
-    const response = await fetch(`/api/informations/${informationId}`, {
+    const response = await fetch(`/api/diary/delete/${diaryId}`, {
       method: "DELETE",
       cache: "no-store",
     });
 
     if (!response.ok) {
-      alert("정보 삭제에 실패하였습니다.");
+      alert("일기 삭제에 실패하였습니다.");
       throw new Error(response.statusText);
     }
 
-    router.replace("/informations/list/parent-category/1?page=1");
+    router.replace("/diary/list");
+    router.refresh();
   };
 
   const onCancelClick = () => {
