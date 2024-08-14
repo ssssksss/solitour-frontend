@@ -12,18 +12,31 @@ export const metadata: Metadata = {
   description: "Solitour의 모임(탭)",
 };
 
-export default function page({ searchParams }: MyProps) {
+async function getData() {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/categories/gathering`, {
+    next: { revalidate: 21600 }, // 6시간 = 21600초
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
+export default async function page({ searchParams }: MyProps) {
+  const gatheringCategoryList = await getData();
+
   return (
-    <div className="flex min-h-[calc(100vh-25rem)] flex-col items-center">
+    <div className="w-full flex min-h-[calc(100vh-25rem)] flex-col items-center">
       <Banner
         content={[`<b>직접 내 모임</b>을`, "<b>만들어</b>보세요!"]}
         buttonText="모임 등록하기"
         category={"모임"}
       />
-      {/* TODO : 나중에 API 연결하게 되면 그때 가서 공통컴포넌트 수정하기 */}
-      <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
+      <div className="mt-[26.25rem] max-[744px]:mt-[31rem] " />
       <TopList title="모임" />
-      <GatheringListContainer />
+      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} />
     </div>
   );
 }

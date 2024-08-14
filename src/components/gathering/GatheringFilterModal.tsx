@@ -1,7 +1,9 @@
 import "@/styles/reactDataRange.css";
+import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
+import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 
@@ -9,23 +11,58 @@ interface IGatheringFilterModalProps {
   closeModal: () => void;
 }
 
-const LOCATION = [
-  ["전체", "all"],
-  ["서울", "seoul"],
-  ["부산", "busan"],
-  ["경기", "gyeonggi"],
-  ["제주", "jeju"],
-  ["충청", "chungcheong"],
-  ["강원", "gangwon"],
-  ["인천", "incheon"],
-  ["경상", "gyeongsang"],
-  ["전라", "jeolla"],
-  ["기타지역", "etc"],
+const regions = [
+  { id: 0, name: "전체" },
+  { id: 11, name: "서울" },
+  { id: 26, name: "부산" },
+  { id: 27, name: "대구" },
+  { id: 28, name: "인천" },
+  { id: 29, name: "광주" },
+  { id: 30, name: "대전" },
+  { id: 31, name: "울산" },
+  { id: 36, name: "세종" },
+  { id: 41, name: "경기" },
+  { id: 42, name: "강원" },
+  { id: 43, name: "충북" },
+  { id: 44, name: "충남" },
+  { id: 45, name: "전북" },
+  { id: 46, name: "전남" },
+  { id: 47, name: "경북" },
+  { id: 48, name: "경남" },
+  { id: 50, name: "제주" },
 ];
+
+const SELECTED_SCHEDULE_DATA = [
+  {
+    name: "7일",
+    value: 7,
+  },
+  {
+    name: "14일",
+    value: 14,
+  },
+  {
+    name: "21일",
+    value: 21,
+  },
+  {
+    name: "30일",
+    value: 30
+  },
+  {
+    name: "60일",
+    value: 60
+  },
+  {
+    name: "90일",
+    value: 90
+  },
+]
+
 const SEX = [
-  ["전체", "all"],
-  ["남성", "man"],
-  ["여성", "woman"],
+  ["전체", "ALL"],
+  ["남성", "MALE"],
+  ["여성", "FEMALE"],
 ];
 const AGE = {
   전체: {
@@ -49,31 +86,6 @@ const AGE = {
     endAge: 59,
   },
 };
-const CATEGORY = {
-  전체: {
-    value: "all",
-  },
-  취향: {
-    value: "liking",
-  },
-  활동: {
-    value: "activity",
-  },
-};
-
-const dateFormat4y2m2d = (date1: string | Date) => {
-  const date = new Date(date1);
-  const month: number | string = date.getMonth() + 1;
-  const day: number | string = date.getDate();
-
-  return (
-    date.getFullYear() +
-    "-" +
-    month.toString().padStart(2, "0") +
-    "-" +
-    day.toString().padStart(2, "0")
-  );
-};
 
 function calculateDateDifference(startDate: Date, endDate: Date): number {
   const differenceInTime = endDate.getTime() - startDate.getTime();
@@ -81,22 +93,19 @@ function calculateDateDifference(startDate: Date, endDate: Date): number {
   return differenceInDays;
 }
 
-const GatheringFilterModal = (props: IGatheringFilterModalProps) => {
-  const router = useRouter();
+const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
   const searchParams = useSearchParams();
   const [location, setLocation] = useState(
-    searchParams.get("location") || "all",
+    searchParams.get("location") || 0,
   );
-  const [sex, setSex] = useState(searchParams.get("sex") || "all");
+  const [sex, setSex] = useState(searchParams.get("sex") || "ALL");
   const [startAge, setStartAge] = useState(
     searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
   );
   const [endAge, setEndAge] = useState(
     searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
   );
-  const [category, setCategory] = useState(
-    searchParams.get("category") || "all",
-  );
+  const [isFilterSchedule, setIsFilterSchedule] = useState((searchParams.get("startDate") || searchParams.get("endDate")) ? true : false);
   const [calendarDate, setCalendarDate] = useState([
     {
       startDate: searchParams.get("startDate")
@@ -110,44 +119,71 @@ const GatheringFilterModal = (props: IGatheringFilterModalProps) => {
   ]);
 
   const initFilterOptionHandler = () => {
-    setLocation(searchParams.get("location") || "all");
-    setSex(searchParams.get("sex") || "all");
-    setStartAge(
-      searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
-    );
-    setEndAge(
-      searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
-    );
-    setCategory(searchParams.get("category") || "all");
+    setLocation(0);
+    setSex("ALL");
+    setStartAge(20);
+    setEndAge(59);
     setCalendarDate([
       {
-        startDate: searchParams.get("startDate")
-          ? new Date(searchParams.get("startDate") as string)
-          : new Date(),
-        endDate: searchParams.get("endDate")
-          ? new Date(searchParams.get("endDate") as string)
-          : new Date(),
+      startDate: new Date(),
+      endDate: new Date(),
         key: "selection",
       },
     ]);
   };
 
   const submitApplyFilter = () => {
-    router.replace(
-      `/gathering?location=${location}&sex=${sex}&startAge=${startAge}&endAge=${endAge}&category=${category}&startDate=${dateFormat4y2m2d(calendarDate[0].startDate)}&endDate=${dateFormat4y2m2d(calendarDate[0].endDate)}`,
-    );
-    props.closeModal();
+    let _url = `/gathering?`;
+    let temp = UrlQueryStringToObject(window.location.href) || {};
+    delete temp.location;
+    delete temp.startAge;
+    delete temp.sex;
+    delete temp.endAge;
+    delete temp.startDate;
+    delete temp.endDate;
+    // 지역
+    if (location != 0) {
+      temp.location = location;
+    }
+    // 성별
+    if (sex != "ALL") {
+      temp.sex = sex;
+    }
+    // 최소나이
+    if (startAge != 20) {
+      temp.startAge = startAge;
+    }
+    // 최대나이
+    if (endAge != 59) {
+      temp.endAge = endAge;
+    }
+    // 일정 선택
+    if (isFilterSchedule) {
+      temp.startDate = format(calendarDate[0].startDate, "yyyy-MM-dd"); 
+      temp.endDate = format(calendarDate[0].endDate, "yyyy-MM-dd"); 
+    }
+    if (temp.page) {
+      temp.page = 1;
+    }
+    Object.entries(temp).map(i => {
+      _url += i[0]+"="+i[1]+"&"
+    })      
+    if (_url.endsWith("&")) {
+      _url = _url.slice(0, -1);
+    }
+    window.history.pushState(null, "", _url);
+    closeModal();
   };
 
   return (
     <div
       className={
-        "relative aspect-square w-[calc(100vw-1rem)] max-w-[40rem] rounded-2xl bg-white px-[1rem] py-[2.875rem] md:p-[2.875rem]"
+        "relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[3rem] py-[2.875rem]"
       }
     >
       <button
         className="absolute right-[1.5rem] top-[1.5rem]"
-        onClick={() => props.closeModal()}
+        onClick={() => closeModal()}
       >
         <Image
           src={"/close-icon.svg"}
@@ -161,13 +197,13 @@ const GatheringFilterModal = (props: IGatheringFilterModalProps) => {
         <div className={"flex flex-col gap-y-[1rem]"}>
           <div className={"h-[2rem] font-bold text-black"}> 지역 </div>
           <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-            {LOCATION.map((i) => (
+            {regions.map((i) => (
               <button
-                key={i[1]}
-                onClick={() => setLocation(i[1])}
-                className={`${location == i[1] ? "bg-main text-white" : "text-gray1"} flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                key={i.id}
+                onClick={() => setLocation(i.id)}
+                className={`${location == i.id ? "bg-main text-white" : "text-gray1"} flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
               >
-                {i[0]}
+                {i.name}
               </button>
             ))}
           </div>
@@ -270,26 +306,47 @@ const GatheringFilterModal = (props: IGatheringFilterModalProps) => {
             </div>
           </div>
         </div>
-        <div className={"flex flex-col gap-y-[1rem]"}>
-          <div className={"h-[2rem] font-bold text-black"}> 카테고리 </div>
-          <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-            {Object.entries(CATEGORY).map((i) => (
-              <button
-                key={i[1].value}
-                className={`${category == i[1].value ? "bg-main text-white" : "text-gray1"} flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
-                onClick={() => setCategory(i[1].value)}
-              >
-                {i[0]}
-              </button>
-            ))}
-          </div>
-        </div>
         <div className={"flex flex-col items-center gap-[.5rem]"}>
-          <div className={"h-[2rem] w-full font-bold text-black"}> 일정 </div>
-          <div>
+          <div className={"h-[2rem] flex gap-4 w-full font-bold text-black items-center justify-between"}>
+            <span> 일정 </span>
+            <button className={"flex gap-1 text-sm text-black font-medium"} onClick={() => setIsFilterSchedule(prev => !prev)}>
+              {
+                isFilterSchedule ?
+                <Image src="/common/check-active-icon.svg" alt="location-icon" width={20} height={20} /> :
+                <Image src="/common/check-empty-icon.svg" alt="location-icon" width={20} height={20} />
+              }
+              특정 기간 선택하기
+            </button>
+          </div>
+          
+          {
+            isFilterSchedule &&
+            <div>
+                <div className={"flex py-[1rem] gap-1"}>
+                  {
+                    SELECTED_SCHEDULE_DATA.map(i => (
+                      <button
+                        className={
+                          "rounded-lg bg-main px-[.5rem] py-[.125rem] text-white"
+                        }
+                        onClick={() => {
+                              setCalendarDate([
+                              {
+                                startDate: calendarDate[0].startDate,
+                                endDate: new Date(new Date(calendarDate[0].startDate).setDate(new Date(calendarDate[0].startDate).getDate() + i.value - 1)),
+                                key: "selection",
+                              },
+                            ]);
+                        }}
+                      >
+                        {i.name}
+                      </button>
+                    ))
+                  }
+            </div>
             <DateRangePicker
-              onChange={(rangesByKey: RangeKeyDict) => {
-                const selection = rangesByKey.selection;
+                  onChange={(rangesByKey: RangeKeyDict) => {
+                    const selection = rangesByKey.selection;
                 setCalendarDate([
                   {
                     startDate: selection.startDate as Date,
@@ -297,20 +354,20 @@ const GatheringFilterModal = (props: IGatheringFilterModalProps) => {
                     key: "selection",
                   },
                 ]);
-              }}
-              // moveRangeOnFirstSelection={true}
+                  }}
+              minDate={new Date()}
+              maxDate={add(new Date(), { years: 1 })}
               showDateDisplay={false}
               months={1}
               ranges={calendarDate}
               locale={ko}
               rangeColors={["#00B488", "#F2FAF7"]}
               color={"#ff0000"}
-            />
-          </div>
-          <div className={"flex h-[1.5rem] w-full justify-center gap-[.25rem]"}>
-            <div>{dateFormat4y2m2d(calendarDate[0].startDate)}</div>
+                />
+            <div className={"flex h-[1.5rem] w-full justify-center gap-[.25rem]"}>
+            <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
             <div>~</div>
-            <div>{dateFormat4y2m2d(calendarDate[0].endDate)}</div>
+            <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
             <div>
               (
               {calculateDateDifference(
@@ -320,6 +377,8 @@ const GatheringFilterModal = (props: IGatheringFilterModalProps) => {
               일)
             </div>
           </div>
+          </div>
+          }
         </div>
       </article>
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
