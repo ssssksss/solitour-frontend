@@ -1,17 +1,22 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
-import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
+import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import {
-  CreateDiaryRequestDto,
-  CreateDiaryResponseDto,
+  GetDiaryResponseDto,
+  UpdateDiaryRequestDto,
+  UpdateDiaryResponseDto,
 } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const DiaryEditorContainer = () => {
+interface Props {
+  diaryData: GetDiaryResponseDto;
+}
+
+const DiaryEditorContainer = ({ diaryData }: Props) => {
   const router = useRouter();
   const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
@@ -21,7 +26,7 @@ const DiaryEditorContainer = () => {
 
   const onSubmit = async () => {
     // Validate from fields using Zod
-    const validatedFields = DiaryCreateFormSchema.safeParse({
+    const validatedFields = DiaryUpdateFormSchema.safeParse({
       userId: authStore.id,
       title: diaryEditorStore.title,
       startDate: diaryEditorStore.startDate,
@@ -37,8 +42,7 @@ const DiaryEditorContainer = () => {
       return;
     }
 
-    const data: CreateDiaryRequestDto = {
-      userId: validatedFields.data.userId,
+    const data: UpdateDiaryRequestDto = {
       title: validatedFields.data.title,
       startDate: validatedFields.data.startDate,
       endDate: validatedFields.data.endDate,
@@ -51,8 +55,8 @@ const DiaryEditorContainer = () => {
 
     setLoading(true);
 
-    const response = await fetch("/api/diary/create", {
-      method: "POST",
+    const response = await fetch(`/api/diary/update/${diaryData.diaryId}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -66,13 +70,29 @@ const DiaryEditorContainer = () => {
       throw new Error(response.statusText);
     }
 
-    const result: CreateDiaryResponseDto = await response.json();
+    const result: UpdateDiaryResponseDto = await response.json();
     router.push(`/diary/${result.id}`);
     router.refresh();
   };
 
   // 화면에서 벗어났을 때 초기화
   useEffect(() => {
+    diaryEditorStore.setDiaryEditor({
+      title: diaryData.title,
+      startDate: new Date(diaryData.startDate),
+      endDate: new Date(diaryData.endDate),
+      placeName: "?", // TODO
+      address: diaryData.address,
+      days:
+        (new Date(diaryData.endDate).getTime() -
+          new Date(diaryData.startDate).getTime()) /
+          (1000 * 60 * 60 * 24) +
+        1,
+      currentDay: 1,
+      moodLevels: diaryData.diaryDays.map((value) => value.moodLevel),
+      contents: diaryData.diaryDays.map((value) => value.content),
+    });
+
     return () => {
       diaryEditorStore.initialize();
     };
@@ -81,7 +101,7 @@ const DiaryEditorContainer = () => {
 
   return (
     <DiaryEditor
-      text="등록"
+      text="수정"
       diaryEditorStore={diaryEditorStore}
       dateRangeModal={dateRangeModal}
       placeModal={placeModal}

@@ -14,6 +14,7 @@ const QuillEditorContainer = dynamic(
 );
 
 interface Props {
+  text: string;
   diaryEditorStore: useDiaryEditorStoreType;
   dateRangeModal: boolean;
   placeModal: boolean;
@@ -27,6 +28,7 @@ interface Props {
 }
 
 const DiaryEditor = ({
+  text,
   diaryEditorStore,
   dateRangeModal,
   placeModal,
@@ -45,7 +47,7 @@ const DiaryEditor = ({
       )}
       {placeModal && <PlaceModalContainer closeModal={closePlaceModal} />}
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
-        일기 등록하기
+        {`일기 ${text}하기`}
       </h1>
       <p className="mt-6 text-gray1 dark:text-slate-400">
         새로운 <span className="text-main">경험을 기록</span>하고 나만의
@@ -203,10 +205,10 @@ const DiaryEditor = ({
               width={20}
               height={20}
             />
-            <p>등록 중...</p>
+            <p>{`${text} 중...`}</p>
           </div>
         ) : (
-          <p>일기 등록하기</p>
+          <p>{`일기 ${text}하기`}</p>
         )}
       </button>
     </div>

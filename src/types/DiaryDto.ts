@@ -47,3 +47,24 @@ export interface GetDiaryListResponseDto {
   address: string;
   diaryDays: { moodLevel: number; content: string }[];
 }
+
+/**
+ * 일기 수정 요청 DTO
+ */
+export interface UpdateDiaryRequestDto {
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  address: string;
+  diaryDays: {
+    moodLevel: number;
+    content: string;
+  }[];
+}
+
+/**
+ * 일기 수정 응답 DTO
+ */
+export interface UpdateDiaryResponseDto {
+  id: number;
+}

@@ -2,7 +2,7 @@
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import useDragScroll from "@/hooks/useDragScroll";
-import { InformationEditFormSchema } from "@/lib/zod/schema/InformationEditFormSchema";
+import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
 import {
@@ -53,7 +53,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
   const onSubmit = async () => {
     // Validate from fields using Zod
-    const validatedFields = InformationEditFormSchema.safeParse({
+    const validatedFields = InformationUpdateFormSchema.safeParse({
       userId: id,
       informationTitle: editorStore.title,
       informationAddress: editorStore.address,

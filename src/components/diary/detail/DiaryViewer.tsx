@@ -1,6 +1,7 @@
 import DeleteModalContainer from "@/containers/diary/detail/DeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
+import Link from "next/link";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
 import { TiLocation } from "react-icons/ti";
@@ -84,10 +85,13 @@ const DiaryViewer = ({
         }}
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
-        <button className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400">
+        <Link
+          className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
+          href={`/diary/edit/${data.diaryId}`}
+        >
           <GoPencil />
           수정
-        </button>
+        </Link>
         <button
           className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
           onClick={() => openModal()}
