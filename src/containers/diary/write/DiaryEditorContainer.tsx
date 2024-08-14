@@ -26,7 +26,9 @@ const DiaryEditorContainer = () => {
       title: diaryEditorStore.title,
       startDate: diaryEditorStore.startDate,
       endDate: diaryEditorStore.endDate,
+      placeName: diaryEditorStore.placeName,
       address: diaryEditorStore.address,
+      image: diaryEditorStore.image,
       moodLevels: diaryEditorStore.moodLevels,
       contents: diaryEditorStore.contents,
     });
@@ -42,7 +44,9 @@ const DiaryEditorContainer = () => {
       title: validatedFields.data.title,
       startDate: validatedFields.data.startDate,
       endDate: validatedFields.data.endDate,
+      placeName: validatedFields.data.placeName,
       address: validatedFields.data.address,
+      image: validatedFields.data.image,
       diaryDays: Array.from({ length: diaryEditorStore.days }, (_, index) => ({
         moodLevel: validatedFields.data.moodLevels[index],
         content: validatedFields.data.contents[index],

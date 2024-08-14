@@ -31,6 +31,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       title: diaryEditorStore.title,
       startDate: diaryEditorStore.startDate,
       endDate: diaryEditorStore.endDate,
+      placeName: diaryEditorStore.placeName,
       address: diaryEditorStore.address,
       moodLevels: diaryEditorStore.moodLevels,
       contents: diaryEditorStore.contents,
@@ -46,6 +47,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       title: validatedFields.data.title,
       startDate: validatedFields.data.startDate,
       endDate: validatedFields.data.endDate,
+      placeName: validatedFields.data.placeName,
       address: validatedFields.data.address,
       diaryDays: Array.from({ length: diaryEditorStore.days }, (_, index) => ({
         moodLevel: validatedFields.data.moodLevels[index],
@@ -81,7 +83,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       title: diaryData.title,
       startDate: new Date(diaryData.startDate),
       endDate: new Date(diaryData.endDate),
-      placeName: "?", // TODO
+      placeName: diaryData.placeName,
       address: diaryData.address,
       days:
         (new Date(diaryData.endDate).getTime() -

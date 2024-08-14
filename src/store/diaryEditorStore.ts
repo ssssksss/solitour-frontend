@@ -12,6 +12,7 @@ interface DiaryEditorState {
   address: string;
   province: string;
   city: string;
+  image: string;
   moodLevels: number[];
   contents: string[];
 }
@@ -35,6 +36,7 @@ const initialState: DiaryEditorState = {
   address: "",
   province: "",
   city: "",
+  image: "",
   moodLevels: [],
   contents: [],
 };

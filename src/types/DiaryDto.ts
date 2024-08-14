@@ -6,7 +6,9 @@ export interface CreateDiaryRequestDto {
   title: string;
   startDate: Date;
   endDate: Date;
+  placeName: string;
   address: string;
+  image: string;
   diaryDays: {
     moodLevel: number;
     content: string;
@@ -28,7 +30,9 @@ export interface GetDiaryResponseDto {
   title: string;
   startDate: Date;
   endDate: Date;
+  placeName: string;
   address: string;
+  image: string;
   diaryDays: {
     moodLevel: number;
     content: string;
@@ -55,6 +59,7 @@ export interface UpdateDiaryRequestDto {
   title: string;
   startDate: Date;
   endDate: Date;
+  placeName: string;
   address: string;
   diaryDays: {
     moodLevel: number;
