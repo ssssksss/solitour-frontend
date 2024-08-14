@@ -1,15 +1,35 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
+import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
+import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { useEffect, useState } from "react";
 
 const DiaryEditorContainer = () => {
+  const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [placeModal, setPlaceModal] = useState<boolean>(false);
 
   const onSubmit = () => {
+    // Validate from fields using Zod
+    const validatedFields = DiaryCreateFormSchema.safeParse({
+      userId: authStore.id,
+      title: diaryEditorStore.title,
+      startDate: diaryEditorStore.startDate,
+      endDate: diaryEditorStore.endDate,
+      address: diaryEditorStore.address,
+      moodLevels: diaryEditorStore.moodLevels,
+      contents: diaryEditorStore.contents,
+    });
+
+    // If validation fails, return errors early. Otherwise, continue.
+    if (!validatedFields.success) {
+      alert(validatedFields.error.issues[0].message);
+      return;
+    }
+
     alert("테스트");
   };
 
