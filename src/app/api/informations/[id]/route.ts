@@ -87,9 +87,6 @@ export async function PUT(
 
 /**
  * 정보 글 삭제
- * @param request
- * @param param
- * @returns
  */
 export async function DELETE(
   request: NextRequest,

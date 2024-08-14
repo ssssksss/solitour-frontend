@@ -65,7 +65,7 @@ const InformationEditorContainer = () => {
       tips: editorStore.tips,
     });
 
-    // If validation fails, return errors early. Otherwise, continue;
+    // If validation fails, return errors early. Otherwise, continue.
     if (!validatedFields.success) {
       console.log(validatedFields.error.issues);
       alert(validatedFields.error.issues[0].message);

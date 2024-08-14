@@ -26,7 +26,7 @@ interface Props {
 export async function generateMetadata({ params: { id } }: Props) {
   const informationId = Number(id);
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
-    throw Error("Not Found");
+    throw new Error("Not Found");
   }
 
   return {
@@ -45,7 +45,7 @@ export default async function page({ params: { id } }: Props) {
 
   return (
     <div className="flex flex-col items-center">
-      <PagePath first="정보" second={"정보 수정하기"} />
+      <PagePath first="정보" second="정보 수정하기" />
       <InformationEditorContainer informationId={informationId} data={data} />
     </div>
   );

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const InformationEditFormSchema = z.object({
+export const InformationUpdateFormSchema = z.object({
   userId: z
     .number({
       required_error: "UserId is required.",

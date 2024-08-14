@@ -14,25 +14,31 @@ const QuillEditorContainer = dynamic(
 );
 
 interface Props {
+  text: string;
   diaryEditorStore: useDiaryEditorStoreType;
   dateRangeModal: boolean;
   placeModal: boolean;
+  loading: boolean;
   showDateRangeModal: () => void;
   closeDateRangeModal: () => void;
   showPlaceModal: () => void;
   closePlaceModal: () => void;
   setCurrentDay: (day: number) => void;
+  onSubmit: () => void;
 }
 
 const DiaryEditor = ({
+  text,
   diaryEditorStore,
   dateRangeModal,
   placeModal,
+  loading,
   showDateRangeModal,
   closeDateRangeModal,
   showPlaceModal,
   closePlaceModal,
   setCurrentDay,
+  onSubmit,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
@@ -41,7 +47,7 @@ const DiaryEditor = ({
       )}
       {placeModal && <PlaceModalContainer closeModal={closePlaceModal} />}
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
-        일기 등록하기
+        {`일기 ${text}하기`}
       </h1>
       <p className="mt-6 text-gray1 dark:text-slate-400">
         새로운 <span className="text-main">경험을 기록</span>하고 나만의
@@ -56,6 +62,10 @@ const DiaryEditor = ({
           type="text"
           name="title"
           placeholder="제목을 입력하세요."
+          value={diaryEditorStore.title}
+          onChange={(e) =>
+            diaryEditorStore.setDiaryEditor({ title: e.target.value })
+          }
         />
       </div>
       <div className="mt-12 flex flex-row items-center gap-[6.75rem] max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-12">
@@ -106,11 +116,13 @@ const DiaryEditor = ({
             장소<span className="text-2xl text-main">*</span>
           </h2>
           <button
-            className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm text-gray2 outline-none hover:border-main"
+            className={`${diaryEditorStore.address === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
             type="button"
             onClick={() => showPlaceModal()}
           >
-            {"장소명을 입력하세요."}
+            {diaryEditorStore.address === ""
+              ? "장소명을 입력하세요."
+              : diaryEditorStore.placeName}
           </button>
         </div>
       </div>
@@ -179,9 +191,25 @@ const DiaryEditor = ({
       )}
       {diaryEditorStore.days > 0 && <QuillEditorContainer />}
       <button
-        className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 h-[2.625rem] w-[9.625rem] self-end rounded-full text-[0.9375rem] text-white`}
+        className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
+        type="submit"
+        onClick={() => onSubmit()}
+        disabled={diaryEditorStore.days === 0 || loading}
       >
-        일기 등록하기
+        {loading ? (
+          <div className="flex flex-row items-center gap-3">
+            <Image
+              className="animate-spin"
+              src="/loading-icon.png"
+              alt="loading-icon"
+              width={20}
+              height={20}
+            />
+            <p>{`${text} 중...`}</p>
+          </div>
+        ) : (
+          <p>{`일기 ${text}하기`}</p>
+        )}
       </button>
     </div>
   );

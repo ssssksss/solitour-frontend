@@ -62,7 +62,7 @@ const MyBoardList = ({ data }: MyBoardListProps) => {
             //   likes={post.likes}
             //   views={post.views}
             // />
-            <div> </div>
+            <div key={index}> </div>
           );
         }
       })}

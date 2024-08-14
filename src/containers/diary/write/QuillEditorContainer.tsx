@@ -20,11 +20,27 @@ const QuillEditorContainer = () => {
     input.click();
 
     // Step 3. change 이벤트가 발생했을 때의 이미지 처리 로직을 적용합니다.
-    input.addEventListener("change", () => {
+    input.addEventListener("change", async () => {
       if (input.files && quillRef.current) {
         const file = input.files[0];
-        const blob = new Blob([file], { type: "image/png" });
-        const url = URL.createObjectURL(blob);
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await fetch("/api/image/upload", {
+          method: "POST",
+          body: formData,
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          alert("이미지 처리 중 오류가 발생하였습니다.");
+          throw new Error(response.statusText);
+        }
+
+        const url = await response.text();
+
+        //const blob = new Blob([file], { type: "image/png" });
+        //const url = URL.createObjectURL(blob);
 
         const Image = Quill.import("formats/image");
         Image.sanitize = (url: string) => url;
@@ -34,7 +50,11 @@ const QuillEditorContainer = () => {
 
         if (range) {
           editor.insertEmbed(range.index, "image", url);
-          editor.setSelection(range.index + 1, 0);
+          editor.setSelection(range.index + 1, 1);
+
+          if (diaryEditorStore.image === "") {
+            diaryEditorStore.setDiaryEditor({ image: url });
+          }
 
           // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout 사용합니다.
           setTimeout(() => {
@@ -46,9 +66,6 @@ const QuillEditorContainer = () => {
             if (imageElement) {
               imageElement.style.borderRadius = "1rem";
             }
-
-            // 메모리 누수를 방지하기 위해 URL을 해제합니다.
-            // URL.revokeObjectURL(url);
           }, 100);
         }
       }
@@ -81,6 +98,7 @@ const QuillEditorContainer = () => {
         },
       },
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
