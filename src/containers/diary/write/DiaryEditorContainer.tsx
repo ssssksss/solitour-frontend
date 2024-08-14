@@ -4,7 +4,10 @@ import DiaryEditor from "@/components/diary/write/DiaryEditor";
 import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
-import { CreateDiaryResponseDto } from "@/types/DiaryDto";
+import {
+  CreateDiaryRequestDto,
+  CreateDiaryResponseDto,
+} from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -33,18 +36,24 @@ const DiaryEditorContainer = () => {
       return;
     }
 
+    const data: CreateDiaryRequestDto = {
+      userId: validatedFields.data.userId,
+      title: validatedFields.data.title,
+      startDate: validatedFields.data.startDate,
+      endDate: validatedFields.data.endDate,
+      address: validatedFields.data.address,
+      diaryDays: Array.from({ length: diaryEditorStore.days }, (_, index) => ({
+        moodLevel: validatedFields.data.moodLevels[index],
+        content: validatedFields.data.contents[index],
+      })),
+    };
+
     const response = await fetch("/api/diary/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        userId: validatedFields.data.userId,
-        title: validatedFields.data.title,
-        startDate: validatedFields.data.startDate,
-        endDate: validatedFields.data.endDate,
-        address: validatedFields.data.address,
-      }),
+      body: JSON.stringify(data),
       cache: "no-store",
     });
 

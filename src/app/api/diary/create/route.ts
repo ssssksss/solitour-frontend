@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
     const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
       body: JSON.stringify(body),
