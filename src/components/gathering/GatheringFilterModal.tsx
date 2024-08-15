@@ -4,7 +4,7 @@ import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 
 interface IGatheringFilterModalProps {
@@ -174,6 +174,20 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     window.history.pushState(null, "", _url);
     closeModal();
   };
+
+  useEffect(() => {
+    setLocation(+(searchParams.get('location') || 0));
+    setSex(searchParams.get('sex') || "ALL");
+    setStartAge(+(searchParams.get('startAge') || 20));
+    setEndAge(+(searchParams.get('endAge') || 59));
+    setCalendarDate([
+      {
+      startDate: (searchParams.get('startDate') ? new Date(searchParams.get('startDate') as string)  : new Date()),
+      endDate: (searchParams.get('endDate') ? new Date(searchParams.get('endDate') as string)  : new Date()),
+        key: "selection",
+      },
+    ]);
+    }, [searchParams])
 
   return (
     <div
