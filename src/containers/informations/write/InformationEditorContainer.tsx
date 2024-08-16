@@ -1,6 +1,7 @@
 "use client";
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
+import sanitizeOption from "@/constants/common/sanitizeOption";
 import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
@@ -8,6 +9,7 @@ import useEditorStore from "@/store/editorStore";
 import { InformationRegisterResponseDto } from "@/types/InformationDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import sanitizeHtml from "sanitize-html";
 
 const InformationEditorContainer = () => {
   const imagesHook = useDragScroll();
@@ -60,7 +62,7 @@ const InformationEditorContainer = () => {
       contentImages: editorStore.imageFiles.filter(
         (_value, index) => index !== editorStore.mainImageIndex,
       ),
-      informationContent: editorStore.content,
+      informationContent: sanitizeHtml(editorStore.content, sanitizeOption),
       hashtags: editorStore.hashtags,
       tips: editorStore.tips,
     });

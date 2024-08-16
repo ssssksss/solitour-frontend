@@ -1,6 +1,7 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
+import sanitizeOption from "@/constants/common/sanitizeOption";
 import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
@@ -10,6 +11,7 @@ import {
 } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import sanitizeHtml from "sanitize-html";
 
 const DiaryEditorContainer = () => {
   const router = useRouter();
@@ -30,7 +32,9 @@ const DiaryEditorContainer = () => {
       address: diaryEditorStore.address,
       image: diaryEditorStore.image,
       moodLevels: diaryEditorStore.moodLevels,
-      contents: diaryEditorStore.contents,
+      contents: diaryEditorStore.contents.map((content) =>
+        sanitizeHtml(content, sanitizeOption),
+      ),
     });
 
     // If validation fails, return errors early. Otherwise, continue.
