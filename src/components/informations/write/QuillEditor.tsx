@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import "@/styles/informationQuillEditor.css";
-import QuillEditorSkeleton from "@/components/skeleton/informations/write/QuillEditorSkeleton";
+import "@/styles/quillEditor.css";
+import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
 
 interface Props {
   content: string;
@@ -32,7 +32,7 @@ const QuillEditor = ({ content, onChange }: Props) => {
       }}
       value={content}
       modules={{
-        toolbar: false,
+        toolbar: [[{ size: ["small", false, "large", "huge"] }, { font: [] }]],
       }}
     />
   );

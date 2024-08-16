@@ -3,7 +3,7 @@ import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
 import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
 import dynamic from "next/dynamic";
-import QuillEditorSkeleton from "@/components/skeleton/diary/write/QuillEditorSkeleton";
+import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
 
 const QuillEditorContainer = dynamic(
   () => import("@/containers/diary/write/QuillEditorContainer"),
