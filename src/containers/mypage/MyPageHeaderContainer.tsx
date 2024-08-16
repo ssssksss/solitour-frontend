@@ -1,9 +1,12 @@
-"use client";
-
 import MyPageHeader from "@/components/mypage/MyPageHeader";
+import { userResponseDto } from "@/types/UserDto";
 
-const MyPageHeaderContainer = () => {
-  return <MyPageHeader />;
+interface IMyPageHeaderContainer {
+  userInfo: userResponseDto;
+}
+const MyPageHeaderContainer = (props: IMyPageHeaderContainer) => {
+  return <>
+    <MyPageHeader userInfo={props.userInfo} />
+  </>;
 };
-
-export default MyPageHeaderContainer;
+export default MyPageHeaderContainer
