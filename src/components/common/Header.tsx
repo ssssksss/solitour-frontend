@@ -139,7 +139,7 @@ const Header = ({
             ) : userId > 0 ? (
               <>
                 <Link
-                  href={"/mypage/profile"}
+                  href={"/mypage"}
                   className={"relative rounded-[50%]"}
                 >
                   <Image
