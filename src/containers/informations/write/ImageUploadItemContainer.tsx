@@ -2,6 +2,7 @@
 
 import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
 import useEditorStore from "@/store/editorStore";
+import React, { useCallback, useState } from "react";
 import { useRef } from "react";
 
 interface Props {
@@ -13,6 +14,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
   const { images, mainImageIndex, setEditor, changeImage, addImage } =
     useEditorStore();
   const editorStore = useEditorStore();
+  const [url, setUrl] = useState<string>("");
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
@@ -25,12 +27,12 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       imageRef.current.files.length >= 1
     ) {
       const file = imageRef.current.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        changeImage(index, reader.result as string); // Base64 Encoded String
-        addImage(file);
-      };
+      const blob = new Blob([file], { type: "image/png" });
+      const fileURL = URL.createObjectURL(blob);
+
+      setUrl(fileURL);
+      changeImage(index, fileURL);
+      addImage(file);
     }
   };
 
@@ -45,6 +47,9 @@ const ImageUploadItemContainer = ({ index }: Props) => {
     } else if (index === mainImageIndex) {
       setEditor({ mainImageIndex: 0 });
     }
+
+    URL.revokeObjectURL(url);
+    setUrl("");
   };
 
   return (
