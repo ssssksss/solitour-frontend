@@ -1,13 +1,21 @@
 "use client";
 
 import MyProfile from "@/components/mypage/MyProfile";
+import { userResponseDto } from "@/types/UserDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { ChangeEvent, useRef, useState } from "react";
 
-const MyProfileContainer = () => {
+interface IMyProfileContainer {
+  userInfo: userResponseDto;
+}
+
+const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
   const imageUploadRef = useRef<HTMLInputElement>(null);
   const [, setIsDragging] = useState(false);
   const [imageUrl, setImageUrl] = useState("/");
-
+  const [nickname, setNickname] = useState(userInfo.nickname);
+  const [defaultNickname, setDefaultNickname] = useState(userInfo.nickname);
+  const [message, setMessage] = useState("");
   const onDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -48,8 +56,30 @@ const MyProfileContainer = () => {
     const result = URL.createObjectURL(file);
     setImageUrl(result);
   };
+  const submitChangeNicknameHandler = async () => {
+    if (nickname == "" && nickname == defaultNickname) return;
+    const res = await fetchWithAuth("/api/mypage/change-nickname", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+      body: JSON.stringify({ nickname: nickname }),
+    })
 
-  // TODO : 디폴트 이미지로 돌아가는 방법에 대해서도 코드 작성이 필요하다. 나중에 서버에 이미지 업로드 될 때 같이 변경해서 변경할 예정
+    const data = await res.json();
+    if (data.status == 200) {
+      setDefaultNickname(nickname);
+      setMessage("성공");
+    } else {
+      setMessage("실패");
+    }
+  }
+  
+  const changeNickname = (value: string) => {
+    setNickname(value);
+    setMessage("");
+  }
+
 
   return (
     <MyProfile
@@ -60,6 +90,12 @@ const MyProfileContainer = () => {
       imageUploadRef={imageUploadRef}
       imageUrl={imageUrl}
       onChangeImageUploadInputHandler={onChangeImageUploadInputHandler}
+      userInfo={userInfo}
+      submitChangeNicknameHandler={submitChangeNicknameHandler}
+      nickname={nickname}
+      changeNickname={changeNickname}
+      defaultNickname={defaultNickname}
+      message={message}
     />
   );
 };
