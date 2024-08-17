@@ -32,7 +32,10 @@ const QuillEditor = ({ content, onChange }: Props) => {
       }}
       value={content}
       modules={{
-        toolbar: [[{ size: ["small", false, "large", "huge"] }, { font: [] }]],
+        toolbar: [
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["bold", "italic", "underline"],
+        ],
       }}
     />
   );
