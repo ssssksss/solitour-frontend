@@ -1,20 +1,47 @@
 import MyProfileContainer from "@/containers/mypage/MyProfileContainer";
+import { userResponseDto } from "@/types/UserDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "마이페이지-프로필 설정",
   description: "Solitour 사용자 마이페이지-프로필 설정",
 };
 
-export default function page() {
-  return (
-    <main
+async function getUserInfo() {
+  const cookie = cookies().get("access_token");
+  const response = await fetchWithAuth(
+    `${process.env.BACKEND_URL}/api/users/info`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.log("page.tsx 파일 : ",response.status);
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error(response.statusText);
+  }
+
+  return response.json() as Promise<userResponseDto>;
+}
+
+
+  export default async function page() {
+  const userInfo = await getUserInfo();
+  
+    return (
+    <div
       className={
-        "flex w-full flex-col items-center px-[.5rem] pb-[2rem] pt-[2rem] lg:px-[0rem] min-h-[calc(100vh-25rem)]"
+        "w-full px-[.5rem] pb-[2rem] pt-[2rem] min-h-[calc(100vh-25rem)]"
       }
     >
-      <MyProfileContainer />
-    </main>
+        <MyProfileContainer userInfo={userInfo} />
+    </div>
   );
 }
               

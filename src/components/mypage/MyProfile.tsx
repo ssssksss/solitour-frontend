@@ -1,3 +1,4 @@
+import { userResponseDto } from "@/types/UserDto";
 import Image from "next/image";
 import Link from "next/link";
 import { RefObject } from "react";
@@ -10,35 +11,19 @@ interface IMyProfileProps {
   onDrop: (e: React.DragEvent<HTMLLabelElement>) => void;
   imageUrl: string;
   onChangeImageUploadInputHandler: (e: any) => void;
-}
-interface IDummyData {
-  user_id?: number;
-  user_status_id?: string;
-  user_oauth_id?: string;
-  user_nickname?: string;
-  user_age?: number | null;
-  user_sex?: string | null;
-  user_email?: string | null;
-  user_phone_number?: string | null;
-  user_image?: string;
-  // is_admin: boolean,
+  userInfo: userResponseDto;
+  submitChangeNicknameHandler: () => void;
+  nickname: string;
+  changeNickname: (value: string) => void;
+  defaultNickname: string;
+  message: string;
 }
 
-const dummyData: IDummyData = {
-  user_id: 1,
-  user_status_id: "1",
-  user_oauth_id: "1",
-  user_nickname: "하몽님",
-  user_age: 20,
-  user_sex: "woman",
-  user_email: "sola240@gmail.com",
-  user_phone_number: "010-1234-5678",
-  // user_image: null,
-};
+const NICKNAME_LENGTH = 20;
 
 const MyProfile = (props: IMyProfileProps) => {
   return (
-    <div className={"flex w-full max-w-[60rem] flex-col"}>
+    <div className={"flex w-full flex-col "}>
       <div className="flex gap-[.25rem] text-[.625rem] text-gray2">
         <div className="text-gray1">
           <Link href={"/"}>
@@ -72,16 +57,14 @@ const MyProfile = (props: IMyProfileProps) => {
             onDragOver={props.onDragOver}
             onDrop={props.onDrop}
           >
-            {/* ? 유저의 썸네일 이미지가 있는지? */}
-            {/* ? 썸네일 이미지가 없다면 남자인지 여자인지? => 만약에 성별을 선택안하게 되면 어떻게 해야할지? */}
-            {props.imageUrl != "/" ? (
+            {props.userInfo.userImage?.address ? (
               <Image
-                src={props.imageUrl}
+                src={props.userInfo.userImage?.address}
                 alt={"user_image"}
                 width={108}
                 height={108}
               />
-            ) : dummyData.user_sex == "man" ? (
+            ) : props.userInfo.sex == "MALE" ? (
               <Image
                 src={"/user_sex_man_default_image.svg"}
                 alt={"user_image"}
@@ -123,32 +106,76 @@ const MyProfile = (props: IMyProfileProps) => {
       <div className={"flex flex-col"}>
         <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
-            <div className={"relative flex-shrink-0"}>
-              <span className={"w-[3.5rem] text-lg font-semibold"}>닉네임</span>
+            <div className={"w-[3.5rem] relative flex-shrink-0"}>
+              <span className={"text-lg font-semibold"}>닉네임</span>
               <span className="absolute top-[-.5rem] text-lg text-main">*</span>
             </div>
-            <input
-              disabled={true}
-              placeholder="닉네임을 입력해주세요"
-              className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
-            />
+            
+           <label className="w-full relative group">
+          <input
+            className="flex h-[3.25rem] w-full rounded-[28px] pl-[2rem] pr-[5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+            type="text"
+            autoComplete="search"
+            name="nickname"
+            placeholder="닉네임을 입력해주세요"
+            maxLength={NICKNAME_LENGTH}
+            minLength={1}
+            defaultValue={props.userInfo.nickname}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                if (e.ctrlKey && e.key === 'Enter') {
+                  props.submitChangeNicknameHandler();
+                }
+            }}
+            onChange={(e)=>props.changeNickname(e.target.value)}
+              />
+          <button
+                className={`${props.nickname == props.defaultNickname ? "bg-gray-400" : "bg-main"} h-[2.4rem] rounded-[28px] absolute top-[50%] translate-y-[-50%] right-[.5rem] text-white px-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 `}
+              onClick={() => {
+                      props.submitChangeNicknameHandler();
+              }}  
+              >
+                변경
+          </button>
+        </label>
           </div>
+          
           <div
-            className={"flex w-full justify-end pt-[.75rem] text-sm text-gray1"}
+            className={`pl-[7.75rem] flex w-full ${props.message ? "justify-between" : "justify-end"} pt-[.75rem] text-sm text-gray1`}
           >
-            0/50
+            {
+              props.message != "" &&
+              <span className={`${props.message == "성공" ? "text-blue-400" : "text-[#FF0000]" }`}>
+                {`변경이 ${props.message} 했습니다.`}
+              </span>
+            }
+            <span>
+              {props.nickname.length}/{NICKNAME_LENGTH}
+            </span>
           </div>
         </article>
         <article className={"pt-[2.375rem]"}>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
-            <div className={"relative flex-shrink-0"}>
-              <span className={"w-[3.5rem] text-lg font-semibold"}>이메일</span>
-              <span className="absolute top-[-.5rem] text-lg text-main">*</span>
+            <div className={"w-[3.5rem] relative flex-shrink-0"}>
+              <span className={" text-lg font-semibold"}>이메일</span>
             </div>
             <input
               disabled={true}
               placeholder="이메일을 입력해주세요"
               className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+              defaultValue={props.userInfo.email} 
+            />
+          </div>
+        </article>
+        <article className={"pt-[2.375rem]"}>
+          <div className={"flex w-full items-center gap-x-[2.375rem]"}>
+            <div className={"w-[3.5rem] relative flex-shrink-0"}>
+              <span className={"text-lg font-semibold"}>성별</span>
+            </div>
+            <input
+              disabled={true}
+              placeholder="이메일을 입력해주세요"
+              className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+              defaultValue={props.userInfo.sex == "male" ? "남성" : "여성"} 
             />
           </div>
         </article>
@@ -164,7 +191,7 @@ const MyProfile = (props: IMyProfileProps) => {
             <div className={"flex items-center justify-between"}>
               <span> 카카오톡 </span>
               <div className={"flex items-center gap-x-[.875rem]"}>
-                <span className={"font-medium text-gray1"}> 2024.06.01 </span>
+                <span className={"font-medium text-gray1"}> {props.userInfo.userImage.createdDate} </span>
                 <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[18px] bg-[#FEE501]">
                   <Image
                     src={"/kakao-icon.svg"}

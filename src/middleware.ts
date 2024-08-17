@@ -7,7 +7,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/informations/write") ||
     pathname.startsWith("/informations/edit") ||
     pathname.startsWith("/gathering/write") ||
-    pathname.startsWith("/diary")
+    pathname.startsWith("/diary") ||
+    pathname.startsWith("/mypage")
   ) {
     const token = request.cookies.get("access_token");
     const refresh_token = request.cookies.get("refresh_token");
@@ -62,5 +63,6 @@ export const config = {
     "/gathering/write",
     "/diary/:path*",
     "/auth/:path*",
+    "/mypage/:path*",
   ],
 };
