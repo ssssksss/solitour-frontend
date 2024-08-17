@@ -40,6 +40,7 @@ const ImageViewer = ({
                 className="absolute left-0 h-full w-full object-contain"
                 key={index}
                 src={imageUrls[index]}
+                alt="image"
                 custom={direction}
                 variants={variants}
                 initial="enter"
