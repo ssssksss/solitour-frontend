@@ -19,7 +19,7 @@ const SEX: { [key: string]: string } = {
 };
 const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
 
-  
+
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
       {/* 제일 상단 */}
@@ -68,7 +68,7 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
         <div className="flex w-full items-end justify-end text-xs font-medium text-gray2">
           <div className="flex flex-row items-center space-x-3">
             <div className="flex flex-row items-center gap-2 text-gray2 mb-[.25rem]">
-              <GatheringLike likes={data.likeCount} isLike={true} gatheringId={postId} />
+              <GatheringLike likes={data.likeCount} isLike={data.isLike || false} gatheringId={postId} />
             <div className="flex items-center  gap-1 text-sm text-gray2">
                 <Image
                   src="/eyes-icon.svg"

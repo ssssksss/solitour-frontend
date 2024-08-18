@@ -86,4 +86,5 @@ export interface GatheringDetailResponseDto {
   nowPersonCount: number;
   gatheringApplicantsResponses: any[];
   gatheringRecommend: GatheringRecommend[];
+  isLike: boolean
 };
