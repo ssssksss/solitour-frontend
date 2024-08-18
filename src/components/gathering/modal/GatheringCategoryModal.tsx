@@ -15,12 +15,14 @@ interface IGatheringCategoryModalProps {
 
 const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   const formContext = useFormContext();
-  const [mainCategoryId, setMainCategoryId] = useState(formContext.getValues("mainCategoryId") || 0);
-  const [subCategoryId, setSubCategoryId] = useState(formContext.getValues("subCategoryId") || 0);
+  const [mainCategoryId, setMainCategoryId] = useState(
+    formContext.getValues("gatheringCategoryId") || 0,
+  );
+  // const [subCategoryId, setSubCategoryId] = useState(formContext.getValues("subCategoryId") || 0);
 
   const submitHandler = () => {
-    formContext.setValue("mainCategoryId", mainCategoryId);
-    formContext.setValue("subCategoryId", subCategoryId);
+    formContext.setValue("gatheringCategoryId", mainCategoryId);
+    // formContext.setValue("subCategoryId", subCategoryId);
     formContext.watch();
     formContext.trigger();
     props.closeModal();
@@ -58,7 +60,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
             </button>
           ))}
         </div>
-        <p className={"h-[2rem] text-lg font-bold text-black"}>
+        {/* <p className={"h-[2rem] text-lg font-bold text-black"}>
           서브 카테고리 선택
         </p>
         <div
@@ -74,7 +76,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
                 {j.name}
               </button>
             ))}
-        </div>
+        </div> */}
       </div>
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
         <button
@@ -82,7 +84,8 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
             "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           }
           onClick={() => submitHandler()}
-          disabled={subCategoryId == 0 && true}
+          // disabled={subCategoryId == 0 && true}
+          disabled={mainCategoryId == 0}
         >
           적용하기
         </button>

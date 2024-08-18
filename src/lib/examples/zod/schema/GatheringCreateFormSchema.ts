@@ -2,7 +2,8 @@ import { z } from "zod";
 
 export const gatheringCreateFormSchema = z
   .object({
-    subCategoryId: z.number().min(1),
+    // subCategoryId: z.number().min(1),
+    gatheringCategoryId: z.number().min(1),
     deadline: z.string().refine((value) => {
       if (!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(value)) return false;
       const date = new Date(value.replace(" ", "T") + ":00");

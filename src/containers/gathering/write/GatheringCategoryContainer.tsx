@@ -56,8 +56,8 @@ const GatheringCategoryContainer = (props: IGatheringCategoryContainerProps) => 
           카테고리 선택
         </button>
         <div>
-          {formContext.getValues("mainCategoryId") != 0 &&
-            formContext.getValues("subCategoryId") != 0 &&
+          {formContext.getValues("gatheringCategoryId") != 0 &&
+            // formContext.getValues("subCategoryId") != 0 &&
             "OK"}
         </div>
         <Modal isOpen={props.isModal} onClose={() => props.closeModal()}>
@@ -74,25 +74,25 @@ const GatheringCategoryContainer = (props: IGatheringCategoryContainerProps) => 
       >
         <div className={"flex h-[2.75rem] items-center"}>
           <span className={"pr-[.5rem]"}> 메인 카테고리 : </span>
-          {formContext.getValues("mainCategoryId") != 0 &&
+          {formContext.getValues("gatheringCategoryId") != 0 &&
             categoryList.filter(
               (i: { id: number }) =>
-                i.id == formContext.getValues("mainCategoryId"),
+                i.id == formContext.getValues("gatheringCategoryId"),
             )[0].name}
         </div>
-        <div className={"flex h-[2.75rem] items-center"}>
+        {/* <div className={"flex h-[2.75rem] items-center"}>
           <span className={"pr-[.5rem]"}> 서브 카테고리 : </span>
           {formContext.getValues("subCategoryId") != 0 &&
             categoryList
               .filter(
                 (i: { id: number }) =>
-                  i.id == formContext.getValues("mainCategoryId"),
+                  i.id == formContext.getValues("gatheringCategoryId"),
               )[0]
               .childrenCategories.filter(
                 (i: { id: number }) =>
                   i.id == formContext.getValues("subCategoryId"),
               )[0].name}
-        </div>
+        </div> */}
       </div>
     </article>
   );
