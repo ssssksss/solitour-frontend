@@ -110,6 +110,7 @@ const Header = ({
                       } ` + "text-sm hover:text-main"
                     }
                     href="/diary/list"
+                    prefetch={userId > 0}
                   >
                     여행일기
                   </Link>
@@ -138,10 +139,7 @@ const Header = ({
               </>
             ) : userId > 0 ? (
               <>
-                <Link
-                  href={"/mypage"}
-                  className={"relative rounded-[50%]"}
-                >
+                <Link href={"/mypage"} className={"relative rounded-[50%]"}>
                   <Image
                     className="rounded-full shadow dark:bg-slate-200"
                     src="/user_sex_man_default_image.svg"
