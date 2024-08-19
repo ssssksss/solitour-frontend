@@ -88,3 +88,56 @@ export interface GatheringDetailResponseDto {
   gatheringRecommend: GatheringRecommend[];
   isLike: boolean
 };
+
+
+// 모임 리스트 조회
+
+export interface Gathering {
+  gatheringId: number;
+  title: string;
+  zoneCategoryParentName: string;
+  zoneCategoryChildName: string;
+  viewCount: number;
+  isBookMark: boolean;
+  likeCount: number;
+  gatheringCategoryName: string;
+  userName: string;
+  scheduleStartDate: string; // ISO 8601 format
+  scheduleEndDate: string; // ISO 8601 format
+  deadline: string; // ISO 8601 format
+  allowedSex: string;
+  startAge: number;
+  endAge: number;
+  personCount: number;
+  nowPersonCount: number;
+  isLike: boolean;
+}
+
+interface Sort {
+  empty: boolean;
+  unsorted: boolean;
+  sorted: boolean;
+}
+
+interface Pageable {
+  pageNumber: number;
+  pageSize: number;
+  sort: Sort;
+  offset: number;
+  paged: boolean;
+  unpaged: boolean;
+}
+
+export interface GatheringsResponse {
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  content: Gathering[];
+  number: number;
+  sort: Sort;
+  first: boolean;
+  last: boolean;
+  numberOfElements: number;
+  pageable: Pageable;
+  empty: boolean;
+}
