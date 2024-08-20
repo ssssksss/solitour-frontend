@@ -1,5 +1,4 @@
 import "@/styles/reactDataRange.css";
-import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
@@ -13,24 +12,24 @@ interface IGatheringFilterModalProps {
 
 const regions = [
   { id: 0, name: "전체" },
-  { id: 11, name: "서울" },
-  { id: 26, name: "부산" },
-  { id: 27, name: "대구" },
-  { id: 28, name: "인천" },
-  { id: 29, name: "광주" },
-  { id: 30, name: "대전" },
-  { id: 31, name: "울산" },
-  { id: 36, name: "세종" },
-  { id: 41, name: "경기" },
-  { id: 42, name: "강원" },
-  { id: 43, name: "충북" },
-  { id: 44, name: "충남" },
-  { id: 45, name: "전북" },
-  { id: 46, name: "전남" },
-  { id: 47, name: "경북" },
-  { id: 48, name: "경남" },
-  { id: 50, name: "제주" },
+  { id: 1, name: "서울" },
+  { id: 2, name: "광주" },
+  { id: 3, name: "인천" },
+  { id: 4, name: "대전" },
+  { id: 5, name: "대구" },
+  { id: 6, name: "전남" },
+  { id: 7, name: "경북" },
+  { id: 8, name: "경남" },
+  { id: 9, name: "부산" },
+  { id: 10, name: "울산" },
+  { id: 11, name: "제주" },
+  { id: 12, name: "경기" },
+  { id: 13, name: "강원" },
+  { id: 14, name: "충북" },
+  { id: 15, name: "충남" },
+  { id: 16, name: "전북" },
 ];
+
 
 const SELECTED_SCHEDULE_DATA = [
   {
@@ -98,7 +97,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
   const [location, setLocation] = useState(
     searchParams.get("location") || 0,
   );
-  const [sex, setSex] = useState(searchParams.get("sex") || "ALL");
+  const [sex, setSex] = useState(searchParams.get("allowedSex") || "ALL");
   const [startAge, setStartAge] = useState(
     searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
   );
@@ -130,54 +129,45 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
         key: "selection",
       },
     ]);
+    setIsFilterSchedule(false);
   };
 
   const submitApplyFilter = () => {
-    let _url = `/gathering?`;
-    let temp = UrlQueryStringToObject(window.location.href) || {};
-    delete temp.location;
-    delete temp.startAge;
-    delete temp.sex;
-    delete temp.endAge;
-    delete temp.startDate;
-    delete temp.endDate;
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.delete("location");
+    params.delete("startAge");
+    params.delete("endAge");
+    params.delete("allowedSex");
+    params.delete("startDate");
+    params.delete("endDate");
     // 지역
     if (location != 0) {
-      temp.location = location;
+      params.set("location", location+"");
     }
     // 성별
     if (sex != "ALL") {
-      temp.sex = sex;
+      params.set("allowedSex", sex + "");
     }
     // 최소나이
-    if (startAge != 20) {
-      temp.startAge = startAge;
-    }
-    // 최대나이
-    if (endAge != 59) {
-      temp.endAge = endAge;
+    if (startAge != 20 || endAge != 59) {
+      params.set("startAge", startAge + "");
+      params.set("endAge", endAge + "");
     }
     // 일정 선택
     if (isFilterSchedule) {
-      temp.startDate = format(calendarDate[0].startDate, "yyyy-MM-dd"); 
-      temp.endDate = format(calendarDate[0].endDate, "yyyy-MM-dd"); 
+      params.set("startDate", format(calendarDate[0].startDate, "yyyy-MM-dd"));
+      params.set("endDate", format(calendarDate[0].endDate, "yyyy-MM-dd"));
     }
-    if (temp.page) {
-      temp.page = 1;
-    }
-    Object.entries(temp).map(i => {
-      _url += i[0]+"="+i[1]+"&"
-    })      
-    if (_url.endsWith("&")) {
-      _url = _url.slice(0, -1);
-    }
-    window.history.pushState(null, "", _url);
+    params.delete("page");
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
     closeModal();
   };
 
   useEffect(() => {
     setLocation(+(searchParams.get('location') || 0));
-    setSex(searchParams.get('sex') || "ALL");
+    setSex(searchParams.get('allowedSex') || "ALL");
     setStartAge(+(searchParams.get('startAge') || 20));
     setEndAge(+(searchParams.get('endAge') || 59));
     setCalendarDate([
@@ -411,7 +401,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
             "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white"
           }
         >
-          초기화
+          설정 초기화
         </button>
       </div>
     </div>
