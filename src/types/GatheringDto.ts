@@ -61,6 +61,7 @@ export type GatheringRecommend = {
   endAge: number;
   personCount: number;
   nowPersonCount: number;
+  isLike: boolean;
 };
 
 // 모임 상세 페이지 타입
