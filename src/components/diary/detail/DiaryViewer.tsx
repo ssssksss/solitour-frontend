@@ -1,4 +1,4 @@
-import DeleteModalContainer from "@/containers/diary/detail/DeleteModalContainer";
+import DiaryDeleteModalContainer from "@/containers/diary/detail/DiaryDeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +28,10 @@ const DiaryViewer = ({
   return (
     <div className="flex w-full flex-col items-start">
       {modalVisible && (
-        <DeleteModalContainer diaryId={data.diaryId} closeModal={closeModal} />
+        <DiaryDeleteModalContainer
+          diaryId={data.diaryId}
+          closeModal={closeModal}
+        />
       )}
       <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
         <Image

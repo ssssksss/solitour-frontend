@@ -8,7 +8,10 @@ interface Props {
   closeModal: () => void;
 }
 
-const DeleteModalContainer = ({ informationId, closeModal }: Props) => {
+const InformationDeleteModalContainer = ({
+  informationId,
+  closeModal,
+}: Props) => {
   const router = useRouter();
 
   const onDeleteClick = async () => {
@@ -34,4 +37,4 @@ const DeleteModalContainer = ({ informationId, closeModal }: Props) => {
   );
 };
 
-export default DeleteModalContainer;
+export default InformationDeleteModalContainer;
