@@ -9,10 +9,14 @@ interface PageProps {
 
 async function fetchGatheringData(id: number): Promise<GatheringDetailResponseDto> {
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/gatherings/${id}`, {
-      headers: { 'Content-Type': 'application/json' },
-      credentials: "include"
-    });
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/gatherings/${id}`,
+      {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        cache: "no-cache",
+      },
+    );
 
     if (!response.ok) {
       throw new Error('네트워크 응답이 좋지 않습니다.');

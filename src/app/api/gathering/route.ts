@@ -12,8 +12,8 @@ export async function GET(request: NextRequest) {
         headers: {
           Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
           "Content-Type": "application/json",
-          cache: "no-store"
         },
+        cache: "no-cache"
       },
     );
 

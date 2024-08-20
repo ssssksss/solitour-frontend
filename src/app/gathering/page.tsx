@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 async function getData() {
     const res = await fetch(`${process.env.BACKEND_URL}/api/categories/gathering`, {
-    next: { revalidate: 21600 }, // 6시간 = 21600초
+    cache: "no-cache"
   });
 
   if (!res.ok) {
