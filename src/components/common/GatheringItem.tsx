@@ -19,7 +19,7 @@ const GatheringItem = (data: Gathering) => {
     <Link
       href={`/gathering/${data.gatheringId}`}
       className={
-        "flex flex-col gap-[1.25rem] rounded-2xl max-[744px]:max-w-[27.5rem] w-full border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main min-[745px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600"
+        "flex w-full flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600"
       }
     >
       <div className="flex flex-col">
@@ -42,7 +42,7 @@ const GatheringItem = (data: Gathering) => {
         </p>
       </div>
       <div className="flex flex-col gap-5">
-        <div className="grid gap-[0.625rem] text-sm font-semibold max-[432px]:grid-cols-1 max-[744px]:grid-cols-[auto_6.25rem] min-[745px]:grid-cols-1 min-[1024px]:grid-cols-2">
+        <div className="grid gap-[0.625rem] text-sm font-semibold max-[744px]:grid-cols-[auto_7rem] max-[432px]:grid-cols-1 min-[745px]:grid-cols-1 min-[1024px]:grid-cols-2">
           <div className="flex flex-row items-center gap-2">
             {/* 모임 기간 */}
             <Image
@@ -55,9 +55,9 @@ const GatheringItem = (data: Gathering) => {
             {data.scheduleEndDate &&
               format(new Date(data.scheduleEndDate), "~ yyyy-MM-dd")}
           </div>
-          <div className="flex flex-row items-center gap-2 text-black dark:text-slate-400">
+          <div className="flex items-center gap-2 text-black dark:text-slate-400 ">
             {/* 모임 장소 */}
-            <div className={"h-4 w-[0.875rem]"}>
+            <div className={"h-4 min-w-[0.875rem] flex items-center"}>
               <Image
                 src="/location-icon.svg"
                 alt="location-icon"
@@ -65,7 +65,7 @@ const GatheringItem = (data: Gathering) => {
                 height={14}
               />
             </div>
-            <p>
+            <p className="overflow-hidden truncate whitespace-nowrap">
               {data.zoneCategoryParentName} {","} {data.zoneCategoryChildName}
             </p>
           </div>
@@ -82,14 +82,15 @@ const GatheringItem = (data: Gathering) => {
                 />
               </div>
               <p
-                className={`${data.nowPersonCount + 1 == data.personCount && "text-[#ff0000]"}`}
+                className={`${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
               >
                 <span
-                  className={`text-main ${(data.nowPersonCount + 1) / data.personCount > 0.5 && "text-[#FC9F3A]"} ${data.nowPersonCount + 1 == data.personCount && "text-[#ff0000]"}`}
+                  className={`text-main ${data.nowPersonCount / data.personCount > 0.5 && "text-[#FC9F3A]"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
                 >
-                  {data.nowPersonCount + 1}
+                  {data.nowPersonCount}
                 </span>
-                / {data.personCount}
+                {"/"}
+                {data.personCount}
               </p>
             </div>
             <p>
