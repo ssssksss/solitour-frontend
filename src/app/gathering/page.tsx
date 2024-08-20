@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 
 async function getData() {
     const res = await fetch(`${process.env.BACKEND_URL}/api/categories/gathering`, {
-    next: { revalidate: 21600 }, // 6시간 = 21600초
+    cache: "no-cache"
   });
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
 
-  return res.json();
+  return await res.json();
 }
 
 
@@ -29,15 +29,20 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
   const gatheringCategoryList = await getData();
 
   return (
-    <div className="w-full flex min-h-[calc(100vh-25rem)] flex-col items-center">
+    <div className="min-h-[calc(100vh-25rem)] w-full">
+      <div className="flex flex-col items-center">
       <Banner
         content={[`<b>직접 내 모임</b>을`, "<b>만들어</b>보세요!"]}
         buttonText="모임 등록하기"
         category={"모임"}
-      />
-      <div className="mt-[26.25rem] max-[744px]:mt-[31rem] " />
+        />
+      </div>
+      <div className="mt-[26.25rem] max-[744px]:mt-[31rem]"> </div>
       <TopList title="모임" />
-      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} sortDefaultValue={searchParams.sort || ""} />
+      <GatheringListContainer
+        gatheringCategoryList={gatheringCategoryList}
+        sortDefaultValue={searchParams.sort || ""}
+      />
     </div>
   );
 }

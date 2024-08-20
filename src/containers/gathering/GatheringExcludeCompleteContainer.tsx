@@ -1,4 +1,3 @@
-import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,34 +7,29 @@ interface IGatheringExcludeCompleteContainer {
 }
 const GatheringExcludeCompleteContainer = (props: IGatheringExcludeCompleteContainer) => {
 
-   const [isExcludeCompleted, setIsExcludeCompleted] = useState(true);
+   const [isExclude, setIsExclude] = useState(true);
    const searchParams = useSearchParams();
   const checkExcludeCompleteGatheringHandler = () => {
-    setIsExcludeCompleted(prev => !prev);
-    let _url = `/gathering?`;
-    let temp = UrlQueryStringToObject(window.location.href) || {};
-      delete temp.isExclude;
-      if (isExcludeCompleted) {
-        temp.isExclude = "false";
-      }
-      Object.entries(temp).map(i => {
-        _url += i[0]+"="+i[1]+"&"
-      })      
-    if (_url.endsWith("&")) {
-      _url = _url.slice(0, -1);
+    setIsExclude(prev => !prev);
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.delete("isExclude");
+    if (isExclude) {
+      params.set("isExclude", "false");
     }
-    console.log("GatheringListContainer.tsx 파일 : ", _url);
-    window.history.pushState(null, "", _url);
+    params.set("page", "1");
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
     } 
     
     useEffect(() => {
-        setIsExcludeCompleted(searchParams.get('isExclude') ? false : true);
+        setIsExclude(searchParams.get('isExclude') ? false : true);
     },[searchParams])
 
   return (
         <button className={"flex gap-1 text-sm text-black font-medium items-center"}  onClick={checkExcludeCompleteGatheringHandler}>
             {
-            isExcludeCompleted ?
+            isExclude ?
             <Image src="/common/check-active-icon.svg" alt="location-icon" width={20} height={20} /> :
             <Image src="/common/check-empty-icon.svg" alt="location-icon" width={20} height={20} />
             }

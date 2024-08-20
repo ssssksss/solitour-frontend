@@ -53,7 +53,7 @@ export default function Dropdown<T>({ options, dropdownHandler, defaultValue, va
 
       {isOpen && (
         <div
-          className="absolute w-full mt-2 rounded-md bg-white ring-2 ring-offset-2 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-200"
+          className="absolute w-full z-40 mt-2 rounded-md bg-white ring-2 ring-offset-2 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-200"
         >
           <div className={"py-1 min-w-max "} role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {options.map((i) => (

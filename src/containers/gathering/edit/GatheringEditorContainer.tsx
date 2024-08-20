@@ -38,8 +38,7 @@ const GatheringEditorContainer = ({gatheringData}: IGatheringEditorContainer) =>
       scheduleEndDate: gatheringData.scheduleEndDate,
       hashtags: gatheringData.tagResponses || [],
       searchId: gatheringData.placeResponse.searchId || 0,
-      mainCategoryId: 0,
-      subCategoryId: 0,
+      gatheringCategoryId: 0,
       mainCategoryName: "",
       subCategoryName: "",
     },
@@ -48,7 +47,17 @@ const GatheringEditorContainer = ({gatheringData}: IGatheringEditorContainer) =>
 
   const updateGatheringHandler = async () => {
   const { id } = params;
-    const { mainCategoryName, subCategoryName, mainCategoryId, allowedSex, hashtags, searchId, placeName, xAxis, yAxis, roadAddressName, subCategoryId, ...requestData } = methods.getValues();
+    const {
+      gatheringCategoryId,
+      allowedSex,
+      hashtags,
+      searchId,
+      placeName,
+      xAxis,
+      yAxis,
+      roadAddressName,
+      ...requestData
+    } = methods.getValues();
     try {
       const response = await fetchWithAuth(`/api/gatherings/${id}`, {
         method: "PUT",
@@ -61,15 +70,22 @@ const GatheringEditorContainer = ({gatheringData}: IGatheringEditorContainer) =>
             searchId: searchId,
             name: placeName,
             xAxis: xAxis,
-            yAxis: yAxis, 
+            yAxis: yAxis,
             address: roadAddressName,
-      },
+          },
           allowedSex: allowedSex.toUpperCase(),
-          gatheringCategoryId: +subCategoryId,
-          zoneCategoryNameParent: convertRegionToTwoLetters(roadAddressName.split(" ")[0]),
+          gatheringCategoryId: gatheringCategoryId,
+          zoneCategoryNameParent: convertRegionToTwoLetters(
+            roadAddressName.split(" ")[0],
+          ),
           zoneCategoryNameChild: roadAddressName.split(" ")[1],
-          tagRegisterRequests: hashtags.length > 0 ? hashtags.map(i=>{return {name: i}}) : []
-    }),
+          tagRegisterRequests:
+            hashtags.length > 0
+              ? hashtags.map((i) => {
+                  return { name: i };
+                })
+              : [],
+        }),
       });
 // TODO 에러 처리 작업 필요함
       if (!response.ok) {

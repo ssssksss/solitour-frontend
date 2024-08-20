@@ -33,15 +33,27 @@ const GatheringEditorContainer = () => {
       scheduleEndDate: "",
       hashtags: [],
       searchId: "",
-      mainCategoryId: 0,
-      subCategoryId: 0,
+      // mainCategoryId: 0,
+      // subCategoryId: 0,
+      gatheringCategoryId: 0,
       placeUrl: "",
     },
   });
 
   const createGatheringHandler = async () => {
 
-    const { mainCategoryId, allowedSex, hashtags, searchId, placeName, xAxis, yAxis, roadAddressName, subCategoryId, ...requestData } = methods.getValues();
+    const {
+      gatheringCategoryId,
+      allowedSex,
+      hashtags,
+      searchId,
+      placeName,
+      xAxis,
+      yAxis,
+      roadAddressName,
+      // subCategoryId,
+      ...requestData
+    } = methods.getValues();
     try {
       const response = await fetchWithAuth("/api/gathering/write", {
         method: "POST",
@@ -58,7 +70,8 @@ const GatheringEditorContainer = () => {
             address: roadAddressName,
       },
           allowedSex: allowedSex.toUpperCase(),
-          gatheringCategoryId: +subCategoryId,
+          // gatheringCategoryId: +subCategoryId,
+          gatheringCategoryId: gatheringCategoryId,
           zoneCategoryNameParent: convertRegionToTwoLetters(roadAddressName.split(" ")[0]),
           zoneCategoryNameChild: roadAddressName.split(" ")[1],
           tagRegisterRequests: hashtags.length > 0 ? hashtags.map(i=>{return {name: i}}) : []

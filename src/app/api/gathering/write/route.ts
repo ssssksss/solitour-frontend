@@ -40,15 +40,25 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify(requestData),
     });
-//  TODO : 에러처리 작업 필요함
+    //  TODO : 에러처리 작업 필요함
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Error: ${errorData.error || 'Unknown error occurred'}`);
     }
     const resultData = await response.json()
     return NextResponse.json({ data: resultData, message: '데이터가 성공적으로 처리되었습니다.' }, { status: 200 });
-  } catch (error) {
-    console.error('요청 처리 중 오류 발생:', error);
-    return NextResponse.json({ error: '서버에서 오류가 발생했습니다.' }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      return NextResponse.json(
+        { error: error.message }, 
+        { status: 500 }           
+      );
+    } else {
+      return NextResponse.json(
+        { error: '알 수 없는 오류가 발생했습니다.' },
+        { status: 500 }
+      );
+    }
   }
 }

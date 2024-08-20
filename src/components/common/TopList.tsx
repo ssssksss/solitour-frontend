@@ -1,4 +1,5 @@
 import LottieImage from "@/../public/lottie/solitour_gathering_animation.json";
+import { TopGatheringResponseDto } from "@/types/GatheringDto";
 import { TopInformationResponseDto } from "@/types/InformationDto";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,9 +27,8 @@ async function getTopInformationList() {
 }
 
 async function getTopGatheringList() {
-  /*
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/?????????????????????????`,
+    `${process.env.BACKEND_URL}/api/gatherings/ranks`,
     {
       method: "GET",
       next: { revalidate: 3600, tags: ["getTopGatheringList"] },
@@ -41,15 +41,6 @@ async function getTopGatheringList() {
   }
 
   return response.json() as Promise<TopGatheringResponseDto[]>;
-  */
-
-  return [
-    { id: 1, title: "동해 서핑 투게더" },
-    { id: 2, title: "강릉 빵지순례 같이 해요!" },
-    { id: 3, title: "전시회 좋아하는 사람? 국립현대미술관 같이 가요" },
-    { id: 4, title: "퇴근 후 운동할 사람? 인왕산 같이 올라가요!" },
-    { id: 5, title: "떡볶이 맛잘알과 함께 전국 떡볶이 투어" },
-  ];
 }
 
 const TopList = async ({ title }: Props) => {
