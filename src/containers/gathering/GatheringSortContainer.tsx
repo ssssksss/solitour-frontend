@@ -1,5 +1,4 @@
 import Dropdown from "@/components/common/dropdown/Dropdown";
-import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -21,22 +20,19 @@ const OPTIONS = [{
 const GatheringSortContainer = (props: IGatheringSortContainer) => {
     const searchParams = useSearchParams();
     const [sort, setSort] = useState("");
+    
     const sortHandler = (value: string) => {
-        let _url = `/gathering?`;
-        let temp = UrlQueryStringToObject(window.location.href) || {};
-        delete temp.sort;
-        if (value != "") {
-        temp.sort = value;
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        params.delete("sort");
+        if (value) {
+            params.set("sort", value);
         }
-        Object.entries(temp).map(i => {
-        _url += i[0]+"="+i[1]+"&"
-        })      
-        if (_url.endsWith("&")) {
-        _url = _url.slice(0, -1);
-        }
-        console.log("GatheringListContainer.tsx 파일 : ", _url);
-        window.history.pushState(null, "", _url);
+        url.search = params.toString();
+        window.history.pushState({}, "", url.toString());
     }
+
+
 
     useEffect(() => {
         setSort(searchParams.get('sort') || "")
