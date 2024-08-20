@@ -3,15 +3,14 @@
 import GatheringCardList from "@/components/gathering/GatheringCardList";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
 import { Gathering, GatheringsResponse } from "@/types/GatheringDto";
-import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import PaginationContainer from "../common/PaginationContainer";
+import GatheringPaginationContainer from "./GatheringPaginationContainer";
 
 const SkeletonGatheringList = () => {
   return (
     <div className="my-6 grid min-h-[20rem] w-full justify-items-center gap-x-3 gap-y-3 min-[745px]:grid-cols-2">
-      {Array.from({ length: 12 }).map((_, index) => (
+      {Array.from({ length: 6 }).map((_, index) => (
         <GatheringItemSkeleton key={index} />
       ))}
     </div>
@@ -20,41 +19,29 @@ const SkeletonGatheringList = () => {
 
 const GatheringCardListContainer = () => {
   const searchParams = useSearchParams();
-  const [page, setPage] = useState(searchParams.get("page") || 0);
   const [totalElements, setTotalElements] = useState(1);
   const [gatherings, setGatherings] = useState<Gathering[]>([]);
   const [loading, setLoading] = useState(true);
-  const changeGatheringPageHandler = (id: number) => {
-    let _url = `/gathering?`;
-    let temp = UrlQueryStringToObject(window.location.href) || {};
-    if (page != 0) {
-      temp.page = id;
-    }
-    Object.entries(temp).map((i) => {
-      _url += i[0] + "=" + i[1] + "&";
-    });
-    if (_url.endsWith("&")) {
-      _url = _url.slice(0, -1);
-    }
-    window.history.pushState(null, "", _url);
-  };
+  const [page, setPage] = useState(
+    searchParams.get("page") ? Number(searchParams.get("page")) : 1,
+  );
 
   useEffect(() => {
     const temp = async () => {
       try {
-        const queryParams = UrlQueryStringToObject(window.location.href);
-        let url = "api/gathering";
-        if (queryParams != undefined) {
-          url += "?";
-          Object.entries(queryParams).map((i) => {
-            url += i[0] + "=" + i[1] + "&";
-          });
-          url = url.slice(0, -1);
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        if (params.get("page")) {
+          params.set("page", (Number(params.get("page"))-1) + "");
+          url.search = params.toString();
         }
-        const response = await fetch(url);
+        const response = await fetch("/api/gathering"+url.search, {
+          cache: "no-cache"
+        });
         const data: GatheringsResponse = await response.json();
         setGatherings(data.content);
         setTotalElements(data.totalElements);
+        setPage(params.get("page") ? Number(params.get("page"))+1 : 1);
       } finally {
         setLoading(false);
       }
@@ -67,14 +54,12 @@ const GatheringCardListContainer = () => {
       {loading ? (
         <SkeletonGatheringList />
       ) : (
-        <div>
           <GatheringCardList data={gatherings} />
-          <PaginationContainer
-            currentPage={+page}
-            totalPages={Math.ceil(totalElements / 12)}
-          />
-        </div>
       )}
+      <GatheringPaginationContainer
+        currentPage={page}
+        totalPages={Math.ceil(totalElements / 12) || 1}
+      />
     </>
   );
 };
