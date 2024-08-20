@@ -1,4 +1,4 @@
-import DeleteModalContainer from "@/containers/informations/detail/DeleteModalContainer";
+import InformationDeleteModalContainer from "@/containers/informations/detail/InformationDeleteModalContainer";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -24,7 +24,7 @@ const ButtonList = ({
   return (
     <div className="mt-6 flex flex-row items-center justify-end gap-3">
       {modalVisible && (
-        <DeleteModalContainer
+        <InformationDeleteModalContainer
           informationId={informationId}
           closeModal={() => setModalVisible(false)}
         />

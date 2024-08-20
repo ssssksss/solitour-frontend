@@ -9,8 +9,8 @@ interface IHomeCarouselContainer {
 const HomeCarouselContainer = (props: IHomeCarouselContainer) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [bannerList, _] = useState([
-    { id: 0, name: "", url: "/background1.png" },
-    { id: 0, name: "", url: "/background2.svg" },
+    { id: 0, name: "", url: "/background1.svg" },
+    { id: 0, name: "", url: "/background2.png" },
     { id: 0, name: "", url: "/background3.svg" },
     { id: 0, name: "", url: "/background4.svg" },
     ...props.initBannerList,

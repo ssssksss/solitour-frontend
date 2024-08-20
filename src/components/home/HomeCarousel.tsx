@@ -12,12 +12,11 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
   return (
     <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80 dark:opacity-65">
       <Image
-        className="-z-10"
+        className={`-z-10 ${currentIndex === 1 && "min-[1440px]:object-[0_-7rem]"}`}
         src={images.length > 0 ? images[currentIndex].url : ""}
         alt="background"
         fill={true}
         style={{
-          zIndex: -10,
           objectFit: "cover",
         }}
       />

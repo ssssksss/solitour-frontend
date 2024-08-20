@@ -141,7 +141,7 @@ const Header = ({
               <>
                 <Link href={"/mypage"} className={"relative rounded-[50%]"}>
                   <Image
-                    className="rounded-full shadow dark:bg-slate-200"
+                    className="rounded-full border-[0.018125rem] border-[#B8EDD9] dark:bg-slate-200"
                     src="/user_sex_man_default_image.svg"
                     alt="user_sex_man_default_image"
                     width={30}
