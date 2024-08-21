@@ -9,10 +9,10 @@ interface IHomeCarouselContainer {
 const HomeCarouselContainer = (props: IHomeCarouselContainer) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [bannerList, _] = useState([
-    { id: 0, name: "", url: "/background1.svg" },
+    { id: 0, name: "", url: "/background1.png" },
     { id: 0, name: "", url: "/background2.png" },
-    { id: 0, name: "", url: "/background3.svg" },
-    { id: 0, name: "", url: "/background4.svg" },
+    { id: 0, name: "", url: "/background3.png" },
+    { id: 0, name: "", url: "/background4.png" },
     ...props.initBannerList,
   ]);
 
@@ -29,6 +29,7 @@ const HomeCarouselContainer = (props: IHomeCarouselContainer) => {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
   return (
