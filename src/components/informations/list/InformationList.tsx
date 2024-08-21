@@ -51,8 +51,6 @@ async function getInformationList(
   }
 
   return response.json() as Promise<InformationListResponseDto>;
-
-  //${place !== undefined ? "&place=" + place : ""}${order !== undefined ? "&order=" + order : ""}
 }
 
 interface Props {
