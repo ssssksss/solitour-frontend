@@ -2,16 +2,14 @@
  * 일기 작성 요청 DTO
  */
 export interface CreateDiaryRequestDto {
-  userId: number;
   title: string;
-  startDate: Date;
-  endDate: Date;
-  placeName: string;
-  address: string;
-  image: string;
-  diaryDays: {
-    moodLevel: number;
+  titleImage: string;
+  startDatetime: Date;
+  endDatetime: Date;
+  diaryDayRequests: {
     content: string;
+    feelingStatus: string;
+    place: string;
   }[];
 }
 

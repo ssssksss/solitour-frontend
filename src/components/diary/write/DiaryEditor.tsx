@@ -116,13 +116,13 @@ const DiaryEditor = ({
             장소<span className="text-2xl text-main">*</span>
           </h2>
           <button
-            className={`${diaryEditorStore.address === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
+            className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
             type="button"
             onClick={() => showPlaceModal()}
           >
-            {diaryEditorStore.address === ""
+            {diaryEditorStore.address[diaryEditorStore.currentDay - 1] === ""
               ? "장소명을 입력하세요."
-              : diaryEditorStore.placeName}
+              : diaryEditorStore.placeName[diaryEditorStore.currentDay - 1]}
           </button>
         </div>
       </div>

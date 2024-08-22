@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/informations/write") ||
     pathname.startsWith("/informations/edit") ||
     pathname.startsWith("/gathering/write") ||
-    pathname.startsWith("/diary") ||
+    // pathname.startsWith("/diary") || // TODO
     pathname.startsWith("/mypage")
   ) {
     const token = request.cookies.get("access_token");

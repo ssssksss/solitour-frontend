@@ -35,12 +35,16 @@ export const DiaryCreateFormSchema = z.object({
       required_error: "장소를 입력해 주세요.",
       invalid_type_error: "PlaceName must be a string.",
     })
+    .min(1, { message: "장소를 입력해 주세요." })
+    .array()
     .min(1, { message: "장소를 입력해 주세요." }),
   address: z
     .string({
       required_error: "주소를 입력해 주세요.",
       invalid_type_error: "Address must be a string.",
     })
+    .min(1, { message: "주소를 입력해 주세요." })
+    .array()
     .min(1, { message: "주소를 입력해 주세요." }),
   image: z
     .string({

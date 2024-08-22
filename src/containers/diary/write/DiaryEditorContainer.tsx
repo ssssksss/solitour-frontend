@@ -2,6 +2,7 @@
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
 import sanitizeOption from "@/constants/common/sanitizeOption";
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
@@ -44,17 +45,18 @@ const DiaryEditorContainer = () => {
     }
 
     const data: CreateDiaryRequestDto = {
-      userId: validatedFields.data.userId,
       title: validatedFields.data.title,
-      startDate: validatedFields.data.startDate,
-      endDate: validatedFields.data.endDate,
-      placeName: validatedFields.data.placeName,
-      address: validatedFields.data.address,
-      image: validatedFields.data.image,
-      diaryDays: Array.from({ length: diaryEditorStore.days }, (_, index) => ({
-        moodLevel: validatedFields.data.moodLevels[index],
-        content: validatedFields.data.contents[index],
-      })),
+      titleImage: validatedFields.data.image,
+      startDatetime: validatedFields.data.startDate,
+      endDatetime: validatedFields.data.endDate,
+      diaryDayRequests: Array.from(
+        { length: diaryEditorStore.days },
+        (_, index) => ({
+          content: validatedFields.data.contents[index],
+          feelingStatus: FEELING_STATUS[validatedFields.data.moodLevels[index]],
+          place: validatedFields.data.address[index],
+        }),
+      ),
     };
 
     setLoading(true);

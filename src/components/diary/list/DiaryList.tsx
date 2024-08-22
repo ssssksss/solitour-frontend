@@ -4,9 +4,10 @@ import Link from "next/link";
 import { GetDiaryListResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";
 
+// TODO
 async function getDiaryList() {
   const cookie = cookies().get("access_token");
-  const response = await fetch(`${process.env.LOCAL_BACKEND_URL}/api/diary`, {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
     method: "GET",
     headers: {
       Cookie: `${cookie?.name}=${cookie?.value}`,
@@ -23,7 +24,8 @@ async function getDiaryList() {
 }
 
 const DiaryList = async () => {
-  const data = await getDiaryList();
+  // const data = await getDiaryList();
+  const data: GetDiaryListResponseDto[] = [];
 
   return (
     <div className="w-full">
