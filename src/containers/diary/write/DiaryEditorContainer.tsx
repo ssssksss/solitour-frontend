@@ -58,7 +58,7 @@ const DiaryEditorContainer = () => {
 
     setLoading(true);
 
-    const response = await fetch("/api/diary/create", {
+    const response = await fetch("/api/diary", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

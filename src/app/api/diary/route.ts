@@ -20,3 +20,20 @@ export async function POST(request: NextRequest) {
   revalidateTag("getDiaryList");
   return response;
 }
+
+/**
+ * 일기 삭제
+ */
+export async function DELETE(request: NextRequest) {
+  const cookie = request.cookies.get("access_token");
+  const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
+    method: "DELETE",
+    headers: {
+      Cookie: `${cookie?.name}=${cookie?.value}`,
+    },
+    cache: "no-store",
+  });
+
+  revalidateTag("getDiaryList");
+  return response;
+}
