@@ -3,9 +3,9 @@ type FEELING_STATUS_TYPE = {
 };
 
 export const FEELING_STATUS: FEELING_STATUS_TYPE = {
-  1: "excited",
-  2: "nice",
-  3: "soso",
-  4: "sad",
-  5: "angry",
+  1: "EXCITED",
+  2: "NICE",
+  3: "SOSO",
+  4: "SAD",
+  5: "ANGRY",
 };

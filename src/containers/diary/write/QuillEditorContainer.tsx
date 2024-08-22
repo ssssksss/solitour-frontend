@@ -55,7 +55,10 @@ const QuillEditorContainer = () => {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 1);
 
-          if (diaryEditorStore.image === "") {
+          if (
+            diaryEditorStore.image === "" &&
+            diaryEditorStore.currentDay === 1
+          ) {
             diaryEditorStore.setDiaryEditor({ image: url });
           }
 
