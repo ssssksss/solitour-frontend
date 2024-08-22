@@ -7,6 +7,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/informations/write") ||
     pathname.startsWith("/informations/edit") ||
     pathname.startsWith("/gathering/write") ||
+    pathname.startsWith("/gathering/edit") ||
     pathname.startsWith("/diary") ||
     pathname.startsWith("/mypage")
   ) {
@@ -61,6 +62,7 @@ export const config = {
     "/informations/write",
     "/informations/edit",
     "/gathering/write",
+    "/gathering/edit/:path*",
     "/diary/:path*",
     "/auth/:path*",
     "/mypage/:path*",
