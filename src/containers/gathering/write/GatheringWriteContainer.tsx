@@ -1,6 +1,6 @@
 "use client";
 
-import GatheringEditor from "@/components/gathering/write/GatheringEditor";
+import GatheringEditor from "@/components/gathering/editor/GatheringEditor";
 import { gatheringCreateFormSchema } from "@/lib/examples/zod/schema/GatheringCreateFormSchema";
 import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-const GatheringEditorContainer = () => {
+const GatheringWriteContainer = () => {
   const [isCategoryModal, setIsCategoryModal] = useState(false);
   const [isSettingModal, setIsSettingModal] = useState(false);
   const [isScheduleModal, setIsScheduleModal] = useState(false);
@@ -33,8 +33,6 @@ const GatheringEditorContainer = () => {
       scheduleEndDate: "",
       hashtags: [],
       searchId: "",
-      // mainCategoryId: 0,
-      // subCategoryId: 0,
       gatheringCategoryId: 0,
       placeUrl: "",
     },
@@ -92,30 +90,10 @@ const GatheringEditorContainer = () => {
   return (
     <FormProvider {...methods}>
       <GatheringEditor
-        categoryModal={{
-          isModal: isCategoryModal,
-          closeModal: () => setIsCategoryModal(false),
-          openModal: () => setIsCategoryModal(true),
-        }}
-        settingModal={{
-          isModal: isSettingModal,
-          closeModal: () => setIsSettingModal(false),
-          openModal: () => setIsSettingModal(true),
-        }}
-        scheduleModal={{
-          isModal: isScheduleModal,
-          closeModal: () => setIsScheduleModal(false),
-          openModal: () => setIsScheduleModal(true),
-        }}
-        placeModal={{
-          isModal: isPlaceModal,
-          closeModal: () => setIsPlaceModal(false),
-          openModal: () => setIsPlaceModal(true),
-        }}
         createGatheringHandler={createGatheringHandler}
       />
     </FormProvider>
   );
 };
 
-export default GatheringEditorContainer;
+export default GatheringWriteContainer;

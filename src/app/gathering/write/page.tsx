@@ -1,4 +1,4 @@
-import GatheringEditorContainer from "@/containers/gathering/write/GatheringEditorContainer";
+import GatheringWriteContainer from "@/containers/gathering/write/GatheringWriteContainer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,10 +8,8 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <div       className={
-        "w-full pb-[2rem] pt-[2rem] min-h-[calc(100vh-25rem)]"
-      }>
-      <GatheringEditorContainer />
+    <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem] pt-[2rem]"}>
+      <GatheringWriteContainer />
     </div>
   );
 }

@@ -18,11 +18,9 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   const [mainCategoryId, setMainCategoryId] = useState(
     formContext.getValues("gatheringCategoryId") || 0,
   );
-  // const [subCategoryId, setSubCategoryId] = useState(formContext.getValues("subCategoryId") || 0);
 
   const submitHandler = () => {
     formContext.setValue("gatheringCategoryId", mainCategoryId);
-    // formContext.setValue("subCategoryId", subCategoryId);
     formContext.watch();
     formContext.trigger();
     props.closeModal();
@@ -31,7 +29,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[44.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem] md:p-[2.875rem]"
+        "relative h-full max-h-[20rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem] md:p-[2.875rem]"
       }
     >
       <button
@@ -60,25 +58,8 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
             </button>
           ))}
         </div>
-        {/* <p className={"h-[2rem] text-lg font-bold text-black"}>
-          서브 카테고리 선택
-        </p>
-        <div
-          className={"flex min-h-[2.5rem] flex-wrap gap-x-[1rem] gap-y-[.5rem]"}
-        >
-          {mainCategoryId != 0 &&
-            props.categoryList.filter(i=>i.id == mainCategoryId)[0].childrenCategories.map((j) => (
-              <button
-                key={j.id}
-                onClick={() => setSubCategoryId(j.id)}
-                className={`${subCategoryId == j.id ? "bg-main text-white" : "text-gray1"} flex h-[2.25rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
-              >
-                {j.name}
-              </button>
-            ))}
-        </div> */}
       </div>
-      <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
+      <div className={"flex w-full justify-center gap-[1rem] pt-[1rem]"}>
         <button
           className={
             "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"

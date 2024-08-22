@@ -79,7 +79,7 @@ export interface GatheringDetailResponseDto {
   allowedSex: string;
   startAge: number;
   endAge: number;
-  tagResponses: {name: string}[];
+  tagResponses: { name: string }[];
   userPostingResponse: UserPostingResponse;
   placeResponse: PlaceResponse;
   zoneCategoryResponse: ZoneCategoryResponse;
@@ -87,7 +87,8 @@ export interface GatheringDetailResponseDto {
   nowPersonCount: number;
   gatheringApplicantsResponses: any[];
   gatheringRecommend: GatheringRecommend[];
-  isLike: boolean
+  isLike: boolean;
+  gatheringCategoryResponse: { id: number; name: string };
 };
 
 

@@ -6,12 +6,19 @@ import { useEffect } from "react";
 const usePreventBodyScroll = (dependency: boolean) => {
   useEffect(() => {
     if (!dependency) return;
+
     const body = document.getElementsByTagName("body")[0];
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
 
     body.style.overflow = "hidden";
+    body.style.paddingRight = `${scrollBarWidth}px`;
+
     return () => {
       body.style.overflow = "auto";
+      body.style.paddingRight = "0px";
     };
   }, [dependency]);
 };
+
 export default usePreventBodyScroll;

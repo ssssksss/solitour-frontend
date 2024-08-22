@@ -1,29 +1,31 @@
+import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { ModalState } from "@/types/ModalState";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from 'date-fns/locale';
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { GoPencil } from "react-icons/go";
 import GatheringLike from "../../containers/gathering/GatheringLikeContainer";
 import GatheringKakaoMap from "./GatheringKakaoMap";
+import GatheringUpdateDeleteButtonComponent from "./GatheringUpdateDeleteButtonComponent";
+import GatheringDeleteModalContainer from "./modal/GatheringDeleteModalContainer";
 
 interface IGatheringViewer {
-  data: GatheringDetailResponseDto
+  data: GatheringDetailResponseDto;
   postId: number;
+  modalState: ModalState;
 }
 
-const SEX: { [key: string]: string } = {
-  "ALL": "성별무관",
-  "MALE": "남성분만",
-  "FEMALE": "여성분만",
-};
-const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
-
+const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
 
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
+      {modalState.isOpen && (
+        <GatheringDeleteModalContainer
+          closeModal={() => modalState.closeModal()}
+        />
+      )}
       {/* 제일 상단 */}
       <div className="flex gap-[.25rem] text-[.625rem] text-gray2">
         <div className="text-gray1">
@@ -48,7 +50,6 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
         {/* 제목, 신청 버튼 */}
         <div className="flex w-full items-end justify-between">
           <h1 className={"h-[3.125rem] text-3xl font-semibold"}>
-            
             {data.title}
           </h1>
           <button
@@ -74,7 +75,6 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
                 {data.userPostingResponse.name}
               </div>
               <div className="w-[4rem] text-xs text-gray1">
-                
                 {data.createdAt.substring(0, 10)}
               </div>
             </div>
@@ -84,7 +84,7 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
               <div className="mb-[.25rem] flex flex-row items-center gap-2 text-gray2">
                 <GatheringLike
                   likes={data.likeCount}
-                  isLike={data.isLike || false}
+                  isLike={data.isLike}
                   gatheringId={postId}
                 />
                 <div className="flex items-center gap-1 text-sm text-gray2">
@@ -111,7 +111,6 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
             height={10}
           />
           <div>
-            
             {format(
               new Date(data.scheduleStartDate),
               "yyyy-MM-dd HH:mm (EE) ~ ",
@@ -131,7 +130,6 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
             height={10}
           />
           <div>
-            
             {data.zoneCategoryResponse.parentZoneCategory?.name} {","}
             {data.zoneCategoryResponse.name}
           </div>
@@ -150,19 +148,17 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
               <span
                 className={`text-main ${data.nowPersonCount / data.personCount > 0.5 && "text-[#FC9F3A]"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
               >
-                
                 {data.nowPersonCount}
               </span>
               / {data.personCount}
             </span>
             <span className="text-gray2">
-              
               {"(" +
                 (new Date().getFullYear() - data.startAge) +
                 "세 ~ " +
                 (new Date().getFullYear() - data.endAge) +
                 "세 ," +
-                SEX[data.allowedSex] +
+                SETTING_MODAL_SEX[data.allowedSex] +
                 ")"}
             </span>
           </div>
@@ -210,22 +206,11 @@ const GatheringViewer = ({ data, postId }: IGatheringViewer) => {
       <div className="h-[19.875rem] w-full">
         <GatheringKakaoMap {...data.placeResponse} />
       </div>
-      <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
-        <Link
-          className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
-          href={`/gathering/edit/${postId}`}
-        >
-          <GoPencil />
-          수정
-        </Link>
-        <button
-          className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
-        >
-          {/* TODO : 삭제 로직 추가해야 함 */}
-          <FaRegTrashCan />
-          삭제
-        </button>
-      </div>
+      <GatheringUpdateDeleteButtonComponent
+        userId={data.userPostingResponse.id}
+        updateHref={`/gathering/edit/${postId}`}
+        deleteHandler={()=> modalState.openModal()}
+      />
     </div>
   );
 };
