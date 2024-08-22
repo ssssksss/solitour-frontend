@@ -16,7 +16,6 @@ async function getDiaryList() {
   });
 
   if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
     throw new Error(response.statusText);
   }
 

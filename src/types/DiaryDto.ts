@@ -44,10 +44,14 @@ export interface GetDiaryListResponseDto {
   diaryId: number;
   image: string;
   title: string;
-  startDate: Date;
-  endDate: Date;
+  startDatetime: Date;
+  endDatetime: Date;
   address: string;
-  diaryDays: { moodLevel: number; content: string }[];
+  diaryDayContentResponses: {
+    content: string;
+    feelingStatus: string;
+    place: string;
+  }[];
 }
 
 /**
