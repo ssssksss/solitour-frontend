@@ -8,7 +8,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface IGatheringEditContainer {
@@ -17,6 +17,7 @@ interface IGatheringEditContainer {
 
 const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const methods = useForm({
     resolver: zodResolver(gatheringCreateFormSchema),
     defaultValues: {
@@ -60,6 +61,7 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
       ...requestData
     } = methods.getValues();
     try {
+            setLoading(true);
       const response = await fetchWithAuth(`/api/gathering/${id}`, {
         method: "PUT",
         headers: {
@@ -89,8 +91,9 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
               : [],
         }),
       });
-// TODO 에러 처리 작업 필요함
-      if (response.status != 201) {
+      
+      if (!response.ok) {
+        setLoading(false);
         throw new Error("Network response was not ok");
       }
 
@@ -112,6 +115,7 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
       <GatheringEditor
         updateGatheringHandler={updateGatheringHandler}
         isEdit={true}
+        loading={loading}
       />
     </FormProvider>
   );
