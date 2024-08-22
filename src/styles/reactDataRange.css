@@ -1,9 +1,7 @@
   .rdrCalendarWrapper {
-    outline: solid #00B488 2px;
-    outline-offset: -2px;
     border-radius: 1rem;
     /* 6주가 채워진 달력의 높이 */
-    min-height: 23rem;
+    min-height: 24rem;
   }
   .rdrDefinedRangesWrapper {
     display: none;
@@ -88,4 +86,5 @@
   .rdrMonthAndYearPickers {
     display: flex;
     flex-direction: row-reverse;
+    visibility: hidden;
   }

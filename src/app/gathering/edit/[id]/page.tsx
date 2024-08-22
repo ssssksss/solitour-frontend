@@ -1,4 +1,4 @@
-import GatheringEditorContainer from "@/containers/gathering/edit/GatheringEditorContainer";
+import GatheringEditContainer from "@/containers/gathering/edit/GatheringEditContainer";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { NextResponse } from "next/server";
 
@@ -10,7 +10,8 @@ async function fetchGatheringData(id: number): Promise<GatheringDetailResponseDt
   try {
     const response = await fetch(`${process.env.BACKEND_URL}/api/gatherings/${id}`, {
       headers: { 'Content-Type': 'application/json' },
-      credentials: "include"
+      credentials: "include",
+      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -49,7 +50,7 @@ export default async function Page({ params: { id } }: PageProps) {
     <div       className={
         "w-full pb-[2rem] pt-[2rem] min-h-[calc(100vh-25rem)]"
       }>
-      <GatheringEditorContainer gatheringData={gatheringData} />
+      <GatheringEditContainer gatheringData={gatheringData} />
     </div>
     );
   } catch (error) {

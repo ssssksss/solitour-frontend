@@ -1,10 +1,9 @@
-import GatheringContent from "@/components/gathering/modal/GatheringContent";
+import GatheringEditorHashTag from "@/components/gathering/editor/GatheringEditorHashTag";
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-
-const GatheringContentContainer = () => {
-    const formContext = useFormContext();
+const GatheringEditorHashTagContainer = () => {
+  const formContext = useFormContext();
   const [tags, setTags] = useState<string[]>([]);
   const inputTagRef = useRef<HTMLInputElement>(null);
 
@@ -14,9 +13,7 @@ const GatheringContentContainer = () => {
   };
 
   // 태그 입력시 ,나 Enter로 태그블록 만들어 주는 기능
-  const onChangeInputTagHandler = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const onChangeHashTagHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const tempTag = (inputTagRef.current as HTMLInputElement).value
         .replace(/,$/, "")
@@ -31,8 +28,8 @@ const GatheringContentContainer = () => {
 
   return (
     <>
-      <GatheringContent
-        onChangeInputTagHandler={onChangeInputTagHandler}
+      <GatheringEditorHashTag
+        onChangeHashTagHandler={onChangeHashTagHandler}
         deleteTagHandler={deleteTagHandler}
         tags={tags}
         inputTagRef={inputTagRef}
@@ -41,4 +38,4 @@ const GatheringContentContainer = () => {
   );
 };
 
-export default GatheringContentContainer;
+export default GatheringEditorHashTagContainer;
