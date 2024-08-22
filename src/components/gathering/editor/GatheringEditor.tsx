@@ -76,15 +76,15 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         <GatheringEditorHashTagContainer />
         <div className={"flex w-full justify-end"}>
           <button
-            className={
-              "h-[3.825rem] max-w-[10.825rem] rounded-[2rem] bg-main px-[2rem] py-[.5rem] text-white disabled:bg-gray1"
-            }
+            className={`h-[3.825rem] max-w-[10.825rem] rounded-[2rem] px-[2rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main"}`}
             onClick={() => {
+              if (!formContext.formState.isValid) {
+                formContext.trigger();
+              }
               props.isEdit == true
                 ? props.updateGatheringHandler()
                 : props.createGatheringHandler();
-           }}
-            disabled={!formContext.formState.isValid}
+            }}
           >
             {props.isEdit ? "모임 수정하기" : "모임 등록하기"}
           </button>

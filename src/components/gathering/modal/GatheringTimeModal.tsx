@@ -37,12 +37,12 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
         new Date(formContext.getValues("scheduleStartDate")),
         "yyyy-MM-dd ",
       ) +
-        startDateTime.hour +
+        (startDateTime.hour+"").padStart(2,"0") +
         ":" +
-        startDateTime.minute,
+        (startDateTime.minute+"").padStart(2,"0"),
     );
     formContext.watch();
-    formContext.trigger();
+    formContext.trigger(["scheduleStartDate"]);
     props.closeModal();
   };
 
