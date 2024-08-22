@@ -1,16 +1,11 @@
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface FormValues {
   title: string;
 }
 
 const GatheringEditorTitle = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useForm<FormValues>({
-    mode: "onChange", // 실시간 검사를 위해 onChange 모드 설정
-  });
+  const formContext = useFormContext();
 
   return (
     <div className="relative flex w-full flex-shrink-0 items-center gap-x-[1.75rem]">
@@ -20,18 +15,24 @@ const GatheringEditorTitle = () => {
       </div>
       <div className="relative w-full">
         <input
-          placeholder="제목을 입력하세요"
+          placeholder="제목을 입력하세요(최대50자)"
           maxLength={50} // 최대 50자 입력 가능
           className={`h-[3.25rem] w-full rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
-            errors.title ? "outline-red-500" : "outline-[#E3E3E3]"
+            formContext.formState.errors.title
+              ? "outline-red-500"
+              : formContext.getValues("title")
+                ? "outline-main"
+                : "outline-[#E3E3E3]"
           }`}
-          {...register("title", {
-            required: "제목은 필수 항목입니다.",
-          })}
+          {...formContext.register("title")}
+          onChange={(e) => {
+            formContext.setValue("title", e.target.value);
+            formContext.trigger("title");
+          }}
         />
-        {errors.title && (
+        {formContext.formState.errors.title && (
           <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
-            {errors.title.message}
+            {formContext.formState.errors.title.message as String}
           </span>
         )}
       </div>

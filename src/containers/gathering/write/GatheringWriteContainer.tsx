@@ -6,14 +6,9 @@ import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const GatheringWriteContainer = () => {
-  const [isCategoryModal, setIsCategoryModal] = useState(false);
-  const [isSettingModal, setIsSettingModal] = useState(false);
-  const [isScheduleModal, setIsScheduleModal] = useState(false);
-  const [isPlaceModal, setIsPlaceModal] = useState(false);
   const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(gatheringCreateFormSchema),
@@ -34,7 +29,6 @@ const GatheringWriteContainer = () => {
       hashtags: [],
       searchId: "",
       gatheringCategoryId: 0,
-      placeUrl: "",
     },
   });
 
@@ -73,6 +67,7 @@ const GatheringWriteContainer = () => {
           zoneCategoryNameParent: convertRegionToTwoLetters(roadAddressName.split(" ")[0]),
           zoneCategoryNameChild: roadAddressName.split(" ")[1],
           tagRegisterRequests: hashtags.length > 0 ? hashtags.map(i=>{return {name: i}}) : []
+          
     }),
       });
 // TODO 에러 처리 작업 필요함

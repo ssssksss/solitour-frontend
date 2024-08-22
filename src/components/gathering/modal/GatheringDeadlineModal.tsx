@@ -28,7 +28,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
     const deadline = format(deadlineDate, "yyyy-MM-dd 23:59");
     formContext.setValue("deadline", deadline);
     formContext.watch();
-    formContext.trigger();
+    formContext.trigger("deadline");
     props.closeModal();
   };
 

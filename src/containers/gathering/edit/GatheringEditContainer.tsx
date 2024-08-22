@@ -8,6 +8,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface IGatheringEditContainer {
@@ -29,10 +30,7 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
       xAxis: gatheringData.placeResponse.xaxis,
       yAxis: gatheringData.placeResponse.yaxis,
       roadAddressName: gatheringData.placeResponse.address,
-      deadline: format(
-        new Date(gatheringData.deadline),
-        "yyyy-MM-dd HH:mm",
-      ),
+      deadline: format(new Date(gatheringData.deadline), "yyyy-MM-dd HH:mm"),
       scheduleStartDate: format(
         new Date(gatheringData.scheduleStartDate),
         "yyyy-MM-dd HH:mm",
@@ -97,11 +95,16 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
       }
 
       const data = await response.json();
-      router.replace(`/gathering/${data.id}`)
+      router.replace(`/gathering/${data.id}`);
+      router.refresh();
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
   }
+
+  useEffect(() => {
+    methods.trigger();
+  },[])
   
 
   return (

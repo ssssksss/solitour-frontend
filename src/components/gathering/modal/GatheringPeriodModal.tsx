@@ -2,9 +2,10 @@ import "@/styles/reactDataRange.css";
 import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 import { useFormContext } from "react-hook-form";
+import { useDebouncedCallback } from "use-debounce";
 interface IGatheringPeriodModalProps {
   closeModal: () => void;
 }
@@ -13,6 +14,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
   const formContext = useFormContext();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [calendarDate, setCalendarDate] = useState([
     {
       startDate: formContext.getValues("scheduleStartDate")
@@ -25,18 +27,27 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
     },
   ]);
 
+  const handleResize = useDebouncedCallback(() => {
+    setWindowWidth(window.innerWidth);
+  }, 16);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
+
   const submitHandler = () => {
     let _dateTime =
       format(new Date(calendarDate[0].startDate), "yyyy-MM-dd") +
       " " +
       (formContext.getValues("scheduleStartDate")
         ? format(new Date(formContext.getValues("scheduleStartDate")), "HH:mm")
-      : "12:00");
+        : "12:00");
 
-    formContext.setValue(
-      "scheduleStartDate",
-      _dateTime
-    );
+    formContext.setValue("scheduleStartDate", _dateTime);
     if (calendarDate[0].startDate == calendarDate[0].endDate) {
       formContext.setValue(
         "scheduleEndDate",
@@ -47,20 +58,19 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
     } else {
       formContext.setValue(
         "scheduleEndDate",
-        format(new Date(calendarDate[0].endDate), "yyyy-MM-dd") +
-          " " +
-          "23:59",
+        format(new Date(calendarDate[0].endDate), "yyyy-MM-dd") + " " + "23:59",
       );
     }
     formContext.watch();
-    formContext.trigger();
+    formContext.trigger("scheduleStartDate");
+    formContext.trigger("scheduleEndDate");
     props.closeModal();
   };
 
   return (
     <div
       className={
-        "relative h-full max-h-[42rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem]"
+        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white px-[1rem] pt-[2.875rem] max-[800px]:max-w-[25rem] min-[801px]:max-h-[36rem]"
       }
     >
       <button
@@ -96,12 +106,13 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
                 },
               ]);
             }}
-            minDate={new Date()}
+            minDate={formContext.getValues("deadline") ? new Date(formContext.getValues("deadline")) : new Date()}
             maxDate={add(new Date(), { years: 1 })}
             showDateDisplay={false}
-            months={1}
+            months={2}
             ranges={calendarDate}
             locale={ko}
+            direction={windowWidth > 800 ? "horizontal" : "vertical"}
             rangeColors={["#00B488", "#F2FAF7"]}
             color={"#ff0000"}
             onShownDateChange={(e) => {
@@ -111,13 +122,20 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           />
           <div
             className={
-              "absolute left-[50%] top-6 translate-x-[-50%] font-semibold"
+              "absolute left-[50%] top-6 translate-x-[-50%] font-semibold min-[801px]:left-[25%]"
             }
           >
             {year}.{month}
           </div>
+          <div
+            className={
+              "absolute left-[50%] top-[calc(50%+46px)] translate-x-[-50%] font-semibold min-[801px]:left-[75%] min-[801px]:top-6"
+            }
+          >
+            {year + Math.floor((month + 1) / 12)}.{(month % 12) + 1}
+          </div>
         </div>
-        <div className={"flex w-full justify-center gap-[1rem] pt-[3rem]"}>
+        <div className={"flex w-full justify-center gap-[1rem]"}>
           <button
             className={
               "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
@@ -125,9 +143,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
             onClick={() => submitHandler()}
           >
             <span> {format(calendarDate[0].startDate, "yy-MM-dd")} </span>
-            <span>
-              {format(calendarDate[0].startDate, "yy-MM-dd") && "~"}
-            </span>
+            <span>{format(calendarDate[0].startDate, "yy-MM-dd") && "~"}</span>
             <span> {format(calendarDate[0].endDate, "yy-MM-dd")} </span>
             <span className={"pl-[.5rem] text-[1.1rem]"}> 적용하기 </span>
           </button>

@@ -13,7 +13,7 @@ interface IGatheringParticipantsFilterModalProps {
 
 const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterModalProps) => {
   const formContext = useFormContext();
-  const [peopleCount, setPeopleCount] = useState(formContext.getValues("personCount") || 6);
+  const [peopleCount, setPeopleCount] = useState(formContext.getValues("personCount") || 5);
   const [sex, setSex] = useState(formContext.getValues("allowedSex"));
   const [startAge, setStartAge] = useState(formContext.getValues("startAge") ? new Date().getFullYear() - formContext.getValues("startAge") : 20);
   const [endAge, setEndAge] = useState(formContext.getValues("endAge") ? new Date().getFullYear() - formContext.getValues("endAge") : 59);
@@ -25,7 +25,7 @@ const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterMod
     formContext.setValue("personCount", peopleCount);
     formContext.setValue("allowedSex", sex);
     formContext.watch();
-    formContext.trigger();
+    formContext.trigger(["startAge", "endAge", "personCount", "allowedSex"]);
     props.closeModal();
   };
 

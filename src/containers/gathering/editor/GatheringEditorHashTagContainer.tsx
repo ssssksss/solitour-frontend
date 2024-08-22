@@ -22,7 +22,7 @@ const GatheringEditorHashTagContainer = () => {
       setTags((prev) => Array.from(new Set([...prev, tempTag])));
       (inputTagRef.current as HTMLInputElement).value = "";
       formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
-      formContext.trigger();
+      formContext.trigger("hashtags");
     }
   };
 
