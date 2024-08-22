@@ -16,11 +16,13 @@ import GatheringEditorTimeContainer from "./GatheringEditorTimeContainer";
 interface IGatheringEditorEditProps {
   isEdit: true;
   updateGatheringHandler: () => void;
+  loading: boolean;
 }
 
 interface IGatheringEditorCreateProps {
   isEdit?: false;
   createGatheringHandler: () => void;
+  loading: boolean;
 }
 
 // `isEdit` 값에 관계없이 적용 가능한 타입
@@ -86,7 +88,20 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
                 : props.createGatheringHandler();
             }}
           >
-            {props.isEdit ? "모임 수정하기" : "모임 등록하기"}
+            {props.loading ? (
+              <div className="flex flex-row items-center gap-3">
+                <Image
+                  className="animate-spin"
+                  src="/loading-icon.png"
+                  alt="loading-icon"
+                  width={20}
+                  height={20}
+                />
+                {props.isEdit ? "수정 중..." : "등록 중..."}
+              </div>
+            ) : (
+              <p>{props.isEdit ? "모임 수정하기" : "모임 등록하기"}</p>
+            )}
           </button>
         </div>
       </section>

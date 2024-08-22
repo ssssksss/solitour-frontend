@@ -6,10 +6,12 @@ import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const GatheringWriteContainer = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const methods = useForm({
     resolver: zodResolver(gatheringCreateFormSchema),
     defaultValues: {
@@ -47,6 +49,7 @@ const GatheringWriteContainer = () => {
       ...requestData
     } = methods.getValues();
     try {
+      setLoading(true);
       const response = await fetchWithAuth("/api/gathering/write", {
         method: "POST",
         headers: {
@@ -72,6 +75,7 @@ const GatheringWriteContainer = () => {
       });
 // TODO 에러 처리 작업 필요함
       if (!response.ok) {
+        setLoading(false);
         throw new Error("Network response was not ok");
       }
 
@@ -86,6 +90,7 @@ const GatheringWriteContainer = () => {
     <FormProvider {...methods}>
       <GatheringEditor
         createGatheringHandler={createGatheringHandler}
+        loading={loading}
       />
     </FormProvider>
   );
