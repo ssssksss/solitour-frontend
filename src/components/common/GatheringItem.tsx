@@ -19,7 +19,7 @@ const GatheringItem = (data: Gathering) => {
     <Link
       href={`/gathering/${data.gatheringId}`}
       className={
-        "flex w-full flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600"
+        "flex w-full flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main min-[1025px]:h-[16.5rem] max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600"
       }
     >
       <div className="flex flex-col">
