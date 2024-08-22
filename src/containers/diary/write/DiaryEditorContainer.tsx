@@ -6,10 +6,7 @@ import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
-import {
-  CreateDiaryRequestDto,
-  CreateDiaryResponseDto,
-} from "@/types/DiaryDto";
+import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";

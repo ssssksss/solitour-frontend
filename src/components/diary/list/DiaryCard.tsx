@@ -1,9 +1,22 @@
-import { GetDiaryListResponseDto } from "@/types/DiaryDto";
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  diaryData: GetDiaryListResponseDto;
+  diaryData: {
+    diaryId: number;
+    title: string;
+    titleImage: string;
+    startDatetime: Date;
+    endDatetime: Date;
+    diaryDayContentResponses: {
+      diaryDayContentDetail: {
+        content: string;
+        feelingStatus: string;
+        place: string;
+      }[];
+    };
+  };
   flag: boolean;
   isFlipped: boolean;
   days: number;
@@ -67,7 +80,7 @@ const DiaryCard = ({
         <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
           <div className="relative h-20 w-16">
             <Image
-              src={`/mood-icon${diaryData.diaryDays[currentDay - 1].moodLevel}.svg`}
+              src={`/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}
@@ -84,12 +97,16 @@ const DiaryCard = ({
           </Link>
           <p className="mt-3 text-lg text-gray1 dark:text-slate-400">
             {new Date(
-              new Date(diaryData.startDate).getTime() +
+              new Date(diaryData.startDatetime).getTime() +
                 (1000 * 60 * 60 * 24 * currentDay - 1),
             ).toLocaleDateString("ko-KR")}
           </p>
           <p className="truncate-vertical mt-6 text-black max-[845px]:mt-3 dark:text-slate-200">
-            {diaryData.diaryDays[currentDay - 1].content}
+            {
+              diaryData.diaryDayContentResponses.diaryDayContentDetail[
+                currentDay - 1
+              ].content
+            }
           </p>
         </div>
       </div>
@@ -108,7 +125,7 @@ const DiaryCard = ({
     >
       <Image
         className="-z-10 rounded-2xl dark:opacity-65"
-        src={diaryData.image}
+        src={diaryData.titleImage}
         alt="diary-image"
         fill={true}
         style={{ objectFit: "cover" }}
@@ -117,7 +134,7 @@ const DiaryCard = ({
         <h2 className="text-start text-2xl font-bold dark:text-slate-200">
           {diaryData.title}
         </h2>
-        <p className="text-lg dark:text-slate-200">{`${new Date(diaryData.startDate).toLocaleDateString("ko-KR")} ~ ${new Date(diaryData.endDate).toLocaleDateString("ko-KR")}`}</p>
+        <p className="text-lg dark:text-slate-200">{`${new Date(diaryData.startDatetime).toLocaleDateString("ko-KR")} ~ ${new Date(diaryData.endDatetime).toLocaleDateString("ko-KR")}`}</p>
       </div>
     </button>
   );

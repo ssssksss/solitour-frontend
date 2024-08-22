@@ -19,12 +19,11 @@ async function getDiaryList() {
     throw new Error(response.statusText);
   }
 
-  return response.json() as Promise<GetDiaryListResponseDto[]>;
+  return response.json() as Promise<GetDiaryListResponseDto>;
 }
 
 const DiaryList = async () => {
-  // const data = await getDiaryList();
-  const data: GetDiaryListResponseDto[] = [];
+  const data = await getDiaryList();
 
   return (
     <div className="w-full">
@@ -41,7 +40,7 @@ const DiaryList = async () => {
       </div>
       <div className="mb-[8.625rem] grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
         <DiaryWriteButton />
-        {data.map((value, index) => (
+        {data.diaryContentResponse.map((value, index) => (
           <DiaryCardContainer key={index} diaryData={value} />
         ))}
       </div>
