@@ -76,9 +76,13 @@ const DiaryEditorContainer = () => {
       throw new Error(response.statusText);
     }
 
-    const result: CreateDiaryResponseDto = await response.json();
-    router.push(`/diary/${result.id}`);
-    router.refresh();
+    alert("성공");
+    router.push("/");
+
+    // TODO
+    // const result: CreateDiaryResponseDto = await response.json();
+    // router.push(`/diary/${result.id}`);
+    // router.refresh();
   };
 
   // 화면에서 벗어났을 때 초기화

@@ -24,7 +24,7 @@ const QuillEditorContainer = () => {
       if (input.files && quillRef.current) {
         const file = input.files[0];
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("userImage", file);
 
         const response = await fetch("/api/image/upload", {
           method: "POST",
