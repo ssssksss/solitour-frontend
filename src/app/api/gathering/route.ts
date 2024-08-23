@@ -1,19 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-    const queryString = request.url.substring(request.url.indexOf("/api/gathering")+14);
-    const access_cookie = request.cookies.get("access_token");
+  const queryString = request.url.substring(
+    request.url.indexOf("/api/gathering") + 14,
+  );
+  const access_cookie = request.cookies.get("access_token");
 
   try {
     const response = await fetch(
-      `${process.env.BACKEND_URL}/api/gatherings`+queryString,
+      `${process.env.BACKEND_URL}/api/gatherings` + queryString,
       {
         method: "GET",
         headers: {
           Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
           "Content-Type": "application/json",
         },
-        cache: "no-cache"
+        cache: "no-store",
       },
     );
 
