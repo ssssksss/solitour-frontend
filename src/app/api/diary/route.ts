@@ -26,13 +26,18 @@ export async function POST(request: NextRequest) {
  */
 export async function DELETE(request: NextRequest) {
   const cookie = request.cookies.get("access_token");
-  const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
-    method: "DELETE",
-    headers: {
-      Cookie: `${cookie?.name}=${cookie?.value}`,
+  const diaryId = request.nextUrl.searchParams.get("diaryId");
+
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/diary?diaryId=${diaryId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      cache: "no-store",
     },
-    cache: "no-store",
-  });
+  );
 
   revalidateTag("getDiaryList");
   return response;
