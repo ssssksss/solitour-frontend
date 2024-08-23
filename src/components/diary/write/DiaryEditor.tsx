@@ -111,20 +111,22 @@ const DiaryEditor = ({
             </button>
           </div>
         </div>
-        <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
-          <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-            장소<span className="text-2xl text-main">*</span>
-          </h2>
-          <button
-            className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
-            type="button"
-            onClick={() => showPlaceModal()}
-          >
-            {diaryEditorStore.address[diaryEditorStore.currentDay - 1] === ""
-              ? "장소명을 입력하세요."
-              : diaryEditorStore.placeName[diaryEditorStore.currentDay - 1]}
-          </button>
-        </div>
+        {diaryEditorStore.days > 0 && (
+          <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
+            <h2 className="text-lg font-semibold text-black dark:text-slate-200">
+              장소<span className="text-2xl text-main">*</span>
+            </h2>
+            <button
+              className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
+              type="button"
+              onClick={() => showPlaceModal()}
+            >
+              {diaryEditorStore.address[diaryEditorStore.currentDay - 1] === ""
+                ? "장소명을 입력하세요."
+                : diaryEditorStore.placeName[diaryEditorStore.currentDay - 1]}
+            </button>
+          </div>
+        )}
       </div>
       {diaryEditorStore.days > 0 && (
         <div className="mt-14 flex h-6 w-full flex-row items-center gap-14 overflow-x-auto">

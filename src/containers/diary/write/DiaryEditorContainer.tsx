@@ -73,7 +73,8 @@ const DiaryEditorContainer = () => {
       throw new Error(response.statusText);
     }
 
-    router.push(`/diary/list`);
+    const diaryId = await response.text();
+    router.push(`/diary/${diaryId}`);
     router.refresh();
   };
 

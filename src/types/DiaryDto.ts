@@ -17,17 +17,18 @@ export interface CreateDiaryRequestDto {
  * 일기 상세 조회 응답 DTO
  */
 export interface GetDiaryResponseDto {
-  diaryId: number;
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  placeName: string;
-  address: string;
-  image: string;
-  diaryDays: {
-    moodLevel: number;
-    content: string;
-  }[];
+  diaryContentResponse: {
+    diaryId: number;
+    title: string;
+    titleImage: string;
+    startDatetime: Date;
+    endDateTime: Date;
+    diaryDayContentResponses: {
+      content: string;
+      feelingStatus: string;
+      place: string;
+    }[];
+  };
 }
 
 /**
