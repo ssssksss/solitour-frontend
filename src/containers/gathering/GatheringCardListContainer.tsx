@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import GatheringCardList from "@/components/gathering/GatheringCardList";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
@@ -32,16 +32,16 @@ const GatheringCardListContainer = () => {
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
         if (params.get("page")) {
-          params.set("page", (Number(params.get("page"))-1) + "");
+          params.set("page", Number(params.get("page")) - 1 + "");
           url.search = params.toString();
         }
-        const response = await fetch("/api/gathering"+url.search, {
-          cache: "no-cache"
+        const response = await fetch("/api/gathering" + url.search, {
+          cache: "no-store",
         });
         const data: GatheringsResponse = await response.json();
         setGatherings(data.content);
         setTotalElements(data.totalElements);
-        setPage(params.get("page") ? Number(params.get("page"))+1 : 1);
+        setPage(params.get("page") ? Number(params.get("page")) + 1 : 1);
       } finally {
         setLoading(false);
       }
@@ -54,7 +54,7 @@ const GatheringCardListContainer = () => {
       {loading ? (
         <SkeletonGatheringList />
       ) : (
-          <GatheringCardList data={gatherings} />
+        <GatheringCardList data={gatherings} />
       )}
       <GatheringPaginationContainer
         currentPage={page}
@@ -63,4 +63,4 @@ const GatheringCardListContainer = () => {
     </>
   );
 };
-export default GatheringCardListContainer
+export default GatheringCardListContainer;

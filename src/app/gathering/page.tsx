@@ -13,33 +13,42 @@ export const metadata: Metadata = {
 };
 
 async function getData() {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/categories/gathering`, {
-      cache: "no-cache"  
-    });
-    
-    console.log("page.tsx 파일 : ",res.status);
-    
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    
-    return res.json();
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/api/categories/gathering`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  console.log("page.tsx 파일 : ", res.status);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
 }
 
-
-export default async function Page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
   const gatheringCategoryList = await getData();
 
   return (
-    <div className="w-full flex min-h-[calc(100vh-25rem)] flex-col items-center">
+    <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col items-center">
       <Banner
         content={[`<b>직접 내 모임</b>을`, "<b>만들어</b>보세요!"]}
         buttonText="모임 등록하기"
         category={"모임"}
       />
-      <div className="mt-[26.25rem] max-[744px]:mt-[31rem] " />
+      <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
       <TopList title="모임" />
-      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} sortDefaultValue={searchParams.sort || ""} />
+      <GatheringListContainer
+        gatheringCategoryList={gatheringCategoryList}
+        sortDefaultValue={searchParams.sort || ""}
+      />
     </div>
   );
 }
