@@ -34,50 +34,14 @@ const Banner = ({ content, buttonText, category }: Props) => {
           </Link>
         </div>
         <div
-          className={`relative flex h-[14rem] w-[27rem] items-center justify-end max-[1024px]:h-[12rem] max-[744px]:justify-center`}
+          className={`relative flex h-[13.5rem] w-[24.875rem] animate-bannerImage items-center justify-end max-[1024px]:mt-8 max-[1024px]:h-[10.6875rem] max-[744px]:justify-center`}
         >
-          <div
-            className={`absolute flex h-full w-full flex-row justify-center`}
-          >
-            {category === "정보" && (
-              <div className="flex h-[13.4375rem] w-[24.8125rem] flex-col max-[1024px]:mt-4 max-[1024px]:h-[10.6875rem] max-[1024px]:w-[19.8125rem] max-[744px]:mt-[1.875rem]">
-                <div className="flex justify-end pr-6">
-                  <div className="relative h-[5.8125rem] w-[11.75rem] animate-bannerImage max-[1024px]:h-[5.0625rem] max-[1024px]:w-[10.1875rem]">
-                    <Image
-                      src="/banner-image1.png"
-                      alt="banner-image1"
-                      fill={true}
-                      style={{
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="relative z-10 -mt-[1.875rem] h-[5.75rem] w-[14.375rem] animate-bannerImage max-[1024px]:h-[4.5625rem] max-[1024px]:w-[11.5rem]">
-                  <Image
-                    src="/banner-image2.png"
-                    alt="banner-image2"
-                    fill={true}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </div>
-                <div className="-mt-8 flex justify-end">
-                  <div className="relative h-[5.8125rem] w-[14.75rem] animate-bannerImage max-[1024px]:h-[4.625rem] max-[1024px]:w-[11.75rem]">
-                    <Image
-                      src="/banner-image3.png"
-                      alt="banner-image3"
-                      fill={true}
-                      style={{
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          <Image
+            className="object-contain"
+            src="/banner-image.png"
+            alt="banner-image"
+            fill={true}
+          />
         </div>
       </div>
     </div>
