@@ -61,7 +61,7 @@ const DiaryViewer = ({
       </div>
       <div className="relative mt-[5.5rem] h-20 w-16">
         <Image
-          src={`/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses[currentDay - 1].feelingStatus]}.svg`}
+          src={`/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
@@ -81,8 +81,8 @@ const DiaryViewer = ({
           <TiLocation className="text-main" size={"1.3rem"} />
           <p>
             {
-              data.diaryContentResponse.diaryDayContentResponses[currentDay - 1]
-                .place
+              data.diaryContentResponse.diaryDayContentResponses
+                .diaryDayContentDetail[currentDay - 1].place
             }
           </p>
         </div>
@@ -91,8 +91,8 @@ const DiaryViewer = ({
         className="mt-16"
         dangerouslySetInnerHTML={{
           __html:
-            data.diaryContentResponse.diaryDayContentResponses[currentDay - 1]
-              .content,
+            data.diaryContentResponse.diaryDayContentResponses
+              .diaryDayContentDetail[currentDay - 1].content,
         }}
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">

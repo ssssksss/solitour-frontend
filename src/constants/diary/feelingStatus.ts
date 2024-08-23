@@ -13,4 +13,9 @@ export const FEELING_STATUS: FEELING_STATUS_TYPE = {
   SOSO: "3",
   SAD: "4",
   ANGRY: "5",
+  최고: "1",
+  좋아: "2",
+  무난: "3",
+  슬퍼: "4",
+  화나: "5",
 };

@@ -12,7 +12,7 @@ const DiaryViewerContainer = ({ data }: Props) => {
   const [currentDay, setCurrentDay] = useState<number>(1);
   const days = useMemo(
     () =>
-      (new Date(data.diaryContentResponse.endDateTime).getTime() -
+      (new Date(data.diaryContentResponse.endDatetime).getTime() -
         new Date(data.diaryContentResponse.startDatetime).getTime()) /
         (1000 * 60 * 60 * 24) +
       1,

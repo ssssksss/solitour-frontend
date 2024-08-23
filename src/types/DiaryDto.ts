@@ -22,12 +22,14 @@ export interface GetDiaryResponseDto {
     title: string;
     titleImage: string;
     startDatetime: Date;
-    endDateTime: Date;
+    endDatetime: Date;
     diaryDayContentResponses: {
-      content: string;
-      feelingStatus: string;
-      place: string;
-    }[];
+      diaryDayContentDetail: {
+        content: string;
+        feelingStatus: string;
+        place: string;
+      }[];
+    };
   };
 }
 
