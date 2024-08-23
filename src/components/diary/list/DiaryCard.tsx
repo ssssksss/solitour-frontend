@@ -1,6 +1,7 @@
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
+import sanitizeHtml from "sanitize-html";
 
 interface Props {
   diaryData: {
@@ -102,11 +103,12 @@ const DiaryCard = ({
             ).toLocaleDateString("ko-KR")}
           </p>
           <p className="truncate-vertical mt-6 text-black max-[845px]:mt-3 dark:text-slate-200">
-            {
+            {sanitizeHtml(
               diaryData.diaryDayContentResponses.diaryDayContentDetail[
                 currentDay - 1
-              ].content
-            }
+              ].content,
+              { allowedTags: [] },
+            )}
           </p>
         </div>
       </div>
