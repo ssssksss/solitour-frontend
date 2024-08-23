@@ -5,16 +5,13 @@ import { cookies } from "next/headers";
 
 async function getDiary(id: number) {
   const cookie = cookies().get("access_token");
-  const response = await fetch(
-    `${process.env.LOCAL_BACKEND_URL}/api/diary/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-      next: { revalidate: 60, tags: [`getDiary/${id}`] },
+  const response = await fetch(`${process.env.BACKEND_URL}/api/diary/${id}`, {
+    method: "GET",
+    headers: {
+      Cookie: `${cookie?.name}=${cookie?.value}`,
     },
-  );
+    next: { revalidate: 60, tags: [`getDiary/${id}`] },
+  });
 
   if (!response.ok) {
     throw new Error(response.statusText);

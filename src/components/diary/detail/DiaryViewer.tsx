@@ -1,3 +1,4 @@
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import DiaryDeleteModalContainer from "@/containers/diary/detail/DiaryDeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
@@ -29,7 +30,7 @@ const DiaryViewer = ({
     <div className="flex w-full flex-col items-start">
       {modalVisible && (
         <DiaryDeleteModalContainer
-          diaryId={data.diaryId}
+          diaryId={data.diaryContentResponse.diaryId}
           closeModal={closeModal}
         />
       )}
@@ -60,37 +61,44 @@ const DiaryViewer = ({
       </div>
       <div className="relative mt-[5.5rem] h-20 w-16">
         <Image
-          src={`/mood-icon${data.diaryDays[currentDay - 1].moodLevel}.svg`}
+          src={`/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
         />
       </div>
       <h1 className="mt-12 text-[1.75rem] font-bold dark:text-slate-200">
-        {data.title}
+        {data.diaryContentResponse.title}
       </h1>
       <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1 dark:text-slate-400">
         <p>
           {new Date(
-            new Date(data.startDate).getTime() +
+            new Date(data.diaryContentResponse.startDatetime).getTime() +
               (1000 * 60 * 60 * 24 * currentDay - 1),
           ).toLocaleDateString("ko-KR")}
         </p>
         <div className="flex flex-row items-center gap-1">
           <TiLocation className="text-main" size={"1.3rem"} />
-          <p>{data.address}</p>
+          <p>
+            {
+              data.diaryContentResponse.diaryDayContentResponses
+                .diaryDayContentDetail[currentDay - 1].place
+            }
+          </p>
         </div>
       </div>
       <div
         className="mt-16"
         dangerouslySetInnerHTML={{
-          __html: data.diaryDays[currentDay - 1].content,
+          __html:
+            data.diaryContentResponse.diaryDayContentResponses
+              .diaryDayContentDetail[currentDay - 1].content,
         }}
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
         <Link
           className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
-          href={`/diary/edit/${data.diaryId}`}
+          href={`/diary/edit/${data.diaryContentResponse.diaryId}`}
         >
           <GoPencil />
           수정

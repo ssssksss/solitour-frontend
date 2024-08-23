@@ -1,11 +1,23 @@
 "use client";
 
 import DiaryCard from "@/components/diary/list/DiaryCard";
-import { GetDiaryListResponseDto } from "@/types/DiaryDto";
 import { useMemo, useState } from "react";
 
 interface Props {
-  diaryData: GetDiaryListResponseDto;
+  diaryData: {
+    diaryId: number;
+    title: string;
+    titleImage: string;
+    startDatetime: Date;
+    endDatetime: Date;
+    diaryDayContentResponses: {
+      diaryDayContentDetail: {
+        content: string;
+        feelingStatus: string;
+        place: string;
+      }[];
+    };
+  };
 }
 
 const DiaryCardContainer = ({ diaryData }: Props) => {
@@ -14,8 +26,8 @@ const DiaryCardContainer = ({ diaryData }: Props) => {
   const [currentDay, setCurrentDay] = useState<number>(1);
   const days = useMemo(
     () =>
-      (new Date(diaryData.endDate).getTime() -
-        new Date(diaryData.startDate).getTime()) /
+      (new Date(diaryData.endDatetime).getTime() -
+        new Date(diaryData.startDatetime).getTime()) /
         (1000 * 60 * 60 * 24) +
       1,
     // eslint-disable-next-line react-hooks/exhaustive-deps

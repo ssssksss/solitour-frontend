@@ -1,12 +1,14 @@
 "use client";
 
 import QuillEditor from "@/components/diary/write/QuillEditor";
+import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { ImageResize } from "quill-image-resize-module-ts";
 import { useMemo, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
 
 const QuillEditorContainer = () => {
+  const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
   const quillRef = useRef<ReactQuill>(null);
 
@@ -24,7 +26,10 @@ const QuillEditorContainer = () => {
       if (input.files && quillRef.current) {
         const file = input.files[0];
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("id", authStore.id.toString());
+        formData.append("image", file);
+        formData.append("type", "diary");
+        formData.append("imageStatus", "THUMBNAIL");
 
         const response = await fetch("/api/image/upload", {
           method: "POST",
@@ -37,10 +42,9 @@ const QuillEditorContainer = () => {
           throw new Error(response.statusText);
         }
 
-        const url = await response.text();
-
-        //const blob = new Blob([file], { type: "image/png" });
-        //const url = URL.createObjectURL(blob);
+        const result: { imageStatus: string; address: string } =
+          await response.json();
+        const url = result.address;
 
         const Image = Quill.import("formats/image");
         Image.sanitize = (url: string) => url;
@@ -52,7 +56,10 @@ const QuillEditorContainer = () => {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 1);
 
-          if (diaryEditorStore.image === "") {
+          if (
+            diaryEditorStore.image === "" &&
+            diaryEditorStore.currentDay === 1
+          ) {
             diaryEditorStore.setDiaryEditor({ image: url });
           }
 

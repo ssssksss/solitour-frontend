@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 
 async function getDiaryList() {
   const cookie = cookies().get("access_token");
-  const response = await fetch(`${process.env.LOCAL_BACKEND_URL}/api/diary`, {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
     method: "GET",
     headers: {
       Cookie: `${cookie?.name}=${cookie?.value}`,
@@ -15,11 +15,10 @@ async function getDiaryList() {
   });
 
   if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
     throw new Error(response.statusText);
   }
 
-  return response.json() as Promise<GetDiaryListResponseDto[]>;
+  return response.json() as Promise<GetDiaryListResponseDto>;
 }
 
 const DiaryList = async () => {
@@ -40,7 +39,7 @@ const DiaryList = async () => {
       </div>
       <div className="mb-[8.625rem] grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
         <DiaryWriteButton />
-        {data.map((value, index) => (
+        {data.diaryContentResponse.map((value, index) => (
           <DiaryCardContainer key={index} diaryData={value} />
         ))}
       </div>

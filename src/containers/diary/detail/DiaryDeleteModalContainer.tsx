@@ -12,7 +12,7 @@ const DiaryDeleteModalContainer = ({ diaryId, closeModal }: Props) => {
   const router = useRouter();
 
   const onDeleteClick = async () => {
-    const response = await fetch(`/api/diary/delete/${diaryId}`, {
+    const response = await fetch(`/api/diary?diaryId=${diaryId}`, {
       method: "DELETE",
       cache: "no-store",
     });
