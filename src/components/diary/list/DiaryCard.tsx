@@ -136,7 +136,7 @@ const DiaryCard = ({
         <h2 className="text-start text-2xl font-bold dark:text-slate-200">
           {diaryData.title}
         </h2>
-        <p className="text-lg dark:text-slate-200">{`${new Date(diaryData.startDatetime).toLocaleDateString("ko-KR")} ~ ${new Date(diaryData.endDatetime).toLocaleDateString("ko-KR")}`}</p>
+        <p className="text-lg dark:text-slate-200">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")} ~ ${new Date(new Date(diaryData.endDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
       </div>
     </button>
   );
