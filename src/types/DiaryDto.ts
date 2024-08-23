@@ -58,19 +58,12 @@ export interface GetDiaryListResponseDto {
  */
 export interface UpdateDiaryRequestDto {
   title: string;
-  startDate: Date;
-  endDate: Date;
-  placeName: string;
-  address: string;
-  diaryDays: {
-    moodLevel: number;
+  titleImage: string;
+  startDatetime: Date;
+  endDatetime: Date;
+  diaryDayRequests: {
     content: string;
+    feelingStatus: string;
+    place: string;
   }[];
-}
-
-/**
- * 일기 수정 응답 DTO
- */
-export interface UpdateDiaryResponseDto {
-  id: number;
 }

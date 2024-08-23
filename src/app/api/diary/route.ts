@@ -1,4 +1,4 @@
-import { CreateDiaryRequestDto } from "@/types/DiaryDto";
+import { CreateDiaryRequestDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
@@ -18,6 +18,36 @@ export async function POST(request: NextRequest) {
   });
 
   revalidateTag("getDiaryList");
+  return response;
+}
+
+/**
+ * 일기 수정
+ */
+export async function PUT(request: NextRequest) {
+  const cookie = request.cookies.get("access_token");
+  const diaryId = request.nextUrl.searchParams.get("diaryId");
+  const body: UpdateDiaryRequestDto = await request.json();
+
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/diary?diaryId=${diaryId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  revalidateTag("getDiaryList");
+  revalidateTag(`getDiary/${diaryId}`);
   return response;
 }
 

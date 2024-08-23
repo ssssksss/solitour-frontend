@@ -1,16 +1,15 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/write/DiaryEditor";
+import sanitizeOption from "@/constants/common/sanitizeOption";
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
-import {
-  GetDiaryResponseDto,
-  UpdateDiaryRequestDto,
-  UpdateDiaryResponseDto,
-} from "@/types/DiaryDto";
+import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import sanitizeHtml from "sanitize-html";
 
 interface Props {
   diaryData: GetDiaryResponseDto;
@@ -33,8 +32,11 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       endDate: diaryEditorStore.endDate,
       placeName: diaryEditorStore.placeName,
       address: diaryEditorStore.address,
+      image: diaryEditorStore.image,
       moodLevels: diaryEditorStore.moodLevels,
-      contents: diaryEditorStore.contents,
+      contents: diaryEditorStore.contents.map((content) =>
+        sanitizeHtml(content, sanitizeOption),
+      ),
     });
 
     // If validation fails, return errors early. Otherwise, continue.
@@ -45,56 +47,78 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     const data: UpdateDiaryRequestDto = {
       title: validatedFields.data.title,
-      startDate: validatedFields.data.startDate,
-      endDate: validatedFields.data.endDate,
-      placeName: validatedFields.data.placeName,
-      address: validatedFields.data.address,
-      diaryDays: Array.from({ length: diaryEditorStore.days }, (_, index) => ({
-        moodLevel: validatedFields.data.moodLevels[index],
-        content: validatedFields.data.contents[index],
-      })),
+      titleImage: validatedFields.data.image,
+      startDatetime: validatedFields.data.startDate,
+      endDatetime: validatedFields.data.endDate,
+      diaryDayRequests: Array.from(
+        { length: diaryEditorStore.days },
+        (_, index) => ({
+          content: validatedFields.data.contents[index],
+          feelingStatus: FEELING_STATUS[validatedFields.data.moodLevels[index]],
+          place: validatedFields.data.address[index],
+        }),
+      ),
     };
 
     setLoading(true);
 
-    const response = await fetch(`/api/diary/update/${diaryData.diaryId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `/api/diary?diaryId=${diaryData.diaryContentResponse.diaryId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        cache: "no-store",
       },
-      body: JSON.stringify(data),
-      cache: "no-store",
-    });
+    );
 
     if (!response.ok) {
-      alert("일기 작성에 실패하였습니다.");
+      alert("일기 수정에 실패하였습니다.");
       setLoading(false);
       throw new Error(response.statusText);
     }
 
-    const result: UpdateDiaryResponseDto = await response.json();
-    router.push(`/diary/${result.id}`);
+    const diaryId = await response.text();
+    router.push(`/diary/${diaryId}`);
     router.refresh();
   };
 
-  // 화면에서 벗어났을 때 초기화
   useEffect(() => {
     diaryEditorStore.setDiaryEditor({
-      title: diaryData.title,
-      startDate: new Date(diaryData.startDate),
-      endDate: new Date(diaryData.endDate),
-      placeName: diaryData.placeName,
-      address: diaryData.address,
-      days:
-        (new Date(diaryData.endDate).getTime() -
-          new Date(diaryData.startDate).getTime()) /
-          (1000 * 60 * 60 * 24) +
-        1,
+      title: diaryData.diaryContentResponse.title,
+      image: diaryData.diaryContentResponse.titleImage,
+      startDate: new Date(
+        new Date(diaryData.diaryContentResponse.startDatetime).getTime() +
+          1000 * 60 * 60 * 24,
+      ),
+      endDate: new Date(
+        new Date(diaryData.diaryContentResponse.endDatetime).getTime() +
+          1000 * 60 * 60 * 24,
+      ),
+      placeName:
+        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+          (value) => value.place,
+        ),
+      address:
+        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+          (value) => value.place,
+        ),
+      days: diaryData.diaryContentResponse.diaryDayContentResponses
+        .diaryDayContentDetail.length,
       currentDay: 1,
-      moodLevels: diaryData.diaryDays.map((value) => value.moodLevel),
-      contents: diaryData.diaryDays.map((value) => value.content),
+      moodLevels:
+        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+          (value) => Number(FEELING_STATUS[value.feelingStatus]),
+        ),
+      contents:
+        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+          (value) => value.content,
+        ),
     });
 
+    // 화면에서 벗어났을 때 초기화
     return () => {
       diaryEditorStore.initialize();
     };

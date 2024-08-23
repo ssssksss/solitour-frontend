@@ -1,6 +1,13 @@
 import { z } from "zod";
 
 export const DiaryUpdateFormSchema = z.object({
+  userId: z
+    .number({
+      required_error: "로그인을 해야 일기 작성이 가능합니다.",
+      invalid_type_error: "UserId must be a integer.",
+    })
+    .int()
+    .positive(),
   title: z
     .string({
       required_error: "제목을 입력해 주세요.",
@@ -28,13 +35,23 @@ export const DiaryUpdateFormSchema = z.object({
       required_error: "장소를 입력해 주세요.",
       invalid_type_error: "PlaceName must be a string.",
     })
+    .min(1, { message: "장소를 입력해 주세요." })
+    .array()
     .min(1, { message: "장소를 입력해 주세요." }),
   address: z
     .string({
       required_error: "주소를 입력해 주세요.",
       invalid_type_error: "Address must be a string.",
     })
+    .min(1, { message: "주소를 입력해 주세요." })
+    .array()
     .min(1, { message: "주소를 입력해 주세요." }),
+  image: z
+    .string({
+      required_error: "최소 1장의 이미지를 등록해 주세요.",
+      invalid_type_error: "Image must be a string.",
+    })
+    .min(1, { message: "최소 1장의 이미지를 등록해 주세요." }),
   moodLevels: z
     .number({
       required_error: "모든 날짜의 기분 정보를 입력해 주세요.",
