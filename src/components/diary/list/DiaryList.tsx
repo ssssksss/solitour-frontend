@@ -4,15 +4,18 @@ import Link from "next/link";
 import { GetDiaryListResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";
 
-async function getDiaryList() {
+async function getDiaryList(page: number) {
   const cookie = cookies().get("access_token");
-  const response = await fetch(`${process.env.BACKEND_URL}/api/diary`, {
-    method: "GET",
-    headers: {
-      Cookie: `${cookie?.name}=${cookie?.value}`,
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/diary?page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: ["getDiaryList"] },
     },
-    next: { revalidate: 60, tags: ["getDiaryList"] },
-  });
+  );
 
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -21,8 +24,12 @@ async function getDiaryList() {
   return response.json() as Promise<GetDiaryListResponseDto>;
 }
 
-const DiaryList = async () => {
-  const data = await getDiaryList();
+interface Props {
+  page: number;
+}
+
+const DiaryList = async ({ page }: Props) => {
+  const data = await getDiaryList(page - 1);
 
   return (
     <div className="w-full">

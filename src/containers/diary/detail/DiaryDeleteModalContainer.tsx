@@ -27,7 +27,7 @@ const DiaryDeleteModalContainer = ({ diaryId, closeModal }: Props) => {
       throw new Error(response.statusText);
     }
 
-    router.replace("/diary/list");
+    router.replace("/diary/list?page=1");
     router.refresh();
   };
 

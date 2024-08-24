@@ -11,7 +11,11 @@ interface Props {
 const DateRangeModalContainer = ({ closeModal }: Props) => {
   const diaryEditorStore = useDiaryEditorStore();
   const [state, setState] = useState([
-    { startDate: new Date(), endDate: new Date(), key: "selection" },
+    {
+      startDate: new Date(new Date().toLocaleDateString("ko-KR")),
+      endDate: new Date(new Date().toLocaleDateString("ko-KR")),
+      key: "selection",
+    },
   ]);
 
   const onChangeDateRange = () => {
