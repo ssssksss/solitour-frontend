@@ -48,10 +48,10 @@ export const DiaryUpdateFormSchema = z.object({
     .min(1, { message: "주소를 입력해 주세요." }),
   image: z
     .string({
-      required_error: "최소 1장의 이미지를 등록해 주세요.",
+      required_error: "Day1에 최소 1장의 이미지를 등록해 주세요.",
       invalid_type_error: "Image must be a string.",
     })
-    .min(1, { message: "최소 1장의 이미지를 등록해 주세요." }),
+    .min(1, { message: "Day1에 최소 1장의 이미지를 등록해 주세요." }),
   moodLevels: z
     .number({
       required_error: "모든 날짜의 기분 정보를 입력해 주세요.",

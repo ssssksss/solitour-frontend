@@ -10,6 +10,7 @@ import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
+import { parse } from "node-html-parser";
 
 interface Props {
   diaryData: GetDiaryResponseDto;
@@ -32,7 +33,10 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       endDate: diaryEditorStore.endDate,
       placeName: diaryEditorStore.placeName,
       address: diaryEditorStore.address,
-      image: diaryEditorStore.image,
+      image:
+        parse(diaryEditorStore.contents[0])
+          .querySelector("img")
+          ?.getAttribute("src") ?? "",
       moodLevels: diaryEditorStore.moodLevels,
       contents: diaryEditorStore.contents.map((content) =>
         sanitizeHtml(content, sanitizeOption),
@@ -88,7 +92,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   useEffect(() => {
     diaryEditorStore.setDiaryEditor({
       title: diaryData.diaryContentResponse.title,
-      image: diaryData.diaryContentResponse.titleImage,
       startDate: new Date(
         new Date(diaryData.diaryContentResponse.startDatetime).getTime() +
           1000 * 60 * 60 * 24,

@@ -61,13 +61,6 @@ const QuillEditorContainer = () => {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 1);
 
-          if (
-            diaryEditorStore.image === "" &&
-            diaryEditorStore.currentDay === 1
-          ) {
-            diaryEditorStore.setDiaryEditor({ image: url });
-          }
-
           // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout 사용합니다.
           setTimeout(() => {
             // Property 'style' does not exist on type 'Element'.ts(2339) 오류를

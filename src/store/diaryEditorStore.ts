@@ -10,7 +10,6 @@ interface DiaryEditorState {
   currentDay: number;
   placeName: string[];
   address: string[];
-  image: string;
   moodLevels: number[];
   contents: string[];
 }
@@ -33,7 +32,6 @@ const initialState: DiaryEditorState = {
   currentDay: 1,
   placeName: [""],
   address: [""],
-  image: "",
   moodLevels: [],
   contents: [],
 };
