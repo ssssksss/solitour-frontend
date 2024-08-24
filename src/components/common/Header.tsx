@@ -109,7 +109,7 @@ const Header = ({
                           : "font-medium text-gray1 dark:text-slate-400"
                       } ` + "text-sm hover:text-main"
                     }
-                    href="/diary/list"
+                    href="/diary/list?page=1"
                     prefetch={userId > 0}
                   >
                     여행일기

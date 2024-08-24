@@ -1,6 +1,6 @@
 import InformationItem from "@/components/common/InformationItem";
 import { LOCATION_ID } from "@/constants/informations/location";
-import PaginationContainer from "@/containers/common/PaginationContainer";
+import InformationPaginationContainer from "@/containers/informations/list/InformationPaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
@@ -94,7 +94,10 @@ const InformationList = async ({
           />
         ))}
       </div>
-      <PaginationContainer currentPage={page} totalPages={data.totalPages} />
+      <InformationPaginationContainer
+        currentPage={page}
+        totalPages={data.totalPages}
+      />
     </div>
   );
 };

@@ -44,10 +44,11 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     address_name: string;
   }) => {
     const index = diaryEditorStore.currentDay - 1;
+    const addressArr = placeInfo.address_name.trim().split(" ");
     diaryEditorStore.changeAddress(
       index,
       placeInfo.place_name,
-      placeInfo.address_name,
+      `${addressArr[0]} ${addressArr[1]}`,
     );
     closeModal();
   };
