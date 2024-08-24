@@ -3,7 +3,6 @@
 import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
-import { ImageResize } from "quill-image-resize-module-ts";
 import { useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 
@@ -66,8 +65,6 @@ const QuillEditorContainer = () => {
   };
 
   const modules = useMemo(() => {
-    ReactQuill.Quill.register("modules/imageResize", ImageResize);
-
     return {
       // 더 많은 옵션은 다음 링크를 참고할 것.
       // https://quilljs.com/docs/modules/toolbar
