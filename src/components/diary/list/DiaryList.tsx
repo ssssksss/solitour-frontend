@@ -14,7 +14,7 @@ async function getDiaryList(page: number) {
       headers: {
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-      next: { revalidate: 3600, tags: ["getDiaryList"] },
+      next: { revalidate: 60, tags: ["getDiaryList"] },
     },
   );
 
@@ -31,6 +31,7 @@ interface Props {
 
 const DiaryList = async ({ page }: Props) => {
   const data = await getDiaryList(page - 1);
+  console.log(data);
 
   return (
     <div className="w-full">
@@ -46,12 +47,15 @@ const DiaryList = async ({ page }: Props) => {
         </Link>
       </div>
       <div className="grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
-        {data.diaryContentResponse.length < 6 && <DiaryWriteButton />}
-        {data.diaryContentResponse.map((value, index) => (
+        {data.content.length < 6 && <DiaryWriteButton />}
+        {data.content.map((value, index) => (
           <DiaryCardContainer key={index} diaryData={value} />
         ))}
       </div>
-      <DiaryPaginationContainer currentPage={page} totalPages={10} />
+      <DiaryPaginationContainer
+        currentPage={page}
+        totalPages={data.totalPages}
+      />
     </div>
   );
 };

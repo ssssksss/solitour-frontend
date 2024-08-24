@@ -10,7 +10,7 @@ async function getDiary(id: number) {
     headers: {
       Cookie: `${cookie?.name}=${cookie?.value}`,
     },
-    next: { revalidate: 3600, tags: [`getDiary/${id}`] },
+    next: { revalidate: 60, tags: [`getDiary/${id}`] },
   });
 
   if (!response.ok) {
