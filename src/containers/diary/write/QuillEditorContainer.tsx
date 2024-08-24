@@ -61,17 +61,17 @@ const QuillEditorContainer = () => {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 1);
 
-          // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout 사용합니다.
-          setTimeout(() => {
-            // Property 'style' does not exist on type 'Element'.ts(2339) 오류를
-            // 방지하기 위해 타입을 any로 지정합니다.
-            const imageElement: any = document.querySelector(
-              `img[src="${url}"]`,
-            );
-            if (imageElement) {
-              imageElement.style.borderRadius = "1rem";
-            }
-          }, 100);
+          // // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout 사용합니다.
+          // setTimeout(() => {
+          //   // Property 'style' does not exist on type 'Element'.ts(2339) 오류를
+          //   // 방지하기 위해 타입을 any로 지정합니다.
+          //   const imageElement: any = document.querySelector(
+          //     `img[src="${url}"]`,
+          //   );
+          //   if (imageElement) {
+          //     imageElement.style.borderRadius = "1rem";
+          //   }
+          // }, 100);
         }
       }
     });
@@ -94,14 +94,14 @@ const QuillEditorContainer = () => {
         ],
         handlers: { image: imageHandler },
       },
-      imageResize: {
-        modules: ["Resize", "DisplaySize", "Toolbar"],
-        handleStyles: {
-          backgroundColor: "#00B488",
-          border: "none",
-          // other camelCase styles for size display
-        },
-      },
+      // imageResize: {
+      //   modules: ["Resize", "DisplaySize", "Toolbar"],
+      //   handleStyles: {
+      //     backgroundColor: "#00B488",
+      //     border: "none",
+      //     // other camelCase styles for size display
+      //   },
+      // },
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

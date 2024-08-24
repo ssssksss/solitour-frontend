@@ -1,6 +1,6 @@
 "use client";
 
-import Pagination from "@/components/common/Pagination";
+import InformationPagination from "@/components/informations/list/InformationPagination";
 import { usePathname, useSearchParams } from "next/navigation";
 
 interface Props {
@@ -8,20 +8,19 @@ interface Props {
   totalPages: number;
 }
 
-const PaginationContainer = ({ currentPage, totalPages }: Props) => {
+const InformationPaginationContainer = ({ currentPage, totalPages }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   return (
-    <Pagination
+    <InformationPagination
       currentPage={currentPage}
       totalPages={totalPages}
       pathname={pathname}
-      page={Number(searchParams.get("page") ?? 1)}
       place={searchParams.get("place")}
       order={searchParams.get("order")}
     />
   );
 };
 
-export default PaginationContainer;
+export default InformationPaginationContainer;

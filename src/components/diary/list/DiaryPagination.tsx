@@ -7,41 +7,27 @@ interface Props {
   currentPage: number;
   totalPages: number;
   pathname: string;
-  page: number;
-  place: string | null;
-  order: string | null;
 }
 
-const Pagination = ({
-  currentPage,
-  totalPages,
-  pathname,
-  page,
-  place,
-  order,
-}: Props) => {
+const DiaryPagination = ({ currentPage, totalPages, pathname }: Props) => {
   const pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
   const leftPage = Math.max(currentPage - 2, 1);
   const rightPage = Math.min(leftPage + 4, totalPages);
 
   return (
-    <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black dark:text-slate-200">
-      {page > 1 ? (
-        <Link
-          href={`${pathname}?page=1${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
-        >
+    <div className="mb-[8.625rem] mt-10 flex flex-row items-center justify-center gap-3 text-sm text-black dark:text-slate-200">
+      {currentPage > 1 ? (
+        <Link href={`${pathname}?page=1`}>
           <MdFirstPage
             className="cursor-pointer hover:text-main"
-            size={"1.1rem"}
+            size="1.1rem"
           />
         </Link>
       ) : (
-        <MdFirstPage className="text-gray2" size={"1.1rem"} />
+        <MdFirstPage className="text-gray2" size="1.1rem" />
       )}
-      {page > 1 ? (
-        <Link
-          href={`${pathname}?page=${page - 1}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
-        >
+      {currentPage > 1 ? (
+        <Link href={`${pathname}?page=${currentPage - 1}`}>
           <IoIosArrowBack className="cursor-pointer hover:text-main" />
         </Link>
       ) : (
@@ -51,7 +37,7 @@ const Pagination = ({
         <div className="flex flex-row items-center gap-3">
           <Link
             className="flex h-6 w-6 items-center justify-center hover:text-main"
-            href={`${pathname}?page=1${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+            href={`${pathname}?page=1`}
           >
             1
           </Link>
@@ -62,7 +48,7 @@ const Pagination = ({
         <Link
           key={pageNumber}
           className={`${pageNumber === currentPage ? "bg-main text-white" : ""} flex h-6 w-6 items-center justify-center rounded-full hover:text-main`}
-          href={`${pathname}?page=${pageNumber}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+          href={`${pathname}?page=${pageNumber}`}
         >
           {pageNumber}
         </Link>
@@ -72,25 +58,21 @@ const Pagination = ({
           <AiOutlineEllipsis />
           <Link
             className="flex h-6 w-6 items-center justify-center hover:text-main"
-            href={`${pathname}?page=${totalPages}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+            href={`${pathname}?page=${totalPages}`}
           >
             {totalPages}
           </Link>
         </div>
       )}
-      {page < totalPages ? (
-        <Link
-          href={`${pathname}?page=${page + 1}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
-        >
+      {currentPage < totalPages ? (
+        <Link href={`${pathname}?page=${currentPage + 1}`}>
           <IoIosArrowForward className="cursor-pointer hover:text-main" />
         </Link>
       ) : (
         <IoIosArrowForward className="text-gray2" />
       )}
-      {page < totalPages ? (
-        <Link
-          href={`${pathname}?page=${totalPages}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
-        >
+      {currentPage < totalPages ? (
+        <Link href={`${pathname}?page=${totalPages}`}>
           <MdLastPage
             className="cursor-pointer hover:text-main"
             size={"1.1rem"}
@@ -103,4 +85,4 @@ const Pagination = ({
   );
 };
 
-export default Pagination;
+export default DiaryPagination;
