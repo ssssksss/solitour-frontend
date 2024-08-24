@@ -2,29 +2,41 @@ import "react-quill/dist/quill.snow.css";
 import "@/styles/quillEditor.css";
 import ReactQuill from "react-quill";
 import { RefObject } from "react";
+import { HashLoader } from "react-spinners";
+import HashSpinner from "@/components/common/HashSpinner";
 
 interface Props {
+  loading: boolean;
   quillRef: RefObject<ReactQuill>;
   modules: {};
   content: string;
   onChange: (value: string) => void;
 }
 
-const QuillEditor = ({ quillRef, modules, content, onChange }: Props) => {
+const QuillEditor = ({
+  loading,
+  quillRef,
+  modules,
+  content,
+  onChange,
+}: Props) => {
   return (
-    <ReactQuill
-      ref={quillRef}
-      theme="snow"
-      placeholder="여행은 어땠나요? 자유롭게 기록하고 싶은 것들을 작성해보세요."
-      onChange={(value, delta, source, editor) => {
-        if (source === "api" && value === "<p><br></p>") {
-          return;
-        }
-        onChange(value);
-      }}
-      value={content}
-      modules={modules}
-    />
+    <div>
+      <HashSpinner loading={loading} />
+      <ReactQuill
+        ref={quillRef}
+        theme="snow"
+        placeholder="여행은 어땠나요? 자유롭게 기록하고 싶은 것들을 작성해보세요."
+        onChange={(value, delta, source, editor) => {
+          if (source === "api" && value === "<p><br></p>") {
+            return;
+          }
+          onChange(value);
+        }}
+        value={content}
+        modules={modules}
+      />
+    </div>
   );
 };
 

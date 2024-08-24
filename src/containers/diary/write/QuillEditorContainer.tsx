@@ -4,13 +4,14 @@ import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { ImageResize } from "quill-image-resize-module-ts";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 
 const QuillEditorContainer = () => {
   const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
   const quillRef = useRef<ReactQuill>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const imageHandler = () => {
     // Step 1. 이미지 파일을 첨부할 수 있는 input을 생성합니다.
@@ -31,11 +32,15 @@ const QuillEditorContainer = () => {
         formData.append("type", "diary");
         formData.append("imageStatus", "THUMBNAIL");
 
+        setLoading(true);
+
         const response = await fetch("/api/image/upload", {
           method: "POST",
           body: formData,
           cache: "no-store",
         });
+
+        setLoading(false);
 
         if (!response.ok) {
           alert("이미지 처리 중 오류가 발생하였습니다.");
@@ -55,13 +60,6 @@ const QuillEditorContainer = () => {
         if (range) {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 1);
-
-          if (
-            diaryEditorStore.image === "" &&
-            diaryEditorStore.currentDay === 1
-          ) {
-            diaryEditorStore.setDiaryEditor({ image: url });
-          }
 
           // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout 사용합니다.
           setTimeout(() => {
@@ -110,6 +108,7 @@ const QuillEditorContainer = () => {
 
   return (
     <QuillEditor
+      loading={loading}
       quillRef={quillRef}
       modules={modules}
       content={diaryEditorStore.contents[diaryEditorStore.currentDay - 1]}
