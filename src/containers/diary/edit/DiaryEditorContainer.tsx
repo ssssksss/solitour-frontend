@@ -93,12 +93,16 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     diaryEditorStore.setDiaryEditor({
       title: diaryData.diaryContentResponse.title,
       startDate: new Date(
-        new Date(diaryData.diaryContentResponse.startDatetime).getTime() +
-          1000 * 60 * 60 * 24,
+        new Date(
+          new Date(diaryData.diaryContentResponse.startDatetime).getTime() +
+            1000 * 60 * 60 * 24,
+        ).toLocaleDateString("ko-KR"),
       ),
       endDate: new Date(
-        new Date(diaryData.diaryContentResponse.endDatetime).getTime() +
-          1000 * 60 * 60 * 24,
+        new Date(
+          new Date(diaryData.diaryContentResponse.endDatetime).getTime() +
+            1000 * 60 * 60 * 24,
+        ).toLocaleDateString("ko-KR"),
       ),
       placeName:
         diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
