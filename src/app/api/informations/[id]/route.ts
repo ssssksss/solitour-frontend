@@ -92,31 +92,18 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  try {
-    const cookie = request.cookies.get("access_token");
-    const response = await fetch(
-      `${process.env.BACKEND_URL}/api/informations/${params.id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Cookie: `${cookie?.name}=${cookie?.value}`,
-        },
-        cache: "no-store",
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    revalidatePath("/informations", "layout");
-    return response;
-  } catch (e) {
-    return new Response(JSON.stringify({ error: "Failed to delete data." }), {
-      status: 500, // Internal Server Error
+  const cookie = request.cookies.get("access_token");
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${params.id}`,
+    {
+      method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
+        Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-    });
-  }
+      cache: "no-store",
+    },
+  );
+
+  revalidatePath("/informations", "layout");
+  return response;
 }
