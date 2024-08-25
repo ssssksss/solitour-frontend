@@ -25,10 +25,6 @@ export async function GET(
       },
     );
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
     return response;
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), {
@@ -66,10 +62,6 @@ export async function PUT(
       cache: "no-store",
     },
   );
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
 
   // Revalidate the cache
   revalidatePath("/informations", "layout");

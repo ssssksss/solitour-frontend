@@ -3,28 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
+import HashSpinner from "./HashSpinner";
 
 interface Props {
   informationId: number;
   categoryId: number;
+  userId?: number;
   isBookMark: boolean;
   title: string;
   image: string;
   address: string;
   likeCount: number;
   viewCount: number;
+  loading?: boolean;
   onBookMarkClick: () => void;
 }
 
 const InformationItem = ({
   informationId,
   categoryId,
+  userId = 0,
   isBookMark,
   title,
   image,
   address,
   likeCount,
   viewCount,
+  loading = false,
   onBookMarkClick,
 }: Props) => {
   let style = "";
@@ -44,6 +49,7 @@ const InformationItem = ({
 
   return (
     <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
+      <HashSpinner loading={loading} />
       <Image
         className="-z-10 rounded-[0.875rem] dark:opacity-65"
         src={image || "/next.svg"}
@@ -63,20 +69,22 @@ const InformationItem = ({
         ) : (
           <div />
         )}
-        <button
-          className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200"
-          type="button"
-          onClick={() => onBookMarkClick()}
-        >
-          <Image
-            src={`/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
-            alt="bookmark-icon"
-            fill={true}
-            style={{
-              objectFit: "contain",
-            }}
-          />
-        </button>
+        {userId > 0 && (
+          <button
+            className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200"
+            type="button"
+            onClick={() => onBookMarkClick()}
+          >
+            <Image
+              src={`/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
+              alt="bookmark-icon"
+              fill={true}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </button>
+        )}
       </div>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4 dark:bg-slate-800">
         <Link
