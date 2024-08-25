@@ -1,28 +1,31 @@
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
-import { CiBookmark } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 
 interface Props {
-  categoryId: number;
   informationId: number;
+  categoryId: number;
+  isBookMark: boolean;
   title: string;
   image: string;
   address: string;
   likeCount: number;
   viewCount: number;
+  onBookMarkClick: () => void;
 }
 
 const InformationItem = ({
-  categoryId,
   informationId,
+  categoryId,
+  isBookMark,
   title,
   image,
   address,
   likeCount,
   viewCount,
+  onBookMarkClick,
 }: Props) => {
   let style = "";
   switch (categoryId) {
@@ -60,16 +63,20 @@ const InformationItem = ({
         ) : (
           <div />
         )}
-        <div className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200">
+        <button
+          className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200"
+          type="button"
+          onClick={() => onBookMarkClick()}
+        >
           <Image
-            src="/bookmark-icon.svg"
+            src={`/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
             alt="bookmark-icon"
             fill={true}
             style={{
               objectFit: "contain",
             }}
           />
-        </div>
+        </button>
       </div>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4 dark:bg-slate-800">
         <Link

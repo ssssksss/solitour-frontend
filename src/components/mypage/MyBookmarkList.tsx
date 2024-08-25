@@ -1,4 +1,5 @@
-import InformationItem from "../common/InformationItem";
+import InformationItemContainer from "@/containers/common/InformationItemContainer";
+
 type MyBookmarkListProps = {
   data: (
     | {
@@ -32,10 +33,11 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
       {data.map((post, index) => {
         if (!("qualification" in post)) {
           return (
-            <InformationItem
+            <InformationItemContainer
               key={"post" + post.id}
               informationId={post.id}
               categoryId={1}
+              isBookMark={true}
               title={post.title}
               image={post.image}
               address="테스트 주소"

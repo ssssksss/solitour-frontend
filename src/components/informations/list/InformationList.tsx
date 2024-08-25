@@ -1,5 +1,5 @@
-import InformationItem from "@/components/common/InformationItem";
 import { LOCATION_ID } from "@/constants/informations/location";
+import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import InformationPaginationContainer from "@/containers/informations/list/InformationPaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
@@ -80,10 +80,11 @@ const InformationList = async ({
     <div className="flex w-full flex-col">
       <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
         {data.content.map((value) => (
-          <InformationItem
+          <InformationItemContainer
             key={value.informationId}
-            categoryId={categoryId}
             informationId={value.informationId}
+            categoryId={categoryId}
+            isBookMark={value.isBookMark}
             title={value.title}
             image={value.thumbNailImage}
             address={
