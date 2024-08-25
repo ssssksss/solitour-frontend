@@ -29,13 +29,19 @@ const InformationItemContainer = ({
   const [isBookMarked, setIsBookMarked] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // TODO
   const onBookMarkClick = async () => {
     setLoading(true);
 
     if (isBookMarked) {
+      const data = new URLSearchParams();
+      data.append("infoId", informationId.toString());
+
       const response = await fetch("api/bookmark/information", {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: data.toString(),
         cache: "no-store",
       });
 
