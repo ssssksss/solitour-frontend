@@ -5,9 +5,16 @@ import { useEffect, useState } from "react";
 interface Props {
   placeName: string; // 장소명
   placeId: number; // 장소 id 값
+  placeYAxis: number;
+  placeXAxis: number;
 }
 
-const KakaoMapLinkContainer = ({ placeName, placeId }: Props) => {
+const KakaoMapLinkContainer = ({
+  placeName,
+  placeId,
+  placeYAxis,
+  placeXAxis,
+}: Props) => {
   const [loading, isLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -70,7 +77,7 @@ const KakaoMapLinkContainer = ({ placeName, placeId }: Props) => {
     <a
       id="map"
       className={`${loading ? "animate-pulse" : ""} h-48 w-full rounded-2xl border-[0.0625rem] bg-slate-200 dark:opacity-65`}
-      href={`https://map.kakao.com/link/map/${placeId}`}
+      href={`https://map.kakao.com/link/map/${placeId.toString() !== "0" ? placeId : `${placeName},${placeYAxis},${placeXAxis}`}`}
       target="_blank"
     />
   );
