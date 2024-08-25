@@ -12,38 +12,16 @@ async function getInformationList(
   order?: string,
 ) {
   const cookie = cookies().get("access_token");
-  let response: Response;
-
-  switch (order) {
-    case "like-count":
-    case "view-count":
-      response = await fetch(
-        `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}/${order}?page=${page}&${place !== undefined ? `zoneCategory=${LOCATION_ID[place]}` : ""}`,
-        {
-          method: "GET",
-          headers: {
-            Cookie: `${cookie?.name}=${cookie?.value}`,
-          },
-          next: { revalidate: 60, tags: ["getInformationList"] },
-        },
-      );
-      break;
-    case "latest":
-    case undefined:
-      response = await fetch(
-        `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}&${place !== undefined ? `zoneCategory=${LOCATION_ID[place]}` : ""}`,
-        {
-          method: "GET",
-          headers: {
-            Cookie: `${cookie?.name}=${cookie?.value}`,
-          },
-          next: { revalidate: 60, tags: ["getInformationList"] },
-        },
-      );
-      break;
-    default:
-      throw new Error("Invalid Order");
-  }
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: ["getInformationList"] },
+    },
+  );
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.

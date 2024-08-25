@@ -51,7 +51,7 @@ const InformationSearch = ({
             className="flex flex-row items-center text-gray1 hover:text-main dark:text-slate-400"
             onClick={() => onDropdownClick()}
           >
-            <p>{`${order === "latest" ? "최신순" : order === "view-count" ? "좋아요순" : "조회순"}`}</p>
+            <p>{`${order === "latest" ? "최신순" : order === "views" ? "좋아요순" : "조회순"}`}</p>
             <IoIosArrowDown />
           </button>
           <div
@@ -66,15 +66,15 @@ const InformationSearch = ({
               최신순
             </Link>
             <Link
-              className={`${order === "like-count" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=like-count`}
+              className={`${order === "likes" && "text-main"} hover:text-main`}
+              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=likes`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
-              className={`${order === "view-count" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=view-count`}
+              className={`${order === "views" && "text-main"} hover:text-main`}
+              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=views`}
               scroll={false}
             >
               조회순
