@@ -26,16 +26,16 @@ const InformationItemContainer = ({
   viewCount,
 }: Props) => {
   const userId = useAuthStore().id;
-  const [isBookMarked, setIsBookMarked] = useState<boolean>(false);
+  const [isBookMarked, setIsBookMarked] = useState<boolean>(isBookMark);
   const [loading, setLoading] = useState<boolean>(false);
 
   const onBookMarkClick = async () => {
     setLoading(true);
 
-    if (isBookMarked) {
-      const data = new URLSearchParams();
-      data.append("infoId", informationId.toString());
+    const data = new URLSearchParams();
+    data.append("infoId", informationId.toString());
 
+    if (isBookMarked) {
       const response = await fetch("api/bookmark/information", {
         method: "DELETE",
         headers: {
@@ -53,9 +53,6 @@ const InformationItemContainer = ({
 
       setIsBookMarked(false);
     } else {
-      const data = new URLSearchParams();
-      data.append("infoId", informationId.toString());
-
       const response = await fetch("/api/bookmark/information", {
         method: "POST",
         headers: {
@@ -76,12 +73,6 @@ const InformationItemContainer = ({
 
     setLoading(false);
   };
-
-  useEffect(() => {
-    setIsBookMarked(isBookMark);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <InformationItem
