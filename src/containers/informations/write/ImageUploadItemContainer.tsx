@@ -2,7 +2,7 @@
 
 import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
 import useEditorStore from "@/store/editorStore";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useRef } from "react";
 
 interface Props {
@@ -27,6 +27,12 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       imageRef.current.files.length >= 1
     ) {
       const file = imageRef.current.files[0];
+
+      if (file.size > 10485760) {
+        alert("사진 용량이 10MB를 초과합니다.");
+        return;
+      }
+
       const blob = new Blob([file], { type: "image/png" });
       const fileURL = URL.createObjectURL(blob);
 
