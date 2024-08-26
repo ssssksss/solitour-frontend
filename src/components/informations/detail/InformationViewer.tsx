@@ -25,8 +25,8 @@ const InformationViewer = ({ informationId, data }: Props) => {
             <div className="flex flex-row items-center gap-2">
               <Image
                 className="rounded-full shadow dark:bg-slate-200"
-                src="/user_sex_woman_default_image.svg" /* TODO: 서버로부터 이미지 URL 받아와야 함 */
-                alt="user_sex_woman_default_image"
+                src={`${data.userImage}`}
+                alt="userImage"
                 width={48}
                 height={48}
               />
@@ -63,8 +63,8 @@ const InformationViewer = ({ informationId, data }: Props) => {
               <div className="flex flex-row items-center gap-2">
                 <Image
                   className="rounded-full shadow dark:bg-slate-200"
-                  src="/user_sex_woman_default_image.svg" /* TODO: 서버로부터 이미지 URL 받아와야 함 */
-                  alt="user_sex_woman_default_image"
+                  src={`${data.userImage}`}
+                  alt="userImage"
                   width={48}
                   height={48}
                 />
