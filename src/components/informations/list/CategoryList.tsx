@@ -17,21 +17,12 @@ async function getCategoryList() {
 }
 
 interface Props {
-  categoryId: number;
+  parentCategoryId: number;
+  childCategoryId: number;
 }
 
-const CategoryList = async ({ categoryId }: Props) => {
+const CategoryList = async ({ parentCategoryId, childCategoryId }: Props) => {
   const categories = await getCategoryList();
-  const parentCategoryId = categories
-    .map((parentCategory) => parentCategory.id)
-    .includes(categoryId)
-    ? categoryId
-    : categories.find((parentCategory) =>
-        parentCategory.childrenCategories
-          .map((childCategory) => childCategory.id)
-          .includes(categoryId),
-      )!.id;
-  const childCategoryId = categoryId;
 
   return (
     <div className="mt-6 flex w-full flex-col gap-6">

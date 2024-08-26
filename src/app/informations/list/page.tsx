@@ -5,31 +5,38 @@ import InformationListSkeleton from "@/components/skeleton/informations/list/Inf
 import { Suspense } from "react";
 
 interface Props {
-  params: { parentCategoryId: string };
   searchParams: { [key: string]: string | undefined };
 }
 
-export default function page({ params, searchParams }: Props) {
-  const categoryId = Number(params.parentCategoryId);
-  if (categoryId <= 0 || !Number.isSafeInteger(categoryId)) {
-    throw new Error("Invalid CategoryId");
-  }
-
+export default function page({ searchParams }: Props) {
   const page = Number(searchParams["page"]);
   if (page <= 0 || !Number.isSafeInteger(page)) {
     throw new Error("Invalid Page Number");
   }
 
+  const parentCategoryId = Number(searchParams["parentCategoryId"]);
+  if (parentCategoryId <= 0 || !Number.isSafeInteger(parentCategoryId)) {
+    throw new Error("Invalid ParentCategoryId");
+  }
+
+  const childCategoryId = Number(searchParams["childCategoryId"] || 0);
+  if (childCategoryId < 0 || !Number.isSafeInteger(childCategoryId)) {
+    throw new Error("Invalid ChildCategoryId");
+  }
+
   return (
     <div className="flex w-full flex-col items-center">
       <Suspense fallback={<CategoryListSkeleton />}>
-        <CategoryList categoryId={categoryId} />
+        <CategoryList
+          parentCategoryId={parentCategoryId}
+          childCategoryId={childCategoryId}
+        />
       </Suspense>
       <Suspense fallback={<InformationListSkeleton />}>
         <InformationList
-          isParentCategory={true}
-          categoryId={categoryId}
           page={page}
+          parentCategoryId={parentCategoryId}
+          childCategoryId={childCategoryId}
           place={searchParams["place"]}
           order={searchParams["order"]}
         />

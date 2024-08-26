@@ -5,15 +5,22 @@ import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
 async function getInformationList(
-  isParentCategory: boolean,
-  categoryId: number,
   page: number,
+  parentCategoryId: number,
+  childCategoryId: number,
   place?: string,
   order?: string,
 ) {
   const cookie = cookies().get("access_token");
+
+  // TODO
+  console.log(
+    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
+  );
+  ////////
+
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
+    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
     {
       method: "GET",
       headers: {
@@ -32,24 +39,24 @@ async function getInformationList(
 }
 
 interface Props {
-  isParentCategory: boolean;
-  categoryId: number;
   page: number;
+  parentCategoryId: number;
+  childCategoryId: number;
   place?: string;
   order?: string;
 }
 
 const InformationList = async ({
-  isParentCategory,
-  categoryId,
   page,
+  parentCategoryId,
+  childCategoryId,
   place,
   order,
 }: Props) => {
   const data = await getInformationList(
-    isParentCategory,
-    categoryId,
     page - 1,
+    parentCategoryId,
+    childCategoryId,
     place,
     order,
   );
@@ -61,7 +68,7 @@ const InformationList = async ({
           <InformationItemContainer
             key={value.informationId}
             informationId={value.informationId}
-            categoryId={categoryId}
+            categoryId={parentCategoryId}
             isBookMark={value.isBookMark}
             title={value.title}
             image={value.thumbNailImage}
@@ -75,7 +82,7 @@ const InformationList = async ({
       </div>
       <InformationPaginationContainer
         currentPage={page}
-        totalPages={data.totalPages}
+        totalPages={data.page.totalPages}
       />
     </div>
   );

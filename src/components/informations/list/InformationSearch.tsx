@@ -5,6 +5,8 @@ import Link from "next/link";
 
 interface Props {
   pathname: string;
+  parentCategoryId: string;
+  childCategoryId: string | null;
   place: string;
   order: string;
   modalVisible: boolean;
@@ -16,6 +18,8 @@ interface Props {
 
 const InformationSearch = ({
   pathname,
+  parentCategoryId,
+  childCategoryId,
   place,
   order,
   modalVisible,
@@ -60,21 +64,21 @@ const InformationSearch = ({
           >
             <Link
               className={`${order === "latest" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=latest`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "likes" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=likes`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "views" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1${place !== "" ? `&place=${place}` : ""}&order=views`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views`}
               scroll={false}
             >
               조회순
