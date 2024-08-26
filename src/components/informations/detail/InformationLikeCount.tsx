@@ -12,7 +12,7 @@ const InformationLikeCount = ({ loading, likeCount, onLikesClick }: Props) => {
     <div>
       <HashSpinner loading={loading} />
       <button
-        className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400"
+        className="flex flex-row items-center gap-1 text-gray2 hover:text-[#F85E5E] dark:text-slate-400"
         type="button"
         onClick={() => onLikesClick()}
       >
