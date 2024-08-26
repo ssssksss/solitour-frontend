@@ -12,13 +12,6 @@ async function getInformationList(
   order?: string,
 ) {
   const cookie = cookies().get("access_token");
-
-  // TODO
-  console.log(
-    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
-  );
-  ////////
-
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
     {
