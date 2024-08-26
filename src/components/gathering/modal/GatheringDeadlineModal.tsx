@@ -1,5 +1,5 @@
 import "@/styles/reactDataRange.css";
-import { add, format } from "date-fns";
+import { add, format, isValid } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import { useState } from "react";
@@ -17,7 +17,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
   const [deadlineDate, setDeadlineDate] = useState<Date>(
     formContext.getValues("deadline")
       ? new Date(formContext.getValues("deadline"))
-      : new Date()
+      : new Date(),
   );
 
   const handleDateSelect = (date: Date) => {
@@ -30,6 +30,27 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
     formContext.watch();
     formContext.trigger("deadline");
     props.closeModal();
+  };
+
+  // maxDate를 결정하는 함수
+  const getMaxDate = () => {
+    const scheduleStartDate = formContext.getValues("scheduleStartDate");
+    const today = new Date();
+    const oneYearFromToday = add(today, { years: 1 });
+
+    if (scheduleStartDate) {
+      const scheduleDate = new Date(scheduleStartDate);
+      // 날짜가 유효한지 확인
+      if (isValid(scheduleDate)) {
+        // scheduleStartDate와 오늘 날짜로부터 1년 후 중 더 이른 날짜를 반환
+        return new Date(
+          Math.min(scheduleDate.getTime(), oneYearFromToday.getTime()),
+        );
+      }
+    }
+
+    // scheduleStartDate가 없거나 유효하지 않으면 1년 후 날짜를 반환
+    return oneYearFromToday;
   };
 
   return (
@@ -52,26 +73,26 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 날짜 선택 </h2>
       <section className={"flex flex-col items-center gap-[1.875rem]"}>
         <div className="relative">
-        <Calendar
-          date={deadlineDate}
-          onChange={handleDateSelect}
-          minDate={new Date()}
-          maxDate={add(new Date(), { years: 1 })}
-          locale={ko}
-          color={"#00B488"}
-          onShownDateChange={(e) => {
+          <Calendar
+            date={deadlineDate}
+            onChange={handleDateSelect}
+            minDate={new Date()}
+            maxDate={getMaxDate()} // 동적으로 계산된 maxDate를 전달
+            locale={ko}
+            color={"#00B488"}
+            onShownDateChange={(e) => {
               setMonth(e.getMonth() + 1);
               setYear(e.getFullYear());
             }}
           />
-        <div
-          className={
-            "absolute left-[50%] top-8 translate-x-[-50%] font-semibold"
-          }
+          <div
+            className={
+              "absolute left-[50%] top-8 translate-x-[-50%] font-semibold"
+            }
           >
-          {year}.{month}
-        </div>
+            {year}.{month}
           </div>
+        </div>
       </section>
       <div className={"flex w-full justify-center pt-[1rem]"}>
         <button
