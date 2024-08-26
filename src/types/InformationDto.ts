@@ -52,6 +52,7 @@ export interface InformationDetailDto {
   imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
   likeCount: number;
   userImage: string;
+  isLike: boolean;
   recommendInformation: Array<
     Readonly<{
       informationId: number;

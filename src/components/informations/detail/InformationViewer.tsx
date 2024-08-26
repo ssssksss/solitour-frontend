@@ -1,12 +1,12 @@
 import ItemTag from "../common/ItemTag";
 import Image from "next/image";
-import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
 import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
+import InformationLikeCountContainer from "@/containers/informations/detail/InformationLikeCountContainer";
 
 interface Props {
   informationId: number;
@@ -40,10 +40,11 @@ const InformationViewer = ({ informationId, data }: Props) => {
               </div>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-                <FaRegHeart size={"0.8rem"} />
-                <p className="text-xs">{data.likeCount}</p>
-              </div>
+              <InformationLikeCountContainer
+                informationId={informationId}
+                likeCount={data.likeCount}
+                isLike={data.isLike}
+              />
               <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <LuEye />
                 <p className="text-xs">{data.viewCount}</p>
@@ -78,10 +79,11 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 </div>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-                  <FaRegHeart size={"0.8rem"} />
-                  <p className="text-xs">{data.likeCount}</p>
-                </div>
+                <InformationLikeCountContainer
+                  informationId={informationId}
+                  likeCount={data.likeCount}
+                  isLike={data.isLike}
+                />
                 <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                   <LuEye />
                   <p className="text-xs">{data.viewCount}</p>
