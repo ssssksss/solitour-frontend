@@ -27,7 +27,7 @@ const Header = ({
       {visible && <HeaderSidebarContainer onClose={onClose} />}
       <div
         className={
-          "fixed top-0 z-40 flex w-full justify-center shadow" +
+          "fixed right-0 top-0 flex z-40 w-full justify-center shadow" +
           ` ${transparent ? "bg-transparent backdrop-blur-md" : "bg-white dark:bg-slate-800"}`
         }
       >
@@ -115,17 +115,32 @@ const Header = ({
                     여행일기
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className={
+                      `${
+                        pathname.includes("/support")
+                          ? "font-bold text-black dark:text-slate-200"
+                          : "font-medium text-gray1 dark:text-slate-400"
+                      } ` + "text-sm hover:text-main"
+                    }
+                    href="/support"
+                    prefetch={userId > 0}
+                  >
+                    지원&안내
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
           <MdOutlineMenu
-            className="hidden cursor-pointer hover:text-main max-[744px]:flex dark:text-slate-200"
+            className="absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer hover:text-main max-[744px]:flex dark:text-slate-200"
             size="1.5rem"
             onClick={onMenuClicked}
           />
           <div
             className={
-              "flex h-[2.25rem] w-[8rem] flex-row items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
+              "absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
             }
           >
             {userId == 0 ? (
