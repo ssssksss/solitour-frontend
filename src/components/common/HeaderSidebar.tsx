@@ -58,7 +58,7 @@ const HeaderSidebar = ({
           </Link>
           <Link
             className="flex flex-row items-center gap-4 hover:text-main dark:text-slate-200"
-            href="/informations/list/parent-category/1?page=1"
+            href="/informations/list?page=1&parentCategoryId=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(2)}
             onMouseLeave={() => setHoverNum(0)}

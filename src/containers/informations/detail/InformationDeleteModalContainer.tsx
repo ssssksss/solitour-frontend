@@ -30,7 +30,7 @@ const InformationDeleteModalContainer = ({
       throw new Error(response.statusText);
     }
 
-    router.replace("/informations/list/parent-category/1?page=1");
+    router.replace("/informations/list?page=1&parentCategoryId=1");
     router.refresh();
   };
 

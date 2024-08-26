@@ -25,7 +25,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
             <div className="flex flex-row items-center gap-2">
               <Image
                 className="rounded-full shadow dark:bg-slate-200"
-                src="/user_sex_woman_default_image.svg"
+                src="/user_sex_woman_default_image.svg" /* TODO: 서버로부터 이미지 URL 받아와야 함 */
                 alt="user_sex_woman_default_image"
                 width={48}
                 height={48}
@@ -63,7 +63,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
               <div className="flex flex-row items-center gap-2">
                 <Image
                   className="rounded-full shadow dark:bg-slate-200"
-                  src="/user_sex_woman_default_image.svg"
+                  src="/user_sex_woman_default_image.svg" /* TODO: 서버로부터 이미지 URL 받아와야 함 */
                   alt="user_sex_woman_default_image"
                   width={48}
                   height={48}
@@ -128,11 +128,13 @@ const InformationViewer = ({ informationId, data }: Props) => {
         <KakaoMapLinkContainer
           placeName={data.placeResponse.name}
           placeId={data.placeResponse.searchId}
+          placeYAxis={data.placeResponse.yaxis}
+          placeXAxis={data.placeResponse.xaxis}
         />
       </div>
       <a
         className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pb-10 pt-12"
-        href={`https://map.kakao.com/link/map/${data.placeResponse.searchId}`}
+        href={`https://map.kakao.com/link/map/${data.placeResponse.searchId.toString() !== "0" ? data.placeResponse.searchId : `${data.placeResponse.name},${data.placeResponse.yaxis},${data.placeResponse.xaxis}`}`}
         target="_blank"
       >
         <h2 className="text-lg font-bold text-black dark:text-slate-200">

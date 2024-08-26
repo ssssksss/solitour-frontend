@@ -1,77 +1,62 @@
-import InformationItem from "@/components/common/InformationItem";
 import { LOCATION_ID } from "@/constants/informations/location";
+import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import InformationPaginationContainer from "@/containers/informations/list/InformationPaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
 async function getInformationList(
-  isParentCategory: boolean,
-  categoryId: number,
   page: number,
+  parentCategoryId: number,
+  childCategoryId: number,
   place?: string,
   order?: string,
 ) {
   const cookie = cookies().get("access_token");
-  let response: Response;
 
-  switch (order) {
-    case "like-count":
-    case "view-count":
-      response = await fetch(
-        `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}/${order}?page=${page}&${place !== undefined ? `zoneCategory=${LOCATION_ID[place]}` : ""}`,
-        {
-          method: "GET",
-          headers: {
-            Cookie: `${cookie?.name}=${cookie?.value}`,
-          },
-          next: { revalidate: 60, tags: ["getInformationList"] },
-        },
-      );
-      break;
-    case "latest":
-    case undefined:
-      response = await fetch(
-        `${process.env.BACKEND_URL}/api/informations/${isParentCategory ? "parent-category" : "child-category"}/${categoryId}?page=${page}&${place !== undefined ? `zoneCategory=${LOCATION_ID[place]}` : ""}`,
-        {
-          method: "GET",
-          headers: {
-            Cookie: `${cookie?.name}=${cookie?.value}`,
-          },
-          next: { revalidate: 60, tags: ["getInformationList"] },
-        },
-      );
-      break;
-    default:
-      throw new Error("Invalid Order");
-  }
+  // TODO
+  console.log(
+    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
+  );
+  ////////
+
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: ["getInformationList"] },
+    },
+  );
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error("Failed to fetch data");
+    throw new Error(response.statusText);
   }
 
   return response.json() as Promise<InformationListResponseDto>;
 }
 
 interface Props {
-  isParentCategory: boolean;
-  categoryId: number;
   page: number;
+  parentCategoryId: number;
+  childCategoryId: number;
   place?: string;
   order?: string;
 }
 
 const InformationList = async ({
-  isParentCategory,
-  categoryId,
   page,
+  parentCategoryId,
+  childCategoryId,
   place,
   order,
 }: Props) => {
   const data = await getInformationList(
-    isParentCategory,
-    categoryId,
     page - 1,
+    parentCategoryId,
+    childCategoryId,
     place,
     order,
   );
@@ -80,10 +65,11 @@ const InformationList = async ({
     <div className="flex w-full flex-col">
       <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
         {data.content.map((value) => (
-          <InformationItem
+          <InformationItemContainer
             key={value.informationId}
-            categoryId={categoryId}
             informationId={value.informationId}
+            categoryId={parentCategoryId}
+            isBookMark={value.isBookMark}
             title={value.title}
             image={value.thumbNailImage}
             address={
@@ -96,7 +82,7 @@ const InformationList = async ({
       </div>
       <InformationPaginationContainer
         currentPage={page}
-        totalPages={data.totalPages}
+        totalPages={data.page.totalPages}
       />
     </div>
   );

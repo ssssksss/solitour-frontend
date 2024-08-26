@@ -104,7 +104,7 @@ const InformationEditor = ({
         </div>
       </div>
       <div
-        className="my-10 flex flex-row items-center gap-4 overflow-x-auto"
+        className="mb-2 mt-10 flex flex-row items-center gap-4 overflow-x-auto"
         ref={imagesHook.listRef}
         onMouseDown={imagesHook.onDragStart}
         onMouseMove={imagesHook.onDragMove}
@@ -120,6 +120,9 @@ const InformationEditor = ({
           </div>
         ))}
       </div>
+      <p className="text-sm font-medium text-gray1">
+        사진 최대 용량은 10MB입니다.
+      </p>
       <QuillEditor
         content={editorStore.content}
         onChange={(value: string, length: number) =>
