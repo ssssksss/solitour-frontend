@@ -27,7 +27,7 @@ const Header = ({
       {visible && <HeaderSidebarContainer onClose={onClose} />}
       <div
         className={
-          "fixed right-0 top-0 flex z-40 w-full justify-center shadow" +
+          "fixed right-0 top-0 z-40 flex w-full justify-center shadow" +
           ` ${transparent ? "bg-transparent backdrop-blur-md" : "bg-white dark:bg-slate-800"}`
         }
       >
@@ -119,12 +119,12 @@ const Header = ({
                   <Link
                     className={
                       `${
-                        pathname.includes("/support")
+                        pathname.includes("/support?menu=about")
                           ? "font-bold text-black dark:text-slate-200"
                           : "font-medium text-gray1 dark:text-slate-400"
                       } ` + "text-sm hover:text-main"
                     }
-                    href="/support"
+                    href="/support?menu=about"
                     prefetch={userId > 0}
                   >
                     지원&안내
@@ -140,7 +140,7 @@ const Header = ({
           />
           <div
             className={
-              "absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
+              "absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
             }
           >
             {userId == 0 ? (
