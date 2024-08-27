@@ -14,8 +14,8 @@ async function getGathering(id: number): Promise<GatheringDetailResponseDto> {
       {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        // cache: "no-store",
-        next: { revalidate: 60, tags: [`gathering/${id}`] },
+        cache: "no-store",
+        // next: { revalidate: 60, tags: [`gathering/${id}`] },
       },
     );
 
@@ -52,6 +52,7 @@ export default async function Page({ params: { id } }: PageProps) {
     );
   }
 
+  
   try {
     const gatheringData = await getGathering(postId);
     return (

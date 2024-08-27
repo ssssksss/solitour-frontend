@@ -1,4 +1,6 @@
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
+import GatheringApplicantListContainer from "@/containers/gathering/GatheringApplicantListContainer";
+import GatheringSupportManagementContainer from "@/containers/gathering/GatheringSupportManagementContainer";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { ModalState } from "@/types/ModalState";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
@@ -52,13 +54,7 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           <h1 className={"h-[3.125rem] text-3xl font-semibold"}>
             {data.title}
           </h1>
-          <button
-            className={
-              "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] bg-[#EE4C4A] text-white"
-            }
-          >
-            신청 거부
-          </button>
+          <GatheringSupportManagementContainer postUserId={data.userPostingResponse.id} />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
         <div className="mt-[0.375rem] flex h-[3.25rem] w-full justify-between">
@@ -206,10 +202,11 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
       <div className="h-[19.875rem] w-full">
         <GatheringKakaoMap {...data.placeResponse} />
       </div>
+      <GatheringApplicantListContainer postUserId={data.userPostingResponse.id} applicants={data.gatheringApplicantsResponses} />
       <GatheringUpdateDeleteButtonComponent
         userId={data.userPostingResponse.id}
         updateHref={`/gathering/edit/${postId}`}
-        deleteHandler={()=> modalState.openModal()}
+        deleteHandler={() => modalState.openModal()}
       />
     </div>
   );

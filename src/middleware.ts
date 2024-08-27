@@ -77,7 +77,7 @@ export const config = {
   matcher: [
     "/informations/write",
     "/informations/edit",
-    // "/gathering/write",
+    "/gathering/write",
     "/gathering/edit/:path*",
     "/diary/:path*",
     "/auth/:path*",
