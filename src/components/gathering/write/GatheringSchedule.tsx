@@ -1,7 +1,7 @@
 import { Modal } from "@/components/common/modal/Modal";
 import { SETTING_MODAL_DAY_OF_THE_WEEK } from "@/constants/gathering/GatheringConstant";
 import { useFormContext } from "react-hook-form";
-import GatheringScheduleModal from "../modal/GatheringScheduleModal";
+import GatheringScheduleModal from "../modal/GatheringPeriodModal";
 
 interface IGatheringScheduleProps {
   isModal: boolean;

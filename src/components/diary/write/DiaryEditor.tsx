@@ -111,20 +111,22 @@ const DiaryEditor = ({
             </button>
           </div>
         </div>
-        <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
-          <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-            장소<span className="text-2xl text-main">*</span>
-          </h2>
-          <button
-            className={`${diaryEditorStore.address === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
-            type="button"
-            onClick={() => showPlaceModal()}
-          >
-            {diaryEditorStore.address === ""
-              ? "장소명을 입력하세요."
-              : diaryEditorStore.placeName}
-          </button>
-        </div>
+        {diaryEditorStore.days > 0 && (
+          <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
+            <h2 className="text-lg font-semibold text-black dark:text-slate-200">
+              장소<span className="text-2xl text-main">*</span>
+            </h2>
+            <button
+              className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
+              type="button"
+              onClick={() => showPlaceModal()}
+            >
+              {diaryEditorStore.address[diaryEditorStore.currentDay - 1] === ""
+                ? "장소명을 입력하세요."
+                : diaryEditorStore.placeName[diaryEditorStore.currentDay - 1]}
+            </button>
+          </div>
+        )}
       </div>
       {diaryEditorStore.days > 0 && (
         <div className="mt-14 flex h-6 w-full flex-row items-center gap-14 overflow-x-auto">
@@ -157,35 +159,33 @@ const DiaryEditor = ({
         </div>
       )}
       {diaryEditorStore.days > 0 && (
-        <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 p-6">
-          <h2 className="text-lg font-semibold text-black dark:text-slate-200">
+        <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 pb-[0.875rem] pt-6">
+          <h2 className="pl-6 text-lg font-semibold text-black dark:text-slate-200">
             {`하루 기분은 어땠나요? (Day ${diaryEditorStore.currentDay})`}
           </h2>
-          <div className="flex flex-wrap items-center gap-[2.375rem]">
-            {["신나요", "좋아요", "그냥 그래요", "슬퍼요", "화나요"].map(
-              (value, index) => (
-                <button
-                  key={index + 1}
-                  className={`${diaryEditorStore.moodLevels[diaryEditorStore.currentDay - 1] === index + 1 ? "text-main" : "text-gray1"} flex h-[4.625rem] flex-col items-center justify-between text-[0.9375rem] hover:text-main dark:text-slate-400`}
-                  onClick={() =>
-                    diaryEditorStore.changeMoodLevel(
-                      diaryEditorStore.currentDay - 1,
-                      index + 1,
-                    )
-                  }
-                >
-                  <div className="relative h-10 w-8">
-                    <Image
-                      src={`/mood-icon${index + 1}.svg`}
-                      alt="mood-icon"
-                      fill={true}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
-                  <p>{value}</p>
-                </button>
-              ),
-            )}
+          <div className="flex flex-wrap items-center">
+            {["최고", "좋아", "무난", "슬퍼", "화나"].map((value, index) => (
+              <button
+                key={index + 1}
+                className={`${diaryEditorStore.moodLevels[diaryEditorStore.currentDay - 1] === index + 1 ? "text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main dark:text-slate-400`}
+                onClick={() =>
+                  diaryEditorStore.changeMoodLevel(
+                    diaryEditorStore.currentDay - 1,
+                    index + 1,
+                  )
+                }
+              >
+                <div className="relative h-10 w-8">
+                  <Image
+                    src={`/mood-icon${index + 1}.svg`}
+                    alt="mood-icon"
+                    fill={true}
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
+                <p>{value}</p>
+              </button>
+            ))}
           </div>
         </div>
       )}

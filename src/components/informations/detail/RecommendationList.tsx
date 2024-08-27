@@ -1,4 +1,4 @@
-import InformationItem from "@/components/common/InformationItem";
+import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
 
 interface Props {
@@ -13,10 +13,11 @@ const RecommendationList = ({ data }: Props) => {
       </h2>
       <div className="mt-6 grid grid-cols-3 items-center gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
         {data.recommendInformation.map((value, index) => (
-          <InformationItem
+          <InformationItemContainer
             key={index}
             informationId={index + 1}
             categoryId={0}
+            isBookMark={value.isBookMark}
             title={value.title}
             image={value.thumbNailImage}
             address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}

@@ -7,8 +7,11 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/informations/write") ||
     pathname.startsWith("/informations/edit") ||
     pathname.startsWith("/gathering/write") ||
+    pathname.startsWith("/gathering/edit") ||
     pathname.startsWith("/diary") ||
-    pathname.startsWith("/mypage")
+    pathname.startsWith("/mypage") ||
+    pathname.startsWith("/support/qna/write") ||
+    pathname.startsWith("/support/qna/detail")
   ) {
     const token = request.cookies.get("access_token");
     const refresh_token = request.cookies.get("refresh_token");
@@ -45,24 +48,42 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (pathname.startsWith("/auth")) {
-    const token = request.cookies.get("access_token");
+    if (pathname.startsWith("/auth")) {
+      const token = request.cookies.get("access_token");
 
-    if (token) {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+      if (token) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
   }
 
+    if (pathname.startsWith("/support")) {
+      const validMenus = ["about", "notice", "faq", "qna", "contact", "terms"];
+      const url = new URL(request.url);
+      const menu = url.searchParams.get("menu");
+      if (!menu && url.pathname == "/support") {
+        return NextResponse.redirect(new URL("/404", request.url));
+      }
+      if (menu && !validMenus.includes(menu)) {
+        return NextResponse.redirect(new URL("/404", request.url));
+      }
+    }
+  
   return NextResponse.next();
 }
+
+
 
 export const config = {
   matcher: [
     "/informations/write",
     "/informations/edit",
     "/gathering/write",
+    "/gathering/edit/:path*",
     "/diary/:path*",
     "/auth/:path*",
     "/mypage/:path*",
+    "/support",
+    "/support/qna/write",
+    "/support/qna/detail/:path*",
   ],
 };

@@ -5,12 +5,9 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
-import {
-  InformationDetailDto,
-  InformationRegisterResponseDto,
-} from "@/types/InformationDto";
+import { InformationDetailDto } from "@/types/InformationDto";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   informationId: number;
@@ -23,7 +20,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const { id } = useAuthStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
-  const [hashtag, setHashtag] = useState<string>("");
+  const inputTagRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -49,6 +46,18 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
   const closeCategoryModal = () => {
     setCategoryModal(false);
+  };
+
+  const onChangeHashTagHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const hashtag = inputTagRef.current?.value ?? "";
+      if (hashtag === "") {
+        return;
+      }
+
+      editorStore.addHashtag(hashtag);
+      (inputTagRef.current as HTMLInputElement).value = "";
+    }
   };
 
   const onSubmit = async () => {
@@ -181,7 +190,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       editorStore={editorStore}
       locationModal={locationModal}
       categoryModal={categoryModal}
-      hashtag={hashtag}
+      inputTagRef={inputTagRef}
       imagesHook={imagesHook}
       hashtagsHook={hashtagsHook}
       loading={loading}
@@ -190,7 +199,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       closeLocationModal={closeLocationModal}
       showCategoryModal={showCategoryModal}
       closeCategoryModal={closeCategoryModal}
-      setHashtag={setHashtag}
+      onChangeHashTagHandler={onChangeHashTagHandler}
     />
   );
 };

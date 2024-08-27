@@ -40,7 +40,7 @@ const GatheringContent = ({
                     {...formContext.register("content")}
                     onChange={(e) => {
                         formContext.setValue("content", e.target.value);
-                        formContext.trigger();
+                        formContext.trigger("content");
                     }}
                     maxLength={500}
                 />

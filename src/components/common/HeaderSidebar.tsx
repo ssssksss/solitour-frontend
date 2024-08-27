@@ -20,7 +20,10 @@ const HeaderSidebar = ({
   onClose,
 }: Props) => {
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-[200%] w-full animate-sidebarFadeIn flex-row justify-end bg-black/25">
+    <aside
+      onClick={onClose}
+      className="fixed left-0 top-0 z-50 flex h-[200%] w-full animate-sidebarFadeIn flex-row justify-end bg-black/25"
+    >
       <nav className="flex h-[35.5rem] w-[20.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6 dark:bg-slate-800">
         <div className="flex h-10 w-full items-center justify-end">
           <div className="cursor-pointer rounded-md bg-gray-100 p-2 hover:text-main dark:bg-slate-600">
@@ -55,7 +58,7 @@ const HeaderSidebar = ({
           </Link>
           <Link
             className="flex flex-row items-center gap-4 hover:text-main dark:text-slate-200"
-            href="/informations/list/parent-category/1?page=1"
+            href="/informations/list?page=1&parentCategoryId=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(2)}
             onMouseLeave={() => setHoverNum(0)}
@@ -105,7 +108,7 @@ const HeaderSidebar = ({
           </Link>
           <Link
             className="flex flex-row items-center gap-[0.875rem] hover:text-main dark:text-slate-200"
-            href="/diary/list"
+            href="/diary/list?page=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(4)}
             onMouseLeave={() => setHoverNum(0)}
@@ -130,17 +133,44 @@ const HeaderSidebar = ({
             )}
             <p>여행일기</p>
           </Link>
+          <Link
+            className="flex flex-row items-center gap-[0.875rem] hover:text-main dark:text-slate-200"
+            href="/support?menu=about"
+            onClick={onClose}
+            onMouseEnter={() => setHoverNum(5)}
+            onMouseLeave={() => setHoverNum(0)}
+            onTouchStart={() => setHoverNum(5)}
+          >
+            {hoverNum === 5 ? (
+              <Image
+                className="ml-[0.125rem]"
+                src="/home/diary-icon-hover.svg"
+                alt="diary-icon"
+                width={22}
+                height={22}
+              />
+            ) : (
+              <Image
+                className="ml-[0.125rem]"
+                src="/home/diary-icon.svg"
+                alt="diary-icon"
+                width={22}
+                height={22}
+              />
+            )}
+            <p>지원&안내</p>
+          </Link>
           {signedIn ? (
             <div className="flex flex-col gap-7">
               <Link
                 className="flex flex-row items-center gap-4 hover:text-main dark:text-slate-200"
                 href="/mypage"
                 onClick={onClose}
-                onMouseEnter={() => setHoverNum(5)}
+                onMouseEnter={() => setHoverNum(6)}
                 onMouseLeave={() => setHoverNum(0)}
-                onTouchStart={() => setHoverNum(5)}
+                onTouchStart={() => setHoverNum(6)}
               >
-                {hoverNum === 5 ? (
+                {hoverNum === 6 ? (
                   <Image
                     className="ml-[0.0625rem]"
                     src="/home/mypage-icon-hover.svg"
@@ -172,11 +202,11 @@ const HeaderSidebar = ({
               className="flex flex-row items-center gap-4 hover:text-main dark:text-slate-200"
               href="/auth/signin"
               onClick={onClose}
-              onMouseEnter={() => setHoverNum(5)}
+              onMouseEnter={() => setHoverNum(7)}
               onMouseLeave={() => setHoverNum(0)}
-              onTouchStart={() => setHoverNum(5)}
+              onTouchStart={() => setHoverNum(7)}
             >
-              {hoverNum === 5 ? (
+              {hoverNum === 7 ? (
                 <Image
                   className="-ml-[0.0625rem]"
                   src="/home/signin-icon-hover.svg"

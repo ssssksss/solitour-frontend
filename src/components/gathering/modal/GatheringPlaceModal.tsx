@@ -111,13 +111,11 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
 
   const pickLocation = (element: PlaceElement) => {
     formContext.setValue("placeName", element.place_name);
-    formContext.setValue("xAxis", element.x);
-    formContext.setValue("yAxis", element.y);
+    formContext.setValue("xAxis", Number(element.x));
+    formContext.setValue("yAxis", Number(element.y));
     formContext.setValue("searchId", element.id);
     formContext.setValue("roadAddressName", element.road_address_name);
-    formContext.setValue("placeUrl", element.place_url);
-    formContext.watch();
-    formContext.trigger();
+    formContext.trigger(["placeName","xAxis", "yAxis", "searchId", "roadAddressName"]);
     props.closeModal();
   };
   
@@ -128,16 +126,20 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
   
   const applyAddressHandler = () => {
     formContext.setValue("placeName", placeCustomName);
-    formContext.setValue("xAxis", placeData?.x);
-    formContext.setValue("yAxis", placeData?.y);
+    formContext.setValue("xAxis", Number(placeData?.x));
+    formContext.setValue("yAxis", Number(placeData?.y));
     formContext.setValue(
       "roadAddressName",
       placeData?.road_address.address_name,
     );
     formContext.setValue("searchId", "");
-    formContext.setValue("placeUrl", "");
-    formContext.watch();
-    formContext.trigger();
+    formContext.trigger([
+      "placeName",
+      "xAxis",
+      "yAxis",
+      "searchId",
+      "roadAddressName",
+    ]);
     props.closeModal();
   };
 

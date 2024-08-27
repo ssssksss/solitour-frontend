@@ -32,7 +32,7 @@ export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
   if (documentBody == null) return;
   if (isOpen === false) return;
     return createPortal(
-      <div className="fixed inset-0 z-10 flex h-full w-full items-center justify-center">
+      <div className="fixed inset-0 flex h-full w-full items-center justify-center" style={{zIndex: "100"}}>
         <div className="absolute h-full w-full bg-black/30"> </div>
         <div ref={ref} className="flex h-full pt-[6rem] pb-[1rem] justify-center items-center">
           {children}

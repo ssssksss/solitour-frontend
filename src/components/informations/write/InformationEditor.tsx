@@ -15,7 +15,7 @@ interface Props {
   editorStore: useEditorStoreType;
   locationModal: boolean;
   categoryModal: boolean;
-  hashtag: string;
+  inputTagRef: React.RefObject<HTMLInputElement>;
   imagesHook: useDragScrollType;
   hashtagsHook: useDragScrollType;
   loading: boolean;
@@ -24,7 +24,7 @@ interface Props {
   closeLocationModal: () => void;
   showCategoryModal: () => void;
   closeCategoryModal: () => void;
-  setHashtag: Dispatch<SetStateAction<string>>;
+  onChangeHashTagHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const InformationEditor = ({
@@ -32,7 +32,7 @@ const InformationEditor = ({
   editorStore,
   locationModal,
   categoryModal,
-  hashtag,
+  inputTagRef,
   imagesHook,
   hashtagsHook,
   loading,
@@ -41,7 +41,7 @@ const InformationEditor = ({
   closeLocationModal,
   showCategoryModal,
   closeCategoryModal,
-  setHashtag,
+  onChangeHashTagHandler,
 }: Props) => {
   return (
     <div className="flex w-full flex-col">
@@ -104,7 +104,7 @@ const InformationEditor = ({
         </div>
       </div>
       <div
-        className="my-10 flex flex-row items-center gap-4 overflow-x-auto"
+        className="mb-2 mt-10 flex flex-row items-center gap-4 overflow-x-auto"
         ref={imagesHook.listRef}
         onMouseDown={imagesHook.onDragStart}
         onMouseMove={imagesHook.onDragMove}
@@ -120,6 +120,9 @@ const InformationEditor = ({
           </div>
         ))}
       </div>
+      <p className="text-sm font-medium text-gray1">
+        사진 최대 용량은 10MB입니다.
+      </p>
       <QuillEditor
         content={editorStore.content}
         onChange={(value: string, length: number) =>
@@ -136,25 +139,27 @@ const InformationEditor = ({
         <div className="flex w-full flex-col gap-2">
           <input
             className={`${editorStore.hashtags.length >= 10 ? "bg-gray-100" : "bg-transparent"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem] hover:border-main focus:border-main`}
-            type="text"
-            name="hashtag"
             placeholder="#해시태그로 키워드를 써보세요!"
-            value={hashtag}
             disabled={editorStore.hashtags.length >= 10}
-            onChange={(e) => {
-              setHashtag(e.target.value.slice(0, 15));
-            }}
+            onKeyUp={onChangeHashTagHandler}
             onKeyDown={(e) => {
               if (e.key === "#") {
                 e.preventDefault();
                 e.persist();
-              } else if (e.key === "Enter") {
+              } else if (
+                e.key !== "Backspace" &&
+                inputTagRef.current !== null &&
+                inputTagRef.current.value.length >= 15
+              ) {
                 e.preventDefault();
                 e.persist();
-                editorStore.addHashtag(hashtag);
-                setHashtag("");
+                inputTagRef.current.value = inputTagRef.current.value.slice(
+                  0,
+                  15,
+                );
               }
             }}
+            ref={inputTagRef}
           />
           <div className="flex h-9 w-full flex-row items-center justify-between gap-2">
             <div
@@ -191,8 +196,12 @@ const InformationEditor = ({
               className="text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
               type="button"
               onClick={() => {
+                const hashtag = inputTagRef.current?.value ?? "";
+                if (hashtag === "") {
+                  return;
+                }
                 editorStore.addHashtag(hashtag);
-                setHashtag("");
+                (inputTagRef.current as HTMLInputElement).value = "";
               }}
             >
               <span className="text-main">+</span>

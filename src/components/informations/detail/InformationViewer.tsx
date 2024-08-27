@@ -1,12 +1,12 @@
 import ItemTag from "../common/ItemTag";
 import Image from "next/image";
-import { FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
 import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
+import InformationLikeCountContainer from "@/containers/informations/detail/InformationLikeCountContainer";
 
 interface Props {
   informationId: number;
@@ -25,8 +25,8 @@ const InformationViewer = ({ informationId, data }: Props) => {
             <div className="flex flex-row items-center gap-2">
               <Image
                 className="rounded-full shadow dark:bg-slate-200"
-                src="/user_sex_woman_default_image.svg"
-                alt="user_sex_woman_default_image"
+                src={`${data.userImage}`}
+                alt="userImage"
                 width={48}
                 height={48}
               />
@@ -40,10 +40,11 @@ const InformationViewer = ({ informationId, data }: Props) => {
               </div>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-                <FaRegHeart size={"0.8rem"} />
-                <p className="text-xs">{data.likeCount}</p>
-              </div>
+              <InformationLikeCountContainer
+                informationId={informationId}
+                likeCount={data.likeCount}
+                isLike={data.isLike}
+              />
               <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <LuEye />
                 <p className="text-xs">{data.viewCount}</p>
@@ -63,8 +64,8 @@ const InformationViewer = ({ informationId, data }: Props) => {
               <div className="flex flex-row items-center gap-2">
                 <Image
                   className="rounded-full shadow dark:bg-slate-200"
-                  src="/user_sex_woman_default_image.svg"
-                  alt="user_sex_woman_default_image"
+                  src={`${data.userImage}`}
+                  alt="userImage"
                   width={48}
                   height={48}
                 />
@@ -78,10 +79,11 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 </div>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-                  <FaRegHeart size={"0.8rem"} />
-                  <p className="text-xs">{data.likeCount}</p>
-                </div>
+                <InformationLikeCountContainer
+                  informationId={informationId}
+                  likeCount={data.likeCount}
+                  isLike={data.isLike}
+                />
                 <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                   <LuEye />
                   <p className="text-xs">{data.viewCount}</p>
@@ -128,11 +130,13 @@ const InformationViewer = ({ informationId, data }: Props) => {
         <KakaoMapLinkContainer
           placeName={data.placeResponse.name}
           placeId={data.placeResponse.searchId}
+          placeYAxis={data.placeResponse.yaxis}
+          placeXAxis={data.placeResponse.xaxis}
         />
       </div>
       <a
         className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pb-10 pt-12"
-        href={`https://map.kakao.com/link/map/${data.placeResponse.searchId}`}
+        href={`https://map.kakao.com/link/map/${data.placeResponse.searchId.toString() !== "0" ? data.placeResponse.searchId : `${data.placeResponse.name},${data.placeResponse.yaxis},${data.placeResponse.xaxis}`}`}
         target="_blank"
       >
         <h2 className="text-lg font-bold text-black dark:text-slate-200">

@@ -11,7 +11,11 @@ interface Props {
 const DateRangeModalContainer = ({ closeModal }: Props) => {
   const diaryEditorStore = useDiaryEditorStore();
   const [state, setState] = useState([
-    { startDate: new Date(), endDate: new Date(), key: "selection" },
+    {
+      startDate: new Date(new Date().toLocaleDateString("ko-KR")),
+      endDate: new Date(new Date().toLocaleDateString("ko-KR")),
+      key: "selection",
+    },
   ]);
 
   const onChangeDateRange = () => {
@@ -26,6 +30,8 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
       endDate: state[0].endDate,
       days: days,
       currentDay: 1,
+      placeName: Array<string>(days).fill(""),
+      address: Array<string>(days).fill(""),
       moodLevels: Array<number>(days).fill(0),
       contents: Array<string>(days).fill(""),
     });

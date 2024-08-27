@@ -30,7 +30,6 @@ const GatheringLikeContainer = (props: IGatheringLikeContainer) => {
         try {
             const response = await fetchWithAuth('/api/gathering/like', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: props.gatheringId })
             });
             

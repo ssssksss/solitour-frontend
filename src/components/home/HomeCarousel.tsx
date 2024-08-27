@@ -17,7 +17,6 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
         alt="background"
         fill={true}
         style={{
-          zIndex: -10,
           objectFit: "cover",
         }}
       />
@@ -29,7 +28,7 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
           </div>
           <Link
             className="flex h-[2.6875rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black font-medium text-white hover:scale-105"
-            href="/informations/list/parent-category/1?page=1"
+            href="/informations/list?page=1&parentCategoryId=1"
           >
             둘러보기
           </Link>

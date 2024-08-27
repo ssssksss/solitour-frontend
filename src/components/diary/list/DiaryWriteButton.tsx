@@ -4,7 +4,7 @@ import Image from "next/image";
 const DiaryWriteButton = () => {
   return (
     <Link
-      className="flex h-[38.9375rem] w-full animate-cardFlip flex-col items-center justify-center rounded-2xl border-[0.0625rem] border-gray3 bg-[#FBFBFB] hover:border-main dark:bg-slate-800 dark:hover:bg-slate-600"
+      className="flex aspect-[3/4] w-full animate-cardFlip flex-col items-center justify-center rounded-2xl border-[0.0625rem] border-gray3 bg-[#FBFBFB] hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem] dark:bg-slate-800 dark:hover:bg-slate-600"
       href="/diary/write"
     >
       <Image

@@ -7,7 +7,6 @@ export interface InformationRegisterResponseDto {
 
 // 정보 목록 조회 결과 DTO
 export interface InformationListResponseDto {
-  totalPages: number;
   content: Array<{
     informationId: number;
     title: string;
@@ -17,7 +16,11 @@ export interface InformationListResponseDto {
     isBookMark: boolean;
     thumbNailImage: string;
     likeCount: number;
+    isLike: boolean;
   }>;
+  page: {
+    totalPages: number;
+  };
 }
 
 /**
@@ -48,6 +51,8 @@ export interface InformationDetailDto {
   };
   imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
   likeCount: number;
+  userImage: string;
+  isLike: boolean;
   recommendInformation: Array<
     Readonly<{
       informationId: number;

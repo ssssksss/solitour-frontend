@@ -21,7 +21,7 @@ const ParentCategoryList = ({ categories, parentCategoryId }: Props) => {
                     : "text-gray1 dark:text-slate-400"
                 } ` + "pb-[0.375rem] hover:text-main"
               }
-              href={`/informations/list/parent-category/${category.id}?page=1`}
+              href={`/informations/list?page=1&parentCategoryId=${category.id}`}
               scroll={false}
             >
               {category.name}

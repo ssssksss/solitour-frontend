@@ -3,27 +3,34 @@ import DiaryWriteButton from "./DiaryWriteButton";
 import Link from "next/link";
 import { GetDiaryListResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";
+import DiaryPaginationContainer from "@/containers/diary/list/DiaryPaginationContainer";
 
-async function getDiaryList() {
+async function getDiaryList(page: number) {
   const cookie = cookies().get("access_token");
-  const response = await fetch(`${process.env.LOCAL_BACKEND_URL}/api/diary`, {
-    method: "GET",
-    headers: {
-      Cookie: `${cookie?.name}=${cookie?.value}`,
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/diary?page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: ["getDiaryList"] },
     },
-    next: { revalidate: 60, tags: ["getDiaryList"] },
-  });
+  );
 
   if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
     throw new Error(response.statusText);
   }
 
-  return response.json() as Promise<GetDiaryListResponseDto[]>;
+  return response.json() as Promise<GetDiaryListResponseDto>;
 }
 
-const DiaryList = async () => {
-  const data = await getDiaryList();
+interface Props {
+  page: number;
+}
+
+const DiaryList = async ({ page }: Props) => {
+  const data = await getDiaryList(page - 1);
 
   return (
     <div className="w-full">
@@ -38,12 +45,16 @@ const DiaryList = async () => {
           일기 쓰기
         </Link>
       </div>
-      <div className="mb-[8.625rem] grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
-        <DiaryWriteButton />
-        {data.map((value, index) => (
+      <div className="grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
+        {data.content.length < 6 && <DiaryWriteButton />}
+        {data.content.map((value, index) => (
           <DiaryCardContainer key={index} diaryData={value} />
         ))}
       </div>
+      <DiaryPaginationContainer
+        currentPage={page}
+        totalPages={data.totalPages}
+      />
     </div>
   );
 };

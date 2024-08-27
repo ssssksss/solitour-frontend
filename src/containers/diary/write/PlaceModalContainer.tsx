@@ -34,12 +34,8 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }, 300);
 
   const onResetPlace = () => {
-    diaryEditorStore.setDiaryEditor({
-      placeName: "",
-      address: "",
-      province: "",
-      city: "",
-    });
+    const index = diaryEditorStore.currentDay - 1;
+    diaryEditorStore.changeAddress(index, "", "");
     closeModal();
   };
 
@@ -47,13 +43,13 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     place_name: string;
     address_name: string;
   }) => {
-    const temp = placeInfo.address_name.split(" ");
-    diaryEditorStore.setDiaryEditor({
-      placeName: placeInfo.place_name,
-      address: placeInfo.address_name,
-      province: temp[0].slice(0, 2) ?? "",
-      city: temp[1] ?? "",
-    });
+    const index = diaryEditorStore.currentDay - 1;
+    const addressArr = placeInfo.address_name.trim().split(" ");
+    diaryEditorStore.changeAddress(
+      index,
+      placeInfo.place_name,
+      `${addressArr[0]} ${addressArr[1]}`,
+    );
     closeModal();
   };
 

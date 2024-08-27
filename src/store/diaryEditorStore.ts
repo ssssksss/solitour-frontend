@@ -8,11 +8,8 @@ interface DiaryEditorState {
   endDate: Date | null;
   days: number;
   currentDay: number;
-  placeName: string;
-  address: string;
-  province: string;
-  city: string;
-  image: string;
+  placeName: string[];
+  address: string[];
   moodLevels: number[];
   contents: string[];
 }
@@ -21,6 +18,7 @@ interface DiaryEditorState {
 interface DiaryEditorActions {
   initialize: () => void;
   setDiaryEditor: (data: Partial<DiaryEditorState>) => void;
+  changeAddress: (index: number, placeName: string, address: string) => void;
   changeMoodLevel: (index: number, value: number) => void;
   changeContent: (index: number, value: string) => void;
 }
@@ -31,12 +29,9 @@ const initialState: DiaryEditorState = {
   startDate: null,
   endDate: null,
   days: 0,
-  currentDay: 0,
-  placeName: "",
-  address: "",
-  province: "",
-  city: "",
-  image: "",
+  currentDay: 1,
+  placeName: [""],
+  address: [""],
   moodLevels: [],
   contents: [],
 };
@@ -49,6 +44,15 @@ const diaryEditorStore: StateCreator<DiaryEditorState & DiaryEditorActions> = (
   ...initialState,
   initialize: () => set({ ...initialState }),
   setDiaryEditor: (data: Partial<DiaryEditorState>) => set(() => ({ ...data })),
+  changeAddress: (index: number, placeName: string, address: string) =>
+    set((state) => ({
+      placeName: state.placeName.map((value, idx) =>
+        idx === index ? placeName : value,
+      ),
+      address: state.address.map((value, idx) =>
+        idx === index ? address : value,
+      ),
+    })),
   changeMoodLevel: (index: number, value: number) =>
     set((state) => ({
       moodLevels: state.moodLevels.map((moodLevel, idx) =>

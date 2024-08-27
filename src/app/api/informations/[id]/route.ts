@@ -25,10 +25,6 @@ export async function GET(
       },
     );
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
     return response;
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), {
@@ -51,38 +47,25 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  try {
-    const cookie = request.cookies.get("access_token");
-    const formData = await request.formData();
+  const cookie = request.cookies.get("access_token");
+  const formData = await request.formData();
 
-    // Back-end API 호출
-    const response = await fetch(
-      `${process.env.BACKEND_URL}/api/informations/${params.id}`,
-      {
-        method: "PUT",
-        headers: {
-          Cookie: `${cookie?.name}=${cookie?.value}`,
-        },
-        body: formData,
-        cache: "no-store",
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    // Revalidate the cache
-    revalidatePath("/informations", "layout");
-    return response;
-  } catch (e) {
-    return new Response(JSON.stringify({ error: "Failed to update data." }), {
-      status: 500, // Internal Server Error
+  // Back-end API 호출
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${params.id}`,
+    {
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-    });
-  }
+      body: formData,
+      cache: "no-store",
+    },
+  );
+
+  // Revalidate the cache
+  revalidatePath("/informations", "layout");
+  return response;
 }
 
 /**
@@ -92,31 +75,18 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  try {
-    const cookie = request.cookies.get("access_token");
-    const response = await fetch(
-      `${process.env.BACKEND_URL}/api/informations/${params.id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Cookie: `${cookie?.name}=${cookie?.value}`,
-        },
-        cache: "no-store",
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    revalidatePath("/informations", "layout");
-    return response;
-  } catch (e) {
-    return new Response(JSON.stringify({ error: "Failed to delete data." }), {
-      status: 500, // Internal Server Error
+  const cookie = request.cookies.get("access_token");
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${params.id}`,
+    {
+      method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
+        Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-    });
-  }
+      cache: "no-store",
+    },
+  );
+
+  revalidatePath("/informations", "layout");
+  return response;
 }

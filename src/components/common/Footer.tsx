@@ -1,11 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { RiKakaoTalkFill } from "react-icons/ri";
-import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="flex h-80 w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px] dark:bg-slate-800">
+    <footer className="mt-auto flex h-80 w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px] dark:bg-slate-800">
       <div className="flex w-[60rem] flex-col gap-4 p-4">
         <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
@@ -38,7 +38,7 @@ const Footer = () => {
         <div className="flex flex-row items-center justify-between">
           <Link
             className="flex h-[2.625rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black text-sm font-medium text-white hover:scale-105 dark:bg-slate-600"
-            href="/informations/list/parent-category/1?page=1"
+            href="/informations/list?page=1&parentCategoryId=1"
           >
             둘러보기
           </Link>
@@ -58,12 +58,18 @@ const Footer = () => {
           <nav>
             <ul className="flex flex-row items-center gap-9 text-sm font-medium text-gray1 dark:text-slate-400">
               <li>
-                <Link className="hover:text-main" href="/terms">
+                <Link
+                  className="hover:text-main"
+                  href="/support?menu=terms#terms-of-service"
+                >
                   이용약관
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-main" href="/privacy">
+                <Link
+                  className="hover:text-main"
+                  href="/support?menu=terms#privacy-policy"
+                >
                   개인정보처리방침
                 </Link>
               </li>

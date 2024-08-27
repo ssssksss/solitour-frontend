@@ -1,9 +1,23 @@
-import { GetDiaryListResponseDto } from "@/types/DiaryDto";
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
+import sanitizeHtml from "sanitize-html";
 
 interface Props {
-  diaryData: GetDiaryListResponseDto;
+  diaryData: {
+    diaryId: number;
+    title: string;
+    titleImage: string;
+    startDatetime: Date;
+    endDatetime: Date;
+    diaryDayContentResponses: {
+      diaryDayContentDetail: {
+        content: string;
+        feelingStatus: string;
+        place: string;
+      }[];
+    };
+  };
   flag: boolean;
   isFlipped: boolean;
   days: number;
@@ -25,7 +39,7 @@ const DiaryCard = ({
   if (isFlipped) {
     return (
       <div
-        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} flex h-[38.9375rem] w-full flex-col rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-[#F2FAF7] dark:bg-slate-800 dark:hover:bg-slate-600`}
+        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} aspect-[3/4] w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-[#F2FAF7] max-[744px]:aspect-auto max-[744px]:h-[29rem] dark:bg-slate-800 dark:hover:bg-slate-600`}
         onClick={() => {
           if (flag) {
             flip();
@@ -64,17 +78,17 @@ const DiaryCard = ({
             )}
           </div>
         </div>
-        <div className="mt-[8.75rem] flex flex-col">
+        <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
           <div className="relative h-20 w-16">
             <Image
-              src={`/mood-icon${diaryData.diaryDays[currentDay - 1].moodLevel}.svg`}
+              src={`/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}
             />
           </div>
           <Link
-            className="mt-12 w-full truncate text-2xl font-bold hover:text-main dark:text-slate-200"
+            className="mt-12 w-full truncate text-2xl font-bold hover:text-main max-[845px]:mt-5 dark:text-slate-200"
             href={`/diary/${diaryData.diaryId}`}
             onClick={(e) => {
               e.stopPropagation();
@@ -84,12 +98,17 @@ const DiaryCard = ({
           </Link>
           <p className="mt-3 text-lg text-gray1 dark:text-slate-400">
             {new Date(
-              new Date(diaryData.startDate).getTime() +
+              new Date(diaryData.startDatetime).getTime() +
                 (1000 * 60 * 60 * 24 * currentDay - 1),
             ).toLocaleDateString("ko-KR")}
           </p>
-          <p className="truncate-vertical mt-6 text-black dark:text-slate-200">
-            {diaryData.diaryDays[currentDay - 1].content}
+          <p className="truncate-vertical mt-6 text-black max-[845px]:mt-3 dark:text-slate-200">
+            {sanitizeHtml(
+              diaryData.diaryDayContentResponses.diaryDayContentDetail[
+                currentDay - 1
+              ].content,
+              { allowedTags: [] },
+            )}
           </p>
         </div>
       </div>
@@ -99,7 +118,7 @@ const DiaryCard = ({
   // 앞면
   return (
     <button
-      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative h-[38.9375rem] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[518px]:w-full`}
+      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative aspect-[3/4] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
       onClick={() => {
         if (!flag) {
           flip();
@@ -108,7 +127,7 @@ const DiaryCard = ({
     >
       <Image
         className="-z-10 rounded-2xl dark:opacity-65"
-        src={diaryData.image}
+        src={diaryData.titleImage}
         alt="diary-image"
         fill={true}
         style={{ objectFit: "cover" }}
@@ -117,7 +136,7 @@ const DiaryCard = ({
         <h2 className="text-start text-2xl font-bold dark:text-slate-200">
           {diaryData.title}
         </h2>
-        <p className="text-lg dark:text-slate-200">{`${new Date(diaryData.startDate).toLocaleDateString("ko-KR")} ~ ${new Date(diaryData.endDate).toLocaleDateString("ko-KR")}`}</p>
+        <p className="text-lg dark:text-slate-200">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")} ~ ${new Date(new Date(diaryData.endDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
       </div>
     </button>
   );

@@ -1,7 +1,7 @@
 export const SETTING_MODAL_SEX: {[key: string]: string} = {
-  ALL: "전체",
-  MALE: "남성만",
-  FEMALE: "여성만",
+  FEMALE: "여성",
+  MALE: "남성",
+  ALL: "성별무관",
 };
 export const SETTING_MODAL_DAY_OF_THE_WEEK: {[key: string]: string} = {
   0: "일",
