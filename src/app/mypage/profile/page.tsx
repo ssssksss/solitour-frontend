@@ -22,8 +22,6 @@ async function getUserInfo() {
   );
 
   if (!response.ok) {
-    console.log("page.tsx 파일 : ",response.status);
-    // This will activate the closest 'error.tsx' Error Boundary.
     throw new Error(response.statusText);
   }
 

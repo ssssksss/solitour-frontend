@@ -7,8 +7,8 @@ const MyPageMainContainer = () => {
     <div className={"w-full max-w-[60rem]"}>
       <TabMenuContainer
         tabs={[
-          { label: "내 게시물", content: <MyBoardContainer /> },
-          { label: "북마크", content: <MyBookmarkContainer /> },
+          { label: "정보", content: <MyBoardContainer /> },
+          { label: "모임", content: <MyBookmarkContainer /> },
         ]}
       />
     </div>
