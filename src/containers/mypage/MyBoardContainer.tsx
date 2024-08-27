@@ -4,7 +4,7 @@ import MyBoard from "@/components/mypage/MyBoard";
 import { useState } from "react";
 import MyBoardListContainer from "./MyBoardListContainer";
 
-const menu = ["전체", "정보", "모임"];
+const menu = ["내게시물", "북마크"];
 
 const MyBoardContainer = () => {
   const [activeBoardMenuIndex, setActiveBoardMenuIndex] = useState(0);

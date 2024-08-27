@@ -130,8 +130,7 @@ const MyProfile = (props: IMyProfileProps) => {
               <span> 카카오톡 </span>
               <div className={"flex items-center gap-x-[.875rem]"}>
                 <span className={"font-medium text-gray1"}>
-                  {" "}
-                  {props.userInfo.userImage.createdDate}{" "}
+                  {props.userInfo.userImage.createdDate}
                 </span>
                 <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[18px] bg-[#FEE501]">
                   <Image

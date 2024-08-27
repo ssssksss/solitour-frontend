@@ -7,11 +7,11 @@ interface TabMenuProps {
 const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
   return (
     <div className={"flex flex-col justify-end"}>
-      <div className={"flex w-full gap-[2rem] border-b-2 border-gray-200"}>
+      <div className={"flex w-full gap-[1.625rem] border-b-2 border-gray-200"}>
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`relative h-[2rem] text-center ${
+            className={`relative h-[2rem] text-center w-[4rem] ${
               activeIndex === index
                 ? "font-bold text-[#00B488]"
                 : "font-medium text-[#666]"

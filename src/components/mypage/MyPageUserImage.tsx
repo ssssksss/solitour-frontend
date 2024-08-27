@@ -33,6 +33,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               alt={"user_image"}
               width={108}
               height={108}
+              className="rounded-[3.875rem]"
             />
           ) : props.userSex == "MALE" ? (
             <Image
@@ -40,13 +41,15 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               alt={"user_image"}
               width={108}
               height={108}
-            />
-          ) : (
-            <Image
+              className="rounded-[3.875rem]"
+              />
+            ) : (
+              <Image
               src={"/user_sex_woman_default_image.svg"}
               alt={"user_image"}
               width={108}
               height={108}
+              className="rounded-[3.875rem]"
             />
           )}
           <div
