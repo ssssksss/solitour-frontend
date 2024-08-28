@@ -26,7 +26,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
   categories,
 }) => {
   return (
-      <nav className="flex items-center gap-[.5rem] text-[.625rem] text-gray2 mb-4">
+      <nav className="flex items-center gap-[.5rem] text-[0.75rem] text-gray2 mb-4">
         <div className="text-gray1">
           <Link href={"/"}>
             <Image
@@ -43,7 +43,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
                 <div> {">"} </div>
                 {
               categories.length == index + 1 ? 
-              <span className="text-main"> {i.label} </span>
+              <span className="text-black font-semibold"> {i.label} </span>
               :
               <Link href={i.href}> {i.label} </Link>
                 }
