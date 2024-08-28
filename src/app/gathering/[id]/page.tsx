@@ -1,6 +1,7 @@
 import GatheringRecommendationList from "@/components/gathering/GatheringRecommendationList";
 import GatheringViewerContainer from "@/components/gathering/GatheringViewerContainer";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 interface PageProps {
@@ -8,12 +9,15 @@ interface PageProps {
 }
 
 async function getGathering(id: number): Promise<GatheringDetailResponseDto> {
+  const cookie = cookies().get("access_token");
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/gatherings/${id}`,
       {
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        method: "GET",
+        headers: {
+          Cookie: `${cookie?.name}=${cookie?.value}`,
+        },
         cache: "no-store",
         // next: { revalidate: 60, tags: [`gathering/${id}`] },
       },
