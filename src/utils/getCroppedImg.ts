@@ -64,9 +64,9 @@ export async function getCroppedImg(
 
         try {
           const formData = new FormData();
-          formData.append("userImage", file);
+          formData.append("userProfile", file);
           await fetch("/api/mypage/user-image", {
-            method: "POST",
+            method: "PUT",
             body: formData,
           }).then(res => {
           })
