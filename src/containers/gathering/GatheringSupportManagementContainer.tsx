@@ -12,13 +12,13 @@ const GatheringSupportManagementContainer = ({
     const params = useParams();
     
     const applyGathering = async () => {
-        const res = await fetch(`/api/gathering/applyHandler?id=${params.id}`, {
+        const res = await fetch(`/api/gathering/apply?id=${params.id}`, {
             method: "POST"
         })
     }
 
     const cancelGathering = async () => {
-        const res = await fetch(`/api/gathering/applyHandler?id=${params.id}`, {
+        const res = await fetch(`/api/gathering/apply?id=${params.id}`, {
           method: "DELETE",
         });
     }
