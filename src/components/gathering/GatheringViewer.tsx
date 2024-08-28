@@ -7,8 +7,8 @@ import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from 'date-fns/locale';
 import Image from "next/image";
-import Link from "next/link";
 import GatheringLike from "../../containers/gathering/GatheringLikeContainer";
+import Breadcrumbs from "../common/Breadcrumb";
 import GatheringKakaoMap from "./GatheringKakaoMap";
 import GatheringUpdateDeleteButtonComponent from "./GatheringUpdateDeleteButtonComponent";
 import GatheringDeleteModalContainer from "./modal/GatheringDeleteModalContainer";
@@ -18,6 +18,11 @@ interface IGatheringViewer {
   postId: number;
   modalState: ModalState;
 }
+
+const categories = [
+  { label: "모임", href: "/gathering" },
+  { label: "모임 상세", href: "" },
+];
 
 const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
 
@@ -29,24 +34,7 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
         />
       )}
       {/* 제일 상단 */}
-      <div className="flex gap-[.25rem] text-[.625rem] text-gray2">
-        <div className="text-gray1">
-          <Link href={"/"}>
-            <Image
-              src={"/home-icon.svg"}
-              alt={"home-icon-image"}
-              width={10}
-              height={10}
-            />
-          </Link>
-        </div>
-        <div> {">"} </div>
-        <div>
-          <Link href={"/gathering"}> 모임 </Link>
-        </div>
-        <div> {">"} </div>
-        <div className={"font-bold text-gray1"}> 모임 상세 </div>
-      </div>
+      <Breadcrumbs categories={categories} />
       {/* 제목 부분 */}
       <article className="h-[11.375rem] w-full px-[.25rem] pb-[2.25rem] pt-[2.375rem]">
         {/* 제목, 신청 버튼 */}
@@ -54,7 +42,9 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           <h1 className={"h-[3.125rem] text-3xl font-semibold"}>
             {data.title}
           </h1>
-          <GatheringSupportManagementContainer postUserId={data.userPostingResponse.id} />
+          <GatheringSupportManagementContainer
+            postUserId={data.userPostingResponse.id}
+          />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
         <div className="mt-[0.375rem] flex h-[3.25rem] w-full justify-between">
@@ -177,10 +167,12 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           width={16}
           height={16}
         />
-        모집 마감일:
+        <span> 모집 마감일 : </span>
+        <span>
         {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", {
           locale: ko,
         })}
+        </span>
       </div>
       <div className="mb-[1.25rem] whitespace-pre-wrap pt-[2rem]">
         {data.content}
@@ -202,7 +194,10 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
       <div className="h-[19.875rem] w-full">
         <GatheringKakaoMap {...data.placeResponse} />
       </div>
-      <GatheringApplicantListContainer postUserId={data.userPostingResponse.id} applicants={data.gatheringApplicantsResponses} />
+      <GatheringApplicantListContainer
+        postUserId={data.userPostingResponse.id}
+        applicants={data.gatheringApplicantsResponses}
+      />
       <GatheringUpdateDeleteButtonComponent
         userId={data.userPostingResponse.id}
         updateHref={`/gathering/edit/${postId}`}
