@@ -20,8 +20,6 @@ async function getData() {
     },
   );
 
-  console.log("page.tsx 파일 : ", res.status);
-
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
