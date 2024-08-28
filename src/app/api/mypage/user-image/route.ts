@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function PUT(request: NextRequest) {
   const access_cookie = request.cookies.get("access_token");
   if (!access_cookie) {
     const refresh_cookie = request.cookies.get("refresh_token");
@@ -15,8 +15,8 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
     // formData.append("request", JSON.stringify({ userId: 11 }));
     try {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/user-image`, {
-      method: "POST",
+    const response = await fetch(`${process.env.BACKEND_URL}/api/users/profile`, {
+      method: "PUT",
       headers: {
         Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
       },
