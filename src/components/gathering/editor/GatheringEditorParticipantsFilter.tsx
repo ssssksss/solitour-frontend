@@ -13,11 +13,11 @@ const GatheringEditorParticipantsFilter = ({
   const formContext = useFormContext();
 
   return (
-    <div className={"flex items-center gap-x-[1.75rem]"}>
+    <div className={"flex items-center gap-x-[1.75rem] max-[360px]:w-full"}>
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`flex h-[3.25rem] w-[15.5rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`flex h-[3.25rem] w-[15.5rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full ${
             formContext.formState.errors.allowedSex
               ? "outline-red-500"
               : formContext.getValues("allowedSex")
@@ -47,7 +47,7 @@ const GatheringEditorParticipantsFilter = ({
           ) : (
             <div
               className={
-                "relative flex h-full w-full items-center justify-center"
+                "relative flex h-full w-full items-center justify-center max-[360px]:justify-start max-[360px]:pl-[.75rem]"
               }
             >
               <div className={"relative text-lg font-semibold"}>

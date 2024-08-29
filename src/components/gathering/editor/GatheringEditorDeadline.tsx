@@ -12,7 +12,11 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
   const formContext = useFormContext();
   
 return (
-  <div className={"flex items-center gap-x-[1.75rem]"}>
+  <div
+    className={
+      "flex items-center gap-x-[1.75rem] max-[360px]:w-full max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-3"
+    }
+  >
     <div className={"relative w-[5.75rem] flex-shrink-0"}>
       <span className={"w-[5.75rem] text-lg font-semibold"}>모집마감일</span>
       <span className="absolute top-[-.5rem] text-lg text-main">*</span>
@@ -20,7 +24,7 @@ return (
     <div className="relative w-full">
       <button
         onClick={modalState.openModal}
-        className={`h-[3.25rem] w-[10.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+        className={`max-[360px]:text-start h-[3.25rem] w-[10.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full ${
           formContext.formState.errors.deadline
             ? "outline-red-500"
             : formContext.getValues("deadline")
@@ -31,7 +35,7 @@ return (
         {formContext.getValues("deadline") ? (
           format(new Date(formContext.getValues("deadline")), "yyyy-MM-dd")
         ) : (
-          <div className="flex justify-center gap-x-[.5rem]">
+          <div className="flex justify-center gap-x-[.5rem] max-[360px]:justify-start max-[360px]:pl-[.75rem]">
             <Image
               src="/common/calendar-icon.svg"
               alt="calendar-icon"

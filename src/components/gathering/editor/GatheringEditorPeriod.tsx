@@ -24,7 +24,7 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`max-[360px]:w-full h-[3.25rem] w-[13.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`h-[3.25rem] w-[13.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full ${
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
               : formContext.getValues("scheduleStartDate")
@@ -49,14 +49,14 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
               </span>
             </div>
           ) : (
-            <div className="flex justify-center gap-x-[.5rem]">
-              <span> YYYY-MM-DD </span>
+            <div className="flex justify-center gap-x-[.5rem] max-[360px]:justify-start max-[360px]:pl-3">
               <Image
                 src="/common/calendar-icon.svg"
                 alt="calendar-icon"
                 width={16}
                 height={16}
               />
+              <span> YY.MM.DD </span>
             </div>
           )}
         </button>

@@ -24,7 +24,7 @@ const GatheringEditorTime = ({modalState}: IGatheringEditorTime) => {
         <button
           onClick={modalState.openModal}
           disabled={!formContext.getValues("scheduleStartDate")}
-          className={`${formContext.getValues("scheduleStartDate") || "cursor-not-allowed bg-gray-200"} h-[3.25rem] w-[13.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full max-[360px]:text-start max-[360px]:pl-[1.75rem] ${
+          className={`${formContext.getValues("scheduleStartDate") || "cursor-not-allowed bg-gray-200"} h-[3.25rem] w-[13.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full max-[360px]:text-start max-[360px]:pl-7 ${
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
               : formContext.getValues("scheduleStartDate")
