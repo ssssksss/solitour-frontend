@@ -37,7 +37,7 @@ export async function DELETE(request: NextRequest) {
   const body = await request.formData();
 
   const data = new URLSearchParams();
-  data.append("infoId", body.get("info")?.toString() ?? "0");
+  data.append("infoId", body.get("infoId")?.toString() ?? "0");
 
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/bookmark/information`,
