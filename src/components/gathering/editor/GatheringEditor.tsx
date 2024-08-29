@@ -65,15 +65,15 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         </p>
       </div>
       <section
-        className={"flex w-full max-w-full flex-wrap gap-[2rem] pt-[3rem]"}
+        className={"flex w-full max-w-full flex-wrap gap-y-[2.375rem] gap-x-[3.5rem] pt-[3rem]"}
       >
         <GatheringEditorTitleContainer />
         <GatheringEditorPeriodContainer />
         <GatheringEditorPlaceContainer />
         <GatheringEditorTimeContainer />
+        <GatheringEditorDeadlineContainer />
         <GatheringEditorCategoryContainer />
         <GatheringEditorParticipantsFilterContainer />
-        <GatheringEditorDeadlineContainer />
         <GatheringEditorContentContainer />
         <GatheringEditorHashTagContainer />
         <div className={"flex w-full justify-end"}>
