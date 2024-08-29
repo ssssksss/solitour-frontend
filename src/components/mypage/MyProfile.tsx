@@ -30,7 +30,7 @@ const MyProfile = (props: IMyProfileProps) => {
         </div>
         <div> {">"} </div>
         <div>
-          <Link href={"/mypage"}> 마이페이지 </Link>
+          <Link href={"/mypage?mainCategory=정보&category=owner"}> 마이페이지 </Link>
         </div>
         <div> {">"} </div>
         <div className={"font-bold text-gray1"}> 프로필 설정 </div>
