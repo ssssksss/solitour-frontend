@@ -36,7 +36,7 @@ const InformationItemContainer = ({
     data.append("infoId", informationId.toString());
 
     if (isBookMarked) {
-      const response = await fetch("api/bookmark/information", {
+      const response = await fetch("/api/bookmark/information", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
