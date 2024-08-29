@@ -164,7 +164,7 @@ const HeaderSidebar = ({
             <div className="flex flex-col gap-7">
               <Link
                 className="flex flex-row items-center gap-4 hover:text-main dark:text-slate-200"
-                href="/mypage"
+                href="/mypage?mainCategory=정보&category=owner"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(6)}
                 onMouseLeave={() => setHoverNum(0)}
