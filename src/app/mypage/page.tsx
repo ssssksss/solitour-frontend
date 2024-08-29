@@ -36,7 +36,7 @@ export default async function page() {
   return (
     <main
       className={
-        "flex min-h-[calc(100vh-25rem)] w-full flex-col items-center px-[5%] pb-[2rem] pt-[2rem] lg:px-[0rem]"
+        "flex min-h-[calc(100vh-25rem)] w-full flex-col px-[5%] pb-[2rem] pt-[2rem] lg:px-[0rem]"
       }
     >
       <MyPageHeaderContainer userInfo={userInfo} /> 
