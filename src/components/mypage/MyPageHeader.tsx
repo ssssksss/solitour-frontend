@@ -50,6 +50,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
                 alt={"user_image"}
                 width={108}
                 height={108}
+                className="rounded-[3.875rem]"
               />
             ) : userInfo.sex == "MALE" ? (
               <Image
@@ -57,6 +58,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
                 alt={"user_image"}
                 width={108}
                 height={108}
+                className="rounded-[3.875rem]"
               />
             ) : (
               <Image
@@ -64,6 +66,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
                 alt={"user_image"}
                 width={108}
                 height={108}
+                className="rounded-[3.875rem]"
               />
             )}
             <Link href="/mypage/profile">

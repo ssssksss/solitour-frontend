@@ -107,12 +107,14 @@ export interface Gathering {
   scheduleStartDate: string; // ISO 8601 format
   scheduleEndDate: string; // ISO 8601 format
   deadline: string; // ISO 8601 format
-  allowedSex: string;
+  allowedSex: string | ("ALL" | "MALE" | "FEMALE");
   startAge: number;
   endAge: number;
   personCount: number;
   nowPersonCount: number;
   isLike: boolean;
+  gatheringStatus?: "CONSENT" | "REFUSE" | "WAIT";
+  isFinish?: boolean;
 }
 
 interface Sort {

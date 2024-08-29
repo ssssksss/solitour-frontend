@@ -7,27 +7,51 @@ import { ko } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
 
+interface IGatheringItem {
+  data: Gathering;
+  onBookMarkClick: (id: number) => void;
+}
+
 const SEX: { [key: string]: string } = {
   ALL: "성별무관",
   MALE: "남성분만",
   FEMALE: "여성분만",
 };
 
+const categoryStyle: {[key: string]: string} = {
+  취미: "outline-[#FFDDEF] text-[#C5006A] bg-[#FFF2F9]",
+  활동: "outline-[#DDE5FF] text-[#0036C2] bg-[#F2F6FF]",
+};
+
+const statusStyle: { [key: string]: string } = {
+  WAIT: "outline-none text-white bg-gray2",
+  CONSENT: "outline-none text-white bg-main",
+  REFUSE: "outline-none text-white bg-[#EE4C4A]",
+};
+
+const status: {[key: string]: string} = {
+  WAIT: "대기",
+  CONSENT: "승인",
+  REFUSE: "거절",
+};
+
 // todo
-const GatheringItem = (data: Gathering) => {
+const GatheringItem = ({ data, onBookMarkClick }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={
-        "flex w-full flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main min-[1025px]:h-[16.5rem] max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600"
-      }
+      className={`flex w-full ${data.isFinish ? "text-gray2" : "text-black"} flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px] min-[1025px]:h-[16.5rem] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600`}
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold shadow`}
+            className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
           >
-            {data.gatheringCategoryName}
+            <span>
+              {data.gatheringStatus
+                ? status[data.gatheringStatus]
+                : data.gatheringCategoryName}
+            </span>
           </p>
           <GatheringBookMarkContainer
             isBookMark={data.isBookMark}
@@ -46,7 +70,7 @@ const GatheringItem = (data: Gathering) => {
           <div className="flex flex-row items-center gap-2">
             {/* 모임 기간 */}
             <Image
-              src="/calendar-icon.svg"
+              src={`${data.isFinish ? "/calendar-gray-icon.svg" : "/calendar-icon.svg"}`}
               alt="calendar-icon"
               width={14}
               height={14}
@@ -55,11 +79,11 @@ const GatheringItem = (data: Gathering) => {
             {data.scheduleEndDate &&
               format(new Date(data.scheduleEndDate), "~ yyyy-MM-dd")}
           </div>
-          <div className="flex items-center gap-2 text-black dark:text-slate-400 ">
+          <div className="flex items-center gap-2 dark:text-slate-400">
             {/* 모임 장소 */}
-            <div className={"h-4 min-w-[0.875rem] flex items-center"}>
+            <div className={"flex h-4 min-w-[0.875rem] items-center"}>
               <Image
-                src="/location-icon.svg"
+                src={`${data.isFinish ? "/location-gray-icon.svg" : "/location-icon.svg"}`}
                 alt="location-icon"
                 width={14}
                 height={14}
@@ -69,12 +93,12 @@ const GatheringItem = (data: Gathering) => {
               {data.zoneCategoryParentName} {","} {data.zoneCategoryChildName}
             </p>
           </div>
-          <div className="flex flex-row items-center gap-2 text-black dark:text-slate-400">
+          <div className="flex flex-row items-center gap-2 dark:text-slate-400">
             <div className={"flex min-w-fit gap-2"}>
               <div className={"relative h-5 w-[0.875rem]"}>
                 {/* 모임 인원 */}
                 <Image
-                  src="/people-icon.svg"
+                  src={`${data.isFinish ? "/people-gray-icon.svg" : "/people-icon.svg"}`}
                   alt="people-icon"
                   width={14}
                   height={14}
@@ -85,7 +109,7 @@ const GatheringItem = (data: Gathering) => {
                 className={`${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
               >
                 <span
-                  className={`text-main ${data.nowPersonCount / data.personCount > 0.5 && "text-[#FC9F3A]"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
+                  className={`${data.isFinish ? "text-gray2" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
                 >
                   {data.nowPersonCount}
                 </span>
@@ -103,21 +127,32 @@ const GatheringItem = (data: Gathering) => {
                 ")"}
             </p>
           </div>
-          <div className="flex flex-row items-center gap-2">
+          <div
+            className="flex items-center gap-2"
+            style={{ lineHeight: "100%" }}
+          >
             {/* 모임 시간 */}
             <Image
-              src="/clock-icon.svg"
+              src={`${data.isFinish ? "/clock-gray-icon.svg" : "/clock-icon.svg"}`}
               alt="clock-icon"
               width={14}
               height={14}
-              className="ml-[.0625rem]"
+              className="ml-[.0625rem] translate-y-[1px]"
             />
-            <span> {format(new Date(data.scheduleStartDate), "hh:mm")} </span>
+            <span className="flex h-full items-center text-sm">
+              {format(new Date(data.scheduleStartDate), "hh:mm")}
+            </span>
           </div>
         </div>
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-1">
-            <Image src="/pin-icon.png" alt="pin-icon" width={16} height={16} />
+            <Image
+              src={`${data.isFinish ? "/pin-gray-icon.svg" : "/pin-icon.svg"}`}
+              alt="pin-icon"
+              width={16}
+              height={16}
+            />
+
             <p className="text-sm dark:text-slate-400">
               모집마감일:
               {format(new Date(data.deadline), "yyyy-MM-dd(EE)", {
@@ -127,11 +162,23 @@ const GatheringItem = (data: Gathering) => {
           </div>
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center gap-3">
-              <GatheringLikeContainer
-                likes={data.likeCount}
-                isLike={data.isLike}
-                gatheringId={data.gatheringId}
-              />
+              {data.isFinish ? (
+                <div className="flex flex-row items-center gap-1 text-sm">
+                  <Image
+                    src={"/common/check-gray-icon.svg"}
+                    alt="check-icon"
+                    width={16}
+                    height={16}
+                  />
+                  {convertNumberToShortForm(data.likeCount)}
+                </div>
+              ) : (
+                <GatheringLikeContainer
+                  likes={data.likeCount}
+                  isLike={data.isLike}
+                  gatheringId={data.gatheringId}
+                />
+              )}
               <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
                 <Image
                   src="/eyes-icon.svg"
