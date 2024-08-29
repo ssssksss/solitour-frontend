@@ -17,7 +17,7 @@ const GatheringEditorTitle = () => {
         <input
           placeholder="제목을 입력하세요(최대50자)"
           maxLength={50} // 최대 50자 입력 가능
-          className={`h-[3.25rem] w-full max-w-[35.375rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`h-[3.25rem] w-full max-w-[35.375rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:pl-5 ${
             formContext.formState.errors.title
               ? "outline-red-500"
               : formContext.getValues("title")

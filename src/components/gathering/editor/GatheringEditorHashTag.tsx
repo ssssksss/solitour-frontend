@@ -14,7 +14,7 @@ const GatheringEditorHashTag = ({
 }: IGatheringEditorHashTag) => {
   return (
     <article className={"flex w-full flex-col gap-[2rem]"}>
-      <div className={"flex w-full items-center gap-x-[2rem]"}>
+      <div className={"flex w-full items-center gap-x-[2rem] max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3"}>
         <div className={"relative flex-shrink-0"}>
           <span className={"w-[3.5rem] text-lg font-semibold"}>해시태그</span>
         </div>

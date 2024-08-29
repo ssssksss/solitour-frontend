@@ -9,7 +9,7 @@ const GatheringEditorContent = (props: IGatheringEditorContent) => {
     <article className={"flex w-full flex-col gap-[2rem]"}>
       <div className="relative w-full">
         <textarea
-          className={`min-h-[17.5rem] w-full resize-none rounded-[1rem] p-[1.5rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`min-h-[17.5rem] w-full resize-none rounded-[1rem] p-6 outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.content
               ? "outline-red-500"
               : formContext.getValues("content")
