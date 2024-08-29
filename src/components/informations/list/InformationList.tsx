@@ -13,12 +13,7 @@ async function getInformationList(
 ) {
   const cookie = cookies().get("access_token");
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations?
-      page=${page}
-      &parentCategoryId=${parentCategoryId}
-      ${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}
-      ${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}
-      ${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}`,
+    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}`,
     {
       method: "GET",
       headers: {

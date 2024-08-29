@@ -3,9 +3,9 @@ import { Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
 
 interface Props {
-  place: string;
+  place: string | null;
   order: string;
-  setPlace: Dispatch<SetStateAction<string>>;
+  setPlace: Dispatch<SetStateAction<string | null>>;
   closeModal: () => void;
   onClick: () => void;
 }
@@ -32,6 +32,13 @@ const InformationFilterModal = ({
             지역별
           </h3>
           <div className="flex flex-wrap items-start gap-2 font-medium text-gray1 dark:text-slate-400">
+            <button
+              className={`${place === null ? "border-main bg-main text-white" : ""} rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 hover:border-main hover:bg-main hover:text-white dark:border-slate-400 dark:bg-slate-600`}
+              type="button"
+              onClick={() => setPlace(null)}
+            >
+              전체
+            </button>
             {LOCATION.map((location, i) => (
               <button
                 key={i}
