@@ -23,10 +23,10 @@ const GatheringBookmark = (props: IGatheringBookmark) => {
         setIsBookmarked(newIsBookmarked);
         
         try {
-            const response = await fetchWithAuth('/api/gathering/bookmark', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ isBookmarked: newIsBookmarked })
+            const response = await fetchWithAuth("/api/bookmark/gathering", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ isBookmarked: newIsBookmarked }),
             });
             
             if (!response.ok) {
