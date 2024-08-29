@@ -37,9 +37,7 @@ const InformationSearch = ({
         <input
           className="w-64 border-b-[0.0625rem] border-black bg-transparent bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
           type="text"
-          autoComplete="search"
-          name="search"
-          placeholder="제목 또는 키워드를 검색해보세요."
+          placeholder="태그로 검색해보세요."
         />
       </form>
       <div className="flex flex-row items-center gap-4 text-sm font-medium">
@@ -55,7 +53,7 @@ const InformationSearch = ({
             className="flex flex-row items-center text-gray1 hover:text-main dark:text-slate-400"
             onClick={() => onDropdownClick()}
           >
-            <p>{`${order === "latest" ? "최신순" : order === "views" ? "좋아요순" : "조회순"}`}</p>
+            <p>{`${order === "latest" ? "최신순" : order === "likes" ? "좋아요순" : "조회순"}`}</p>
             <IoIosArrowDown />
           </button>
           <div
