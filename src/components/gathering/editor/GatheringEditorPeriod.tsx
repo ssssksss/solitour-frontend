@@ -12,7 +12,11 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
   const formContext = useFormContext();
 
   return (
-    <div className={"flex items-center gap-x-[1.75rem]"}>
+    <div
+      className={
+        "flex items-center gap-x-[1.75rem] max-[360px]:w-full max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-3"
+      }
+    >
       <div className={"relative w-[2.625rem] flex-shrink-0"}>
         <span className={"w-[3.5rem] text-lg font-semibold"}>날짜</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
@@ -20,7 +24,7 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`h-[3.25rem] w-[18.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`max-[360px]:w-full h-[3.25rem] w-[13.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
               : formContext.getValues("scheduleStartDate")

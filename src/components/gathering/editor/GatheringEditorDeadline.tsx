@@ -13,14 +13,14 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
   
 return (
   <div className={"flex items-center gap-x-[1.75rem]"}>
-    <div className={"relative w-[5.875rem] flex-shrink-0"}>
-      <span className={"w-[5.875rem] text-lg font-semibold"}>모집마감일</span>
+    <div className={"relative w-[5.75rem] flex-shrink-0"}>
+      <span className={"w-[5.75rem] text-lg font-semibold"}>모집마감일</span>
       <span className="absolute top-[-.5rem] text-lg text-main">*</span>
     </div>
     <div className="relative w-full">
       <button
         onClick={modalState.openModal}
-        className={`h-[3.25rem] w-[9.375rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+        className={`h-[3.25rem] w-[10.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
           formContext.formState.errors.deadline
             ? "outline-red-500"
             : formContext.getValues("deadline")
@@ -32,13 +32,13 @@ return (
           format(new Date(formContext.getValues("deadline")), "yyyy-MM-dd")
         ) : (
           <div className="flex justify-center gap-x-[.5rem]">
-            <span> YYYY-MM-DD </span>
             <Image
               src="/common/calendar-icon.svg"
               alt="calendar-icon"
               width={16}
               height={16}
             />
+            <span> YY.MM.DD </span>
           </div>
         )}
       </button>

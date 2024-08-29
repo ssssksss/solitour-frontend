@@ -17,7 +17,7 @@ const GatheringEditorParticipantsFilter = ({
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`flex h-[3.25rem] w-[17.5rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`flex h-[3.25rem] w-[15.5rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.allowedSex
               ? "outline-red-500"
               : formContext.getValues("allowedSex")

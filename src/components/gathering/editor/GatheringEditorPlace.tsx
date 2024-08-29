@@ -9,15 +9,19 @@ interface IGatheringEditorPlace {
 const GatheringEditorPlace = ({modalState}: IGatheringEditorPlace) => {
   const formContext = useFormContext();
   return (
-    <div className={"flex items-center gap-x-[1.75rem]"}>
+    <div
+      className={
+        "flex items-center gap-x-[1.75rem] max-[360px]:w-full max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-3"
+      }
+    >
       <div className={"relative w-[2.625rem] flex-shrink-0"}>
         <span className={"w-[3.5rem] text-lg font-semibold"}>장소</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
-      <div className="relative w-full">
+      <div className="relative w-full ">
         <button
           onClick={modalState.openModal}
-          className={`h-[3.25rem] w-[11.875rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`max-[360px]:w-full h-[3.25rem] w-[13.75rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.placeName
               ? "outline-red-500"
               : formContext.getValues("placeName")
