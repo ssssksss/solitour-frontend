@@ -62,12 +62,14 @@ const InformationEditor = ({
           제목<span className="text-2xl text-main">*</span>
         </h2>
         <input
-          className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+          className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent px-5 text-sm font-medium outline-none hover:border-main focus:border-main"
           type="text"
           name="title"
           placeholder="제목을 입력하세요."
           value={editorStore.title}
-          onChange={(e) => editorStore.setEditor({ title: e.target.value })}
+          onChange={(e) =>
+            editorStore.setEditor({ title: e.target.value.slice(0, 50) })
+          }
           required={true}
         />
       </div>
