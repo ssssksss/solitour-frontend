@@ -1,4 +1,4 @@
-import PagePath from "@/components/common/PagePath";
+import Breadcrumbs from "@/components/common/Breadcrumb";
 import InformationEditorContainer from "@/containers/informations/edit/InformationEditorContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
 
@@ -45,7 +45,15 @@ export default async function page({ params: { id } }: Props) {
 
   return (
     <div className="flex flex-col items-center">
-      <PagePath first="정보" second="정보 수정하기" />
+      <Breadcrumbs
+        categories={[
+          {
+            label: "정보",
+            href: "/informations/list?page=1&parentCategoryId=1",
+          },
+          { label: "정보 수정하기", href: "" },
+        ]}
+      />
       <InformationEditorContainer informationId={informationId} data={data} />
     </div>
   );

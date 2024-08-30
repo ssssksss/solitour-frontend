@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem] pt-[2rem]"}>
+    <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem]"}>
       <GatheringWriteContainer />
     </div>
   );

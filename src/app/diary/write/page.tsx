@@ -1,4 +1,4 @@
-import PagePath from "@/components/common/PagePath";
+import Breadcrumbs from "@/components/common/Breadcrumb";
 import DiaryEditorContainer from "@/containers/diary/write/DiaryEditorContainer";
 import { Metadata } from "next";
 
@@ -10,7 +10,12 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div className="flex w-full flex-col items-center">
-      <PagePath first="여행 일기" second="일기 등록하기" />
+      <Breadcrumbs
+        categories={[
+          { label: "여행 일기", href: "/diary/list" },
+          { label: "일기 등록하기", href: "" },
+        ]}
+      />
       <DiaryEditorContainer />
     </div>
   );
