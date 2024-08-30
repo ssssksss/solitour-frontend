@@ -21,7 +21,7 @@ const ItemTag = ({
 }: Props) => {
   return (
     <div
-      className={`flex flex-row items-center gap-1 rounded-full border-[0.0625rem] px-2 py-1 font-medium ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}
+      className={`flex flex-row items-center gap-1 text-nowrap rounded-full border-[0.0625rem] px-2 py-1 font-medium ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}
       onClick={onClick}
     >
       <p className={`${textColor} text-xs`}>#{tag}</p>
