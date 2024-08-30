@@ -14,10 +14,11 @@ async function getInformationList(
 ) {
   const cookie = cookies().get("access_token");
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations${tagName !== undefined ? `/tag/search` : ""}?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${tagName !== undefined ? `&tagName=${tagName}` : ""}`,
+    `${process.env.BACKEND_URL}/api/informations${tagName !== undefined ? `/tag/search` : ""}?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${tagName !== undefined ? `&tagName=${encodeURIComponent(tagName)}` : ""}`,
     {
       method: "GET",
       headers: {
+        "Content-Type": "application/json",
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
       next: { revalidate: 60, tags: ["getInformationList"] },
