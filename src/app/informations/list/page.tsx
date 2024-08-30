@@ -39,6 +39,7 @@ export default function page({ searchParams }: Props) {
           childCategoryId={childCategoryId}
           place={searchParams["place"]}
           order={searchParams["order"]}
+          tagName={searchParams["tagName"]}
         />
       </Suspense>
     </div>

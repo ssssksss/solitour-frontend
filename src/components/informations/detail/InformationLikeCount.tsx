@@ -2,20 +2,29 @@ import HashSpinner from "@/components/common/HashSpinner";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface Props {
+  clickable: boolean;
   loading: boolean;
   likeCount: number;
   isLiked: boolean;
   onLikesClick: () => void;
 }
 
-// hover:text-[#F85E5E]
-
 const InformationLikeCount = ({
+  clickable,
   loading,
   likeCount,
   isLiked,
   onLikesClick,
 }: Props) => {
+  if (!clickable) {
+    return (
+      <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
+        <FaRegHeart size={"0.8rem"} />
+        <p className="text-xs">{likeCount}</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <HashSpinner loading={loading} />

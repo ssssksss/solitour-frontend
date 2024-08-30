@@ -7,16 +7,22 @@ interface Props {
   currentPage: number;
   totalPages: number;
   pathname: string;
+  parentCategoryId: string | null;
+  childCategoryId: string | null;
   place: string | null;
   order: string | null;
+  tagName: string | null;
 }
 
 const InformationPagination = ({
   currentPage,
   totalPages,
   pathname,
+  parentCategoryId,
+  childCategoryId,
   place,
   order,
+  tagName,
 }: Props) => {
   const pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
   const leftPage = Math.max(currentPage - 2, 1);
@@ -26,7 +32,7 @@ const InformationPagination = ({
     <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black dark:text-slate-200">
       {currentPage > 1 ? (
         <Link
-          href={`${pathname}?page=1${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+          href={`${pathname}?page=1${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
         >
           <MdFirstPage
             className="cursor-pointer hover:text-main"
@@ -38,7 +44,7 @@ const InformationPagination = ({
       )}
       {currentPage > 1 ? (
         <Link
-          href={`${pathname}?page=${currentPage - 1}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+          href={`${pathname}?page=${currentPage - 1}${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
         >
           <IoIosArrowBack className="cursor-pointer hover:text-main" />
         </Link>
@@ -49,7 +55,7 @@ const InformationPagination = ({
         <div className="flex flex-row items-center gap-3">
           <Link
             className="flex h-6 w-6 items-center justify-center hover:text-main"
-            href={`${pathname}?page=1${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+            href={`${pathname}?page=1${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
           >
             1
           </Link>
@@ -60,7 +66,7 @@ const InformationPagination = ({
         <Link
           key={pageNumber}
           className={`${pageNumber === currentPage ? "bg-main text-white" : ""} flex h-6 w-6 items-center justify-center rounded-full hover:text-main`}
-          href={`${pathname}?page=${pageNumber}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+          href={`${pathname}?page=${pageNumber}${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
         >
           {pageNumber}
         </Link>
@@ -70,7 +76,7 @@ const InformationPagination = ({
           <AiOutlineEllipsis />
           <Link
             className="flex h-6 w-6 items-center justify-center hover:text-main"
-            href={`${pathname}?page=${totalPages}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+            href={`${pathname}?page=${totalPages}${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
           >
             {totalPages}
           </Link>
@@ -78,7 +84,7 @@ const InformationPagination = ({
       )}
       {currentPage < totalPages ? (
         <Link
-          href={`${pathname}?page=${currentPage + 1}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+          href={`${pathname}?page=${currentPage + 1}${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
         >
           <IoIosArrowForward className="cursor-pointer hover:text-main" />
         </Link>
@@ -87,7 +93,7 @@ const InformationPagination = ({
       )}
       {currentPage < totalPages ? (
         <Link
-          href={`${pathname}?page=${totalPages}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}`}
+          href={`${pathname}?page=${totalPages}${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}
         >
           <MdLastPage
             className="cursor-pointer hover:text-main"

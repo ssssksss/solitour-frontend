@@ -9,11 +9,14 @@ interface Props {
   childCategoryId: string | null;
   place: string;
   order: string;
+  tagName: string;
   modalVisible: boolean;
   dropdownVisible: boolean;
+  onChangeTagName: (value: string) => void;
   closeModal: () => void;
   openModal: () => void;
   onDropdownClick: () => void;
+  searchByTagName: () => void;
 }
 
 const InformationSearch = ({
@@ -22,24 +25,30 @@ const InformationSearch = ({
   childCategoryId,
   place,
   order,
+  tagName,
   modalVisible,
   dropdownVisible,
+  onChangeTagName,
   closeModal,
   openModal,
   onDropdownClick,
+  searchByTagName,
 }: Props) => {
   return (
     <div className="flex flex-row items-center gap-4 max-[1024px]:w-full max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start">
       {modalVisible && (
         <InformationFilterModalContainer closeModal={closeModal} />
       )}
-      <form className="max-[1024px]:flex-1 max-[744px]:w-full">
+      <form
+        className="max-[1024px]:flex-1 max-[744px]:w-full"
+        action={() => searchByTagName()}
+      >
         <input
           className="w-64 border-b-[0.0625rem] border-black bg-transparent bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
           type="text"
-          autoComplete="search"
-          name="search"
-          placeholder="제목 또는 키워드를 검색해보세요."
+          placeholder="태그로 검색해보세요."
+          value={tagName}
+          onChange={(e) => onChangeTagName(e.target.value)}
         />
       </form>
       <div className="flex flex-row items-center gap-4 text-sm font-medium">
@@ -55,7 +64,7 @@ const InformationSearch = ({
             className="flex flex-row items-center text-gray1 hover:text-main dark:text-slate-400"
             onClick={() => onDropdownClick()}
           >
-            <p>{`${order === "latest" ? "최신순" : order === "views" ? "좋아요순" : "조회순"}`}</p>
+            <p>{`${order === "latest" ? "최신순" : order === "likes" ? "좋아요순" : "조회순"}`}</p>
             <IoIosArrowDown />
           </button>
           <div
@@ -64,21 +73,21 @@ const InformationSearch = ({
           >
             <Link
               className={`${order === "latest" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "likes" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "views" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               조회순

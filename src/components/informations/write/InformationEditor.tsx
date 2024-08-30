@@ -143,7 +143,7 @@ const InformationEditor = ({
             disabled={editorStore.hashtags.length >= 10}
             onKeyUp={onChangeHashTagHandler}
             onKeyDown={(e) => {
-              if (e.key === "#") {
+              if (e.key === "#" || e.key === " ") {
                 e.preventDefault();
                 e.persist();
               } else if (

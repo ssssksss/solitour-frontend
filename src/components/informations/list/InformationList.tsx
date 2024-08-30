@@ -10,10 +10,11 @@ async function getInformationList(
   childCategoryId: number,
   place?: string,
   order?: string,
+  tagName?: string,
 ) {
   const cookie = cookies().get("access_token");
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${place !== undefined ? `&zoneCategory=${LOCATION_ID[place]}` : ""}`,
+    `${process.env.BACKEND_URL}/api/informations${tagName !== undefined ? `/tag/search` : ""}?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${tagName !== undefined ? `&tagName=${encodeURIComponent(tagName)}` : ""}`,
     {
       method: "GET",
       headers: {
@@ -37,6 +38,7 @@ interface Props {
   childCategoryId: number;
   place?: string;
   order?: string;
+  tagName?: string;
 }
 
 const InformationList = async ({
@@ -45,6 +47,7 @@ const InformationList = async ({
   childCategoryId,
   place,
   order,
+  tagName,
 }: Props) => {
   const data = await getInformationList(
     page - 1,
@@ -52,6 +55,7 @@ const InformationList = async ({
     childCategoryId,
     place,
     order,
+    tagName,
   );
 
   return (

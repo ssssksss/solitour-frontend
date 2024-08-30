@@ -1,7 +1,7 @@
 "use client";
 
 import InformationSearch from "@/components/informations/list/InformationSearch";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const InformationSearchContainer = () => {
@@ -13,6 +13,18 @@ const InformationSearchContainer = () => {
   const childCategoryId = searchParams.get("childCategoryId");
   const place = searchParams.get("place") ?? "";
   const order = searchParams.get("order") ?? "latest";
+  const [tagName, setTagName] = useState<string>("");
+  const router = useRouter();
+
+  const onChangeTagName = (value: string) => {
+    setTagName(value.slice(0, 15));
+  };
+
+  const searchByTagName = () => {
+    router.push(
+      `${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=${order}${tagName !== "" ? `&tagName=${tagName}` : ""}`,
+    );
+  };
 
   return (
     <InformationSearch
@@ -21,11 +33,14 @@ const InformationSearchContainer = () => {
       childCategoryId={childCategoryId}
       place={place}
       order={order}
+      tagName={tagName}
       modalVisible={modalVisible}
       dropdownVisible={dropdownVisible}
+      onChangeTagName={onChangeTagName}
       closeModal={() => setModalVisible(false)}
       openModal={() => setModalVisible(true)}
       onDropdownClick={() => setDropdownVisible(!dropdownVisible)}
+      searchByTagName={searchByTagName}
     />
   );
 };

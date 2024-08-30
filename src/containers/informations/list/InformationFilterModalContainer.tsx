@@ -12,14 +12,15 @@ const InformationFilterModalContainer = ({ closeModal }: Props) => {
   const searchParams = useSearchParams();
   const parentCategoryId = searchParams.get("parentCategoryId");
   const childCategoryId = searchParams.get("childCategoryId");
-  const [place, setPlace] = useState<string>(searchParams.get("place") ?? "");
+  const [place, setPlace] = useState<string | null>(searchParams.get("place"));
   const order = searchParams.get("order") ?? "latest";
+  const tagName = searchParams.get("tagName");
   const router = useRouter();
   const pathname = usePathname();
 
   const onClick = () => {
     router.push(
-      `${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}&place=${place}&order=${order}`,
+      `${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}&order=${order}${tagName !== null ? `&tagName=${tagName}` : ""}`,
       {
         scroll: false,
       },
