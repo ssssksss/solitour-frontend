@@ -1,6 +1,7 @@
 "use client";
 
 import InformationLikeCount from "@/components/informations/detail/InformationLikeCount";
+import useAuthStore from "@/store/authStore";
 import useInformationLikeStore from "@/store/informationLikeStore";
 import { useEffect, useState } from "react";
 
@@ -15,8 +16,7 @@ const InformationLikeCountContainer = ({
   likeCount,
   isLike,
 }: Props) => {
-  // const [likes, setLikes] = useState<number>(likeCount);
-  // const [isLiked, setIsLiked] = useState<boolean>(isLike);
+  const userId = useAuthStore().id;
   const informationLikeStore = useInformationLikeStore();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -81,6 +81,7 @@ const InformationLikeCountContainer = ({
 
   return (
     <InformationLikeCount
+      clickable={userId > 0}
       loading={loading}
       likeCount={informationLikeStore.likeCount}
       isLiked={informationLikeStore.isLiked}

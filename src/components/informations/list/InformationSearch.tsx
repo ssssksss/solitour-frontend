@@ -73,21 +73,21 @@ const InformationSearch = ({
           >
             <Link
               className={`${order === "latest" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "likes" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "views" && "text-main"} hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               조회순

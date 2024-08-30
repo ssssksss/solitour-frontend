@@ -21,6 +21,7 @@ const InformationPaginationContainer = ({ currentPage, totalPages }: Props) => {
       childCategoryId={searchParams.get("childCategoryId")}
       place={searchParams.get("place")}
       order={searchParams.get("order")}
+      tagName={searchParams.get("tagName")}
     />
   );
 };
