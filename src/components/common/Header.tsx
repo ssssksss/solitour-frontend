@@ -151,19 +151,20 @@ const Header = ({
                   }
                 ></div>
                 <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main dark:text-slate-200"></div>
+                <div className="text-gray-400">|</div>
               </>
             ) : userId > 0 ? (
               <>
                 <Link href={"/mypage"} className={"relative rounded-[50%]"}>
                   <Image
-                    className="rounded-full border-[0.018125rem] border-[#B8EDD9] dark:bg-slate-200"
+                    className="rounded-full bg-[#F2FAF7] dark:bg-slate-200"
                     src="/user_sex_man_default_image.svg"
                     alt="user_sex_man_default_image"
                     width={30}
                     height={30}
                   />
                 </Link>
-                <div className="text-gray-400">|</div>
+
                 <button
                   onClick={logoutHandler}
                   className="font-semibold text-black hover:text-main dark:text-slate-200"
