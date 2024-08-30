@@ -28,6 +28,7 @@ const GatheringEditorHashTag = ({
               e.preventDefault();
             }
             if (
+              e.key === " " ||
               e.key === "#" ||
               (inputTagRef.current as HTMLInputElement).value.length >= 15
             ) {
