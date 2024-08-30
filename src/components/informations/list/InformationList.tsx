@@ -18,7 +18,6 @@ async function getInformationList(
     {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
       next: { revalidate: 60, tags: ["getInformationList"] },
