@@ -1,4 +1,4 @@
-import PagePath from "@/components/common/PagePath";
+import Breadcrumbs from "@/components/common/Breadcrumb";
 import DiaryViewerContainer from "@/containers/diary/detail/DiaryViewerContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";
@@ -46,7 +46,12 @@ export default async function page({ params: { id } }: Props) {
 
   return (
     <div className="flex w-full flex-col items-center">
-      <PagePath first="여행 일기" second="일기 상세" />
+      <Breadcrumbs
+        categories={[
+          { label: "여행 일기", href: "/diary/list" },
+          { label: "일기 상세", href: "" },
+        ]}
+      />
       <DiaryViewerContainer data={data} />
     </div>
   );

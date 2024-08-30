@@ -17,7 +17,7 @@ const InformationSearchContainer = () => {
   const router = useRouter();
 
   const onChangeTagName = (value: string) => {
-    setTagName(value.slice(0, 15));
+    setTagName(value.trim().slice(0, 15));
   };
 
   const searchByTagName = () => {

@@ -24,7 +24,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
           <div className="flex flex-row items-end justify-between py-4">
             <div className="flex flex-row items-center gap-2">
               <Image
-                className="rounded-full shadow dark:bg-slate-200"
+                className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7] dark:bg-slate-200"
                 src={`${data.userImage}`}
                 alt="userImage"
                 width={48}
@@ -63,7 +63,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
             <div className="flex flex-row items-end justify-between py-4">
               <div className="flex flex-row items-center gap-2">
                 <Image
-                  className="rounded-full shadow dark:bg-slate-200"
+                  className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7] dark:bg-slate-200"
                   src={`${data.userImage}`}
                   alt="userImage"
                   width={48}

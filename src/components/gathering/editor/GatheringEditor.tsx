@@ -12,6 +12,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useFormContext } from "react-hook-form";
 import GatheringEditorTimeContainer from "./GatheringEditorTimeContainer";
+import Breadcrumbs from "@/components/common/Breadcrumb";
 
 interface IGatheringEditorEditProps {
   isEdit: true;
@@ -35,28 +36,14 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
 
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
-      <div className="flex gap-[.25rem] text-[.625rem] text-gray2">
-        <div className="text-gray1">
-          <Link href={"/"}>
-            <Image
-              src={"/home-icon.svg"}
-              alt={"home-icon-image"}
-              width={10}
-              height={10}
-            />
-          </Link>
-        </div>
-        <div> {">"} </div>
-        <div>
-          <Link href={"/gathering"}> 모임 </Link>
-        </div>
-        <div> {">"} </div>
-        <div className={"font-bold text-gray1"}>
-          {props.isEdit ? "모임 수정하기" : "모임 등록하기"}
-        </div>
-      </div>
+      <Breadcrumbs
+        categories={[
+          { label: "모임", href: "/gathering" },
+          { label: props.isEdit ? "모임 수정하기" : "모임 등록하기", href: "" },
+        ]}
+      />
       <div className="flex flex-col gap-[1.5rem]">
-        <h1 className={"pt-[2.25rem] text-3xl font-semibold"}>
+        <h1 className={"text-3xl font-semibold"}>
           {props.isEdit ? "모임 수정하기" : "모임 등록하기"}
         </h1>
         <p>
