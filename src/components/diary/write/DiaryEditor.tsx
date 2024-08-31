@@ -1,5 +1,5 @@
 import Image from "next/image";
-import PlaceModalContainer from "@/containers/diary/write/PlaceModalContainer";
+import AddressModalContainer from "@/containers/diary/write/AddressModalContainer";
 import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalContainer";
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
 import dynamic from "next/dynamic";
@@ -17,12 +17,12 @@ interface Props {
   text: string;
   diaryEditorStore: useDiaryEditorStoreType;
   dateRangeModal: boolean;
-  placeModal: boolean;
+  addressModal: boolean;
   loading: boolean;
   showDateRangeModal: () => void;
   closeDateRangeModal: () => void;
-  showPlaceModal: () => void;
-  closePlaceModal: () => void;
+  showAddressModal: () => void;
+  closeAddressModal: () => void;
   setCurrentDay: (day: number) => void;
   onSubmit: () => void;
 }
@@ -31,12 +31,12 @@ const DiaryEditor = ({
   text,
   diaryEditorStore,
   dateRangeModal,
-  placeModal,
+  addressModal,
   loading,
   showDateRangeModal,
   closeDateRangeModal,
-  showPlaceModal,
-  closePlaceModal,
+  showAddressModal,
+  closeAddressModal,
   setCurrentDay,
   onSubmit,
 }: Props) => {
@@ -45,7 +45,7 @@ const DiaryEditor = ({
       {dateRangeModal && (
         <DateRangeModalContainer closeModal={closeDateRangeModal} />
       )}
-      {placeModal && <PlaceModalContainer closeModal={closePlaceModal} />}
+      {addressModal && <AddressModalContainer closeModal={closeAddressModal} />}
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
         {`일기 ${text}하기`}
       </h1>
@@ -114,16 +114,16 @@ const DiaryEditor = ({
         {diaryEditorStore.days > 0 && (
           <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
             <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-              장소<span className="text-2xl text-main">*</span>
+              지역<span className="text-2xl text-main">*</span>
             </h2>
             <button
               className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
               type="button"
-              onClick={() => showPlaceModal()}
+              onClick={() => showAddressModal()}
             >
               {diaryEditorStore.address[diaryEditorStore.currentDay - 1] === ""
-                ? "장소명을 입력하세요."
-                : diaryEditorStore.placeName[diaryEditorStore.currentDay - 1]}
+                ? "지역명을 입력하세요."
+                : diaryEditorStore.address[diaryEditorStore.currentDay - 1]}
             </button>
           </div>
         )}
