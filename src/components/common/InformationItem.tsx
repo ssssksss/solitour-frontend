@@ -50,42 +50,48 @@ const InformationItem = ({
   return (
     <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
       <HashSpinner loading={loading} />
-      <Image
-        className="-z-10 rounded-[0.875rem] dark:opacity-65"
-        src={image || "/next.svg"}
-        alt={"PostImage"}
-        fill={true}
-        style={{
-          objectFit: "cover",
-        }}
-      />
-      <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
-        {style !== "" ? (
-          <p
-            className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold ${style}`}
-          >
-            {CATEGORY_TEXT[categoryId]}
-          </p>
-        ) : (
-          <div />
-        )}
-        {userId > 0 && (
-          <button
-            className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200"
-            type="button"
-            onClick={() => onBookMarkClick()}
-          >
-            <Image
-              src={`/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
-              alt="bookmark-icon"
-              fill={true}
-              style={{
-                objectFit: "contain",
+      <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
+        <Image
+          className="-z-10 rounded-[0.875rem] dark:opacity-65"
+          src={image || "/next.svg"}
+          alt={"PostImage"}
+          fill={true}
+          style={{
+            objectFit: "cover",
+          }}
+        />
+        <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
+          {style !== "" ? (
+            <p
+              className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold ${style}`}
+            >
+              {CATEGORY_TEXT[categoryId]}
+            </p>
+          ) : (
+            <div />
+          )}
+          {userId > 0 && (
+            <button
+              className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onBookMarkClick();
               }}
-            />
-          </button>
-        )}
-      </div>
+            >
+              <Image
+                src={`/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
+                alt="bookmark-icon"
+                fill={true}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </button>
+          )}
+        </div>
+      </Link>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4 dark:bg-slate-800">
         <Link
           className="truncate-vertical-information-title p-1 font-bold hover:text-main dark:text-slate-200"
