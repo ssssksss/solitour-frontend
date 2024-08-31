@@ -4,7 +4,9 @@ const SupportTerms = (props: ISupportTerms) => {
   return (
     <section>
       <article className="mb-20 mt-10 flex w-full flex-col gap-10">
-        <h2 className="text-3xl font-bold text-main" id={"terms-of-service"}>이용약관</h2>
+        <h2 className="text-3xl font-bold text-main" id={"terms-of-service"}>
+          이용약관
+        </h2>
         <div className="flex flex-col gap-5">
           <h3 className="text-xl font-bold">제1조 - 목적</h3>
           <p>
@@ -333,15 +335,17 @@ const SupportTerms = (props: ISupportTerms) => {
         </div>
       </article>
       <article>
-        <h1 className="mb-10 text-3xl font-bold text-main" id="privacy-policy">개인정보 처리방침</h1>
+        <h1 className="mb-10 text-3xl font-bold text-main" id="privacy-policy">
+          개인정보 처리방침
+        </h1>
         <div className="space-y-8">
           <div className="flex flex-col gap-5">
             <h2 className="text-2xl font-bold">
               제1조 - 개인정보의 수집 및 이용 목적
             </h2>
             <p>
-              Solitour(이하 "회사"라 합니다)는 다음과 같은 목적을 위해
-              개인정보를 수집하고 이용합니다:
+              {`Solitour(이하 "회사"라 합니다)는 다음과 같은 목적을 위해
+              개인정보를 수집하고 이용합니다:`}
             </p>
             <ul className="list-disc pl-5">
               <li>서비스 제공 및 운영</li>

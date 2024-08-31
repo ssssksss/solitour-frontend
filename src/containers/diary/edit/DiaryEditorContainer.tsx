@@ -21,7 +21,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
-  const [placeModal, setPlaceModal] = useState<boolean>(false);
+  const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = async () => {
@@ -31,7 +31,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       title: diaryEditorStore.title,
       startDate: diaryEditorStore.startDate,
       endDate: diaryEditorStore.endDate,
-      placeName: diaryEditorStore.placeName,
       address: diaryEditorStore.address,
       image:
         parse(diaryEditorStore.contents[0])
@@ -104,10 +103,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
             1000 * 60 * 60 * 24,
         ).toLocaleDateString("ko-KR"),
       ),
-      placeName:
-        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-          (value) => value.place,
-        ),
       address:
         diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
           (value) => value.place,
@@ -137,12 +132,12 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       text="수정"
       diaryEditorStore={diaryEditorStore}
       dateRangeModal={dateRangeModal}
-      placeModal={placeModal}
+      addressModal={addressModal}
       loading={loading}
       showDateRangeModal={() => setDateRangeModal(true)}
       closeDateRangeModal={() => setDateRangeModal(false)}
-      showPlaceModal={() => setPlaceModal(true)}
-      closePlaceModal={() => setPlaceModal(false)}
+      showAddressModal={() => setAddressModal(true)}
+      closeAddressModal={() => setAddressModal(false)}
       setCurrentDay={(day: number) =>
         diaryEditorStore.setDiaryEditor({ currentDay: day })
       }
