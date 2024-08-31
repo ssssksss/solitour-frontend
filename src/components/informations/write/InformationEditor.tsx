@@ -57,7 +57,7 @@ const InformationEditor = ({
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
         솔리들과 공유해보세요!
       </p>
-      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-7">
+      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
         <h2 className="text-lg font-semibold text-black dark:text-slate-200">
           제목<span className="text-2xl text-main">*</span>
         </h2>

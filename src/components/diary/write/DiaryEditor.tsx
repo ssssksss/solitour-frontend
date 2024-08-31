@@ -53,9 +53,9 @@ const DiaryEditor = ({
         새로운 <span className="text-main">경험을 기록</span>하고 나만의
         추억카드를 만들어보세요!
       </p>
-      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-7">
-        <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-          제목<span className="text-2xl text-main">*</span>
+      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
+        <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+          제목<span className="text-main">*</span>
         </h2>
         <input
           className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
@@ -68,53 +68,36 @@ const DiaryEditor = ({
           }
         />
       </div>
-      <div className="mt-12 flex flex-row items-center gap-[6.75rem] max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-12">
-        <div className="flex flex-row items-center gap-7 max-[1024px]:items-start">
-          <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-            날짜<span className="text-2xl text-main">*</span>
+      <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-10">
+        <div className="flex h-[3.3125rem] flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
+          <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+            날짜<span className="text-main">*</span>
           </h2>
-          <div className="flex flex-row items-center gap-[1.125rem] max-[585px]:flex-col">
-            <button
-              className={`${diaryEditorStore.startDate ? "text-black" : "text-gray2"} h-[3.3125rem] w-[11.375rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm hover:border-main`}
-              type="button"
-              onClick={() => showDateRangeModal()}
-            >
-              {diaryEditorStore.startDate?.toLocaleDateString("ko-KR") ?? (
-                <div className="flex flex-row items-center gap-2">
-                  {"YYYY.MM.DD"}
-                  <Image
-                    src={"/calendar-icon.svg"}
-                    alt={"calendar-icon"}
-                    width={16}
-                    height={16}
-                  />
-                </div>
-              )}
-            </button>
-            <p className="text-lg font-semibold text-black">~</p>
-            <button
-              className={`${diaryEditorStore.endDate ? "text-black" : "text-gray2"} h-[3.3125rem] w-[11.375rem] rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm hover:border-main`}
-              type="button"
-              onClick={() => showDateRangeModal()}
-            >
-              {diaryEditorStore.endDate?.toLocaleDateString("ko-KR") ?? (
-                <div className="flex flex-row items-center gap-2">
-                  {"YYYY.MM.DD"}
-                  <Image
-                    src={"/calendar-icon.svg"}
-                    alt={"calendar-icon"}
-                    width={16}
-                    height={16}
-                  />
-                </div>
-              )}
-            </button>
-          </div>
+          <button
+            className={`${diaryEditorStore.startDate ? "text-black" : "text-gray2"} h-[3.3125rem] w-[21.75rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm hover:border-main`}
+            type="button"
+            onClick={() => showDateRangeModal()}
+          >
+            {diaryEditorStore.startDate !== null &&
+            diaryEditorStore.endDate !== null ? (
+              <p>{`${diaryEditorStore.startDate.toLocaleDateString("ko-KR")} ~ ${diaryEditorStore.endDate?.toLocaleDateString("ko-KR")}`}</p>
+            ) : (
+              <div className="flex flex-row items-center gap-2">
+                {"YYYY.MM.DD"}
+                <Image
+                  src={"/calendar-icon.svg"}
+                  alt={"calendar-icon"}
+                  width={16}
+                  height={16}
+                />
+              </div>
+            )}
+          </button>
         </div>
         {diaryEditorStore.days > 0 && (
-          <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-7 max-[1024px]:w-full">
-            <h2 className="text-lg font-semibold text-black dark:text-slate-200">
-              지역<span className="text-2xl text-main">*</span>
+          <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
+            <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+              지역<span className="text-main">*</span>
             </h2>
             <button
               className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
@@ -167,7 +150,7 @@ const DiaryEditor = ({
             {["최고", "좋아", "무난", "슬퍼", "화나"].map((value, index) => (
               <button
                 key={index + 1}
-                className={`${diaryEditorStore.moodLevels[diaryEditorStore.currentDay - 1] === index + 1 ? "text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main dark:text-slate-400`}
+                className={`${diaryEditorStore.moodLevels[diaryEditorStore.currentDay - 1] === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main dark:text-slate-400`}
                 onClick={() =>
                   diaryEditorStore.changeMoodLevel(
                     diaryEditorStore.currentDay - 1,
