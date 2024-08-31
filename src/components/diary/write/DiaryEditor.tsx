@@ -4,6 +4,7 @@ import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalCont
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
 import dynamic from "next/dynamic";
 import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
+import { FormEvent } from "react";
 
 const QuillEditorContainer = dynamic(
   () => import("@/containers/diary/write/QuillEditorContainer"),
@@ -24,7 +25,7 @@ interface Props {
   showAddressModal: () => void;
   closeAddressModal: () => void;
   setCurrentDay: (day: number) => void;
-  onSubmit: () => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 const DiaryEditor = ({
@@ -41,7 +42,7 @@ const DiaryEditor = ({
   onSubmit,
 }: Props) => {
   return (
-    <div className="flex w-full flex-col">
+    <form className="flex w-full flex-col" onSubmit={(e) => onSubmit(e)}>
       {dateRangeModal && (
         <DateRangeModalContainer closeModal={closeDateRangeModal} />
       )}
@@ -62,7 +63,9 @@ const DiaryEditor = ({
           type="text"
           name="title"
           placeholder="제목을 입력하세요."
+          required={true}
           value={diaryEditorStore.title}
+          maxLength={50}
           onChange={(e) =>
             diaryEditorStore.setDiaryEditor({ title: e.target.value })
           }
@@ -176,7 +179,7 @@ const DiaryEditor = ({
       <button
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
         type="submit"
-        onClick={() => onSubmit()}
+        // onClick={() => onSubmit()}
         disabled={diaryEditorStore.days === 0 || loading}
       >
         {loading ? (
@@ -194,7 +197,7 @@ const DiaryEditor = ({
           <p>{`일기 ${text}하기`}</p>
         )}
       </button>
-    </div>
+    </form>
   );
 };
 

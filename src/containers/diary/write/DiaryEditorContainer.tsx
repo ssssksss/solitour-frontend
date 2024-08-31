@@ -8,7 +8,7 @@ import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { parse } from "node-html-parser";
 
@@ -20,65 +20,69 @@ const DiaryEditorContainer = () => {
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const onSubmit = async () => {
-    // Validate from fields using Zod
-    const validatedFields = DiaryCreateFormSchema.safeParse({
-      userId: authStore.id,
-      title: diaryEditorStore.title,
-      startDate: diaryEditorStore.startDate,
-      endDate: diaryEditorStore.endDate,
-      address: diaryEditorStore.address,
-      image:
-        parse(diaryEditorStore.contents[0])
-          .querySelector("img")
-          ?.getAttribute("src") ?? "",
-      moodLevels: diaryEditorStore.moodLevels,
-      contents: diaryEditorStore.contents.map((content) =>
-        sanitizeHtml(content, sanitizeOption),
-      ),
-    });
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // TODO
+    e.preventDefault();
+    alert("테스트");
 
-    // If validation fails, return errors early. Otherwise, continue.
-    if (!validatedFields.success) {
-      alert(validatedFields.error.issues[0].message);
-      return;
-    }
+    // // Validate from fields using Zod
+    // const validatedFields = DiaryCreateFormSchema.safeParse({
+    //   userId: authStore.id,
+    //   title: diaryEditorStore.title,
+    //   startDate: diaryEditorStore.startDate,
+    //   endDate: diaryEditorStore.endDate,
+    //   address: diaryEditorStore.address,
+    //   image:
+    //     parse(diaryEditorStore.contents[0])
+    //       .querySelector("img")
+    //       ?.getAttribute("src") ?? "",
+    //   moodLevels: diaryEditorStore.moodLevels,
+    //   contents: diaryEditorStore.contents.map((content) =>
+    //     sanitizeHtml(content, sanitizeOption),
+    //   ),
+    // });
 
-    const data: CreateDiaryRequestDto = {
-      title: validatedFields.data.title,
-      titleImage: validatedFields.data.image,
-      startDatetime: validatedFields.data.startDate,
-      endDatetime: validatedFields.data.endDate,
-      diaryDayRequests: Array.from(
-        { length: diaryEditorStore.days },
-        (_, index) => ({
-          content: validatedFields.data.contents[index],
-          feelingStatus: FEELING_STATUS[validatedFields.data.moodLevels[index]],
-          place: validatedFields.data.address[index],
-        }),
-      ),
-    };
+    // // If validation fails, return errors early. Otherwise, continue.
+    // if (!validatedFields.success) {
+    //   alert(validatedFields.error.issues[0].message);
+    //   return;
+    // }
 
-    setLoading(true);
+    // const data: CreateDiaryRequestDto = {
+    //   title: validatedFields.data.title,
+    //   titleImage: validatedFields.data.image,
+    //   startDatetime: validatedFields.data.startDate,
+    //   endDatetime: validatedFields.data.endDate,
+    //   diaryDayRequests: Array.from(
+    //     { length: diaryEditorStore.days },
+    //     (_, index) => ({
+    //       content: validatedFields.data.contents[index],
+    //       feelingStatus: FEELING_STATUS[validatedFields.data.moodLevels[index]],
+    //       place: validatedFields.data.address[index],
+    //     }),
+    //   ),
+    // };
 
-    const response = await fetch("/api/diary", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-      cache: "no-store",
-    });
+    // setLoading(true);
 
-    if (!response.ok) {
-      alert("일기 작성에 실패하였습니다.");
-      setLoading(false);
-      throw new Error(response.statusText);
-    }
+    // const response = await fetch("/api/diary", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    //   cache: "no-store",
+    // });
 
-    const diaryId = await response.text();
-    router.push(`/diary/${diaryId}`);
-    router.refresh();
+    // if (!response.ok) {
+    //   alert("일기 작성에 실패하였습니다.");
+    //   setLoading(false);
+    //   throw new Error(response.statusText);
+    // }
+
+    // const diaryId = await response.text();
+    // router.push(`/diary/${diaryId}`);
+    // router.refresh();
   };
 
   // 화면에서 벗어났을 때 초기화

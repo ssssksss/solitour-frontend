@@ -67,9 +67,8 @@ const InformationEditor = ({
           name="title"
           placeholder="제목을 입력하세요."
           value={editorStore.title}
-          onChange={(e) =>
-            editorStore.setEditor({ title: e.target.value.slice(0, 50) })
-          }
+          maxLength={50}
+          onChange={(e) => editorStore.setEditor({ title: e.target.value })}
           required={true}
         />
       </div>

@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 
 const FloatingButtonContainer = () => {
   const [visible, setVisible] = useState<boolean>(false);
-    const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const onClick = () => {
     setVisible(!visible);

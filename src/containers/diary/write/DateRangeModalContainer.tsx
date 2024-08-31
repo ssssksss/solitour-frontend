@@ -2,13 +2,14 @@
 
 import DateRangeModal from "@/components/diary/write/DateRangeModal";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   closeModal: () => void;
 }
 
 const DateRangeModalContainer = ({ closeModal }: Props) => {
+  const [width, setWidth] = useState<number>(window.innerWidth);
   const diaryEditorStore = useDiaryEditorStore();
   const [state, setState] = useState([
     {
@@ -30,7 +31,6 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
       endDate: state[0].endDate,
       days: days,
       currentDay: 1,
-      placeName: Array<string>(days).fill(""),
       address: Array<string>(days).fill(""),
       moodLevels: Array<number>(days).fill(0),
       contents: Array<string>(days).fill(""),
@@ -38,8 +38,17 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
     closeModal();
   };
 
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, []);
+
   return (
     <DateRangeModal
+      width={width}
       state={state}
       setState={setState}
       closeModal={closeModal}

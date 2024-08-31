@@ -12,16 +12,6 @@ interface BreadcrumbsProps {
   categories: Category[];
 }
 
-/**
- * 
- * @props 데이터 예시 
-    const categories = [
-      { label: "지원&안내", href: "/support" },
-      { label: "QnA", href: "/support?menu=qna" },
-      { label: "질문 등록하기", href: "" },
-    ];
-*/
-
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ categories }) => {
   return (
     <nav className="flex w-full items-center gap-[.25rem] py-10 text-xs text-gray2">
