@@ -25,7 +25,7 @@ interface Props {
   showAddressModal: () => void;
   closeAddressModal: () => void;
   setCurrentDay: (day: number) => void;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onSubmit: () => void;
 }
 
 const DiaryEditor = ({
@@ -42,7 +42,7 @@ const DiaryEditor = ({
   onSubmit,
 }: Props) => {
   return (
-    <form className="flex w-full flex-col" onSubmit={(e) => onSubmit(e)}>
+    <div className="flex w-full flex-col">
       {dateRangeModal && (
         <DateRangeModalContainer closeModal={closeDateRangeModal} />
       )}
@@ -63,7 +63,6 @@ const DiaryEditor = ({
           type="text"
           name="title"
           placeholder="제목을 입력하세요."
-          required={true}
           value={diaryEditorStore.title}
           maxLength={50}
           onChange={(e) =>
@@ -115,7 +114,7 @@ const DiaryEditor = ({
         )}
       </div>
       {diaryEditorStore.days > 0 && (
-        <div className="mt-14 flex h-6 w-full flex-row items-center gap-14 overflow-x-auto">
+        <div className="mt-14 flex h-7 w-full flex-row items-center gap-14 overflow-x-auto overflow-y-hidden pb-2">
           <Image
             className="hidden dark:block"
             src="/day-text-dark-mode.svg"
@@ -179,7 +178,7 @@ const DiaryEditor = ({
       <button
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
         type="submit"
-        // onClick={() => onSubmit()}
+        onClick={() => onSubmit()}
         disabled={diaryEditorStore.days === 0 || loading}
       >
         {loading ? (
@@ -197,7 +196,7 @@ const DiaryEditor = ({
           <p>{`일기 ${text}하기`}</p>
         )}
       </button>
-    </form>
+    </div>
   );
 };
 

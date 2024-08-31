@@ -46,9 +46,8 @@ const QuillEditorContainer = () => {
           throw new Error(response.statusText);
         }
 
-        const result: { imageStatus: string; address: string } =
-          await response.json();
-        const url = result.address;
+        const result: { fileUrl: string } = await response.json();
+        const url = result.fileUrl;
 
         const Image = Quill.import("formats/image");
         Image.sanitize = (url: string) => url;
