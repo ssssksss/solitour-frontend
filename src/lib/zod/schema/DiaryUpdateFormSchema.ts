@@ -30,14 +30,6 @@ export const DiaryUpdateFormSchema = z.object({
     .max(new Date(new Date().getTime() + 1000 * 60 * 60 * 24), {
       message: "미래에 해당하는 날짜는 입력할 수 없습니다.",
     }),
-  placeName: z
-    .string({
-      required_error: "장소를 입력해 주세요.",
-      invalid_type_error: "PlaceName must be a string.",
-    })
-    .min(1, { message: "장소를 입력해 주세요." })
-    .array()
-    .min(1, { message: "장소를 입력해 주세요." }),
   address: z
     .string({
       required_error: "주소를 입력해 주세요.",
