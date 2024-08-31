@@ -2,8 +2,8 @@ import "react-quill/dist/quill.snow.css";
 import "@/styles/quillEditor.css";
 import ReactQuill from "react-quill";
 import { RefObject } from "react";
-import { HashLoader } from "react-spinners";
 import HashSpinner from "@/components/common/HashSpinner";
+import { FaRegImage } from "react-icons/fa6";
 
 interface Props {
   loading: boolean;
@@ -21,8 +21,12 @@ const QuillEditor = ({
   onChange,
 }: Props) => {
   return (
-    <div>
+    <div className="flex flex-col">
       <HashSpinner loading={loading} />
+      <div className="-mb-2 mt-8 flex flex-row items-center gap-2 text-sm font-medium text-gray1">
+        <FaRegImage />
+        <p>Day1에 최소 1장의 이미지를 등록해 주세요.</p>
+      </div>
       <ReactQuill
         ref={quillRef}
         theme="snow"

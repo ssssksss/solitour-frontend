@@ -8,7 +8,7 @@ import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { parse } from "node-html-parser";
 
@@ -17,7 +17,7 @@ const DiaryEditorContainer = () => {
   const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
-  const [placeModal, setPlaceModal] = useState<boolean>(false);
+  const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = async () => {
@@ -27,7 +27,6 @@ const DiaryEditorContainer = () => {
       title: diaryEditorStore.title,
       startDate: diaryEditorStore.startDate,
       endDate: diaryEditorStore.endDate,
-      placeName: diaryEditorStore.placeName,
       address: diaryEditorStore.address,
       image:
         parse(diaryEditorStore.contents[0])
@@ -95,12 +94,12 @@ const DiaryEditorContainer = () => {
       text="등록"
       diaryEditorStore={diaryEditorStore}
       dateRangeModal={dateRangeModal}
-      placeModal={placeModal}
+      addressModal={addressModal}
       loading={loading}
       showDateRangeModal={() => setDateRangeModal(true)}
       closeDateRangeModal={() => setDateRangeModal(false)}
-      showPlaceModal={() => setPlaceModal(true)}
-      closePlaceModal={() => setPlaceModal(false)}
+      showAddressModal={() => setAddressModal(true)}
+      closeAddressModal={() => setAddressModal(false)}
       setCurrentDay={(day: number) =>
         diaryEditorStore.setDiaryEditor({ currentDay: day })
       }

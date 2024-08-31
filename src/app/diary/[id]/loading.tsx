@@ -6,7 +6,7 @@ export default function Loading() {
     <div className="flex w-full flex-col items-center">
       <Breadcrumbs
         categories={[
-          { label: "여행 일기", href: "/diary/list" },
+          { label: "여행 일기", href: "/diary/list?page=1" },
           { label: "일기 상세", href: "" },
         ]}
       />
