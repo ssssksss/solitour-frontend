@@ -1,3 +1,6 @@
+/**
+ * 정보 등록 요청 DTO
+ */
 export interface CreateInformationRequestDto {
   informationTitle: string;
   informationAddress: string;
@@ -14,6 +17,30 @@ export interface CreateInformationRequestDto {
   zoneCategoryNameParent: string;
   zoneCategoryNameChild: string;
   thumbNailImageUrl: string;
+  contentImagesUrl: string[];
+  tagRegisterRequests: { name: string }[];
+}
+
+/**
+ * 정보 수정 요청 DTO
+ */
+export interface UpdateInformationRequestDto {
+  title: string;
+  address: string;
+  content: string;
+  tips: string;
+  placeModifyRequest: {
+    searchId: string;
+    name: string;
+    xAxis: string;
+    yAxis: string;
+    address: string;
+  };
+  categoryId: number;
+  zoneCategoryNameParent: string;
+  zoneCategoryNameChild: string;
+  deleteImages: { address: string }[];
+  thumbNailUrl: string;
   contentImagesUrl: string[];
   tagRegisterRequests: { name: string }[];
 }
