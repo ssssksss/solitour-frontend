@@ -101,7 +101,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
             className="py-4 font-medium text-gray1 dark:text-slate-400"
             dangerouslySetInnerHTML={{ __html: data.content }}
           />
-          <div className="flex flex-row items-center gap-1 pb-8">
+          <div className="flex flex-row flex-wrap items-center gap-1 pb-8">
             {data.tagResponses.map((tag, index) => (
               <ItemTag
                 key={index}
