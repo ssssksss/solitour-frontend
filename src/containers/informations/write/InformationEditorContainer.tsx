@@ -6,7 +6,10 @@ import useDragScroll from "@/hooks/useDragScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
-import { InformationRegisterResponseDto } from "@/types/InformationDto";
+import {
+  CreateInformationRequestDto,
+  InformationRegisterResponseDto,
+} from "@/types/InformationDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import sanitizeHtml from "sanitize-html";
@@ -69,9 +72,9 @@ const InformationEditorContainer = () => {
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
       categoryId: editorStore.categoryId,
-      thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
-      contentImages: editorStore.imageFiles.filter(
-        (_value, index) => index !== editorStore.mainImageIndex,
+      thumbnailImageUrl: editorStore.images[editorStore.mainImageIndex],
+      contentImagesUrl: editorStore.images.filter(
+        (url, index) => index !== editorStore.mainImageIndex && url !== "",
       ),
       informationContent: sanitizeHtml(editorStore.content, sanitizeOption),
       hashtags: editorStore.hashtags,
@@ -85,47 +88,36 @@ const InformationEditorContainer = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append(
-      "request",
-      new Blob(
-        [
-          JSON.stringify({
-            informationTitle: validatedFields.data.informationTitle,
-            informationAddress: validatedFields.data.informationAddress,
-            informationContent: validatedFields.data.informationContent,
-            informationTips: validatedFields.data.tips.join(";"),
-            userId: id,
-            placeRegisterRequest: {
-              searchId: validatedFields.data.placeId,
-              name: validatedFields.data.placeName,
-              xAxis: validatedFields.data.placeXAxis,
-              yAxis: validatedFields.data.placeYAxis,
-              address: validatedFields.data.informationAddress,
-            },
-            categoryId: validatedFields.data.categoryId,
-            zoneCategoryNameParent: validatedFields.data.province,
-            zoneCategoryNameChild: validatedFields.data.city,
-            tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
-              name: tag,
-            })),
-          }),
-        ],
-        {
-          type: "application/json",
-        },
-      ),
-    );
-    formData.append("thumbNailImage", validatedFields.data.thumbnailImage);
-    validatedFields.data.contentImages?.forEach((contentImage) => {
-      formData.append("contentImages", contentImage);
-    });
+    const data: CreateInformationRequestDto = {
+      informationTitle: validatedFields.data.informationTitle,
+      informationAddress: validatedFields.data.informationAddress,
+      informationContent: validatedFields.data.informationContent,
+      informationTips: validatedFields.data.tips.join(";"),
+      placeRegisterRequest: {
+        searchId: validatedFields.data.placeId,
+        name: validatedFields.data.placeName,
+        xAxis: validatedFields.data.placeXAxis,
+        yAxis: validatedFields.data.placeYAxis,
+        address: validatedFields.data.informationAddress,
+      },
+      categoryId: validatedFields.data.categoryId,
+      zoneCategoryNameParent: validatedFields.data.province,
+      zoneCategoryNameChild: validatedFields.data.city,
+      thumbNailImageUrl: validatedFields.data.thumbnailImageUrl,
+      contentImagesUrl: validatedFields.data.contentImagesUrl,
+      tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
+        name: tag,
+      })),
+    };
 
     setLoading(true);
 
     const response = await fetch("/api/informations", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
       cache: "no-store",
     });
 

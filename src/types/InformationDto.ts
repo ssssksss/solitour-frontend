@@ -1,3 +1,23 @@
+export interface CreateInformationRequestDto {
+  informationTitle: string;
+  informationAddress: string;
+  informationContent: string;
+  informationTips: string;
+  placeRegisterRequest: {
+    searchId: string;
+    name: string;
+    xAxis: string;
+    yAxis: string;
+    address: string;
+  };
+  categoryId: number;
+  zoneCategoryNameParent: string;
+  zoneCategoryNameChild: string;
+  thumbNailImageUrl: string;
+  contentImagesUrl: string[];
+  tagRegisterRequests: { name: string }[];
+}
+
 /**
  * (정보 등록)/(정보 수정) 결과 DTO
  */

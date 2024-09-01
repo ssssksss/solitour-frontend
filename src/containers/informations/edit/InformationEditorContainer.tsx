@@ -72,10 +72,10 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
       categoryId: editorStore.categoryId,
-      thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
-      contentImages: editorStore.imageFiles.filter(
-        (_value, index) => index !== editorStore.mainImageIndex,
-      ),
+      // thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
+      // contentImages: editorStore.imageFiles.filter(
+      //   (_value, index) => index !== editorStore.mainImageIndex,
+      // ),
       informationContent: editorStore.content,
       hashtags: editorStore.hashtags,
       tips: editorStore.tips,
@@ -167,7 +167,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       categoryId: 0,
       categoryName: "",
       images: [...data.imageResponses.map((value) => value.address), ""],
-      imageFiles: [],
       mainImageIndex: data.imageResponses.findIndex(
         (value) => value.imageStatus === "썸네일",
       ),

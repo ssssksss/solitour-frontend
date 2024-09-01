@@ -1,18 +1,20 @@
+import { CreateInformationRequestDto } from "@/types/InformationDto";
 import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
 // 정보 글 작성
 export async function POST(request: NextRequest) {
   const cookie = request.cookies.get("access_token");
-  const formData = await request.formData();
+  const body: CreateInformationRequestDto = await request.json();
 
   // Back-end API 호출
   const response = await fetch(`${process.env.BACKEND_URL}/api/informations`, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Cookie: `${cookie?.name}=${cookie?.value}`,
     },
-    body: formData,
+    body: JSON.stringify(body),
     cache: "no-store",
   });
 
