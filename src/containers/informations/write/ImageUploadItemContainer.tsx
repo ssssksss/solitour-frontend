@@ -16,7 +16,6 @@ const ImageUploadItemContainer = ({ index }: Props) => {
     useEditorStore();
   const editorStore = useEditorStore();
   const authStore = useAuthStore();
-  const [url, setUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const onUploadButtonClicked = () => {
@@ -57,8 +56,6 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       }
 
       const result: { fileUrl: string } = await response.json();
-
-      setUrl(result.fileUrl);
       changeImage(index, result.fileUrl);
       addImage();
     }
@@ -74,9 +71,6 @@ const ImageUploadItemContainer = ({ index }: Props) => {
     } else if (index === mainImageIndex) {
       setEditor({ mainImageIndex: 0 });
     }
-
-    URL.revokeObjectURL(url);
-    setUrl("");
   };
 
   return (

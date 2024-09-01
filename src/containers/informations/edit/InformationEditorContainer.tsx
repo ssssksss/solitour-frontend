@@ -110,9 +110,11 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       categoryId: validatedFields.data.categoryId,
       zoneCategoryNameParent: validatedFields.data.province,
       zoneCategoryNameChild: validatedFields.data.city,
-      deleteImages: validatedFields.data.deleteImages.map((deletedImage) => ({
-        address: deletedImage,
-      })),
+      deleteImages: validatedFields.data.deleteImages
+        .filter((deletedImage) => !editorStore.images.includes(deletedImage))
+        .map((deletedImage) => ({
+          address: deletedImage,
+        })),
       thumbNailUrl: validatedFields.data.thumbnailImageUrl,
       contentImagesUrl: validatedFields.data.contentImagesUrl,
       tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
@@ -164,13 +166,13 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeYAxis: data.placeResponse.yaxis.toString(),
       categoryId: 0,
       categoryName: "",
-      deletedImages: [],
+      deletedImages: [...data.imageResponses.map((value) => value.address)],
       images: [...data.imageResponses.map((value) => value.address), ""],
       mainImageIndex: data.imageResponses.findIndex(
         (value) => value.imageStatus === "썸네일",
       ),
       content: data.content,
-      contentLength: data.content.length, // TODO
+      contentLength: 0,
       hashtags: data.tagResponses.map((value) => value.name),
       tips: data.tip.split(";"),
     });
