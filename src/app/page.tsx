@@ -44,7 +44,7 @@ export default async function Home() {
         category={"정보"}
         titles={["고민을 덜어줄,", "BEST", "여행 정보"]}
         description={"솔리투어에서 인기 여행 정보를 확인해보세요!"}
-        >
+      >
         <Suspense fallback={<BestInformationListSkeleton />}>
           <BestInformationList />
         </Suspense>
