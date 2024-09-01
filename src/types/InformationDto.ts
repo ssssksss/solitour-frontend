@@ -52,7 +52,9 @@ export interface InformationRegisterResponseDto {
   id: number;
 }
 
-// 정보 목록 조회 결과 DTO
+/**
+ * 정보 목록 조회 결과 DTO
+ */
 export interface InformationListResponseDto {
   content: Array<{
     informationId: number;

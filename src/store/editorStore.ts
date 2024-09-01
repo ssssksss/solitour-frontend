@@ -14,6 +14,7 @@ interface EditorState {
   categoryId: number;
   categoryName: string;
   images: string[];
+  deletedImages: string[];
   mainImageIndex: number;
   content: string;
   contentLength: number;
@@ -45,6 +46,7 @@ const initialState: EditorState = {
   categoryId: 0,
   categoryName: "",
   images: [""],
+  deletedImages: [],
   mainImageIndex: 0,
   content: "",
   contentLength: 0,
