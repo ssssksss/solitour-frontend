@@ -28,8 +28,7 @@ const QuillEditorContainer = () => {
         const formData = new FormData();
         formData.append("id", authStore.id.toString());
         formData.append("image", file);
-        formData.append("type", "diary");
-        formData.append("imageStatus", "THUMBNAIL");
+        formData.append("type", "DIARY");
 
         setLoading(true);
 

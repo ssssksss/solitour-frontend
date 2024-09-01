@@ -13,13 +13,15 @@ export const InformationCreateFormSchema = z.object({
       required_error: "제목을 입력해 주세요.",
       invalid_type_error: "Title must be a string.",
     })
-    .min(1, { message: "제목을 입력해 주세요." }),
+    .min(1, { message: "제목을 입력해 주세요." })
+    .max(50, { message: "제목 길이는 50자 이하여야 합니다." }),
   informationAddress: z
     .string({
       required_error: "Address is required.",
       invalid_type_error: "Address must be a string.",
     })
-    .min(1, { message: "장소를 입력해 주세요." }),
+    .min(1, { message: "장소를 입력해 주세요." })
+    .max(20, { message: "장소 길이는 20자 이하여야 합니다." }),
   province: z
     .string({
       required_error: "Province is required.",
@@ -63,15 +65,18 @@ export const InformationCreateFormSchema = z.object({
     })
     .int()
     .positive({ message: "카테고리를 선택해 주세요." }),
-  thumbnailImage: z.custom<File>((file) => file instanceof File, {
-    message: "최소 두 장의 사진을 추가해 주세요.",
-  }),
-  contentImages: z
-    .custom<File>((file) => file instanceof File, {
-      message: "Expected a File",
+  thumbnailImageUrl: z
+    .string({
+      required_error: "ThumbnailImageUrl is required.",
+      invalid_type_error: "ThumbnailImageUrl must be a string.",
     })
-    .array()
-    .min(1, { message: "최소 두 장의 사진을 추가해 주세요." }),
+    .min(1, { message: "최소 한 장의 사진을 추가해 주세요." }),
+  contentImagesUrl: z
+    .string({
+      required_error: "ContentImagesUrl is required.",
+      invalid_type_error: "ContentImagesUrl must be a string.",
+    })
+    .array(),
   informationContent: z
     .string({
       required_error: "Content is required.",

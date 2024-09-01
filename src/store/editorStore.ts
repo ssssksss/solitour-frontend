@@ -14,7 +14,7 @@ interface EditorState {
   categoryId: number;
   categoryName: string;
   images: string[];
-  imageFiles: File[];
+  deletedImages: string[];
   mainImageIndex: number;
   content: string;
   contentLength: number;
@@ -28,7 +28,7 @@ interface EditorActions {
   setEditor: (data: Partial<EditorState>) => void;
   changeImage: (index: number, image: string) => void;
   changeTip: (index: number, tip: string) => void;
-  addImage: (file: File) => void;
+  addImage: () => void;
   addHashtag: (hashtag: string) => void;
   resetPlaceInfo: () => void;
 }
@@ -46,7 +46,7 @@ const initialState: EditorState = {
   categoryId: 0,
   categoryName: "",
   images: [""],
-  imageFiles: [],
+  deletedImages: [],
   mainImageIndex: 0,
   content: "",
   contentLength: 0,
@@ -75,10 +75,9 @@ const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
         tips: tips,
       };
     }),
-  addImage: (file: File) =>
+  addImage: () =>
     set((state) => ({
       images: [...state.images, ""],
-      imageFiles: [...state.imageFiles, file],
     })),
   addHashtag: (hashtag: string) =>
     set((state) => {

@@ -1,6 +1,7 @@
 "use client";
 
 import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
+import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
 import React, { useState } from "react";
 import { useRef } from "react";
@@ -14,13 +15,14 @@ const ImageUploadItemContainer = ({ index }: Props) => {
   const { images, mainImageIndex, setEditor, changeImage, addImage } =
     useEditorStore();
   const editorStore = useEditorStore();
-  const [url, setUrl] = useState<string>("");
+  const authStore = useAuthStore();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
   };
 
-  const previewImage = () => {
+  const previewImage = async () => {
     if (
       imageRef.current &&
       imageRef.current.files &&
@@ -33,19 +35,35 @@ const ImageUploadItemContainer = ({ index }: Props) => {
         return;
       }
 
-      const blob = new Blob([file], { type: "image/png" });
-      const fileURL = URL.createObjectURL(blob);
+      const formData = new FormData();
+      formData.append("id", authStore.id.toString());
+      formData.append("image", file);
+      formData.append("type", "INFORMATION");
 
-      setUrl(fileURL);
-      changeImage(index, fileURL);
-      addImage(file);
+      setLoading(true);
+
+      const response = await fetch("/api/image/upload", {
+        method: "POST",
+        body: formData,
+        cache: "no-store",
+      });
+
+      setLoading(false);
+
+      if (!response.ok) {
+        alert("이미지 처리 중 오류가 발생하였습니다.");
+        throw new Error(response.statusText);
+      }
+
+      const result: { fileUrl: string } = await response.json();
+      changeImage(index, result.fileUrl);
+      addImage();
     }
   };
 
   const onRemove = (index: number) => {
     setEditor({
       images: editorStore.images.filter((_, i) => index !== i),
-      imageFiles: editorStore.imageFiles.filter((_, i) => index !== i),
     });
 
     if (index < mainImageIndex) {
@@ -53,9 +71,6 @@ const ImageUploadItemContainer = ({ index }: Props) => {
     } else if (index === mainImageIndex) {
       setEditor({ mainImageIndex: 0 });
     }
-
-    URL.revokeObjectURL(url);
-    setUrl("");
   };
 
   return (
@@ -64,6 +79,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       image={images[index]}
       mainImageIndex={mainImageIndex}
       imageRef={imageRef}
+      loading={loading}
       onUploadButtonClicked={onUploadButtonClicked}
       previewImage={previewImage}
       setMainImageIndex={(index) => setEditor({ mainImageIndex: index })}

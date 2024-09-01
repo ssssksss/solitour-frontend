@@ -1,12 +1,17 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
 import InformationEditorContainer from "@/containers/informations/edit/InformationEditorContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
+import { cookies } from "next/headers";
 
 async function getInformation(id: number) {
+  const cookie = cookies().get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
       method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
       next: { revalidate: 60, tags: [`getInformation/${id}`] },
     },
   );
@@ -44,7 +49,7 @@ export default async function page({ params: { id } }: Props) {
   const data = await getInformation(informationId);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <Breadcrumbs
         categories={[
           {

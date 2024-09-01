@@ -1,3 +1,4 @@
+import { UpdateInformationRequestDto } from "@/types/InformationDto";
 import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
@@ -16,24 +17,15 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  try {
-    const response = await fetch(
-      `${process.env.BACKEND_URL}/api/informations/${params.id}`,
-      {
-        method: "GET",
-        next: { revalidate: 60, tags: [`getInformation/${params.id}`] },
-      },
-    );
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/${params.id}`,
+    {
+      method: "GET",
+      next: { revalidate: 60, tags: [`getInformation/${params.id}`] },
+    },
+  );
 
-    return response;
-  } catch (e: any) {
-    return new Response(JSON.stringify({ error: e.message }), {
-      status: 500, // Internal Server Error
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
+  return response;
 }
 
 /**
@@ -48,7 +40,7 @@ export async function PUT(
   { params }: { params: { id: string } },
 ) {
   const cookie = request.cookies.get("access_token");
-  const formData = await request.formData();
+  const body: UpdateInformationRequestDto = await request.json();
 
   // Back-end API 호출
   const response = await fetch(
@@ -56,9 +48,10 @@ export async function PUT(
     {
       method: "PUT",
       headers: {
+        "Content-Type": "application/json",
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-      body: formData,
+      body: JSON.stringify(body),
       cache: "no-store",
     },
   );

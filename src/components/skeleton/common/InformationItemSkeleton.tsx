@@ -1,6 +1,6 @@
 const InformationItemSkeleton = () => {
   return (
-    <div className="flex h-[19rem] w-[19rem] animate-pulse flex-col justify-between rounded-2xl bg-gray-100 outline outline-1 outline-gray3 duration-300 hover:outline-main dark:bg-slate-600">
+    <div className="flex h-[19.6875rem] w-full animate-pulse flex-col justify-between rounded-2xl bg-gray-100 outline outline-1 outline-gray3 duration-300 hover:outline-main dark:bg-slate-600">
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
         <div className="h-8 w-12 rounded-full border-[0.0625rem] bg-gray-200 px-4 py-[0.375rem] shadow dark:bg-slate-800" />
         <div className="h-8 w-8 bg-gray-200 dark:bg-slate-800" />

@@ -1,13 +1,19 @@
 "use client";
 
 import InformationEditor from "@/components/informations/write/InformationEditor";
+import sanitizeOption from "@/constants/common/sanitizeOption";
 import useDragScroll from "@/hooks/useDragScroll";
 import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
-import { InformationDetailDto } from "@/types/InformationDto";
+import {
+  InformationDetailDto,
+  InformationRegisterResponseDto,
+  UpdateInformationRequestDto,
+} from "@/types/InformationDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import sanitizeHtml from "sanitize-html";
 
 interface Props {
   informationId: number;
@@ -16,7 +22,6 @@ interface Props {
 
 const InformationEditorContainer = ({ informationId, data }: Props) => {
   const imagesHook = useDragScroll();
-  const hashtagsHook = useDragScroll();
   const { id } = useAuthStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
@@ -73,76 +78,70 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeYAxis: editorStore.placeYAxis,
       placeName: editorStore.placeName,
       categoryId: editorStore.categoryId,
-      thumbnailImage: editorStore.imageFiles[editorStore.mainImageIndex],
-      contentImages: editorStore.imageFiles.filter(
-        (_value, index) => index !== editorStore.mainImageIndex,
+      deleteImages: editorStore.deletedImages,
+      thumbnailImageUrl: editorStore.images[editorStore.mainImageIndex],
+      contentImagesUrl: editorStore.images.filter(
+        (url, index) => index !== editorStore.mainImageIndex && url !== "",
       ),
-      informationContent: editorStore.content,
+      informationContent: sanitizeHtml(editorStore.content, sanitizeOption),
       hashtags: editorStore.hashtags,
       tips: editorStore.tips,
     });
 
     // If validation fails, return errors early. Otherwise, continue;
     if (!validatedFields.success) {
-      console.log(validatedFields.error.flatten().fieldErrors);
-      alert("모든 정보를 입력해 주세요.");
+      console.log(validatedFields.error.issues);
+      alert(validatedFields.error.issues[0].message);
       return;
     }
 
-    const formData = new FormData();
-    formData.append(
-      "request",
-      new Blob(
-        [
-          JSON.stringify({
-            title: validatedFields.data.informationTitle,
-            content: validatedFields.data.informationContent,
-            tips: validatedFields.data.tips.join(";"),
-            placeModifyRequest: {
-              searchId: validatedFields.data.placeId,
-              name: validatedFields.data.placeName,
-              xAxis: validatedFields.data.placeXAxis,
-              yAxis: validatedFields.data.placeYAxis,
-              address: validatedFields.data.informationAddress,
-            },
-            categoryId: validatedFields.data.categoryId,
-            zoneCategoryNameParent: validatedFields.data.province,
-            zoneCategoryNameChild: validatedFields.data.city,
-            useImages: [{ address: "" }],
-            deletedImages: [{ address: "" }],
-            tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
-              name: tag,
-            })),
-          }),
-        ],
-        {
-          type: "application/json",
-        },
-      ),
-    );
-    formData.append("thumbNailImage", validatedFields.data.thumbnailImage);
-    validatedFields.data.contentImages?.forEach((contentImage) => {
-      formData.append("contentImages", contentImage);
-    });
+    const data: UpdateInformationRequestDto = {
+      title: validatedFields.data.informationTitle,
+      address: validatedFields.data.informationAddress,
+      content: validatedFields.data.informationContent,
+      tips: validatedFields.data.tips.join(";"),
+      placeModifyRequest: {
+        searchId: validatedFields.data.placeId,
+        name: validatedFields.data.placeName,
+        xAxis: validatedFields.data.placeXAxis,
+        yAxis: validatedFields.data.placeYAxis,
+        address: validatedFields.data.informationAddress,
+      },
+      categoryId: validatedFields.data.categoryId,
+      zoneCategoryNameParent: validatedFields.data.province,
+      zoneCategoryNameChild: validatedFields.data.city,
+      deleteImages: validatedFields.data.deleteImages
+        .filter((deletedImage) => !editorStore.images.includes(deletedImage))
+        .map((deletedImage) => ({
+          address: deletedImage,
+        })),
+      thumbNailUrl: validatedFields.data.thumbnailImageUrl,
+      contentImagesUrl: validatedFields.data.contentImagesUrl,
+      tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
+        name: tag,
+      })),
+    };
 
-    /*
+    setLoading(true);
+
     const response = await fetch(`/api/informations/${informationId}`, {
       method: "PUT",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
       cache: "no-store",
     });
 
     if (!response.ok) {
       alert("정보 수정에 실패하였습니다.");
+      setLoading(false);
       throw new Error(response.statusText);
     }
 
     const result: InformationRegisterResponseDto = await response.json();
     router.push(`/informations/${result.id}`);
     router.refresh();
-    */
-
-    alert("수정 테스트");
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
@@ -167,12 +166,13 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeYAxis: data.placeResponse.yaxis.toString(),
       categoryId: 0,
       categoryName: "",
+      deletedImages: [...data.imageResponses.map((value) => value.address)],
       images: [...data.imageResponses.map((value) => value.address), ""],
-      imageFiles: [],
       mainImageIndex: data.imageResponses.findIndex(
         (value) => value.imageStatus === "썸네일",
       ),
       content: data.content,
+      contentLength: 0,
       hashtags: data.tagResponses.map((value) => value.name),
       tips: data.tip.split(";"),
     });
@@ -180,7 +180,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     return () => {
       initialize();
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialize]);
 
@@ -192,7 +191,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       categoryModal={categoryModal}
       inputTagRef={inputTagRef}
       imagesHook={imagesHook}
-      hashtagsHook={hashtagsHook}
       loading={loading}
       onSubmit={onSubmit}
       showLocationModal={showLocationModal}

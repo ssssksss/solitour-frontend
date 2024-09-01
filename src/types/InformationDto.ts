@@ -1,11 +1,60 @@
 /**
+ * 정보 등록 요청 DTO
+ */
+export interface CreateInformationRequestDto {
+  informationTitle: string;
+  informationAddress: string;
+  informationContent: string;
+  informationTips: string;
+  placeRegisterRequest: {
+    searchId: string;
+    name: string;
+    xAxis: string;
+    yAxis: string;
+    address: string;
+  };
+  categoryId: number;
+  zoneCategoryNameParent: string;
+  zoneCategoryNameChild: string;
+  thumbNailImageUrl: string;
+  contentImagesUrl: string[];
+  tagRegisterRequests: { name: string }[];
+}
+
+/**
+ * 정보 수정 요청 DTO
+ */
+export interface UpdateInformationRequestDto {
+  title: string;
+  address: string;
+  content: string;
+  tips: string;
+  placeModifyRequest: {
+    searchId: string;
+    name: string;
+    xAxis: string;
+    yAxis: string;
+    address: string;
+  };
+  categoryId: number;
+  zoneCategoryNameParent: string;
+  zoneCategoryNameChild: string;
+  deleteImages: { address: string }[];
+  thumbNailUrl: string;
+  contentImagesUrl: string[];
+  tagRegisterRequests: { name: string }[];
+}
+
+/**
  * (정보 등록)/(정보 수정) 결과 DTO
  */
 export interface InformationRegisterResponseDto {
   id: number;
 }
 
-// 정보 목록 조회 결과 DTO
+/**
+ * 정보 목록 조회 결과 DTO
+ */
 export interface InformationListResponseDto {
   content: Array<{
     informationId: number;

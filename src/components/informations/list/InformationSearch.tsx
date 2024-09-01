@@ -68,25 +68,25 @@ const InformationSearch = ({
             <IoIosArrowDown />
           </button>
           <div
-            className={`${!dropdownVisible && "hidden"} absolute -left-4 top-7 z-10 flex w-20 flex-col items-center gap-1 rounded-xl bg-[#F2FAF7] p-2 text-gray1 dark:text-slate-400`}
+            className={`${!dropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow dark:text-slate-400`}
             onClick={() => onDropdownClick()}
           >
             <Link
-              className={`${order === "latest" && "text-main"} hover:text-main`}
+              className={`${order === "latest" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
               href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
-              className={`${order === "likes" && "text-main"} hover:text-main`}
+              className={`${order === "likes" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
               href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
-              className={`${order === "views" && "text-main"} hover:text-main`}
+              className={`${order === "views" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
               href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${tagName !== "" ? `&tagName=${tagName}` : ""}`}
               scroll={false}
             >
