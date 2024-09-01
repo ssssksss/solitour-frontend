@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/store/editorStore";
@@ -17,7 +16,6 @@ interface Props {
   categoryModal: boolean;
   inputTagRef: React.RefObject<HTMLInputElement>;
   imagesHook: useDragScrollType;
-  hashtagsHook: useDragScrollType;
   loading: boolean;
   onSubmit: () => void;
   showLocationModal: () => void;
@@ -34,7 +32,6 @@ const InformationEditor = ({
   categoryModal,
   inputTagRef,
   imagesHook,
-  hashtagsHook,
   loading,
   onSubmit,
   showLocationModal,
@@ -133,7 +130,7 @@ const InformationEditor = ({
         {editorStore.contentLength}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
-        <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-black dark:text-slate-200">
+        <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black dark:text-slate-200">
           해시태그<span className="text-main">*</span>
         </h2>
         <div className="flex w-full flex-col gap-2">
@@ -161,18 +158,8 @@ const InformationEditor = ({
             }}
             ref={inputTagRef}
           />
-          <div className="flex h-9 w-full flex-row items-center justify-between gap-2">
-            <div
-              className="flex flex-1 flex-row items-center gap-2 overflow-auto py-1 pl-5"
-              ref={hashtagsHook.listRef}
-              onMouseDown={hashtagsHook.onDragStart}
-              onMouseMove={hashtagsHook.onDragMove}
-              onMouseUp={hashtagsHook.onDragEnd}
-              onMouseLeave={hashtagsHook.onDragEnd}
-              onTouchStart={hashtagsHook.onTouchStart}
-              onTouchMove={hashtagsHook.onTouchMove}
-              onTouchEnd={hashtagsHook.onTouchEnd}
-            >
+          <div className="flex w-full flex-row items-center justify-between gap-2">
+            <div className="flex flex-1 flex-row flex-wrap items-center gap-2 overflow-auto py-1 pl-5">
               {editorStore.hashtags.map((hashtag, index) => (
                 <ItemTag
                   key={index}

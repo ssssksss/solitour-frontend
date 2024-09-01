@@ -16,7 +16,6 @@ interface Props {
 
 const InformationEditorContainer = ({ informationId, data }: Props) => {
   const imagesHook = useDragScroll();
-  const hashtagsHook = useDragScroll();
   const { id } = useAuthStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
@@ -192,7 +191,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       categoryModal={categoryModal}
       inputTagRef={inputTagRef}
       imagesHook={imagesHook}
-      hashtagsHook={hashtagsHook}
       loading={loading}
       onSubmit={onSubmit}
       showLocationModal={showLocationModal}
