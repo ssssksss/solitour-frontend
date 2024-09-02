@@ -127,7 +127,7 @@ const Header = ({
                     href="/support?menu=about"
                     prefetch={userId > 0}
                   >
-                    지원&안내
+                    고객지원
                   </Link>
                 </li>
               </ul>

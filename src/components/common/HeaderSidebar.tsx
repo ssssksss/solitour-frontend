@@ -158,7 +158,7 @@ const HeaderSidebar = ({
                 height={22}
               />
             )}
-            <p>지원&안내</p>
+            <p>고객지원</p>
           </Link>
           {signedIn ? (
             <div className="flex flex-col gap-7">
