@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     // 리프레시 토큰으로 재발급 받아 재요청 보내기 위한 응답
     return new NextResponse("Refresh token not found", { status: 401 });
   }
-
+  
   // 사용자 정보 조회 API
   const response = await fetch(`${process.env.BACKEND_URL}/api/users/info`, {
     method: "GET",
@@ -23,16 +23,22 @@ export async function GET(request: NextRequest) {
     },
     cache: "no-store",
   });
-
-  if (response.status === 200) {
+  
+  if (response.ok) {
     const data = await response.json();
     return new NextResponse(JSON.stringify(data), {
       status: 200,
     });
   }
+  
+  if (response.status == 401) {
+  return new NextResponse("토큰 만료", {
+    status: 401,
+  });
+  }
 
   cookies().delete("access_token");
-  cookies().delete("refresh_token");
+  cookies().delete("refresh_token");  
   return new NextResponse("서버 에러", {
     status: 500,
   });
