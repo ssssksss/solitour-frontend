@@ -1,6 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
+ *  qna 등록
+ */
+export async function POST(request: NextRequest) {
+  const access_cookie = request.cookies.get("access_token");
+  if (!access_cookie) {
+    const refresh_cookie = request.cookies.get("refresh_token");
+    if (!refresh_cookie) {
+      // 리프레시 토큰이 없으므로 요청 중단
+      return new NextResponse("Refresh token not found", { status: 403 });
+    }
+    // 리프레시 토큰으로 재발급 받아 재요청 보내기 위한 응답
+    return new NextResponse("Refresh token not found", { status: 401 });
+  }
+  const bodyData = await request.json();
+
+  const response = await fetch(`${process.env.BACKEND_URL}/api/qna`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
+    },
+    body: JSON.stringify(bodyData),
+    cache: "no-store",
+  });
+
+  return response;
+}
+
+/**
  * qna 리스트 페이지네이션
  */
 export async function GET(request: NextRequest) {
@@ -37,6 +66,37 @@ export async function GET(request: NextRequest) {
     },
     cache: "no-store",
   });
+
+  return response;
+}
+
+/**
+ * qna 삭제
+ */
+export async function DELETE(request: NextRequest) {
+  const access_cookie = request.cookies.get("access_token");
+  if (!access_cookie) {
+    const refresh_cookie = request.cookies.get("refresh_token");
+    if (!refresh_cookie) {
+      // 리프레시 토큰이 없으므로 요청 중단
+      return new NextResponse("Refresh token not found", { status: 403 });
+    }
+    // 리프레시 토큰으로 재발급 받아 재요청 보내기 위한 응답
+    return new NextResponse("Refresh token not found", { status: 401 });
+  }
+  const url = new URL(request.url);
+
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/qna/${url.searchParams.get("id")}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
+      },
+      cache: "no-store",
+    },
+  );
 
   return response;
 }
