@@ -2,6 +2,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { VscSettings } from "react-icons/vsc";
 import InformationFilterModalContainer from "@/containers/informations/list/InformationFilterModalContainer";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   pathname: string;
@@ -9,14 +10,18 @@ interface Props {
   childCategoryId: string | null;
   place: string;
   order: string;
-  tagName: string;
+  searchMethod: string;
+  searchValue: string;
   modalVisible: boolean;
-  dropdownVisible: boolean;
-  onChangeTagName: (value: string) => void;
+  orderDropdownVisible: boolean;
+  searchDropdownVisible: boolean;
+  onChangeSearchValue: (value: string) => void;
   closeModal: () => void;
   openModal: () => void;
-  onDropdownClick: () => void;
-  searchByTagName: () => void;
+  onOrderDropdownClick: () => void;
+  onSearchDropdownClick: () => void;
+  onSearchClick: () => void;
+  setSearchMethod: (value: string) => void;
 }
 
 const InformationSearch = ({
@@ -25,14 +30,18 @@ const InformationSearch = ({
   childCategoryId,
   place,
   order,
-  tagName,
+  searchMethod,
+  searchValue,
   modalVisible,
-  dropdownVisible,
-  onChangeTagName,
+  orderDropdownVisible,
+  searchDropdownVisible,
+  onChangeSearchValue,
   closeModal,
   openModal,
-  onDropdownClick,
-  searchByTagName,
+  onOrderDropdownClick,
+  onSearchDropdownClick,
+  setSearchMethod,
+  onSearchClick,
 }: Props) => {
   return (
     <div className="flex flex-row items-center gap-4 max-[1024px]:w-full max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start">
@@ -40,16 +49,55 @@ const InformationSearch = ({
         <InformationFilterModalContainer closeModal={closeModal} />
       )}
       <form
-        className="max-[1024px]:flex-1 max-[744px]:w-full"
-        action={() => searchByTagName()}
+        className="relative z-[1] flex flex-row items-center bg-white max-[1024px]:flex-1 max-[744px]:w-full"
+        action={() => onSearchClick()}
       >
+        <button
+          className="absolute left-0 top-0 flex h-[2.75rem] flex-row items-center gap-2 pl-[1.125rem] text-sm text-gray1 hover:text-main"
+          type="button"
+          onClick={() => onSearchDropdownClick()}
+        >
+          <p>{searchMethod}</p>
+          <IoIosArrowDown className="mt-1" />
+        </button>
+        <div
+          className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow dark:text-slate-400`}
+          onClick={() => onSearchDropdownClick()}
+        >
+          <button
+            className={`${searchMethod === "제목" && "text-main"} h-[3.75rem] w-[4.6875rem] hover:text-main`}
+            type="button"
+            onClick={() => setSearchMethod("제목")}
+          >
+            제목
+          </button>
+          <button
+            className={`${searchMethod === "태그" && "text-main"} h-[3.75rem] w-[4.6875rem] hover:text-main`}
+            type="button"
+            onClick={() => setSearchMethod("태그")}
+          >
+            태그
+          </button>
+        </div>
+        <p className="absolute left-[4.6875rem] top-2 text-gray3">|</p>
         <input
-          className="w-64 border-b-[0.0625rem] border-black bg-transparent bg-search-icon bg-[length:1rem] bg-[left_0rem_top_0.1rem] bg-no-repeat pb-1 pl-8 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
+          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-[5.8125rem] pr-12 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
           type="text"
-          placeholder="태그로 검색해보세요."
-          value={tagName}
-          onChange={(e) => onChangeTagName(e.target.value)}
+          placeholder="검색하기"
+          value={searchValue}
+          onChange={(e) => onChangeSearchValue(e.target.value)}
         />
+        <button
+          className="absolute right-[0.375rem] top-[0.3125rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full bg-[#F2FAF7] hover:scale-110"
+          onClick={() => onSearchClick()}
+        >
+          <Image
+            src="/search-icon.png"
+            alt="search-icon"
+            width={16}
+            height={16}
+          />
+        </button>
       </form>
       <div className="flex flex-row items-center gap-4 text-sm font-medium">
         <button
@@ -57,37 +105,37 @@ const InformationSearch = ({
           onClick={openModal}
         >
           <VscSettings size={"1.25rem"} />
-          <p>{place === "" ? "지역별" : place}</p>
+          <p className="text-nowrap">{place === "" ? "지역별" : place}</p>
         </button>
         <div className="relative">
           <button
             className="flex flex-row items-center text-gray1 hover:text-main dark:text-slate-400"
-            onClick={() => onDropdownClick()}
+            onClick={() => onOrderDropdownClick()}
           >
-            <p>{`${order === "latest" ? "최신순" : order === "likes" ? "좋아요순" : "조회순"}`}</p>
+            <p className="text-nowrap">{`${order === "latest" ? "최신순" : order === "likes" ? "좋아요순" : "조회순"}`}</p>
             <IoIosArrowDown />
           </button>
           <div
-            className={`${!dropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow dark:text-slate-400`}
-            onClick={() => onDropdownClick()}
+            className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow dark:text-slate-400`}
+            onClick={() => onOrderDropdownClick()}
           >
             <Link
               className={`${order === "latest" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${tagName !== "" ? `&tagName=${tagName}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "likes" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${tagName !== "" ? `&tagName=${tagName}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "views" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${tagName !== "" ? `&tagName=${tagName}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               조회순
