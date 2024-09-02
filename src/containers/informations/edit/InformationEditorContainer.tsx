@@ -28,6 +28,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const inputTagRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
 
   // 장소 선택 모달창이 보이는지 여부
   const [locationModal, setLocationModal] = useState<boolean>(false);
@@ -95,6 +96,16 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       return;
     }
 
+    const deletedImages = validatedFields.data.deleteImages
+      .filter((deletedImage) => !editorStore.images.includes(deletedImage))
+      .map((deletedImage) => ({
+        address: deletedImage,
+      }));
+
+    if (originalThumbnailUrl !== validatedFields.data.thumbnailImageUrl) {
+      deletedImages.push({ address: originalThumbnailUrl });
+    }
+
     const data: UpdateInformationRequestDto = {
       title: validatedFields.data.informationTitle,
       address: validatedFields.data.informationAddress,
@@ -110,11 +121,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       categoryId: validatedFields.data.categoryId,
       zoneCategoryNameParent: validatedFields.data.province,
       zoneCategoryNameChild: validatedFields.data.city,
-      deleteImages: validatedFields.data.deleteImages
-        .filter((deletedImage) => !editorStore.images.includes(deletedImage))
-        .map((deletedImage) => ({
-          address: deletedImage,
-        })),
+      deleteImages: deletedImages,
       thumbNailUrl: validatedFields.data.thumbnailImageUrl,
       contentImagesUrl: validatedFields.data.contentImagesUrl,
       tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
@@ -176,6 +183,11 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       hashtags: data.tagResponses.map((value) => value.name),
       tips: data.tip.split(";"),
     });
+
+    setOriginalThumbnailUrl(
+      data.imageResponses.find((value) => value.imageStatus === "썸네일")
+        ?.address ?? "",
+    );
 
     return () => {
       initialize();
