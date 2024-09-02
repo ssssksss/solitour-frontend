@@ -1,223 +1,91 @@
-import SupportNotice from "@/components/support/SupportNotice";
+"use client"
 
-const data = [
-  {
-    id: 1,
-    title: "시스템 점검 안내",
-    createdAt: "2024-08-01T09:00:00Z",
-    content:
-      "저희 시스템의 정기 점검이 2024년 8월 5일 00:00부터 06:00까지 진행됩니다. 이 시간 동안 서비스 이용이 불가할 수 있습니다.",
-  },
-  {
-    id: 2,
-    title: "회원 가입 이벤트",
-    createdAt: "2024-08-02T10:30:00Z",
-    content:
-      "회원 가입 시 특별 할인 쿠폰을 드립니다. 자세한 사항은 홈페이지에서 확인해 주세요.",
-  },
-  {
-    id: 3,
-    title: "새로운 기능 추가",
-    createdAt: "2024-08-03T11:15:00Z",
-    content:
-      "새로운 기능이 추가되었습니다. 업데이트된 기능에 대한 자세한 내용은 사용자 설명서를 참조하세요.",
-  },
-  {
-    id: 4,
-    title: "비밀번호 변경 안내",
-    createdAt: "2024-08-04T12:00:00Z",
-    content:
-      "비밀번호를 주기적으로 변경해 주시기 바랍니다. 변경 방법은 계정 설정에서 확인할 수 있습니다.",
-  },
-  {
-    id: 5,
-    title: "고객 지원팀 연락처",
-    createdAt: "2024-08-05T13:45:00Z",
-    content:
-      "고객 지원팀의 연락처가 변경되었습니다. 새 연락처는 홈페이지의 고객 지원 페이지에서 확인해 주세요.",
-  },
-  {
-    id: 6,
-    title: "추석 연휴 휴무 안내",
-    createdAt: "2024-08-06T14:30:00Z",
-    content:
-      "추석 연휴로 인해 2024년 9월 27일부터 9월 30일까지 휴무합니다. 연휴 기간 동안의 서비스 이용에 참고해 주세요.",
-  },
-  {
-    id: 7,
-    title: "데이터 백업 완료",
-    createdAt: "2024-08-07T15:00:00Z",
-    content:
-      "모든 데이터의 백업이 완료되었습니다. 안전하게 서비스 이용하시기 바랍니다.",
-  },
-  {
-    id: 8,
-    title: "정기 업데이트 공지",
-    createdAt: "2024-08-08T16:10:00Z",
-    content:
-      "정기 업데이트가 2024년 8월 10일에 진행됩니다. 이로 인해 일시적인 서비스 중단이 있을 수 있습니다.",
-  },
-  {
-    id: 9,
-    title: "보안 강화 안내",
-    createdAt: "2024-08-09T17:25:00Z",
-    content:
-      "서비스 보안을 강화하기 위한 작업이 진행됩니다. 이로 인해 일부 기능이 일시적으로 비활성화될 수 있습니다.",
-  },
-  {
-    id: 10,
-    title: "서비스 이용약관 변경",
-    createdAt: "2024-08-10T18:00:00Z",
-    content:
-      "서비스 이용약관이 변경되었습니다. 변경된 약관은 홈페이지에서 확인할 수 있습니다.",
-  },
-  {
-    id: 11,
-    title: "이벤트 참여 방법 안내",
-    createdAt: "2024-08-11T19:15:00Z",
-    content:
-      "현재 진행 중인 이벤트에 참여하는 방법에 대한 안내입니다. 자세한 내용은 이벤트 페이지를 참조해 주세요.",
-  },
-  {
-    id: 12,
-    title: "서버 점검 완료",
-    createdAt: "2024-08-12T20:00:00Z",
-    content:
-      "서버 점검이 완료되었습니다. 서비스 이용에 문제가 없으시길 바랍니다.",
-  },
-  {
-    id: 13,
-    title: "채팅 서비스 개선",
-    createdAt: "2024-08-13T21:30:00Z",
-    content: "채팅 서비스가 개선되었습니다. 개선된 기능을 확인해 보세요.",
-  },
-  {
-    id: 14,
-    title: "연말정산 관련 공지",
-    createdAt: "2024-08-14T22:15:00Z",
-    content:
-      "연말정산 관련 안내입니다. 관련 서류는 2024년 12월 15일까지 제출해 주시기 바랍니다.",
-  },
-  {
-    id: 15,
-    title: "사용자 만족도 조사",
-    createdAt: "2024-08-15T23:00:00Z",
-    content:
-      "사용자 만족도 조사가 진행 중입니다. 설문에 참여해 주시면 감사하겠습니다.",
-  },
-  {
-    id: 16,
-    title: "서비스 장애 사과",
-    createdAt: "2024-08-16T09:45:00Z",
-    content:
-      "최근 서비스 장애로 불편을 드려 사과드립니다. 문제는 해결되었으며, 향후 동일한 문제가 발생하지 않도록 최선을 다하겠습니다.",
-  },
-  {
-    id: 17,
-    title: "구매 할인 쿠폰 발급",
-    createdAt: "2024-08-17T10:20:00Z",
-    content:
-      "특별 구매 할인 쿠폰이 발급되었습니다. 쿠폰 코드와 사용 방법은 이메일을 확인해 주세요.",
-  },
-  {
-    id: 18,
-    title: "업데이트 예정일 공지",
-    createdAt: "2024-08-18T11:05:00Z",
-    content:
-      "다음 업데이트가 2024년 8월 25일에 예정되어 있습니다. 업데이트에 따른 서비스 중단은 없습니다.",
-  },
-  {
-    id: 19,
-    title: "서비스 속도 개선",
-    createdAt: "2024-08-19T12:00:00Z",
-    content:
-      "서비스 속도가 개선되었습니다. 보다 빠르고 원활한 이용을 경험해 보세요.",
-  },
-  {
-    id: 20,
-    title: "사용자 정보 업데이트",
-    createdAt: "2024-08-20T13:30:00Z",
-    content:
-      "사용자 정보 업데이트가 완료되었습니다. 계정 정보를 확인해 주세요.",
-  },
-  {
-    id: 21,
-    title: "모바일 앱 출시",
-    createdAt: "2024-08-21T14:15:00Z",
-    content:
-      "새로운 모바일 앱이 출시되었습니다. 앱 스토어에서 다운로드하고 이용해 보세요.",
-  },
-  {
-    id: 22,
-    title: "설문조사 참여 요청",
-    createdAt: "2024-08-22T15:00:00Z",
-    content:
-      "서비스 개선을 위한 설문조사에 참여해 주세요. 여러분의 의견이 중요합니다.",
-  },
-  {
-    id: 23,
-    title: "보안 업데이트 완료",
-    createdAt: "2024-08-23T16:45:00Z",
-    content:
-      "보안 업데이트가 완료되었습니다. 보안 관련 문제는 해결되었으니 안심하고 서비스를 이용하세요.",
-  },
-  {
-    id: 24,
-    title: "제휴사 할인 안내",
-    createdAt: "2024-08-24T17:30:00Z",
-    content:
-      "제휴사와의 할인 혜택이 적용되었습니다. 제휴사 목록과 할인 내용은 홈페이지에서 확인할 수 있습니다.",
-  },
-  {
-    id: 25,
-    title: "서비스 이용 팁",
-    createdAt: "2024-08-25T18:15:00Z",
-    content:
-      "서비스 이용 시 유용한 팁을 안내드립니다. 효율적인 이용을 위해 참고해 주세요.",
-  },
-  {
-    id: 26,
-    title: "이벤트 결과 발표",
-    createdAt: "2024-08-26T19:00:00Z",
-    content:
-      "최근 진행된 이벤트의 결과를 발표합니다. 당첨자 명단과 상품은 홈페이지에서 확인해 주세요.",
-  },
-  {
-    id: 27,
-    title: "기술 지원 서비스 개선",
-    createdAt: "2024-08-27T20:45:00Z",
-    content:
-      "기술 지원 서비스가 개선되었습니다. 보다 빠르고 전문적인 지원을 경험해 보세요.",
-  },
-  {
-    id: 28,
-    title: "알림 설정 변경 안내",
-    createdAt: "2024-08-28T21:30:00Z",
-    content:
-      "알림 설정 변경 방법에 대한 안내입니다. 설정을 통해 원하는 알림을 받으실 수 있습니다.",
-  },
-  {
-    id: 29,
-    title: "서버 점검 예정",
-    createdAt: "2024-08-29T22:15:00Z",
-    content:
-      "서버 점검이 2024년 9월 1일 02:00부터 04:00까지 예정되어 있습니다. 점검 중에는 서비스 이용이 제한될 수 있습니다.",
-  },
-  {
-    id: 30,
-    title: "새로운 소식 구독 안내",
-    createdAt: "2024-08-30T23:00:00Z",
-    content:
-      "새로운 소식을 이메일로 받아보세요. 구독 방법은 계정 설정에서 확인할 수 있습니다.",
-  },
-];
+import Pagination from "@/components/common/Pagination";
+import SupportNoticeList from "@/components/support/SupportNoticeList";
+import { NoticeType } from "@/types/NoticeDto";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface ISupportNoticeContainer {
 }
+
+const Skeleton = () => (
+  <div className="flex w-full flex-col space-y-4 pb-8">
+    {Array.from({ length: 10 }).map((_, index) => (
+      <div
+        key={index}
+        className="flex flex-col gap-y-2 rounded-lg border border-gray-200 p-4 shadow-sm bg-gray-100 animate-pulse"
+      >
+        <div className="w-24 h-4 bg-gray-300 rounded-lg mb-2"></div>
+        <div className="w-48 h-6 bg-gray-300 rounded-lg mb-2"></div>
+        <div className="w-32 h-4 bg-gray-300 rounded-lg"></div>
+      </div>
+    ))}
+  </div>
+);
+
 const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
 
+  const searchParams = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    searchParams.get("page") ? Number(searchParams.get("page")) : 1,
+  );
+  const [elements, setElements] = useState<NoticeType[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [viewedNotices, setViewedNotices] = useState([]);
+
+  const pageHandler = (page: number) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set("page", page + "");
+    url.search = params.toString();
+    setCurrentPage(page);
+    fetchNotice(page);
+    window.history.pushState({}, "", url.toString());
+  };
+
+  const fetchNotice = async (page: number) => {
+    setLoading(true);
+    const response = await fetch(`/api/support/notice?page=${page}`);
+    const data = await response.json();
+    setElements(data.content);
+    setTotalPages(data.page.totalPages);
+    setLoading(false);
+  };
+
+  const onClickNotice = (id: number) => {
+    const viewedNotices = JSON.parse(
+      localStorage.getItem("viewedNotices") || "[]",
+    );
+    if (!viewedNotices.includes(id)) {
+      viewedNotices.push(id);
+      localStorage.setItem("viewedNotices", JSON.stringify(viewedNotices));
+    }
+  }
+
+  useEffect(() => {
+    fetchNotice(currentPage);
+    setViewedNotices(JSON.parse(localStorage.getItem("viewedNotices") || "[]"));
+  }, []);
+
   return (
-      <SupportNotice data={data}  />
+    <>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <SupportNoticeList
+          data={elements}
+          viewedNotices={viewedNotices}
+          onClickNotice={onClickNotice}
+        />
+      )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        pageHandler={pageHandler}
+      />
+    </>
   );
 };
 export default SupportNoticeContainer
