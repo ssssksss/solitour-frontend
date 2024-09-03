@@ -9,7 +9,6 @@ import Link from "next/link";
 
 interface IGatheringItemHome {
   data: GatheringRecommend;
-  onBookMarkClick: (id: number) => void;
 }
 
 const SEX: { [key: string]: string } = {
@@ -23,20 +22,21 @@ const categoryStyle: {[key: string]: string} = {
   활동: "outline-[#DDE5FF] text-[#0036C2] bg-[#F2F6FF]",
 };
 
-const statusStyle: { [key: string]: string } = {
-  WAIT: "outline-none text-white bg-gray2",
-  CONSENT: "outline-none text-white bg-main",
-  REFUSE: "outline-none text-white bg-[#EE4C4A]",
-};
+// const statusStyle: { [key: string]: string } = {
+//   WAIT: "outline-none text-white bg-gray2",
+//   CONSENT: "outline-none text-white bg-main",
+//   REFUSE: "outline-none text-white bg-[#EE4C4A]",
+// };
 
-const status: {[key: string]: string} = {
-  WAIT: "대기",
-  CONSENT: "승인",
-  REFUSE: "거절",
-};
+// const status: {[key: string]: string} = {
+//   WAIT: "대기",
+//   CONSENT: "승인",
+//   REFUSE: "거절",
+// };
 
 // todo
-const GatheringItemHome = ({ data, onBookMarkClick }: IGatheringItemHome) => {
+const GatheringItemHome = ({ data }: IGatheringItemHome) => {
+  console.log("GatheringItemHome.tsx 파일 : ",data);
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
@@ -44,6 +44,11 @@ const GatheringItemHome = ({ data, onBookMarkClick }: IGatheringItemHome) => {
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
+          <p
+            className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${categoryStyle[data.gatheringCategoryName]}`}
+          >
+            <span>{data.gatheringCategoryName}</span>
+          </p>
           <GatheringBookMarkContainer
             isBookMark={data.isBookMark}
             postId={data.gatheringId}
@@ -84,7 +89,7 @@ const GatheringItemHome = ({ data, onBookMarkClick }: IGatheringItemHome) => {
               {data.zoneCategoryParentName} {","} {data.zoneCategoryChildName}
             </p>
           </div>
-          <article className="flex gap-2 flex-col-reverse">
+          <article className="flex flex-col-reverse gap-2">
             <div className="flex items-center gap-2 dark:text-slate-400">
               <div className={"flex min-w-fit gap-2"}>
                 <div className={"relative h-5 w-[0.875rem]"}>

@@ -64,7 +64,6 @@ const GatheringRecommendationList = ({data}: {data: GatheringRecommend[]}) => {
           <GatheringItem
             key={i.gatheringId}
             data={i}
-            onBookMarkClick={onBookMarkClick}
           />
         ))}
       </div>

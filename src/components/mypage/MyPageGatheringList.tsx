@@ -24,13 +24,11 @@ interface Gathering {
 
 interface IMyPageGatheringList {
   elements: Gathering[];
-  onBookMarkClick: (id: number) => void;
   isLoading: boolean;
 }
 
 const MyPageGatheringList = ({
   elements,
-  onBookMarkClick,
   isLoading,
 }: IMyPageGatheringList) => {
 
@@ -44,7 +42,6 @@ const MyPageGatheringList = ({
             <GatheringItem
               key={item.gatheringId}
               data={item}
-              onBookMarkClick={() => onBookMarkClick(item.gatheringId)}
             />
           ))}
     </div>
