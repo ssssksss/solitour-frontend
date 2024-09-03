@@ -12,8 +12,8 @@ const GatheringEditorContent = (props: IGatheringEditorContent) => {
           className={`min-h-[17.5rem] w-full resize-none rounded-[1rem] p-6 outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.content
               ? "outline-red-500"
-              : formContext.getValues("content")
-                ? "outline-main"
+              // : formContext.getValues("content")
+              //   ? "outline-main"
                 : "outline-[#E3E3E3]"
           }`}
           placeholder={

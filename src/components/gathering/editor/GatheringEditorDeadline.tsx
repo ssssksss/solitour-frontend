@@ -14,35 +14,35 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
 return (
   <div
     className={
-      "flex items-center gap-x-[1.75rem] max-[360px]:w-full max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-3"
+      "flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start"
     }
   >
-    <div className={"relative w-[5.75rem] flex-shrink-0"}>
-      <span className={"w-[5.75rem] text-lg font-semibold"}>모집마감일</span>
+    <div className={"relative w-[2.625rem] flex-shrink-0"}>
+      <span className={"text-lg font-semibold"}>마감</span>
       <span className="absolute top-[-.5rem] text-lg text-main">*</span>
     </div>
     <div className="relative w-full">
       <button
         onClick={modalState.openModal}
-        className={`max-[360px]:text-start h-[3.25rem] w-[10.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full ${
+        className={`flex h-[3.25rem] w-full items-center justify-start rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
           formContext.formState.errors.deadline
             ? "outline-red-500"
-            : formContext.getValues("deadline")
-              ? "outline-main"
-              : "outline-[#E3E3E3]"
+            : // : formContext.getValues("deadline")
+              //   ? "outline-main"
+              "outline-[#E3E3E3]"
         }`}
       >
         {formContext.getValues("deadline") ? (
           format(new Date(formContext.getValues("deadline")), "yyyy-MM-dd")
         ) : (
           <div className="flex justify-center gap-x-[.5rem] max-[360px]:justify-start max-[360px]:pl-[.75rem]">
+            <span> YY.MM.DD </span>
             <Image
               src="/common/calendar-icon.svg"
               alt="calendar-icon"
               width={16}
               height={16}
             />
-            <span> YY.MM.DD </span>
           </div>
         )}
       </button>

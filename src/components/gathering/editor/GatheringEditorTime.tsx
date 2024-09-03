@@ -11,24 +11,20 @@ const GatheringEditorTime = ({modalState}: IGatheringEditorTime) => {
   const formContext = useFormContext();
 
   return (
-    <div
-      className={
-        "flex items-center gap-x-[1.75rem] max-[360px]:w-full max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-3"
-      }
-    >
+    <div className={"flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start"}>
       <div className={"relative w-[2.625rem] flex-shrink-0"}>
-        <span className={"w-[3.5rem] text-lg font-semibold"}> 시간 </span>
+        <span className={"text-lg font-semibold"}>시간</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
           disabled={!formContext.getValues("scheduleStartDate")}
-          className={`${formContext.getValues("scheduleStartDate") || "cursor-not-allowed bg-gray-200"} h-[3.25rem] w-[13.75rem] rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full max-[360px]:text-start max-[360px]:pl-7 ${
+          className={`${formContext.getValues("scheduleStartDate") || "cursor-not-allowed bg-gray-100"} h-[3.25rem] pl-[1.75rem] rounded-[3rem] outline outline-[1px] outline-offset-[-1px] w-full flex justify-start items-center ${
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
-              : formContext.getValues("scheduleStartDate")
-                ? "outline-main"
+              // : formContext.getValues("scheduleStartDate")
+              //   ? "outline-main"
                 : "outline-[#E3E3E3]"
           }`}
         >
