@@ -53,7 +53,7 @@ const DiaryList = async ({ page }: Props) => {
       </div>
       <DiaryPaginationContainer
         currentPage={page}
-        totalPages={data.totalPages}
+        totalPages={data.page.totalPages}
       />
     </div>
   );
