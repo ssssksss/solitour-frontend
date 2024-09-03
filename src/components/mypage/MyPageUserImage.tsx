@@ -19,7 +19,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
       <div className={"flex flex-col items-center"}>
         <label
           className={
-            "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[3rem] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
+            "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
           }
           htmlFor={"imageUpload"}
           onDragEnter={props.dragAndDrop.onDragEnter}
@@ -33,7 +33,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               alt={"user_image"}
               width={108}
               height={108}
-              className="rounded-[3.875rem]"
+              className="rounded-[50%]"
             />
           ) : props.userSex == "MALE" ? (
             <Image
@@ -41,7 +41,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               alt={"user_image"}
               width={108}
               height={108}
-              className="rounded-[3.875rem]"
+              className="rounded-[50%]"
               />
             ) : (
               <Image
@@ -49,7 +49,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               alt={"user_image"}
               width={108}
               height={108}
-              className="rounded-[3.875rem]"
+              className="rounded-[50%]"
             />
           )}
           <div
