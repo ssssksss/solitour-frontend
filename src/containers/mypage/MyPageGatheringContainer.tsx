@@ -69,54 +69,6 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
       setCurrentPage(1);
   }
 
-const onBookMarkClick = async (id: number) => {
-  const data = new URLSearchParams();
-  data.append("infoId", id.toString());
-
-  const updatedElements = await Promise.all(
-    elements.map(async (i) => {
-      if (i.gatheringId === id) {
-        if (i.isBookMark) {
-          const response = await fetchWithAuth(`/api/bookmark/gathering`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data.toString(),
-            cache: "no-store",
-          });
-
-          if (!response.ok) {
-            alert("북마크 취소에 실패하였습니다.");
-            return i;
-          }
-
-          return { ...i, isBookMark: false };
-        } else {
-          const response = await fetchWithAuth(`/api/bookmark/gathering`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data.toString(),
-            cache: "no-store",
-          });
-
-          if (!response.ok) {
-            alert("북마크 추가에 실패하였습니다.");
-            return i;
-          }
-
-          return { ...i, isBookMark: true };
-        }
-      }
-      return i;
-    }),
-  );
-
-  setElements(updatedElements);
-};
-  
   useEffect(() => {
     setIsLoading(true);
     const url = new URL(window.location.href);
@@ -157,7 +109,6 @@ const onBookMarkClick = async (id: number) => {
       />
       <MyPageGatheringList
         elements={elements}
-        onBookMarkClick={onBookMarkClick}
         isLoading={isLoading}
         />
       <Pagination

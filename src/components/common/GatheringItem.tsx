@@ -9,7 +9,6 @@ import Link from "next/link";
 
 interface IGatheringItem {
   data: Gathering;
-  onBookMarkClick: (id: number) => void;
 }
 
 const SEX: { [key: string]: string } = {
@@ -36,7 +35,7 @@ const status: {[key: string]: string} = {
 };
 
 // todo
-const GatheringItem = ({ data, onBookMarkClick }: IGatheringItem) => {
+const GatheringItem = ({ data }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
@@ -97,7 +96,7 @@ const GatheringItem = ({ data, onBookMarkClick }: IGatheringItem) => {
           </div>
           <div className={"gap-[0.625rem] text-sm font-semibold "+ 
                 "max-[432px]:flex max-[432px]:flex-col-reverse "+
-                "min-[433px]:grid min-[433px]:grid-cols-[auto_7rem] "+
+                "min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] "+
                 "min-[745px]:flex min-[745px]:flex-col-reverse min-[745px]:grid-cols-1 "+
                 "min-[1024px]:grid min-[1024px]:grid-cols-2"}>
               <div className="flex w-full flex-row items-center gap-2 dark:text-slate-400">

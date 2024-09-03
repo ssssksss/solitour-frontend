@@ -21,11 +21,10 @@ async function getNewGatheringList() {
 const NewGatheringList = async () => {
   const elements: GatheringRecommend[] = await getNewGatheringList();
 
-
   return (
     <div className="mt-6 grid w-full grid-cols-3 items-center gap-4 p-1 max-[1024px]:grid-cols-2 max-[744px]:w-[120.6rem] max-[744px]:grid-cols-6 max-[744px]:grid-rows-1">
       {elements?.map((data, index) => (
-        <GatheringItemHome key={index} data={data} onBookMarkClick={() => {}} />
+        <GatheringItemHome key={index} data={data} />
       ))}
     </div>
   );
