@@ -4,6 +4,7 @@ import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { useMemo, useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill";
 
 const QuillEditorContainer = () => {
@@ -11,6 +12,7 @@ const QuillEditorContainer = () => {
   const diaryEditorStore = useDiaryEditorStore();
   const quillRef = useRef<ReactQuill>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const formContext = useFormContext();
 
   const imageHandler = () => {
     // Step 1. 이미지 파일을 첨부할 수 있는 input을 생성합니다.
@@ -86,10 +88,15 @@ const QuillEditorContainer = () => {
       loading={loading}
       quillRef={quillRef}
       modules={modules}
-      content={diaryEditorStore.contents[diaryEditorStore.currentDay - 1]}
-      onChange={(value: string) =>
-        diaryEditorStore.changeContent(diaryEditorStore.currentDay - 1, value)
+      content={
+        formContext.getValues("contents")[diaryEditorStore.currentDay - 1]
       }
+      onChange={(value: string) => {
+        const contents: string[] = formContext.getValues("contents");
+        contents[diaryEditorStore.currentDay - 1] = value;
+        formContext.setValue("contents", contents);
+        formContext.trigger();
+      }}
     />
   );
 };

@@ -4,7 +4,8 @@ import DateRangeModalContainer from "@/containers/diary/write/DateRangeModalCont
 import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
 import dynamic from "next/dynamic";
 import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
-import { FormEvent } from "react";
+import { useFormContext } from "react-hook-form";
+import { parse } from "node-html-parser";
 
 const QuillEditorContainer = dynamic(
   () => import("@/containers/diary/write/QuillEditorContainer"),
@@ -41,6 +42,8 @@ const DiaryEditor = ({
   setCurrentDay,
   onSubmit,
 }: Props) => {
+  const formContext = useFormContext();
+
   return (
     <div className="flex w-full flex-col">
       {dateRangeModal && (
@@ -54,35 +57,40 @@ const DiaryEditor = ({
         새로운 <span className="text-main">경험을 기록</span>하고 나만의
         추억카드를 만들어보세요!
       </p>
-      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
+      <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
         <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-sm outline-none hover:border-main"
+          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
           type="text"
-          name="title"
           placeholder="제목을 입력하세요."
-          value={diaryEditorStore.title}
+          {...formContext.register("title")}
           maxLength={50}
-          onChange={(e) =>
-            diaryEditorStore.setDiaryEditor({ title: e.target.value })
-          }
+          onChange={(e) => {
+            formContext.setValue("title", e.target.value);
+            formContext.trigger("title");
+          }}
         />
+        {formContext.formState.errors.title && (
+          <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
+            {formContext.formState.errors.title.message as String}
+          </p>
+        )}
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-10">
-        <div className="flex h-[3.3125rem] flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
+        <div className="relative flex h-[3.3125rem] flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
           <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
             날짜<span className="text-main">*</span>
           </h2>
           <button
-            className={`${diaryEditorStore.startDate ? "text-black" : "text-gray2"} h-[3.3125rem] w-[21.75rem] flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm hover:border-main`}
+            className={`${formContext.getValues("startDate") ? "text-black" : "text-gray2"} ${formContext.formState.errors.startDate ? "border-red-500" : "border-gray3 hover:border-main"} h-[3.3125rem] w-[21.75rem] flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm`}
             type="button"
             onClick={() => showDateRangeModal()}
           >
-            {diaryEditorStore.startDate !== null &&
-            diaryEditorStore.endDate !== null ? (
-              <p>{`${diaryEditorStore.startDate.toLocaleDateString("ko-KR")} ~ ${diaryEditorStore.endDate?.toLocaleDateString("ko-KR")}`}</p>
+            {formContext.getValues("startDate") !== null &&
+            formContext.getValues("endDate") !== null ? (
+              <p>{`${formContext.getValues("startDate").toLocaleDateString("ko-KR")} ~ ${formContext.getValues("endDate").toLocaleDateString("ko-KR")}`}</p>
             ) : (
               <div className="flex flex-row items-center gap-2">
                 {"YYYY.MM.DD"}
@@ -95,21 +103,35 @@ const DiaryEditor = ({
               </div>
             )}
           </button>
+          {formContext.formState.errors.startDate && (
+            <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
+              {formContext.formState.errors.startDate.message as String}
+            </p>
+          )}
         </div>
         {diaryEditorStore.days > 0 && (
-          <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
+          <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
             <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
               지역<span className="text-main">*</span>
             </h2>
             <button
-              className={`${diaryEditorStore.address[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm outline-none hover:border-main`}
+              className={`${formContext.getValues("address")[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-none`}
               type="button"
               onClick={() => showAddressModal()}
             >
-              {diaryEditorStore.address[diaryEditorStore.currentDay - 1] === ""
+              {formContext.getValues("address")[
+                diaryEditorStore.currentDay - 1
+              ] === ""
                 ? "지역명을 입력하세요."
-                : diaryEditorStore.address[diaryEditorStore.currentDay - 1]}
+                : formContext.getValues("address")[
+                    diaryEditorStore.currentDay - 1
+                  ]}
             </button>
+            {formContext.formState.errors.address && (
+              <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
+                주소를 입력해 주세요.
+              </p>
+            )}
           </div>
         )}
       </div>
@@ -144,7 +166,9 @@ const DiaryEditor = ({
         </div>
       )}
       {diaryEditorStore.days > 0 && (
-        <div className="mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] border-gray3 pb-[0.875rem] pt-6">
+        <div
+          className={`${formContext.formState.errors.moodLevels ? "border-red-500" : "border-gray3"} relative mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] pb-[0.875rem] pt-6`}
+        >
           <h2 className="pl-6 text-lg font-semibold text-black dark:text-slate-200">
             {`하루 기분은 어땠나요? (Day ${diaryEditorStore.currentDay})`}
           </h2>
@@ -152,13 +176,14 @@ const DiaryEditor = ({
             {["최고", "좋아", "무난", "슬퍼", "화나"].map((value, index) => (
               <button
                 key={index + 1}
-                className={`${diaryEditorStore.moodLevels[diaryEditorStore.currentDay - 1] === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main dark:text-slate-400`}
-                onClick={() =>
-                  diaryEditorStore.changeMoodLevel(
-                    diaryEditorStore.currentDay - 1,
-                    index + 1,
-                  )
-                }
+                className={`${formContext.getValues("moodLevels")[diaryEditorStore.currentDay - 1] === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main dark:text-slate-400`}
+                onClick={() => {
+                  const moodLevels: number[] =
+                    formContext.getValues("moodLevels");
+                  moodLevels[diaryEditorStore.currentDay - 1] = index + 1;
+                  formContext.setValue("moodLevels", moodLevels);
+                  formContext.trigger("moodLevels");
+                }}
               >
                 <div className="relative h-10 w-8">
                   <Image
@@ -172,13 +197,36 @@ const DiaryEditor = ({
               </button>
             ))}
           </div>
+          {formContext.formState.errors.moodLevels && (
+            <p className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
+              모든 날짜의 기분 정보를 입력해 주세요.
+            </p>
+          )}
         </div>
       )}
       {diaryEditorStore.days > 0 && <QuillEditorContainer />}
       <button
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
         type="submit"
-        onClick={() => onSubmit()}
+        onClick={() => {
+          const imageUrl =
+            parse(formContext.getValues("contents")[0])
+              .querySelector("img")
+              ?.getAttribute("src") ?? "";
+
+          if (imageUrl === "") {
+            alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
+            return;
+          }
+
+          formContext.setValue("image", imageUrl);
+
+          if (!formContext.formState.isValid) {
+            formContext.trigger();
+          } else {
+            onSubmit();
+          }
+        }}
         disabled={diaryEditorStore.days === 0 || loading}
       >
         {loading ? (

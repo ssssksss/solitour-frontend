@@ -37,9 +37,6 @@ export interface GetDiaryResponseDto {
  * 일기 목록 조회 응답 DTO
  */
 export interface GetDiaryListResponseDto {
-  totalPages: number;
-  totalElements: number;
-  size: number;
   content: {
     diaryId: number;
     title: string;
@@ -54,6 +51,9 @@ export interface GetDiaryListResponseDto {
       }[];
     };
   }[];
+  page: {
+    totalPages: number;
+  };
 }
 
 /**
