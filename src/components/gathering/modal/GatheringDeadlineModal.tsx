@@ -56,7 +56,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[36rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem]"
+        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem]"
       }
     >
       <button
@@ -96,7 +96,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
       </section>
       <div className={"flex w-full justify-center pt-[1rem]"}>
         <button
-          className={`h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1`}
+          className={`h-[3.375rem] min-w-[18.625rem] rounded-[1.75rem] bg-main px-[3.5rem] py-[1rem] text-white disabled:bg-gray1`}
           onClick={() => submitHandler()}
         >
           {format(new Date(deadlineDate), "yyyy년 MM월 dd일")} 적용하기
