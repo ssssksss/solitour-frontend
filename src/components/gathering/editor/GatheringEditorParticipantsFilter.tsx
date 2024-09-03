@@ -13,41 +13,45 @@ const GatheringEditorParticipantsFilter = ({
   const formContext = useFormContext();
 
   return (
-    <div className={"flex items-center gap-x-[1.75rem] max-[360px]:w-full"}>
+    <div className={"flex w-full items-center"}>
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`flex h-[3.25rem] w-[15.5rem] overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] max-[360px]:w-full ${
+          className={`flex h-[3.25rem] w-full items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.allowedSex
               ? "outline-red-500"
-              : formContext.getValues("allowedSex")
-                ? "outline-main"
-                : "outline-[#E3E3E3]"
+              : // : formContext.getValues("allowedSex")
+                //   ? "outline-main"
+                "outline-[#E3E3E3]"
           }`}
         >
           {formContext.getValues("allowedSex") ? (
-            <div className="flex h-full w-full items-center justify-center">
-              <div className="rounded-full py-1 pr-1 font-semibold text-black">
-                {"참여자-"}
+            <div className="flex h-full w-full items-center justify-center max-[612px]:flex-col max-[612px]:leading-5">
+              <div className={"flex"}>
+                <div className="rounded-full py-1 pr-1 font-semibold text-black">
+                  {"참여자-"}
+                </div>
+                <div className="rounded-full py-1 font-semibold text-black">
+                  {formContext.getValues("personCount")}명,
+                </div>
               </div>
-              <div className="rounded-full py-1 font-semibold text-black">
-                {formContext.getValues("personCount")}명,
-              </div>
+              <div className={"flex"}>
+                <div className="flex items-center rounded-full py-1 font-semibold text-black">
+                  {new Date().getFullYear() - formContext.getValues("startAge")}
+                  세<span>~</span>
+                  {new Date().getFullYear() - formContext.getValues("endAge")}
+                  세,
+                </div>
 
-              <div className="flex items-center rounded-full py-1 font-semibold text-black">
-                {new Date().getFullYear() - formContext.getValues("startAge")}세
-                <span>~</span>
-                {new Date().getFullYear() - formContext.getValues("endAge")}세,
-              </div>
-
-              <div className="rounded-full py-1 font-semibold text-black">
-                {SETTING_MODAL_SEX[formContext.getValues("allowedSex")]}
+                <div className="rounded-full py-1 font-semibold text-black">
+                  {SETTING_MODAL_SEX[formContext.getValues("allowedSex")]}
+                </div>
               </div>
             </div>
           ) : (
             <div
               className={
-                "relative flex h-full w-full items-center justify-center max-[360px]:justify-start max-[360px]:pl-[.75rem]"
+                "relative flex h-full w-full items-center justify-start"
               }
             >
               <div className={"relative text-lg font-semibold"}>
