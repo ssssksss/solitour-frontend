@@ -39,7 +39,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
         <article className={"flex flex-col items-center"}>
           <div
             className={
-              "relative mb-[1rem] aspect-square w-[6.75rem] rounded-[3rem] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
+              "relative mb-[1rem] aspect-square w-[6.75rem] rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
             }
           >
             {/* ? 유저의 썸네일 이미지가 있는지? */}
@@ -50,7 +50,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
                 alt={"user_image"}
                 width={108}
                 height={108}
-                className="rounded-[3.875rem]"
+                className="rounded-[50%]"
               />
             ) : userInfo.sex == "MALE" ? (
               <Image
@@ -58,7 +58,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
                 alt={"user_image"}
                 width={108}
                 height={108}
-                className="rounded-[3.875rem]"
+                className="rounded-[50%]"
               />
             ) : (
               <Image
@@ -66,7 +66,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
                 alt={"user_image"}
                 width={108}
                 height={108}
-                className="rounded-[3.875rem]"
+                className="rounded-[50%]"
               />
             )}
             <Link href="/mypage/profile">
