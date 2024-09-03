@@ -10,8 +10,7 @@ import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
-import { parse } from "node-html-parser";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const DiaryEditorContainer = () => {
@@ -49,7 +48,7 @@ const DiaryEditorContainer = () => {
       diaryDayRequests: Array.from(
         { length: diaryEditorStore.days },
         (_, index) => ({
-          content: contents[index],
+          content: sanitizeHtml(contents[index], sanitizeOption),
           feelingStatus: FEELING_STATUS[moodLevels[index]],
           place: address[index],
         }),
