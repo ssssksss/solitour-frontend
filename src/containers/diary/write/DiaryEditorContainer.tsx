@@ -8,9 +8,11 @@ import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { parse } from "node-html-parser";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const DiaryEditorContainer = () => {
   const router = useRouter();
@@ -20,41 +22,36 @@ const DiaryEditorContainer = () => {
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const onSubmit = async () => {
-    // Validate from fields using Zod
-    const validatedFields = DiaryCreateFormSchema.safeParse({
+  const methods = useForm({
+    resolver: zodResolver(DiaryCreateFormSchema),
+    defaultValues: {
       userId: authStore.id,
-      title: diaryEditorStore.title,
-      startDate: diaryEditorStore.startDate,
-      endDate: diaryEditorStore.endDate,
-      address: diaryEditorStore.address,
-      image:
-        parse(diaryEditorStore.contents[0])
-          .querySelector("img")
-          ?.getAttribute("src") ?? "",
-      moodLevels: diaryEditorStore.moodLevels,
-      contents: diaryEditorStore.contents.map((content) =>
-        sanitizeHtml(content, sanitizeOption),
-      ),
-    });
+      title: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      address: [""],
+      image: "",
+      moodLevels: [],
+      contents: [],
+    },
+    mode: "onChange",
+  });
 
-    // If validation fails, return errors early. Otherwise, continue.
-    if (!validatedFields.success) {
-      alert(validatedFields.error.issues[0].message);
-      return;
-    }
+  const onSubmit = async () => {
+    const { title, image, startDate, endDate, contents, moodLevels, address } =
+      methods.getValues();
 
     const data: CreateDiaryRequestDto = {
-      title: validatedFields.data.title,
-      titleImage: validatedFields.data.image,
-      startDatetime: validatedFields.data.startDate,
-      endDatetime: validatedFields.data.endDate,
+      title: title,
+      titleImage: image,
+      startDatetime: startDate,
+      endDatetime: endDate,
       diaryDayRequests: Array.from(
         { length: diaryEditorStore.days },
         (_, index) => ({
-          content: validatedFields.data.contents[index],
-          feelingStatus: FEELING_STATUS[validatedFields.data.moodLevels[index]],
-          place: validatedFields.data.address[index],
+          content: contents[index],
+          feelingStatus: FEELING_STATUS[moodLevels[index]],
+          place: address[index],
         }),
       ),
     };
@@ -90,21 +87,23 @@ const DiaryEditorContainer = () => {
   }, []);
 
   return (
-    <DiaryEditor
-      text="등록"
-      diaryEditorStore={diaryEditorStore}
-      dateRangeModal={dateRangeModal}
-      addressModal={addressModal}
-      loading={loading}
-      showDateRangeModal={() => setDateRangeModal(true)}
-      closeDateRangeModal={() => setDateRangeModal(false)}
-      showAddressModal={() => setAddressModal(true)}
-      closeAddressModal={() => setAddressModal(false)}
-      setCurrentDay={(day: number) =>
-        diaryEditorStore.setDiaryEditor({ currentDay: day })
-      }
-      onSubmit={onSubmit}
-    />
+    <FormProvider {...methods}>
+      <DiaryEditor
+        text="등록"
+        diaryEditorStore={diaryEditorStore}
+        dateRangeModal={dateRangeModal}
+        addressModal={addressModal}
+        loading={loading}
+        showDateRangeModal={() => setDateRangeModal(true)}
+        closeDateRangeModal={() => setDateRangeModal(false)}
+        showAddressModal={() => setAddressModal(true)}
+        closeAddressModal={() => setAddressModal(false)}
+        setCurrentDay={(day: number) =>
+          diaryEditorStore.setDiaryEditor({ currentDay: day })
+        }
+        onSubmit={onSubmit}
+      />
+    </FormProvider>
   );
 };
 

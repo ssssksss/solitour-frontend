@@ -17,7 +17,7 @@ export const DiaryCreateFormSchema = z.object({
   startDate: z
     .date({
       required_error: "날짜를 입력해 주세요.",
-      invalid_type_error: "startDate must be a date.",
+      invalid_type_error: "날짜를 입력해 주세요.",
     })
     .min(new Date("1970-01-01"), {
       message: "1970년 이후의 날짜만 입력할 수 있습니다.",
@@ -25,7 +25,7 @@ export const DiaryCreateFormSchema = z.object({
   endDate: z
     .date({
       required_error: "날짜를 입력해 주세요.",
-      invalid_type_error: "endDate must be a date.",
+      invalid_type_error: "날짜를 입력해 주세요.",
     })
     .max(new Date(new Date().getTime() + 1000 * 60 * 60 * 24), {
       message: "미래에 해당하는 날짜는 입력할 수 없습니다.",

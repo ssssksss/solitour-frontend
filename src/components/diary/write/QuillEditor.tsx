@@ -21,7 +21,7 @@ const QuillEditor = ({
   onChange,
 }: Props) => {
   return (
-    <div className="flex flex-col">
+    <div className="relative flex flex-col">
       <HashSpinner loading={loading} />
       <div className="-mb-2 mt-8 flex flex-row items-center gap-2 text-sm font-medium text-gray1">
         <FaRegImage />

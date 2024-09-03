@@ -3,6 +3,7 @@
 import DateRangeModal from "@/components/diary/write/DateRangeModal";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 interface Props {
   closeModal: () => void;
@@ -18,6 +19,7 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
       key: "selection",
     },
   ]);
+  const formContext = useFormContext();
 
   const onChangeDateRange = () => {
     const days = Math.floor(
@@ -26,14 +28,15 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
         1,
     );
 
+    formContext.setValue("startDate", state[0].startDate);
+    formContext.setValue("endDate", state[0].endDate);
+    formContext.setValue("address", Array<string>(days).fill(""));
+    formContext.setValue("moodLevels", Array<number>(days).fill(0));
+    formContext.setValue("contents", Array<string>(days).fill(""));
+
     diaryEditorStore.setDiaryEditor({
-      startDate: state[0].startDate,
-      endDate: state[0].endDate,
       days: days,
       currentDay: 1,
-      address: Array<string>(days).fill(""),
-      moodLevels: Array<number>(days).fill(0),
-      contents: Array<string>(days).fill(""),
     });
     closeModal();
   };
