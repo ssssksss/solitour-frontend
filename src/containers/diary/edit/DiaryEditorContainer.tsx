@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { parse } from "node-html-parser";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Props {
   diaryData: GetDiaryResponseDto;
@@ -23,42 +25,36 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const methods = useForm({
+    resolver: zodResolver(DiaryUpdateFormSchema),
+    defaultValues: {
+      userId: authStore.id,
+      title: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      address: [""],
+      image: "",
+      moodLevels: [0],
+      contents: [""],
+    },
+    mode: "onChange",
+  });
 
   const onSubmit = async () => {
-    // Validate from fields using Zod
-    const validatedFields = DiaryUpdateFormSchema.safeParse({
-      userId: authStore.id,
-      title: diaryEditorStore.title,
-      startDate: diaryEditorStore.startDate,
-      endDate: diaryEditorStore.endDate,
-      address: diaryEditorStore.address,
-      image:
-        parse(diaryEditorStore.contents[0])
-          .querySelector("img")
-          ?.getAttribute("src") ?? "",
-      moodLevels: diaryEditorStore.moodLevels,
-      contents: diaryEditorStore.contents.map((content) =>
-        sanitizeHtml(content, sanitizeOption),
-      ),
-    });
-
-    // If validation fails, return errors early. Otherwise, continue.
-    if (!validatedFields.success) {
-      alert(validatedFields.error.issues[0].message);
-      return;
-    }
+    const { title, image, startDate, endDate, contents, moodLevels, address } =
+      methods.getValues();
 
     const data: UpdateDiaryRequestDto = {
-      title: validatedFields.data.title,
-      titleImage: validatedFields.data.image,
-      startDatetime: validatedFields.data.startDate,
-      endDatetime: validatedFields.data.endDate,
+      title: title,
+      titleImage: image,
+      startDatetime: startDate,
+      endDatetime: endDate,
       diaryDayRequests: Array.from(
         { length: diaryEditorStore.days },
         (_, index) => ({
-          content: validatedFields.data.contents[index],
-          feelingStatus: FEELING_STATUS[validatedFields.data.moodLevels[index]],
-          place: validatedFields.data.address[index],
+          content: sanitizeHtml(contents[index], sanitizeOption),
+          feelingStatus: FEELING_STATUS[moodLevels[index]],
+          place: address[index],
         }),
       ),
     };
@@ -90,35 +86,48 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
   useEffect(() => {
     diaryEditorStore.setDiaryEditor({
-      title: diaryData.diaryContentResponse.title,
-      startDate: new Date(
+      days: diaryData.diaryContentResponse.diaryDayContentResponses
+        .diaryDayContentDetail.length,
+      currentDay: 1,
+    });
+
+    methods.setValue("title", diaryData.diaryContentResponse.title);
+    methods.setValue(
+      "startDate",
+      new Date(
         new Date(
           new Date(diaryData.diaryContentResponse.startDatetime).getTime() +
             1000 * 60 * 60 * 24,
         ).toLocaleDateString("ko-KR"),
       ),
-      endDate: new Date(
+    );
+    methods.setValue(
+      "endDate",
+      new Date(
         new Date(
           new Date(diaryData.diaryContentResponse.endDatetime).getTime() +
             1000 * 60 * 60 * 24,
         ).toLocaleDateString("ko-KR"),
       ),
-      address:
-        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-          (value) => value.place,
-        ),
-      days: diaryData.diaryContentResponse.diaryDayContentResponses
-        .diaryDayContentDetail.length,
-      currentDay: 1,
-      moodLevels:
-        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-          (value) => Number(FEELING_STATUS[value.feelingStatus]),
-        ),
-      contents:
-        diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-          (value) => value.content,
-        ),
-    });
+    );
+    methods.setValue(
+      "address",
+      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+        (value) => value.place,
+      ),
+    );
+    methods.setValue(
+      "moodLevels",
+      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+        (value) => Number(FEELING_STATUS[value.feelingStatus]),
+      ),
+    );
+    methods.setValue(
+      "contents",
+      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+        (value) => value.content,
+      ),
+    );
 
     // 화면에서 벗어났을 때 초기화
     return () => {
