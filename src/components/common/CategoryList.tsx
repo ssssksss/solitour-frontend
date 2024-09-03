@@ -21,7 +21,7 @@ const CategoryList = <T extends string | number>({
 
   return (
     <div className="gap-[2rem] pt-[2rem] w-full">
-      <div className={"flex gap-[.5rem]"}>
+      <div className={"flex gap-[1rem]"}>
         {categories.map((i) => (
           <button
             key={i.value.toString()} // key는 문자열로 변환하여 유니크하게 설정
