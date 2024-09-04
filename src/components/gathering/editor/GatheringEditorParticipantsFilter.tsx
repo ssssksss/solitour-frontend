@@ -26,13 +26,10 @@ const GatheringEditorParticipantsFilter = ({
           }`}
         >
           {formContext.getValues("allowedSex") ? (
-            <div className="flex h-full w-full items-center justify-center max-[612px]:flex-col max-[612px]:leading-5">
+            <div className="flex h-full w-full items-center justify-start">
               <div className={"flex"}>
-                <div className="rounded-full py-1 pr-1 font-semibold text-black">
-                  {"참여자-"}
-                </div>
                 <div className="rounded-full py-1 font-semibold text-black">
-                  {formContext.getValues("personCount")}명,
+                  {formContext.getValues("personCount")}명 <span className={"text-black px-1"}> | </span>
                 </div>
               </div>
               <div className={"flex"}>
@@ -40,7 +37,7 @@ const GatheringEditorParticipantsFilter = ({
                   {new Date().getFullYear() - formContext.getValues("startAge")}
                   세<span>~</span>
                   {new Date().getFullYear() - formContext.getValues("endAge")}
-                  세,
+                  세 <span className={"text-black px-1"}> | </span>
                 </div>
 
                 <div className="rounded-full py-1 font-semibold text-black">
