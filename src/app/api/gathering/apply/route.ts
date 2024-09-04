@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 
-
+// 모임 신청 등록
 export async function POST(
   request: NextRequest,
 ) {
@@ -35,6 +35,7 @@ export async function POST(
   }
 }
 
+// 모임 신청 수정
 export async function PUT(
   request: NextRequest,
 ) {
@@ -72,7 +73,7 @@ export async function PUT(
   }
 }
 
-//  * 모임 글 삭제
+//  * 모임 신청 취소
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } },
