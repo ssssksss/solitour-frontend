@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://solitour.ssssksss.xyz
+
+# Sitemaps
+Sitemap: https://solitour.ssssksss.xyz/sitemap.xml
