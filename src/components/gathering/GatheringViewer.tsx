@@ -36,10 +36,10 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
       {/* 제일 상단 */}
       <Breadcrumbs categories={categories} />
       {/* 제목 부분 */}
-      <article className="h-[11.375rem] w-full px-[.25rem] pb-[2.25rem] pt-[2.375rem]">
+      <article className="w-full px-[.25rem] pb-[2.25rem]">
         {/* 제목, 신청 버튼 */}
-        <div className="flex w-full items-end justify-between">
-          <h1 className={"h-[3.125rem] text-3xl font-semibold"}>
+        <div className=" w-full">
+          <h1 className={"text-3xl font-semibold break-words whitespace-pre-wrap w-full"}>
             {data.title}
           </h1>
           <GatheringSupportManagementContainer
@@ -47,7 +47,7 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
-        <div className="mt-[0.375rem] flex h-[3.25rem] w-full justify-between">
+        <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
           <div className={"flex items-center gap-x-3"}>
             <Image
               src={"/user_sex_man_default_image.svg"}
