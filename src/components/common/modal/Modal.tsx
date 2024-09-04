@@ -9,13 +9,6 @@ interface ModalProps extends React.PropsWithChildren {
   onClose: () => void;
 }
 
-/**
- * 
- * @param param 
- * <Modal isOpen={isModal} onClose={() => setIsModal(false)} className="flex items-center justify-center">
- *   <ModalComponent closeModal={() => setIsModal(false)} />
- * </Modal>
- */
 
 export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
   const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
@@ -28,16 +21,22 @@ export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
     onClose();
   });
   usePreventBodyScroll(isOpen);
+  if (!documentBody || !isOpen) return null;
 
-  if (documentBody == null) return;
-  if (isOpen === false) return;
     return createPortal(
-      <div className="fixed inset-0 flex h-full w-full items-center justify-center" style={{zIndex: "100"}}>
+      <div
+        className="fixed inset-0 flex h-full w-full items-center justify-center"
+        style={{ zIndex: "100" }}
+      >
         <div className="absolute h-full w-full bg-black/30"> </div>
-        <div ref={ref} className="flex h-full pt-[6rem] pb-[1rem] justify-center items-center">
+        {/* pt는 상단 네비게이션 바 높이보다 크게, pb는 바닥에서 띄우는 용도 */}
+        <div
+          ref={ref}
+          className="flex h-full items-center justify-center pb-[1rem] pt-[6rem]"
+        >
           {children}
         </div>
       </div>,
-      documentBody,
+      document.getElementById("modal-root") as HTMLElement,
     );
 };
