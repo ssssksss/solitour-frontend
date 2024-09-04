@@ -11,11 +11,11 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-interface IGatheringEditContainer {
+interface IGatheringEditorContainer {
     gatheringData: GatheringDetailResponseDto
 }
 
-const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
+const GatheringEditorContainer = ({gatheringData}: IGatheringEditorContainer) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const methods = useForm({
@@ -61,7 +61,7 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
       ...requestData
     } = methods.getValues();
     try {
-            setLoading(true);
+      setLoading(true);
       const response = await fetchWithAuth(`/api/gathering/${id}`, {
         method: "PUT",
         headers: {
@@ -121,4 +121,4 @@ const GatheringEditContainer = ({gatheringData}: IGatheringEditContainer) => {
   );
 };
 
-export default GatheringEditContainer;
+export default GatheringEditorContainer;
