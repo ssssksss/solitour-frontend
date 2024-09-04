@@ -1,5 +1,4 @@
 import GatheringSearch from "@/components/gathering/GatheringSearch";
-import useModalState from "@/hooks/useModalState";
 import { useSearchParams } from 'next/navigation';
 import { useState } from "react";
 
@@ -9,7 +8,6 @@ interface IGatheringSearchContainer {
 const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState<string>(searchParams.get("search") || searchParams.get("tagName") ||  "");
-  const modalState = useModalState();
   const [dropdownValue, setDropdownValue] = useState(
     searchParams.get("tagName") != null ? "태그" : "제목",
   );
@@ -59,7 +57,6 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
 
   return (
     <GatheringSearch
-      modalState={modalState}
       dropDownHandler={dropDownHandler}
       dropdownValue={dropdownValue}
       searchValue={searchValue}

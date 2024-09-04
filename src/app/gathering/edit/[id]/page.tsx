@@ -1,4 +1,4 @@
-import GatheringEditContainer from "@/containers/gathering/edit/GatheringEditContainer";
+import GatheringEditorContainer from "@/containers/gathering/edit/GatheringEditorContainer";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { NextResponse } from "next/server";
 
@@ -50,7 +50,7 @@ export default async function Page({ params: { id } }: PageProps) {
     <div       className={
         "w-full pb-[2rem] pt-[2rem] min-h-[calc(100vh-25rem)]"
       }>
-      <GatheringEditContainer gatheringData={gatheringData} />
+      <GatheringEditorContainer gatheringData={gatheringData} />
     </div>
     );
   } catch (error) {
