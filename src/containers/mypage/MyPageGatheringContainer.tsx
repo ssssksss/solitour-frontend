@@ -51,13 +51,20 @@ interface Gathering {
 const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
   const searchParams = useSearchParams();
     const [activeCategory, setActiveCategory] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(
+      Number(searchParams.get("page")) || 1,
+    );
     const [elements, setElements] = useState<Gathering[]>([]);
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-    const pageHandler = (page: number) => {
-        setCurrentPage(page);
-    }
+  const pageHandler = (page: number) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set("page", page + "");
+    url.search = params.toString();
+    setCurrentPage(page);
+    window.history.pushState({}, "", url.toString());
+  };
     const onClickCategoryHandler = (value: string) => {
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search);
@@ -91,6 +98,14 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
           cache: "no-store",
         },
       );
+
+      if (!res.ok) {
+        setElements([]);
+        setTotalElements(0);
+        setIsLoading(false);
+        return;
+      }
+
       const data = await res.json();
       setElements(data.content);
       setTotalElements(data.page.totalElements);
@@ -107,10 +122,7 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
         onClickHandler={onClickCategoryHandler}
         activeCategory={activeCategory}
       />
-      <MyPageGatheringList
-        elements={elements}
-        isLoading={isLoading}
-        />
+      <MyPageGatheringList elements={elements} isLoading={isLoading} />
       <Pagination
         currentPage={currentPage}
         totalPages={Math.floor(totalElements / 6) + 1}
