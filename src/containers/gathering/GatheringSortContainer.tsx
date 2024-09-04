@@ -32,8 +32,6 @@ const GatheringSortContainer = (props: IGatheringSortContainer) => {
         window.history.pushState({}, "", url.toString());
     }
 
-
-
     useEffect(() => {
         setSort(searchParams.get('sort') || "")
     },[searchParams])
@@ -41,7 +39,14 @@ const GatheringSortContainer = (props: IGatheringSortContainer) => {
 
   return (
       <>
-        <Dropdown options={OPTIONS} dropdownHandler={sortHandler} value={sort} defaultValue={sort} />
+          <Dropdown options={OPTIONS} dropdownHandler={sortHandler} value={sort} defaultValue={sort}
+              dropdownOptionStyle={
+            {w: "8.625rem"}
+            }
+              dropdownContainerStyle={
+            {w: "3.5rem"}
+            }
+          />
       </>
   );
 };

@@ -29,9 +29,6 @@ async function fetchData(id: number) {
     },
   });
 
-  console.log("page.tsx 파일 : ",res.status);
-  console.log("page.tsx 파일 : ",cookie);
-
   if (!res.ok) {
     throw new Error(`Failed to fetch data: ${res.statusText}`);
   }

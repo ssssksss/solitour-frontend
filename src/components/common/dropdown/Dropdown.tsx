@@ -7,27 +7,53 @@ interface IDropdown<T> {
   dropdownHandler: (value: T) => void;
   defaultValue: T;
   value: T;
+  dropdownContainerStyle?: {
+    w?: string;
+    p?: string;
+  };
+  dropdownOptionStyle?: {
+    w?: string;
+  };
 }
 
-export default function Dropdown<T>({ options, dropdownHandler, defaultValue, value }: IDropdown<T>) {
+export default function Dropdown<T>({
+  options,
+  dropdownHandler,
+  defaultValue,
+  value,
+  dropdownContainerStyle = {
+    w: "3.5rem",
+    p: "",
+  },
+  dropdownOptionStyle = {
+    w: "5rem"
+  },
+}: IDropdown<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<T>(defaultValue);
-  const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
+  const [isOnRightSide, setIsOnRightSide] = useState(true);
 
-  useEffect(() => {
-    setDocumentBody(document.body);
-  }, []);
   useOutsideClick(ref, () => {
     setIsOpen(false);
   });
 
   useEffect(() => {
     setSelectedOption(value);
-  },[value])
+  }, [value]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+    const checkPosition = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const rightSide = rect.right > windowWidth / 2;
+        setIsOnRightSide(rightSide);
+      }
+    };
+
+    checkPosition();
   };
 
   const handleOptionClick = (value: T) => {
@@ -36,26 +62,46 @@ export default function Dropdown<T>({ options, dropdownHandler, defaultValue, va
   };
 
   return (
-    <div ref={ref} className="relative inline-block text-left ">
-      <div>
-        <button
-          onClick={toggleDropdown}
-          className="items-center gap-1 hover:text-main inline-flex justify-between w-full rounded-md px-0 py-2 text-sm font-medium text-gray-700  focus:outline-none "
-        >
-          {options.filter(i=>i.value == selectedOption)[0].name}
-            {
-              isOpen ?
-              <Image src="/common/dropdown-down-arrow.svg" className="translate-y-[50%] rotate-180" alt="location-icon" width={8} height={4} /> :
-              <Image src="/common/dropdown-down-arrow.svg" className="translate-y-[25%]" alt="location-icon" width={8} height={4} />
-            }
-        </button>
-      </div>
+    <div
+      className={`relative flex h-[2.75rem] flex-shrink-0 items-center w-[${dropdownContainerStyle.w}] text-left`}
+    >
+      <button
+        onClick={toggleDropdown}
+        ref={ref}
+        className={`inline-flex items-center gap-x-2 rounded-md py-2 ${dropdownContainerStyle.p} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
+      >
+        <div className={"min-w-fit"}>
+          {options.filter((i) => i.value == selectedOption)[0].name}
+        </div>
+        {isOpen ? (
+          <Image
+            src="/common/dropdown-down-arrow.svg"
+            className="translate-y-[50%] rotate-180"
+            alt="location-icon"
+            width={8}
+            height={4}
+          />
+        ) : (
+          <Image
+            src="/common/dropdown-down-arrow.svg"
+            className="translate-y-[25%]"
+            alt="location-icon"
+            width={8}
+            height={4}
+          />
+        )}
+      </button>
 
       {isOpen && (
         <div
-          className="absolute w-full z-40 mt-2 rounded-md bg-white ring-2 ring-offset-2 ring-black ring-opacity-5 focus:outline-none transition ease-out duration-200"
+          className={`absolute ${isOnRightSide ? "translate-x-[calc("+[dropdownContainerStyle.w]+"-100%)]" : "bg-red-100"} top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out dark:text-slate-400`}
         >
-          <div className={"py-1 min-w-max "} role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+          <div
+            className={"w-full py-1"}
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
             {options.map((i) => (
               <button
                 key={i.name}
@@ -63,7 +109,7 @@ export default function Dropdown<T>({ options, dropdownHandler, defaultValue, va
                   dropdownHandler(i.value);
                   handleOptionClick(i.value);
                 }}
-                className={`block px-2 py-2 text-sm text-gray-700  hover:text-main w-full hover:bg-white ${
+                className={`flex h-16 w-full items-center justify-center hover:text-main ${
                   selectedOption === i.value ? "bg-white text-main" : ""
                 }`}
                 role="menuitem"

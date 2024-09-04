@@ -36,7 +36,6 @@ const categoryStyle: {[key: string]: string} = {
 
 // todo
 const GatheringItemHome = ({ data }: IGatheringItemHome) => {
-  console.log("GatheringItemHome.tsx 파일 : ",data);
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}

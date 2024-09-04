@@ -31,13 +31,23 @@ const GatheringCardListContainer = () => {
       try {
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
-        if (params.get("page")) {
-          params.set("page", Number(params.get("page")) - 1 + "");
-          url.search = params.toString();
-        }
+
+        // 페이지 숫자인지 여부와 1보다 큰지 여부
+        let page = params.get("page");
+        let pageNumber =
+          isNaN(Number(page)) || Number(page) <= 1 ? 0 : Number(page) - 1;
+        params.set("page", pageNumber + "");
+        url.search = params.toString();
+
         const response = await fetch("/api/gathering" + url.search, {
           cache: "no-store",
         });
+        if (!response.ok) {
+          setElements([]);
+          setTotalElements(0);
+          setPage(0);
+          return;
+        }
         const data: GatheringsResponse = await response.json();
         setElements(data.content);
         setTotalElements(data.totalElements);
@@ -54,14 +64,17 @@ const GatheringCardListContainer = () => {
       {loading ? (
         <SkeletonGatheringList />
       ) : (
-        <GatheringCardList
-          data={elements}
-        />
+        <>
+          <GatheringCardList data={elements} />
+          {
+            elements.length != 0 &&
+            <GatheringPaginationContainer
+              currentPage={page}
+              totalPages={Math.ceil(totalElements / 12) || 1}
+            />
+          }
+        </>
       )}
-      <GatheringPaginationContainer
-        currentPage={page}
-        totalPages={Math.ceil(totalElements / 12) || 1}
-      />
     </>
   );
 };

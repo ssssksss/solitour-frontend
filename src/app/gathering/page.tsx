@@ -35,7 +35,7 @@ export default async function Page({
   const gatheringCategoryList = await getData();
 
   return (
-    <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col items-center">
+    <div className="flex min-h-[calc(100vh-25rem)] pb-[2.5rem] w-full flex-col items-center">
       <Banner
         content={[`<b>직접 내 모임</b>을`, "<b>만들어</b>보세요!"]}
         buttonText="모임 등록하기"

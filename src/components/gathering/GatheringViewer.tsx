@@ -36,18 +36,19 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
       {/* 제일 상단 */}
       <Breadcrumbs categories={categories} />
       {/* 제목 부분 */}
-      <article className="h-[11.375rem] w-full px-[.25rem] pb-[2.25rem] pt-[2.375rem]">
+      <article className="w-full px-[.25rem] pb-[2.25rem]">
         {/* 제목, 신청 버튼 */}
-        <div className="flex w-full items-end justify-between">
-          <h1 className={"h-[3.125rem] text-3xl font-semibold"}>
+        <div className="grid w-full items-start gap-4 max-[960px]:grid-cols-[calc(100%-8.5rem)_8.5rem] min-[960px]:grid-cols-[calc(100%-14.5rem)_14.5rem]">
+          <h1 className="whitespace-pre-wrap break-words text-3xl font-semibold">
             {data.title}
           </h1>
           <GatheringSupportManagementContainer
             postUserId={data.userPostingResponse.id}
+            gatheringStatus={data.gatheringStatus}
           />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
-        <div className="mt-[0.375rem] flex h-[3.25rem] w-full justify-between">
+        <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
           <div className={"flex items-center gap-x-3"}>
             <Image
               src={"/user_sex_man_default_image.svg"}
@@ -169,9 +170,9 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
         />
         <span> 모집 마감일 : </span>
         <span>
-        {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", {
-          locale: ko,
-        })}
+          {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", {
+            locale: ko,
+          })}
         </span>
       </div>
       <div className="mb-[1.25rem] whitespace-pre-wrap pt-[2rem]">
