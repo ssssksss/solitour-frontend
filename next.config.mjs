@@ -9,13 +9,6 @@ const nextConfig = {
         port: "",
         pathname: "/solitour-bucket/**",
       },
-      {
-        // TODO: 테스트 목적
-        protocol: "http",
-        hostname: "localhost",
-        port: "4000",
-        pathname: "/uploads/images/diary/**",
-      },
     ],
   },
 };
