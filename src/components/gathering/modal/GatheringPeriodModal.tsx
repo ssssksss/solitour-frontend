@@ -70,7 +70,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white px-[1rem] pt-[2.875rem] max-[800px]:max-w-[25rem] min-[801px]:max-h-[36rem]"
+        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white px-[1rem] pt-[2.875rem] max-[800px]:max-w-[25rem] min-[800px]:w-[50.375rem] min-[801px]:max-h-[36rem]"
       }
     >
       <button
@@ -84,8 +84,8 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           height={20}
         />
       </button>
-      <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 날짜 선택 </h2>
-      <div className={"flex flex-col items-center gap-[1.875rem]"}>
+      <h2 className={"h-[2rem] text-2xl font-bold text-black min-[800px]:w-[47.625rem] "}> 날짜 선택 </h2>
+      <div className={"flex flex-col items-center gap-[1.875rem] "}>
         <div className="relative">
           <DateRangePicker
             onChange={(rangesByKey: RangeKeyDict) => {
