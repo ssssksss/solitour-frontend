@@ -182,7 +182,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
   return (
     <div
       className={
-        "relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[3rem] py-[2.875rem]"
+        "relative h-full max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[3rem]"
       }
     >
       <button
