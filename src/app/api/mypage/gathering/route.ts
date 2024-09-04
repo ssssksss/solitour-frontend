@@ -12,20 +12,27 @@ export async function GET(request: NextRequest) {
     return new NextResponse("Refresh token not found", { status: 401 });
   }
 
-  const { searchParams } = new URL(request.url);
-  const category = searchParams.get("category");
-  const page = searchParams.get("page") || "1"; // 기본값을 1로 설정
+  const url = new URL(request.url);
+  const params = new URLSearchParams(url.search);
+  const category = params.get("category");
+  const page = Number(params.get("page"));
+  if (page < 0 || !Number.isSafeInteger(page)) {
+    throw new Error("Invalid Page Number");
+  }
+  params.delete("category");
+  url.search = params.toString();
 
   try {
     const response = await fetch(
-      `${process.env.BACKEND_URL}/api/users/mypage/gathering/${category}${+page > 1 ? "?page=" + page : ""}`,
+      `${process.env.BACKEND_URL}/api/users/mypage/gathering/${category}` +
+        url.search,
       {
         method: "GET",
         headers: {
           Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
           "Content-Type": "application/json",
         },
-        cache: "no-store"
+        cache: "no-store",
       },
     );
 
