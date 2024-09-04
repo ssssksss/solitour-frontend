@@ -18,13 +18,13 @@ const GatheringList = (props: IGatheringList) => {
 
   return (
     <div className="w-full flex flex-col pt-[5.5rem] min-w-[22.5rem]">
-      <article className="flex flex-col gap-y-4 max-[756px]:items-start ">
-        <div className="w-full flex flex-row max-[744px]:flex-col max-[744px]:gap-y-5  justify-between items-center  max-[756px]:w-full max-[756px]:justify-between">
+      <article className="flex flex-col gap-y-4 min-[960px]:flex-row-reverse min-[960px]:gap-x-6">
+        <div className="w-full flex flex-row gap-x-2 max-[744px]:flex-col justify-between gap-y-5 min-[960px]:gap-x-6 ">
           <GatheringSearchContainer />
           <div className="max-[744px]:w-full flex flex-row justify-between items-center gap-4 text-sm font-medium text-gray1 ">
-            <div className={"flex gap-4"}>
-            <GatheringFilterContainer />
-            <GatheringSortContainer />
+            <div className={"flex justify-between gap-4 w-[7.5rem] "}>
+              <GatheringFilterContainer />
+              <GatheringSortContainer />
             </div>
             <div className="min-[745px]:hidden">
             <GatheringExcludeCompleteContainer />
