@@ -33,6 +33,10 @@ export default function RootLayout({
         name="google-site-verification"
         content="4uK8QzlAEyT9nriZXww7-TpyUEm5Pgz6FAbEBy0F4_4"
       />
+      <meta
+        name="naver-site-verification"
+        content="4da70e879bd32d934e1a503b1a86d3e3cae4e0a3"
+      />
       <body className={`${notoSansKr.className} flex h-full flex-col`}>
         <HeaderContainer />
         <div className="flex w-full items-center justify-center">
