@@ -89,6 +89,7 @@ export interface GatheringDetailResponseDto {
   gatheringRecommend: GatheringRecommend[];
   isLike: boolean;
   gatheringCategoryResponse: { id: number; name: string };
+  gatheringStatus: string;
 };
 
 
