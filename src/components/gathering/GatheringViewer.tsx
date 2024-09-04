@@ -38,12 +38,13 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
       {/* 제목 부분 */}
       <article className="w-full px-[.25rem] pb-[2.25rem]">
         {/* 제목, 신청 버튼 */}
-        <div className=" w-full">
-          <h1 className={"text-3xl font-semibold break-words whitespace-pre-wrap w-full"}>
+        <div className="grid w-full items-start gap-4 max-[960px]:grid-cols-[calc(100%-8.5rem)_8.5rem] min-[960px]:grid-cols-[calc(100%-14.5rem)_14.5rem]">
+          <h1 className="whitespace-pre-wrap break-words text-3xl font-semibold">
             {data.title}
           </h1>
           <GatheringSupportManagementContainer
             postUserId={data.userPostingResponse.id}
+            gatheringStatus={data.gatheringStatus}
           />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
@@ -169,9 +170,9 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
         />
         <span> 모집 마감일 : </span>
         <span>
-        {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", {
-          locale: ko,
-        })}
+          {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", {
+            locale: ko,
+          })}
         </span>
       </div>
       <div className="mb-[1.25rem] whitespace-pre-wrap pt-[2rem]">
