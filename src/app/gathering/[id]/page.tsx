@@ -62,7 +62,7 @@ export default async function Page({ params: { id } }: PageProps) {
     return (
       <div
         className={
-          "m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col py-[2rem]"
+          "m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]"
         }
       >
         <GatheringViewerContainer data={gatheringData} postId={postId} />
