@@ -55,7 +55,7 @@ const GatheringSearch = ({
           maxLength={50}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.ctrlKey && e.key === "Enter") {
+            if (e.key === "Enter") {
               searchHandler();
             }
           }}

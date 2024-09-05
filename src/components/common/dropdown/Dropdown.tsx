@@ -31,7 +31,7 @@ export default function Dropdown<T>({
 }: IDropdown<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<T>(defaultValue);
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [isOnRightSide, setIsOnRightSide] = useState(true);
 
   useOutsideClick(ref, () => {
@@ -64,10 +64,10 @@ export default function Dropdown<T>({
   return (
     <div
       className={`relative flex h-[2.75rem] flex-shrink-0 items-center w-[${dropdownContainerStyle.w}] text-left`}
+      ref={ref}
     >
       <button
         onClick={toggleDropdown}
-        ref={ref}
         className={`inline-flex items-center gap-x-2 rounded-md py-2 ${dropdownContainerStyle.p} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
       >
         <div className={"min-w-fit"}>
@@ -94,8 +94,10 @@ export default function Dropdown<T>({
 
       {isOpen && (
         <div
-          className={`absolute ${isOnRightSide ? "translate-x-[calc("+[dropdownContainerStyle.w]+"-100%)]" : "bg-red-100"} top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out dark:text-slate-400`}
+        className={`absolute ${(isOnRightSide && dropdownContainerStyle.w) ? "translate-x-[calc(" + dropdownContainerStyle.w + "-100%)]" : "bg-red-100"} top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out dark:text-slate-400`}
         >
+          {dropdownContainerStyle.w}
+          {isOnRightSide ? "r" : "l"}
           <div
             className={"w-full py-1"}
             role="menu"

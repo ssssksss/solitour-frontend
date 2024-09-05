@@ -1,6 +1,6 @@
 import GatheringSearch from "@/components/gathering/GatheringSearch";
 import { useSearchParams } from 'next/navigation';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IGatheringSearchContainer {
 
@@ -15,9 +15,8 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
   const searchHandler = () => {
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search);
-    if (searchParams.get("tagName")) {
+    if (dropdownValue == "태그") {
       // 태그 검색일 경우
-      if (searchValue == params.get("tagName")) return;
       searchValue == ""
         ? params.delete("tagName")
         : params.set("tagName", searchValue);
@@ -26,13 +25,13 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
       window.history.pushState({}, "", url.toString());
     } else {
       // 일반 검색일 경우
-        if (searchValue == params.get("search")) return;
-        searchValue == ""
-          ? params.delete("search")
-          : params.set("search", searchValue);
-        params.delete("page");
-        url.search = params.toString();
-        window.history.pushState({}, "", url.toString());
+      if (searchValue == params.get("search")) return;
+      searchValue == ""
+        ? params.delete("search")
+        : params.set("search", searchValue);
+      params.delete("page");
+      url.search = params.toString();
+      window.history.pushState({}, "", url.toString());
     }
   }
   
@@ -54,6 +53,13 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
     url.search = params.toString();
     window.history.pushState({}, "", url.toString());
   };
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    setSearchValue(params.get("search") || params.get("tagName") || "");
+    setDropdownValue(params.get("tagName") != null ? "태그" : "제목");
+  },[searchParams])
 
   return (
     <GatheringSearch
