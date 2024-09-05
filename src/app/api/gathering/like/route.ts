@@ -18,10 +18,6 @@ export async function POST(request: NextRequest) {
     }
     
     const url = new URL(request.url);
-    console.log(
-      "route.ts 파일 : ",
-      `${process.env.BACKEND_URL}/api/gathering/great?gatheringId=${url.searchParams.get("id")}`,
-    );
     
     try {
         const response = await fetch(
