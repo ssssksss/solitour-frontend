@@ -3,9 +3,10 @@ import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
-
 interface IGatheringFilterModalProps {
   closeModal: () => void;
 }
@@ -63,28 +64,8 @@ const SEX = [
   ["남성", "MALE"],
   ["여성", "FEMALE"],
 ];
-const AGE = {
-  전체: {
-    startAge: 20,
-    endAge: 59,
-  },
-  "20대": {
-    startAge: 20,
-    endAge: 29,
-  },
-  "30대": {
-    startAge: 30,
-    endAge: 39,
-  },
-  "40대": {
-    startAge: 40,
-    endAge: 49,
-  },
-  "50대": {
-    startAge: 50,
-    endAge: 59,
-  },
-};
+
+const markerPositions = [20, 25, 30, 35, 40, 45, 50, 55, 59];
 
 function calculateDateDifference(startDate: Date, endDate: Date): number {
   const differenceInTime = endDate.getTime() - startDate.getTime();
@@ -105,6 +86,9 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
   );
   const [isFilterSchedule, setIsFilterSchedule] = useState((searchParams.get("startDate") || searchParams.get("endDate")) ? true : false);
+  const [values, setValues] = useState([startAge, endAge]);
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [calendarDate, setCalendarDate] = useState([
     {
       startDate: searchParams.get("startDate")
@@ -116,6 +100,59 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
       key: "selection",
     },
   ]);
+
+  const onClickDecreaseMinAge = () => {
+    let temp = Math.max(20, startAge - 1);
+    if (temp <= endAge) {
+      setStartAge(temp);
+      setValues((prev) => [temp, prev[1]]);
+    }
+  };
+
+  const onClickImproveMinAge = () => {
+    let temp = Math.min(endAge, startAge + 1);
+    setStartAge(temp);
+    setValues((prev) => [temp, prev[1]]);
+  };
+
+  const onClickDecreaseMaxAge = () => {
+    let temp = Math.max(startAge, endAge - 1);
+    setEndAge(temp);
+    setValues((prev) => [prev[0], temp]);
+  };
+
+  const onClickImproveMaxAge = () => {
+    let temp = Math.min(59, endAge + 1);
+    if (temp >= startAge) {
+      setEndAge(temp);
+      setValues((prev) => [prev[0], temp]);
+    }
+  };
+
+    const handleChange = (newValues: number[] | number) => {
+      const valuesArray = newValues as number[];
+      setValues(valuesArray);
+      setStartAge(valuesArray[0]);
+      setEndAge(valuesArray[1]);
+  };
+  
+    const handleMarkerClick = (age: number) => {
+      const distanceToStart = Math.abs(startAge - age);
+      const distanceToEnd = Math.abs(endAge - age);
+
+      if (distanceToStart < distanceToEnd) {
+        // Update startAge if it's closer to the clicked age
+        const newStartAge = age;
+        setStartAge(newStartAge);
+        setValues([newStartAge, endAge]);
+      } else {
+        // Update endAge if it's closer to the clicked age
+        const newEndAge = age;
+        setEndAge(newEndAge);
+        setValues([startAge, newEndAge]);
+      }
+    };
+
 
   const initFilterOptionHandler = () => {
     setLocation(0);
@@ -197,7 +234,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
         />
       </button>
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 조건 선택 </h2>
-      <article className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
+      <div className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
         <div className={"flex flex-col gap-y-[1rem]"}>
           <div className={"h-[2rem] font-bold text-black"}> 지역 </div>
           <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
@@ -226,166 +263,244 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
             ))}
           </div>
         </div>
-        <div className={"flex w-full flex-col gap-y-[1rem]"}>
-          <div className={"h-[2rem] font-bold text-black"}> 나이 </div>
-          <div className="relative flex w-full flex-col gap-[1rem]">
-            <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-              {Object.entries(AGE).map((i) => (
+        <article className="flex w-full flex-col gap-y-[1rem]">
+          <div className="font-bold text-black">
+            <span className="text-xl"> 나이 </span>
+            <div className="flex w-full justify-between pt-[1rem]">
+              <div>
+                <span> {new Date().getFullYear() - startAge} 년생 </span>
+                <span> {`(${startAge} 세)`} </span>
+              </div>
+              <div>
+                <span> {new Date().getFullYear() - endAge} 년생 </span>
+                <span> {`(${endAge} 세)`} </span>
+              </div>
+            </div>
+            {/* 화살표 버튼 */}
+            <div className="flex h-[3rem] select-none items-center justify-between gap-x-4 pt-[1rem]">
+              <div className="flex w-full rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
                 <button
-                  key={i[0]}
-                  onClick={() => {
-                    setStartAge(i[1].startAge);
-                    setEndAge(i[1].endAge);
-                  }}
-                  className={
-                    "flex h-[2rem] flex-shrink-0 items-center rounded-[4rem] px-[1rem] py-[.5rem] text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] hover:bg-main hover:text-white"
-                  }
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickDecreaseMinAge()}
                 >
-                  {i[0]}
+                  <Image
+                    src={"/calendar-prev-arrow-icon.svg"}
+                    alt={"prev-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+                <button
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickImproveMinAge()}
+                >
+                  <Image
+                    src={"/calendar-next-arrow-icon.svg"}
+                    alt={"next-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+              </div>
+              <div className="flex w-full rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
+                <button
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickDecreaseMaxAge()}
+                >
+                  <Image
+                    src={"/calendar-prev-arrow-icon.svg"}
+                    alt={"prev-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+                <button
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickImproveMaxAge()}
+                >
+                  <Image
+                    src={"/calendar-next-arrow-icon.svg"}
+                    alt={"next-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative flex w-full flex-col justify-center gap-[1rem] pb-[2rem]">
+            <Slider
+              range
+              min={20}
+              max={59}
+              value={values}
+              onChange={handleChange}
+              step={1}
+              dotStyle={{ display: "none" }}
+              activeDotStyle={{ display: "none" }}
+              handleStyle={[
+                {
+                  height: 30,
+                  width: 30,
+                  borderRadius: 50,
+                  borderColor: "#0d6efd00",
+                  backgroundColor: "#ffffff00",
+                  transform: "translate(-50%, 8px)",
+                  opacity: 0,
+                },
+                {
+                  height: 30,
+                  width: 30,
+                  borderRadius: 50,
+                  borderColor: "#0d6efd00",
+                  backgroundColor: "#ffffff00",
+                  transform: "translate(-50%, 8px)",
+                  opacity: 0,
+                },
+              ]}
+              trackStyle={[
+                {
+                  backgroundColor: "#0d6efd",
+                  height: 30,
+                },
+              ]}
+              railStyle={{
+                backgroundColor: "#ddd",
+                height: 32,
+              }}
+            />
+            <div className="absolute left-0 right-0 top-[4.5rem] flex justify-between px-4">
+              {markerPositions.map((age) => (
+                <button
+                  key={age}
+                  onClick={() => handleMarkerClick(age)}
+                  className={
+                    "left-[-1rem] top-[-1.5rem] flex h-[1.875rem] w-8 cursor-pointer select-none items-center justify-center rounded-full bg-gray2 text-center text-white transition-transform duration-200 hover:bg-main" +
+                    ` ${age >= startAge && age <= endAge && "bg-main"}`
+                  }
+                  style={{
+                    position: "relative",
+                    transform: `translateX(calc(${((age - 20) / 39) * 100}%))`,
+                  }}
+                >
+                  <div className="text-md absolute font-medium">{age}</div>
                 </button>
               ))}
             </div>
-            <div
-              className={
-                "flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem] after:content-['세']"
-              }
-            >
-              <input
-                type={"number"}
-                placeholder="최소 20"
-                min={20}
-                max={59}
-                onChange={(e) => {
-                  let num = Number(e.target.value);
-                  if (e.target.value.length > 1) {
-                    // ? 최대값을 넘었는가?
-                    if (num > 59) {
-                      num = 59;
-                    }
-                    // ? endAge값을 넘었는가?
-                    if (num > endAge) {
-                      if (endAge < 60) {
-                        setEndAge(num);
-                      }
-                    }
-                    // ? 최소 나이값보다 작은가?
-                    if (num < 20) num = 20;
-                  }
-                  setStartAge(num);
-                }}
-                value={startAge}
-                className={
-                  "w-[8rem] rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"
-                }
-              />
-              <div> ~ </div>
-              <input
-                type={"number"}
-                placeholder="최대 59"
-                min={20}
-                max={59}
-                onChange={(e) => {
-                  let num = Number(e.target.value);
-                  if (e.target.value.length > 1) {
-                    // ? 최소 나이값보다 작은가?
-                    if (num < 20) num = 20;
-                    // ? startAge값보다 작은가?
-                    if (num < startAge) {
-                      if (startAge > 19) {
-                        setStartAge(num);
-                      }
-                    }
-                    // ? 최대값을 넘었는가?
-                    if (num > 59) {
-                      num = 59;
-                    }
-                  }
-                  setEndAge(num);
-                }}
-                value={endAge}
-                className={
-                  "w-[8rem] rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"
-                }
-              />
-            </div>
           </div>
-        </div>
-        <div className={"flex flex-col items-center gap-[.5rem]"}>
-          <div className={"h-[2rem] flex gap-4 w-full font-bold text-black items-center justify-between"}>
+        </article>
+        <div className={"flex flex-col items-center gap-[.5rem] pt-[2rem]"}>
+          <div
+            className={
+              "flex h-[2rem] w-full items-center justify-between gap-4 font-bold text-black"
+            }
+          >
             <span> 일정 </span>
-            <button className={"flex gap-1 text-sm text-black font-medium"} onClick={() => setIsFilterSchedule(prev => !prev)}>
-              {
-                isFilterSchedule ?
-                <Image src="/common/check-active-icon.svg" alt="location-icon" width={20} height={20} /> :
-                <Image src="/common/check-empty-icon.svg" alt="location-icon" width={20} height={20} />
-              }
+            <button
+              className={"flex gap-1 text-sm font-medium text-black"}
+              onClick={() => setIsFilterSchedule((prev) => !prev)}
+            >
+              {isFilterSchedule ? (
+                <Image
+                  src="/common/check-active-icon.svg"
+                  alt="location-icon"
+                  width={20}
+                  height={20}
+                />
+              ) : (
+                <Image
+                  src="/common/check-empty-icon.svg"
+                  alt="location-icon"
+                  width={20}
+                  height={20}
+                />
+              )}
               특정 기간 선택하기
             </button>
           </div>
-          
-          {
-            isFilterSchedule &&
+
+          {isFilterSchedule && (
             <div>
-                <div className={"flex py-[1rem] gap-1"}>
-                  {
-                    SELECTED_SCHEDULE_DATA.map(i => (
-                      <button
-                        key={i.name}
-                        className={
-                          "rounded-lg bg-main px-[.5rem] py-[.125rem] text-white"
-                        }
-                        onClick={() => {
-                              setCalendarDate([
-                              {
-                                startDate: calendarDate[0].startDate,
-                                endDate: new Date(new Date(calendarDate[0].startDate).setDate(new Date(calendarDate[0].startDate).getDate() + i.value - 1)),
-                                key: "selection",
-                              },
-                            ]);
-                        }}
-                      >
-                        {i.name}
-                      </button>
-                    ))
-                  }
-            </div>
-            <DateRangePicker
+              <div className={"flex gap-1 py-[1rem]"}>
+                {SELECTED_SCHEDULE_DATA.map((i) => (
+                  <button
+                    key={i.name}
+                    className={
+                      "rounded-lg bg-main px-[.5rem] py-[.125rem] text-white"
+                    }
+                    onClick={() => {
+                      setCalendarDate([
+                        {
+                          startDate: calendarDate[0].startDate,
+                          endDate: new Date(
+                            new Date(calendarDate[0].startDate).setDate(
+                              new Date(calendarDate[0].startDate).getDate() +
+                                i.value -
+                                1,
+                            ),
+                          ),
+                          key: "selection",
+                        },
+                      ]);
+                    }}
+                  >
+                    {i.name}
+                  </button>
+                ))}
+              </div>
+              <div className="relative">
+                <DateRangePicker
                   onChange={(rangesByKey: RangeKeyDict) => {
                     const selection = rangesByKey.selection;
-                setCalendarDate([
-                  {
-                    startDate: selection.startDate as Date,
-                    endDate: selection.endDate as Date,
-                    key: "selection",
-                  },
-                ]);
+                    setCalendarDate([
+                      {
+                        startDate: selection.startDate as Date,
+                        endDate: selection.endDate as Date,
+                        key: "selection",
+                      },
+                    ]);
                   }}
-              minDate={new Date()}
-              maxDate={add(new Date(), { years: 1 })}
-              showDateDisplay={false}
-              months={1}
-              ranges={calendarDate}
-              locale={ko}
-              rangeColors={["#00B488", "#F2FAF7"]}
-              color={"#ff0000"}
+                  minDate={new Date()}
+                  maxDate={add(new Date(), { years: 1 })}
+                  showDateDisplay={false}
+                  months={1}
+                  ranges={calendarDate}
+                  locale={ko}
+                  rangeColors={["#00B488", "#F2FAF7"]}
+                  color={"#ff0000"}
+                  onShownDateChange={(e) => {
+                    setMonth(e.getMonth() + 1);
+                    setYear(e.getFullYear());
+                  }}
                 />
-            <div className={"flex h-[1.5rem] w-full justify-center gap-[.25rem]"}>
-            <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
-            <div>~</div>
-            <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
-            <div>
-              (
-              {calculateDateDifference(
-                calendarDate[0].startDate,
-                calendarDate[0].endDate,
-              ) + 1}
-              일)
+                <div
+                  className={
+                    "absolute left-[50%] top-6 translate-x-[-50%] font-semibold"
+                  }
+                >
+                  {year}.{month}
+                </div>
+              </div>
+              <div
+                className={"flex h-[1.5rem] w-full justify-center gap-[.25rem]"}
+              >
+                <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
+                <div>~</div>
+                <div>{format(calendarDate[0].endDate, "yyyy-MM-dd")}</div>
+                <div>
+                  (
+                  {calculateDateDifference(
+                    calendarDate[0].startDate,
+                    calendarDate[0].endDate,
+                  ) + 1}
+                  일)
+                </div>
+              </div>
             </div>
-          </div>
-          </div>
-          }
+          )}
         </div>
-      </article>
+      </div>
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
         <button
           onClick={() => submitApplyFilter()}
