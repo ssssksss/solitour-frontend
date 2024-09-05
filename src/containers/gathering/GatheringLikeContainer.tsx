@@ -12,8 +12,8 @@ interface IGatheringLikeContainer {
 
 const GatheringLikeContainer = (props: IGatheringLikeContainer) => {
     const { id: userId } = useAuthStore();
-    const [isLike, setIsLike] = useState(props.isLike);
-    const [likes, setLikes] = useState(props.likes);
+    const [isLike, setIsLike] = useState(props.isLike); // 상태
+    const [likes, setLikes] = useState(props.likes); // 숫자
     const [loading, setLoading] = useState(false);
 
     const handleClick = async (e: React.MouseEvent) => {
@@ -28,14 +28,14 @@ const GatheringLikeContainer = (props: IGatheringLikeContainer) => {
         setLikes(newLikes);
         
         try {
-            const response = await fetchWithAuth('/api/gathering/like', {
-                method: 'POST',
-                body: JSON.stringify({ id: props.gatheringId })
+            const response = await fetchWithAuth(`/api/gathering/like?id=${props.gatheringId}`, {
+                method: isLike ? 'DELETE' : 'POST',
             });
             
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            
             
         } catch (error) {
             setIsLike(isLike);
@@ -47,10 +47,12 @@ const GatheringLikeContainer = (props: IGatheringLikeContainer) => {
 
     return (
         <GatheringLike
-            {...props}
             loading={loading}
             userId={userId}
             handleClick={handleClick}
+            likes={likes}
+            isLike={isLike}
+            gatheringId={props.gatheringId}
         />
     );
 };
