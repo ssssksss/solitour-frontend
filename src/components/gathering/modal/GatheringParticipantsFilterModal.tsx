@@ -142,10 +142,10 @@ const onClickImproveMaxAge = () => {
             />
           </div>
         </article>
-        <article className="flex w-full flex-col gap-y-[2rem]">
-          <div className="font-bold text-black">
+        <article className="flex w-full flex-col gap-y-[1rem]">
+          <div className="font-bold text-black ">
             <span className="text-xl"> 나이 </span>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between pt-[1rem]">
               <div>
                 <span> {new Date().getFullYear() - startAge} 년생 </span>
                 <span> {`(${startAge} 세)`} </span>
@@ -155,10 +155,11 @@ const onClickImproveMaxAge = () => {
                 <span> {`(${endAge} 세)`} </span>
               </div>
             </div>
+            {/* 화살표 버튼 */}
             <div className="flex h-[3rem] select-none items-center justify-between gap-x-4 pt-[1rem]">
               <div className="flex w-full rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
                 <button
-                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
                   onClick={() => onClickDecreaseMinAge()}
                 >
                   <Image
@@ -169,7 +170,7 @@ const onClickImproveMaxAge = () => {
                   />
                 </button>
                 <button
-                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
                   onClick={() => onClickImproveMinAge()}
                 >
                   <Image
@@ -182,7 +183,7 @@ const onClickImproveMaxAge = () => {
               </div>
               <div className="flex w-full rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
                 <button
-                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
                   onClick={() => onClickDecreaseMaxAge()}
                 >
                   <Image
@@ -193,7 +194,7 @@ const onClickImproveMaxAge = () => {
                   />
                 </button>
                 <button
-                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  className="flex h-[2rem] w-full flex-col items-center justify-center"
                   onClick={() => onClickImproveMaxAge()}
                 >
                   <Image
@@ -245,13 +246,13 @@ const onClickImproveMaxAge = () => {
               ]}
               railStyle={{ backgroundColor: "#ddd", height: 32 }}
             />
-            <div className="absolute left-0 right-0 top-[5rem] flex justify-between px-4">
+            <div className="absolute left-0 right-0 top-[4.5rem] flex justify-between px-4">
               {markerPositions.map((age) => (
                 <button
                   key={age}
                   onClick={() => handleMarkerClick(age)}
                   className={
-                    "left-[-1rem] top-[-1.5rem] flex h-8 w-8 cursor-pointer select-none items-center justify-center rounded-full bg-gray2 text-center text-white transition-transform duration-200 hover:bg-main " +
+                    "left-[-1rem] top-[-1.5rem] flex h-[1.875rem] w-8 cursor-pointer select-none items-center justify-center rounded-full bg-gray2 text-center text-white transition-transform duration-200 hover:bg-main " +
                     `${age >= startAge && age <= endAge && "bg-main"}`
                   }
                   style={{
@@ -266,7 +267,7 @@ const onClickImproveMaxAge = () => {
           </div>
         </article>
         <article className={"flex flex-col gap-y-[1rem] pt-[1rem]"}>
-          <div className={"h-[2rem] font-bold text-black"}> 성별 제한 </div>
+          <div className={"h-[2rem] font-bold text-black text-xl"}> 성별 제한 </div>
           <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
             {Object.entries(SETTING_MODAL_SEX).map((i) => (
               <button
