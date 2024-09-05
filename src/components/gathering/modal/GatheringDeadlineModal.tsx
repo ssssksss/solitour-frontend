@@ -56,7 +56,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem]"
+        "scrollbar-hide relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-2xl bg-white p-[1rem]"
       }
     >
       <button
@@ -70,7 +70,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
           height={20}
         />
       </button>
-      <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 날짜 선택 </h2>
+      <h2 className={"h-[2rem] text-2xl font-bold text-black mt-[2rem]"}> 모임 마감일 선택 </h2>
       <section className={"flex flex-col items-center gap-[1.875rem]"}>
         <div className="relative">
           <Calendar
@@ -87,7 +87,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
           />
           <div
             className={
-              "absolute left-[50%] top-8 translate-x-[-50%] font-semibold"
+              "absolute left-[50%] top-10 translate-x-[-50%] font-semibold"
             }
           >
             {year}.{month}

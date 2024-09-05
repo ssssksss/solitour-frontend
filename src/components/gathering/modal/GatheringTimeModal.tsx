@@ -49,7 +49,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[21.75rem] w-[calc(100vw-1rem)] max-w-[30rem] overflow-y-scroll rounded-2xl bg-white px-[2.75rem] pt-[2.75rem] pb-[2.25rem]"
+        "scrollbar-hide relative h-full max-h-[21.75rem] max-[440px]:max-h-[24rem] w-[calc(100vw-1rem)] max-w-[30rem] overflow-y-scroll rounded-2xl bg-white p-[1rem]"
       }
     >
       <button
@@ -63,23 +63,29 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
           height={20}
         />
       </button>
-      <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 시간 선택 </h2>
+      <h2 className={"h-[2rem] text-2xl font-bold text-black mt-[2rem]"}> 시간 선택 </h2>
       <div className={"flex flex-col items-center gap-[1.875rem] pt-[3rem]"}>
-        <div className={"flex w-full justify-between gap-[.5rem]"}>
+        <div
+          className={
+            "flex w-full justify-center gap-[1.25rem] max-[440px]:grid max-[440px]:grid-cols-2"
+          }
+        >
+          {/* 날짜 */}
           <div
             className={
-              "rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+              "w-[9.875rem] rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:col-span-2 max-[440px]:w-full max-[440px]:text-center"
             }
           >
             {format(calendarDate[0].startDate, "yyyy-MM-dd(EE)", {
               locale: ko,
             })}
           </div>
-          <div className="relative">
+          {/* 시 */}
+          <div className="flex w-[6.375rem] gap-2 max-[440px]:w-full">
             <select
               name="hour"
               className={
-                "w-[5rem] cursor-pointer appearance-none rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                "w-[5rem] cursor-pointer rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:w-full max-[440px]:text-center"
               }
               onChange={(e) =>
                 setStartDateTime((prev) => ({
@@ -95,20 +101,14 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
                 </option>
               ))}
             </select>
-            <Image
-              src="/common/dropdown-down-arrow.svg"
-              className="absolute right-4 top-[50%]"
-              alt="location-icon"
-              width={8}
-              height={4}
-            />
+            <div className={"flex items-center"}> 시 </div>
           </div>
-          <div className={"flex items-center"}> 시 </div>
-          <div className="relative">
+          {/* 분 */}
+          <div className="flex w-[6.375rem] gap-2 max-[440px]:w-full">
             <select
               name="minute"
               className={
-                "w-[5rem] appearance-none rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] cursor-pointer"
+                "w-[5rem] cursor-pointer rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:w-full max-[440px]:text-center"
               }
               onChange={(e) =>
                 setStartDateTime((prev) => ({
@@ -126,15 +126,8 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
                 ),
               )}
             </select>
-            <Image
-              src="/common/dropdown-down-arrow.svg"
-              className="absolute right-4 top-[50%]"
-              alt="location-icon"
-              width={8}
-              height={4}
-            />
+            <div className={"flex items-center"}> 분 </div>
           </div>
-          <div className={"flex items-center"}> 분 </div>
         </div>
         <div className={"flex w-full justify-center gap-[1rem] pt-[3rem]"}>
           <button

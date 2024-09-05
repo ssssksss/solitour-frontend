@@ -70,7 +70,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white px-[1rem] pt-[2.875rem] max-[800px]:max-w-[25rem] min-[800px]:w-[50.375rem] min-[801px]:max-h-[36rem]"
+        "scrollbar-hide relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white p-[1rem] max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
       }
     >
       <button
@@ -84,8 +84,14 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           height={20}
         />
       </button>
-      <h2 className={"h-[2rem] text-2xl font-bold text-black min-[800px]:w-[47.625rem] "}> 날짜 선택 </h2>
-      <div className={"flex flex-col items-center gap-[1.875rem] "}>
+      <h2
+        className={
+          "mt-[2rem] h-[2rem] text-2xl font-bold text-black "
+        }
+      >
+        날짜 선택
+      </h2>
+      <div className={"flex flex-col items-center gap-[1.875rem]"}>
         <div className="relative">
           <DateRangePicker
             onChange={(rangesByKey: RangeKeyDict) => {
@@ -106,13 +112,17 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
                 },
               ]);
             }}
-            minDate={formContext.getValues("deadline") ? new Date(formContext.getValues("deadline")) : new Date()}
+            minDate={
+              formContext.getValues("deadline")
+                ? new Date(formContext.getValues("deadline"))
+                : new Date()
+            }
             maxDate={add(new Date(), { years: 1 })}
             showDateDisplay={false}
             months={2}
             ranges={calendarDate}
             locale={ko}
-            direction={windowWidth > 800 ? "horizontal" : "vertical"}
+            direction={windowWidth > 799 ? "horizontal" : "vertical"}
             rangeColors={["#00B488", "#F2FAF7"]}
             color={"#ff0000"}
             onShownDateChange={(e) => {
@@ -122,14 +132,14 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           />
           <div
             className={
-              "absolute left-[50%] top-6 translate-x-[-50%] font-semibold min-[801px]:left-[25%]"
+              "absolute left-[50%] top-6 translate-x-[-50%] font-semibold min-[800px]:left-[25%]"
             }
           >
             {year}.{month}
           </div>
           <div
             className={
-              "absolute left-[50%] top-[calc(50%+46px)] translate-x-[-50%] font-semibold min-[801px]:left-[75%] min-[801px]:top-6"
+              "absolute left-[50%] top-[calc(50%+46px)] translate-x-[-50%] font-semibold min-[800px]:left-[75%] min-[800px]:top-6"
             }
           >
             {year + Math.floor((month + 1) / 12)}.{(month % 12) + 1}

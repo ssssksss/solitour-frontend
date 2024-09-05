@@ -157,9 +157,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
 
   return (
     <div
-      className={
-        "relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem] md:p-[2.875rem]"
-      }
+      className={`scrollbar-hide relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[1rem] ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
     >
       <button
         className="absolute right-[1.5rem] top-[1.5rem]"
@@ -174,12 +172,10 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
           height={20}
         />
       </button>
-      <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 장소 선택 </h2>
-      <section
-        className={
-          "flex h-[calc(100%-2rem)] w-full flex-col items-center gap-[1rem] pt-[2rem]"
-        }
-      >
+      <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black mb-[1.875rem]"}>
+        장소 선택
+      </h2>
+      <section className={"flex flex-col items-center gap-[1.875rem]"}>
         <div className="flex w-full">
           <button
             className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline outline-[1px] outline-offset-[-1px] outline-black"}`}
@@ -203,7 +199,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
           </button>
         </div>
         <div
-          className={`w-full ${menu == "address" ? "h-[calc(100%-12rem)]" : "h-[calc(100%-6rem)]"}`}
+          className={`w-full ${menu == "address" ? "h-[30rem]" : "h-[37rem]"}`}
         >
           {menu == "search" && (
             <>
@@ -224,7 +220,9 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="장소나 건물명을 입력해주세요"
-                    className={"h-[3rem] bg-transparent focus:outline-none"}
+                    className={
+                      "h-[3rem] w-full bg-transparent focus:outline-none"
+                    }
                   />
                 </label>
 
@@ -373,9 +371,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
         {menu == "address" && (
           <div className={"flex w-full flex-col gap-[1rem]"}>
             <h3
-              className={
-                "flex h-[2rem] items-center gap-[1rem] font-medium text-black"
-              }
+              className={"flex items-center gap-[1rem] font-medium text-black"}
             >
               <span className={"text-lg font-bold text-black"}>
                 장소명 입력
@@ -389,7 +385,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
               placeholder="장소명을 입력하세요"
               onChange={(e) => setPlaceCustomName(e.target.value)}
               className={
-                "h-[3.25rem] rounded-[1rem] bg-transparent px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                "h-[3.25rem] w-full rounded-[1rem] bg-transparent px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               }
             />
             <button
