@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { parse } from "node-html-parser";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Props {
@@ -137,21 +137,23 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   }, []);
 
   return (
-    <DiaryEditor
-      text="수정"
-      diaryEditorStore={diaryEditorStore}
-      dateRangeModal={dateRangeModal}
-      addressModal={addressModal}
-      loading={loading}
-      showDateRangeModal={() => setDateRangeModal(true)}
-      closeDateRangeModal={() => setDateRangeModal(false)}
-      showAddressModal={() => setAddressModal(true)}
-      closeAddressModal={() => setAddressModal(false)}
-      setCurrentDay={(day: number) =>
-        diaryEditorStore.setDiaryEditor({ currentDay: day })
-      }
-      onSubmit={onSubmit}
-    />
+    <FormProvider {...methods}>
+      <DiaryEditor
+        text="수정"
+        diaryEditorStore={diaryEditorStore}
+        dateRangeModal={dateRangeModal}
+        addressModal={addressModal}
+        loading={loading}
+        showDateRangeModal={() => setDateRangeModal(true)}
+        closeDateRangeModal={() => setDateRangeModal(false)}
+        showAddressModal={() => setAddressModal(true)}
+        closeAddressModal={() => setAddressModal(false)}
+        setCurrentDay={(day: number) =>
+          diaryEditorStore.setDiaryEditor({ currentDay: day })
+        }
+        onSubmit={onSubmit}
+      />
+    </FormProvider>
   );
 };
 
