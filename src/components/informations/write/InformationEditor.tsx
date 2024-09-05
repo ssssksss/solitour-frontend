@@ -8,6 +8,7 @@ import CategoryModalContainer from "@/containers/informations/write/CategoryModa
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import QuillEditor from "./QuillEditor";
+import { useFormContext } from "react-hook-form";
 
 interface Props {
   pathname: string;
@@ -40,13 +41,14 @@ const InformationEditor = ({
   closeCategoryModal,
   onChangeHashTagHandler,
 }: Props) => {
+  const formContext = useFormContext();
+
   return (
     <div className="flex w-full flex-col">
       {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
       )}
-
       <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
         {`정보 ${pathname}하기`}
       </h1>
@@ -54,43 +56,54 @@ const InformationEditor = ({
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
         솔리들과 공유해보세요!
       </p>
-      <div className="mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
+      <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
         <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className="h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent px-5 text-sm font-medium outline-none hover:border-main focus:border-main"
+          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-none`}
           type="text"
-          name="title"
           placeholder="제목을 입력하세요."
-          value={editorStore.title}
+          {...formContext.register("informationTitle")}
           maxLength={50}
-          onChange={(e) => editorStore.setEditor({ title: e.target.value })}
-          required={true}
+          onChange={(e) => {
+            formContext.setValue("informationTitle", e.target.value);
+            formContext.trigger("informationTitle");
+          }}
         />
+        {formContext.formState.errors.informationTitle && (
+          <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
+            {formContext.formState.errors.informationTitle.message as String}
+          </p>
+        )}
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
-        <div className="flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
+        <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
           <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
             장소<span className="text-main">*</span>
           </h2>
           <button
-            className={`${editorStore.placeName !== "" ? "text-black" : "text-gray2"} h-full flex-grow rounded-full border-[0.0625rem] border-gray3 bg-transparent pl-5 text-start text-sm font-medium outline-none hover:border-main focus:border-main`}
+            className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm font-medium outline-none`}
             type="button"
             onClick={showLocationModal}
           >
-            {editorStore.placeName !== ""
-              ? editorStore.placeName
+            {formContext.getValues("placeName") !== ""
+              ? formContext.getValues("placeName")
               : "장소명을 입력하세요."}
           </button>
+          {formContext.formState.errors.placeName && (
+            <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
+              {formContext.formState.errors.placeName.message as String}
+            </p>
+          )}
         </div>
         <button
-          className="flex h-[3.3125rem] flex-grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] border-gray3 px-7 py-3 text-lg font-semibold hover:border-main dark:text-slate-200"
+          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] flex-grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold dark:text-slate-200`}
           type="button"
           onClick={showCategoryModal}
         >
-          {editorStore.categoryId !== 0 ? (
-            editorStore.categoryName
+          {formContext.getValues("categoryId") !== 0 ? (
+            formContext.getValues("categoryName")
           ) : (
             <p className="flex flex-row items-center">
               {"카테고리 선택"}
@@ -98,6 +111,11 @@ const InformationEditor = ({
             </p>
           )}
           <IoIosArrowDown />
+          {formContext.formState.errors.categoryId && (
+            <p className="absolute -bottom-6 left-4 mt-1 text-xs font-medium text-red-500">
+              {formContext.formState.errors.categoryId.message as String}
+            </p>
+          )}
         </button>
       </div>
       <div
@@ -121,13 +139,15 @@ const InformationEditor = ({
         사진 최대 용량은 10MB입니다.
       </p>
       <QuillEditor
-        content={editorStore.content}
-        onChange={(value: string, length: number) =>
-          editorStore.setEditor({ content: value, contentLength: length })
-        }
+        content={formContext.getValues("informationContent")}
+        onChange={(value: string, length: number) => {
+          formContext.setValue("informationContent", value);
+          formContext.setValue("contentLength", length);
+          formContext.trigger("informationContent");
+        }}
       />
       <p className="pt-3 text-end text-sm font-medium text-gray1">
-        {editorStore.contentLength}/500
+        {formContext.getValues("contentLength")}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
         <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black dark:text-slate-200">

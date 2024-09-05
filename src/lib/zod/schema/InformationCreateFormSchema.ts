@@ -82,7 +82,6 @@ export const InformationCreateFormSchema = z.object({
       required_error: "Content is required.",
       invalid_type_error: "Content must be a string.",
     })
-    .min(1, { message: "내용을 입력해 주세요." })
     .max(500, { message: "Must be 500 or fewer characters long" }),
   hashtags: z
     .string({

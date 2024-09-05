@@ -62,7 +62,7 @@ const DiaryEditor = ({
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
+          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
           type="text"
           placeholder="제목을 입력하세요."
           {...formContext.register("title")}
