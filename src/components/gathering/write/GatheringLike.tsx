@@ -12,9 +12,9 @@ interface IGatheringLike {
 const GatheringLike = ({likes, isLike, loading, userId, handleClick}: IGatheringLike) => {
   return (
              <button
-            onClick={userId > 0 ? handleClick : undefined}
+            onClick={userId > 0 ? handleClick : () => alert("로그인이 필요합니다.")}
             disabled={loading}
-            className={`${userId < 1 && `cursor-default`} text-sm flex flex-row items-center gap-1 ${loading ? 'text-gray-400' : 'text-gray-600'} dark:${loading ? 'text-slate-400' : 'text-slate-200'}`}
+            className={`${userId < 1 ? `cursor-default` : 'cursor-pointer'} hover:size-110 text-sm flex flex-row items-center gap-1 ${loading ? 'text-gray-400' : 'text-gray-600'} dark:${loading ? 'text-slate-400' : 'text-slate-200'}`}
         >
             <div className="relative h-4 w-4 text-white dark:text-slate-200">
                 {isLike ? (
