@@ -17,7 +17,7 @@ const GatheringEditorHashTag = ({
   inputTagRef,
 }: IGatheringEditorHashTag) => {
   return (
-    <article className={"flex w-full flex-col gap-[1rem]"}>
+    <article className={"flex w-full flex-col gap-[2rem]"}>
       <div
         className={
           "flex w-full items-center gap-x-[0.625rem] max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3"
@@ -33,6 +33,7 @@ const GatheringEditorHashTag = ({
             placeholder="해시태그로 키워드를 써보세요!"
             className="h-[3.25rem] w-full rounded-[3rem] px-[1rem] pr-[3rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]" // 오른쪽 padding 추가
             onKeyUp={onChangeHashTagHandler}
+            disabled={tags.length > 9}
             onKeyDown={(e) => {
               if (tags.length > 10) {
                 e.preventDefault();
@@ -52,12 +53,12 @@ const GatheringEditorHashTag = ({
               해시태그는 최대 10개입니다.
             </div>
           )}
-          <button
+          {/* <button
             onClick={(e) => onChangeHashTagHandler(e)}
             className="absolute right-[0.75rem] top-[50%] translate-y-[-50%] rounded-full bg-main px-3 py-1 text-white"
           >
             버튼
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="flex min-h-8 flex-row flex-wrap items-center gap-1">
