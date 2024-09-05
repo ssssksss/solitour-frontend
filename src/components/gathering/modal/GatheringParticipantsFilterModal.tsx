@@ -1,11 +1,13 @@
 import {
-  SETTING_MODAL_AGE,
   SETTING_MODAL_SEX
 } from "@/constants/gathering/GatheringConstant";
 import "@/styles/reactDataRange.css";
 import Image from "next/image";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+
 interface IGatheringParticipantsFilterModalProps {
   closeModal: () => void;
 }
@@ -13,11 +15,64 @@ interface IGatheringParticipantsFilterModalProps {
 
 const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterModalProps) => {
   const formContext = useFormContext();
-  const [peopleCount, setPeopleCount] = useState(formContext.getValues("personCount") || 5);
+  const [peopleCount, setPeopleCount] = useState(formContext.getValues("personCount") || 6);
   const [sex, setSex] = useState(formContext.getValues("allowedSex"));
   const [startAge, setStartAge] = useState(formContext.getValues("startAge") ? new Date().getFullYear() - formContext.getValues("startAge") : 20);
   const [endAge, setEndAge] = useState(formContext.getValues("endAge") ? new Date().getFullYear() - formContext.getValues("endAge") : 59);
+  const [values, setValues] = useState([startAge, endAge]);
+  const markerPositions = [20, 25, 30, 35, 40, 45, 50, 55, 59];
 
+const onClickDecreaseMinAge = () => {
+  let temp = Math.max(20, startAge - 1);
+  if (temp <= endAge) {
+    setStartAge(temp);
+    setValues((prev) => [temp, prev[1]]);
+  }
+};
+
+const onClickImproveMinAge = () => {
+  let temp = Math.min(endAge, startAge + 1);
+  setStartAge(temp);
+  setValues((prev) => [temp, prev[1]]);
+};
+
+const onClickDecreaseMaxAge = () => {
+  let temp = Math.max(startAge, endAge - 1);
+  setEndAge(temp);
+  setValues((prev) => [prev[0], temp]);
+};
+
+const onClickImproveMaxAge = () => {
+  let temp = Math.min(59, endAge + 1);
+  if (temp >= startAge) {
+    setEndAge(temp);
+    setValues((prev) => [prev[0], temp]);
+  }
+};
+
+  const handleChange = (newValues: number[] | number) => {
+    const valuesArray = newValues as number[];
+    setValues(valuesArray);
+    setStartAge(valuesArray[0]);
+    setEndAge(valuesArray[1]);
+  };
+
+  const handleMarkerClick = (age: number) => {
+    const distanceToStart = Math.abs(startAge - age);
+    const distanceToEnd = Math.abs(endAge - age);
+
+    if (distanceToStart < distanceToEnd) {
+      // Update startAge if it's closer to the clicked age
+      const newStartAge = age;
+      setStartAge(newStartAge);
+      setValues([newStartAge, endAge]);
+    } else {
+      // Update endAge if it's closer to the clicked age
+      const newEndAge = age;
+      setEndAge(newEndAge);
+      setValues([startAge, newEndAge]);
+    }
+  };
 
   const submitHandler = () => {
     formContext.setValue("startAge", new Date().getFullYear() - startAge);
@@ -29,10 +84,11 @@ const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterMod
     props.closeModal();
   };
 
+
   return (
     <div
       className={
-        "relative h-full max-h-[44.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem] md:p-[2.875rem]"
+        "relative h-full max-h-[44rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-auto rounded-2xl bg-white p-[1rem] scrollbar-hide"
       }
     >
       <button
@@ -46,164 +102,166 @@ const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterMod
           height={20}
         />
       </button>
-      <h2 className={"h-[2rem] text-2xl font-bold text-black"}>
-        {" "}
-        참여자 선택{" "}
+      <h2 className={"h-[2rem] pt-[3rem] text-2xl font-bold text-black"}>
+        참여자 선택
       </h2>
-      <section className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
-        <article
-          className={"flex max-w-[16.25rem] justify-between gap-y-[1rem]"}
-        >
-          <div className={"h-[2rem] font-bold text-black"}> 인원 </div>
+      <section className="flex w-full flex-col gap-y-[4rem] pt-[3rem]">
+        <article className={"flex w-full flex-col gap-x-4"}>
           <div
-            className={"flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]"}
+            className={
+              "flex h-[2rem] items-center gap-x-2 font-bold text-black"
+            }
           >
-            <div
-              className="flex h-[2rem] items-center"
-              onClick={() => {
-                setPeopleCount(peopleCount <= 2 ? 2 : peopleCount - 1);
-              }}
-            >
-              {peopleCount > 2 ? (
-                <Image
-                  src={"/minus-icon.svg"}
-                  alt={"minus-icon"}
-                  width={20}
-                  height={20}
-                />
-              ) : (
-                <div className="aspect-square w-[1.25rem]"> </div>
-              )}
-            </div>
-            <div className="flex h-[2rem] w-[2.5rem] items-center justify-center">
-              <div className={"w-[1rem]"}> {peopleCount} </div> 명
-            </div>
-            <div
-              className="flex h-[2rem] items-center"
-              onClick={() => {
-                setPeopleCount(peopleCount >= 10 ? 10 : peopleCount + 1);
-              }}
-            >
-              {peopleCount < 10 ? (
-                <Image
-                  src={"/plus-icon.svg"}
-                  alt={"plus-icon"}
-                  width={20}
-                  height={20}
-                />
-              ) : (
-                <div className="aspect-square w-[1.25rem]"> </div>
-              )}
+            <div className={"min-w-fit text-xl"}> 인원 </div>
+            <div className="flex h-[2rem] w-full items-center justify-end">
+              <div className={"w-[2rem]"}>{peopleCount}</div> 명
             </div>
           </div>
+          <div className="flex w-full flex-wrap items-center gap-x-[1rem] gap-y-[1.5rem]">
+            <Slider
+              min={2}
+              max={10}
+              value={peopleCount}
+              onChange={(value) => setPeopleCount(value)}
+              trackStyle={[
+                {
+                  backgroundColor: "#0d6efd",
+                  height: 30,
+                },
+              ]}
+              handleStyle={{
+                height: 30,
+                width: 30,
+                borderRadius: 50,
+                borderColor: "#0d6efd00",
+                backgroundColor: "#ffffff00",
+                transform: "translate(-50%, 8px)",
+                opacity: 0,
+              }}
+              railStyle={{ backgroundColor: "#ddd", height: 32 }}
+            />
+          </div>
         </article>
-        <article className={"flex w-full flex-col gap-y-[1rem]"}>
-          <div className={"h-[2rem] font-bold text-black"}> 나이 </div>
-          <div className="relative flex w-full flex-col gap-[1rem]">
-            <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-              {Object.entries(SETTING_MODAL_AGE).map((i) => (
+        <article className="flex w-full flex-col gap-y-[2rem]">
+          <div className="font-bold text-black">
+            <span className="text-xl"> 나이 </span>
+            <div className="flex w-full justify-between">
+              <div>
+                <span> {new Date().getFullYear() - startAge} 년생 </span>
+                <span> {`(${startAge} 세)`} </span>
+              </div>
+              <div>
+                <span> {new Date().getFullYear() - endAge} 년생 </span>
+                <span> {`(${endAge} 세)`} </span>
+              </div>
+            </div>
+            <div className="flex h-[3rem] select-none items-center justify-between gap-x-4 pt-[1rem]">
+              <div className="flex w-full rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
                 <button
-                  key={i[0]}
-                  onClick={() => {
-                    setStartAge(i[1].startAge);
-                    setEndAge(i[1].endAge);
-                  }}
-                  className={
-                    "flex h-[2rem] flex-shrink-0 items-center rounded-[4rem] px-[1rem] py-[.5rem] text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] hover:bg-main hover:text-white"
-                  }
+                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickDecreaseMinAge()}
                 >
-                  {i[0]}
+                  <Image
+                    src={"/calendar-prev-arrow-icon.svg"}
+                    alt={"prev-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+                <button
+                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickImproveMinAge()}
+                >
+                  <Image
+                    src={"/calendar-next-arrow-icon.svg"}
+                    alt={"next-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+              </div>
+              <div className="flex w-full rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
+                <button
+                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickDecreaseMaxAge()}
+                >
+                  <Image
+                    src={"/calendar-prev-arrow-icon.svg"}
+                    alt={"prev-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+                <button
+                  className="flex h-[3rem] w-full flex-col items-center justify-center"
+                  onClick={() => onClickImproveMaxAge()}
+                >
+                  <Image
+                    src={"/calendar-next-arrow-icon.svg"}
+                    alt={"next-icon"}
+                    width={12}
+                    height={12}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative flex w-full flex-col gap-[1rem] pb-[2rem]">
+            <Slider
+              range
+              min={20}
+              max={59}
+              value={values}
+              onChange={handleChange}
+              step={1}
+              dotStyle={{ display: "none" }}
+              activeDotStyle={{ display: "none" }}
+              handleStyle={[
+                {
+                  height: 30,
+                  width: 30,
+                  borderRadius: 50,
+                  borderColor: "#0d6efd00",
+                  backgroundColor: "#ffffff00",
+                  transform: "translate(-50%, 8px)",
+                  opacity: 0,
+                },
+                {
+                  height: 30,
+                  width: 30,
+                  borderRadius: 50,
+                  borderColor: "#0d6efd00",
+                  backgroundColor: "#ffffff00",
+                  transform: "translate(-50%, 8px)",
+                  opacity: 0,
+                },
+              ]}
+              trackStyle={[
+                {
+                  backgroundColor: "#0d6efd",
+                  height: 30,
+                },
+              ]}
+              railStyle={{ backgroundColor: "#ddd", height: 32 }}
+            />
+            <div className="absolute left-0 right-0 top-[5rem] flex justify-between px-4">
+              {markerPositions.map((age) => (
+                <button
+                  key={age}
+                  onClick={() => handleMarkerClick(age)}
+                  className={
+                    "left-[-1rem] top-[-1.5rem] flex h-8 w-8 cursor-pointer select-none items-center justify-center rounded-full bg-gray2 text-center text-white transition-transform duration-200 hover:bg-main " +
+                    `${age >= startAge && age <= endAge && "bg-main"}`
+                  }
+                  style={{
+                    position: "relative",
+                    transform: `translateX(${((age - 20) / 39) * 100}%)`,
+                  }}
+                >
+                  <div className="text-md absolute font-medium">{age}</div>
                 </button>
               ))}
-            </div>
-            <div
-              className={
-                "flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]"
-              }
-            >
-              <div
-                className={
-                  "relative flex w-[5.125rem] py-[.5rem] pr-[0.625rem] after:content-['세']"
-                }
-              >
-                <input
-                  placeholder="최소 20"
-                  min={20}
-                  max={59}
-                  onChange={(e) => {
-                    let num = Number(e.target.value);
-                    if (e.target.value.length > 1) {
-                      // ? 최대값을 넘었는가?
-                      if (num > 59) {
-                        num = 59;
-                      }
-                      // ? endAge값을 넘었는가?
-                      if (num > endAge) {
-                        if (endAge < 60) {
-                          setEndAge(num);
-                        }
-                      }
-                      // ? 최소 나이값보다 작은가?
-                      if (num < 20) num = 20;
-                    }
-                    setStartAge(num);
-                  }}
-                  value={startAge}
-                  className="w-full text-center"
-                />
-                <div
-                  className={"absolute bottom-2 h-[1px] w-[5.125rem] bg-black"}
-                ></div>
-                <div
-                  className={
-                    "absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold text-main"
-                  }
-                >
-                  {new Date().getFullYear() - startAge} 년생
-                </div>
-              </div>
-              <div> ~ </div>
-              <div
-                className={
-                  "relative flex w-[5.125rem] py-[.5rem] pr-[0.625rem] after:content-['세']"
-                }
-              >
-                <input
-                  placeholder="최대 59"
-                  min={20}
-                  max={59}
-                  onChange={(e) => {
-                    let num = Number(e.target.value);
-                    if (e.target.value.length > 1) {
-                      // ? 최소 나이값보다 작은가?
-                      if (num < 20) num = 20;
-                      // ? startAge값보다 작은가?
-                      if (num < startAge) {
-                        if (startAge > 19) {
-                          setStartAge(num);
-                        }
-                      }
-                      // ? 최대값을 넘었는가?
-                      if (num > 59) {
-                        num = 59;
-                      }
-                    }
-                    setEndAge(num);
-                  }}
-                  value={endAge}
-                  className="w-full pr-[0.625rem] text-center"
-                />
-                <div
-                  className={"absolute bottom-2 h-[1px] w-[5.125rem] bg-black"}
-                ></div>
-                <div
-                  className={
-                    "absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold text-main"
-                  }
-                >
-                  {new Date().getFullYear() - endAge} 년생
-                </div>
-              </div>
             </div>
           </div>
         </article>
@@ -216,7 +274,7 @@ const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterMod
                 onClick={() => setSex(i[0])}
                 className={`${
                   sex == i[0] ? "bg-main text-white" : "text-gray1"
-                } flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                } flex h-[2.5rem] select-none items-center rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
               >
                 {i[1]}
               </button>
@@ -224,9 +282,9 @@ const GatheringParticipantsFilterModal = (props: IGatheringParticipantsFilterMod
           </div>
         </article>
       </section>
-      <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
+      <div className={"flex w-full justify-center gap-[1rem] pt-[4rem]"}>
         <button
-          className={`h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1`}
+          className={`h-[3rem] min-w-[8rem] select-none rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1`}
           disabled={!sex}
           onClick={() => submitHandler()}
         >

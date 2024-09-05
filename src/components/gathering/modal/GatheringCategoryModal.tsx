@@ -28,7 +28,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[20rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white px-[1rem] py-[2.875rem] md:p-[2.875rem]"
+        "scrollbar-hide relative h-full max-h-[18rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[1rem]"
       }
     >
       <button
@@ -42,8 +42,8 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
           height={20}
         />
       </button>
-      <div className={"flex flex-col gap-y-[1rem] pt-[2rem]"}>
-        <p className={"h-[2rem] text-lg font-bold text-black"}>카테고리 선택</p>
+      <div className={"flex flex-col gap-y-[1rem]"}>
+        <p className={"h-[2rem] text-lg font-bold text-black mt-[2rem]"}>카테고리 선택</p>
         <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
           {props.categoryList.map((i) => (
             <button
@@ -58,10 +58,10 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
           ))}
         </div>
       </div>
-      <div className={"flex w-full justify-center gap-[1rem] pt-[1rem]"}>
+      <div className={"flex w-full justify-center gap-[1rem] pt-[4rem]"}>
         <button
           className={
-            "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
+            "h-[3rem] max-w-[18.625rem] w-full rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           }
           onClick={() => submitHandler()}
           // disabled={subCategoryId == 0 && true}

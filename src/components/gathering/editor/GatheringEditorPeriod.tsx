@@ -33,14 +33,14 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
           }`}
         >
           {formContext.getValues("scheduleStartDate") ? (
-            <div className="flex w-full gap-[.25rem] max-[612px]:flex-col max-[612px]:items-start max-[612px]:leading-5">
+            <div className="flex w-full gap-[.25rem]">
               <span>
                 {format(
                   new Date(formContext.getValues("scheduleStartDate")),
                   "yy.MM.dd",
                 )}
               </span>
-              <span className={"max-[612px]:hidden"}>{" ~ "}</span>
+              <span>{" - "}</span>
               <span>
                 {format(
                   new Date(formContext.getValues("scheduleEndDate")),
