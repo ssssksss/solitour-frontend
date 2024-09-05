@@ -94,8 +94,10 @@ export default function Dropdown<T>({
 
       {isOpen && (
         <div
-          className={`absolute ${isOnRightSide ? "translate-x-[calc("+[dropdownContainerStyle.w]+"-100%)]" : "bg-red-100"} top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out dark:text-slate-400`}
+        className={`absolute ${(isOnRightSide && dropdownContainerStyle.w) ? "translate-x-[calc(" + dropdownContainerStyle.w + "-100%)]" : "bg-red-100"} top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out dark:text-slate-400`}
         >
+          {dropdownContainerStyle.w}
+          {isOnRightSide ? "r" : "l"}
           <div
             className={"w-full py-1"}
             role="menu"
