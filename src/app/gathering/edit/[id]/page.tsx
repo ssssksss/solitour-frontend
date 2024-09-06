@@ -1,4 +1,4 @@
-import GatheringEditorContainer from "@/containers/gathering/edit/GatheringEditorContainer";
+import GatheringUpdateContainer from "@/containers/gathering/createUpdate/GatheringUpdateContainer";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { NextResponse } from "next/server";
 
@@ -47,10 +47,10 @@ export default async function Page({ params: { id } }: PageProps) {
   try {
     const gatheringData = await fetchGatheringData(postId);
     return (
-    <div       className={
+    <div className={
         "w-full pb-[2rem] pt-[2rem] min-h-[calc(100vh-25rem)]"
       }>
-      <GatheringEditorContainer gatheringData={gatheringData} />
+      <GatheringUpdateContainer gatheringData={gatheringData} />
     </div>
     );
   } catch (error) {

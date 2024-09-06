@@ -1,6 +1,6 @@
 import Banner from "@/components/common/Banner";
 import TopList from "@/components/common/TopList";
-import GatheringListContainer from "@/containers/gathering/GatheringListContainer";
+import GatheringListContainer from "@/containers/gathering/read/GatheringListContainer";
 import { Metadata } from "next";
 
 type MyProps = {

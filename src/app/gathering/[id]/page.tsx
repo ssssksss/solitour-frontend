@@ -1,5 +1,5 @@
-import GatheringRecommendationList from "@/components/gathering/GatheringRecommendationList";
 import GatheringViewerContainer from "@/components/gathering/GatheringViewerContainer";
+import GatheringRecommendationList from "@/components/gathering/read/GatheringRecommendationList";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
