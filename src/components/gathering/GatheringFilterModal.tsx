@@ -363,6 +363,18 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
                 {
                   backgroundColor: "#0d6efd",
                   height: 30,
+                  left:
+                    startAge >= 56
+                      ? `calc(${((startAge - 20) / 39) * 100}% - 2rem)`
+                      : `calc(${((startAge - 20) / 35) * 87.5}% - ${((((startAge - 20) / 35) * 87.5) / 100) * 2}rem)`,
+                  width:
+                    startAge >= 56
+                      ? endAge >= 56
+                        ? `calc(100% - (${((startAge - 20) / 39) * 100}% - 2rem - (${((59 - endAge) / 39) * 87.5}%))`
+                        : `calc(100% - (${((startAge - 20) / 39) * 100}% - 2rem - (${((59 - endAge) / 39) * 87.5}%))` // 55 1 , 57 0.5,  59 0
+                      : endAge >= 55
+                        ? `calc(100% - (${((startAge - 20) / 35) * 87.5}% - ${((((startAge - 20) / 35) * 87.5) / 100) * 2}rem) - calc(calc(100% - 2rem) / 8 * ${59 - endAge} / 4 )`
+                        : `calc(100% - (${((startAge - 20) / 35) * 87.5}% - ${((((startAge - 20) / 35) * 87.5) / 100) * 2}rem) - calc(calc(100% - 2rem) / 8 * ${55 - endAge + 5} / 5 )`,
                 },
               ]}
               railStyle={{
@@ -370,18 +382,17 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
                 height: 32,
               }}
             />
-            <div className="absolute left-0 right-0 top-[4.5rem] flex justify-between px-4">
-              {markerPositions.map((age) => (
+            <div className="absolute left-0 right-0 top-[4.5rem] flex w-full justify-between">
+              {markerPositions.map((age, index) => (
                 <button
                   key={age}
                   onClick={() => handleMarkerClick(age)}
                   className={
-                    "left-[-1rem] top-[-1.5rem] flex h-[1.875rem] w-8 cursor-pointer select-none items-center justify-center rounded-full bg-gray2 text-center text-white transition-transform duration-200 hover:bg-main" +
+                    "top-[-1.5rem] flex aspect-square w-[2rem] cursor-pointer select-none items-center justify-center rounded-full bg-gray2 text-center text-white transition-transform duration-200 hover:bg-main" +
                     ` ${age >= startAge && age <= endAge && "bg-main"}`
                   }
                   style={{
                     position: "relative",
-                    transform: `translateX(calc(${((age - 20) / 39) * 100}%))`,
                   }}
                 >
                   <div className="text-md absolute font-medium">{age}</div>
