@@ -153,11 +153,11 @@ const InformationEditor = ({
         <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black dark:text-slate-200">
           해시태그<span className="text-main">*</span>
         </h2>
-        <div className="flex w-full flex-col gap-2">
+        <div className="relative flex w-full flex-col gap-2">
           <input
-            className={`${editorStore.hashtags.length >= 10 ? "bg-gray-100" : "bg-transparent"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] border-gray3 py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem] hover:border-main focus:border-main`}
+            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
             placeholder="#해시태그로 키워드를 써보세요!"
-            disabled={editorStore.hashtags.length >= 10}
+            disabled={formContext.getValues("hashtags").length >= 10}
             onKeyUp={onChangeHashTagHandler}
             onKeyDown={(e) => {
               if (e.key === "#" || e.key === " ") {
@@ -178,36 +178,50 @@ const InformationEditor = ({
             }}
             ref={inputTagRef}
           />
+          {formContext.formState.errors.hashtags && (
+            <p className="absolute bottom-5 left-4 text-xs font-medium text-red-500">
+              {formContext.formState.errors.hashtags.message as String}
+            </p>
+          )}
           <div className="flex w-full flex-row items-center justify-between gap-2">
             <div className="flex flex-1 flex-row flex-wrap items-center gap-2 overflow-auto py-1 pl-5">
-              {editorStore.hashtags.map((hashtag, index) => (
-                <ItemTag
-                  key={index}
-                  tag={hashtag}
-                  borderColor="border-main"
-                  textColor="text-main"
-                  cursorPointer={true}
-                  hover="hover:scale-105"
-                  removable={true}
-                  onClick={() =>
-                    editorStore.setEditor({
-                      hashtags: editorStore.hashtags.filter(
+              {formContext
+                .getValues("hashtags")
+                .map((hashtag: string, index: number) => (
+                  <ItemTag
+                    key={index}
+                    tag={hashtag}
+                    borderColor="border-main"
+                    textColor="text-main"
+                    cursorPointer={true}
+                    hover="hover:scale-105"
+                    removable={true}
+                    onClick={() => {
+                      const hashtags: string[] =
+                        formContext.getValues("hashtags");
+                      const filteredHashtags = hashtags.filter(
                         (_, i) => index !== i,
-                      ),
-                    })
-                  }
-                />
-              ))}
+                      );
+                      formContext.setValue("hashtags", filteredHashtags);
+                      formContext.trigger("hashtags");
+                    }}
+                  />
+                ))}
             </div>
             <button
-              className="text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
+              className="h-9 text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
               type="button"
               onClick={() => {
                 const hashtag = inputTagRef.current?.value ?? "";
                 if (hashtag === "") {
                   return;
                 }
-                editorStore.addHashtag(hashtag);
+                const hashtags = formContext.getValues("hashtags");
+                if (!hashtags.includes(hashtag) && hashtag.trim().length >= 2) {
+                  hashtags.push(hashtag);
+                }
+                formContext.setValue("hashtags", hashtags);
+                formContext.trigger("hashtags");
                 (inputTagRef.current as HTMLInputElement).value = "";
               }}
             >
@@ -221,16 +235,20 @@ const InformationEditor = ({
         <h2 className="w-36 pt-3 text-lg font-bold text-black dark:text-slate-200">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
-        <div className="flex flex-grow flex-col gap-4 max-[744px]:w-full">
-          {editorStore.tips.map((tip, index) => (
+        <div className="relative flex flex-grow flex-col gap-4 max-[744px]:w-full">
+          {formContext.getValues("tips").map((tip: string, index: number) => (
             <div key={index} className="relative w-full">
               <input
-                className={`${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] border-gray3 pl-5 text-sm outline-none hover:border-main focus:border-main`}
+                className={`${formContext.formState.errors.tips && tip.trim() === "" ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} ${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 text-sm outline-none`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
-                value={tip}
-                onChange={(e) => editorStore.changeTip(index, e.target.value)}
-                required={true}
+                onChange={(e) => {
+                  const tips: string[] = formContext.getValues("tips");
+                  tips[index] = e.target.value;
+                  console.log(tips);
+                  formContext.setValue("tips", tips);
+                  formContext.trigger("tips");
+                }}
                 onKeyDown={(e) => {
                   if (e.key === ";") {
                     e.preventDefault();
@@ -243,30 +261,37 @@ const InformationEditor = ({
                   className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
                   size="2rem"
                   onClick={() => {
-                    editorStore.setEditor({
-                      tips: editorStore.tips.filter((_, idx) => idx !== index),
-                    });
+                    const tips: string[] = formContext.getValues("tips");
+                    const filteredTips = tips.filter((_, idx) => idx !== index);
+                    formContext.setValue("tips", filteredTips);
+                    formContext.trigger("tips");
                   }}
                 />
               )}
             </div>
           ))}
+          {formContext.formState.errors.tips && (
+            <p className="absolute -bottom-6 left-4 text-xs font-medium text-red-500">
+              비어있는 Tip을 입력하거나 항목을 삭제해 주세요.
+            </p>
+          )}
         </div>
       </div>
       <div className="flex flex-col items-end">
         <div className="mt-3 flex flex-row items-center gap-5 text-sm font-medium text-gray1 dark:text-slate-400">
           <button
-            className={`${editorStore.tips.length <= 1 ? "text-gray3 dark:text-slate-600" : "hover:text-main"}`}
+            className={`${formContext.getValues("tips").length <= 1 ? "text-gray3 dark:text-slate-600" : "hover:text-main"}`}
             type="button"
-            onClick={() =>
-              editorStore.setEditor({
-                tips: editorStore.tips.slice(0, editorStore.tips.length - 1),
-              })
-            }
-            disabled={editorStore.tips.length <= 1}
+            onClick={() => {
+              const tips: string[] = formContext.getValues("tips");
+              tips.pop();
+              formContext.setValue("tips", tips);
+              formContext.trigger("tips");
+            }}
+            disabled={formContext.getValues("tips").length <= 1}
           >
             <span
-              className={`${editorStore.tips.length <= 1 ? "text-gray3" : "text-main"}`}
+              className={`${formContext.getValues("tips").length <= 1 ? "text-gray3" : "text-main"}`}
             >
               -
             </span>
@@ -275,9 +300,12 @@ const InformationEditor = ({
           <button
             className="hover:text-main"
             type="button"
-            onClick={() =>
-              editorStore.setEditor({ tips: [...editorStore.tips, ""] })
-            }
+            onClick={() => {
+              const tips = formContext.getValues("tips");
+              tips.push("");
+              formContext.setValue("tips", tips);
+              formContext.trigger("tips");
+            }}
           >
             <span className="text-main">+</span>
             {" 항목 추가"}

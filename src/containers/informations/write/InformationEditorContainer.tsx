@@ -44,7 +44,7 @@ const InformationEditorContainer = () => {
       mainImageIndex: 0,
       informationContent: "",
       contentLength: 0,
-      hashtags: [],
+      hashtags: Array<string>(0),
       tips: [""],
     },
     mode: "onChange",
@@ -88,84 +88,98 @@ const InformationEditorContainer = () => {
         return;
       }
 
-      editorStore.addHashtag(hashtag);
+      const hashtags = methods.getValues("hashtags");
+      if (!hashtags.includes(hashtag) && hashtag.trim().length >= 2) {
+        hashtags.push(hashtag);
+      }
+      methods.setValue("hashtags", hashtags);
+      methods.trigger("hashtags");
       (inputTagRef.current as HTMLInputElement).value = "";
     }
   };
 
   const onSubmit = async () => {
-    alert("테스트");
+    if (editorStore.images.filter((image) => image !== "").length === 0) {
+      alert("최소 한 장의 사진을 추가해 주세요.");
+      return;
+    }
 
-    // // Validate from fields using Zod
-    // const validatedFields = InformationCreateFormSchema.safeParse({
-    //   userId: id,
-    //   informationTitle: editorStore.title,
-    //   informationAddress: editorStore.address,
-    //   province: editorStore.province,
-    //   city: editorStore.city,
-    //   placeId: editorStore.placeId,
-    //   placeXAxis: editorStore.placeXAxis,
-    //   placeYAxis: editorStore.placeYAxis,
-    //   placeName: editorStore.placeName,
-    //   categoryId: editorStore.categoryId,
-    //   thumbnailImageUrl: editorStore.images[editorStore.mainImageIndex],
-    //   contentImagesUrl: editorStore.images.filter(
-    //     (url, index) => index !== editorStore.mainImageIndex && url !== "",
-    //   ),
-    //   informationContent: sanitizeHtml(editorStore.content, sanitizeOption),
-    //   hashtags: editorStore.hashtags,
-    //   tips: editorStore.tips,
-    // });
+    methods.setValue(
+      "thumbnailImageUrl",
+      editorStore.images[editorStore.mainImageIndex],
+    );
+    methods.setValue(
+      "contentImagesUrl",
+      editorStore.images.filter(
+        (url, index) => index !== editorStore.mainImageIndex && url !== "",
+      ),
+    );
 
-    // // If validation fails, return errors early. Otherwise, continue.
-    // if (!validatedFields.success) {
-    //   console.log(validatedFields.error.issues);
-    //   alert(validatedFields.error.issues[0].message);
-    //   return;
-    // }
+    if (!methods.formState.isValid) {
+      methods.trigger();
+      alert("모든 정보를 입력해 주세요.");
+      return;
+    }
 
-    // const data: CreateInformationRequestDto = {
-    //   informationTitle: validatedFields.data.informationTitle,
-    //   informationAddress: validatedFields.data.informationAddress,
-    //   informationContent: validatedFields.data.informationContent,
-    //   informationTips: validatedFields.data.tips.join(";"),
-    //   placeRegisterRequest: {
-    //     searchId: validatedFields.data.placeId,
-    //     name: validatedFields.data.placeName,
-    //     xAxis: validatedFields.data.placeXAxis,
-    //     yAxis: validatedFields.data.placeYAxis,
-    //     address: validatedFields.data.informationAddress,
-    //   },
-    //   categoryId: validatedFields.data.categoryId,
-    //   zoneCategoryNameParent: validatedFields.data.province,
-    //   zoneCategoryNameChild: validatedFields.data.city,
-    //   thumbNailImageUrl: validatedFields.data.thumbnailImageUrl,
-    //   contentImagesUrl: validatedFields.data.contentImagesUrl,
-    //   tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
-    //     name: tag,
-    //   })),
-    // };
+    const {
+      informationTitle,
+      informationAddress,
+      informationContent,
+      tips,
+      placeId,
+      placeName,
+      placeXAxis,
+      placeYAxis,
+      categoryId,
+      province,
+      city,
+      thumbnailImageUrl,
+      contentImagesUrl,
+      hashtags,
+    } = methods.getValues();
 
-    // setLoading(true);
+    const data: CreateInformationRequestDto = {
+      informationTitle: informationTitle,
+      informationAddress: informationAddress,
+      informationContent: sanitizeHtml(informationContent, sanitizeOption),
+      informationTips: tips.join(";"),
+      placeRegisterRequest: {
+        searchId: placeId,
+        name: placeName,
+        xAxis: placeXAxis,
+        yAxis: placeYAxis,
+        address: informationAddress,
+      },
+      categoryId: categoryId,
+      zoneCategoryNameParent: province,
+      zoneCategoryNameChild: city,
+      thumbNailImageUrl: thumbnailImageUrl,
+      contentImagesUrl: contentImagesUrl,
+      tagRegisterRequests: hashtags.map((tag) => ({
+        name: tag,
+      })),
+    };
 
-    // const response = await fetch("/api/informations", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    //   cache: "no-store",
-    // });
+    setLoading(true);
 
-    // if (!response.ok) {
-    //   alert("정보 등록에 실패하였습니다.");
-    //   setLoading(false);
-    //   throw new Error(response.statusText);
-    // }
+    const response = await fetch("/api/informations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    });
 
-    // const result: InformationRegisterResponseDto = await response.json();
-    // router.push(`/informations/${result.id}`);
-    // router.refresh();
+    if (!response.ok) {
+      alert("정보 등록에 실패하였습니다.");
+      setLoading(false);
+      throw new Error(response.statusText);
+    }
+
+    const result: InformationRegisterResponseDto = await response.json();
+    router.push(`/informations/${result.id}`);
+    router.refresh();
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.

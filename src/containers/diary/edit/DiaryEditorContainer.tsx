@@ -41,6 +41,23 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   });
 
   const onSubmit = async () => {
+    const imageUrl =
+      parse(methods.getValues("contents")[0])
+        .querySelector("img")
+        ?.getAttribute("src") ?? "";
+
+    if (imageUrl === "") {
+      alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
+      return;
+    }
+
+    methods.setValue("image", imageUrl);
+
+    if (!methods.formState.isValid) {
+      methods.trigger();
+      return;
+    }
+
     const { title, image, startDate, endDate, contents, moodLevels, address } =
       methods.getValues();
 

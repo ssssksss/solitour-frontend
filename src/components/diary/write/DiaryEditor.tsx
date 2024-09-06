@@ -5,7 +5,6 @@ import { useDiaryEditorStoreType } from "@/store/diaryEditorStore";
 import dynamic from "next/dynamic";
 import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
 import { useFormContext } from "react-hook-form";
-import { parse } from "node-html-parser";
 
 const QuillEditorContainer = dynamic(
   () => import("@/containers/diary/write/QuillEditorContainer"),
@@ -208,25 +207,7 @@ const DiaryEditor = ({
       <button
         className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
         type="submit"
-        onClick={() => {
-          const imageUrl =
-            parse(formContext.getValues("contents")[0])
-              .querySelector("img")
-              ?.getAttribute("src") ?? "";
-
-          if (imageUrl === "") {
-            alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
-            return;
-          }
-
-          formContext.setValue("image", imageUrl);
-
-          if (!formContext.formState.isValid) {
-            formContext.trigger();
-          } else {
-            onSubmit();
-          }
-        }}
+        onClick={() => onSubmit()}
         disabled={diaryEditorStore.days === 0 || loading}
       >
         {loading ? (

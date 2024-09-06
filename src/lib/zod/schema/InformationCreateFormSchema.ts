@@ -95,6 +95,7 @@ export const InformationCreateFormSchema = z.object({
       required_error: "Tip is required.",
       invalid_type_error: "Tip must be a string.",
     })
+    .min(1, { message: "최소 하나의 Tip을 입력해 주세요." })
     .array()
     .min(1, { message: "최소 하나의 Tip을 입력해 주세요." }),
 });
