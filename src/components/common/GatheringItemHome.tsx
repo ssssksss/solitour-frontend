@@ -1,5 +1,5 @@
-import GatheringBookMarkContainer from "@/containers/gathering/GatheringBookmarkContainer";
-import GatheringLikeContainer from "@/containers/gathering/GatheringLikeContainer";
+import GatheringBookMarkContainer from "@/containers/gathering/read/GatheringBookmarkContainer";
+import GatheringLikeContainer from "@/containers/gathering/read/GatheringLikeContainer";
 import { GatheringRecommend } from "@/types/GatheringDto";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { format } from "date-fns";
