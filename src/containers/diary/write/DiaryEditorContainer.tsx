@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import parse from "node-html-parser";
 
 const DiaryEditorContainer = () => {
   const router = useRouter();
@@ -37,6 +38,23 @@ const DiaryEditorContainer = () => {
   });
 
   const onSubmit = async () => {
+    const imageUrl =
+      parse(methods.getValues("contents")[0])
+        .querySelector("img")
+        ?.getAttribute("src") ?? "";
+
+    if (imageUrl === "") {
+      alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
+      return;
+    }
+
+    methods.setValue("image", imageUrl);
+
+    if (!methods.formState.isValid) {
+      methods.trigger();
+      return;
+    }
+
     const { title, image, startDate, endDate, contents, moodLevels, address } =
       methods.getValues();
 

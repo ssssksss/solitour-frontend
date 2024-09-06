@@ -3,6 +3,7 @@
 import PlaceModal from "@/components/informations/write/PlaceModal";
 import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
 
 interface Props {
@@ -10,8 +11,9 @@ interface Props {
 }
 
 const PlaceModalContainer = ({ closeModal }: Props) => {
-  const { address, placeName, placeId, setEditor, resetPlaceInfo } =
-    useEditorStore();
+  const formContext = useFormContext();
+  // const { address, placeName, placeId, setEditor, resetPlaceInfo } =
+  //   useEditorStore();
   const [isCustom, setIsCustom] = useState<boolean>(false);
 
   // 장소 검색 객체 (place search)
@@ -61,7 +63,14 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }, 300);
 
   const onResetPlace = () => {
-    resetPlaceInfo();
+    formContext.setValue("province", "");
+    formContext.setValue("city", "");
+    formContext.setValue("informationAddress", "");
+    formContext.setValue("placeId", "");
+    formContext.setValue("placeXAxis", "");
+    formContext.setValue("placeYAxis", "");
+    formContext.setValue("placeName", "");
+    formContext.trigger("placeName");
     closeModal();
   };
 
@@ -73,15 +82,14 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     y: string;
   }) => {
     const temp = placeInfo.address_name.split(" ");
-    setEditor({
-      province: temp[0].slice(0, 2) ?? "",
-      city: temp[1] ?? "",
-      address: placeInfo.address_name,
-      placeId: placeInfo.id,
-      placeXAxis: placeInfo.x,
-      placeYAxis: placeInfo.y,
-      placeName: placeInfo.place_name,
-    });
+    formContext.setValue("province", temp[0].slice(0, 2) ?? "");
+    formContext.setValue("city", temp[1] ?? "");
+    formContext.setValue("informationAddress", placeInfo.address_name);
+    formContext.setValue("placeId", placeInfo.id);
+    formContext.setValue("placeXAxis", placeInfo.x);
+    formContext.setValue("placeYAxis", placeInfo.y);
+    formContext.setValue("placeName", placeInfo.place_name);
+    formContext.watch();
     closeModal();
   };
 
@@ -91,18 +99,18 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     y: string;
   }) => {
     const temp = addressInfo.address_name.split(" ");
-    setEditor({
-      province: temp[0].slice(0, 2) ?? "",
-      city: temp[1] ?? "",
-      address: addressInfo.address_name,
-      placeXAxis: addressInfo.x,
-      placeYAxis: addressInfo.y,
-      placeId: "0",
-    });
+    formContext.setValue("province", temp[0].slice(0, 2) ?? "");
+    formContext.setValue("city", temp[1] ?? "");
+    formContext.setValue("informationAddress", addressInfo.address_name);
+    formContext.setValue("placeXAxis", addressInfo.x);
+    formContext.setValue("placeYAxis", addressInfo.y);
+    formContext.setValue("placeId", "0");
+    formContext.watch();
   };
 
   const onChangeCustomPlaceName = (placeName: string) => {
-    setEditor({ placeName: placeName });
+    formContext.setValue("placeName", placeName);
+    formContext.trigger("placeName");
   };
 
   const onClick = (isCustom: boolean) => {
@@ -128,8 +136,11 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
       handleLocationSearch={handleLocationSearch}
       handleAddressSearch={handleAddressSearch}
       isCustom={isCustom}
-      canTypePlaceName={placeId === "0"}
-      canRegister={address !== "" && placeName !== ""}
+      canTypePlaceName={formContext.getValues("placeId") === "0"}
+      canRegister={
+        formContext.getValues("informationAddress") !== "" &&
+        formContext.getValues("placeName") !== ""
+      }
       onClick={onClick}
       onResetPlace={onResetPlace}
       onChangePlace={onChangePlace}
