@@ -65,9 +65,10 @@ const ImageUploadItem = ({
     <div>
       <HashSpinner loading={loading} />
       <label
-        className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main dark:bg-slate-800`}
+        className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main focus:border-main dark:bg-slate-800`}
         htmlFor="file"
-        onClick={onUploadButtonClicked}
+        onClick={() => onUploadButtonClicked()}
+        onTouchEnd={() => onUploadButtonClicked()}
       >
         <div className="flex h-12 w-12 items-center justify-center rounded-full border-[0.0625rem] border-main text-xl text-main">
           +

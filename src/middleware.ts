@@ -48,30 +48,28 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-    if (pathname.startsWith("/auth")) {
-      const token = request.cookies.get("access_token");
+  if (pathname.startsWith("/auth")) {
+    const token = request.cookies.get("access_token");
 
-      if (token) {
-        return NextResponse.redirect(new URL("/", request.url));
-      }
+    if (token) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 
-    if (pathname.startsWith("/support")) {
-      const validMenus = ["about", "notice", "faq", "qna", "contact", "terms"];
-      const url = new URL(request.url);
-      const menu = url.searchParams.get("menu");
-      if (!menu && url.pathname == "/support") {
-        return NextResponse.redirect(new URL("/404", request.url));
-      }
-      if (menu && !validMenus.includes(menu)) {
-        return NextResponse.redirect(new URL("/404", request.url));
-      }
+  if (pathname.startsWith("/support")) {
+    const validMenus = ["about", "notice", "faq", "qna", "contact", "terms"];
+    const url = new URL(request.url);
+    const menu = url.searchParams.get("menu");
+    if (!menu && url.pathname == "/support") {
+      return NextResponse.redirect(new URL("/404", request.url));
     }
-  
+    if (menu && !validMenus.includes(menu)) {
+      return NextResponse.redirect(new URL("/404", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
-
-
 
 export const config = {
   matcher: [
