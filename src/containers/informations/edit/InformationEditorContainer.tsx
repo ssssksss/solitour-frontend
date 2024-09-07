@@ -185,7 +185,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     );
 
     if (!methods.formState.isValid) {
-      alert(JSON.stringify(methods.formState.errors));
       methods.trigger();
       alert("모든 정보를 입력해 주세요.");
       return;
