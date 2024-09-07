@@ -1,8 +1,7 @@
 import InformationDeleteModalContainer from "@/containers/informations/detail/InformationDeleteModalContainer";
+import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { GoPencil } from "react-icons/go";
 
 interface Props {
   visible: boolean;
@@ -30,17 +29,28 @@ const ButtonList = ({
         />
       )}
       <Link
-        className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
+        className="flex flex-row items-center gap-1 text-sm text-gray1 hover:text-main dark:text-slate-400"
         href={`/informations/edit/${informationId}`}
       >
-        <GoPencil />
+        <Image
+          className="mt-[0.125rem]"
+          src="/edit-icon.svg"
+          alt="edit-icon"
+          width={20}
+          height={20}
+        />
         수정
       </Link>
       <button
-        className="flex flex-row items-center gap-1 text-sm hover:text-main dark:text-slate-400"
+        className="flex flex-row items-center gap-1 text-sm text-gray1 hover:text-main dark:text-slate-400"
         onClick={() => setModalVisible(true)}
       >
-        <FaRegTrashCan />
+        <Image
+          src="/delete-icon.svg"
+          alt="delete-icon"
+          width={16}
+          height={16}
+        />
         삭제
       </button>
     </div>
