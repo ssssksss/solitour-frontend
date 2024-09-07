@@ -65,18 +65,24 @@ export const InformationUpdateFormSchema = z.object({
     })
     .int()
     .positive({ message: "카테고리를 선택해 주세요." }),
-  newThumbNailUrl: z.string({
-    required_error: "newThumbNailUrl is required.",
-    invalid_type_error: "newThumbNailUrl must be a string.",
-  }),
-  newThumbNailFromContent: z.string({
-    required_error: "newThumbNailFromContent is required.",
-    invalid_type_error: "newThumbNailFromContent must be a string.",
-  }),
-  moveThumbNailToContent: z.string({
-    required_error: "moveThumbNailToContent is required.",
-    invalid_type_error: "moveThumbNailToContent must be a string.",
-  }),
+  newThumbNailUrl: z
+    .string({
+      required_error: "newThumbNailUrl is required.",
+      invalid_type_error: "newThumbNailUrl must be a string.",
+    })
+    .nullable(),
+  newThumbNailFromContent: z
+    .string({
+      required_error: "newThumbNailFromContent is required.",
+      invalid_type_error: "newThumbNailFromContent must be a string.",
+    })
+    .nullable(),
+  moveThumbNailToContent: z
+    .string({
+      required_error: "moveThumbNailToContent is required.",
+      invalid_type_error: "moveThumbNailToContent must be a string.",
+    })
+    .nullable(),
   newContentImagesUrl: z
     .string({
       required_error: "newContentImagesUrl is required.",

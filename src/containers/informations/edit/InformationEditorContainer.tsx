@@ -33,7 +33,28 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
 
-  const methods = useForm({
+  const methods = useForm<{
+    userId: number;
+    informationTitle: string;
+    informationAddress: string;
+    province: string;
+    city: string;
+    placeId: string;
+    placeXAxis: string;
+    placeYAxis: string;
+    placeName: string;
+    categoryId: number;
+    categoryName: string;
+    newThumbNailUrl: string | null;
+    newThumbNailFromContent: string | null;
+    moveThumbNailToContent: string | null;
+    newContentImagesUrl: string[];
+    deleteImagesUrl: string[];
+    informationContent: string;
+    contentLength: number;
+    hashtags: string[];
+    tips: string[];
+  }>({
     resolver: zodResolver(InformationUpdateFormSchema),
     defaultValues: {
       userId: id,
@@ -47,9 +68,9 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeName: "",
       categoryId: 0,
       categoryName: "",
-      newThumbNailUrl: "",
-      newThumbNailFromContent: "",
-      moveThumbNailToContent: "",
+      newThumbNailUrl: null,
+      newThumbNailFromContent: null,
+      moveThumbNailToContent: null,
       newContentImagesUrl: Array<string>(0),
       deleteImagesUrl: Array<string>(0),
       informationContent: "",
@@ -121,19 +142,19 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
     // 썸네일 이미지가 변경되지 않은 경우
     if (originalThumbnailUrl === thumbnailUrl) {
-      methods.setValue("newThumbNailUrl", "");
-      methods.setValue("newThumbNailFromContent", "");
-      methods.setValue("moveThumbNailToContent", "");
+      methods.setValue("newThumbNailUrl", null);
+      methods.setValue("newThumbNailFromContent", null);
+      methods.setValue("moveThumbNailToContent", null);
     } else {
       // 기존 본문 이미지가 썸네일 이미지로 변경되는 경우
       if (originalContentUrl.includes(thumbnailUrl)) {
-        methods.setValue("newThumbNailUrl", "");
+        methods.setValue("newThumbNailUrl", null);
         methods.setValue("newThumbNailFromContent", thumbnailUrl);
       }
       // 새로운 썸네일 이미지를 사용하는 경우
       else {
         methods.setValue("newThumbNailUrl", thumbnailUrl);
-        methods.setValue("newThumbNailFromContent", "");
+        methods.setValue("newThumbNailFromContent", null);
       }
 
       // 기존 썸네일 이미지가 본문으로 이동하는 경우
@@ -142,7 +163,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       }
       // 기존 썸네일 이미지를 삭제하는 경우
       else {
-        methods.setValue("moveThumbNailToContent", "");
+        methods.setValue("moveThumbNailToContent", null);
       }
     }
 
@@ -164,6 +185,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     );
 
     if (!methods.formState.isValid) {
+      alert(JSON.stringify(methods.formState.errors));
       methods.trigger();
       alert("모든 정보를 입력해 주세요.");
       return;
@@ -204,11 +226,18 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       categoryId: categoryId,
       zoneCategoryNameParent: province,
       zoneCategoryNameChild: city,
-      newThumbNailUrl: newThumbNailUrl,
-      newThumbNailFromContent: newThumbNailFromContent,
-      moveThumbNailToContent: moveThumbNailToContent,
-      newContentImagesUrl: newContentImagesUrl,
-      deleteImagesUrl: deleteImagesUrl,
+      newThumbNailUrl:
+        newThumbNailUrl === null ? null : { address: newThumbNailUrl },
+      newThumbNailFromContent:
+        newThumbNailFromContent === null
+          ? null
+          : { address: newThumbNailFromContent },
+      moveThumbNailToContent:
+        moveThumbNailToContent === null
+          ? null
+          : { address: moveThumbNailToContent },
+      newContentImagesUrl: newContentImagesUrl.map((url) => ({ address: url })),
+      deleteImagesUrl: deleteImagesUrl.map((url) => ({ address: url })),
       tagRegisterRequests: hashtags.map((tag) => ({
         name: tag,
       })),

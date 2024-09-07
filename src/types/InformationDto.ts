@@ -39,11 +39,11 @@ export interface UpdateInformationRequestDto {
   categoryId: number;
   zoneCategoryNameParent: string;
   zoneCategoryNameChild: string;
-  newThumbNailUrl: string | null;
-  newThumbNailFromContent: string | null;
-  moveThumbNailToContent: string | null;
-  newContentImagesUrl: string[];
-  deleteImagesUrl: string[];
+  newThumbNailUrl: { address: string } | null;
+  newThumbNailFromContent: { address: string } | null;
+  moveThumbNailToContent: { address: string } | null;
+  newContentImagesUrl: { address: string }[];
+  deleteImagesUrl: { address: string }[];
   tagRegisterRequests: { name: string }[];
 }
 
