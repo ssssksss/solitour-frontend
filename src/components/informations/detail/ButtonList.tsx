@@ -1,5 +1,6 @@
+import DeleteIcon from "@/components/common/icons/DeleteIcon";
+import EditIcon from "@/components/common/icons/EditIcon";
 import InformationDeleteModalContainer from "@/containers/informations/detail/InformationDeleteModalContainer";
-import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
@@ -29,28 +30,17 @@ const ButtonList = ({
         />
       )}
       <Link
-        className="flex flex-row items-center gap-1 text-sm text-gray1 hover:text-main dark:text-slate-400"
+        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
         href={`/informations/edit/${informationId}`}
       >
-        <Image
-          className="mt-[0.125rem]"
-          src="/edit-icon.svg"
-          alt="edit-icon"
-          width={20}
-          height={20}
-        />
+        <EditIcon />
         수정
       </Link>
       <button
-        className="flex flex-row items-center gap-1 text-sm text-gray1 hover:text-main dark:text-slate-400"
+        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
         onClick={() => setModalVisible(true)}
       >
-        <Image
-          src="/delete-icon.svg"
-          alt="delete-icon"
-          width={16}
-          height={16}
-        />
+        <DeleteIcon />
         삭제
       </button>
     </div>
