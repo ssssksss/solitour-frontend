@@ -89,7 +89,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     formContext.setValue("placeXAxis", placeInfo.x);
     formContext.setValue("placeYAxis", placeInfo.y);
     formContext.setValue("placeName", placeInfo.place_name);
-    formContext.watch();
+    formContext.trigger("placeName");
     closeModal();
   };
 
