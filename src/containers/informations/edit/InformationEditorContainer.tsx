@@ -33,7 +33,28 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
 
-  const methods = useForm({
+  const methods = useForm<{
+    userId: number;
+    informationTitle: string;
+    informationAddress: string;
+    province: string;
+    city: string;
+    placeId: string;
+    placeXAxis: string;
+    placeYAxis: string;
+    placeName: string;
+    categoryId: number;
+    categoryName: string;
+    newThumbNailUrl: string | null;
+    newThumbNailFromContent: string | null;
+    moveThumbNailToContent: string | null;
+    newContentImagesUrl: string[];
+    deleteImagesUrl: string[];
+    informationContent: string;
+    contentLength: number;
+    hashtags: string[];
+    tips: string[];
+  }>({
     resolver: zodResolver(InformationUpdateFormSchema),
     defaultValues: {
       userId: id,
@@ -47,9 +68,9 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeName: "",
       categoryId: 0,
       categoryName: "",
-      newThumbNailUrl: "",
-      newThumbNailFromContent: "",
-      moveThumbNailToContent: "",
+      newThumbNailUrl: null,
+      newThumbNailFromContent: null,
+      moveThumbNailToContent: null,
       newContentImagesUrl: Array<string>(0),
       deleteImagesUrl: Array<string>(0),
       informationContent: "",
@@ -121,19 +142,19 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
     // 썸네일 이미지가 변경되지 않은 경우
     if (originalThumbnailUrl === thumbnailUrl) {
-      methods.setValue("newThumbNailUrl", "");
-      methods.setValue("newThumbNailFromContent", "");
-      methods.setValue("moveThumbNailToContent", "");
+      methods.setValue("newThumbNailUrl", null);
+      methods.setValue("newThumbNailFromContent", null);
+      methods.setValue("moveThumbNailToContent", null);
     } else {
       // 기존 본문 이미지가 썸네일 이미지로 변경되는 경우
       if (originalContentUrl.includes(thumbnailUrl)) {
-        methods.setValue("newThumbNailUrl", "");
+        methods.setValue("newThumbNailUrl", null);
         methods.setValue("newThumbNailFromContent", thumbnailUrl);
       }
       // 새로운 썸네일 이미지를 사용하는 경우
       else {
         methods.setValue("newThumbNailUrl", thumbnailUrl);
-        methods.setValue("newThumbNailFromContent", "");
+        methods.setValue("newThumbNailFromContent", null);
       }
 
       // 기존 썸네일 이미지가 본문으로 이동하는 경우
@@ -142,7 +163,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       }
       // 기존 썸네일 이미지를 삭제하는 경우
       else {
-        methods.setValue("moveThumbNailToContent", "");
+        methods.setValue("moveThumbNailToContent", null);
       }
     }
 
@@ -169,51 +190,78 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       return;
     }
 
-    alert("정보 수정 API 연동 예정");
+    const {
+      informationTitle,
+      informationAddress,
+      informationContent,
+      tips,
+      placeId,
+      placeName,
+      placeXAxis,
+      placeYAxis,
+      categoryId,
+      province,
+      city,
+      newThumbNailUrl,
+      newThumbNailFromContent,
+      moveThumbNailToContent,
+      newContentImagesUrl,
+      deleteImagesUrl,
+      hashtags,
+    } = methods.getValues();
 
-    //   const data: UpdateInformationRequestDto = {
-    //     title: validatedFields.data.informationTitle,
-    //     address: validatedFields.data.informationAddress,
-    //     content: validatedFields.data.informationContent,
-    //     tips: validatedFields.data.tips.join(";"),
-    //     placeModifyRequest: {
-    //       searchId: validatedFields.data.placeId,
-    //       name: validatedFields.data.placeName,
-    //       xAxis: validatedFields.data.placeXAxis,
-    //       yAxis: validatedFields.data.placeYAxis,
-    //       address: validatedFields.data.informationAddress,
-    //     },
-    //     categoryId: validatedFields.data.categoryId,
-    //     zoneCategoryNameParent: validatedFields.data.province,
-    //     zoneCategoryNameChild: validatedFields.data.city,
-    //     deleteImages: deletedImages,
-    //     thumbNailUrl: validatedFields.data.thumbnailImageUrl,
-    //     contentImagesUrl: validatedFields.data.contentImagesUrl,
-    //     tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
-    //       name: tag,
-    //     })),
-    //   };
+    const data: UpdateInformationRequestDto = {
+      title: informationTitle,
+      address: informationAddress,
+      content: informationContent,
+      tips: tips.join(";"),
+      placeModifyRequest: {
+        searchId: placeId,
+        name: placeName,
+        xAxis: placeXAxis,
+        yAxis: placeYAxis,
+        address: informationAddress,
+      },
+      categoryId: categoryId,
+      zoneCategoryNameParent: province,
+      zoneCategoryNameChild: city,
+      newThumbNailUrl:
+        newThumbNailUrl === null ? null : { address: newThumbNailUrl },
+      newThumbNailFromContent:
+        newThumbNailFromContent === null
+          ? null
+          : { address: newThumbNailFromContent },
+      moveThumbNailToContent:
+        moveThumbNailToContent === null
+          ? null
+          : { address: moveThumbNailToContent },
+      newContentImagesUrl: newContentImagesUrl.map((url) => ({ address: url })),
+      deleteImagesUrl: deleteImagesUrl.map((url) => ({ address: url })),
+      tagRegisterRequests: hashtags.map((tag) => ({
+        name: tag,
+      })),
+    };
 
-    //   setLoading(true);
+    setLoading(true);
 
-    //   const response = await fetch(`/api/informations/${informationId}`, {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
-    //     cache: "no-store",
-    //   });
+    const response = await fetch(`/api/informations/${informationId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    });
 
-    //   if (!response.ok) {
-    //     alert("정보 수정에 실패하였습니다.");
-    //     setLoading(false);
-    //     throw new Error(response.statusText);
-    //   }
+    if (!response.ok) {
+      alert("정보 수정에 실패하였습니다.");
+      setLoading(false);
+      throw new Error(response.statusText);
+    }
 
-    //   const result: InformationRegisterResponseDto = await response.json();
-    //   router.push(`/informations/${result.id}`);
-    //   router.refresh();
+    const result: InformationRegisterResponseDto = await response.json();
+    router.push(`/informations/${result.id}`);
+    router.refresh();
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.

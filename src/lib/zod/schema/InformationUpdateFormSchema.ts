@@ -21,7 +21,7 @@ export const InformationUpdateFormSchema = z.object({
       invalid_type_error: "Address must be a string.",
     })
     .min(1, { message: "장소를 입력해 주세요." })
-    .max(20, { message: "장소 길이는 20자 이하여야 합니다." }),
+    .max(50, { message: "장소 길이는 50자 이하여야 합니다." }),
   province: z
     .string({
       required_error: "Province is required.",
@@ -65,18 +65,24 @@ export const InformationUpdateFormSchema = z.object({
     })
     .int()
     .positive({ message: "카테고리를 선택해 주세요." }),
-  newThumbNailUrl: z.string({
-    required_error: "newThumbNailUrl is required.",
-    invalid_type_error: "newThumbNailUrl must be a string.",
-  }),
-  newThumbNailFromContent: z.string({
-    required_error: "newThumbNailFromContent is required.",
-    invalid_type_error: "newThumbNailFromContent must be a string.",
-  }),
-  moveThumbNailToContent: z.string({
-    required_error: "moveThumbNailToContent is required.",
-    invalid_type_error: "moveThumbNailToContent must be a string.",
-  }),
+  newThumbNailUrl: z
+    .string({
+      required_error: "newThumbNailUrl is required.",
+      invalid_type_error: "newThumbNailUrl must be a string.",
+    })
+    .nullable(),
+  newThumbNailFromContent: z
+    .string({
+      required_error: "newThumbNailFromContent is required.",
+      invalid_type_error: "newThumbNailFromContent must be a string.",
+    })
+    .nullable(),
+  moveThumbNailToContent: z
+    .string({
+      required_error: "moveThumbNailToContent is required.",
+      invalid_type_error: "moveThumbNailToContent must be a string.",
+    })
+    .nullable(),
   newContentImagesUrl: z
     .string({
       required_error: "newContentImagesUrl is required.",

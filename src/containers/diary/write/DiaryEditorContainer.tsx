@@ -22,13 +22,22 @@ const DiaryEditorContainer = () => {
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const methods = useForm({
+  const methods = useForm<{
+    userId: number;
+    title: string;
+    startDate: Date | null;
+    endDate: Date | null;
+    address: string[];
+    image: string;
+    moodLevels: number[];
+    contents: string[];
+  }>({
     resolver: zodResolver(DiaryCreateFormSchema),
     defaultValues: {
       userId: authStore.id,
       title: "",
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: null,
+      endDate: null,
       address: [""],
       image: "",
       moodLevels: [],
@@ -61,8 +70,8 @@ const DiaryEditorContainer = () => {
     const data: CreateDiaryRequestDto = {
       title: title,
       titleImage: image,
-      startDatetime: startDate,
-      endDatetime: endDate,
+      startDatetime: startDate!,
+      endDatetime: endDate!,
       diaryDayRequests: Array.from(
         { length: diaryEditorStore.days },
         (_, index) => ({
