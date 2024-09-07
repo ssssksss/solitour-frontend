@@ -169,51 +169,71 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       return;
     }
 
-    alert("정보 수정 API 연동 예정");
+    const {
+      informationTitle,
+      informationAddress,
+      informationContent,
+      tips,
+      placeId,
+      placeName,
+      placeXAxis,
+      placeYAxis,
+      categoryId,
+      province,
+      city,
+      newThumbNailUrl,
+      newThumbNailFromContent,
+      moveThumbNailToContent,
+      newContentImagesUrl,
+      deleteImagesUrl,
+      hashtags,
+    } = methods.getValues();
 
-    //   const data: UpdateInformationRequestDto = {
-    //     title: validatedFields.data.informationTitle,
-    //     address: validatedFields.data.informationAddress,
-    //     content: validatedFields.data.informationContent,
-    //     tips: validatedFields.data.tips.join(";"),
-    //     placeModifyRequest: {
-    //       searchId: validatedFields.data.placeId,
-    //       name: validatedFields.data.placeName,
-    //       xAxis: validatedFields.data.placeXAxis,
-    //       yAxis: validatedFields.data.placeYAxis,
-    //       address: validatedFields.data.informationAddress,
-    //     },
-    //     categoryId: validatedFields.data.categoryId,
-    //     zoneCategoryNameParent: validatedFields.data.province,
-    //     zoneCategoryNameChild: validatedFields.data.city,
-    //     deleteImages: deletedImages,
-    //     thumbNailUrl: validatedFields.data.thumbnailImageUrl,
-    //     contentImagesUrl: validatedFields.data.contentImagesUrl,
-    //     tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
-    //       name: tag,
-    //     })),
-    //   };
+    const data: UpdateInformationRequestDto = {
+      title: informationTitle,
+      address: informationAddress,
+      content: informationContent,
+      tips: tips.join(";"),
+      placeModifyRequest: {
+        searchId: placeId,
+        name: placeName,
+        xAxis: placeXAxis,
+        yAxis: placeYAxis,
+        address: informationAddress,
+      },
+      categoryId: categoryId,
+      zoneCategoryNameParent: province,
+      zoneCategoryNameChild: city,
+      newThumbNailUrl: newThumbNailUrl,
+      newThumbNailFromContent: newThumbNailFromContent,
+      moveThumbNailToContent: moveThumbNailToContent,
+      newContentImagesUrl: newContentImagesUrl,
+      deleteImagesUrl: deleteImagesUrl,
+      tagRegisterRequests: hashtags.map((tag) => ({
+        name: tag,
+      })),
+    };
 
-    //   setLoading(true);
+    setLoading(true);
 
-    //   const response = await fetch(`/api/informations/${informationId}`, {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
-    //     cache: "no-store",
-    //   });
+    const response = await fetch(`/api/informations/${informationId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    });
 
-    //   if (!response.ok) {
-    //     alert("정보 수정에 실패하였습니다.");
-    //     setLoading(false);
-    //     throw new Error(response.statusText);
-    //   }
+    if (!response.ok) {
+      alert("정보 수정에 실패하였습니다.");
+      setLoading(false);
+      throw new Error(response.statusText);
+    }
 
-    //   const result: InformationRegisterResponseDto = await response.json();
-    //   router.push(`/informations/${result.id}`);
-    //   router.refresh();
+    const result: InformationRegisterResponseDto = await response.json();
+    router.push(`/informations/${result.id}`);
+    router.refresh();
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
