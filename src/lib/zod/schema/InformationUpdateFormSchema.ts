@@ -65,12 +65,6 @@ export const InformationUpdateFormSchema = z.object({
     })
     .int()
     .positive({ message: "카테고리를 선택해 주세요." }),
-  deleteImages: z
-    .string({
-      required_error: "DeleteImages is required.",
-      invalid_type_error: "DeleteImages must be a string.",
-    })
-    .array(),
   thumbnailImageUrl: z
     .string({
       required_error: "ThumbnailImageUrl is required.",
@@ -88,7 +82,6 @@ export const InformationUpdateFormSchema = z.object({
       required_error: "Content is required.",
       invalid_type_error: "Content must be a string.",
     })
-    .min(1, { message: "내용을 입력해 주세요." })
     .max(500, { message: "Must be 500 or fewer characters long" }),
   hashtags: z
     .string({
@@ -102,6 +95,7 @@ export const InformationUpdateFormSchema = z.object({
       required_error: "Tip is required.",
       invalid_type_error: "Tip must be a string.",
     })
+    .min(1, { message: "최소 하나의 Tip을 입력해 주세요." })
     .array()
     .min(1, { message: "최소 하나의 Tip을 입력해 주세요." }),
 });

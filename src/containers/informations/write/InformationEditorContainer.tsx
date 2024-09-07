@@ -45,7 +45,7 @@ const InformationEditorContainer = () => {
       informationContent: "",
       contentLength: 0,
       hashtags: Array<string>(0),
-      tips: [""],
+      tips: ["팁"],
     },
     mode: "onChange",
   });
