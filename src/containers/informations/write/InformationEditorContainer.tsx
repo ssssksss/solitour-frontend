@@ -41,11 +41,10 @@ const InformationEditorContainer = () => {
       categoryName: "",
       thumbnailImageUrl: "",
       contentImagesUrl: [""],
-      mainImageIndex: 0,
       informationContent: "",
       contentLength: 0,
       hashtags: Array<string>(0),
-      tips: [""],
+      tips: ["팁"],
     },
     mode: "onChange",
   });
@@ -83,13 +82,13 @@ const InformationEditorContainer = () => {
 
   const onChangeHashTagHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const hashtag = inputTagRef.current?.value ?? "";
-      if (hashtag === "") {
+      const hashtag = inputTagRef.current?.value.trim() ?? "";
+      if (hashtag.length < 2) {
         return;
       }
 
       const hashtags = methods.getValues("hashtags");
-      if (!hashtags.includes(hashtag) && hashtag.trim().length >= 2) {
+      if (!hashtags.includes(hashtag)) {
         hashtags.push(hashtag);
       }
       methods.setValue("hashtags", hashtags);

@@ -29,6 +29,16 @@ const InformationSearchContainer = () => {
   };
 
   const onSearchClick = () => {
+    if (searchMethod === "제목" && searchValue.length < 1) {
+      alert("최소 한 글자의 제목을 입력해 주세요.");
+      return;
+    }
+
+    if (searchMethod === "태그" && searchValue.length < 2) {
+      alert("2 ~ 15자의 태그를 입력해 주세요.");
+      return;
+    }
+
     router.push(
       `${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=${order}${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`,
     );
