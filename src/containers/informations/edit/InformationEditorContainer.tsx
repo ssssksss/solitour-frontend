@@ -31,6 +31,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
+  const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
 
   const methods = useForm({
     resolver: zodResolver(InformationUpdateFormSchema),
@@ -46,9 +47,11 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       placeName: "",
       categoryId: 0,
       categoryName: "",
-      thumbnailImageUrl: "",
-      contentImagesUrl: [""],
-      mainImageIndex: 0,
+      newThumbNailUrl: "",
+      newThumbNailFromContent: "",
+      moveThumbNailToContent: "",
+      newContentImagesUrl: Array<string>(0),
+      deleteImagesUrl: Array<string>(0),
       informationContent: "",
       contentLength: 0,
       hashtags: Array<string>(0),
@@ -106,52 +109,67 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   };
 
   const onSubmit = async () => {
+    if (editorStore.images.filter((image) => image !== "").length === 0) {
+      alert("최소 한 장의 사진을 추가해 주세요.");
+      return;
+    }
+
+    const thumbnailUrl = editorStore.images[editorStore.mainImageIndex];
+    const contentUrl = editorStore.images.filter(
+      (url, index) => index !== editorStore.mainImageIndex && url !== "",
+    );
+
+    // 썸네일 이미지가 변경되지 않은 경우
+    if (originalThumbnailUrl === thumbnailUrl) {
+      methods.setValue("newThumbNailUrl", "");
+      methods.setValue("newThumbNailFromContent", "");
+      methods.setValue("moveThumbNailToContent", "");
+    } else {
+      // 기존 본문 이미지가 썸네일 이미지로 변경되는 경우
+      if (originalContentUrl.includes(thumbnailUrl)) {
+        methods.setValue("newThumbNailUrl", "");
+        methods.setValue("newThumbNailFromContent", thumbnailUrl);
+      }
+      // 새로운 썸네일 이미지를 사용하는 경우
+      else {
+        methods.setValue("newThumbNailUrl", thumbnailUrl);
+        methods.setValue("newThumbNailFromContent", "");
+      }
+
+      // 기존 썸네일 이미지가 본문으로 이동하는 경우
+      if (contentUrl.includes(originalThumbnailUrl)) {
+        methods.setValue("moveThumbNailToContent", originalThumbnailUrl);
+      }
+      // 기존 썸네일 이미지를 삭제하는 경우
+      else {
+        methods.setValue("moveThumbNailToContent", "");
+      }
+    }
+
+    // 새로운 본문 이미지 등록
+    methods.setValue(
+      "newContentImagesUrl",
+      contentUrl.filter(
+        (url) =>
+          url !== originalThumbnailUrl && !originalContentUrl.includes(url),
+      ),
+    );
+
+    // 삭제할 이미지 등록
+    methods.setValue(
+      "deleteImagesUrl",
+      [originalThumbnailUrl, ...originalContentUrl].filter(
+        (url) => url !== thumbnailUrl && !contentUrl.includes(url),
+      ),
+    );
+
     if (!methods.formState.isValid) {
       methods.trigger();
       alert("모든 정보를 입력해 주세요.");
       return;
     }
 
-    alert("정보 수정 테스트");
-
-    //   // Validate from fields using Zod
-    //   const validatedFields = InformationUpdateFormSchema.safeParse({
-    //     userId: id,
-    //     informationTitle: editorStore.title,
-    //     informationAddress: editorStore.address,
-    //     province: editorStore.province,
-    //     city: editorStore.city,
-    //     placeId: editorStore.placeId,
-    //     placeXAxis: editorStore.placeXAxis,
-    //     placeYAxis: editorStore.placeYAxis,
-    //     placeName: editorStore.placeName,
-    //     categoryId: editorStore.categoryId,
-    //     deleteImages: editorStore.deletedImages,
-    //     thumbnailImageUrl: editorStore.images[editorStore.mainImageIndex],
-    //     contentImagesUrl: editorStore.images.filter(
-    //       (url, index) => index !== editorStore.mainImageIndex && url !== "",
-    //     ),
-    //     informationContent: sanitizeHtml(editorStore.content, sanitizeOption),
-    //     hashtags: editorStore.hashtags,
-    //     tips: editorStore.tips,
-    //   });
-
-    //   // If validation fails, return errors early. Otherwise, continue;
-    //   if (!validatedFields.success) {
-    //     console.log(validatedFields.error.issues);
-    //     alert(validatedFields.error.issues[0].message);
-    //     return;
-    //   }
-
-    //   const deletedImages = validatedFields.data.deleteImages
-    //     .filter((deletedImage) => !editorStore.images.includes(deletedImage))
-    //     .map((deletedImage) => ({
-    //       address: deletedImage,
-    //     }));
-
-    //   if (originalThumbnailUrl !== validatedFields.data.thumbnailImageUrl) {
-    //     deletedImages.push({ address: originalThumbnailUrl });
-    //   }
+    alert("정보 수정 API 연동 예정");
 
     //   const data: UpdateInformationRequestDto = {
     //     title: validatedFields.data.informationTitle,
@@ -238,6 +256,11 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     setOriginalThumbnailUrl(
       data.imageResponses.find((value) => value.imageStatus === "썸네일")
         ?.address ?? "",
+    );
+    setOriginalContentUrl(
+      data.imageResponses
+        .filter((value) => value.imageStatus !== "썸네일")
+        .map((value) => value.address),
     );
 
     return () => {

@@ -41,7 +41,6 @@ const InformationEditorContainer = () => {
       categoryName: "",
       thumbnailImageUrl: "",
       contentImagesUrl: [""],
-      mainImageIndex: 0,
       informationContent: "",
       contentLength: 0,
       hashtags: Array<string>(0),
