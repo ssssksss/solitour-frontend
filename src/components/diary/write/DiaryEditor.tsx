@@ -128,7 +128,7 @@ const DiaryEditor = ({
             </button>
             {formContext.formState.errors.address && (
               <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
-                주소를 입력해 주세요.
+                모든 날짜의 주소를 입력해 주세요.
               </p>
             )}
           </div>

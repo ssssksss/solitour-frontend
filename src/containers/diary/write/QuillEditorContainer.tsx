@@ -95,7 +95,7 @@ const QuillEditorContainer = () => {
         const contents: string[] = formContext.getValues("contents");
         contents[diaryEditorStore.currentDay - 1] = value;
         formContext.setValue("contents", contents);
-        formContext.trigger();
+        formContext.trigger("contents");
       }}
     />
   );
