@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import parse from "node-html-parser";
 
 const DiaryEditorContainer = () => {
   const router = useRouter();
@@ -21,13 +22,22 @@ const DiaryEditorContainer = () => {
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const methods = useForm({
+  const methods = useForm<{
+    userId: number;
+    title: string;
+    startDate: Date | null;
+    endDate: Date | null;
+    address: string[];
+    image: string;
+    moodLevels: number[];
+    contents: string[];
+  }>({
     resolver: zodResolver(DiaryCreateFormSchema),
     defaultValues: {
       userId: authStore.id,
       title: "",
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: null,
+      endDate: null,
       address: [""],
       image: "",
       moodLevels: [],
@@ -37,14 +47,31 @@ const DiaryEditorContainer = () => {
   });
 
   const onSubmit = async () => {
+    const imageUrl =
+      parse(methods.getValues("contents")[0])
+        .querySelector("img")
+        ?.getAttribute("src") ?? "";
+
+    if (imageUrl === "") {
+      alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
+      return;
+    }
+
+    methods.setValue("image", imageUrl);
+
+    if (!methods.formState.isValid) {
+      methods.trigger();
+      return;
+    }
+
     const { title, image, startDate, endDate, contents, moodLevels, address } =
       methods.getValues();
 
     const data: CreateDiaryRequestDto = {
       title: title,
       titleImage: image,
-      startDatetime: startDate,
-      endDatetime: endDate,
+      startDatetime: startDate!,
+      endDatetime: endDate!,
       diaryDayRequests: Array.from(
         { length: diaryEditorStore.days },
         (_, index) => ({

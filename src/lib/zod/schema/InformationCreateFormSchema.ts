@@ -21,7 +21,7 @@ export const InformationCreateFormSchema = z.object({
       invalid_type_error: "Address must be a string.",
     })
     .min(1, { message: "장소를 입력해 주세요." })
-    .max(20, { message: "장소 길이는 20자 이하여야 합니다." }),
+    .max(50, { message: "장소 길이는 50자 이하여야 합니다." }),
   province: z
     .string({
       required_error: "Province is required.",
@@ -82,7 +82,6 @@ export const InformationCreateFormSchema = z.object({
       required_error: "Content is required.",
       invalid_type_error: "Content must be a string.",
     })
-    .min(1, { message: "내용을 입력해 주세요." })
     .max(500, { message: "Must be 500 or fewer characters long" }),
   hashtags: z
     .string({
@@ -96,6 +95,7 @@ export const InformationCreateFormSchema = z.object({
       required_error: "Tip is required.",
       invalid_type_error: "Tip must be a string.",
     })
+    .min(1, { message: "최소 하나의 Tip을 입력해 주세요." })
     .array()
     .min(1, { message: "최소 하나의 Tip을 입력해 주세요." }),
 });

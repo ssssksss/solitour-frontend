@@ -11,8 +11,10 @@ import {
   InformationRegisterResponseDto,
   UpdateInformationRequestDto,
 } from "@/types/InformationDto";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import sanitizeHtml from "sanitize-html";
 
 interface Props {
@@ -29,6 +31,55 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
+  const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
+
+  const methods = useForm<{
+    userId: number;
+    informationTitle: string;
+    informationAddress: string;
+    province: string;
+    city: string;
+    placeId: string;
+    placeXAxis: string;
+    placeYAxis: string;
+    placeName: string;
+    categoryId: number;
+    categoryName: string;
+    newThumbNailUrl: string | null;
+    newThumbNailFromContent: string | null;
+    moveThumbNailToContent: string | null;
+    newContentImagesUrl: string[];
+    deleteImagesUrl: string[];
+    informationContent: string;
+    contentLength: number;
+    hashtags: string[];
+    tips: string[];
+  }>({
+    resolver: zodResolver(InformationUpdateFormSchema),
+    defaultValues: {
+      userId: id,
+      informationTitle: "",
+      informationAddress: "",
+      province: "",
+      city: "",
+      placeId: "",
+      placeXAxis: "",
+      placeYAxis: "",
+      placeName: "",
+      categoryId: 0,
+      categoryName: "",
+      newThumbNailUrl: null,
+      newThumbNailFromContent: null,
+      moveThumbNailToContent: null,
+      newContentImagesUrl: Array<string>(0),
+      deleteImagesUrl: Array<string>(0),
+      informationContent: "",
+      contentLength: 0,
+      hashtags: Array<string>(0),
+      tips: [""],
+    },
+    mode: "onChange",
+  });
 
   // 장소 선택 모달창이 보이는지 여부
   const [locationModal, setLocationModal] = useState<boolean>(false);
@@ -37,7 +88,14 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
   const showLocationModal = () => {
-    editorStore.resetPlaceInfo();
+    methods.setValue("province", "");
+    methods.setValue("city", "");
+    methods.setValue("informationAddress", "");
+    methods.setValue("placeId", "");
+    methods.setValue("placeXAxis", "");
+    methods.setValue("placeYAxis", "");
+    methods.setValue("placeName", "");
+    methods.watch();
     setLocationModal(true);
   };
 
@@ -46,7 +104,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   };
 
   const showCategoryModal = () => {
-    editorStore.setEditor({ categoryId: 0 });
+    methods.setValue("categoryId", 0);
     setCategoryModal(true);
   };
 
@@ -56,75 +114,130 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
   const onChangeHashTagHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const hashtag = inputTagRef.current?.value ?? "";
-      if (hashtag === "") {
+      const hashtag = inputTagRef.current?.value.trim() ?? "";
+      if (hashtag.length < 2) {
         return;
       }
 
-      editorStore.addHashtag(hashtag);
+      const hashtags = methods.getValues("hashtags");
+      if (!hashtags.includes(hashtag)) {
+        hashtags.push(hashtag);
+      }
+      methods.setValue("hashtags", hashtags);
+      methods.trigger("hashtags");
       (inputTagRef.current as HTMLInputElement).value = "";
     }
   };
 
   const onSubmit = async () => {
-    // Validate from fields using Zod
-    const validatedFields = InformationUpdateFormSchema.safeParse({
-      userId: id,
-      informationTitle: editorStore.title,
-      informationAddress: editorStore.address,
-      province: editorStore.province,
-      city: editorStore.city,
-      placeId: editorStore.placeId,
-      placeXAxis: editorStore.placeXAxis,
-      placeYAxis: editorStore.placeYAxis,
-      placeName: editorStore.placeName,
-      categoryId: editorStore.categoryId,
-      deleteImages: editorStore.deletedImages,
-      thumbnailImageUrl: editorStore.images[editorStore.mainImageIndex],
-      contentImagesUrl: editorStore.images.filter(
-        (url, index) => index !== editorStore.mainImageIndex && url !== "",
-      ),
-      informationContent: sanitizeHtml(editorStore.content, sanitizeOption),
-      hashtags: editorStore.hashtags,
-      tips: editorStore.tips,
-    });
-
-    // If validation fails, return errors early. Otherwise, continue;
-    if (!validatedFields.success) {
-      console.log(validatedFields.error.issues);
-      alert(validatedFields.error.issues[0].message);
+    if (editorStore.images.filter((image) => image !== "").length === 0) {
+      alert("최소 한 장의 사진을 추가해 주세요.");
       return;
     }
 
-    const deletedImages = validatedFields.data.deleteImages
-      .filter((deletedImage) => !editorStore.images.includes(deletedImage))
-      .map((deletedImage) => ({
-        address: deletedImage,
-      }));
+    const thumbnailUrl = editorStore.images[editorStore.mainImageIndex];
+    const contentUrl = editorStore.images.filter(
+      (url, index) => index !== editorStore.mainImageIndex && url !== "",
+    );
 
-    if (originalThumbnailUrl !== validatedFields.data.thumbnailImageUrl) {
-      deletedImages.push({ address: originalThumbnailUrl });
+    // 썸네일 이미지가 변경되지 않은 경우
+    if (originalThumbnailUrl === thumbnailUrl) {
+      methods.setValue("newThumbNailUrl", null);
+      methods.setValue("newThumbNailFromContent", null);
+      methods.setValue("moveThumbNailToContent", null);
+    } else {
+      // 기존 본문 이미지가 썸네일 이미지로 변경되는 경우
+      if (originalContentUrl.includes(thumbnailUrl)) {
+        methods.setValue("newThumbNailUrl", null);
+        methods.setValue("newThumbNailFromContent", thumbnailUrl);
+      }
+      // 새로운 썸네일 이미지를 사용하는 경우
+      else {
+        methods.setValue("newThumbNailUrl", thumbnailUrl);
+        methods.setValue("newThumbNailFromContent", null);
+      }
+
+      // 기존 썸네일 이미지가 본문으로 이동하는 경우
+      if (contentUrl.includes(originalThumbnailUrl)) {
+        methods.setValue("moveThumbNailToContent", originalThumbnailUrl);
+      }
+      // 기존 썸네일 이미지를 삭제하는 경우
+      else {
+        methods.setValue("moveThumbNailToContent", null);
+      }
     }
 
+    // 새로운 본문 이미지 등록
+    methods.setValue(
+      "newContentImagesUrl",
+      contentUrl.filter(
+        (url) =>
+          url !== originalThumbnailUrl && !originalContentUrl.includes(url),
+      ),
+    );
+
+    // 삭제할 이미지 등록
+    methods.setValue(
+      "deleteImagesUrl",
+      [originalThumbnailUrl, ...originalContentUrl].filter(
+        (url) => url !== thumbnailUrl && !contentUrl.includes(url),
+      ),
+    );
+
+    if (!methods.formState.isValid) {
+      methods.trigger();
+      alert("모든 정보를 입력해 주세요.");
+      return;
+    }
+
+    const {
+      informationTitle,
+      informationAddress,
+      informationContent,
+      tips,
+      placeId,
+      placeName,
+      placeXAxis,
+      placeYAxis,
+      categoryId,
+      province,
+      city,
+      newThumbNailUrl,
+      newThumbNailFromContent,
+      moveThumbNailToContent,
+      newContentImagesUrl,
+      deleteImagesUrl,
+      hashtags,
+    } = methods.getValues();
+
     const data: UpdateInformationRequestDto = {
-      title: validatedFields.data.informationTitle,
-      address: validatedFields.data.informationAddress,
-      content: validatedFields.data.informationContent,
-      tips: validatedFields.data.tips.join(";"),
+      title: informationTitle,
+      address: informationAddress,
+      content: informationContent,
+      tips: tips.join(";"),
       placeModifyRequest: {
-        searchId: validatedFields.data.placeId,
-        name: validatedFields.data.placeName,
-        xAxis: validatedFields.data.placeXAxis,
-        yAxis: validatedFields.data.placeYAxis,
-        address: validatedFields.data.informationAddress,
+        searchId: placeId,
+        name: placeName,
+        xAxis: placeXAxis,
+        yAxis: placeYAxis,
+        address: informationAddress,
       },
-      categoryId: validatedFields.data.categoryId,
-      zoneCategoryNameParent: validatedFields.data.province,
-      zoneCategoryNameChild: validatedFields.data.city,
-      deleteImages: deletedImages,
-      thumbNailUrl: validatedFields.data.thumbnailImageUrl,
-      contentImagesUrl: validatedFields.data.contentImagesUrl,
-      tagRegisterRequests: validatedFields.data.hashtags.map((tag) => ({
+      categoryId: categoryId,
+      zoneCategoryNameParent: province,
+      zoneCategoryNameChild: city,
+      newThumbNailUrl:
+        newThumbNailUrl === null ? null : { address: newThumbNailUrl },
+      newThumbNailFromContent:
+        newThumbNailFromContent === null
+          ? null
+          : { address: newThumbNailFromContent },
+      moveThumbNailToContent:
+        moveThumbNailToContent === null
+          ? null
+          : { address: moveThumbNailToContent },
+      newContentImagesUrl: newContentImagesUrl.map((url) => ({ address: url })),
+      deleteImagesUrl: deleteImagesUrl.map((url) => ({ address: url })),
+      tagRegisterRequests: hashtags.map((tag) => ({
         name: tag,
       })),
     };
@@ -162,31 +275,40 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   // 수정 페이지에 들어왔을 때 수정할 정보 글 데이터를 가져옴.
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {
+    methods.setValue("informationTitle", data.title);
+    methods.setValue("informationAddress", data.address);
+    methods.setValue(
+      "province",
+      data.zoneCategoryResponse.parentZoneCategory.name,
+    );
+    methods.setValue("city", data.zoneCategoryResponse.name);
+    methods.setValue("placeId", data.placeResponse.searchId.toString());
+    methods.setValue("placeXAxis", data.placeResponse.xaxis.toString());
+    methods.setValue("placeYAxis", data.placeResponse.yaxis.toString());
+    methods.setValue("placeName", data.placeResponse.name);
+    methods.setValue("informationContent", data.content);
+    methods.setValue(
+      "hashtags",
+      data.tagResponses.map((tag) => tag.name),
+    );
+    methods.setValue("tips", data.tip.split(";"));
+    methods.watch();
+
     editorStore.setEditor({
-      title: data.title,
-      address: data.address,
-      province: data.zoneCategoryResponse.parentZoneCategory.name,
-      city: data.zoneCategoryResponse.name,
-      placeId: data.placeResponse.searchId.toString(),
-      placeName: data.placeResponse.name,
-      placeXAxis: data.placeResponse.xaxis.toString(),
-      placeYAxis: data.placeResponse.yaxis.toString(),
-      categoryId: 0,
-      categoryName: "",
-      deletedImages: [...data.imageResponses.map((value) => value.address)],
       images: [...data.imageResponses.map((value) => value.address), ""],
       mainImageIndex: data.imageResponses.findIndex(
         (value) => value.imageStatus === "썸네일",
       ),
-      content: data.content,
-      contentLength: 0,
-      hashtags: data.tagResponses.map((value) => value.name),
-      tips: data.tip.split(";"),
     });
 
     setOriginalThumbnailUrl(
       data.imageResponses.find((value) => value.imageStatus === "썸네일")
         ?.address ?? "",
+    );
+    setOriginalContentUrl(
+      data.imageResponses
+        .filter((value) => value.imageStatus !== "썸네일")
+        .map((value) => value.address),
     );
 
     return () => {
@@ -196,21 +318,23 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   }, [initialize]);
 
   return (
-    <InformationEditor
-      pathname="수정"
-      editorStore={editorStore}
-      locationModal={locationModal}
-      categoryModal={categoryModal}
-      inputTagRef={inputTagRef}
-      imagesHook={imagesHook}
-      loading={loading}
-      onSubmit={onSubmit}
-      showLocationModal={showLocationModal}
-      closeLocationModal={closeLocationModal}
-      showCategoryModal={showCategoryModal}
-      closeCategoryModal={closeCategoryModal}
-      onChangeHashTagHandler={onChangeHashTagHandler}
-    />
+    <FormProvider {...methods}>
+      <InformationEditor
+        pathname="수정"
+        editorStore={editorStore}
+        locationModal={locationModal}
+        categoryModal={categoryModal}
+        inputTagRef={inputTagRef}
+        imagesHook={imagesHook}
+        loading={loading}
+        onSubmit={onSubmit}
+        showLocationModal={showLocationModal}
+        closeLocationModal={closeLocationModal}
+        showCategoryModal={showCategoryModal}
+        closeCategoryModal={closeCategoryModal}
+        onChangeHashTagHandler={onChangeHashTagHandler}
+      />
+    </FormProvider>
   );
 };
 

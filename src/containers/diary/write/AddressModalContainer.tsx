@@ -39,7 +39,7 @@ const AddressModalContainer = ({ closeModal }: Props) => {
     const addressList: string[] = formContext.getValues("address");
     addressList[index] = "";
     formContext.setValue("address", addressList);
-    formContext.trigger();
+    formContext.trigger("address");
     closeModal();
   };
 
@@ -48,7 +48,7 @@ const AddressModalContainer = ({ closeModal }: Props) => {
     const addressList: string[] = formContext.getValues("address");
     addressList[index] = placeInfo.address_name;
     formContext.setValue("address", addressList);
-    formContext.trigger();
+    formContext.trigger("address");
     closeModal();
   };
 

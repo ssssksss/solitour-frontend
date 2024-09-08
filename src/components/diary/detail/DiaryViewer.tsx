@@ -1,3 +1,5 @@
+import DeleteIcon from "@/components/common/icons/DeleteIcon";
+import EditIcon from "@/components/common/icons/EditIcon";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import DiaryDeleteModalContainer from "@/containers/diary/detail/DiaryDeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
@@ -97,17 +99,17 @@ const DiaryViewer = ({
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
         <Link
-          className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
+          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
           href={`/diary/edit/${data.diaryContentResponse.diaryId}`}
         >
-          <GoPencil />
+          <EditIcon />
           수정
         </Link>
         <button
-          className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
+          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
           onClick={() => openModal()}
         >
-          <FaRegTrashCan />
+          <DeleteIcon />
           삭제
         </button>
       </div>
