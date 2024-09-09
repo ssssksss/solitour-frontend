@@ -1,4 +1,4 @@
-import Image from "next/image";
+import GatheringExcludeComplete from "@/components/gathering/read/GatheringExcludeComplete";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -8,7 +8,8 @@ interface IGatheringExcludeCompleteContainer {
 const GatheringExcludeCompleteContainer = (props: IGatheringExcludeCompleteContainer) => {
 
    const [isExclude, setIsExclude] = useState(true);
-   const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const checkExcludeCompleteGatheringHandler = () => {
     setIsExclude(prev => !prev);
     const url = new URL(window.location.href);
@@ -23,18 +24,24 @@ const GatheringExcludeCompleteContainer = (props: IGatheringExcludeCompleteConta
     } 
     
     useEffect(() => {
-        setIsExclude(searchParams.get('isExclude') ? false : true);
+      setIsExclude(searchParams.get('isExclude') ? false : true);
+      setLoading(false);
     },[searchParams])
 
+    if (loading)
+      return (
+        <div
+          className={`relative flex h-[2rem] w-[5rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left`}
+        ></div>
+      );
+  
   return (
-        <button className={"flex gap-1 text-sm text-black font-medium items-center"}  onClick={checkExcludeCompleteGatheringHandler}>
-            {
-            isExclude ?
-            <Image src="/common/check-active-icon.svg" alt="location-icon" width={20} height={20} /> :
-            <Image src="/common/check-empty-icon.svg" alt="location-icon" width={20} height={20} />
-            }
-            모집완료 제외
-        </button>
+    <GatheringExcludeComplete
+      isExclude={isExclude}
+      checkExcludeCompleteGatheringHandler={
+        checkExcludeCompleteGatheringHandler
+      }
+    />
   );
 };
 export default GatheringExcludeCompleteContainer

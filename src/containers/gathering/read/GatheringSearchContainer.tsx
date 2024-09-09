@@ -11,15 +11,14 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
   const [dropdownValue, setDropdownValue] = useState(
     searchParams.get("tagName") != null ? "태그" : "제목",
   );
+  const [loading, setLoading] = useState(true);
 
   const searchHandler = () => {
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search);
     if (dropdownValue == "태그") {
       // 태그 검색일 경우
-      searchValue == ""
-        ? params.delete("tagName")
-        : params.set("tagName", searchValue);
+      params.set("tagName", searchValue);
       params.delete("page");
       url.search = params.toString();
       window.history.pushState({}, "", url.toString());
@@ -59,6 +58,7 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
     const params = new URLSearchParams(url.search);
     setSearchValue(params.get("search") || params.get("tagName") || "");
     setDropdownValue(params.get("tagName") != null ? "태그" : "제목");
+    setLoading(false);
   },[searchParams])
 
   return (
@@ -68,6 +68,7 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
       searchValue={searchValue}
       setSearchValue={setSearchValue}
       searchHandler={searchHandler}
+      loading={loading}
     />
   );
 };

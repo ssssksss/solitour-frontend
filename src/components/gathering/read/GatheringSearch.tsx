@@ -7,6 +7,7 @@ interface Props {
   searchValue: string;
   setSearchValue: (value: string) => void;
   searchHandler: () => void;
+  loading: boolean;
 }
 
 const OPTIONS = [
@@ -26,7 +27,15 @@ const GatheringSearch = ({
   searchValue,
   setSearchValue,
   searchHandler,
+  loading,
 }: Props) => {
+  if (loading)
+    return (
+      <div
+        className={`relative flex h-[2.75rem] w-[21.4375rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left`}
+      ></div>
+    );
+
   return (
     <div className="flex flex-row items-center gap-4 max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start max-[744px]:w-full ">
       <div className="relative z-[1] flex flex-row items-center max-[744px]:w-full">

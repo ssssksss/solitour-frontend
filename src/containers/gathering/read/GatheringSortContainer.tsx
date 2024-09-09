@@ -17,9 +17,12 @@ const OPTIONS = [{
     name: "조회순",
 }];
 
+
 const GatheringSortContainer = (props: IGatheringSortContainer) => {
-    const searchParams = useSearchParams();
-    const [sort, setSort] = useState("");
+
+  const searchParams = useSearchParams();
+    const [sort, setSort] = useState<string>("");
+    const [loading, setLoading] = useState(true);
     
     const sortHandler = (value: string) => {
         const url = new URL(window.location.href);
@@ -33,10 +36,15 @@ const GatheringSortContainer = (props: IGatheringSortContainer) => {
     }
 
     useEffect(() => {
-        setSort(searchParams.get('sort') || "")
+        setSort(searchParams.get('sort') || "");
+        setLoading(false);
     },[searchParams])
 
-
+    if (loading) return (
+      <div
+        className={`relative flex h-[2rem] w-[3rem] flex-shrink-0 animate-pulse items-center bg-gray-300 text-left rounded-xl`}
+      ></div>
+    );
   return (
       <>
           <Dropdown options={OPTIONS} dropdownHandler={sortHandler} value={sort} defaultValue={sort}
