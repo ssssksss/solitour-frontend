@@ -198,8 +198,10 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     }
     params.delete("page");
     url.search = params.toString();
-    window.history.pushState({}, "", url.toString());
     closeModal();
+    setTimeout(() => {
+        window.history.pushState({}, "", url.toString());
+      }, 100);
   };
 
   useEffect(() => {
@@ -219,7 +221,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[3rem]"
+        "relative h-full max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem] scrollbar-hide overflow-y-scroll rounded-2xl bg-white p-[3rem]"
       }
     >
       <button
