@@ -45,7 +45,6 @@ export default async function Page({
       <TopList title="모임" />
       <GatheringListContainer
         gatheringCategoryList={gatheringCategoryList}
-        sortDefaultValue={searchParams.sort || ""}
       />
     </div>
   );

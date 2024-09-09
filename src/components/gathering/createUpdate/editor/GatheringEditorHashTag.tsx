@@ -34,14 +34,11 @@ const GatheringEditorHashTag = ({
             className="h-[3.25rem] w-full rounded-[3rem] px-[1rem] pr-[3rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]" // 오른쪽 padding 추가
             onKeyUp={onChangeHashTagHandler}
             disabled={tags.length > 9}
+            maxLength={15}
             onKeyDown={(e) => {
-              if (tags.length > 10) {
-                e.preventDefault();
-              }
               if (
                 e.key === " " ||
-                e.key === "#" ||
-                (inputTagRef.current as HTMLInputElement).value.length >= 15
+                e.key === "#"
               ) {
                 e.preventDefault();
               }

@@ -1,5 +1,5 @@
 import "@/styles/reactDataRange.css";
-import { add, format } from "date-fns";
+import { add, addDays, format, isAfter } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -19,10 +19,10 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
     {
       startDate: formContext.getValues("scheduleStartDate")
         ? new Date(formContext.getValues("scheduleStartDate"))
-        : new Date(),
+        : addDays(new Date(), 1),
       endDate: formContext.getValues("scheduleEndDate")
         ? new Date(formContext.getValues("scheduleEndDate"))
-        : new Date(),
+        : addDays(new Date(), 1),
       key: "selection",
     },
   ]);
@@ -70,7 +70,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
   return (
     <div
       className={
-        "scrollbar-hide relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white p-[1rem] max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
+        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white p-[1rem] scrollbar-hide max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
       }
     >
       <button
@@ -84,11 +84,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           height={20}
         />
       </button>
-      <h2
-        className={
-          "mt-[2rem] h-[2rem] text-2xl font-bold text-black "
-        }
-      >
+      <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         날짜 선택
       </h2>
       <div className={"flex flex-col items-center gap-[1.875rem]"}>
@@ -114,8 +110,8 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
             }}
             minDate={
               formContext.getValues("deadline")
-                ? new Date(formContext.getValues("deadline"))
-                : new Date()
+                ? addDays(new Date(formContext.getValues("deadline")), 1)
+                : addDays(new Date(), 1)
             }
             maxDate={add(new Date(), { years: 1 })}
             showDateDisplay={false}
@@ -151,6 +147,15 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
               "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
             }
             onClick={() => submitHandler()}
+            disabled={
+              !(
+                isAfter(new Date(calendarDate[0].startDate), new Date()) &&
+                isAfter(
+                  new Date(calendarDate[0].startDate),
+                  formContext.getValues("deadline") || new Date(),
+                )
+              )
+            }
           >
             <span> {format(calendarDate[0].startDate, "yy-MM-dd")} </span>
             <span>{format(calendarDate[0].startDate, "yy-MM-dd") && "~"}</span>

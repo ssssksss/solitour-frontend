@@ -11,23 +11,23 @@ const GatheringEditorChattingLink = () => {
       <div className="relative w-full">
         <input
           placeholder="참여 인원과 소통을 위해 오픈 채팅 링크를 추가해주세요."
-          maxLength={100}
+          maxLength={255}
           className={`h-[2.75rem] w-full rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
-            formContext.formState.errors.title
+            formContext.formState.errors.openChattingUrl
               ? "outline-red-500"
-              : // : formContext.getValues("chattingLink")
+              : // : formContext.getValues("openChattingUrl")
                 //   ? "outline-main"
                 "outline-[#E3E3E3]"
           }`}
-          {...formContext.register("chattingLink")}
+          {...formContext.register("openChattingUrl")}
           onChange={(e) => {
-            formContext.setValue("chattingLink", e.target.value);
-            formContext.trigger("chattingLink");
+            formContext.setValue("openChattingUrl", e.target.value);
+            formContext.trigger("openChattingUrl");
           }}
         />
-        {formContext.formState.errors.title && (
+        {formContext.formState.errors.openChattingUrl && (
           <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
-            {formContext.formState.errors.title.message as String}
+            {formContext.formState.errors.openChattingUrl.message as String}
           </span>
         )}
       </div>

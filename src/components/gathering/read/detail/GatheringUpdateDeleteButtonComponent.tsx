@@ -22,7 +22,7 @@ const GatheringUpdateDeleteButtonComponent = ({
   return (
     <>
       {authStore.id == userId && authStore.id > 0 && (
-        <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
+        <div className="mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
           <Link
             className="flex flex-row items-center gap-1 hover:text-main dark:text-slate-400"
             href={updateHref}

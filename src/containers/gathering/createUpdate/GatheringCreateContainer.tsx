@@ -2,6 +2,7 @@
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { gatheringCreateFormSchema } from "@/lib/examples/zod/schema/GatheringCreateFormSchema";
+import useToastifyStore from "@/store/toastifyStore";
 import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +13,7 @@ import { FormProvider, useForm } from "react-hook-form";
 const GatheringCreateContainer = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const toastifyStore = useToastifyStore();
   const methods = useForm({
     resolver: zodResolver(gatheringCreateFormSchema),
     defaultValues: {
@@ -31,6 +33,7 @@ const GatheringCreateContainer = () => {
       hashtags: [],
       searchId: "",
       gatheringCategoryId: 0,
+      openChattingUrl: "",
     },
   });
 
@@ -50,7 +53,7 @@ const GatheringCreateContainer = () => {
     } = methods.getValues();
     try {
       setLoading(true);
-      const response = await fetchWithAuth("/api/gathering/write", {
+      const response = await fetchWithAuth("/api/gathering", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,14 +76,18 @@ const GatheringCreateContainer = () => {
           
     }),
       });
-// TODO 에러 처리 작업 필요함
+
       if (!response.ok) {
         setLoading(false);
+        toastifyStore.setToastify({
+          type: "error",
+          message: "모임 생성 중에 에러가 발생했습니다.",
+        });
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
-      router.replace(`/gathering/${data.data.id}`)
+      router.replace(`/gathering/${data.data.id}`);
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }

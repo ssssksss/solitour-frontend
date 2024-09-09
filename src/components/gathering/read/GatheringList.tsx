@@ -31,9 +31,9 @@ const GatheringList = (props: IGatheringList) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center ">
           <GatheringCategoryListContainer gatheringCategoryList={props.gatheringCategoryList} />
-          <div className="max-[744px]:hidden min-w-max ">
+          <div className="flex max-[744px]:hidden min-w-max">
             <GatheringExcludeCompleteContainer />
           </div>
         </div>

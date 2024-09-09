@@ -2,6 +2,7 @@
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { gatheringCreateFormSchema } from "@/lib/examples/zod/schema/GatheringCreateFormSchema";
+import useToastifyStore from "@/store/toastifyStore";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
@@ -17,6 +18,7 @@ interface IGatheringUpdateContainer {
 
 const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) => {
   const router = useRouter();
+  const toastifyStore = useToastifyStore();
   const [loading, setLoading] = useState<boolean>(false);
   const methods = useForm({
     resolver: zodResolver(gatheringCreateFormSchema),
@@ -40,9 +42,13 @@ const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) =>
         new Date(gatheringData.scheduleEndDate),
         "yyyy-MM-dd HH:mm",
       ),
-      hashtags: gatheringData.tagResponses || [],
+      hashtags:
+        gatheringData.tagResponses.length > 0
+          ? gatheringData.tagResponses.map((i: { name: string }) => i.name)
+          : [],
       searchId: gatheringData.placeResponse.searchId || 0,
       gatheringCategoryId: gatheringData.gatheringCategoryResponse.id,
+      openChattingUrl: gatheringData.openChattingUrl,
     },
   });
   const params = useParams();
@@ -94,13 +100,21 @@ const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) =>
       
       if (!response.ok) {
         setLoading(false);
+        toastifyStore.setToastify({
+          type: "error",
+          message: "모임 수정 중에 에러가 발생했습니다.",
+        });
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      router.replace(`/gathering/${data.id}`);
+      // const data = await response.json();
+      // router.replace(`/gathering/${data.id}`);
+      router.replace(`/gathering`);
       router.refresh();
+      setLoading(false);
+
     } catch (error) {
+      setLoading(false);
       console.error("There was a problem with the fetch operation:", error);
     }
   }

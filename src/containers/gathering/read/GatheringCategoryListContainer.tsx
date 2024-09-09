@@ -6,7 +6,8 @@ interface IGatheringCategoryListContainer {
   gatheringCategoryList: GatheringCategoryListType;
 }
 const GatheringCategoryListContainer = ({ gatheringCategoryList }: IGatheringCategoryListContainer) => {
-    const [activeGatheringCategoryId, setActiveGatheringCategoryId] = useState(0);
+  const [activeGatheringCategoryId, setActiveGatheringCategoryId] = useState(0);
+  const [loading, setLoading] = useState(true);
     const searchParams = useSearchParams();
     const changeGatheringCategoryHandler = (id: number) => {
         setActiveGatheringCategoryId(id);
@@ -22,12 +23,26 @@ const GatheringCategoryListContainer = ({ gatheringCategoryList }: IGatheringCat
 
     useEffect(() => {
         setActiveGatheringCategoryId(+(searchParams.get('category') || 0));
+      setLoading(false);
     }, [searchParams])
   
+  if (loading) return (
+    <div
+      className={`flex animate-pulse flex-wrap items-center gap-2 text-left`}
+    >
+      {Array.from({ length: 2 }, (i) => i).map((_, index) => (
+        <div
+          className={`w-[4rem] h-[2rem] rounded-xl border-2 border-[#E9EBED] bg-gray-300 px-3 py-[0.375rem] text-sm font-medium hover:scale-105`}
+        >
+        </div>
+      ))}
+    </div>
+  );
+  
   return (
-              <div className="w-full flex justify-between">
-    <div className="flex flex-wrap items-center gap-1">
-              <button onClick={()=>changeGatheringCategoryHandler(0)} className={
+    <div className="w-full flex justify-between">
+      <div className="flex flex-wrap items-center gap-1">
+        <button onClick={()=>changeGatheringCategoryHandler(0)} className={
             `rounded-full border-2 border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 ${activeGatheringCategoryId == 0 ? "text-white bg-main" : "outline outline-[1px] outline-offset-[-1px] outline-main"}`
           }> 전체 </button>
       {gatheringCategoryList.map((i) => (
@@ -37,7 +52,7 @@ const GatheringCategoryListContainer = ({ gatheringCategoryList }: IGatheringCat
             `rounded-full border-2 border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 ${activeGatheringCategoryId == i.id ? "text-white bg-main" : "outline outline-[1px] outline-offset-[-1px] outline-main"}`
           }> {i.name} </button>
       ))}
-    </div>
+      </div>
     </div>
   );
 };

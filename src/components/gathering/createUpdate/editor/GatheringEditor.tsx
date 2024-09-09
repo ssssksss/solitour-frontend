@@ -74,6 +74,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
             onClick={() => {
               if (!formContext.formState.isValid) {
                 formContext.trigger();
+                return ;
               }
               props.isEdit == true
                 ? props.updateGatheringHandler()

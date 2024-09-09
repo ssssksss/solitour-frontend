@@ -2,35 +2,25 @@
 
 import GatheringApplicantList from "@/components/gathering/read/detail/GatheringApplicantList";
 import useAuthStore from "@/store/authStore";
+import useGatheringStore from "@/store/gatheringStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
 
-interface IApplicant {
-  userGatheringResponse: {
-    profileUrl: string;
-    nickname: string;
-    age: number;
-    sex: "male" | "female";
-    id: number;
-  };
-  gatheringStatus: "WAIT" | "CONSENT" | "REFUSE";
-}
-
 interface IGatheringApplicantListContainer {
   postUserId: number;
-  applicants: IApplicant[];
 }
 
 const GatheringApplicantListContainer =
   (props: IGatheringApplicantListContainer) => {
     const authStore = useAuthStore();
-    const [applicants, setApplicants] = useState(props.applicants);
+    const gatheringStore = useGatheringStore();
     const params = useParams();
+    const [sort, setSort] = useState("");
+    const [isSortOpen, setIsSortOpen] = useState(false); 
 
-    
-    const updateGatheringApplicantStatus = async (
+    const updateGatheringApplicantStatusHandler = async (
       status: "WAIT" | "CONSENT" | "REFUSE",
       userId: number,
     ) => {
@@ -47,18 +37,45 @@ const GatheringApplicantListContainer =
       });
 
       if (res.ok) {
-        const temp = applicants.map((i) => {
+        let _prevStatus = "";
+        const temp = gatheringStore.gatheringApplicantsResponses.map((i) => {
           if (i.userGatheringResponse.id == userId) {
+            _prevStatus = i.gatheringStatus;
             i.gatheringStatus = status;
           }
           return i;
         });
-        setApplicants(temp);
+        gatheringStore.setGathering({
+          gatheringApplicantsResponses: temp,
+          currentParticipants: gatheringStore.currentParticipants + (_prevStatus == "CONSENT" ? -1 : status == "CONSENT" ? +1 : 0)
+        })
       }
     };
 
-    if (props.postUserId == authStore.id && applicants) {
-      return <GatheringApplicantList applicants={applicants} updateGatheringApplicantStatus={updateGatheringApplicantStatus} />
+    const sortHandler = (value: string) => {
+      setSort(value);
+      setIsSortOpen(false);
+    }
+
+    if (props.postUserId == authStore.id && gatheringStore.gatheringApplicantsResponses) {
+      return (
+        <GatheringApplicantList
+          gatheringApplicantsResponses={
+            gatheringStore.gatheringApplicantsResponses
+          }
+          updateGatheringApplicantStatusHandler={
+            updateGatheringApplicantStatusHandler
+          }
+          isFullParticipants={
+            gatheringStore.currentParticipants == gatheringStore.personCount
+          }
+          sort={sort}
+          sortHandler={sortHandler}
+          setIsSortOpen={setIsSortOpen}
+          isSortOpen={isSortOpen}
+          isFinish={gatheringStore.isFinish}
+        />
+      );
     }
 
     return <></>;

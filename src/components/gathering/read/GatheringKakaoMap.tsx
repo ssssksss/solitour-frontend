@@ -5,31 +5,57 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
-  useEffect(() => {
-    if (!placeResponse.name) return;
 
-    const lat = Number(placeResponse.yaxis);
-    const lng = Number(placeResponse.xaxis);
+useEffect(() => {
+  if (!placeResponse.name) return;
 
-    window.kakao.maps.load(function () {
-      const container = document.getElementById("map");
-      const options = {
-        center: new window.kakao.maps.LatLng(lat, lng),
-        level: 3,
-      };
+  const lat = Number(placeResponse.yaxis);
+  const lng = Number(placeResponse.xaxis);
 
-      const map = new window.kakao.maps.Map(container, options);
+  const initializeMap = () => {
+    const container = document.getElementById("map");
+    const options = {
+      center: new window.kakao.maps.LatLng(lat, lng),
+      level: 3,
+    };
 
-      map.setDraggable(false);
-      map.setZoomable(false);
+    const map = new window.kakao.maps.Map(container, options);
 
-      const marker = new window.kakao.maps.Marker({
-        position: new window.kakao.maps.LatLng(lat, lng),
-      });
+    map.setDraggable(false);
+    map.setZoomable(false);
 
-      marker.setMap(map);
+    const marker = new window.kakao.maps.Marker({
+      position: new window.kakao.maps.LatLng(lat, lng),
     });
-  }, [placeResponse]);
+
+    marker.setMap(map);
+
+    const debounce = (func: (...args: any[]) => void, delay: number) => {
+      let timeout: ReturnType<typeof setTimeout>;
+      return (...args: any[]) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          func(...args);
+        }, delay);
+      };
+    };
+
+
+    const handleResize = debounce(() => {
+      map.relayout();
+      map.setCenter(new window.kakao.maps.LatLng(lat, lng));
+    }, 300);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  };
+
+  window.kakao.maps.load(initializeMap);
+}, [placeResponse]);
+
 
   return (
     <div
