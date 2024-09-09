@@ -1,16 +1,19 @@
 import GatheringSupportManagement from "@/components/gathering/read/detail/GatheringSupportManagement";
 import useAuthStore from "@/store/authStore";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
 interface IGatheringSupportManagementContainer {
-    postUserId: number;
-    gatheringStatus: string;
+  postUserId: number;
+  gatheringStatus: string;
+  isFinish: boolean;
 }
 const GatheringSupportManagementContainer = (props: IGatheringSupportManagementContainer) => {
     const authStore = useAuthStore();
   const params = useParams();
   const [gatheringStatus, setGatheringStatus] = useState<string | null>(props.gatheringStatus)
+  const [isFinish, setIsFinish] = useState(props.isFinish);  
     
     // 모임 신청하기
     const applyGathering = async () => {
@@ -31,6 +34,23 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
         setGatheringStatus(null);
       }
   }
+
+    const reOpenGathering = async () => {
+      // 모임 다시 활성화하기
+      const response = await fetchWithAuth(
+        `/api/gathering/finish?isFinish=true&id=${params.id}`,
+        {
+          method: "PUT",
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        return;
+      }
+
+      setIsFinish(false);
+    };
 
   if (authStore.id < 1) return; 
 
