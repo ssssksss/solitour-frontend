@@ -66,6 +66,17 @@ export type GatheringRecommend = {
 
 // 모임 상세 페이지 타입
 
+export interface gatheringApplicantsResponsesDto {
+  userGatheringResponse: {
+    id: number;
+    profileUrl: string;
+    nickname: string;
+    age: number;
+    sex: string;
+  },
+  gatheringStatus: 'WAIT' | 'CONSENT' | 'REFUSE'
+}
+
 export interface GatheringDetailResponseDto {
   title: string;
   content: string;
@@ -85,11 +96,12 @@ export interface GatheringDetailResponseDto {
   zoneCategoryResponse: ZoneCategoryResponse;
   likeCount: number;
   nowPersonCount: number;
-  gatheringApplicantsResponses: any[];
+  gatheringApplicantsResponses: gatheringApplicantsResponsesDto[];
   gatheringRecommend: GatheringRecommend[];
   isLike: boolean;
   gatheringCategoryResponse: { id: number; name: string };
   gatheringStatus: string;
+  openChattingUrl: string;
 };
 
 
@@ -116,6 +128,7 @@ export interface Gathering {
   isLike: boolean;
   gatheringStatus?: "CONSENT" | "REFUSE" | "WAIT";
   isFinish?: boolean;
+  openChattingUrl: string;
 }
 
 interface Sort {
