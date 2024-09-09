@@ -42,12 +42,6 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
       const scheduleDate = new Date(scheduleStartDate);
       // 날짜가 유효한지 확인
       if (isValid(scheduleDate)) {
-        console.log(
-          "GatheringDeadlineModal.tsx 파일 : ",
-          compareAsc(new Date(scheduleStartDate), oneYearFromToday) < 1
-            ? new Date(scheduleStartDate)
-            : oneYearFromToday,
-        );
         return compareAsc(new Date(scheduleStartDate), oneYearFromToday) < 1
           ? new Date(scheduleStartDate)
           : oneYearFromToday;

@@ -1,5 +1,5 @@
 import "@/styles/reactDataRange.css";
-import { add, addDays, format } from "date-fns";
+import { add, addDays, format, isAfter } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -147,6 +147,15 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
               "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
             }
             onClick={() => submitHandler()}
+            disabled={
+              !(
+                isAfter(new Date(calendarDate[0].startDate), new Date()) &&
+                isAfter(
+                  new Date(calendarDate[0].startDate),
+                  formContext.getValues("deadline") || new Date(),
+                )
+              )
+            }
           >
             <span> {format(calendarDate[0].startDate, "yy-MM-dd")} </span>
             <span>{format(calendarDate[0].startDate, "yy-MM-dd") && "~"}</span>
