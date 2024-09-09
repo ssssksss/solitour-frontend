@@ -9,6 +9,7 @@ export interface CreateDiaryRequestDto {
   diaryDayRequests: {
     content: string;
     feelingStatus: string;
+    diaryDayContentImages: string;
     place: string;
   }[];
 }
@@ -27,6 +28,7 @@ export interface GetDiaryResponseDto {
       diaryDayContentDetail: {
         content: string;
         feelingStatus: string;
+        diaryDayContentImages: string;
         place: string;
       }[];
     };
@@ -47,6 +49,7 @@ export interface GetDiaryListResponseDto {
       diaryDayContentDetail: {
         content: string;
         feelingStatus: string;
+        contentImage: string;
         place: string;
       }[];
     };
@@ -61,12 +64,15 @@ export interface GetDiaryListResponseDto {
  */
 export interface UpdateDiaryRequestDto {
   title: string;
-  titleImage: string;
+  deleteTitleImage: string;
+  saveTitleImage: string;
   startDatetime: Date;
   endDatetime: Date;
   diaryDayRequests: {
     content: string;
     feelingStatus: string;
+    deleteImagesUrl: string;
+    saveImagesUrl: string;
     place: string;
   }[];
 }

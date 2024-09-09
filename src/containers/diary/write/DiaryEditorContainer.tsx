@@ -52,6 +52,14 @@ const DiaryEditorContainer = () => {
         .querySelector("img")
         ?.getAttribute("src") ?? "";
 
+    const contentImagesUrl = methods.getValues("contents").map((content) =>
+      parse(content)
+        .querySelectorAll("img")
+        .filter((img) => img.getAttribute("src") !== imageUrl)
+        .map((img) => img.getAttribute("src") ?? "")
+        .join(","),
+    );
+
     if (imageUrl === "") {
       alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
       return;
@@ -77,6 +85,7 @@ const DiaryEditorContainer = () => {
         (_, index) => ({
           content: sanitizeHtml(contents[index], sanitizeOption),
           feelingStatus: FEELING_STATUS[moodLevels[index]],
+          diaryDayContentImages: contentImagesUrl[index],
           place: address[index],
         }),
       ),
