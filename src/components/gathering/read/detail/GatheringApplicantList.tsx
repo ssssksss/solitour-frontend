@@ -1,105 +1,143 @@
-
-interface IApplicant {
-  userGatheringResponse: {
-    profileUrl: string;
-    nickname: string;
-    age: number;
-    sex: "male" | "female";
-    id: number;
-  };
-  gatheringStatus: "WAIT" | "CONSENT" | "REFUSE";
-}
+import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
+import Image from "next/image";
+import GatheringApplicantButton from "./GatheringApplicantButton";
 
 interface IGatheringApplicantList {
-  applicants: IApplicant[];
-  updateGatheringApplicantStatus: (
+  gatheringApplicantsResponses: gatheringApplicantsResponsesDto[];
+  updateGatheringApplicantStatusHandler: (
     status: "WAIT" | "CONSENT" | "REFUSE",
     userId: number,
   ) => void;
+  isFullParticipants: boolean;
+  sort: string;
+  sortHandler: (value: string) => void;
+  setIsSortOpen: (value: boolean) => void;
+  isSortOpen: boolean;
+  isFinish: boolean;
 }
 
-const GatheringApplicantList = (props: IGatheringApplicantList) => {
+const GatheringApplicantList = ({
+  gatheringApplicantsResponses,
+  updateGatheringApplicantStatusHandler,
+  isFullParticipants,
+  sort,
+  sortHandler,
+  setIsSortOpen,
+  isSortOpen,
+  isFinish,
+}: IGatheringApplicantList) => {
   return (
-    <div className="mt-[3.625rem] flex max-h-[28.5rem] w-full flex-col rounded-[1rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
-      <div className="flex h-[3.5rem] w-full border-b-[1px] border-b-gray3 px-4 py-1 font-bold">
-        <div className="flex w-1/12 flex-col items-center justify-center max-[600px]:text-xs">
+    <div className="mt-[3.625rem] flex h-auto w-full flex-col rounded-[1rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
+      <div
+        className={`grid h-[4.5rem] w-full border-b-[1px] border-b-gray3 py-1 font-bold ${isFinish ? "grid-cols-[80px_auto_40px_40px] min-[577px]:grid-cols-[80px_auto_80px_80px] min-[800px]:grid-cols-[120px_auto_120px_120px]" : "max-[576px]:grid-cols-[80px_auto_40px_40px_60px] min-[577px]:grid-cols-[80px_auto_40px_40px_200px] min-[800px]:grid-cols-[80px_260px_80px_80px_auto]"}`}
+      >
+        <div className="flex flex-col items-center justify-center max-[600px]:text-xs">
           <span> 프로필 </span>
           <span> 이미지 </span>
         </div>
-        <div className="flex w-1/6 items-center justify-center">닉네임</div>
-        <div className="flex w-1/6 items-center justify-center">나이</div>
-        <div className="flex w-1/6 items-center justify-center">성별</div>
-        <div className="flex w-5/12 items-center justify-center">
-          모임 신청 상태
-        </div>
-      </div>
-      <div className="max-h-[25rem] overflow-y-scroll">
-        {props.applicants.map((applicant, index) => (
-          <div
-            key={index}
-            className="flex h-[5rem] w-full items-start border-b p-4"
+        <div className="flex items-center justify-center">닉네임</div>
+        <div className="flex items-center justify-center">나이</div>
+        <div className="flex items-center justify-center">성별</div>
+        {!isFinish && (
+          <button
+            className="relative flex items-center justify-center"
+            onClick={() => setIsSortOpen(!isSortOpen)}
           >
-            <div className="flex w-1/12 items-center justify-center">
-              <img
-                src={applicant.userGatheringResponse.profileUrl}
-                alt="Profile"
-                className="h-12 w-12 rounded-full object-cover"
+            <div className={"flex gap-x-2"}>
+              상태
+              <Image
+                src="/common/dropdown-down-arrow.svg"
+                className="translate-y-[0.125rem]"
+                alt="location-icon"
+                width={12}
+                height={6}
               />
             </div>
-            <div className="flex h-full w-1/6 items-center justify-center">
-              {applicant.userGatheringResponse.nickname}
-            </div>
-            <div className="flex h-full w-1/6 flex-col items-center justify-center">
-              <span> {applicant.userGatheringResponse.age}년 </span>
-              <span>
-                {"("}
-                {new Date().getFullYear() - applicant.userGatheringResponse.age}
-                살{")"}
-              </span>
-            </div>
-            <div className="flex h-full w-1/6 items-center justify-center">
-              {applicant.userGatheringResponse.sex === "male" ? "남성" : "여성"}
-            </div>
-            <div className="flex w-5/12 items-center justify-center space-x-2">
-              <button
-                className={`h-[3.25rem] w-[6.75rem] rounded-[2rem] py-2 ${applicant.gatheringStatus === "CONSENT" ? "bg-main text-white" : "bg-white outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"}`}
-                onClick={() =>
-                  props.updateGatheringApplicantStatus(
-                    "CONSENT",
-                    applicant.userGatheringResponse.id,
-                  )
-                }
-              >
-                승인
-              </button>
-              <button
-                className={`h-[3.25rem] w-[6.75rem] rounded-[2rem] py-2 ${applicant.gatheringStatus === "REFUSE" ? "bg-[#EE4C4A] text-white" : "bg-white outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"}`}
-                onClick={() =>
-                  props.updateGatheringApplicantStatus(
-                    "REFUSE",
-                    applicant.userGatheringResponse.id,
-                  )
-                }
-              >
-                거절
-              </button>
-              <button
-                className={`h-[3.25rem] w-[6.75rem] rounded-[2rem] py-2 ${applicant.gatheringStatus === "WAIT" ? "bg-gray2 text-white" : "bg-white outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"}`}
-                onClick={() =>
-                  props.updateGatheringApplicantStatus(
-                    "WAIT",
-                    applicant.userGatheringResponse.id,
-                  )
-                }
-              >
-                대기
-              </button>
-            </div>
-          </div>
-        ))}
+            {isSortOpen && (
+              <ul className="absolute bottom-[-8.25rem] z-10 flex w-full flex-col bg-white outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
+                {[
+                  { label: "전체", value: "" },
+                  { label: "승인", value: "CONSENT" },
+                  { label: "거절", value: "REFUSE" },
+                  { label: "대기", value: "WAIT" },
+                ].map((option, index) => (
+                  <li
+                    key={index}
+                    className={"h-[2rem] hover:bg-gray3 hover:text-main"}
+                  >
+                    <button
+                      className={"h-full w-full"}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        sortHandler(option.value);
+                      }}
+                    >
+                      {option.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </button>
+        )}
       </div>
+      {gatheringApplicantsResponses.length < 1 ? (
+        <div className="flex h-[4rem] w-full items-center justify-center text-lg">
+          지원자가 없습니다.
+        </div>
+      ) : (
+        <div className="max-h-[25rem] overflow-y-scroll scrollbar-hide">
+          {gatheringApplicantsResponses
+            .filter((i) => {
+              if (isFinish) return i.gatheringStatus == "CONSENT";
+              if (sort == "") return true;
+              if (i.gatheringStatus == sort) return true;
+            })
+            .map((applicant, index) => (
+              <div
+                key={index}
+                className={`relative grid w-full items-start border-b ${isFinish ? "grid-cols-[80px_auto_40px_40px] min-[577px]:grid-cols-[80px_auto_80px_80px] min-[800px]:grid-cols-[120px_auto_120px_120px]" : "max-[576px]:grid-cols-[80px_auto_40px_40px_60px] min-[577px]:grid-cols-[80px_auto_40px_40px_200px] min-[800px]:grid-cols-[80px_260px_80px_80px_auto]"}`}
+              >
+                <div className="flex h-full items-center justify-center py-4">
+                  <img
+                    src={applicant.userGatheringResponse.profileUrl}
+                    alt="Profile"
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                </div>
+                <div className="flex h-full w-full items-center justify-center py-4 text-center">
+                  {applicant.userGatheringResponse.nickname}
+                </div>
+                <div className="flex h-full flex-col items-center justify-center py-4">
+                  {/* <span> {applicant.userGatheringResponse.age}년 </span> */}
+                  <span>
+                    {`
+                  ${
+                    new Date().getFullYear() -
+                    applicant.userGatheringResponse.age
+                  }
+                  `}
+                  </span>
+                </div>
+                <div className="flex h-full items-center justify-center py-4">
+                  {applicant.userGatheringResponse.sex === "male" ? "남" : "여"}
+                </div>
+                {!isFinish && (
+                  <GatheringApplicantButton
+                    applicant={applicant}
+                    isFullParticipants={isFullParticipants}
+                    updateGatheringApplicantStatusHandler={
+                      updateGatheringApplicantStatusHandler
+                    }
+                  />
+                )}
+              </div>
+            ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default GatheringApplicantList;
+
