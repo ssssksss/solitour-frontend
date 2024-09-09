@@ -1,4 +1,5 @@
 import GatheringSupportManagement from "@/components/gathering/read/detail/GatheringSupportManagement";
+import useModalState from "@/hooks/useModalState";
 import useAuthStore from "@/store/authStore";
 import useGatheringStore from "@/store/gatheringStore";
 import useToastifyStore from "@/store/toastifyStore";
@@ -23,6 +24,9 @@ const GatheringSupportManagementContainer = (
     props.gatheringStatus,
   );
   const [isFinish, setIsFinish] = useState(props.isFinish);
+  const modalState = useModalState();
+  const modalState1 = useModalState();
+  const modalState2 = useModalState();
   // 모임 신청하기
   const applyGathering = async () => {
     const res = await fetchWithAuth(`/api/gathering/apply?id=${params.id}`, {
@@ -98,6 +102,9 @@ const GatheringSupportManagementContainer = (
       applyGathering={applyGathering}
       cancelGathering={cancelGathering}
       gatheringStatus={gatheringStatus}
+      modalState={modalState}
+      modalState1={modalState1}
+      modalState2={modalState2}
       isFinish={isFinish}
       openChattingUrl={props.openChattingUrl}
       reOpenGathering={reOpenGathering}
