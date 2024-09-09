@@ -1,5 +1,6 @@
 import GatheringSupportManagement from "@/components/gathering/read/detail/GatheringSupportManagement";
 import useAuthStore from "@/store/authStore";
+import useGatheringStore from "@/store/gatheringStore";
 import useToastifyStore from "@/store/toastifyStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams } from "next/navigation";
@@ -9,42 +10,48 @@ interface IGatheringSupportManagementContainer {
   postUserId: number;
   gatheringStatus: string;
   isFinish: boolean;
+  openChattingUrl: string;
 }
-const GatheringSupportManagementContainer = (props: IGatheringSupportManagementContainer) => {
+const GatheringSupportManagementContainer = (
+  props: IGatheringSupportManagementContainer,
+) => {
   const authStore = useAuthStore();
+  const gatheringStore = useGatheringStore();
+  const toastifyStore = useToastifyStore();
   const params = useParams();
   const [gatheringStatus, setGatheringStatus] = useState<string | null>(
     props.gatheringStatus,
   );
   const [isFinish, setIsFinish] = useState(props.isFinish);
-  const toastifyStore = useToastifyStore();
-
   // 모임 신청하기
   const applyGathering = async () => {
-    const res = await fetch(`/api/gathering/apply?id=${params.id}`, {
+    const res = await fetchWithAuth(`/api/gathering/apply?id=${params.id}`, {
       method: "POST",
     });
     if (res.ok) {
       setGatheringStatus("WAIT");
-    }
       toastifyStore.setToastify({
         type: "success",
         message: "모임을 신청했습니다.",
       });
+    }
   };
 
   // 모임 신청 취소 및 모임 신청 이후 취소, 승인 이후에도 취소 가능
   const cancelGathering = async () => {
-    const res = await fetch(`/api/gathering/apply?id=${params.id}`, {
+    const res = await fetchWithAuth(`/api/gathering/apply?id=${params.id}`, {
       method: "DELETE",
     });
     if (res.ok) {
       setGatheringStatus(null);
+      gatheringStore.setGathering({
+        currentParticipants: gatheringStore.currentParticipants - 1,
+      });
+      toastifyStore.setToastify({
+        type: "warning",
+        message: "모임을 취소했습니다.",
+      });
     }
-            toastifyStore.setToastify({
-              type: "warning",
-              message: "모임을 취소했습니다.",
-            });
   };
 
   const reOpenGathering = async () => {
@@ -66,6 +73,9 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
     }
 
     setIsFinish(false);
+    gatheringStore.setGathering({
+      isFinish: false,
+    });
     toastifyStore.setToastify({
       type: "success",
       message: "모임이 활성화 되었습니다.",
@@ -88,7 +98,13 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
       applyGathering={applyGathering}
       cancelGathering={cancelGathering}
       gatheringStatus={gatheringStatus}
+      isFinish={isFinish}
+      openChattingUrl={props.openChattingUrl}
+      reOpenGathering={reOpenGathering}
+      isFullParticipants={
+        gatheringStore.personCount == gatheringStore.currentParticipants
+      }
     />
   );
 };
-export default GatheringSupportManagementContainer
+export default GatheringSupportManagementContainer;
