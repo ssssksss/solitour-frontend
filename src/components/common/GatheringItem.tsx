@@ -39,7 +39,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-auto flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600`}
+      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-auto flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[744px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600`}
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
@@ -70,7 +70,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
         <div className="flex flex-col gap-[0.625rem]">
           <div
             className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[745px]:flex min-[745px]:grid-cols-1 min-[745px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
+              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
             }
           >
             <article className="flex flex-row items-center gap-2">
@@ -106,7 +106,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
           </div>
           <div
             className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[745px]:flex min-[745px]:grid-cols-1 min-[745px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
+              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
             }
           >
             <article className="flex h-[1.25rem] w-full flex-row items-center gap-2 dark:text-slate-400">
