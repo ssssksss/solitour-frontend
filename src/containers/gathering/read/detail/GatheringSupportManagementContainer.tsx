@@ -39,6 +39,12 @@ const GatheringSupportManagementContainer = (
         message: "모임을 신청했습니다.",
       });
     }
+    if (!res.ok) {
+      toastifyStore.setToastify({
+        type: "error",
+        message: "모임을 신청에 실패했습니다.",
+      });
+    }
   };
 
   // 모임 신청 취소 및 모임 신청 이후 취소, 승인 이후에도 취소 가능
@@ -54,6 +60,12 @@ const GatheringSupportManagementContainer = (
       toastifyStore.setToastify({
         type: "warning",
         message: "모임을 취소했습니다.",
+      });
+    }
+    if (!res.ok) {
+      toastifyStore.setToastify({
+        type: "error",
+        message: "모임을 취소에 실패했습니다.",
       });
     }
   };
