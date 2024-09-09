@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 
 const GatheringEditorHashTagContainer = () => {
   const formContext = useFormContext();
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(formContext.getValues("hashtags") ? formContext.getValues("hashtags") : []);
   const inputTagRef = useRef<HTMLInputElement>(null);
 
   // 태그 클릭해서 지울 때
@@ -43,8 +43,6 @@ const onChangeHashTagHandler = (
       formContext.trigger("hashtags");
   }
 };
-
-
 
   return (
     <>
