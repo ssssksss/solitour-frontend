@@ -5,10 +5,9 @@ import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
 
 interface IgatheringCategoryList {
   gatheringCategoryList: GatheringCategoryListType;
-  sortDefaultValue: string;
 }
 
-const GatheringListContainer = ({gatheringCategoryList, sortDefaultValue}:IgatheringCategoryList) => {
+const GatheringListContainer = ({gatheringCategoryList}:IgatheringCategoryList) => {
 
   return (
     <GatheringList

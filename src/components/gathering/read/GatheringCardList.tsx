@@ -16,7 +16,7 @@ const GatheringCardList = ({
         lottieFile={LottieFile}
         className={"w-[20rem]"}
       />
-      <div> 검색 내용이 없습니다. </div>
+      <div> 찾는 내용이 없습니다. </div>
       </div>
     ) : 
     <div className="my-6 grid min-h-[20rem] w-full justify-items-center gap-x-3 gap-y-3 min-[745px]:grid-cols-2">

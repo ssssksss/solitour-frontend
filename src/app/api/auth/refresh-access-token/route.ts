@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
           "Access-Control-Allow-Origin": "*",
         },
         cache: "no-store",
-        credentials: "include",
       },
     );
     const result = new NextResponse(
