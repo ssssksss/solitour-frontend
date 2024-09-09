@@ -2,6 +2,7 @@ import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
+import ReactToastifyComponent from "./ReactToastifyComponent";
 
 interface Props {
   pathname: string;
@@ -25,6 +26,7 @@ const Header = ({
   return (
     <header className="flex w-full flex-row justify-center">
       {visible && <HeaderSidebarContainer onClose={onClose} />}
+      <ReactToastifyComponent />
       <div
         className={
           "fixed right-0 top-0 z-40 flex w-full justify-center shadow" +
