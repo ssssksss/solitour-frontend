@@ -55,6 +55,7 @@ const DiaryEditorContainer = () => {
     const contentImagesUrl = methods.getValues("contents").map((content) =>
       parse(content)
         .querySelectorAll("img")
+        .filter((img) => img.getAttribute("src") !== imageUrl)
         .map((img) => img.getAttribute("src") ?? "")
         .join(","),
     );
