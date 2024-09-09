@@ -32,16 +32,6 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
       }
   }
 
-  // 모임 제거
-    const removeGathering = async () => {
-      const res = await fetch(`/api/gathering?id=${params.id}`, {
-        method: "DELETE",
-      });
-      if (res.ok) {
-        alert("모임 제거 완료")
-      }
-    };
-  
   if (authStore.id < 1) return; 
 
   return (
@@ -51,7 +41,6 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
       applyGathering={applyGathering}
       cancelGathering={cancelGathering}
       gatheringStatus={gatheringStatus}
-      removeGathering={removeGathering}
     />
   );
 };
