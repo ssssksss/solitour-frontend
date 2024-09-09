@@ -4,7 +4,7 @@ import Pagination from "@/components/common/Pagination";
 import GatheringCardList from "@/components/gathering/read/GatheringCardList";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
 import { GatheringListFilterSchema } from "@/lib/examples/zod/schema/GatheringListFilterSchema";
-import { Gathering, GatheringsResponse } from "@/types/GatheringDto";
+import { Gathering } from "@/types/GatheringDto";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -98,9 +98,9 @@ const GatheringCardListContainer = () => {
           // throw new Error(response.statusText);
           return ;
         }
-        const data: GatheringsResponse = await response.json();
+        const data = await response.json();
         setElements(data.content);
-        setTotalElements(data.totalElements);
+        setTotalElements(data.page.totalElements);
         setCurrentPage(params.get("page") ? Number(params.get("page")) + 1 : 1);
       } finally {
         setLoading(false);
