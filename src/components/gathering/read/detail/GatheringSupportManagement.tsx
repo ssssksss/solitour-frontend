@@ -1,10 +1,22 @@
+import { Modal } from "@/components/common/modal/Modal";
+import GatheringStatusChangeModalContainer from "@/containers/gathering/read/detail/GatheringStatusChangeModalContainer";
+import { ModalState } from "@/types/ModalState";
+import ConfirmModal from './../../../common/modal/ConfirmModal';
+import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
+
 interface IGatheringSupportManagement {
   postUserId: number;
   userId: number;
   applyGathering: () => void;
   cancelGathering: () => void;
   gatheringStatus: string | null;
-  removeGathering: () => void;
+  modalState: ModalState;
+  modalState1: ModalState;
+  modalState2: ModalState;
+  isFinish: boolean,
+  openChattingUrl: string;
+  reOpenGathering: () => void;
+  isFullParticipants: boolean;
 }
 const GatheringSupportManagement = ({
   postUserId,
@@ -12,25 +24,56 @@ const GatheringSupportManagement = ({
   applyGathering,
   cancelGathering,
   gatheringStatus,
-  removeGathering,
+  modalState,
+  modalState1,
+  modalState2,
+  isFinish,
+  openChattingUrl,
+  reOpenGathering,
+  isFullParticipants,
 }: IGatheringSupportManagement) => {
+
   if (postUserId == userId && userId > 0) {
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
+        {modalState.isOpen && (
+          <GatheringStatusChangeModalContainer
+            isFinish={isFinish}
+            closeModal={() => modalState.closeModal()}
+          />
+        )}
+        <Modal
+          isOpen={modalState1.isOpen}
+          onClose={() => modalState1.closeModal()}
+          isHeaderBar={true}
+        >
+          <GatheringChattingLinkCheckModal
+            closeModal={() => modalState1.closeModal()}
+            openChattingUrl={openChattingUrl}
+          />
+        </Modal>
         <button
           className={
             "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] outline outline-[1px] outline-offset-[-1px] outline-gray3"
           }
+          onClick={() => modalState1.openModal()}
         >
           채팅방 가기
         </button>
         <button
-          onClick={removeGathering}
+          onClick={() => {
+            isFinish ? reOpenGathering() : modalState.openModal()
+          }}
           className={
-            "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3"
+            `h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`
           }
         >
-          모임 마감하기
+          {
+            isFinish ? 
+            "모임 마감"
+            :
+          "모임 마감하기"
+          }
         </button>
       </div>
     );
@@ -38,12 +81,38 @@ const GatheringSupportManagement = ({
   if (postUserId != userId && userId > 0) {
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
+        <Modal
+          isOpen={modalState1.isOpen}
+          onClose={() => modalState1.closeModal()}
+          isHeaderBar={true}
+        >
+          <GatheringChattingLinkCheckModal
+            closeModal={() => modalState1.closeModal()}
+            openChattingUrl={openChattingUrl}
+          />
+        </Modal>
+        <Modal
+          isOpen={modalState2.isOpen}
+          onClose={() => modalState2.closeModal()}
+          isHeaderBar={true}
+        >
+          <ConfirmModal
+            onConfirmClick={() => {
+              cancelGathering();
+              modalState2.closeModal();
+            }}
+            onCancelClick={() => modalState2.closeModal()}
+            mainMessage={["모임 신청을 취소하시겠습니까?"]}
+            loading={false}
+          />
+        </Modal>
         {
           <button
             disabled={gatheringStatus != "CONSENT"}
             className={
               "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] outline outline-[1px] outline-offset-[-1px] outline-gray3 disabled:bg-gray3"
             }
+            onClick={() => modalState1.openModal()}
           >
             채팅방 열기
           </button>
@@ -69,7 +138,7 @@ const GatheringSupportManagement = ({
         )}
         {gatheringStatus == "CONSENT" && (
           <button
-            onClick={cancelGathering}
+            onClick={() => modalState2.openModal()}
             className={
               "flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] bg-main text-sm text-white outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
             }
@@ -80,11 +149,10 @@ const GatheringSupportManagement = ({
         {gatheringStatus == null && (
           <button
             onClick={applyGathering}
-            className={
-              "flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
-            }
+            className={`${isFullParticipants && "bg-gray3"} flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
+            disabled={isFullParticipants}
           >
-            모임 신청하기
+            {isFullParticipants ? "정원 초과" : "모임 신청하기"}
           </button>
         )}
       </div>
