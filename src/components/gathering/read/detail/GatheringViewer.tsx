@@ -9,7 +9,6 @@ import { ko } from 'date-fns/locale';
 import Image from "next/image";
 import GatheringDeleteModalContainer from "../../../../containers/gathering/read/detail/GatheringDeleteModalContainer";
 import GatheringLike from "../../../../containers/gathering/read/GatheringLikeContainer";
-import Breadcrumbs from "../../../common/Breadcrumb";
 import GatheringKakaoMap from "../GatheringKakaoMap";
 import GatheringUpdateDeleteButtonComponent from "./GatheringUpdateDeleteButtonComponent";
 
@@ -17,15 +16,15 @@ interface IGatheringViewer {
   data: GatheringDetailResponseDto;
   postId: number;
   modalState: ModalState;
+  currentParticipants: number;
 }
 
-const categories = [
-  { label: "모임", href: "/gathering" },
-  { label: "모임 상세", href: "" },
-];
-
-const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
-
+const GatheringViewer = ({
+  data,
+  postId,
+  modalState,
+  currentParticipants,
+}: IGatheringViewer) => {
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
       {modalState.isOpen && (
@@ -33,8 +32,6 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           closeModal={() => modalState.closeModal()}
         />
       )}
-      {/* 제일 상단 */}
-      <Breadcrumbs categories={categories} />
       {/* 제목 부분 */}
       <article className="w-full px-[.25rem] pb-[2.25rem]">
         {/* 제목, 신청 버튼 */}
@@ -45,6 +42,8 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           <GatheringSupportManagementContainer
             postUserId={data.userPostingResponse.id}
             gatheringStatus={data.gatheringStatus}
+            isFinish={data.isFinish}
+            openChattingUrl={data.openChattingUrl}
           />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
@@ -88,23 +87,23 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           </div>
         </div>
       </article>
-      {/* 제한 부분 */}
+      {/* 제한 부분(날짜, 장소, 인원, 시간) */}
       <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm sm:grid-cols-[320px_auto] min-[800px]:grid-cols-2">
         <div className="flex gap-x-3">
           <Image
             src={"/calendar-icon.svg"}
             alt={"calendar-icon-image"}
-            width={10}
-            height={10}
+            width={14}
+            height={14}
           />
           <div>
             {format(
               new Date(data.scheduleStartDate),
-              "yyyy-MM-dd HH:mm (EE) ~ ",
+              "yyyy.MM.dd HH:mm (EE) ~ ",
               { locale: ko },
             )}
             {data.scheduleEndDate &&
-              format(new Date(data.scheduleEndDate), "yyyy-MM-dd HH:mm (EE)", {
+              format(new Date(data.scheduleEndDate), "yyyy.MM.dd HH:mm (EE)", {
                 locale: ko,
               })}
           </div>
@@ -113,29 +112,33 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           <Image
             src={"/location-icon.svg"}
             alt={"location-icon-image"}
-            width={10}
-            height={10}
+            width={14}
+            height={14}
           />
           <div>
-            {data.zoneCategoryResponse.parentZoneCategory?.name} {","}
-            {data.zoneCategoryResponse.name}
+            {data.zoneCategoryResponse.parentZoneCategory?.name == "세종"
+              ? "세종"
+              : `
+              ${data.zoneCategoryResponse.parentZoneCategory?.name} ,
+              ${data.zoneCategoryResponse.name}
+            `}
           </div>
         </div>
         <div className="flex gap-x-3">
           <Image
             src={"/people-icon.svg"}
             alt={"people-icon-image"}
-            width={10}
-            height={10}
+            width={14}
+            height={14}
           />
           <div>
             <span
-              className={`${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
+              className={`${data.personCount == currentParticipants && "text-[#ff0000]"}`}
             >
               <span
-                className={`text-main ${data.nowPersonCount / data.personCount > 0.5 && "text-[#FC9F3A]"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
+                className={`${data.personCount == currentParticipants ? "text-[#ff0000]" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"}`}
               >
-                {data.nowPersonCount}
+                {currentParticipants || data.nowPersonCount}
               </span>
               / {data.personCount}
             </span>
@@ -154,8 +157,8 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
           <Image
             src={"/clock-icon.svg"}
             alt={"clock-icon-image"}
-            width={10}
-            height={10}
+            width={14}
+            height={14}
           />
           <div> {format(new Date(data.scheduleStartDate), "HH:mm")} </div>
         </div>
@@ -165,15 +168,16 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
         <Image
           src={"/gathering/green_pin.svg"}
           alt={"clock-icon-image"}
-          width={16}
-          height={16}
+          width={14}
+          height={14}
         />
-        <span> 모집 마감일 : </span>
-        <span>
-          {format(new Date(data.deadline), "yyyy-MM-dd HH:mm(EE) 까지", {
-            locale: ko,
-          })}
-        </span>
+          {format(
+            new Date(data.deadline),
+            "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
+            {
+              locale: ko,
+            },
+          )}
       </div>
       <div className="mb-[1.25rem] whitespace-pre-wrap pt-[2rem]">
         {data.content}
@@ -197,7 +201,6 @@ const GatheringViewer = ({ data, postId, modalState }: IGatheringViewer) => {
       </div>
       <GatheringApplicantListContainer
         postUserId={data.userPostingResponse.id}
-        applicants={data.gatheringApplicantsResponses}
       />
       <GatheringUpdateDeleteButtonComponent
         userId={data.userPostingResponse.id}
