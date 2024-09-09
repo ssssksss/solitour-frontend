@@ -1,5 +1,6 @@
 import GatheringSupportManagement from "@/components/gathering/read/detail/GatheringSupportManagement";
 import useAuthStore from "@/store/authStore";
+import useToastifyStore from "@/store/toastifyStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -16,6 +17,7 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
     props.gatheringStatus,
   );
   const [isFinish, setIsFinish] = useState(props.isFinish);
+  const toastifyStore = useToastifyStore();
 
   // 모임 신청하기
   const applyGathering = async () => {
@@ -25,6 +27,10 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
     if (res.ok) {
       setGatheringStatus("WAIT");
     }
+      toastifyStore.setToastify({
+        type: "success",
+        message: "모임을 신청했습니다.",
+      });
   };
 
   // 모임 신청 취소 및 모임 신청 이후 취소, 승인 이후에도 취소 가능
@@ -35,6 +41,10 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
     if (res.ok) {
       setGatheringStatus(null);
     }
+            toastifyStore.setToastify({
+              type: "warning",
+              message: "모임을 취소했습니다.",
+            });
   };
 
   const reOpenGathering = async () => {
@@ -48,10 +58,18 @@ const GatheringSupportManagementContainer = (props: IGatheringSupportManagementC
     );
 
     if (!response.ok) {
+      toastifyStore.setToastify({
+        type: "error",
+        message: "모임 활성화를 실패하였습니다.",
+      });
       return;
     }
 
     setIsFinish(false);
+    toastifyStore.setToastify({
+      type: "success",
+      message: "모임이 활성화 되었습니다.",
+    });
   };
 
   // 로그인 작업이 처리되기전에 authStore.id == 0
