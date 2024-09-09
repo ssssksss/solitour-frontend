@@ -121,21 +121,21 @@ const InformationSearch = ({
           >
             <Link
               className={`${order === "latest" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "likes" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "views" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "$tagName"}=${searchValue}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               조회순
