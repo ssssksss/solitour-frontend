@@ -43,7 +43,7 @@ const DateRangeModal = ({
           rangeColors={["#00B488"]}
         />
         <button
-          className="h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
+          className="mt-4 h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
           type="button"
           onClick={() => onChangeDateRange()}
         >

@@ -9,6 +9,7 @@ export interface CreateDiaryRequestDto {
   diaryDayRequests: {
     content: string;
     feelingStatus: string;
+    diaryDayContentImages: string;
     place: string;
   }[];
 }
