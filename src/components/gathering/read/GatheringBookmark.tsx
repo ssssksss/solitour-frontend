@@ -41,29 +41,29 @@ const GatheringBookmark = (props: IGatheringBookmark) => {
     };
 
     return (
-        <button
-            onClick={userId > 0 ? handleClick : undefined}
-            disabled={loading}
-            className={`${userId > 0 ? `hover:scale-125` : `cursor-default`} text-sm flex flex-row items-center gap-1 ${loading ? 'text-gray-400' : 'text-gray-600'} dark:${loading ? 'text-slate-400' : 'text-slate-200'}`}
-        >
-            <div className="relative h-4 w-4 text-white dark:text-slate-200">
-                {isBookmarked ? (
-                    <Image
-                        src="/common/bookmark-active-icon.svg"
-                        alt="bookmark-icon"
-                        fill={true}
-                        style={{ objectFit: 'contain' }}
-                    />
-                ) : (
-                    <Image
-                        src="/common/bookmark-empty-icon.svg"
-                        alt="bookmark-icon"
-                        fill={true}
-                        style={{ objectFit: 'contain' }}
-                    />
-                )}
-            </div>
-        </button>
+      <button
+        onClick={(e) => handleClick(e)}
+        disabled={loading || userId < 1}
+        className={`${userId > 0 ? `hover:scale-125` : `cursor-default`} flex flex-row items-center gap-1 text-sm ${loading ? "text-gray-400" : "text-gray-600"} dark:${loading ? "text-slate-400" : "text-slate-200"}`}
+      >
+        <div className="relative h-4 w-4 text-white dark:text-slate-200">
+          {isBookmarked ? (
+            <Image
+              src="/common/bookmark-active-icon.svg"
+              alt="bookmark-icon"
+              fill={true}
+              style={{ objectFit: "contain" }}
+            />
+          ) : (
+            <Image
+              src="/common/bookmark-empty-icon.svg"
+              alt="bookmark-icon"
+              fill={true}
+              style={{ objectFit: "contain" }}
+            />
+          )}
+        </div>
+      </button>
     );
 };
 
