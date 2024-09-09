@@ -3,6 +3,7 @@
 import CategoryList from "@/components/common/CategoryList";
 import Pagination from "@/components/common/Pagination";
 import MyPageGatheringList from "@/components/mypage/MyPageGatheringList";
+import { Gathering } from "@/types/GatheringDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -25,28 +26,6 @@ const categories = [
     value: "bookmark",
   },
 ];
-
-interface Gathering {
-    gatheringId: number;
-    title: string;
-    zoneCategoryParentName: string;
-    zoneCategoryChildName: string;
-    viewCount: number;
-    isBookMark: boolean;
-    likeCount: number;
-    gatheringCategoryName: string;
-    userName: string;
-    scheduleStartDate: string; 
-    scheduleEndDate: string; 
-    deadline: string; 
-    allowedSex: "ALL" | "MALE" | "FEMALE"; 
-    startAge: number;
-    endAge: number;
-    personCount: number;
-    nowPersonCount: number;
-    isLike: boolean;
-}
-
 
 const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
   const searchParams = useSearchParams();
