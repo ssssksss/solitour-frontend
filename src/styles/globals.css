@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'CustomFont';
-  src: url('/fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
+  font-family: "CustomFont";
+  src: url("/fonts/NotoSansKR-VariableFont_wght.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -17,15 +17,13 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  html {
+    color-scheme: light;
   }
 }
 
 body {
-  font-family: 'CustomFont';
+  font-family: "CustomFont";
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
