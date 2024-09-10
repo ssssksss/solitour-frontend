@@ -74,7 +74,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-main" href="/about">
+                <Link className="hover:text-main" href="/support?menu=about">
                   서비스소개
                 </Link>
               </li>
