@@ -1,7 +1,8 @@
 import MyPageUserImageContainer from "@/containers/mypage/MyPageUserImageContainer";
 import { userResponseDto } from "@/types/UserDto";
+import { MYPAGE_PROFILE_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import Image from "next/image";
-import Link from "next/link";
+import Breadcrumbs from "../common/Breadcrumb";
 
 interface IMyProfileProps {
   userInfo: userResponseDto;
@@ -17,24 +18,7 @@ const NICKNAME_LENGTH = 20;
 const MyProfile = (props: IMyProfileProps) => {
   return (
     <div className={"flex w-full flex-col"}>
-      <div className="flex gap-[.25rem] text-[.625rem] text-gray2">
-        <div className="text-gray1">
-          <Link href={"/"}>
-            <Image
-              src={"/home-icon.svg"}
-              alt={"home-icon-image"}
-              width={10}
-              height={10}
-            />
-          </Link>
-        </div>
-        <div> {">"} </div>
-        <div>
-          <Link href={"/mypage?mainCategory=정보&category=owner"}> 마이페이지 </Link>
-        </div>
-        <div> {">"} </div>
-        <div className={"font-bold text-gray1"}> 프로필 설정 </div>
-      </div>
+      <Breadcrumbs categories={MYPAGE_PROFILE_BREADCRUMB_PATH} />
       <h1 className={"pt-[2.25rem] text-3xl font-semibold"}> 프로필 설정 </h1>
       <MyPageUserImageContainer
         userImageUrl={props.userInfo.userImage.address}

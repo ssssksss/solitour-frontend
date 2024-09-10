@@ -16,3 +16,8 @@ export const QNA_DETAIL_WRITE_BREADCRUMB_PATH = [
   { label: "질문 등록하기", href: "" },
 ];
 
+export const MYPAGE_PROFILE_BREADCRUMB_PATH = [
+  { label: "마이페이지", href: "/mypage?mainCategory=정보&category=owner" },
+  { label: "프로필 설정", href: "" },
+];
+
