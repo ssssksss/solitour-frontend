@@ -25,17 +25,29 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const methods = useForm({
+  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
+  const [originalContentUrl, setOriginalContentUrl] = useState<string[][]>([]);
+
+  const methods = useForm<{
+    userId: number;
+    title: string;
+    startDate: Date | null;
+    endDate: Date | null;
+    address: string[];
+    image: string;
+    moodLevels: number[];
+    contents: string[];
+  }>({
     resolver: zodResolver(DiaryUpdateFormSchema),
     defaultValues: {
       userId: authStore.id,
       title: "",
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: null,
+      endDate: null,
       address: [""],
       image: "",
-      moodLevels: [0],
-      contents: [""],
+      moodLevels: [],
+      contents: [],
     },
     mode: "onChange",
   });
@@ -45,6 +57,14 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       parse(methods.getValues("contents")[0])
         .querySelector("img")
         ?.getAttribute("src") ?? "";
+
+    const contentImagesUrl = methods.getValues("contents").map((content) =>
+      parse(content)
+        .querySelectorAll("img")
+        .filter((img) => img.getAttribute("src") !== imageUrl)
+        .map((img) => img.getAttribute("src") ?? "")
+        .join(","),
+    );
 
     if (imageUrl === "") {
       alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
@@ -63,14 +83,25 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     const data: UpdateDiaryRequestDto = {
       title: title,
-      titleImage: image,
-      startDatetime: startDate,
-      endDatetime: endDate,
+      deleteTitleImage: ![image, ...contentImagesUrl[0].split(",")].includes(
+        originalThumbnailUrl,
+      )
+        ? originalThumbnailUrl
+        : "",
+      saveTitleImage: image,
+      startDatetime: startDate!,
+      endDatetime: endDate!,
       diaryDayRequests: Array.from(
         { length: diaryEditorStore.days },
         (_, index) => ({
           content: sanitizeHtml(contents[index], sanitizeOption),
           feelingStatus: FEELING_STATUS[moodLevels[index]],
+          deleteImagesUrl: originalContentUrl[index]
+            .filter(
+              (value) => !contentImagesUrl[index].split(",").includes(value),
+            )
+            .join(","),
+          saveImagesUrl: contentImagesUrl[index],
           place: address[index],
         }),
       ),
@@ -143,6 +174,13 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       "contents",
       diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
         (value) => value.content,
+      ),
+    );
+
+    setOriginalThumbnailUrl(diaryData.diaryContentResponse.titleImage);
+    setOriginalContentUrl(
+      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
+        (value) => value.diaryDayContentImages.split(","),
       ),
     );
 
