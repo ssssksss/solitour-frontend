@@ -67,6 +67,7 @@ const InformationList = async ({
             informationId={value.informationId}
             categoryId={parentCategoryId}
             isBookMark={value.isBookMark}
+            isLike={value.isLike}
             title={value.title}
             image={value.thumbNailImage}
             address={

@@ -18,6 +18,7 @@ const RecommendationList = ({ data }: Props) => {
             informationId={index + 1}
             categoryId={0}
             isBookMark={value.isBookMark}
+            isLike={value.isLike}
             title={value.title}
             image={value.thumbNailImage}
             address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}

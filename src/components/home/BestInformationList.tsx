@@ -38,6 +38,7 @@ const BestInformationList = async () => {
           informationId={value.informationId}
           categoryId={Number(CATEGORY_TEXT[value.parentCategoryName])}
           isBookMark={value.isBookMark}
+          isLike={value.isLike}
           title={value.title}
           image={value.thumbNailImage}
           address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}

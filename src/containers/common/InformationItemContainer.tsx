@@ -2,12 +2,14 @@
 
 import InformationItem from "@/components/common/InformationItem";
 import useAuthStore from "@/store/authStore";
-import { useEffect, useState } from "react";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useState } from "react";
 
 interface Props {
   informationId: number;
   categoryId: number;
   isBookMark: boolean;
+  isLike: boolean;
   title: string;
   image: string;
   address: string;
@@ -19,6 +21,7 @@ const InformationItemContainer = ({
   informationId,
   categoryId,
   isBookMark,
+  isLike,
   title,
   image,
   address,
@@ -36,7 +39,7 @@ const InformationItemContainer = ({
     data.append("infoId", informationId.toString());
 
     if (isBookMarked) {
-      const response = await fetch("/api/bookmark/information", {
+      const response = await fetchWithAuth("/api/bookmark/information", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -53,7 +56,7 @@ const InformationItemContainer = ({
 
       setIsBookMarked(false);
     } else {
-      const response = await fetch("/api/bookmark/information", {
+      const response = await fetchWithAuth("/api/bookmark/information", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -80,6 +83,7 @@ const InformationItemContainer = ({
       categoryId={categoryId}
       userId={userId}
       isBookMark={isBookMarked}
+      isLike={isLike}
       title={title}
       image={image}
       address={address}
