@@ -2,7 +2,8 @@
 
 import SupportQnADetailEdit from "@/components/support/qna/SupportQnADetailEdit";
 import useAuthStore from "@/store/authStore";
-import { QnADetailType, QnAMessageType } from "@/types/QnADto";
+import useToastifyStore from "@/store/toastifyStore";
+import { QnADetailType } from "@/types/QnADto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,6 +13,7 @@ interface ISupportQnADetailEditContainer {
 }
 const SupportQnADetailEditContainer = ({data}: ISupportQnADetailEditContainer) => {
   const authStore = useAuthStore();
+  const toastifyStore =  useToastifyStore();
   const router = useRouter();
   const [content, setContent] = useState("");
   const [messageList, setMessageList] = useState(data.qnaMessages || []);
@@ -39,11 +41,18 @@ const questionSubmitHandler = async () => {
     });
 
     if (!response.ok) {
-      throw new Error("서버에 요청하는 중 오류가 발생했습니다.");
+      toastifyStore.setToastify({
+        type: "error",
+        message: "QnA 질문 등록에 실패했습니다."
+      })
     }
 
-    const result: QnAMessageType = await response.json();
-    setMessageList(prev => [...prev, result]);
+    toastifyStore.setToastify({
+      type: "success",
+      message: "QnA 질문 등록에 성공했습니다.",
+    });
+    router.push("/support?menu=qna");
+    
 
   } catch (error) {
     console.error("답변 등록 중 오류: ", error);
@@ -78,14 +87,14 @@ const questionSubmitHandler = async () => {
 // 상태값을 늦게 불러와 렌더링이 약간 이상해짐 임시 해결
   return (
     <>
-        <SupportQnADetailEdit
-          data={data}
-          messageList={messageList}
-          userId={authStore.id}
-          changeInputHandler={changeInputHandler}
-          questionSubmitHandler={questionSubmitHandler}
-          qnaCloseHandler={qnaCloseHandler}
-        />
+      <SupportQnADetailEdit
+        data={data}
+        messageList={messageList}
+        userId={authStore.id}
+        changeInputHandler={changeInputHandler}
+        questionSubmitHandler={questionSubmitHandler}
+        qnaCloseHandler={qnaCloseHandler}
+      />
     </>
   );
 };
