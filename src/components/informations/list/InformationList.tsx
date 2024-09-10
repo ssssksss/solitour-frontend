@@ -20,7 +20,7 @@ async function getInformationList(
       headers: {
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-      next: { revalidate: 60, tags: ["getInformationList"] },
+      cache: "no-store",
     },
   );
 
