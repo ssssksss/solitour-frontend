@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        custom: ["CustomFont", "sans-serif"],
+      },
       colors: {
         main: "#00B488",
         black: "#111111",
@@ -82,17 +85,15 @@ const config: Config = {
   },
   plugins: [
     function ({ addUtilities }: PluginAPI) {
-      addUtilities(
-        {
-          ".scrollbar-hide": {
-            "-ms-overflow-style": "none" /* IE and Edge */,
-            "scrollbar-width": "none" /* Firefox */,
-            "&::-webkit-scrollbar": {
-              display: "none" /* Chrome, Safari, and Opera */,
-            },
+      addUtilities({
+        ".scrollbar-hide": {
+          "-ms-overflow-style": "none" /* IE and Edge */,
+          "scrollbar-width": "none" /* Firefox */,
+          "&::-webkit-scrollbar": {
+            display: "none" /* Chrome, Safari, and Opera */,
           },
         },
-      );
+      });
     },
   ],
 };
