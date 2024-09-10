@@ -23,7 +23,7 @@ const ImageList = ({
   closeViewer,
 }: Props) => {
   return (
-    <div className="dark:opacity-65">
+    <div>
       {viewerVisible && (
         <ImageViewerContainer
           imageUrls={[

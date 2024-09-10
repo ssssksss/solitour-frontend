@@ -30,28 +30,14 @@ const Header = ({
       <div
         className={
           "fixed right-0 top-0 z-40 flex w-full justify-center shadow" +
-          ` ${transparent ? "bg-transparent backdrop-blur-md" : "bg-white dark:bg-slate-800"}`
+          ` ${transparent ? "bg-transparent backdrop-blur-md" : "bg-white"}`
         }
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
           <div className="flex flex-row items-center">
-            <Link
-              // className="relative ml-[2.375rem] h-8 w-[5rem] font-black max-[1024px]:ml-4 max-[744px]:ml-0"
-              className="relative h-8 w-[6.9375rem] font-black"
-              href="/"
-            >
+            <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
               <Image
-                className="dark:hidden"
                 src={"/Solitour-logo.svg"}
-                alt={"/background"}
-                fill={true}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <Image
-                className="hidden dark:block"
-                src={"/solitour-logo-dark-mode.png"}
                 alt={"/background"}
                 fill={true}
                 style={{
@@ -66,7 +52,7 @@ const Header = ({
                 <li>
                   <Link
                     className={
-                      `${pathname === "/" ? "font-bold text-black dark:text-slate-200" : "font-medium text-gray1 dark:text-slate-400"} ` +
+                      `${pathname === "/" ? "font-bold text-black" : "font-medium text-gray1"} ` +
                       "text-sm hover:text-main"
                     }
                     href="/"
@@ -79,8 +65,8 @@ const Header = ({
                     className={
                       `${
                         pathname.includes("/informations")
-                          ? "font-bold text-black dark:text-slate-200"
-                          : "font-medium text-gray1 dark:text-slate-400"
+                          ? "font-bold text-black"
+                          : "font-medium text-gray1"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/informations/list?page=1&parentCategoryId=1"
@@ -93,8 +79,8 @@ const Header = ({
                     className={
                       `${
                         pathname.includes("/gathering")
-                          ? "font-bold text-black dark:text-slate-200"
-                          : "font-medium text-gray1 dark:text-slate-400"
+                          ? "font-bold text-black"
+                          : "font-medium text-gray1"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/gathering"
@@ -107,8 +93,8 @@ const Header = ({
                     className={
                       `${
                         pathname.includes("/diary")
-                          ? "font-bold text-black dark:text-slate-200"
-                          : "font-medium text-gray1 dark:text-slate-400"
+                          ? "font-bold text-black"
+                          : "font-medium text-gray1"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/diary/list?page=1"
@@ -122,8 +108,8 @@ const Header = ({
                     className={
                       `${
                         pathname.includes("/support?menu=about")
-                          ? "font-bold text-black dark:text-slate-200"
-                          : "font-medium text-gray1 dark:text-slate-400"
+                          ? "font-bold text-black"
+                          : "font-medium text-gray1"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/support?menu=about"
@@ -136,7 +122,7 @@ const Header = ({
             </nav>
           </div>
           <MdOutlineMenu
-            className="absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer hover:text-main max-[744px]:flex dark:text-slate-200"
+            className="absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer hover:text-main max-[744px]:flex"
             size="1.5rem"
             onClick={onMenuClicked}
           />
@@ -149,10 +135,10 @@ const Header = ({
               <>
                 <div
                   className={
-                    "relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow dark:bg-slate-200"
+                    "relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow"
                   }
                 ></div>
-                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main dark:text-slate-200"></div>
+                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main"></div>
                 <div className="text-gray-400">|</div>
               </>
             ) : userId > 0 ? (
@@ -162,7 +148,7 @@ const Header = ({
                   className={"relative rounded-[50%]"}
                 >
                   <Image
-                    className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7] dark:bg-slate-200"
+                    className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
                     src="/user_sex_man_default_image.svg"
                     alt="user_sex_man_default_image"
                     width={30}
@@ -172,7 +158,7 @@ const Header = ({
 
                 <button
                   onClick={logoutHandler}
-                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                  className="font-semibold text-black hover:text-main"
                 >
                   로그아웃
                 </button>
@@ -180,14 +166,14 @@ const Header = ({
             ) : (
               <>
                 <Link
-                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                  className="font-semibold text-black hover:text-main"
                   href="/auth/signin"
                 >
                   로그인
                 </Link>
                 <div className="text-gray-400">|</div>
                 <Link
-                  className="font-semibold text-black hover:text-main dark:text-slate-200"
+                  className="font-semibold text-black hover:text-main"
                   href="/auth/signup"
                 >
                   회원가입

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 interface IDropdown<T> {
-  options: { value: T, name: string }[];
+  options: { value: T; name: string }[];
   dropdownHandler: (value: T) => void;
   defaultValue: T;
   value: T;
@@ -26,7 +26,7 @@ export default function Dropdown<T>({
     p: "",
   },
   dropdownOptionStyle = {
-    w: "5rem"
+    w: "5rem",
   },
 }: IDropdown<T>) {
   const [isOpen, setIsOpen] = useState(false);
@@ -94,9 +94,11 @@ export default function Dropdown<T>({
 
       {isOpen && (
         <div
-          className={`absolute top-[2.75rem] z-10 flex  w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out dark:text-slate-400`}
+          className={`absolute top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
           style={{
-            transform: isOnRightSide ? `translateX(calc(${dropdownContainerStyle.w} - 100%))` : ``,
+            transform: isOnRightSide
+              ? `translateX(calc(${dropdownContainerStyle.w} - 100%))`
+              : ``,
           }}
         >
           <div

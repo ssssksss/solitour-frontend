@@ -25,7 +25,7 @@ const ImageViewer = ({
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25 text-white">
       <div className="relative flex h-[calc(100%_-_48px)] w-[calc(100%_-_48px)] flex-col gap-3 rounded-2xl bg-gray-900 p-6">
-        <div className="absolute right-5 top-4 cursor-pointer self-end rounded-md hover:text-main dark:bg-slate-600">
+        <div className="absolute right-5 top-4 cursor-pointer self-end rounded-md hover:text-main">
           <MdClose size={"2rem"} onClick={() => closeViewer()} />
         </div>
         <div className="mt-8 flex h-full w-full flex-row items-center">

@@ -34,12 +34,10 @@ const DiaryList = async ({ page }: Props) => {
 
   return (
     <div className="w-full">
-      <h1 className="py-[2.375rem] text-[1.75rem] font-bold dark:text-slate-200">
-        여행 일기
-      </h1>
+      <h1 className="py-[2.375rem] text-[1.75rem] font-bold">여행 일기</h1>
       <div className="flex flex-row justify-end pb-4">
         <Link
-          className="flex h-[2.625rem] w-[7.6875rem] items-center justify-center rounded-full bg-black text-white hover:scale-105 dark:bg-slate-600"
+          className="flex h-[2.625rem] w-[7.6875rem] items-center justify-center rounded-full bg-black text-white hover:scale-105"
           href="/diary/write"
         >
           일기 쓰기

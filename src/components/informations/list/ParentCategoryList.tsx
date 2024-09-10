@@ -8,7 +8,7 @@ interface Props {
 
 const ParentCategoryList = ({ categories, parentCategoryId }: Props) => {
   return (
-    <div className="mt-[5.5rem] flex w-full flex-row items-center justify-between border-b-[0.0625rem] dark:border-slate-200">
+    <div className="mt-[5.5rem] flex w-full flex-row items-center justify-between border-b-[0.0625rem]">
       <nav className="w-fit">
         <ul className="flex flex-row items-center gap-9">
           {categories.map((category, index) => (
@@ -18,7 +18,7 @@ const ParentCategoryList = ({ categories, parentCategoryId }: Props) => {
                 `${
                   category.id === parentCategoryId
                     ? "border-b-2 border-main font-bold text-main"
-                    : "text-gray1 dark:text-slate-400"
+                    : "text-gray1"
                 } ` + "pb-[0.375rem] hover:text-main"
               }
               href={`/informations/list?page=1&parentCategoryId=${category.id}`}
