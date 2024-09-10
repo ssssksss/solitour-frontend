@@ -20,7 +20,7 @@ async function getInformationList(
       headers: {
         Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-      next: { revalidate: 60, tags: ["getInformationList"] },
+      cache: "no-store",
     },
   );
 
@@ -67,6 +67,7 @@ const InformationList = async ({
             informationId={value.informationId}
             categoryId={parentCategoryId}
             isBookMark={value.isBookMark}
+            isLike={value.isLike}
             title={value.title}
             image={value.thumbNailImage}
             address={
