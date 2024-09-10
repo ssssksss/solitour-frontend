@@ -57,7 +57,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]"
             }
           >
-            <div className="relative h-[1.25rem] w-[1.25rem]">
+            <div className="relative h-[1.25rem] w-[1.25rem] bg-white">
               <Image src={"/camera-icon.svg"} alt={"camera-icon-image"} fill />
             </div>
           </div>
