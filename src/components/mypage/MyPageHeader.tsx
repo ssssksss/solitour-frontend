@@ -2,38 +2,13 @@ import { userResponseDto } from "@/types/UserDto";
 import Image from "next/image";
 import Link from "next/link";
 
-interface IDummyData {
-  user_id?: number;
-  user_status_id?: string;
-  user_oauth_id?: string;
-  user_nickname?: string;
-  user_age?: number | null;
-  user_sex?: string | null;
-  user_email?: string | null;
-  user_phone_number?: string | null;
-  user_image?: string | null;
-  // is_admin: boolean,
-}
-
-const dummyData: IDummyData = {
-  user_id: 1,
-  user_status_id: "1",
-  user_oauth_id: "1",
-  user_nickname: "하몽님",
-  user_age: 20,
-  user_sex: "woman",
-  user_email: "sola240@gmail.com",
-  user_phone_number: "010-1234-5678",
-  user_image: null,
-};
-
 interface IMyPageHeader {
   userInfo: userResponseDto;
 }
 
 const MyPageHeader = ({userInfo}:IMyPageHeader) => {
   return (
-    <div className={"flex w-full max-w-[60rem] flex-col"}>
+    <div className={"flex w-full max-w-[60rem] flex-col pt-[2.5rem]"}>
       <h1 className={"text-3xl font-semibold"}> 마이페이지 </h1>
       <div className={"flex items-center justify-center pb-[5rem] pt-[6.5rem]"}>
         <article className={"flex flex-col items-center"}>
@@ -43,7 +18,6 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
             }
           >
             {/* ? 유저의 썸네일 이미지가 있는지? */}
-            {/* ? 썸네일 이미지가 없다면 남자인지 여자인지? => 만약에 성별을 선택안하게 되면 어떻게 해야할지? */}
             {userInfo.userImage?.address ? (
               <Image
                 src={userInfo.userImage?.address}

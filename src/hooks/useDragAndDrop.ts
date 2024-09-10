@@ -45,6 +45,9 @@ export const useDragAndDrop = ({ imageUpload }: UseDragAndDropProps) => {
       }
     const imageDataUrl = await readFile(file);
     imageUpload(imageDataUrl);
+    if ("target" in e && e.target instanceof HTMLInputElement) {
+          e.target.value = ""
+    }
     setIsDragging(false);
   };
 

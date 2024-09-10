@@ -44,11 +44,13 @@ const CropperComponent = ({
           crop={crop}
           rotation={rotation}
           zoom={zoom}
-          aspect={1} // Aspect ratio for cropping
+          aspect={1} // 자르는 비율
           onCropChange={setCrop}
           onRotationChange={setRotation}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
+          cropShape="round" // 이미지 편집 형태
+          zoomWithScroll={true} // 스크롤 확대/축소 허용할지
         />
         <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 transform space-x-4">
           <button
