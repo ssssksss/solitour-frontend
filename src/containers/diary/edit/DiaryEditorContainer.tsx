@@ -110,7 +110,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     setLoading(true);
 
     const response = await fetch(
-      `/api/diary?diaryId=${diaryData.diaryContentResponse.diaryId}`,
+      `/api/diary/${diaryData.diaryContentResponse.diaryId}`,
       {
         method: "PUT",
         headers: {
@@ -127,8 +127,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       throw new Error(response.statusText);
     }
 
-    const diaryId = await response.text();
-    router.push(`/diary/${diaryId}`);
+    router.push(`/diary/${diaryData.diaryContentResponse.diaryId}`);
     router.refresh();
   };
 
