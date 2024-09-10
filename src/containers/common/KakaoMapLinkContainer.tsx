@@ -76,7 +76,7 @@ const KakaoMapLinkContainer = ({
   return (
     <a
       id="map"
-      className={`${loading ? "animate-pulse" : ""} h-48 w-full rounded-t-2xl border-[0.0625rem] bg-slate-200 dark:opacity-65`}
+      className={`${loading ? "animate-pulse" : ""} h-48 w-full rounded-t-2xl border-[0.0625rem] bg-slate-200`}
       href={`https://map.kakao.com/link/map/${placeId.toString() !== "0" ? placeId : `${placeName},${placeYAxis},${placeXAxis}`}`}
       target="_blank"
     />

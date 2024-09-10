@@ -29,7 +29,7 @@ const InformationPagination = ({
   const rightPage = Math.min(leftPage + 4, totalPages);
 
   return (
-    <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black dark:text-slate-200">
+    <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black">
       {currentPage > 1 ? (
         <Link
           href={`${pathname}?page=1${parentCategoryId !== null ? `&parentCategoryId=${parentCategoryId}` : ""}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== null ? `&place=${place}` : ""}${order !== null ? `&order=${order}` : ""}${tagName !== null ? `&tagName=${tagName}` : ""}`}

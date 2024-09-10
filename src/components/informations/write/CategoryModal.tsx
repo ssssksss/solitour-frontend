@@ -22,14 +22,12 @@ const CategoryModal = ({
 }: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%] dark:bg-slate-800">
+      <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%]">
         <div className="flex flex-col gap-1">
           <div className="flex flex-row items-center justify-between">
-            <h3 className="text-lg font-medium text-black dark:text-slate-200">
-              카테고리 선택
-            </h3>
+            <h3 className="text-lg font-medium text-black">카테고리 선택</h3>
             <MdClose
-              className="cursor-pointer text-gray2 hover:text-main dark:text-slate-400"
+              className="cursor-pointer text-gray2 hover:text-main"
               size={"2.5rem"}
               onClick={onCancel}
             />
@@ -39,7 +37,7 @@ const CategoryModal = ({
               <button
                 key={index}
                 className={
-                  `${parentCategory === category.id ? "border-main bg-main font-black text-white" : "text-gray1 dark:bg-slate-600 dark:text-slate-400"} ` +
+                  `${parentCategory === category.id ? "border-main bg-main font-black text-white" : "text-gray1"} ` +
                   "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                 }
                 type="button"
@@ -52,9 +50,7 @@ const CategoryModal = ({
         </div>
         <div className="flex flex-col gap-2">
           {parentCategory !== 0 && (
-            <h3 className="text-lg font-medium text-black dark:text-slate-200">
-              소분류 선택
-            </h3>
+            <h3 className="text-lg font-medium text-black">소분류 선택</h3>
           )}
           <div className="flex flex-row flex-wrap items-center gap-2">
             {categories
@@ -63,7 +59,7 @@ const CategoryModal = ({
                 <button
                   key={index}
                   className={
-                    `${categoryId === category.id ? "border-main bg-main text-white" : "text-gray1 dark:bg-slate-600 dark:text-slate-400"} ` +
+                    `${categoryId === category.id ? "border-main bg-main text-white" : "text-gray1"} ` +
                     "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                   }
                   type="button"

@@ -10,7 +10,7 @@ interface Props {
 
 const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
   return (
-    <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80 dark:opacity-65">
+    <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80">
       <Image
         className="-z-10"
         src={images.length > 0 ? images[currentIndex].url : ""}

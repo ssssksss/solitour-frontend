@@ -50,7 +50,7 @@ const TopList = async ({ title }: Props) => {
       : await getTopGatheringList();
 
   return (
-    <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow shadow-[#CCECE2] max-[744px]:-mt-24 dark:bg-slate-800">
+    <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow shadow-[#CCECE2] max-[744px]:-mt-24">
       {title === "모임" && (
         <div
           className={
@@ -59,7 +59,7 @@ const TopList = async ({ title }: Props) => {
         >
           <LottieComponent
             lottieFile={LottieImage}
-            className="object-contain translate-y-[-1rem]"
+            className="translate-y-[-1rem] object-contain"
           />
           <Image
             src={"/gathering/solitour_gathering_people.svg"}
@@ -71,7 +71,7 @@ const TopList = async ({ title }: Props) => {
       )}
       <div className="h-[20rem] w-full max-[1024px]:h-[24rem]">
         <div className="absolute h-full w-full rounded-2xl bg-white px-24 py-16 max-[1024px]:px-8 max-[1024px]:py-12">
-          <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black dark:border-slate-200 dark:text-slate-200">
+          <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black">
             {`${title} 정보 `}
             <span className="font-bold text-main">Top 5</span>
           </h2>
@@ -85,7 +85,7 @@ const TopList = async ({ title }: Props) => {
                 >
                   <p className="w-6 font-bold text-main">{index + 1}.</p>
                   <Link
-                    className="w-96 truncate text-sm font-medium text-gray1 hover:text-main max-[1024px]:w-full dark:text-slate-400"
+                    className="w-96 truncate text-sm font-medium text-gray1 hover:text-main max-[1024px]:w-full"
                     href={`/${title === "여행" ? "informations" : "gathering"}/${value.id}`}
                   >
                     {value.title}

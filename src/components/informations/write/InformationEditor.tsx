@@ -49,15 +49,15 @@ const InformationEditor = ({
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
       )}
-      <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
+      <h1 className="text-[1.75rem] font-bold text-black">
         {`정보 ${pathname}하기`}
       </h1>
-      <p className="mt-6 font-medium text-gray1 dark:text-slate-400">
+      <p className="mt-6 font-medium text-gray1">
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
         솔리들과 공유해보세요!
       </p>
       <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
-        <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+        <h2 className="w-[2.625rem] text-lg font-semibold text-black">
           제목<span className="text-main">*</span>
         </h2>
         <input
@@ -79,7 +79,7 @@ const InformationEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
         <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+          <h2 className="w-[2.625rem] text-lg font-semibold text-black">
             장소<span className="text-main">*</span>
           </h2>
           <button
@@ -98,7 +98,7 @@ const InformationEditor = ({
           )}
         </div>
         <button
-          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] flex-grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold dark:text-slate-200`}
+          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] flex-grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold`}
           type="button"
           onClick={showCategoryModal}
         >
@@ -150,7 +150,7 @@ const InformationEditor = ({
         {formContext.getValues("contentLength")}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
-        <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black dark:text-slate-200">
+        <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black">
           해시태그<span className="text-main">*</span>
         </h2>
         <div className="relative flex w-full flex-col gap-2">
@@ -209,7 +209,7 @@ const InformationEditor = ({
                 ))}
             </div>
             <button
-              className="h-9 text-sm font-medium text-gray1 hover:text-main dark:text-slate-400"
+              className="h-9 text-sm font-medium text-gray1 hover:text-main"
               type="button"
               onClick={() => {
                 const hashtag = inputTagRef.current?.value ?? "";
@@ -232,7 +232,7 @@ const InformationEditor = ({
         </div>
       </div>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
-        <h2 className="w-36 pt-3 text-lg font-bold text-black dark:text-slate-200">
+        <h2 className="w-36 pt-3 text-lg font-bold text-black">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
         <div className="relative flex flex-grow flex-col gap-4 max-[744px]:w-full">
@@ -299,9 +299,9 @@ const InformationEditor = ({
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <div className="mt-3 flex flex-row items-center gap-5 text-sm font-medium text-gray1 dark:text-slate-400">
+        <div className="mt-3 flex flex-row items-center gap-5 text-sm font-medium text-gray1">
           <button
-            className={`${formContext.getValues("tips").length <= 1 ? "text-gray3 dark:text-slate-600" : "hover:text-main"}`}
+            className={`${formContext.getValues("tips").length <= 1 ? "text-gray3" : "hover:text-main"}`}
             type="button"
             onClick={() => {
               const tips: string[] = formContext.getValues("tips");
