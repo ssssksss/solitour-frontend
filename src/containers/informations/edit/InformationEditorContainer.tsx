@@ -286,6 +286,11 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     methods.setValue("placeXAxis", data.placeResponse.xaxis.toString());
     methods.setValue("placeYAxis", data.placeResponse.yaxis.toString());
     methods.setValue("placeName", data.placeResponse.name);
+    methods.setValue("categoryId", data.categoryResponse.id);
+    methods.setValue(
+      "categoryName",
+      `${data.categoryResponse.parentCategory.name} - ${data.categoryResponse.name}`,
+    );
     methods.setValue("informationContent", data.content);
     methods.setValue(
       "hashtags",
