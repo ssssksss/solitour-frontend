@@ -78,8 +78,6 @@ const GatheringCardListContainer = () => {
       ) : (
         <>
           <GatheringCardList data={elements} />
-          {totalElements}
-          {Math.ceil(totalElements / 12)}
           {elements.length != 0 && (
             <Pagination
               currentPage={currentPage}
