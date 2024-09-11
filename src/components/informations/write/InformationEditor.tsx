@@ -66,6 +66,7 @@ const InformationEditor = ({
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("informationTitle")}
           maxLength={50}
+          autoComplete="off"
           onChange={(e) => {
             formContext.setValue("informationTitle", e.target.value);
             formContext.trigger("informationTitle");
@@ -156,7 +157,7 @@ const InformationEditor = ({
         <div className="relative flex w-full flex-col gap-2">
           <input
             className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
-            placeholder="#해시태그로 키워드를 써보세요! (2 ~ 15자)"
+            placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             disabled={formContext.getValues("hashtags").length >= 10}
             onKeyUp={onChangeHashTagHandler}
             onKeyDown={(e) => {
@@ -238,45 +239,24 @@ const InformationEditor = ({
         <div className="relative flex flex-grow flex-col gap-4 max-[744px]:w-full">
           {formContext.getValues("tips").map((tip: string, index: number) => (
             <div key={index} className="relative w-full">
-              {pathname === "등록" ? (
-                <input
-                  className={`${formContext.formState.errors.tips && tip.trim() === "" ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} ${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 text-sm outline-none`}
-                  type="text"
-                  placeholder="나만의 혼플 팁을 알려주세요."
-                  onChange={(e) => {
-                    const tips: string[] = formContext.getValues("tips");
-                    tips[index] = e.target.value;
-                    formContext.setValue("tips", tips);
-                    formContext.trigger("tips");
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === ";") {
-                      e.preventDefault();
-                      e.persist();
-                    }
-                  }}
-                />
-              ) : (
-                <input
-                  className={`${formContext.formState.errors.tips && tip.trim() === "" ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} ${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 text-sm outline-none`}
-                  type="text"
-                  placeholder="나만의 혼플 팁을 알려주세요."
-                  value={tip}
-                  onChange={(e) => {
-                    const tips: string[] = formContext.getValues("tips");
-                    tips[index] = e.target.value;
-                    formContext.setValue("tips", tips);
-                    formContext.trigger("tips");
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === ";") {
-                      e.preventDefault();
-                      e.persist();
-                    }
-                  }}
-                />
-              )}
-
+              <input
+                className={`${formContext.formState.errors.tips && tip.trim() === "" ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} ${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 text-sm outline-none`}
+                type="text"
+                placeholder="나만의 혼플 팁을 알려주세요."
+                value={tip}
+                onChange={(e) => {
+                  const tips: string[] = formContext.getValues("tips");
+                  tips[index] = e.target.value;
+                  formContext.setValue("tips", tips);
+                  formContext.trigger("tips");
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === ";") {
+                    e.preventDefault();
+                    e.persist();
+                  }
+                }}
+              />
               {index >= 1 && (
                 <MdClose
                   className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
 
 interface Props {
   placeName: string; // 장소명
@@ -64,6 +65,19 @@ const KakaoMapLinkContainer = ({
 
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다.
             map.setCenter(coords);
+
+            const handleResize = () => {
+              map.relayout();
+              map.setCenter(
+                new window.kakao.maps.LatLng(result[0].y, result[0].x),
+              );
+            };
+
+            window.addEventListener("resize", handleResize);
+
+            return () => {
+              window.removeEventListener("resize", handleResize);
+            };
           }
         });
       });

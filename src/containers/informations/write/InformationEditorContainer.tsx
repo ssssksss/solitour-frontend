@@ -114,6 +114,7 @@ const InformationEditorContainer = () => {
       ),
     );
 
+    await methods.trigger();
     if (!methods.formState.isValid) {
       methods.trigger();
       alert("모든 정보를 입력해 주세요.");
@@ -191,10 +192,16 @@ const InformationEditorContainer = () => {
 
   // 화면에서 벗어났을 때 form값을 모두 초기화함.
   useEffect(() => {
+    // 아래 코드는 tips이 제대로 입력되지 않는 목적의 코드입니다.
+    // 해당 코드가 없는 경우 한글 입력 시 한 글자만 입력되는 오류가 발생합니다.
+    methods.setValue("tips", [""]);
+    methods.watch();
+
     return () => {
       initialize();
     };
-  }, [initialize]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <FormProvider {...methods}>
