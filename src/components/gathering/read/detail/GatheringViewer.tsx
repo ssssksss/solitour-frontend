@@ -171,15 +171,15 @@ const GatheringViewer = ({
           width={14}
           height={14}
         />
-          {format(
-            new Date(data.deadline),
-            "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
-            {
-              locale: ko,
-            },
-          )}
+        {format(
+          new Date(data.deadline),
+          "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
+          {
+            locale: ko,
+          },
+        )}
       </div>
-      <div className="mb-[1.25rem] whitespace-pre-wrap pt-[2rem]">
+      <div className="mb-[1.25rem] w-full whitespace-pre-wrap break-words pt-[2rem]">
         {data.content}
       </div>
       {data.tagResponses?.length > 0 && (
