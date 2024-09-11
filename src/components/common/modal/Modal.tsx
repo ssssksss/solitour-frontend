@@ -65,7 +65,7 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
       <div className="absolute h-full w-full bg-black/30 cursor-pointer"></div>
       <div
         ref={ref}
-        className="relative flex flex-col items-center justify-center pb-[1rem] pt-[1rem]"
+        className="relative flex flex-col items-center justify-center"
       >
         {isHeaderBar && (
           <div className={`flex h-[3rem] w-full justify-end ${headerBarStyle}`}>

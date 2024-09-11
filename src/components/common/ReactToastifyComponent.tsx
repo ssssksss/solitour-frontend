@@ -48,7 +48,7 @@ const ReactToastifyComponent = () => {
         pauseOnHover={false} // 마우스를 올리면 알람 정지
         limit={3} // 알람 개수 제한\
         theme={"colored"}
-        className={"translate-y-[4rem] w-[40vw]"}
+        className={"translate-y-[4rem] w-[40vw] relative"}
       />
     </div>
   );

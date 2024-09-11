@@ -155,7 +155,7 @@ const onBookMarkClick = async (id: number) => {
       />
       <Pagination
         currentPage={currentPage}
-        totalPages={totalElements}
+        totalPages={Math.ceil(totalElements / 6)}
         pageHandler={pageHandler}
       />
     </div>

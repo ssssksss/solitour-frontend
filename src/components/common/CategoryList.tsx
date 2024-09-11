@@ -21,14 +21,14 @@ const CategoryList = <T extends string | number>({
 
   return (
     <div className="gap-[2rem] pt-[2rem] w-full">
-      <div className={"flex gap-[1rem]"}>
+      <div className={"flex gap-[0.375rem]"}>
         {categories.map((i) => (
           <button
             key={i.value.toString()} // key는 문자열로 변환하여 유니크하게 설정
             onClick={() => onClickMenu(i.value)}
-            className={`h-[2rem] rounded-[4rem] px-2 text-sm outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] ${
+            className={`h-[2.25rem] rounded-[4rem] px-4 py-2 text-sm  ${
               i.value == activeCategory
-                ? "bg-main text-white"
+                ? "bg-main text-white outline-none"
                 : "bg-white text-gray1 outline outline-offset-[1px] outline-[#E9EBED]"
             } `}
           >
