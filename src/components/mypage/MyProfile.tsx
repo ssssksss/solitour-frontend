@@ -24,7 +24,7 @@ const MyProfile = (props: IMyProfileProps) => {
         userImageUrl={props.userInfo.userImage.address}
         userSex={props.userInfo.sex}
       />
-      <div className={"flex flex-col"}>
+      <div className={"flex flex-col gap-y-[2.375rem]"}>
         <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
@@ -75,7 +75,7 @@ const MyProfile = (props: IMyProfileProps) => {
             </span>
           </div>
         </article>
-        <article className={"pt-[2.375rem]"}>
+        <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
               <span className={"text-lg font-semibold"}>이메일</span>
@@ -88,7 +88,7 @@ const MyProfile = (props: IMyProfileProps) => {
             />
           </div>
         </article>
-        <article className={"pt-[2.375rem]"}>
+        <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
               <span className={"text-lg font-semibold"}>성별</span>
@@ -101,7 +101,7 @@ const MyProfile = (props: IMyProfileProps) => {
             />
           </div>
         </article>
-        <article className={"pt-[4.25rem]"}>
+        <article className={""}>
           <div
             className={
               "grid h-[2.5rem] w-full grid-cols-[6rem_auto] gap-x-[1.75rem]"
