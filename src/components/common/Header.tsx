@@ -2,6 +2,7 @@ import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
+import UserImage from "../auth/UserImage";
 import ReactToastifyComponent from "./ReactToastifyComponent";
 
 interface Props {
@@ -12,6 +13,8 @@ interface Props {
   onClose: () => void;
   logoutHandler: () => void;
   userId: number;
+  userSex: string;
+  userProfile: string;
 }
 
 const Header = ({
@@ -22,6 +25,8 @@ const Header = ({
   onClose,
   userId,
   logoutHandler,
+  userSex,
+  userProfile,
 }: Props) => {
   return (
     <header className="flex w-full flex-row justify-center">
@@ -147,12 +152,10 @@ const Header = ({
                   href={"/mypage?mainCategory=정보&category=owner"}
                   className={"relative rounded-[50%]"}
                 >
-                  <Image
-                    className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
-                    src="/user_sex_man_default_image.svg"
-                    alt="user_sex_man_default_image"
-                    width={30}
-                    height={30}
+                  <UserImage
+                    userImageAddress={`${userProfile}`}
+                    userSex={`${userSex}`}
+                    size={30}
                   />
                 </Link>
 
