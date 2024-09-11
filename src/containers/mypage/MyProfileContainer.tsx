@@ -1,8 +1,11 @@
 "use client";
 
 import MyProfile from "@/components/mypage/MyProfile";
+import useModalState from "@/hooks/useModalState";
+import useToastifyStore from "@/store/toastifyStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface IMyProfileContainer {
@@ -13,6 +16,10 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
   const [nickname, setNickname] = useState(userInfo.nickname);
   const [defaultNickname, setDefaultNickname] = useState(userInfo.nickname);
   const [message, setMessage] = useState("");
+  const modalState = useModalState();
+  const [userDeleteText, setUserDeleteText] = useState("");
+  const router = useRouter();
+  const toastifyStore = useToastifyStore();
 
   const submitChangeNicknameHandler = async () => {
     if (nickname == "" && nickname == defaultNickname) return;
@@ -38,6 +45,31 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
     setMessage("");
   }
 
+  const changeUserDeleteText = (value: string) => {
+    setUserDeleteText(value);
+  }
+
+  const userDeleteHandler = async () => {
+
+    const response = await fetchWithAuth("/api/auth/user", {
+      method: "DELETE",
+      "Content-Type": "application/json",
+    });
+
+    if (response.ok) {
+      toastifyStore.setToastify({
+        type: "success",
+        message: "회원탈퇴에 성공했습니다."
+      })
+      router.push("/");
+    }
+
+      toastifyStore.setToastify({
+        type: "error",
+        message: "회원탈퇴에 실패했습니다.",
+      });
+  }
+
 
   return (
     <MyProfile
@@ -47,6 +79,10 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
       changeNickname={changeNickname}
       defaultNickname={defaultNickname}
       message={message}
+      modalState={modalState}
+      changeUserDeleteText={changeUserDeleteText}
+      userDeleteText={userDeleteText}
+      userDeleteHandler={userDeleteHandler}
     />
   );
 };
