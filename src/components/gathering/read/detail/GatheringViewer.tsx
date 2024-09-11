@@ -196,9 +196,7 @@ const GatheringViewer = ({
         </div>
       )}
       {/* 지도 부분 */}
-      <div className="h-[19.875rem] w-full">
-        <GatheringKakaoMap {...data.placeResponse} />
-      </div>
+      <GatheringKakaoMap {...data.placeResponse} />
       <GatheringApplicantListContainer
         postUserId={data.userPostingResponse.id}
       />
