@@ -35,7 +35,7 @@ const Header = ({
       <div
         className={
           "fixed right-0 top-0 z-40 flex w-full justify-center shadow" +
-          ` ${transparent ? "bg-transparent backdrop-blur-md" : "bg-white"}`
+          ` ${transparent ? "bg-[#ffffff30] backdrop-blur-md" : "bg-white"}`
         }
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
@@ -57,7 +57,7 @@ const Header = ({
                 <li>
                   <Link
                     className={
-                      `${pathname === "/" ? "font-bold text-black" : "font-medium text-gray1"} ` +
+                      `${pathname === "/" ? "font-bold text-black" : "font-medium text-black"} ` +
                       "text-sm hover:text-main"
                     }
                     href="/"
@@ -71,7 +71,7 @@ const Header = ({
                       `${
                         pathname.includes("/informations")
                           ? "font-bold text-black"
-                          : "font-medium text-gray1"
+                          : "font-medium text-black"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/informations/list?page=1&parentCategoryId=1"
@@ -85,7 +85,7 @@ const Header = ({
                       `${
                         pathname.includes("/gathering")
                           ? "font-bold text-black"
-                          : "font-medium text-gray1"
+                          : "font-medium text-black"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/gathering"
@@ -99,7 +99,7 @@ const Header = ({
                       `${
                         pathname.includes("/diary")
                           ? "font-bold text-black"
-                          : "font-medium text-gray1"
+                          : "font-medium text-black"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/diary/list?page=1"
@@ -114,7 +114,7 @@ const Header = ({
                       `${
                         pathname.includes("/support?menu=about")
                           ? "font-bold text-black"
-                          : "font-medium text-gray1"
+                          : "font-medium text-black"
                       } ` + "text-sm hover:text-main"
                     }
                     href="/support?menu=about"
