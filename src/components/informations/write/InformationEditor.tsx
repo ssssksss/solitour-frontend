@@ -156,7 +156,7 @@ const InformationEditor = ({
         <div className="relative flex w-full flex-col gap-2">
           <input
             className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
-            placeholder="#해시태그로 키워드를 써보세요! (2 ~ 15자)"
+            placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             disabled={formContext.getValues("hashtags").length >= 10}
             onKeyUp={onChangeHashTagHandler}
             onKeyDown={(e) => {
