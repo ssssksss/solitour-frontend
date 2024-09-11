@@ -65,7 +65,7 @@ const GatheringSupportManagement = ({
             isFinish ? reOpenGathering() : modalState.openModal()
           }}
           className={
-            `h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`
+            `h-[3.125rem] w-[7.5rem] rounded-[2.125rem] outline outline-[1px] outline-offset-[-1px] outline-gray3 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`
           }
         >
           {
