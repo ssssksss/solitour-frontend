@@ -35,7 +35,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
     } = useDragAndDrop({ imageUpload });
 
   return (
-    <div className="flex flex-col py-4">
+    <div>
       <MyPageUserImage
         dragAndDrop={{
           isDragging,

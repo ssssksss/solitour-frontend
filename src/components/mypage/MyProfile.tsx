@@ -19,7 +19,7 @@ const MyProfile = (props: IMyProfileProps) => {
   return (
     <div className={"flex w-full flex-col"}>
       <Breadcrumbs categories={MYPAGE_PROFILE_BREADCRUMB_PATH} />
-      <h1 className={"pt-[2.25rem] text-3xl font-semibold"}> 프로필 설정 </h1>
+      <h1 className={"text-3xl font-semibold"}> 프로필 설정 </h1>
       <MyPageUserImageContainer
         userImageUrl={props.userInfo.userImage.address}
         userSex={props.userInfo.sex}
