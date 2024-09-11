@@ -9,10 +9,13 @@ interface IDropdown<T> {
   value: T;
   dropdownContainerStyle?: {
     w?: string;
-    p?: string;
+    h?: string;
+    style?: string;
   };
   dropdownOptionStyle?: {
     w?: string;
+    style?: string;
+    z?: string;
   };
 }
 
@@ -22,11 +25,9 @@ export default function Dropdown<T>({
   defaultValue,
   value,
   dropdownContainerStyle = {
-    w: "3.5rem",
-    p: "",
   },
   dropdownOptionStyle = {
-    w: "5rem",
+    z: "z-10",
   },
 }: IDropdown<T>) {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,12 +64,12 @@ export default function Dropdown<T>({
 
   return (
     <div
-      className={`relative flex h-[2.75rem] flex-shrink-0 items-center w-[${dropdownContainerStyle.w}] text-left`}
+      className={`relative flex ${dropdownContainerStyle.h} h-full flex-shrink-0 items-center w-[${dropdownContainerStyle.w}] text-left`}
       ref={ref}
     >
       <button
         onClick={toggleDropdown}
-        className={`inline-flex items-center gap-x-2 rounded-md py-2 ${dropdownContainerStyle.p} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
+        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle.style} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
       >
         <div className={"min-w-fit"}>
           {options.filter((i) => i.value == selectedOption)[0].name}
@@ -94,7 +95,7 @@ export default function Dropdown<T>({
 
       {isOpen && (
         <div
-          className={`absolute top-[2.75rem] z-10 flex w-[${dropdownOptionStyle.w}] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
+          className={`absolute top-0 ${dropdownOptionStyle.z} flex w-[${dropdownOptionStyle.w}] ${dropdownOptionStyle.style} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
           style={{
             transform: isOnRightSide
               ? `translateX(calc(${dropdownContainerStyle.w} - 100%))`
@@ -102,7 +103,7 @@ export default function Dropdown<T>({
           }}
         >
           <div
-            className={"w-full py-1"}
+            className={"w-full"}
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
