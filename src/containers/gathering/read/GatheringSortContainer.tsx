@@ -11,7 +11,7 @@ const OPTIONS = [{
     name: "최신순",
 }, {
     value: "likes",
-    name: "인기순",
+    name: "좋아요순",
 }, {
     value: "views",
     name: "조회순",
@@ -46,16 +46,22 @@ const GatheringSortContainer = (props: IGatheringSortContainer) => {
       ></div>
     );
   return (
-      <>
-          <Dropdown options={OPTIONS} dropdownHandler={sortHandler} value={sort} defaultValue={sort}
-              dropdownOptionStyle={
-            {w: "8.625rem"}
-            }
-              dropdownContainerStyle={
-            {w: "3.5rem"}
-            }
-          />
-      </>
+    <>
+      <Dropdown
+        options={OPTIONS}
+        dropdownHandler={sortHandler}
+        value={sort}
+        defaultValue={sort}
+        dropdownContainerStyle={{
+          w: "3.5rem",
+          style: "",
+        }}
+        dropdownOptionStyle={{
+          w: "8.625rem",
+          style: "mt-[2rem] rounded-xl",
+        }}
+      />
+    </>
   );
 };
 export default GatheringSortContainer
