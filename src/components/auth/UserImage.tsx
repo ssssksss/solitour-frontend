@@ -2,10 +2,10 @@ import Image from "next/image";
 
 interface IUserImage {
   userImageAddress: string,
-  userSex: string,
+  userSex?: string,
   size: number,
-  addressStyle: string,
-  defaultStyle: string,
+  addressStyle?: string,
+  defaultStyle?: string,
 }
 const UserImage = ({
   userImageAddress,
