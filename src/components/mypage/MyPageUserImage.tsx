@@ -2,6 +2,7 @@ import { dragAndDropProps } from "@/types/DragAndDrop";
 import Image from "next/image";
 import UserImage from "../auth/UserImage";
 import CropperComponent from "../common/cropper/CropperComponent";
+import { Modal } from "../common/modal/Modal";
 
 interface IMyPageUserImage {
   dragAndDrop: dragAndDropProps;
@@ -50,13 +51,17 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
           />
         </label>
       </div>
-      {props.isModalOpen && props.imageBase64Data && (
+      <Modal
+        isOpen={props.isModalOpen}
+        onClose={props.closeCropModal}
+        isHeaderBar={true}
+      >
         <CropperComponent
           imageBase64Data={props.imageBase64Data}
           closeCropModal={props.closeCropModal}
           onChangeImageUrl={props.onChangeImageUrl}
-        />
-      )}
+          />
+      </Modal>
     </article>
   );
 };

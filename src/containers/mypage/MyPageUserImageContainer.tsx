@@ -1,5 +1,6 @@
 import MyPageUserImage from "@/components/mypage/MyPageUserImage";
 import { useDragAndDrop } from "@/hooks/useDragAndDrop";
+import useModalState from "@/hooks/useModalState";
 import { useState } from "react";
 
 interface IMyPageUserImageContainer {
@@ -10,16 +11,16 @@ interface IMyPageUserImageContainer {
 const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
   const [imageUrl, setImageUrl] = useState(props.userImageUrl || "");
   const [imageBase64Data, setImageBase64Data] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const modalState = useModalState();
   
   const imageUpload = (imageDataUrl: string) => {
     setImageBase64Data(imageDataUrl);
-    setIsModalOpen(true); // 이미지 편집을 위한 모달창
+    modalState.openModal(); // 이미지 편집을 위한 모달창
   }
-
+  
   const closeCropModal = () => {
     setImageBase64Data("");
-    setIsModalOpen(false);
+    modalState.closeModal();
   };
 
   const onChangeImageUrl = (url: string) => {
@@ -46,7 +47,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
         }}
         userImageUrl={imageUrl}
         userSex={props.userSex}
-        isModalOpen={isModalOpen}
+        isModalOpen={modalState.isOpen}
         imageBase64Data={imageBase64Data}
         closeCropModal={closeCropModal}
         onChangeImageUrl={onChangeImageUrl}
