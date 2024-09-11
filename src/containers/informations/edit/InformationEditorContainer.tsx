@@ -186,7 +186,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
     if (!methods.formState.isValid) {
       methods.trigger();
-      alert("모든 정보를 입력해 주세요.");
       return;
     }
 
@@ -297,7 +296,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       data.tagResponses.map((tag) => tag.name),
     );
     methods.setValue("tips", data.tip.split(";"));
-    methods.watch();
+    methods.trigger();
 
     editorStore.setEditor({
       images: [...data.imageResponses.map((value) => value.address), ""],
