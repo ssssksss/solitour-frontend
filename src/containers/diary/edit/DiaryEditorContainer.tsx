@@ -73,8 +73,10 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     methods.setValue("image", imageUrl);
 
+    await methods.trigger();
     if (!methods.formState.isValid) {
       methods.trigger();
+      alert("모든 정보를 입력해 주세요.");
       return;
     }
 
@@ -175,6 +177,8 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
         (value) => value.content,
       ),
     );
+
+    methods.trigger();
 
     setOriginalThumbnailUrl(diaryData.diaryContentResponse.titleImage);
     setOriginalContentUrl(
