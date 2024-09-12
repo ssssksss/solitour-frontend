@@ -54,8 +54,7 @@ const MyProfile = (props: IMyProfileProps) => {
             <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
           </div>
           <div className="select-none text-orange-400">
-            {" "}
-            '회원탈퇴를 하겠습니다.' 라고 입력해주세요.{" "}
+            {"'회원탈퇴를 하겠습니다.' 라고 입력해주세요."}
           </div>
           <input
             className="w-full rounded-[1rem] px-4 py-4 outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
