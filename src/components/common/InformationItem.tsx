@@ -108,14 +108,10 @@ const InformationItem = ({
           </div>
           <div className="flex flex-row items-center gap-3">
             <div
-              className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-1`}
+              className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs`}
             >
-              {isLike ? (
-                <FaHeart size={"0.8rem"} />
-              ) : (
-                <FaRegHeart size={"0.8rem"} />
-              )}
-              <p className="text-xs">{likeCount}</p>
+              {isLike ? <FaHeart /> : <FaRegHeart />}
+              <p>{likeCount}</p>
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">
               <Image

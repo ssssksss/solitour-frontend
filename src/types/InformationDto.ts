@@ -100,6 +100,15 @@ export interface InformationDetailDto {
     };
     name: string;
   };
+  categoryResponse: {
+    id: number;
+    parentCategory: {
+      id: number;
+      parentCategory: null;
+      name: string;
+    };
+    name: string;
+  };
   imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
   likeCount: number;
   userImage: string;

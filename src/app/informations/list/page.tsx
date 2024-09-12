@@ -40,6 +40,7 @@ export default function page({ searchParams }: Props) {
           place={searchParams["place"]}
           order={searchParams["order"]}
           tagName={searchParams["tagName"]}
+          search={searchParams["search"]}
         />
       </Suspense>
     </div>

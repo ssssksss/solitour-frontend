@@ -4,7 +4,6 @@ import { MdClose } from "react-icons/md";
 
 interface Props {
   place: string | null;
-  order: string;
   setPlace: Dispatch<SetStateAction<string | null>>;
   closeModal: () => void;
   onClick: () => void;
@@ -12,7 +11,6 @@ interface Props {
 
 const InformationFilterModal = ({
   place,
-  order,
   setPlace,
   closeModal,
   onClick,
