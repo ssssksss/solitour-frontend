@@ -38,7 +38,7 @@ const DiaryEditorContainer = () => {
       title: "",
       startDate: null,
       endDate: null,
-      address: [""],
+      address: [],
       image: "",
       moodLevels: [],
       contents: [],
