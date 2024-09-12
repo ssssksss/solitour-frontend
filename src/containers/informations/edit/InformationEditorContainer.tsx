@@ -184,6 +184,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       ),
     );
 
+    await methods.trigger();
     if (!methods.formState.isValid) {
       methods.trigger();
       return;

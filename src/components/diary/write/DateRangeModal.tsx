@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { DateRange } from "react-date-range";
 import { Dispatch, SetStateAction } from "react";
 import { ko } from "date-fns/locale";
-import { addDays } from "date-fns";
+import { addDays, min } from "date-fns";
 
 interface Props {
   width: number;
@@ -51,7 +51,9 @@ const DateRangeModal = ({
               : new Date("1970-1-1")
           }
           maxDate={
-            isStartDateSelected ? addDays(state[0].startDate, 6) : new Date()
+            isStartDateSelected
+              ? min([addDays(state[0].startDate, 6), new Date()])
+              : new Date()
           }
           locale={ko}
           rangeColors={["#00B488"]}

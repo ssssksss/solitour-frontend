@@ -168,7 +168,7 @@ const DiaryEditor = ({
                     formContext.getValues("moodLevels");
                   moodLevels[diaryEditorStore.currentDay - 1] = index + 1;
                   formContext.setValue("moodLevels", moodLevels);
-                  formContext.trigger("moodLevels");
+                  formContext.watch("moodLevels");
                 }}
               >
                 <div className="relative h-10 w-8">
