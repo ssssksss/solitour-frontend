@@ -28,7 +28,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   return (
     <div
       className={
-        "scrollbar-hide relative h-full max-h-[18rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[1rem]"
+        "flex flex-col relative h-auto w-[calc(100vw-2rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
       }
     >
       <button
@@ -42,26 +42,26 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
           height={20}
         />
       </button>
-      <div className={"flex flex-col gap-y-[1rem]"}>
-        <p className={"h-[2rem] text-lg font-bold text-black mt-[2rem]"}>카테고리 선택</p>
-        <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
+      <div className={"flex flex-col gap-y-1"}>
+        <h3 className="text-lg font-medium text-black text-start">카테고리 선택</h3>
+        <div className={"flex flex-wrap gap-x-2 gap-y-[.5rem]"}>
           {props.categoryList.map((i) => (
             <button
               key={i.id}
               onClick={() => {
                 setMainCategoryId(i.id);
               }}
-              className={`${mainCategoryId == i.id ? "bg-main text-white" : "text-gray1"} flex h-[2.25rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+              className={`${mainCategoryId == i.id ? "bg-main text-white outline-none" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-3 py-1 `}
             >
               {i.name}
             </button>
           ))}
         </div>
       </div>
-      <div className={"flex w-full justify-center gap-[1rem] pt-[4rem]"}>
+      <div className={"pt-8 flex w-full justify-center"}>
         <button
           className={
-            "h-[3rem] max-w-[18.625rem] w-full rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
+            "h-[3rem] w-full max-w-[18.625rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           }
           onClick={() => submitHandler()}
           // disabled={subCategoryId == 0 && true}

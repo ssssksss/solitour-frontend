@@ -14,7 +14,7 @@ interface ModalProps extends React.PropsWithChildren {
 
 export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle = "bg-white" }: ModalProps) => {
   const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
   let flag = isOpen;
   usePreventBodyScroll(isOpen);
 
@@ -62,10 +62,15 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
       className="fixed inset-0 flex h-full w-full items-center justify-center"
       style={{ zIndex: "100" }}
     >
-      <div className="absolute h-full w-full bg-black/30 cursor-pointer"></div>
-      <div
+      <div className="absolute h-full w-full cursor-pointer bg-black/30"></div>
+      <button
         ref={ref}
-        className="relative flex flex-col items-center justify-center"
+        className="-z-1 relative flex h-[calc(100vh-1rem)] flex-col items-center justify-center "
+        onClick={(e) => {
+          if (e.target == ref.current) {
+            onClose();
+          }
+        }}
       >
         {isHeaderBar && (
           <div className={`flex h-[3rem] w-full justify-end ${headerBarStyle}`}>
@@ -83,7 +88,7 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
           </div>
         )}
         {children}
-      </div>
+      </button>
     </div>,
     document.getElementById("modal-root") as HTMLElement,
   );

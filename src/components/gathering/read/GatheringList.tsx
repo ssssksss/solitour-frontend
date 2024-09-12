@@ -17,7 +17,7 @@ interface IGatheringList {
 const GatheringList = (props: IGatheringList) => {
 
   return (
-    <div className="w-full flex flex-col pt-[5.5rem] min-w-[22.5rem]">
+    <div className="w-full flex flex-col pt-[5.5rem] min-w-[19.1875rem]">
       <article className="flex flex-col gap-y-4 min-[960px]:flex-row-reverse min-[960px]:gap-x-6">
         <div className="w-full flex flex-row gap-x-2 max-[744px]:flex-col justify-between gap-y-5 min-[960px]:gap-x-6 ">
           <GatheringSearchContainer />
