@@ -3,22 +3,18 @@ import { TiLocation } from "react-icons/ti";
 import { DebouncedState } from "use-debounce";
 
 interface Props {
-  placeInfos:
-    | {
-        place_name: string;
-        address_name: string;
-        id: string;
-        x: string;
-        y: string;
-      }[]
-    | undefined;
-  addressInfos:
-    | {
-        address_name: string;
-        x: string;
-        y: string;
-      }[]
-    | undefined;
+  placeInfos?: {
+    place_name: string;
+    address_name: string;
+    id: string;
+    x: string;
+    y: string;
+  }[];
+  addressInfos?: {
+    address_name: string;
+    x: string;
+    y: string;
+  }[];
   handleLocationSearch: DebouncedState<(search: string) => void>;
   handleAddressSearch: DebouncedState<(search: string) => void>;
   isCustom: boolean;

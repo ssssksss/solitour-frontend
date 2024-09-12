@@ -111,7 +111,7 @@ const DiaryEditor = ({
         {diaryEditorStore.days > 0 && (
           <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
             <h2 className="w-[2.625rem] text-lg font-semibold text-black">
-              지역<span className="text-main">*</span>
+              주소<span className="text-main">*</span>
             </h2>
             <button
               className={`${formContext.getValues("address")[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-none`}
@@ -121,7 +121,7 @@ const DiaryEditor = ({
               {formContext.getValues("address")[
                 diaryEditorStore.currentDay - 1
               ] === ""
-                ? "지역명을 입력하세요."
+                ? "주소를 입력하세요."
                 : formContext.getValues("address")[
                     diaryEditorStore.currentDay - 1
                   ]}
@@ -168,7 +168,11 @@ const DiaryEditor = ({
                     formContext.getValues("moodLevels");
                   moodLevels[diaryEditorStore.currentDay - 1] = index + 1;
                   formContext.setValue("moodLevels", moodLevels);
-                  formContext.trigger("moodLevels");
+                  if (formContext.formState.errors.moodLevels) {
+                    formContext.trigger();
+                  } else {
+                    formContext.watch("moodLevels");
+                  }
                 }}
               >
                 <div className="relative h-10 w-8">

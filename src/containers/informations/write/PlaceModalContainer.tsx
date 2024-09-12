@@ -1,7 +1,6 @@
 "use client";
 
 import PlaceModal from "@/components/informations/write/PlaceModal";
-import useEditorStore from "@/store/editorStore";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
@@ -12,8 +11,6 @@ interface Props {
 
 const PlaceModalContainer = ({ closeModal }: Props) => {
   const formContext = useFormContext();
-  // const { address, placeName, placeId, setEditor, resetPlaceInfo } =
-  //   useEditorStore();
   const [isCustom, setIsCustom] = useState<boolean>(false);
 
   // 장소 검색 객체 (place search)
