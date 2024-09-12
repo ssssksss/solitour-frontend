@@ -37,11 +37,13 @@ const status: { [key: string]: string } = {
 // todo
 const GatheringItem = ({ data }: IGatheringItem) => {
   return (
+    // w-[307] , h-[315], p-5, 
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-auto flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[744px]:min-w-[312px]`}
+      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] max-[744px]:max-w-[28.75rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main`}
     >
       <div className="flex flex-col">
+      {/* 상태와 북마크 */}
         <div className="flex flex-row items-center justify-between">
           <p
             className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
@@ -57,6 +59,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
             postId={data.gatheringId}
           />
         </div>
+        {/* 제목, 유저 닉네임 */}
         <p className="overflow-hidden text-ellipsis whitespace-nowrap pb-1 pt-6 text-lg font-bold hover:text-main">
           {data.title}
         </p>
@@ -66,11 +69,11 @@ const GatheringItem = ({ data }: IGatheringItem) => {
       </div>
       {/* 마감일 포함 영역 */}
       <div className="flex w-full flex-col gap-[0.625rem]">
-        {/* 4개 영역 */}
+        {/* 4개 영역(기간, 장소, 시간, 인원) */}
         <div className="flex flex-col gap-[0.625rem]">
           <div
             className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
+              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse"
             }
           >
             <article className="flex flex-row items-center gap-2">
@@ -106,7 +109,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
           </div>
           <div
             className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
+              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse"
             }
           >
             <article className="flex h-[1.25rem] w-full flex-row items-center gap-2">
@@ -162,7 +165,8 @@ const GatheringItem = ({ data }: IGatheringItem) => {
             </article>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between">
+        {/* 마감일, 좋아요, 조회수 */}
+        <div className="flex flex-row items-center justify-between pt-[0.4375rem]">
           <div className="flex flex-row items-center gap-1">
             <Image
               src={`${data.isFinish ? "/pin-gray-icon.svg" : "/pin-icon.svg"}`}
@@ -173,7 +177,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
 
             <p className="text-sm">
               마감일:
-              {format(new Date(data.deadline), "yy-MM-dd(EE)", {
+              {format(new Date(data.deadline), "yy.MM.dd(EE)", {
                 locale: ko,
               })}
             </p>
