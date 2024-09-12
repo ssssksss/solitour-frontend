@@ -19,6 +19,7 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
       key: "selection",
     },
   ]);
+  const [isStartDateSelected, setIsStartDateSelectec] = useState(false);
   const formContext = useFormContext();
 
   const onChangeDateRange = () => {
@@ -53,7 +54,9 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
     <DateRangeModal
       width={width}
       state={state}
+      isStartDateSelected={isStartDateSelected}
       setState={setState}
+      setIsStartDateSelected={setIsStartDateSelectec}
       closeModal={closeModal}
       onChangeDateRange={onChangeDateRange}
     />

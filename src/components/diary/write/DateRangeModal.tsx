@@ -4,11 +4,14 @@ import { MdClose } from "react-icons/md";
 import { DateRange } from "react-date-range";
 import { Dispatch, SetStateAction } from "react";
 import { ko } from "date-fns/locale";
+import { addDays } from "date-fns";
 
 interface Props {
   width: number;
-  state: any[];
+  state: { startDate: Date; endDate: Date; key: string }[];
+  isStartDateSelected: boolean;
   setState: Dispatch<SetStateAction<any[]>>;
+  setIsStartDateSelected: Dispatch<SetStateAction<boolean>>;
   closeModal: () => void;
   onChangeDateRange: () => void;
 }
@@ -16,7 +19,9 @@ interface Props {
 const DateRangeModal = ({
   width,
   state,
+  isStartDateSelected,
   setState,
+  setIsStartDateSelected,
   closeModal,
   onChangeDateRange,
 }: Props) => {
@@ -32,13 +37,22 @@ const DateRangeModal = ({
         </div>
         <DateRange
           editableDateInputs={true}
-          onChange={(item) => setState([item.selection])}
+          onChange={(item) => {
+            setState([item.selection]);
+            setIsStartDateSelected(!isStartDateSelected);
+          }}
           moveRangeOnFirstSelection={false}
           ranges={state}
           months={width >= 744 ? 2 : 1}
           direction="horizontal"
-          minDate={new Date("1970-1-1")}
-          maxDate={new Date()}
+          minDate={
+            isStartDateSelected
+              ? addDays(state[0].startDate, -6)
+              : new Date("1970-1-1")
+          }
+          maxDate={
+            isStartDateSelected ? addDays(state[0].startDate, 6) : new Date()
+          }
           locale={ko}
           rangeColors={["#00B488"]}
         />
