@@ -67,6 +67,7 @@ const DiaryEditorContainer = () => {
 
     methods.setValue("image", imageUrl);
 
+    await methods.trigger();
     if (!methods.formState.isValid) {
       methods.trigger();
       alert("모든 정보를 입력해 주세요.");
