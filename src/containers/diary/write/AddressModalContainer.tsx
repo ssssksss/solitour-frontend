@@ -68,6 +68,12 @@ const AddressModalContainer = ({ closeModal }: Props) => {
   const onChangeAddress = (placeInfo: { address_name: string }) => {
     const index = diaryEditorStore.currentDay - 1;
     const addressList: string[] = formContext.getValues("address");
+
+    for (let i = 0; i < addressList.length; i++) {
+      if (addressList[i] === "") {
+        addressList[i] = placeInfo.address_name;
+      }
+    }
     addressList[index] = placeInfo.address_name;
     formContext.setValue("address", addressList);
     formContext.trigger("address");
