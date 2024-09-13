@@ -162,6 +162,7 @@ const QuillEditorContainer = () => {
         formContext.setValue("contents", contents);
         formContext.trigger("contents");
       }}
+      temp={diaryEditorStore.currentDay}
     />
   );
 };

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import QuillEditor from "./QuillEditor";
 import { useFormContext } from "react-hook-form";
+import { FaCheck } from "react-icons/fa6";
 
 interface Props {
   pathname: string;
@@ -18,12 +19,14 @@ interface Props {
   inputTagRef: React.RefObject<HTMLInputElement>;
   imagesHook: useDragScrollType;
   loading: boolean;
+  tip: string;
   onSubmit: () => void;
   showLocationModal: () => void;
   closeLocationModal: () => void;
   showCategoryModal: () => void;
   closeCategoryModal: () => void;
   onChangeHashTagHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  setTip: (tip: string) => void;
 }
 
 const InformationEditor = ({
@@ -34,12 +37,14 @@ const InformationEditor = ({
   inputTagRef,
   imagesHook,
   loading,
+  tip,
   onSubmit,
   showLocationModal,
   closeLocationModal,
   showCategoryModal,
   closeCategoryModal,
   onChangeHashTagHandler,
+  setTip,
 }: Props) => {
   const formContext = useFormContext();
 
@@ -156,7 +161,7 @@ const InformationEditor = ({
         </h2>
         <div className="relative flex w-full flex-col gap-2">
           <input
-            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
+            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100/25" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
             placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             disabled={formContext.getValues("hashtags").length >= 10}
             onKeyUp={onChangeHashTagHandler}
@@ -239,79 +244,65 @@ const InformationEditor = ({
         <div className="relative flex flex-grow flex-col gap-4 max-[744px]:w-full">
           {formContext.getValues("tips").map((tip: string, index: number) => (
             <div key={index} className="relative w-full">
+              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border-[0.0625rem] bg-gray-100/25 pl-5 pr-14 text-sm outline-none">
+                {tip}
+              </div>
+              <MdClose
+                className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
+                size="2rem"
+                onClick={() => {
+                  const tips: string[] = formContext.getValues("tips");
+                  const filteredTips = tips.filter((_, idx) => idx !== index);
+                  formContext.setValue("tips", filteredTips);
+                  formContext.trigger("tips");
+                }}
+              />
+            </div>
+          ))}
+          {formContext.getValues("tips").length < 5 && (
+            <div className="relative w-full">
               <input
-                className={`${formContext.formState.errors.tips && tip.trim() === "" ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} ${index >= 1 ? "pr-14" : "pr-5"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 text-sm outline-none`}
+                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 pr-14 text-sm outline-none`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
                 value={tip}
-                onChange={(e) => {
-                  const tips: string[] = formContext.getValues("tips");
-                  tips[index] = e.target.value;
-                  formContext.setValue("tips", tips);
-                  formContext.trigger("tips");
-                }}
+                onChange={(e) => setTip(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === ";") {
                     e.preventDefault();
                     e.persist();
+                  } else if (e.key === "Enter") {
+                    const tips: string[] = formContext.getValues("tips");
+                    tips.push(tip);
+                    formContext.setValue("tips", tips);
+                    formContext.trigger("tips");
+                    setTip("");
                   }
                 }}
               />
-              {index >= 1 && (
-                <MdClose
+              {tip.length >= 1 && (
+                <FaCheck
                   className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
                   size="2rem"
                   onClick={() => {
                     const tips: string[] = formContext.getValues("tips");
-                    const filteredTips = tips.filter((_, idx) => idx !== index);
-                    formContext.setValue("tips", filteredTips);
+                    tips.push(tip);
+                    formContext.setValue("tips", tips);
                     formContext.trigger("tips");
+                    setTip("");
                   }}
                 />
               )}
             </div>
-          ))}
+          )}
           {formContext.formState.errors.tips && (
             <p className="absolute -bottom-6 left-4 text-xs font-medium text-red-500">
-              비어있는 Tip을 입력하거나 항목을 삭제해 주세요.
+              최소 하나의 Tip을 입력해 주세요.
             </p>
           )}
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <div className="mt-3 flex flex-row items-center gap-5 text-sm font-medium text-gray1">
-          <button
-            className={`${formContext.getValues("tips").length <= 1 ? "text-gray3" : "hover:text-main"}`}
-            type="button"
-            onClick={() => {
-              const tips: string[] = formContext.getValues("tips");
-              tips.pop();
-              formContext.setValue("tips", tips);
-              formContext.trigger("tips");
-            }}
-            disabled={formContext.getValues("tips").length <= 1}
-          >
-            <span
-              className={`${formContext.getValues("tips").length <= 1 ? "text-gray3" : "text-main"}`}
-            >
-              -
-            </span>
-            {" 항목 삭제"}
-          </button>
-          <button
-            className="hover:text-main"
-            type="button"
-            onClick={() => {
-              const tips = formContext.getValues("tips");
-              tips.push("");
-              formContext.setValue("tips", tips);
-              formContext.trigger("tips");
-            }}
-          >
-            <span className="text-main">+</span>
-            {" 항목 추가"}
-          </button>
-        </div>
         <button
           className="mb-20 mt-10 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
           type="submit"
