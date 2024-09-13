@@ -23,7 +23,7 @@ const SupportHeader = ({ active }: ISupportHeader) => {
         </h1>
         <p className={"text-gray1"}> 솔리투어 고객지원에서 도와드릴게요 </p>
       </div>
-      <article className="flex justify-start gap-1 pt-12">
+      <article className="flex justify-start gap-1 pt-12 max-w-full overflow-x-scroll scrollbar-hide">
         {tabs.map((tab) => (
           <Link
             key={tab.value}
