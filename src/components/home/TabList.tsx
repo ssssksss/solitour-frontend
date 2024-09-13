@@ -5,7 +5,7 @@ const TabList = () => {
   return (
     <div className="flex w-full flex-row items-center justify-between gap-5 max-[744px]:flex-col">
       <Link
-        className="flex h-72 flex-1 flex-col justify-between rounded-2xl bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA] p-12 duration-300 hover:scale-105 max-[1024px]:h-48 max-[1024px]:p-6 max-[744px]:w-full dark:opacity-65"
+        className="flex h-72 flex-1 flex-col justify-between rounded-2xl bg-gradient-to-br from-[#CBF6FF] to-[#EBE0FA] p-12 duration-300 hover:scale-105 max-[1024px]:h-48 max-[1024px]:p-6 max-[744px]:w-full"
         href="/informations/list?page=1&parentCategoryId=1"
       >
         <div className="flex flex-col gap-2">
@@ -28,7 +28,7 @@ const TabList = () => {
         </div>
       </Link>
       <Link
-        className="flex h-72 flex-1 flex-col justify-between rounded-2xl bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF] p-12 duration-300 hover:scale-105 max-[1024px]:h-48 max-[1024px]:p-6 max-[744px]:w-full dark:opacity-65"
+        className="flex h-72 flex-1 flex-col justify-between rounded-2xl bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF] p-12 duration-300 hover:scale-105 max-[1024px]:h-48 max-[1024px]:p-6 max-[744px]:w-full"
         href="/gathering"
       >
         <div className="flex flex-col gap-2">

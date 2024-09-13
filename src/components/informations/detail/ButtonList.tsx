@@ -30,14 +30,14 @@ const ButtonList = ({
         />
       )}
       <Link
-        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
+        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
         href={`/informations/edit/${informationId}`}
       >
         <EditIcon />
         수정
       </Link>
       <button
-        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
+        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
         onClick={() => setModalVisible(true)}
       >
         <DeleteIcon />

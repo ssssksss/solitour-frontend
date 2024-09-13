@@ -15,7 +15,7 @@ const DiaryPagination = ({ currentPage, totalPages, pathname }: Props) => {
   const rightPage = Math.min(leftPage + 4, totalPages);
 
   return (
-    <div className="mb-[8.625rem] mt-10 flex flex-row items-center justify-center gap-3 text-sm text-black dark:text-slate-200">
+    <div className="mb-[8.625rem] mt-10 flex flex-row items-center justify-center gap-3 text-sm text-black">
       {currentPage > 1 ? (
         <Link href={`${pathname}?page=1`}>
           <MdFirstPage

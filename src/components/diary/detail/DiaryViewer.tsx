@@ -37,20 +37,7 @@ const DiaryViewer = ({
         />
       )}
       <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
-        <Image
-          className="hidden dark:block"
-          src="/day-text-dark-mode.svg"
-          alt="day-text"
-          width={41}
-          height={25}
-        />
-        <Image
-          className="dark:hidden"
-          src="/day-text.svg"
-          alt="day-text"
-          width={41}
-          height={25}
-        />
+        <Image src="/day-text.svg" alt="day-text" width={41} height={25} />
         {Array.from({ length: days }, (_, index) => index + 1).map((day) => (
           <button
             key={day}
@@ -69,10 +56,10 @@ const DiaryViewer = ({
           style={{ objectFit: "contain" }}
         />
       </div>
-      <h1 className="mt-12 text-[1.75rem] font-bold dark:text-slate-200">
+      <h1 className="mt-12 text-[1.75rem] font-bold">
         {data.diaryContentResponse.title}
       </h1>
-      <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1 dark:text-slate-400">
+      <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1">
         <p>
           {new Date(
             new Date(data.diaryContentResponse.startDatetime).getTime() +
@@ -99,14 +86,14 @@ const DiaryViewer = ({
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
         <Link
-          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
+          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
           href={`/diary/edit/${data.diaryContentResponse.diaryId}`}
         >
           <EditIcon />
           수정
         </Link>
         <button
-          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main dark:text-slate-400"
+          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
           onClick={() => openModal()}
         >
           <DeleteIcon />

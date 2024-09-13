@@ -19,6 +19,7 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
       key: "selection",
     },
   ]);
+  const [isStartDateSelected, setIsStartDateSelectec] = useState(false);
   const formContext = useFormContext();
 
   const onChangeDateRange = () => {
@@ -30,9 +31,23 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
 
     formContext.setValue("startDate", state[0].startDate);
     formContext.setValue("endDate", state[0].endDate);
-    formContext.setValue("address", Array<string>(days).fill(""));
-    formContext.setValue("moodLevels", Array<number>(days).fill(0));
-    formContext.setValue("contents", Array<string>(days).fill(""));
+
+    let addressList: string[] = formContext.getValues("address");
+    let moodLevels: number[] = formContext.getValues("moodLevels");
+    let contents: string[] = formContext.getValues("contents");
+    const dayDifference = days - diaryEditorStore.days;
+
+    if (dayDifference > 0) {
+      for (let i = 0; i < dayDifference; i++) {
+        addressList.push("");
+        moodLevels.push(0);
+        contents.push("");
+      }
+    }
+
+    formContext.setValue("address", addressList.slice(0, days));
+    formContext.setValue("moodLevels", moodLevels.slice(0, days));
+    formContext.setValue("contents", contents.slice(0, days));
 
     diaryEditorStore.setDiaryEditor({
       days: days,
@@ -53,7 +68,9 @@ const DateRangeModalContainer = ({ closeModal }: Props) => {
     <DateRangeModal
       width={width}
       state={state}
+      isStartDateSelected={isStartDateSelected}
       setState={setState}
+      setIsStartDateSelected={setIsStartDateSelectec}
       closeModal={closeModal}
       onChangeDateRange={onChangeDateRange}
     />

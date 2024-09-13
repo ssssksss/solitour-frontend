@@ -49,15 +49,15 @@ const DiaryEditor = ({
         <DateRangeModalContainer closeModal={closeDateRangeModal} />
       )}
       {addressModal && <AddressModalContainer closeModal={closeAddressModal} />}
-      <h1 className="text-[1.75rem] font-bold text-black dark:text-slate-200">
+      <h1 className="text-[1.75rem] font-bold text-black">
         {`일기 ${text}하기`}
       </h1>
-      <p className="mt-6 text-gray1 dark:text-slate-400">
+      <p className="mt-6 text-gray1">
         새로운 <span className="text-main">경험을 기록</span>하고 나만의
         추억카드를 만들어보세요!
       </p>
       <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
-        <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+        <h2 className="w-[2.625rem] text-lg font-semibold text-black">
           제목<span className="text-main">*</span>
         </h2>
         <input
@@ -79,7 +79,7 @@ const DiaryEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-10">
         <div className="relative flex h-[3.3125rem] flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
+          <h2 className="w-[2.625rem] text-lg font-semibold text-black">
             날짜<span className="text-main">*</span>
           </h2>
           <button
@@ -110,8 +110,8 @@ const DiaryEditor = ({
         </div>
         {diaryEditorStore.days > 0 && (
           <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
-            <h2 className="w-[2.625rem] text-lg font-semibold text-black dark:text-slate-200">
-              지역<span className="text-main">*</span>
+            <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+              주소<span className="text-main">*</span>
             </h2>
             <button
               className={`${formContext.getValues("address")[diaryEditorStore.currentDay - 1] === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-none`}
@@ -121,7 +121,7 @@ const DiaryEditor = ({
               {formContext.getValues("address")[
                 diaryEditorStore.currentDay - 1
               ] === ""
-                ? "지역명을 입력하세요."
+                ? "주소를 입력하세요."
                 : formContext.getValues("address")[
                     diaryEditorStore.currentDay - 1
                   ]}
@@ -136,20 +136,7 @@ const DiaryEditor = ({
       </div>
       {diaryEditorStore.days > 0 && (
         <div className="mt-14 flex h-7 w-full flex-row items-center gap-14 overflow-x-auto overflow-y-hidden pb-2">
-          <Image
-            className="hidden dark:block"
-            src="/day-text-dark-mode.svg"
-            alt="day-text"
-            width={41}
-            height={25}
-          />
-          <Image
-            className="dark:hidden"
-            src="/day-text.svg"
-            alt="day-text"
-            width={41}
-            height={25}
-          />
+          <Image src="/day-text.svg" alt="day-text" width={41} height={25} />
           {Array.from(
             { length: diaryEditorStore.days },
             (_, index) => index + 1,
@@ -168,20 +155,24 @@ const DiaryEditor = ({
         <div
           className={`${formContext.formState.errors.moodLevels ? "border-red-500" : "border-gray3"} relative mt-6 flex flex-col gap-5 rounded-2xl border-[0.0625rem] pb-[0.875rem] pt-6`}
         >
-          <h2 className="pl-6 text-lg font-semibold text-black dark:text-slate-200">
+          <h2 className="pl-6 text-lg font-semibold text-black">
             {`하루 기분은 어땠나요? (Day ${diaryEditorStore.currentDay})`}
           </h2>
           <div className="flex flex-wrap items-center">
             {["최고", "좋아", "무난", "슬퍼", "화나"].map((value, index) => (
               <button
                 key={index + 1}
-                className={`${formContext.getValues("moodLevels")[diaryEditorStore.currentDay - 1] === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main dark:text-slate-400`}
+                className={`${formContext.getValues("moodLevels")[diaryEditorStore.currentDay - 1] === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main`}
                 onClick={() => {
                   const moodLevels: number[] =
                     formContext.getValues("moodLevels");
                   moodLevels[diaryEditorStore.currentDay - 1] = index + 1;
                   formContext.setValue("moodLevels", moodLevels);
-                  formContext.trigger("moodLevels");
+                  if (formContext.formState.errors.moodLevels) {
+                    formContext.trigger();
+                  } else {
+                    formContext.watch("moodLevels");
+                  }
                 }}
               >
                 <div className="relative h-10 w-8">

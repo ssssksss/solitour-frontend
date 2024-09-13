@@ -100,6 +100,15 @@ export interface InformationDetailDto {
     };
     name: string;
   };
+  categoryResponse: {
+    id: number;
+    parentCategory: {
+      id: number;
+      parentCategory: null;
+      name: string;
+    };
+    name: string;
+  };
   imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
   likeCount: number;
   userImage: string;
@@ -112,6 +121,7 @@ export interface InformationDetailDto {
       zoneCategoryChildName: string;
       viewCount: number;
       isBookMark: boolean;
+      isLike: boolean;
       thumbNailImage: string;
       likeCount: number;
     }>
@@ -137,6 +147,7 @@ export interface BestInformationResponseDto {
   parentCategoryName: string; // 부모 카테고리 이름
   viewCount: number; // 조회수
   isBookMark: boolean; // 북마크 했는지 여부
+  isLike: boolean;
   thumbNailImage: string; // 썸네일 이미지 주소
   likeCount: number; // 좋아요 수
 }

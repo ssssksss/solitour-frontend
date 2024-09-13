@@ -61,7 +61,7 @@ const InformationSearch = ({
           <IoIosArrowDown className="mt-1" />
         </button>
         <div
-          className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow dark:text-slate-400`}
+          className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow`}
           onClick={() => onSearchDropdownClick()}
         >
           <button
@@ -81,7 +81,7 @@ const InformationSearch = ({
         </div>
         <p className="absolute left-[4.6875rem] top-2 text-gray3">|</p>
         <input
-          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
+          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
           type="text"
           placeholder="검색하기"
           value={searchValue}
@@ -101,7 +101,7 @@ const InformationSearch = ({
       </form>
       <div className="flex flex-row items-center gap-4 text-sm font-medium">
         <button
-          className={`${place === "" ? "text-gray1 dark:text-slate-400" : "text-main"} flex flex-row items-center hover:text-main`}
+          className={`${place === "" ? "text-gray1" : "text-main"} flex flex-row items-center hover:text-main`}
           onClick={openModal}
         >
           <VscSettings size={"1.25rem"} />
@@ -109,33 +109,33 @@ const InformationSearch = ({
         </button>
         <div className="relative">
           <button
-            className="flex flex-row items-center text-gray1 hover:text-main dark:text-slate-400"
+            className="flex flex-row items-center text-gray1 hover:text-main"
             onClick={() => onOrderDropdownClick()}
           >
             <p className="text-nowrap">{`${order === "latest" ? "최신순" : order === "likes" ? "좋아요순" : "조회순"}`}</p>
             <IoIosArrowDown />
           </button>
           <div
-            className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow dark:text-slate-400`}
+            className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow`}
             onClick={() => onOrderDropdownClick()}
           >
             <Link
               className={`${order === "latest" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
               className={`${order === "likes" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
               className={`${order === "views" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
-              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`}
+              href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               조회순

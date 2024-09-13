@@ -1,7 +1,7 @@
 import { CategoryResponseDto } from "@/types/CategoryDto";
 import ParentCategoryList from "./ParentCategoryList";
-import ChildCategoryList from "./ChildCategoryList";
 import InformationSearchContainer from "@/containers/informations/list/InformationSearchContainer";
+import ChildCategoryListContainer from "@/containers/informations/list/ChildCategoryListContainer";
 
 async function getCategoryList() {
   const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
@@ -31,7 +31,7 @@ const CategoryList = async ({ parentCategoryId, childCategoryId }: Props) => {
         parentCategoryId={parentCategoryId}
       />
       <div className="flex flex-row items-center justify-between max-[1024px]:flex-col-reverse max-[1024px]:items-start max-[1024px]:space-y-6 max-[1024px]:space-y-reverse">
-        <ChildCategoryList
+        <ChildCategoryListContainer
           categories={categories}
           parentCategoryId={parentCategoryId}
           childCategoryId={childCategoryId}

@@ -37,8 +37,8 @@ const CropperComponent = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-      <div className="relative h-full max-h-screen w-full max-w-screen-lg overflow-hidden rounded-lg bg-white p-4">
+    <div className="relative h-[calc(100vh-8rem)] w-[calc(100vw-4rem)] bg-white flex flex-col justify-between py-4">
+      <div className={"relative h-[calc(100%-5rem)] w-full"}>
         <Cropper
           image={imageBase64Data}
           crop={crop}
@@ -52,20 +52,14 @@ const CropperComponent = ({
           cropShape="round" // 이미지 편집 형태
           zoomWithScroll={true} // 스크롤 확대/축소 허용할지
         />
-        <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 transform space-x-4">
-          <button
-            onClick={showCroppedImage}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-white shadow-md hover:bg-blue-700"
-          >
-            Crop & Save
-          </button>
-          <button
-            onClick={closeCropModal}
-            className="rounded-lg bg-red-600 px-4 py-2 text-white shadow-md hover:bg-red-700"
-          >
-            Cancel
-          </button>
-        </div>
+      </div>
+      <div className="flex w-full px-4">
+        <button
+          onClick={showCroppedImage}
+          className="h-[4rem] w-full rounded-lg bg-main text-white shadow-md"
+        >
+          편집 완료
+        </button>
       </div>
     </div>
   );

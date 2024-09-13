@@ -95,12 +95,10 @@ export const InformationUpdateFormSchema = z.object({
       invalid_type_error: "deleteImagesUrl must be a string.",
     })
     .array(),
-  informationContent: z
-    .string({
-      required_error: "Content is required.",
-      invalid_type_error: "Content must be a string.",
-    })
-    .max(500, { message: "Must be 500 or fewer characters long" }),
+  informationContent: z.string({
+    required_error: "Content is required.",
+    invalid_type_error: "Content must be a string.",
+  }),
   hashtags: z
     .string({
       required_error: "Hashtag is required.",

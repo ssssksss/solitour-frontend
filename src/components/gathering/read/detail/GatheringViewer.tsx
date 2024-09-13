@@ -171,23 +171,23 @@ const GatheringViewer = ({
           width={14}
           height={14}
         />
-          {format(
-            new Date(data.deadline),
-            "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
-            {
-              locale: ko,
-            },
-          )}
+        {format(
+          new Date(data.deadline),
+          "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
+          {
+            locale: ko,
+          },
+        )}
       </div>
-      <div className="mb-[1.25rem] whitespace-pre-wrap pt-[2rem]">
+      <div className="mb-[1.25rem] w-full whitespace-pre-wrap break-words pt-[2rem]">
         {data.content}
       </div>
       {data.tagResponses?.length > 0 && (
-        <div className={"mb-[2.625rem] flex gap-x-[.25rem] text-sm"}>
+        <div className={"mb-[2.625rem] flex gap-x-[.25rem]"}>
           {data.tagResponses?.map((i) => (
             <div
               key={i.name}
-              className="max-w-max rounded-xl px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main"
+              className="max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main"
             >
               {"#"}
               {i.name}
@@ -196,9 +196,7 @@ const GatheringViewer = ({
         </div>
       )}
       {/* 지도 부분 */}
-      <div className="h-[19.875rem] w-full">
-        <GatheringKakaoMap {...data.placeResponse} />
-      </div>
+      <GatheringKakaoMap {...data.placeResponse} />
       <GatheringApplicantListContainer
         postUserId={data.userPostingResponse.id}
       />

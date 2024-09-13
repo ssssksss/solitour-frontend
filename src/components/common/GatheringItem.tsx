@@ -17,7 +17,7 @@ const SEX: { [key: string]: string } = {
   FEMALE: "여성분만",
 };
 
-const categoryStyle: {[key: string]: string} = {
+const categoryStyle: { [key: string]: string } = {
   취미: "outline-[#FFDDEF] text-[#C5006A] bg-[#FFF2F9]",
   활동: "outline-[#DDE5FF] text-[#0036C2] bg-[#F2F6FF]",
 };
@@ -28,7 +28,7 @@ const statusStyle: { [key: string]: string } = {
   REFUSE: "outline-none text-white bg-[#EE4C4A]",
 };
 
-const status: {[key: string]: string} = {
+const status: { [key: string]: string } = {
   WAIT: "대기",
   CONSENT: "승인",
   REFUSE: "거절",
@@ -37,11 +37,13 @@ const status: {[key: string]: string} = {
 // todo
 const GatheringItem = ({ data }: IGatheringItem) => {
   return (
+    // w-[307] , h-[315], p-5, 
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-auto flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[27.5rem] min-[744px]:min-w-[312px] dark:bg-slate-800 dark:outline-slate-400 dark:hover:bg-slate-600`}
+      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] max-[744px]:max-w-[28.75rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main`}
     >
       <div className="flex flex-col">
+      {/* 상태와 북마크 */}
         <div className="flex flex-row items-center justify-between">
           <p
             className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
@@ -57,20 +59,21 @@ const GatheringItem = ({ data }: IGatheringItem) => {
             postId={data.gatheringId}
           />
         </div>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap pb-1 pt-6 text-lg font-bold hover:text-main dark:text-slate-200">
+        {/* 제목, 유저 닉네임 */}
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap pb-1 pt-6 text-lg font-bold hover:text-main">
           {data.title}
         </p>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1 dark:text-slate-400">
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1">
           {data.userName}
         </p>
       </div>
       {/* 마감일 포함 영역 */}
       <div className="flex w-full flex-col gap-[0.625rem]">
-        {/* 4개 영역 */}
+        {/* 4개 영역(기간, 장소, 시간, 인원) */}
         <div className="flex flex-col gap-[0.625rem]">
           <div
             className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
+              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse"
             }
           >
             <article className="flex flex-row items-center gap-2">
@@ -89,7 +92,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
                 </span>
               )}
             </article>
-            <article className="flex h-[1.25rem] items-center gap-2 dark:text-slate-400">
+            <article className="flex h-[1.25rem] items-center gap-2">
               {/* 모임 장소 */}
               <div className={"flex items-center"}>
                 <Image
@@ -106,10 +109,10 @@ const GatheringItem = ({ data }: IGatheringItem) => {
           </div>
           <div
             className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse min-[1024px]:grid min-[1024px]:grid-cols-2"
+              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse"
             }
           >
-            <article className="flex h-[1.25rem] w-full flex-row items-center gap-2 dark:text-slate-400">
+            <article className="flex h-[1.25rem] w-full flex-row items-center gap-2">
               <div className={"flex min-w-fit gap-2"}>
                 <div className={"relative flex items-center"}>
                   {/* 모임 인원 */}
@@ -146,23 +149,24 @@ const GatheringItem = ({ data }: IGatheringItem) => {
               className="flex h-[1.25rem] items-center gap-2"
               style={{ lineHeight: "100%" }}
             >
-              <div className={"relative"}> 
-              {/* 모임 시간 */}
-              <Image
-                src={`${data.isFinish ? "/clock-gray-icon.svg" : "/clock-icon.svg"}`}
-                alt="clock-icon"
-                width={16}
-                height={16}
-                className="translate-y-[1px]"
+              <div className={"relative"}>
+                {/* 모임 시간 */}
+                <Image
+                  src={`${data.isFinish ? "/clock-gray-icon.svg" : "/clock-icon.svg"}`}
+                  alt="clock-icon"
+                  width={16}
+                  height={16}
+                  className="translate-y-[1px]"
                 />
-                </div>
+              </div>
               <span className="flex h-full items-center text-sm">
                 {format(new Date(data.scheduleStartDate), "hh:mm")}
               </span>
             </article>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between">
+        {/* 마감일, 좋아요, 조회수 */}
+        <div className="flex flex-row items-center justify-between pt-[0.4375rem]">
           <div className="flex flex-row items-center gap-1">
             <Image
               src={`${data.isFinish ? "/pin-gray-icon.svg" : "/pin-icon.svg"}`}
@@ -171,9 +175,9 @@ const GatheringItem = ({ data }: IGatheringItem) => {
               height={16}
             />
 
-            <p className="text-sm dark:text-slate-400">
+            <p className="text-sm">
               마감일:
-              {format(new Date(data.deadline), "yy-MM-dd(EE)", {
+              {format(new Date(data.deadline), "yy.MM.dd(EE)", {
                 locale: ko,
               })}
             </p>
@@ -197,7 +201,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
                   gatheringId={data.gatheringId}
                 />
               )}
-              <div className="relative flex items-center gap-1  dark:text-slate-400">
+              <div className="relative flex items-center gap-1">
                 <Image
                   src="/eyes-icon.svg"
                   alt="eyes-icon"

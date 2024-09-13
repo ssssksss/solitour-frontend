@@ -1,6 +1,8 @@
 import { dragAndDropProps } from "@/types/DragAndDrop";
 import Image from "next/image";
+import UserImage from "../auth/UserImage";
 import CropperComponent from "../common/cropper/CropperComponent";
+import { Modal } from "../common/modal/Modal";
 
 interface IMyPageUserImage {
   dragAndDrop: dragAndDropProps;
@@ -27,37 +29,17 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
           onDragOver={props.dragAndDrop.onDragOver}
           onDrop={props.dragAndDrop.onDropOrInputEvent}
         >
-          {props.userImageUrl ? (
-            <Image
-              src={props.userImageUrl}
-              alt={"user_image"}
-              width={108}
-              height={108}
-              className="rounded-[50%]"
-            />
-          ) : props.userSex == "MALE" ? (
-            <Image
-              src={"/user_sex_man_default_image.svg"}
-              alt={"user_image"}
-              width={108}
-              height={108}
-              className="rounded-[50%]"
-              />
-            ) : (
-              <Image
-              src={"/user_sex_woman_default_image.svg"}
-              alt={"user_image"}
-              width={108}
-              height={108}
-              className="rounded-[50%]"
-            />
-          )}
+          <UserImage
+            userImageAddress={`${props.userImageUrl}`}
+            userSex={`${props.userSex}`}
+            size={108}
+          />
           <div
             className={
-              "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]"
+              "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-white"
             }
           >
-            <div className="relative h-[1.25rem] w-[1.25rem] bg-white">
+            <div className="relative h-[1.25rem] w-[1.25rem] ">
               <Image src={"/camera-icon.svg"} alt={"camera-icon-image"} fill />
             </div>
           </div>
@@ -69,13 +51,17 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
           />
         </label>
       </div>
-      {props.isModalOpen && props.imageBase64Data && (
+      <Modal
+        isOpen={props.isModalOpen}
+        onClose={props.closeCropModal}
+        isHeaderBar={true}
+      >
         <CropperComponent
           imageBase64Data={props.imageBase64Data}
           closeCropModal={props.closeCropModal}
           onChangeImageUrl={props.onChangeImageUrl}
-        />
-      )}
+          />
+      </Modal>
     </article>
   );
 };

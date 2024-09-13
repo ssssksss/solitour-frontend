@@ -4,8 +4,8 @@ interface Props {
 
 const TopListSkeleton = ({ title }: Props) => {
   return (
-    <div className="z-10 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow shadow-[#CCECE2] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24 dark:bg-slate-800">
-      <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black dark:text-slate-200">
+    <div className="z-10 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow shadow-[#CCECE2] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24">
+      <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black">
         {`${title} 정보 `}
         <span className="font-bold text-main">Top 5</span>
       </h2>
@@ -17,8 +17,8 @@ const TopListSkeleton = ({ title }: Props) => {
               className={`flex items-center gap-2 ${index > 2 ? `col-start-2` : `col-start-1`}`}
               style={{ gridRowStart: index > 2 ? index - 2 : index + 1 }}
             >
-              <div className="h-6 w-4 animate-pulse bg-gray-100 dark:bg-slate-600" />
-              <div className="h-6 w-80 animate-pulse bg-gray-100 dark:bg-slate-600" />
+              <div className="h-6 w-4 animate-pulse bg-gray-100" />
+              <div className="h-6 w-80 animate-pulse bg-gray-100" />
             </li>
           ))}
         </ol>

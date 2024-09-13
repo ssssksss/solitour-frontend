@@ -26,8 +26,8 @@ const GatheringExcludeComplete = ({checkExcludeCompleteGatheringHandler ,isExclu
       height={20}
     />
   )}
-  <div className="flex min-w-[5.25rem] w-auto items-center justify-start">
-    {isExclude ? "현재 모집 중" : "모집 중 + 마감"}
+      <div className="flex min-w-[5.25rem] w-auto items-center justify-start">
+        모집 완료 제외
   </div>
 </button>
   );

@@ -18,23 +18,21 @@ const InformationViewer = ({ informationId, data }: Props) => {
     <div className="w-full">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
         <div className="w-full pb-4 lg:hidden">
-          <h1 className="text-2xl font-bold dark:text-slate-200">
-            {data.title}
-          </h1>
+          <h1 className="break-words text-2xl font-bold">{data.title}</h1>
           <div className="flex flex-row items-end justify-between py-4">
             <div className="flex flex-row items-center gap-2">
               <Image
-                className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7] dark:bg-slate-200"
+                className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
                 src={`${data.userImage}`}
                 alt="userImage"
                 width={48}
                 height={48}
               />
               <div className="space-y-1">
-                <p className="text-xs font-medium text-black dark:text-slate-400">
+                <p className="text-xs font-medium text-black">
                   {data.userPostingResponse.name}
                 </p>
-                <p className="text-xs text-gray1 dark:text-slate-400">
+                <p className="text-xs text-gray1">
                   {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}
                 </p>
               </div>
@@ -45,7 +43,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 likeCount={data.likeCount}
                 isLike={data.isLike}
               />
-              <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
+              <div className="flex flex-row items-center gap-1 text-gray2">
                 <LuEye />
                 <p className="text-xs">{data.viewCount}</p>
               </div>
@@ -57,23 +55,21 @@ const InformationViewer = ({ informationId, data }: Props) => {
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <div className="max-[1024px]:hidden">
-            <h1 className="text-2xl font-bold dark:text-slate-200">
-              {data.title}
-            </h1>
+            <h1 className="break-words text-2xl font-bold">{data.title}</h1>
             <div className="flex flex-row items-end justify-between py-4">
               <div className="flex flex-row items-center gap-2">
                 <Image
-                  className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7] dark:bg-slate-200"
+                  className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
                   src={`${data.userImage}`}
                   alt="userImage"
                   width={48}
                   height={48}
                 />
                 <div className="space-y-1">
-                  <p className="text-xs font-medium text-black dark:text-slate-400">
+                  <p className="text-xs font-medium text-black">
                     {data.userPostingResponse.name}
                   </p>
-                  <p className="text-xs text-gray1 dark:text-slate-400">
+                  <p className="text-xs text-gray1">
                     {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}
                   </p>
                 </div>
@@ -84,7 +80,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
                   likeCount={data.likeCount}
                   isLike={data.isLike}
                 />
-                <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
+                <div className="flex flex-row items-center gap-1 text-gray2">
                   <LuEye />
                   <p className="text-xs">{data.viewCount}</p>
                 </div>
@@ -93,12 +89,10 @@ const InformationViewer = ({ informationId, data }: Props) => {
           </div>
           <div className="flex flex-row items-center gap-1 py-3">
             <TiLocation className="text-main" size={"1.1rem"} />
-            <p className="text-xs font-medium text-gray1 dark:text-slate-400">
-              {data.address}
-            </p>
+            <p className="text-xs font-medium text-gray1">{data.address}</p>
           </div>
           <p
-            className="py-4 font-medium text-gray1 dark:text-slate-400"
+            className="break-words py-4 font-medium text-gray1"
             dangerouslySetInnerHTML={{ __html: data.content }}
           />
           <div className="flex flex-row flex-wrap items-center gap-1 pb-8">
@@ -112,13 +106,13 @@ const InformationViewer = ({ informationId, data }: Props) => {
             ))}
           </div>
           <div className="flex flex-col gap-3 border-y-[0.0625rem] border-gray3 px-6 py-4">
-            <div className="text-bold text-lg font-bold dark:text-slate-200">
+            <div className="text-bold text-lg font-bold">
               생생한 혼플 <span className="text-main">TIP</span>
             </div>
             {data.tip.split(";").map((tip, index) => (
               <li
                 key={index}
-                className="ml-6 align-baseline font-medium text-gray1 marker:text-main dark:text-slate-400"
+                className="ml-6 align-baseline font-medium text-gray1 marker:text-main"
               >
                 {tip}
               </li>
@@ -139,10 +133,10 @@ const InformationViewer = ({ informationId, data }: Props) => {
         href={`https://map.kakao.com/link/map/${data.placeResponse.searchId.toString() !== "0" ? data.placeResponse.searchId : `${data.placeResponse.name},${data.placeResponse.yaxis},${data.placeResponse.xaxis}`}`}
         target="_blank"
       >
-        <h2 className="text-lg font-bold text-black dark:text-slate-200">
+        <h2 className="text-lg font-bold text-black">
           {data.placeResponse.name}
         </h2>
-        <div className="flex flex-row items-center gap-1 text-sm text-gray1 dark:text-slate-400">
+        <div className="flex flex-row items-center gap-1 text-sm text-gray1">
           <TiLocation />
           <p>{data.address}</p>
         </div>

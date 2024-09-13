@@ -3,22 +3,18 @@ import { TiLocation } from "react-icons/ti";
 import { DebouncedState } from "use-debounce";
 
 interface Props {
-  placeInfos:
-    | {
-        place_name: string;
-        address_name: string;
-        id: string;
-        x: string;
-        y: string;
-      }[]
-    | undefined;
-  addressInfos:
-    | {
-        address_name: string;
-        x: string;
-        y: string;
-      }[]
-    | undefined;
+  placeInfos?: {
+    place_name: string;
+    address_name: string;
+    id: string;
+    x: string;
+    y: string;
+  }[];
+  addressInfos?: {
+    address_name: string;
+    x: string;
+    y: string;
+  }[];
   handleLocationSearch: DebouncedState<(search: string) => void>;
   handleAddressSearch: DebouncedState<(search: string) => void>;
   isCustom: boolean;
@@ -59,29 +55,27 @@ const PlaceModal = ({
 }: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[39.75rem] flex-col rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)] dark:bg-slate-800">
+      <div className="flex h-fit w-[39.75rem] flex-col rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)]">
         <div className="flex flex-row items-center justify-end">
           <MdClose
-            className="cursor-pointer text-gray2 hover:text-main dark:text-slate-400"
+            className="cursor-pointer text-gray2 hover:text-main"
             size={"2.5rem"}
             onClick={onResetPlace}
           />
         </div>
         <div className="flex flex-col gap-8 px-5">
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-medium text-black dark:text-slate-200">
-              장소 선택
-            </h3>
+            <h3 className="text-lg font-medium text-black">장소 선택</h3>
             <div className="flex h-11 flex-row items-center border-[0.0625rem] text-sm">
               <button
-                className={`h-11 flex-[50%] ${isCustom ? "text-gray1 dark:text-slate-400" : "bg-main text-white"}`}
+                className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
                 onClick={() => onClick(false)}
               >
                 검색으로 찾기
               </button>
               <button
-                className={`h-11 flex-[50%] ${isCustom ? "bg-main text-white" : "text-gray1 dark:text-slate-400"}`}
+                className={`h-11 flex-[50%] ${isCustom ? "bg-main text-white" : "text-gray1"}`}
                 type="button"
                 onClick={() => onClick(true)}
               >
@@ -92,12 +86,10 @@ const PlaceModal = ({
           <div
             className={`${isCustom ? "hidden" : ""} flex w-full flex-col gap-2`}
           >
-            <h3 className="text-lg font-medium text-black dark:text-slate-200">
-              장소 검색하기
-            </h3>
+            <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
             <div className="flex h-80 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full dark:bg-search-icon-dark-mode"
+                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="location"
                 name="location"
@@ -108,15 +100,15 @@ const PlaceModal = ({
                 {placeInfos?.map((placeInfo, index) => (
                   <button
                     key={index}
-                    className="flex w-full flex-col gap-1 hover:bg-gray-100 dark:hover:bg-slate-600"
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
                     type="button"
                     onClick={() => onChangePlace(placeInfo)}
                   >
-                    <div className="flex flex-row items-center gap-2 text-sm text-black dark:text-slate-200">
+                    <div className="flex flex-row items-center gap-2 text-sm text-black">
                       <TiLocation />
                       {placeInfo.place_name}
                     </div>
-                    <span className="text-xs text-gray1 dark:text-slate-400">
+                    <span className="text-xs text-gray1">
                       {placeInfo.address_name}
                     </span>
                   </button>
@@ -127,14 +119,12 @@ const PlaceModal = ({
           <div
             className={`${isCustom ? "" : "hidden"} flex w-full flex-col gap-2`}
           >
-            <h3 className="text-lg font-medium text-black dark:text-slate-200">
-              도로명주소 찾기
-            </h3>
+            <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
             <div
               className={`${canTypePlaceName ? "h-fit" : "h-80 border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]"} flex flex-col rounded-3xl`}
             >
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full dark:bg-search-icon-dark-mode"
+                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="address"
                 name="address"
@@ -148,11 +138,11 @@ const PlaceModal = ({
                 {addressInfos?.map((addressInfo, index) => (
                   <button
                     key={index}
-                    className="flex w-full flex-col gap-1 hover:bg-gray-100 dark:hover:bg-slate-600"
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
                     type="button"
                     onClick={() => onChangeAddress(addressInfo)}
                   >
-                    <div className="flex flex-row items-center gap-2 text-sm text-black dark:text-slate-200">
+                    <div className="flex flex-row items-center gap-2 text-sm text-black">
                       <TiLocation />
                       {addressInfo.address_name}
                     </div>
@@ -164,7 +154,7 @@ const PlaceModal = ({
               className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
             >
               <input
-                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full dark:bg-search-icon-dark-mode"
+                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="location"
                 name="location"

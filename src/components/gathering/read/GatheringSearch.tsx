@@ -37,11 +37,11 @@ const GatheringSearch = ({
     );
 
   return (
-    <div className="flex flex-row items-center gap-4 max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start max-[744px]:w-full ">
+    <div className="flex flex-row items-center gap-4 max-[1024px]:justify-between max-[744px]:w-full max-[744px]:flex-col max-[744px]:items-start">
       <div className="relative z-[1] flex flex-row items-center max-[744px]:w-full">
         <div
           className={
-            "absolute left-0 top-0 flex h-[2.75rem] flex-row items-center gap-2 text-sm text-gray1 hover:text-main"
+            "absolute left-0 top-0 flex h-full flex-row items-center text-sm text-gray1 hover:text-main"
           }
         >
           <Dropdown
@@ -50,13 +50,20 @@ const GatheringSearch = ({
             value={dropdownValue}
             defaultValue={dropdownValue}
             dropdownContainerStyle={{
-              p: "pl-[1.125rem]",
+              style: "pl-[1.125rem]",
+              w: "3.5rem",
+              h: "2.75rem",
+            }}
+            dropdownOptionStyle={{
+              w: "5rem",
+              z: "-z-10",
+              style: "pt-[2.75rem] rounded-[1.375rem_0rem_0.75rem_0.75rem]",
             }}
           />
         </div>
         <p className="absolute left-[4.6875rem] top-2 text-gray3">|</p>
         <input
-          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full dark:border-slate-200 dark:bg-search-icon-dark-mode"
+          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
           type="text"
           autoComplete="search"
           placeholder="검색하기"

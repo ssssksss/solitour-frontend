@@ -3,6 +3,7 @@
 import InformationLikeCount from "@/components/informations/detail/InformationLikeCount";
 import useAuthStore from "@/store/authStore";
 import useInformationLikeStore from "@/store/informationLikeStore";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -27,7 +28,7 @@ const InformationLikeCountContainer = ({
     data.append("infoId", informationId.toString());
 
     if (informationLikeStore.isLiked) {
-      const response = await fetch("/api/informations/great", {
+      const response = await fetchWithAuth("/api/informations/great", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -47,7 +48,7 @@ const InformationLikeCountContainer = ({
         isLiked: false,
       });
     } else {
-      const response = await fetch("/api/informations/great", {
+      const response = await fetchWithAuth("/api/informations/great", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

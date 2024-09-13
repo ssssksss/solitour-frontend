@@ -3,7 +3,6 @@
 import Pagination from "@/components/common/Pagination";
 import GatheringCardList from "@/components/gathering/read/GatheringCardList";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
-import { GatheringListFilterSchema } from "@/lib/examples/zod/schema/GatheringListFilterSchema";
 import { Gathering } from "@/types/GatheringDto";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -35,43 +34,6 @@ const GatheringCardListContainer = () => {
       url.search = params.toString();
       window.history.pushState({}, "", url.toString());
     };
-
-  function validateQueryParams(query: URLSearchParams) {
-      const params = {
-        search: query.get("search") || undefined,
-        tagName: query.get("tagName") || undefined,
-        location: query.has("location")
-          ? parseInt(query.get("location")!, 10)
-          : undefined,
-        allowedSex: query.get("allowedSex") || undefined,
-        startAge: query.has("startAge")
-          ? parseInt(query.get("startAge")!, 10)
-          : undefined,
-        endAge: query.has("endAge")
-          ? parseInt(query.get("endAge")!, 10)
-          : undefined,
-        startDate: query.get("startDate")
-          ? new Date(query.get("startDate")!)
-          : undefined,
-        endDate: query.get("endDate")
-          ? new Date(query.get("endDate")!)
-          : undefined,
-        sort: query.get("sort") || undefined,
-        category: query.has("category")
-          ? parseInt(query.get("category")!, 10)
-          : undefined,
-        isExclude: query.has("isExclude")
-          ? query.get("isExclude") === "true"
-          : undefined,
-      };
-
-      try {
-        GatheringListFilterSchema.parse(params);
-      } catch (error) {
-        router.push("/not-found");
-        return null;
-      }
-    }
 
   useEffect(() => {
     const temp = async () => {
@@ -119,7 +81,7 @@ const GatheringCardListContainer = () => {
           {elements.length != 0 && (
             <Pagination
               currentPage={currentPage}
-              totalPages={Math.ceil(totalElements / 12) + 1}
+              totalPages={Math.ceil(totalElements / 12)}
               pageHandler={pageHandler}
             />
           )}

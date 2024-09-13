@@ -16,7 +16,7 @@ const FloatingButton = ({ visible, ref, onClick, onScrollToTop }: Props) => {
     <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 translate-x-[-100%] flex-col items-center gap-3">
       {visible && (
         <div ref={ref} className="flex flex-col items-center gap-3">
-          <div className="flex animate-fadeIn flex-col items-center gap-6 rounded-full bg-[#F2FAF7] px-4 py-[1.875rem] dark:bg-slate-500">
+          <div className="flex animate-fadeIn flex-col items-center gap-6 rounded-full bg-[#F2FAF7] px-4 py-[1.875rem]">
             <Link
               className="flex flex-col items-center text-sm hover:text-main"
               href="/diary/write"
@@ -52,7 +52,7 @@ const FloatingButton = ({ visible, ref, onClick, onScrollToTop }: Props) => {
       )}
       {!visible && (
         <button
-          className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105 dark:bg-slate-600"
+          className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
           onClick={onClick}
         >
           <Image
@@ -65,7 +65,7 @@ const FloatingButton = ({ visible, ref, onClick, onScrollToTop }: Props) => {
         </button>
       )}
       <button
-        className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105 dark:bg-slate-600"
+        className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
         onClick={onScrollToTop}
       >
         <IoIosArrowUp size={"1.5rem"} />

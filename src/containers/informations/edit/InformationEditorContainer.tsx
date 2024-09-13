@@ -184,6 +184,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       ),
     );
 
+    await methods.trigger();
     if (!methods.formState.isValid) {
       methods.trigger();
       alert("모든 정보를 입력해 주세요.");
@@ -286,13 +287,18 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     methods.setValue("placeXAxis", data.placeResponse.xaxis.toString());
     methods.setValue("placeYAxis", data.placeResponse.yaxis.toString());
     methods.setValue("placeName", data.placeResponse.name);
+    methods.setValue("categoryId", data.categoryResponse.id);
+    methods.setValue(
+      "categoryName",
+      `${data.categoryResponse.parentCategory.name} - ${data.categoryResponse.name}`,
+    );
     methods.setValue("informationContent", data.content);
     methods.setValue(
       "hashtags",
       data.tagResponses.map((tag) => tag.name),
     );
     methods.setValue("tips", data.tip.split(";"));
-    methods.watch();
+    methods.trigger();
 
     editorStore.setEditor({
       images: [...data.imageResponses.map((value) => value.address), ""],

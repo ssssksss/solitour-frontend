@@ -31,6 +31,7 @@ interface IFetchWithTokenRefreshSSR {
   method?: string;
   cache?: RequestCache;
   contentType?: string;
+  next?: NextFetchRequestConfig | undefined;
 }
 
 export async function fetchWithTokenRefreshSSR({
@@ -40,8 +41,8 @@ export async function fetchWithTokenRefreshSSR({
   method,
   cache,
   contentType,
+  next,
 }: IFetchWithTokenRefreshSSR) {
-
   let response = await fetch(url, {
     method: method || "GET",
     headers: {
@@ -63,6 +64,7 @@ export async function fetchWithTokenRefreshSSR({
           Cookie: `access_token=${newAccessToken}`,
         },
         cache: cache || "no-store",
+        next: next,
       });
     } else {
       throw new Error("새로운 액세스 토큰 발급 실패");
@@ -70,19 +72,18 @@ export async function fetchWithTokenRefreshSSR({
   }
 
   if (response.status == 403) {
+    alert("접근 권한이 없음");
     throw new Error("접근 권한이 없음");
   }
 
   if (response.status == 404) {
+    alert("잘못된 경로 요청");
     throw new Error("잘못된 경로 요청");
   }
 
   if (response.status == 405) {
+    alert("잘못된 메소드 타입");
     throw new Error("잘못된 메소드 타입");
-  }
-
-  if (response.status == 409) {
-    throw new Error("중복된 데이터로 요청에 실패");
   }
 
   if (!response.ok) {

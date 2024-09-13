@@ -1,7 +1,7 @@
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import HashSpinner from "./HashSpinner";
 
@@ -10,6 +10,7 @@ interface Props {
   categoryId: number;
   userId?: number;
   isBookMark: boolean;
+  isLike: boolean;
   title: string;
   image: string;
   address: string;
@@ -24,6 +25,7 @@ const InformationItem = ({
   categoryId,
   userId = 0,
   isBookMark,
+  isLike,
   title,
   image,
   address,
@@ -48,11 +50,11 @@ const InformationItem = ({
   }
 
   return (
-    <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main dark:outline-slate-400">
+    <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main">
       <HashSpinner loading={loading} />
       <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
         <Image
-          className="-z-10 rounded-[0.875rem] dark:opacity-65"
+          className="-z-10 rounded-[0.875rem]"
           src={image || "/next.svg"}
           alt={"PostImage"}
           fill={true}
@@ -72,7 +74,7 @@ const InformationItem = ({
           )}
           {userId > 0 && (
             <button
-              className="relative h-7 w-5 cursor-pointer text-white hover:scale-110 dark:text-slate-200"
+              className="relative h-7 w-5 cursor-pointer text-white hover:scale-110"
               type="button"
               onClick={(e) => {
                 e.preventDefault();
@@ -92,24 +94,26 @@ const InformationItem = ({
           )}
         </div>
       </Link>
-      <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4 dark:bg-slate-800">
+      <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4">
         <Link
-          className="truncate-vertical-information-title p-1 font-bold hover:text-main dark:text-slate-200"
+          className="truncate-vertical-information-title p-1 font-bold hover:text-main"
           href={`/informations/${informationId}`}
         >
           {title}
         </Link>
         <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center gap-1 text-gray1 dark:text-slate-400">
+          <div className="flex flex-row items-center gap-1 text-gray1">
             <TiLocation />
             <p className="text-xs font-medium">{address}</p>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-              <FaRegHeart size={"0.8rem"} />
-              <p className="text-xs">{likeCount}</p>
+            <div
+              className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs`}
+            >
+              {isLike ? <FaHeart /> : <FaRegHeart />}
+              <p>{likeCount}</p>
             </div>
-            <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
+            <div className="flex flex-row items-center gap-1 text-gray2">
               <Image
                 src="/eyes-icon.svg"
                 alt="eyes-icon.svg"

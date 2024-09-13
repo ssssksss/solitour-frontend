@@ -32,6 +32,8 @@ const QuillEditor = ({
         theme="snow"
         placeholder="여행은 어땠나요? 자유롭게 기록하고 싶은 것들을 작성해보세요."
         onChange={(value, delta, source, editor) => {
+          console.log(value, delta, source, editor); // TODO
+
           if (source === "api" && value === "<p><br></p>") {
             return;
           }

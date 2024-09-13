@@ -87,6 +87,8 @@ const HeaderContainer = () => {
       onMenuClicked={onMenuClicked}
       onClose={onClose}
       userId={authStore.id}
+      userSex={authStore.sex}
+      userProfile={authStore.userImage.address}
       logoutHandler={logoutHandler}
     />
   );

@@ -23,7 +23,7 @@ const ImageList = ({
   closeViewer,
 }: Props) => {
   return (
-    <div className="dark:opacity-65">
+    <div>
       {viewerVisible && (
         <ImageViewerContainer
           imageUrls={[
@@ -64,7 +64,7 @@ const ImageList = ({
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative h-[6.6875rem] w-[6.6875rem] rounded-lg border-[0.0625rem]"
+            className="relative min-h-[6.6875rem] min-w-[6.6875rem] rounded-lg border-[0.0625rem]"
             onClick={() => {
               setMainImageUrl(image.address);
             }}

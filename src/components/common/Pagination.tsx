@@ -8,17 +8,13 @@ interface Props {
   pageHandler: (currentPage: number) => void;
 }
 
-const Pagination = ({
-  currentPage,
-  totalPages,
-  pageHandler,
-}: Props) => {
+const Pagination = ({ currentPage, totalPages, pageHandler }: Props) => {
   const pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
   const leftPage = Math.max(currentPage - 2, 1);
   const rightPage = Math.min(leftPage + 4, totalPages);
 
   return (
-    <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black dark:text-slate-200">
+    <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black">
       {currentPage > 1 ? (
         <button onClick={() => pageHandler(1)}>
           <MdFirstPage
@@ -74,7 +70,7 @@ const Pagination = ({
       ) : (
         <div className="aspect-square w-[0.875rem] opacity-100"> </div>
       )}
-      {currentPage < totalPages  ? (
+      {currentPage < totalPages ? (
         <button onClick={() => pageHandler(totalPages)}>
           <MdLastPage
             className="cursor-pointer hover:text-main"

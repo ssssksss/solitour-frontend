@@ -40,7 +40,7 @@ const InformationSearchContainer = () => {
     }
 
     router.push(
-      `${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=${order}${searchValue !== "" ? `${searchMethod === "제목" ? "&title" : "&tagName"}=${searchValue}` : ""}`,
+      `${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=${order}${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`,
     );
   };
 

@@ -6,7 +6,7 @@ interface IGatheringEditorContent {
 const GatheringEditorContent = (props: IGatheringEditorContent) => {
   const formContext = useFormContext();
   return (
-    <article className={"flex w-full flex-col gap-[2rem]"}>
+    <article className={"flex w-full flex-col"}>
       <div className="relative w-full">
         <textarea
           className={`min-h-[17.5rem] w-full resize-none rounded-[1rem] p-6 outline outline-[1px] outline-offset-[-1px] ${
@@ -26,18 +26,18 @@ const GatheringEditorContent = (props: IGatheringEditorContent) => {
           }}
           maxLength={500}
         />
+      <div className={"flex w-full justify-end pt-[0.75rem]"}>
         {formContext.formState.errors.content && (
-          <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+          <span className="absolute left-4 text-sm text-red-500">
             {formContext.formState.errors.content.message as String}
           </span>
         )}
-      </div>
-      <div className={"flex w-full justify-end"}>
-        <span
+                <span
           className={`${formContext.getValues("content").length >= 500 && "text-red-600"}`}
         >
           {formContext.getValues("content").length} / 500
         </span>
+        </div>
       </div>
     </article>
   );

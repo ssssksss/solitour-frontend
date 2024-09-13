@@ -58,15 +58,11 @@ useEffect(() => {
 
 
   return (
-    <div
-      className={
-        "flex h-[19.875rem] cursor-pointer flex-col gap-[.5rem] rounded-[1rem] font-semibold text-black outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
-      }
-    >
+    <div className={"flex h-[21.125rem] w-full flex-col text-black"}>
       {placeResponse.name && (
         <a
           className={
-            "relative flex h-full cursor-pointer flex-col items-center justify-center rounded-[1rem]"
+            "relative flex h-full cursor-pointer flex-col items-center justify-center border-[0.0625rem] rounded-2xl"
           }
           href={
             placeResponse.searchId
@@ -77,10 +73,8 @@ useEffect(() => {
         >
           <div
             id="map"
-            style={{ width: "100%", height: "calc(100% - 6rem)" }}
-            className={
-              "rounded-[1rem_1rem_0_0] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
-            }
+            style={{ width: "calc(100%)", height: "calc(100% - 6rem)" }}
+            className={"rounded-t-2xl border-b-[0.0625rem]"}
           ></div>
 
           {/* 투명한 오버레이 div 추가 */}
@@ -98,13 +92,13 @@ useEffect(() => {
 
           <div
             className={
-              "flex h-[6rem] w-full cursor-pointer flex-col justify-between gap-[1rem] rounded-[0_0_1rem_1rem] bg-white p-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+              "-mt-4 flex h-fit w-full flex-col justify-center gap-2 border-[0.0625rem] px-6 pb-10 pt-12 rounded-b-2xl"
             }
           >
-            <div className={"flex items-center text-2xl font-bold"}>
+            <div className="text-lg font-bold text-black">
               {placeResponse.name}
             </div>
-            <div className={"flex items-center gap-[1rem]"}>
+            <div className="flex items-center gap-1 text-sm text-gray1">
               <Image
                 src={"/location-icon.svg"}
                 alt={"location-icon"}

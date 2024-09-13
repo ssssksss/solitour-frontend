@@ -1,8 +1,10 @@
 import MyPageUserImageContainer from "@/containers/mypage/MyPageUserImageContainer";
+import { ModalState } from "@/types/ModalState";
 import { userResponseDto } from "@/types/UserDto";
 import { MYPAGE_PROFILE_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import Image from "next/image";
 import Breadcrumbs from "../common/Breadcrumb";
+import { Modal } from "../common/modal/Modal";
 
 interface IMyProfileProps {
   userInfo: userResponseDto;
@@ -11,20 +13,66 @@ interface IMyProfileProps {
   changeNickname: (value: string) => void;
   defaultNickname: string;
   message: string;
+  modalState: ModalState;
+  changeUserDeleteText: (value: string) => void;
+  userDeleteText: string;
+  userDeleteHandler: () => void;
 }
 
-const NICKNAME_LENGTH = 20;
+const NICKNAME_LENGTH = 30;
 
 const MyProfile = (props: IMyProfileProps) => {
   return (
     <div className={"flex w-full flex-col"}>
       <Breadcrumbs categories={MYPAGE_PROFILE_BREADCRUMB_PATH} />
-      <h1 className={"pt-[2.25rem] text-3xl font-semibold"}> 프로필 설정 </h1>
+      <h1 className={"text-3xl font-semibold"}> 프로필 설정 </h1>
       <MyPageUserImageContainer
         userImageUrl={props.userInfo.userImage.address}
         userSex={props.userInfo.sex}
       />
-      <div className={"flex flex-col"}>
+      <Modal
+        onClose={props.modalState.closeModal}
+        isOpen={props.modalState.isOpen}
+        isHeaderBar={true}
+        headerBarStyle="rounded-t-xl bg-white"
+      >
+        <div
+          className={
+            "relative flex h-full w-[calc(100vw-1rem)] max-w-[40rem] flex-col gap-y-[1rem] overflow-y-scroll rounded-b-xl bg-white p-[1rem] scrollbar-hide"
+          }
+        >
+          <div className={"flex flex-col gap-y-[.5rem]"}>
+            <p>
+              1. 회원 탈퇴 후에는 복구가 불가능하며, 현재 진행 중인 모임
+              서비스나 여행일기 서비스 이용 내역이 있을 경우, 관련 정보도 함께
+              삭제됩니다.
+            </p>
+            <p>
+              2. 정보 게시글은 삭제되지 않지만 사용자와 관련된 내용은 전부
+              비공개 처리되고 이후에는 수정이나 삭제는 불가능해집니다.
+            </p>
+            <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
+          </div>
+          <div className="select-none text-orange-400">
+            {"'회원탈퇴를 하겠습니다.' 라고 입력해주세요."}
+          </div>
+          <input
+            className="w-full rounded-[1rem] px-4 py-4 outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+            placeholder="텍스트를 입력해주세요."
+            onChange={(e) => props.changeUserDeleteText(e.target.value)}
+          />
+          <button
+            disabled={props.userDeleteText !== "회원탈퇴를 하겠습니다."}
+            onClick={props.userDeleteHandler}
+            className={
+              "h-[3rem] w-full rounded-full bg-main text-white disabled:bg-gray2"
+            }
+          >
+            회원탈퇴
+          </button>
+        </div>
+      </Modal>
+      <div className={"flex flex-col gap-y-[2.375rem]"}>
         <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
@@ -75,7 +123,7 @@ const MyProfile = (props: IMyProfileProps) => {
             </span>
           </div>
         </article>
-        <article className={"pt-[2.375rem]"}>
+        <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
               <span className={"text-lg font-semibold"}>이메일</span>
@@ -88,7 +136,7 @@ const MyProfile = (props: IMyProfileProps) => {
             />
           </div>
         </article>
-        <article className={"pt-[2.375rem]"}>
+        <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
               <span className={"text-lg font-semibold"}>성별</span>
@@ -101,7 +149,7 @@ const MyProfile = (props: IMyProfileProps) => {
             />
           </div>
         </article>
-        <article className={"pt-[4.25rem]"}>
+        <article>
           <div
             className={
               "grid h-[2.5rem] w-full grid-cols-[6rem_auto] gap-x-[1.75rem]"
@@ -128,6 +176,9 @@ const MyProfile = (props: IMyProfileProps) => {
             </div>
           </div>
         </article>
+      </div>
+      <div className="flex w-full justify-end pt-[3rem] text-[#999999] hover:text-main">
+        <button onClick={props.modalState.openModal}>회원탈퇴</button>
       </div>
     </div>
   );

@@ -18,9 +18,9 @@ const InformationLikeCount = ({
 }: Props) => {
   if (!clickable) {
     return (
-      <div className="flex flex-row items-center gap-1 text-gray2 dark:text-slate-400">
-        <FaRegHeart size={"0.8rem"} />
-        <p className="text-xs">{likeCount}</p>
+      <div className="flex flex-row items-center gap-1 text-xs text-gray2">
+        <FaRegHeart />
+        <p>{likeCount}</p>
       </div>
     );
   }
@@ -29,12 +29,12 @@ const InformationLikeCount = ({
     <div>
       <HashSpinner loading={loading} />
       <button
-        className={`${isLiked ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-1 hover:text-[#F85E5E] dark:text-slate-400`}
+        className={`${isLiked ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]`}
         type="button"
         onClick={() => onLikesClick()}
       >
-        {isLiked ? <FaHeart size={"0.8rem"} /> : <FaRegHeart size={"0.8rem"} />}
-        <p className="text-xs">{likeCount}</p>
+        {isLiked ? <FaHeart /> : <FaRegHeart />}
+        <p>{likeCount}</p>
       </button>
     </div>
   );
