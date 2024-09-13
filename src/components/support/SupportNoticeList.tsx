@@ -19,6 +19,7 @@ const categoryStyles: { [key: string]: string } = {
   기타: "text-gray-800",
 };
 
+
 const SupportNoticeList = ({
   data,
   viewedNotices,
@@ -40,7 +41,7 @@ const SupportNoticeList = ({
           <Link
             href={`/support/notice/${notice.id}`}
             key={notice.id}
-            className={`relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:scale-105`}
+            className={`relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:shadow`}
             onClick={() => onClickNotice(notice.id)}
           >
             {differenceInDays(new Date(), new Date(notice.createdAt)) < 2 &&
