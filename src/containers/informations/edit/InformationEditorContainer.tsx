@@ -32,6 +32,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
+  const [tip, setTip] = useState("");
 
   const methods = useForm<{
     userId: number;
@@ -334,11 +335,13 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
         imagesHook={imagesHook}
         loading={loading}
         onSubmit={onSubmit}
+        tip={tip}
         showLocationModal={showLocationModal}
         closeLocationModal={closeLocationModal}
         showCategoryModal={showCategoryModal}
         closeCategoryModal={closeCategoryModal}
         onChangeHashTagHandler={onChangeHashTagHandler}
+        setTip={(tip: string) => setTip(tip)}
       />
     </FormProvider>
   );

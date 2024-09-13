@@ -24,8 +24,27 @@ const InformationEditorContainer = () => {
   const inputTagRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [tip, setTip] = useState("");
 
-  const methods = useForm({
+  const methods = useForm<{
+    userId: number;
+    informationTitle: string;
+    informationAddress: string;
+    province: string;
+    city: string;
+    placeId: string;
+    placeXAxis: string;
+    placeYAxis: string;
+    placeName: string;
+    categoryId: number;
+    categoryName: string;
+    thumbnailImageUrl: string;
+    contentImagesUrl: string[];
+    informationContent: string;
+    contentLength: number;
+    hashtags: string[];
+    tips: string[];
+  }>({
     resolver: zodResolver(InformationCreateFormSchema),
     defaultValues: {
       userId: id,
@@ -43,8 +62,8 @@ const InformationEditorContainer = () => {
       contentImagesUrl: [""],
       informationContent: "",
       contentLength: 0,
-      hashtags: Array<string>(0),
-      tips: [""],
+      hashtags: [],
+      tips: [],
     },
     mode: "onChange",
   });
@@ -194,7 +213,7 @@ const InformationEditorContainer = () => {
   useEffect(() => {
     // 아래 코드는 tips이 제대로 입력되지 않는 목적의 코드입니다.
     // 해당 코드가 없는 경우 한글 입력 시 한 글자만 입력되는 오류가 발생합니다.
-    methods.setValue("tips", [""]);
+    methods.setValue("tips", []);
     methods.watch();
 
     return () => {
@@ -213,12 +232,14 @@ const InformationEditorContainer = () => {
         inputTagRef={inputTagRef}
         imagesHook={imagesHook}
         loading={loading}
+        tip={tip}
         onSubmit={onSubmit}
         showLocationModal={showLocationModal}
         closeLocationModal={closeLocationModal}
         showCategoryModal={showCategoryModal}
         closeCategoryModal={closeCategoryModal}
         onChangeHashTagHandler={onChangeHashTagHandler}
+        setTip={(tip: string) => setTip(tip)}
       />
     </FormProvider>
   );
