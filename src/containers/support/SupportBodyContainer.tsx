@@ -3,7 +3,6 @@ import SupportContactContainer from "./SupportContactContainer";
 import SupportFAQContainer from "./SupportFAQContainer";
 import SupportNoticeContainer from "./SupportNoticeContainer";
 import SupportQnAContainer from "./SupportQnAContainer";
-import SupportTermsContainer from "./SupportTermsContainer";
 
 
 
@@ -25,9 +24,9 @@ const SupportBodyContainer = ({active}: ISupportBodyContainer) => {
         {
           active == "qna" && <SupportQnAContainer />
         }
-        {
+        {/* {
           active == "terms" && <SupportTermsContainer />
-        }
+        } */}
         {
           active == "contact" && <SupportContactContainer />
         }

@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 interface ISupportHeader {
   active: string | null;
@@ -9,21 +7,13 @@ interface ISupportHeader {
 const tabs = [
   { name: "서비스소개", value: "about" },
   { name: "공지사항", value: "notice" },
-  { name: "자주 묻는 질문", value: "faq" },
-  { name: "Q&A", value: "qna" },
-  { name: "문의하기", value: "contact" },
-  { name: "약관/정책", value: "terms" },
+  { name: "FAQ", value: "faq" },
+  { name: "1:1 문의", value: "qna" },
+  // { name: "1:1 문의", value: "contact" },
+  { name: "이용약관", value: "terms" },
 ];
 
 const SupportHeader = ({ active }: ISupportHeader) => {
-  const router = useRouter();
-  const [selectedValue, setSelectedValue] = useState<string>(active || "");
-
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = event.target.value;
-    setSelectedValue(newValue);
-    router.push(`/support?menu=${newValue}`);
-  };
 
   return (
     <div className="mb-4 flex w-full flex-col items-start py-1">
