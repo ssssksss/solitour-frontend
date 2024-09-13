@@ -12,6 +12,7 @@ const SupportQnAWriteContainer: React.FC<ISupportQnAWriteContainer> = () => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const router = useRouter();
+  const [isConsent, setIsConsent] = useState(false);
 
   const handleContentChange = (content: string) => {
     setContent(content);
@@ -49,6 +50,10 @@ const SupportQnAWriteContainer: React.FC<ISupportQnAWriteContainer> = () => {
     }
   };
 
+  const handleConsentCheck = () => {
+    setIsConsent(prev => !prev);
+  }
+
   return (
     <SupportQnAWrite
       category={category}
@@ -58,6 +63,8 @@ const SupportQnAWriteContainer: React.FC<ISupportQnAWriteContainer> = () => {
       onContentChange={handleContentChange}
       onTitleChange={handleTitleChange} // Pass title change handler
       onSubmit={handleSubmit}
+      onAgreeToTermsCheck={handleConsentCheck}
+      isConsent={isConsent}
     />
   );
 };
