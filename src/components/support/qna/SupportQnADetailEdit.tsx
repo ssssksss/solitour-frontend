@@ -21,10 +21,6 @@ const SupportQnADetailEdit: React.FC<ISupportQnADetailEdit> = ({
   messageList,
   qnaCloseHandler,
 }) => {
-  const formatDate = (dateString: string) => {
-    return format(new Date(dateString), "yyyy-MM-dd HH:mm:ss");
-  };
-
   const STATUS: { [key: string]: { name: string; style: string } } = {
     WAIT: {
       name: "답변 대기 중",
@@ -59,26 +55,51 @@ const SupportQnADetailEdit: React.FC<ISupportQnADetailEdit> = ({
         </div>
       </div>
 
-      <div className="mb-8 space-y-6">
-        {messageList.map((entry) => (
-          <div
-            key={entry.id}
-            className={`flex ${entry.userId === userId ? "justify-start" : "justify-end"}`}
-          >
-            <div
-              className={`w-full max-w-2xl rounded-[2rem] bg-white p-6 shadow-md outline outline-[2px] outline-offset-[-2px] ${entry.userId === userId ? "outline-gray-800" : "outline-orange-400"}`}
-            >
-              <div className="flex aspect-square w-[2rem] items-center justify-center rounded-lg bg-main text-white">
-                {entry.userId === userId ? "Q" : "A"}
+      {userId < 1 ? (
+        <div className="mb-8 space-y-6">
+          <div className="flex justify-start">
+            <div className="w-full max-w-2xl animate-pulse rounded-[2rem] bg-gray-200 p-6 shadow-md">
+              <div className="flex h-[2rem] w-[2rem] items-center justify-center rounded-lg bg-gray-300">
+                &nbsp;
               </div>
-              <p className="text-gray-700">{entry.content}</p>
-              <p className="mt-2 text-right text-sm text-gray-500">
-                {format(new Date(entry.createdAt), "yyyy-MM-dd HH:mm")}
-              </p>
+              <div className="mt-4 h-4 rounded bg-gray-300"></div>
+              <div className="mt-2 h-4 w-3/4 rounded bg-gray-300"></div>
+              <div className="mt-6 h-3 w-1/2 rounded bg-gray-300"></div>
             </div>
           </div>
-        ))}
-      </div>
+          <div className="flex justify-end">
+            <div className="w-full max-w-2xl animate-pulse rounded-[2rem] bg-gray-200 p-6 shadow-md">
+              <div className="flex h-[2rem] w-[2rem] items-center justify-center rounded-lg bg-gray-300">
+                &nbsp;
+              </div>
+              <div className="mt-4 h-4 rounded bg-gray-300"></div>
+              <div className="mt-2 h-4 w-3/4 rounded bg-gray-300"></div>
+              <div className="mt-6 h-3 w-1/2 rounded bg-gray-300"></div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="mb-8 space-y-6">
+          {messageList.map((entry) => (
+            <div
+              key={entry.id}
+              className={`flex ${entry.userId === userId ? "justify-start" : "justify-end"}`}
+            >
+              <div
+                className={`w-full max-w-2xl rounded-[2rem] bg-white p-6 shadow-md outline outline-[2px] outline-offset-[-2px] ${entry.userId === userId ? "outline-gray-800" : "outline-orange-400"}`}
+              >
+                <div className="flex aspect-square w-[2rem] items-center justify-center rounded-lg bg-main text-white">
+                  {entry.userId === userId ? "Q" : "A"}
+                </div>
+                <p className="text-gray-700">{entry.content}</p>
+                <p className="mt-2 text-right text-sm text-gray-500">
+                  {format(new Date(entry.createdAt), "yyyy-MM-dd HH:mm")}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {data.status !== "CLOSED" && (
         <div className="space-y-4">

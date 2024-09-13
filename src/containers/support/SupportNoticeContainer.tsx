@@ -34,6 +34,7 @@ const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [viewedNotices, setViewedNotices] = useState([]);
+  const [totalElements, setTotalElements] = useState(0);
 
   const pageHandler = (page: number) => {
     const url = new URL(window.location.href);
@@ -51,6 +52,7 @@ const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
     const data = await response.json();
     setElements(data.content);
     setTotalPages(data.page.totalPages);
+    setTotalElements(data.page.totalElements);
     setLoading(false);
   };
 
@@ -78,11 +80,14 @@ const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
           data={elements}
           viewedNotices={viewedNotices}
           onClickNotice={onClickNotice}
+          loading={loading}
+          totalElements={totalElements}
+          currentPage={currentPage}
         />
       )}
       <Pagination
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={Math.ceil(totalElements / 10)}
         pageHandler={pageHandler}
       />
     </>

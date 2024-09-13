@@ -1,6 +1,5 @@
 import SupportQnADetailEditContainer from "@/containers/support/qna/SupportQnADetailEditContainer";
-import { QnADetailType } from "@/types/QnADto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
 import { cookies } from "next/headers";
 
 interface Props {
@@ -14,26 +13,20 @@ export async function generateMetadata({ params: { id } }: Props) {
   }
 
   return {
-    title: `공지사항 조회`,
-    description: "공지사항 상세조회",
+    title: `QnA 상세 조회`,
+    description: "QnA 상세 조회",
   };
 }
 
 async function fetchData(id: number) {
-  const cookie = cookies().get("access_token");
+  const accessToken = cookies().get("access_token");
+  const refreshToken = cookies().get("refresh_token");
 
-  const res = await fetchWithAuth(`${process.env.BACKEND_URL}/api/qna/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `${cookie?.name}=${cookie?.value}`,
-    },
+  return fetchWithTokenRefreshSSR({
+    url: `${process.env.BACKEND_URL}/api/qna/${id}`,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
   });
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data: ${res.statusText}`);
-  }
-
-  return res.json();
 }
 
 export default async function Page({ params: { id } }: Props) {
@@ -42,7 +35,7 @@ export default async function Page({ params: { id } }: Props) {
     throw Error("Not Found");
   }
 
-  const data: QnADetailType = await fetchData(qnaId);
+  const data = await fetchData(qnaId);
 
   return (
     <main className="mb-8 w-full">
