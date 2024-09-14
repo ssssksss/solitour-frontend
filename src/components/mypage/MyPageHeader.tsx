@@ -1,6 +1,7 @@
 import { userResponseDto } from "@/types/UserDto";
 import Image from "next/image";
 import Link from "next/link";
+import UserImage from "../auth/UserImage";
 
 interface IMyPageHeader {
   userInfo: userResponseDto;
@@ -17,32 +18,10 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
               "relative mb-[1rem] aspect-square w-[6.75rem] rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
             }
           >
-            {/* ? 유저의 썸네일 이미지가 있는지? */}
-            {userInfo.userImage?.address ? (
-              <Image
-                src={userInfo.userImage?.address}
-                alt={"user_image"}
-                width={108}
-                height={108}
-                className="rounded-[50%]"
-              />
-            ) : userInfo.sex == "MALE" ? (
-              <Image
-                src={"/user_sex_man_default_image.svg"}
-                alt={"user_image"}
-                width={108}
-                height={108}
-                className="rounded-[50%]"
-              />
-            ) : (
-              <Image
-                src={"/user_sex_woman_default_image.svg"}
-                alt={"user_image"}
-                width={108}
-                height={108}
-                className="rounded-[50%]"
-              />
-            )}
+            <UserImage
+              userImageAddress={userInfo.userImage?.address}
+              size={108}
+            />
             <Link href="/mypage/profile">
               <div
                 className={

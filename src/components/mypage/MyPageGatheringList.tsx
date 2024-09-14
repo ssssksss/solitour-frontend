@@ -12,7 +12,7 @@ const MyPageGatheringList = ({
 }: IMyPageGatheringList) => {
 
   return (
-    <div className="my-6 grid min-h-[20rem] w-full justify-items-center gap-x-3 gap-y-3 min-[744px]:grid-cols-2">
+    <div className="my-6 grid w-full justify-items-center gap-x-3 gap-y-3 min-[744px]:grid-cols-2">
       {isLoading
         ? Array.from({ length: 6 }).map((_, index) => (
             <GatheringItemSkeleton key={index} />

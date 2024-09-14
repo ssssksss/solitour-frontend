@@ -37,16 +37,15 @@ const status: { [key: string]: string } = {
 // todo
 const GatheringItem = ({ data }: IGatheringItem) => {
   return (
-    // w-[307] , h-[315], p-5,
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] max-[744px]:max-w-[28.75rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:outline-main`}
+      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:outline-main max-[744px]:max-w-[28.75rem]`}
     >
       <div className="flex flex-col">
         {/* 상태와 북마크 */}
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
+            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
           >
             <span>
               {data.gatheringStatus
@@ -79,7 +78,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
             <article className="flex flex-row items-center gap-2">
               {/* 모임 기간 */}
               <Image
-                src={`${data.isFinish ? "/calendar-gray-icon.svg" : "/calendar-icon.svg"}`}
+                src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/calendar-gray-icon.svg" : "/calendar-icon.svg"}`}
                 alt="calendar-icon"
                 width={16}
                 height={16}
@@ -96,7 +95,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
               {/* 모임 장소 */}
               <div className={"flex items-center"}>
                 <Image
-                  src={`${data.isFinish ? "/location-gray-icon.svg" : "/location-icon.svg"}`}
+                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/location-gray-icon.svg" : "/location-icon.svg"}`}
                   alt="location-icon"
                   width={16}
                   height={16}
@@ -117,7 +116,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
                 <div className={"relative flex items-center"}>
                   {/* 모임 인원 */}
                   <Image
-                    src={`${data.isFinish ? "/people-gray-icon.svg" : "/people-icon.svg"}`}
+                    src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/people-gray-icon.svg" : "/people-icon.svg"}`}
                     alt="people-icon"
                     width={16}
                     height={16}
@@ -127,7 +126,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
                   className={`${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
                 >
                   <span
-                    className={`${data.isFinish ? "text-gray2" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
+                    className={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
                   >
                     {data.nowPersonCount}
                   </span>
@@ -152,7 +151,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
               <div className={"relative"}>
                 {/* 모임 시간 */}
                 <Image
-                  src={`${data.isFinish ? "/clock-gray-icon.svg" : "/clock-icon.svg"}`}
+                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/clock-gray-icon.svg" : "/clock-icon.svg"}`}
                   alt="clock-icon"
                   width={16}
                   height={16}
@@ -169,7 +168,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
         <div className="flex flex-row items-center justify-between pt-[0.4375rem]">
           <div className="flex flex-row items-center gap-1">
             <Image
-              src={`${data.isFinish ? "/pin-gray-icon.svg" : "/pin-icon.svg"}`}
+              src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/pin-gray-icon.svg" : "/pin-icon.svg"}`}
               alt="pin-icon"
               width={16}
               height={16}
@@ -184,7 +183,9 @@ const GatheringItem = ({ data }: IGatheringItem) => {
           </div>
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
-              {data.isFinish ? (
+              {data.isFinish ||
+              format(new Date(data.deadline), "yyyyMMdd") <
+                format(new Date(), "yyyyMMdd") ? (
                 <div className="flex items-center gap-1 text-sm">
                   <Image
                     src={"/common/check-gray-icon.svg"}
