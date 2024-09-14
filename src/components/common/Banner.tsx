@@ -16,7 +16,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
   if (category == "모임") {
     return (
       <div className="absolute -mt-20 flex h-[31.25rem] w-full flex-row items-center justify-center bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF] max-[744px]:h-[36rem]">
-        <div className="max-[744px]: flex h-96 w-[60rem] flex-row items-center justify-between px-4 pt-[2.125rem] max-[1024px]:w-full max-[1024px]:px-[3.375rem] max-[744px]:flex-col max-[744px]:justify-start">
+        <div className="flex h-96 w-[60rem] flex-row items-center justify-between px-4 max-[1024px]:w-full max-[1024px]:px-[3.375rem] max-[744px]:mt-16 max-[744px]:flex-col max-[744px]:justify-start">
           <div className="flex flex-col max-[744px]:items-center">
             {content.map((str, index) => (
               <div
