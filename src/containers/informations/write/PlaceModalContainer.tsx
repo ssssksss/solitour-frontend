@@ -54,7 +54,12 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     geocoder.addressSearch(search, (result: any, status: any) => {
       // 정상적으로 검색이 완료됐으면
       if (status === window.kakao.maps.services.Status.OK) {
-        setAddressInfos(result);
+        setAddressInfos(
+          result.filter(
+            (data: { address_name: string; x: string; y: string }) =>
+              data.address_name.split(" ")[1] !== undefined,
+          ),
+        );
       }
     });
   }, 300);

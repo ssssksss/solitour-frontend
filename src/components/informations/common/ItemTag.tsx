@@ -24,7 +24,7 @@ const ItemTag = ({
       className={`flex flex-row text-sm items-center gap-1 text-nowrap rounded-[1rem] border-[0.0625rem] px-2 py-1 font-medium ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}
       onClick={onClick}
     >
-      <p className={`${textColor}`}>#{tag}</p>
+      <p className={`${textColor} text-sm`}>#{tag}</p>
       {removable && (
         <MdClose className="rounded-full bg-gray-100 p-1 text-main" />
       )}

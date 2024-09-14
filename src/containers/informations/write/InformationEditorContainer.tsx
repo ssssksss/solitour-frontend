@@ -22,9 +22,9 @@ const InformationEditorContainer = () => {
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
   const inputTagRef = useRef<HTMLInputElement>(null);
+  const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
-  const [tip, setTip] = useState("");
 
   const methods = useForm<{
     userId: number;
@@ -113,6 +113,21 @@ const InformationEditorContainer = () => {
       methods.setValue("hashtags", hashtags);
       methods.trigger("hashtags");
       (inputTagRef.current as HTMLInputElement).value = "";
+    }
+  };
+
+  const onChangeTipHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const tip = inputTipRef.current?.value.trim() ?? "";
+      if (tip === "") {
+        return;
+      }
+
+      const tips = methods.getValues("tips");
+      tips.push(tip);
+      methods.setValue("tips", tips);
+      methods.trigger("tips");
+      (inputTipRef.current as HTMLInputElement).value = "";
     }
   };
 
@@ -230,16 +245,16 @@ const InformationEditorContainer = () => {
         locationModal={locationModal}
         categoryModal={categoryModal}
         inputTagRef={inputTagRef}
+        inputTipRef={inputTipRef}
         imagesHook={imagesHook}
         loading={loading}
-        tip={tip}
         onSubmit={onSubmit}
         showLocationModal={showLocationModal}
         closeLocationModal={closeLocationModal}
         showCategoryModal={showCategoryModal}
         closeCategoryModal={closeCategoryModal}
         onChangeHashTagHandler={onChangeHashTagHandler}
-        setTip={(tip: string) => setTip(tip)}
+        onChangeTipHandler={onChangeTipHandler}
       />
     </FormProvider>
   );
