@@ -60,7 +60,6 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 시작
   const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
     setIsDragging(true);
 
     const x = e.touches[0].pageX;
@@ -71,7 +70,6 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 동작 중
   const onTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
     if (!isDragging) {
       return;
     }
@@ -85,7 +83,6 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 종료
   const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
     if (!isDragging) {
       return;
     }
