@@ -86,7 +86,6 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
       }
 
       const data = await res.json();
-      console.log("MyPageGatheringContainer.tsx 파일 : ",data.content);
       setElements(data.content);
       setTotalElements(data.page.totalElements);
       setIsLoading(false);
