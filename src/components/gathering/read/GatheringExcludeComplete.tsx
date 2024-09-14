@@ -27,7 +27,7 @@ const GatheringExcludeComplete = ({checkExcludeCompleteGatheringHandler ,isExclu
     />
   )}
       <div className="flex min-w-[5.25rem] w-auto items-center justify-start">
-        모집 완료 제외
+        모집 중
   </div>
 </button>
   );
