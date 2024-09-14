@@ -40,13 +40,13 @@ const GatheringItem = ({ data }: IGatheringItem) => {
     // w-[307] , h-[315], p-5, 
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] max-[744px]:max-w-[28.75rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main`}
+      className={`${format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-[#eaeaea]" : ""} flex w-full ${data.isFinish ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] max-[744px]:max-w-[28.75rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:outline-main`}
     >
       <div className="flex flex-col">
       {/* 상태와 북마크 */}
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
+            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
           >
             <span>
               {data.gatheringStatus

@@ -22,7 +22,7 @@ const GatheringList = (props: IGatheringList) => {
         <div className="w-full flex flex-row gap-x-2 max-[744px]:flex-col justify-between gap-y-5 min-[960px]:gap-x-6 ">
           <GatheringSearchContainer />
           <div className="max-[744px]:w-full flex flex-row justify-between items-center gap-4 text-sm font-medium text-gray1 ">
-            <div className={"flex justify-between gap-4 w-[7.5rem] "}>
+            <div className={"flex justify-between gap-4 w-[7.5rem] z-10"}>
               <GatheringFilterContainer />
               <GatheringSortContainer />
             </div>
