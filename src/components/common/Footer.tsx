@@ -5,8 +5,8 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 
 const Footer = () => {
   return (
-    <footer className="mt-auto flex h-80 w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px]">
-      <div className="flex w-[60rem] flex-col gap-4 p-4">
+    <footer className="mt-auto flex h-fit w-full flex-row items-center justify-center bg-neutral-100 px-4 max-[744px]:h-[350px]">
+      <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
         <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
             src={"/Solitour-logo.svg"}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import HashSpinner from "./HashSpinner";
+import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 
 interface Props {
   informationId: number;
@@ -111,7 +112,7 @@ const InformationItem = ({
               className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs`}
             >
               {isLike ? <FaHeart /> : <FaRegHeart />}
-              <p>{likeCount}</p>
+              <p>{convertNumberToShortForm(likeCount)}</p>
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">
               <Image
@@ -120,7 +121,7 @@ const InformationItem = ({
                 width={15}
                 height={15}
               />
-              <p className="text-xs">{viewCount}</p>
+              <p className="text-xs">{convertNumberToShortForm(viewCount)}</p>
             </div>
           </div>
         </div>
