@@ -46,22 +46,21 @@ const GatheringSortContainer = (props: IGatheringSortContainer) => {
       ></div>
     );
   return (
-    <>
-      <Dropdown
-        options={OPTIONS}
-        dropdownHandler={sortHandler}
-        value={sort}
-        defaultValue={sort}
-        dropdownContainerStyle={{
-          w: "3.5rem",
-          style: "",
-        }}
-        dropdownOptionStyle={{
-          w: "8.625rem",
-          style: "mt-[2rem] rounded-xl",
-        }}
-      />
-    </>
+    <Dropdown
+      options={OPTIONS}
+      dropdownHandler={sortHandler}
+      value={sort}
+      defaultValue={sort}
+      dropdownContainerStyle={{
+        w: "w-[3.5rem]",
+        style: "",
+      }}
+      dropdownOptionStyle={{
+        w: "w-[8rem]",
+        style: "mt-[2rem] rounded-xl",
+        transformX: "translateX(calc(3.5rem - 100%))",
+      }}
+    />
   );
 };
 export default GatheringSortContainer
