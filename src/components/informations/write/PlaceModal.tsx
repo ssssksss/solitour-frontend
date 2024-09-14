@@ -124,9 +124,9 @@ const PlaceModal = ({
               className={`${canTypePlaceName ? "h-fit" : "h-80 border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]"} flex flex-col rounded-3xl`}
             >
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className={`${canTypePlaceName ? "bg-gray-100/25" : ""} h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full`}
                 type="text"
-                autoComplete="address"
+                autoComplete="off"
                 name="address"
                 placeholder="도로명주소를 입력하세요. (Ex. 용산구 청파로)"
                 onChange={(e) => handleAddressSearch(e.target.value)}
@@ -156,7 +156,7 @@ const PlaceModal = ({
               <input
                 className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
-                autoComplete="location"
+                autoComplete="off"
                 name="location"
                 placeholder="장소명을 입력하세요."
                 onChange={(e) => onChangeCustomPlaceName(e.target.value)}
