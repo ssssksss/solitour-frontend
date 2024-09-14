@@ -65,7 +65,7 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
       <div className="absolute h-full w-full cursor-pointer bg-black/30"></div>
       <div
         ref={ref}
-        className="-z-1 relative flex h-[calc(100vh-1rem)] items-center justify-start"
+        className="-z-1 relative flex h-[calc(100vh-1rem)] items-center justify-center flex-col"
         onClick={(e) => {
           if (e.target == ref.current) {
             onClose();

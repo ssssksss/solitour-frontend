@@ -51,12 +51,12 @@ const GatheringSearch = ({
             defaultValue={dropdownValue}
             dropdownContainerStyle={{
               style: "pl-[1.125rem]",
-              w: "3.5rem",
-              h: "2.75rem",
+              w: "w-[5rem]",
+              h: "h-[2.75rem]",
             }}
             dropdownOptionStyle={{
-              w: "5rem",
-              z: "-z-10",
+              w: "w-[5rem]",
+              z: "-z-[1]",
               style: "pt-[2.75rem] rounded-[1.375rem_0rem_0.75rem_0.75rem]",
             }}
           />

@@ -83,7 +83,7 @@ const GatheringParticipantsFilterModal = (
   return (
     <div
       className={
-        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll scrollbar-hide rounded-2xl bg-white px-[1rem] py-[2.75rem]"
+        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
       }
     >
       <button
@@ -107,7 +107,7 @@ const GatheringParticipantsFilterModal = (
             className={"flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]"}
           >
             <div
-              className="flex h-[2.75rem] items-center  select-none"
+              className="flex h-[2.75rem] select-none items-center"
               onClick={() => {
                 setPeopleCount(peopleCount <= 2 ? 2 : peopleCount - 1);
               }}
@@ -123,11 +123,11 @@ const GatheringParticipantsFilterModal = (
                 <div className="aspect-square w-[1.25rem]"> </div>
               )}
             </div>
-            <div className="flex h-[2.75rem] w-[2.5rem] items-center justify-center  select-none">
+            <div className="flex h-[2.75rem] w-[2.5rem] select-none items-center justify-center">
               <div className={"w-[1rem]"}> {peopleCount} </div> 명
             </div>
             <div
-              className="flex h-[2.75rem] items-center  select-none"
+              className="flex h-[2.75rem] select-none items-center"
               onClick={() => {
                 setPeopleCount(peopleCount >= 10 ? 10 : peopleCount + 1);
               }}
@@ -158,13 +158,13 @@ const GatheringParticipantsFilterModal = (
                       _endAge: i[1].endAge,
                     })
                   }
-                  className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge && "bg-main text-white"} flex flex-shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] hover:bg-main hover:text-white`}
+                  className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex flex-shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
                 >
                   {i[0]}
                 </button>
               ))}
               <button
-                className={`${directInput && "bg-main text-white"} rounded-[4rem] px-4 py-2 text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] hover:bg-main hover:text-white`}
+                className={`${directInput ? "bg-main text-white" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
                 onClick={() => setDirectInput(true)}
               >
                 직접 입력
@@ -276,8 +276,10 @@ const GatheringParticipantsFilterModal = (
                 key={i[0]}
                 onClick={() => setSex(i[0])}
                 className={`${
-                  sex == i[0] ? "bg-main text-white" : "text-gray1"
-                } flex items-center rounded-[4rem] px-4 py-2 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                  sex == i[0]
+                    ? "bg-main text-white"
+                    : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] text-gray-1"
+                } flex items-center rounded-[4rem] px-4 py-2`}
               >
                 {i[1]}
               </button>

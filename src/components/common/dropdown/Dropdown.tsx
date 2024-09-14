@@ -16,6 +16,7 @@ interface IDropdown<T> {
     w?: string;
     style?: string;
     z?: string;
+    transformX?: string;
   };
 }
 
@@ -24,11 +25,8 @@ export default function Dropdown<T>({
   dropdownHandler,
   defaultValue,
   value,
-  dropdownContainerStyle = {
-  },
-  dropdownOptionStyle = {
-    z: "z-10",
-  },
+  dropdownContainerStyle,
+  dropdownOptionStyle,
 }: IDropdown<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<T>(defaultValue);
@@ -64,12 +62,12 @@ export default function Dropdown<T>({
 
   return (
     <div
-      className={`relative flex ${dropdownContainerStyle.h} h-full flex-shrink-0 items-center w-[${dropdownContainerStyle.w}] text-left`}
+      className={`relative flex ${dropdownContainerStyle?.h || ""} h-full flex-shrink-0 items-center ${dropdownContainerStyle?.w || ""} text-left`}
       ref={ref}
     >
       <button
         onClick={toggleDropdown}
-        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle.style} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
+        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
       >
         <div className={"min-w-fit"}>
           {options.filter((i) => i.value == selectedOption)[0].name}
@@ -93,20 +91,13 @@ export default function Dropdown<T>({
         )}
       </button>
 
-      {isOpen && (
-        <div
-          className={`absolute top-0 ${dropdownOptionStyle.z} flex w-[${dropdownOptionStyle.w}] ${dropdownOptionStyle.style} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
-          style={{
-            transform: isOnRightSide
-              ? `translateX(calc(${dropdownContainerStyle.w} - 100%))`
-              : ``,
-          }}
-        >
+      {isOpen &&
+        (isOnRightSide ? (
           <div
-            className={"w-full"}
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="options-menu"
+            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
+            style={{
+              transform: dropdownOptionStyle?.transformX
+            }}
           >
             {options.map((i) => (
               <button
@@ -124,8 +115,27 @@ export default function Dropdown<T>({
               </button>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div
+            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
+          >
+            {options.map((i) => (
+              <button
+                key={i.name}
+                onClick={() => {
+                  dropdownHandler(i.value);
+                  handleOptionClick(i.value);
+                }}
+                className={`flex h-16 w-full items-center justify-center hover:text-main ${
+                  selectedOption === i.value ? "bg-white text-main" : ""
+                }`}
+                role="menuitem"
+              >
+                {i.name}
+              </button>
+            ))}
+          </div>
+        ))}
     </div>
   );
 }

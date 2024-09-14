@@ -1,3 +1,4 @@
+import UserImage from "@/components/auth/UserImage";
 import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
 import Image from "next/image";
 import GatheringApplicantButton from "./GatheringApplicantButton";
@@ -99,12 +100,9 @@ const GatheringApplicantList = ({
                 className={`relative grid w-full items-start ${gatheringApplicantsResponses.length - 1 != index && "border-b"} ${isFinish ? "grid-cols-[80px_auto_40px_40px] min-[577px]:grid-cols-[80px_auto_80px_80px] min-[800px]:grid-cols-[120px_auto_120px_120px]" : "max-[576px]:grid-cols-[80px_auto_40px_40px_60px] min-[577px]:grid-cols-[80px_auto_40px_40px_200px] min-[800px]:grid-cols-[80px_260px_80px_80px_auto]"}`}
               >
                 <div className="flex h-full items-center justify-center py-4">
-                  <Image
-                    src={applicant.userGatheringResponse.profileUrl}
-                    alt="Profile"
-                    className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7] object-cover"
-                    width={48}
-                    height={48}
+                  <UserImage
+                    userImageAddress={applicant.userGatheringResponse.profileUrl}
+                    size={48}
                   />
                 </div>
                 <div className="flex h-full w-full items-center justify-center py-4 text-center">

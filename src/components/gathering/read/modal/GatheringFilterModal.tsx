@@ -65,8 +65,6 @@ const SEX = [
   ["여성", "FEMALE"],
 ];
 
-const markerPositions = [20, 25, 30, 35, 40, 45, 50, 55, 59];
-
 function calculateDateDifference(startDate: Date, endDate: Date): number {
   const differenceInTime = endDate.getTime() - startDate.getTime();
   const differenceInDays = differenceInTime / (1000 * 3600 * 24);
@@ -86,7 +84,6 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
   );
   const [isFilterSchedule, setIsFilterSchedule] = useState((searchParams.get("startDate") || searchParams.get("endDate")) ? true : false);
-  const [values, setValues] = useState([startAge, endAge]);
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [calendarDate, setCalendarDate] = useState([
@@ -209,7 +206,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
               <button
                 key={i.id}
                 onClick={() => setLocation(i.id)}
-                className={`${location == i.id ? "bg-main text-white" : "text-gray1"} flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                className={`${location == i.id ? "bg-main text-white" : "text-gray1"} flex items-center rounded-[4rem] px-4 py-2 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
               >
                 {i.name}
               </button>
@@ -223,7 +220,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
               <button
                 key={i[1]}
                 onClick={() => setSex(i[1])}
-                className={`${sex == i[1] ? "bg-main text-white" : "text-gray1"} flex h-[2rem] items-center rounded-[4rem] px-[1rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                className={`${sex == i[1] ? "bg-main text-white" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
               >
                 {i[0]}
               </button>

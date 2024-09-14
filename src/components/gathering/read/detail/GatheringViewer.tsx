@@ -1,3 +1,4 @@
+import UserImage from "@/components/auth/UserImage";
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import GatheringApplicantListContainer from "@/containers/gathering/read/detail/GatheringApplicantListContainer";
 import GatheringSupportManagementContainer from "@/containers/gathering/read/detail/GatheringSupportManagementContainer";
@@ -25,6 +26,7 @@ const GatheringViewer = ({
   modalState,
   currentParticipants,
 }: IGatheringViewer) => {
+
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
       {modalState.isOpen && (
@@ -44,17 +46,14 @@ const GatheringViewer = ({
             gatheringStatus={data.gatheringStatus}
             isFinish={data.isFinish}
             openChattingUrl={data.openChattingUrl}
-          />
+          />  
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
         <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
           <div className={"flex items-center gap-x-3"}>
-            <Image
-              src={"/user_sex_man_default_image.svg"}
-              alt={"sex-default-icon-image"}
-              width={52}
-              height={52}
-              className="rounded-[50%] bg-[#F2FAF7]"
+            <UserImage
+              userImageAddress={data.userImage}
+              size={52}
             />
             <div className="flex flex-col gap-y-[0.125rem]">
               <div className="text-xs font-semibold text-black">

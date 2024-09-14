@@ -102,6 +102,7 @@ export interface GatheringDetailResponseDto {
   gatheringCategoryResponse: { id: number; name: string };
   gatheringStatus: string;
   openChattingUrl: string;
+  userImage: string;
 };
 
 
