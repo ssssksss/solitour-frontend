@@ -26,7 +26,7 @@ const GatheringExcludeComplete = ({checkExcludeCompleteGatheringHandler ,isExclu
       height={20}
     />
   )}
-      <div className="flex min-w-[5.25rem] w-auto items-center justify-start">
+      <div className="flex w-auto items-center justify-start">
         모집 중
   </div>
 </button>

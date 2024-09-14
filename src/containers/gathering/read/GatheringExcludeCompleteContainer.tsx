@@ -31,7 +31,7 @@ const GatheringExcludeCompleteContainer = (props: IGatheringExcludeCompleteConta
     if (loading)
       return (
         <div
-          className={`relative flex h-[2rem] w-[5rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left`}
+          className={`relative flex h-[2rem] w-[4rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left`}
         ></div>
       );
   
