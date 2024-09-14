@@ -7,6 +7,7 @@ import { InformationDetailDto } from "@/types/InformationDto";
 import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
 import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
 import InformationLikeCountContainer from "@/containers/informations/detail/InformationLikeCountContainer";
+import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 
 interface Props {
   informationId: number;
@@ -45,7 +46,9 @@ const InformationViewer = ({ informationId, data }: Props) => {
               />
               <div className="flex flex-row items-center gap-1 text-gray2">
                 <LuEye />
-                <p className="text-xs">{data.viewCount}</p>
+                <p className="text-xs">
+                  {convertNumberToShortForm(data.viewCount)}
+                </p>
               </div>
             </div>
           </div>
@@ -82,7 +85,9 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 />
                 <div className="flex flex-row items-center gap-1 text-gray2">
                   <LuEye />
-                  <p className="text-xs">{data.viewCount}</p>
+                  <p className="text-xs">
+                    {convertNumberToShortForm(data.viewCount)}
+                  </p>
                 </div>
               </div>
             </div>
