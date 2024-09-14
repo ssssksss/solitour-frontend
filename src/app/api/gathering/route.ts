@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { URLSearchParams } from "url";
 
@@ -97,6 +98,7 @@ export async function DELETE(request: NextRequest) {
     if (!response.ok) {
       return NextResponse.json({ error: "서버 오류" }, { status: 500 });
     }
+    revalidatePath("/gathering", "layout");
     return response;
   } catch (error) {
     console.error("서버에서 데이터 처리 중 오류 발생:", error);
