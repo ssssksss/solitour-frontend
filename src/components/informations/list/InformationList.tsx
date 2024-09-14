@@ -1,8 +1,10 @@
+import LottieComponent from "@/components/common/lottie/LottieComponent";
 import { LOCATION_ID } from "@/constants/informations/location";
 import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import InformationPaginationContainer from "@/containers/informations/list/InformationPaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
+import LottieFile from "@/../public/lottie/list-not-found.json";
 
 async function getInformationList(
   page: number,
@@ -64,28 +66,39 @@ const InformationList = async ({
 
   return (
     <div className="flex w-full flex-col">
-      <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
-        {data.content.map((value) => (
-          <InformationItemContainer
-            key={value.informationId}
-            informationId={value.informationId}
-            categoryId={parentCategoryId}
-            isBookMark={value.isBookMark}
-            isLike={value.isLike}
-            title={value.title}
-            image={value.thumbNailImage}
-            address={
-              value.zoneCategoryParentName + ", " + value.zoneCategoryChildName
-            }
-            likeCount={value.likeCount}
-            viewCount={value.viewCount}
+      {data.content.length > 0 ? (
+        <div className="mt-6 flex flex-col">
+          <div className="grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
+            {data.content.map((value) => (
+              <InformationItemContainer
+                key={value.informationId}
+                informationId={value.informationId}
+                categoryId={parentCategoryId}
+                isBookMark={value.isBookMark}
+                isLike={value.isLike}
+                title={value.title}
+                image={value.thumbNailImage}
+                address={
+                  value.zoneCategoryParentName +
+                  ", " +
+                  value.zoneCategoryChildName
+                }
+                likeCount={value.likeCount}
+                viewCount={value.viewCount}
+              />
+            ))}
+          </div>
+          <InformationPaginationContainer
+            currentPage={page}
+            totalPages={data.page.totalPages}
           />
-        ))}
-      </div>
-      <InformationPaginationContainer
-        currentPage={page}
-        totalPages={data.page.totalPages}
-      />
+        </div>
+      ) : (
+        <div className="flex w-full flex-col items-center pb-12">
+          <LottieComponent lottieFile={LottieFile} className={"w-[20rem]"} />
+          <div> 찾는 내용이 없습니다. </div>
+        </div>
+      )}
     </div>
   );
 };
