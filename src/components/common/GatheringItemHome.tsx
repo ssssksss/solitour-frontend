@@ -39,7 +39,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`flex flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 outline-offset-[-2px] outline-gray3 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:w-[20rem]`}
+      className={`flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 outline-gray3 hover:bg-[#F2FAF7] hover:outline-main`}
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
