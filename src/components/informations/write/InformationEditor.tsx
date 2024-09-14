@@ -10,6 +10,7 @@ import { MdClose } from "react-icons/md";
 import QuillEditor from "./QuillEditor";
 import { useFormContext } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
+import React from "react";
 
 interface Props {
   pathname: string;
@@ -17,16 +18,16 @@ interface Props {
   locationModal: boolean;
   categoryModal: boolean;
   inputTagRef: React.RefObject<HTMLInputElement>;
+  inputTipRef: React.RefObject<HTMLInputElement>;
   imagesHook: useDragScrollType;
   loading: boolean;
-  tip: string;
   onSubmit: () => void;
   showLocationModal: () => void;
   closeLocationModal: () => void;
   showCategoryModal: () => void;
   closeCategoryModal: () => void;
   onChangeHashTagHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  setTip: (tip: string) => void;
+  onChangeTipHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const InformationEditor = ({
@@ -35,16 +36,16 @@ const InformationEditor = ({
   locationModal,
   categoryModal,
   inputTagRef,
+  inputTipRef,
   imagesHook,
   loading,
-  tip,
   onSubmit,
   showLocationModal,
   closeLocationModal,
   showCategoryModal,
   closeCategoryModal,
   onChangeHashTagHandler,
-  setTip,
+  onChangeTipHandler,
 }: Props) => {
   const formContext = useFormContext();
 
@@ -265,34 +266,32 @@ const InformationEditor = ({
                 className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 pr-14 text-sm outline-none`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
-                value={tip}
-                onChange={(e) => setTip(e.target.value)}
+                onKeyUp={onChangeTipHandler}
                 onKeyDown={(e) => {
                   if (e.key === ";") {
                     e.preventDefault();
                     e.persist();
-                  } else if (e.key === "Enter") {
+                  }
+                }}
+                ref={inputTipRef}
+              />
+              <FaCheck
+                className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
+                size="2rem"
+                onClick={() => {
+                  if (
+                    inputTipRef.current !== null &&
+                    inputTipRef.current.value.trim() !== ""
+                  ) {
                     const tips: string[] = formContext.getValues("tips");
+                    const tip = inputTipRef.current.value;
                     tips.push(tip);
                     formContext.setValue("tips", tips);
                     formContext.trigger("tips");
-                    setTip("");
+                    inputTipRef.current.value = "";
                   }
                 }}
               />
-              {tip.length >= 1 && (
-                <FaCheck
-                  className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
-                  size="2rem"
-                  onClick={() => {
-                    const tips: string[] = formContext.getValues("tips");
-                    tips.push(tip);
-                    formContext.setValue("tips", tips);
-                    formContext.trigger("tips");
-                    setTip("");
-                  }}
-                />
-              )}
             </div>
           )}
           {formContext.formState.errors.tips && (
