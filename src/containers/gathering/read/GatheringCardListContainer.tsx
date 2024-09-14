@@ -63,7 +63,7 @@ const GatheringCardListContainer = () => {
         const data = await response.json();
         setElements(data.content);
         setTotalElements(data.page.totalElements);
-        setCurrentPage(params.get("page") ? Number(params.get("page")) + 1 : 1);
+        setCurrentPage(data.page.number + 1);
       } finally {
         setLoading(false);
       }
