@@ -2,6 +2,7 @@
 
 import ImageList from "@/components/informations/detail/ImageList";
 import useDragScroll from "@/hooks/useDragScroll";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { useState } from "react";
 
 interface Props {
@@ -14,6 +15,8 @@ const ImageListContainer = ({ images }: Props) => {
     images.find((image) => image.imageStatus === "썸네일")?.address ?? "",
   );
   const [viewerVisible, setViewerVisible] = useState<boolean>(false);
+
+  usePreventBodyScroll(viewerVisible);
 
   return (
     <ImageList

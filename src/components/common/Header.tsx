@@ -144,7 +144,6 @@ const Header = ({
                   }
                 ></div>
                 <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main"></div>
-                <div className="text-gray-400">|</div>
               </>
             ) : userId > 0 ? (
               <>

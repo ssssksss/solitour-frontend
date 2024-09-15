@@ -1,7 +1,6 @@
 "use client";
 
 import CategoryModal from "@/components/informations/write/CategoryModal";
-import useEditorStore from "@/store/editorStore";
 import { CategoryResponseDto } from "@/types/CategoryDto";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";

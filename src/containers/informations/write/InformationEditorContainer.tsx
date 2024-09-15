@@ -3,6 +3,7 @@
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import useDragScroll from "@/hooks/useDragScroll";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
@@ -73,6 +74,9 @@ const InformationEditorContainer = () => {
 
   // 카테고리 선택 모달창이 보이는지 여부
   const [categoryModal, setCategoryModal] = useState<boolean>(false);
+
+  usePreventBodyScroll(locationModal);
+  usePreventBodyScroll(categoryModal);
 
   const showLocationModal = () => {
     methods.setValue("province", "");

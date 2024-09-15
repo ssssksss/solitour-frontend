@@ -13,6 +13,7 @@ import sanitizeHtml from "sanitize-html";
 import { parse } from "node-html-parser";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 
 interface Props {
   diaryData: GetDiaryResponseDto;
@@ -27,6 +28,9 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[][]>([]);
+
+  usePreventBodyScroll(dateRangeModal);
+  usePreventBodyScroll(addressModal);
 
   const methods = useForm<{
     userId: number;
