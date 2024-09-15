@@ -3,6 +3,7 @@
 import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/store/authStore";
 import useDiaryEditorStore from "@/store/diaryEditorStore";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -35,7 +36,7 @@ const QuillEditorContainer = () => {
 
         setLoading(true);
 
-        const response = await fetch("/api/image/upload", {
+        const response = await fetchWithAuth("/api/image/upload", {
           method: "POST",
           body: formData,
           cache: "no-store",
@@ -95,7 +96,7 @@ const QuillEditorContainer = () => {
 
     setLoading(true);
 
-    const response = await fetch("/api/image/upload", {
+    const response = await fetchWithAuth("/api/image/upload", {
       method: "POST",
       body: formData,
       cache: "no-store",

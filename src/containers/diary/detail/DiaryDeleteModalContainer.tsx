@@ -1,6 +1,7 @@
 "use client";
 
 import DeleteModal from "@/components/common/DeleteModal";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ const DiaryDeleteModalContainer = ({ diaryId, closeModal }: Props) => {
   const onDeleteClick = async () => {
     setLoading(true);
 
-    const response = await fetch(`/api/diary/${diaryId}`, {
+    const response = await fetchWithAuth(`/api/diary/${diaryId}`, {
       method: "DELETE",
       cache: "no-store",
     });

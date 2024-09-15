@@ -2,6 +2,7 @@
 
 import CategoryModal from "@/components/informations/write/CategoryModal";
 import { CategoryResponseDto } from "@/types/CategoryDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -40,7 +41,7 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
 
   useEffect(() => {
     (async function () {
-      const response = await fetch("/api/categories", {
+      const response = await fetchWithAuth("/api/categories", {
         method: "GET",
         next: { revalidate: 60, tags: ["getCategoryList"] },
       });

@@ -12,6 +12,7 @@ import {
   InformationRegisterResponseDto,
   UpdateInformationRequestDto,
 } from "@/types/InformationDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -265,7 +266,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
 
     setLoading(true);
 
-    const response = await fetch(`/api/informations/${informationId}`, {
+    const response = await fetchWithAuth(`/api/informations/${informationId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

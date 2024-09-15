@@ -1,6 +1,7 @@
 "use client";
 
 import DeleteModal from "@/components/common/DeleteModal";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -19,7 +20,7 @@ const InformationDeleteModalContainer = ({
   const onDeleteClick = async () => {
     setLoading(true);
 
-    const response = await fetch(`/api/informations/${informationId}`, {
+    const response = await fetchWithAuth(`/api/informations/${informationId}`, {
       method: "DELETE",
       cache: "no-store",
     });
