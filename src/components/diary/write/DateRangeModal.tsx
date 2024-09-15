@@ -27,7 +27,7 @@ const DateRangeModal = ({
 }: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-fit flex-col gap-4 rounded-xl bg-white p-6">
+      <div className="flex h-fit max-h-[calc(100%_-_48px)] w-fit max-w-[90%] flex-col gap-4 overflow-y-auto rounded-xl bg-white p-6">
         <div className="flex flex-row items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
@@ -59,7 +59,7 @@ const DateRangeModal = ({
           rangeColors={["#00B488"]}
         />
         <button
-          className="mt-4 h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
+          className="mt-4 min-h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
           type="button"
           onClick={() => onChangeDateRange()}
         >

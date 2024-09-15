@@ -1,6 +1,7 @@
 "use client";
 
 import InformationSearch from "@/components/informations/list/InformationSearch";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ const InformationSearchContainer = () => {
   const [searchDropdownVisible, setSearchDropdownVisible] =
     useState<boolean>(false);
   const router = useRouter();
+  usePreventBodyScroll(modalVisible);
 
   const onChangeSearchValue = (value: string) => {
     if (searchMethod === "제목") {

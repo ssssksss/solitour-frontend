@@ -2,7 +2,7 @@
 
 import HeaderSidebar from "@/components/common/HeaderSidebar";
 import useAuthStore from "@/store/authStore";
-import { debounce } from "@/utils/debounc";
+import { debounce } from "@/utils/debounce";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

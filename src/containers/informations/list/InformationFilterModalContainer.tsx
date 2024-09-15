@@ -1,8 +1,9 @@
 "use client";
 
 import InformationFilterModal from "@/components/informations/list/InformationFilterModal";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   closeModal: () => void;

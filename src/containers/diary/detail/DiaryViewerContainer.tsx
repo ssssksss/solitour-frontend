@@ -1,6 +1,7 @@
 "use client";
 
 import DiaryViewer from "@/components/diary/detail/DiaryViewer";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import { useMemo, useState } from "react";
 
@@ -24,6 +25,8 @@ const DiaryViewerContainer = ({ data }: Props) => {
   const changeDay = (day: number) => {
     setCurrentDay(day);
   };
+
+  usePreventBodyScroll(modalVisible);
 
   return (
     <DiaryViewer

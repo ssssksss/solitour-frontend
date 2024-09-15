@@ -22,7 +22,7 @@ const CategoryModal = ({
 }: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-[31.25rem] flex-col gap-8 rounded-xl bg-white p-8 max-[560px]:w-[90%]">
+      <div className="flex h-fit w-[31.25rem] max-w-[calc(100%_-_48px)] flex-col gap-8 rounded-xl bg-white p-8">
         <div className="flex flex-col gap-1">
           <div className="flex flex-row items-center justify-between">
             <h3 className="text-lg font-medium text-black">카테고리 선택</h3>
