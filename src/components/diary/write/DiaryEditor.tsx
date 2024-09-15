@@ -164,12 +164,13 @@ const DiaryEditor = ({
                 key={index + 1}
                 className={`${formContext.getValues("moodLevels")[diaryEditorStore.currentDay - 1] === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main`}
                 onClick={() => {
+                  formContext.watch("moodLevels");
                   const moodLevels: number[] =
                     formContext.getValues("moodLevels");
                   moodLevels[diaryEditorStore.currentDay - 1] = index + 1;
                   formContext.setValue("moodLevels", moodLevels);
                   if (formContext.formState.errors.moodLevels) {
-                    formContext.trigger();
+                    formContext.trigger("moodLevels");
                   } else {
                     formContext.watch("moodLevels");
                   }
