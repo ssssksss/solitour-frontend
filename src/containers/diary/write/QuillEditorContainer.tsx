@@ -16,6 +16,13 @@ const QuillEditorContainer = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const formContext = useFormContext();
 
+  const onContentChange = (value: string) => {
+    const contents: string[] = formContext.getValues("contents");
+    contents[diaryEditorStore.currentDay - 1] = value;
+    formContext.setValue("contents", contents);
+    formContext.trigger("contents");
+  };
+
   const imageHandler = () => {
     // Step 1. 이미지 파일을 첨부할 수 있는 input을 생성합니다.
     const input = document.createElement("input");
@@ -61,6 +68,7 @@ const QuillEditorContainer = () => {
         if (range) {
           editor.insertEmbed(range.index, "image", url);
           editor.setSelection(range.index + 1, 1);
+          onContentChange(quillRef.current.getEditorContents().toString());
         }
       }
     });
@@ -121,6 +129,7 @@ const QuillEditorContainer = () => {
     if (range) {
       editor.insertEmbed(range.index, "image", url);
       editor.setSelection(range.index + 1, 1);
+      onContentChange(quillRef.current.getEditorContents().toString());
     }
   };
 
@@ -157,13 +166,7 @@ const QuillEditorContainer = () => {
       content={
         formContext.getValues("contents")[diaryEditorStore.currentDay - 1]
       }
-      onChange={(value: string) => {
-        const contents: string[] = formContext.getValues("contents");
-        contents[diaryEditorStore.currentDay - 1] = value;
-        formContext.setValue("contents", contents);
-        formContext.trigger("contents");
-      }}
-      temp={diaryEditorStore.currentDay}
+      onChange={onContentChange}
     />
   );
 };
