@@ -11,7 +11,7 @@ export async function fetchWithAuth(url: string, options = {}, retries = 1) {
         return Promise.reject({
           status: data.status,
           message: "실패",
-        }); 
+        });
       }
       // TODO: 추가적인 에러처리 필요
       return await fetchWithAuth(url, options, 0); // 요청 재시도

@@ -5,8 +5,6 @@ import DiaryDeleteModalContainer from "@/containers/diary/detail/DiaryDeleteModa
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { GoPencil } from "react-icons/go";
 import { TiLocation } from "react-icons/ti";
 
 interface Props {

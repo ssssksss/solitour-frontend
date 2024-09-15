@@ -14,6 +14,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import parse from "node-html-parser";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 const DiaryEditorContainer = () => {
   const router = useRouter();
@@ -100,7 +101,7 @@ const DiaryEditorContainer = () => {
 
     setLoading(true);
 
-    const response = await fetch("/api/diary", {
+    const response = await fetchWithAuth("/api/diary", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

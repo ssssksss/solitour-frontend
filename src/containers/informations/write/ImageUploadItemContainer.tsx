@@ -3,6 +3,7 @@
 import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import React, { useState } from "react";
 import { useRef } from "react";
 
@@ -42,7 +43,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
 
       setLoading(true);
 
-      const response = await fetch("/api/image/upload", {
+      const response = await fetchWithAuth("/api/image/upload", {
         method: "POST",
         body: formData,
         cache: "no-store",
