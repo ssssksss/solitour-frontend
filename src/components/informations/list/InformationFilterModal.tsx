@@ -17,7 +17,7 @@ const InformationFilterModal = ({
 }: Props) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit w-80 flex-col rounded-xl bg-white p-6">
+      <div className="flex h-fit max-h-[calc(100%_-_48px)] w-80 max-w-[calc(100%_-_48px)] flex-col overflow-y-auto rounded-xl bg-white p-6">
         <div className="flex flex-row items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
