@@ -102,11 +102,15 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
         (_, index) => ({
           content: sanitizeHtml(contents[index], sanitizeOption),
           feelingStatus: FEELING_STATUS[moodLevels[index]],
-          deleteImagesUrl: originalContentUrl[index]
-            .filter(
-              (value) => !contentImagesUrl[index].split(",").includes(value),
-            )
-            .join(","),
+          deleteImagesUrl:
+            originalContentUrl[index] !== undefined
+              ? originalContentUrl[index]
+                  .filter(
+                    (value) =>
+                      !contentImagesUrl[index].split(",").includes(value),
+                  )
+                  .join(",")
+              : "",
           saveImagesUrl: contentImagesUrl[index],
           place: address[index],
         }),
