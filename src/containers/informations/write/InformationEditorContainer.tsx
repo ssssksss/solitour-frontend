@@ -3,6 +3,7 @@
 import InformationEditor from "@/components/informations/write/InformationEditor";
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import useDragScroll from "@/hooks/useDragScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import useAuthStore from "@/store/authStore";
@@ -78,6 +79,8 @@ const InformationEditorContainer = () => {
 
   usePreventBodyScroll(locationModal);
   usePreventBodyScroll(categoryModal);
+  useModalBackHandler(locationModal, () => setLocationModal(false));
+  useModalBackHandler(categoryModal, () => setCategoryModal(false));
 
   const showLocationModal = () => {
     methods.setValue("province", "");
@@ -255,9 +258,15 @@ const InformationEditorContainer = () => {
         loading={loading}
         onSubmit={onSubmit}
         showLocationModal={showLocationModal}
-        closeLocationModal={closeLocationModal}
+        closeLocationModal={() => {
+          window.history.back();
+          closeLocationModal();
+        }}
         showCategoryModal={showCategoryModal}
-        closeCategoryModal={closeCategoryModal}
+        closeCategoryModal={() => {
+          window.history.back();
+          closeCategoryModal();
+        }}
         onChangeHashTagHandler={onChangeHashTagHandler}
         onChangeTipHandler={onChangeTipHandler}
       />

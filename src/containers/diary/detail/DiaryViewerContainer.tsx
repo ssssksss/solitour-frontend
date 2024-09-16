@@ -1,6 +1,7 @@
 "use client";
 
 import DiaryViewer from "@/components/diary/detail/DiaryViewer";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import { useMemo, useState } from "react";
@@ -27,6 +28,7 @@ const DiaryViewerContainer = ({ data }: Props) => {
   };
 
   usePreventBodyScroll(modalVisible);
+  useModalBackHandler(modalVisible, () => setModalVisible(false));
 
   return (
     <DiaryViewer
@@ -36,7 +38,10 @@ const DiaryViewerContainer = ({ data }: Props) => {
       modalVisible={modalVisible}
       changeDay={changeDay}
       openModal={() => setModalVisible(true)}
-      closeModal={() => setModalVisible(false)}
+      closeModal={() => {
+        window.history.back();
+        setModalVisible(false);
+      }}
     />
   );
 };

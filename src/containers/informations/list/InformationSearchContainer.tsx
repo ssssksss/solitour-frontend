@@ -1,6 +1,7 @@
 "use client";
 
 import InformationSearch from "@/components/informations/list/InformationSearch";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -20,7 +21,9 @@ const InformationSearchContainer = () => {
   const [searchDropdownVisible, setSearchDropdownVisible] =
     useState<boolean>(false);
   const router = useRouter();
+
   usePreventBodyScroll(modalVisible);
+  useModalBackHandler(modalVisible, () => setModalVisible(false));
 
   const onChangeSearchValue = (value: string) => {
     if (searchMethod === "제목") {
@@ -59,7 +62,10 @@ const InformationSearchContainer = () => {
       orderDropdownVisible={orderDropdownVisible}
       searchDropdownVisible={searchDropdownVisible}
       onChangeSearchValue={onChangeSearchValue}
-      closeModal={() => setModalVisible(false)}
+      closeModal={() => {
+        window.history.back();
+        setModalVisible(false);
+      }}
       openModal={() => setModalVisible(true)}
       onOrderDropdownClick={() =>
         setOrderDropdownVisible(!orderDropdownVisible)
