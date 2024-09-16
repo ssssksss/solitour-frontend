@@ -15,6 +15,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 interface Props {
   diaryData: GetDiaryResponseDto;
@@ -32,6 +33,8 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
   usePreventBodyScroll(dateRangeModal);
   usePreventBodyScroll(addressModal);
+  useModalBackHandler(dateRangeModal, () => setDateRangeModal(false));
+  useModalBackHandler(addressModal, () => setAddressModal(false));
 
   const methods = useForm<{
     userId: number;
@@ -212,9 +215,15 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
         addressModal={addressModal}
         loading={loading}
         showDateRangeModal={() => setDateRangeModal(true)}
-        closeDateRangeModal={() => setDateRangeModal(false)}
+        closeDateRangeModal={() => {
+          window.history.back();
+          setDateRangeModal(false);
+        }}
         showAddressModal={() => setAddressModal(true)}
-        closeAddressModal={() => setAddressModal(false)}
+        closeAddressModal={() => {
+          window.history.back();
+          setAddressModal(false);
+        }}
         setCurrentDay={(day: number) =>
           diaryEditorStore.setDiaryEditor({ currentDay: day })
         }

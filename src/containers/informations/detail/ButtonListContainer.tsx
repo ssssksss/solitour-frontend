@@ -1,6 +1,7 @@
 "use client";
 
 import ButtonList from "@/components/informations/detail/ButtonList";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import useAuthStore from "@/store/authStore";
 import { useState } from "react";
@@ -15,6 +16,7 @@ const ButtonListContainer = ({ userId, informationId }: Props) => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   usePreventBodyScroll(modalVisible);
+  useModalBackHandler(modalVisible, () => setModalVisible(false));
 
   return (
     <ButtonList

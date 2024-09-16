@@ -2,6 +2,7 @@
 
 import ImageList from "@/components/informations/detail/ImageList";
 import useDragScroll from "@/hooks/useDragScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { useState } from "react";
 
@@ -17,6 +18,7 @@ const ImageListContainer = ({ images }: Props) => {
   const [viewerVisible, setViewerVisible] = useState<boolean>(false);
 
   usePreventBodyScroll(viewerVisible);
+  useModalBackHandler(viewerVisible, () => setViewerVisible(false));
 
   return (
     <ImageList
@@ -26,7 +28,10 @@ const ImageListContainer = ({ images }: Props) => {
       viewerVisible={viewerVisible}
       setMainImageUrl={setMainImageUrl}
       openViewer={() => setViewerVisible(true)}
-      closeViewer={() => setViewerVisible(false)}
+      closeViewer={() => {
+        window.history.back();
+        setViewerVisible(false);
+      }}
     />
   );
 };

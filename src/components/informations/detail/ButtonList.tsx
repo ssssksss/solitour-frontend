@@ -26,7 +26,10 @@ const ButtonList = ({
       {modalVisible && (
         <InformationDeleteModalContainer
           informationId={informationId}
-          closeModal={() => setModalVisible(false)}
+          closeModal={() => {
+            window.history.back();
+            setModalVisible(false);
+          }}
         />
       )}
       <Link
