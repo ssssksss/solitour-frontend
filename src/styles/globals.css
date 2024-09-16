@@ -9,6 +9,15 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "pretendrad";
+  src: url("/fonts/PretendardVariable.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   /*--background-start-rgb: 214, 219, 220;*/
@@ -23,7 +32,7 @@
 }
 
 body {
-  font-family: "CustomFont";
+  font-family: "pretendrad";
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
