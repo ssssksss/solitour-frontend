@@ -1,7 +1,6 @@
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import HashSpinner from "./HashSpinner";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
@@ -111,7 +110,23 @@ const InformationItem = ({
             <div
               className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs`}
             >
-              {isLike ? <FaHeart /> : <FaRegHeart />}
+              <div className="relative h-4 w-4 text-white">
+                {isLike ? (
+                  <Image
+                    src="/common/heart-active-icon.svg"
+                    alt="like-icon"
+                    fill={true}
+                    style={{ objectFit: "contain" }}
+                  />
+                ) : (
+                  <Image
+                    src="/common/heart-empty-icon.svg"
+                    alt="like-icon"
+                    fill={true}
+                    style={{ objectFit: "contain" }}
+                  />
+                )}
+              </div>
               <p>{convertNumberToShortForm(likeCount)}</p>
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">

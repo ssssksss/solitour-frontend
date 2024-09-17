@@ -1,5 +1,7 @@
 import HashSpinner from "@/components/common/HashSpinner";
+import HeartIcon from "@/components/common/icons/HeartIcon";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import Image from "next/image";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface Props {
@@ -30,11 +32,11 @@ const InformationLikeCount = ({
     <div>
       <HashSpinner loading={loading} />
       <button
-        className={`${isLiked ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]`}
+        className={`${isLiked ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]" : "fill-none stroke-gray2 text-gray2 hover:fill-[#F85E5E] hover:stroke-[#F85E5E]"} flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]`}
         type="button"
         onClick={() => onLikesClick()}
       >
-        {isLiked ? <FaHeart /> : <FaRegHeart />}
+        <HeartIcon className="fill-inherit stroke-inherit" />
         <p>{convertNumberToShortForm(likeCount)}</p>
       </button>
     </div>
