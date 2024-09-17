@@ -40,10 +40,10 @@ const ButtonList = ({
         수정
       </Link>
       <button
-        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
+        className="flex flex-row items-center gap-1 fill-gray2 stroke-gray2 text-sm text-gray1 hover:fill-main hover:stroke-main hover:text-main"
         onClick={() => setModalVisible(true)}
       >
-        <DeleteIcon />
+        <DeleteIcon className="fill-inherit" />
         삭제
       </button>
     </div>
