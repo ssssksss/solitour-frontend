@@ -71,7 +71,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       .join(",");
 
     if (imageUrl === "") {
-      alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
+      alert("최소 1장의 이미지를 등록해 주세요.");
       return;
     }
 
@@ -102,7 +102,10 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
           content: sanitizeHtml(contents, sanitizeOption),
           feelingStatus: FEELING_STATUS[moodLevels],
           deleteImagesUrl: originalContentUrl
-            .filter((value) => !contentImagesUrl.split(",").includes(value))
+            .filter(
+              (value) =>
+                !contentImagesUrl.split(",").includes(value) && value !== image,
+            )
             .join(","),
           saveImagesUrl: contentImagesUrl,
           place: address,
