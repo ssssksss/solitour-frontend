@@ -303,7 +303,7 @@ const InformationEditor = ({
       </div>
       <div className="flex flex-col items-end">
         <button
-          className="mb-20 mt-10 flex h-11 w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
+          className="mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
           type="submit"
           onClick={() => onSubmit()}
           disabled={loading}

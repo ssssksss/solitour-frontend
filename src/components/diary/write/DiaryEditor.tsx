@@ -197,7 +197,7 @@ const DiaryEditor = ({
       )}
       {diaryEditorStore.days > 0 && <QuillEditorContainer />}
       <button
-        className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.625rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
+        className={`${diaryEditorStore.days > 0 ? "bg-main hover:scale-105" : "cursor-not-allowed bg-gray1"} mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white`}
         type="submit"
         onClick={() => onSubmit()}
         disabled={diaryEditorStore.days === 0 || loading}
