@@ -1,7 +1,6 @@
 "use client";
 
 import AddressModal from "@/components/diary/write/AddressModal";
-import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const AddressModalContainer = ({ closeModal }: Props) => {
-  const diaryEditorStore = useDiaryEditorStore();
   const formContext = useFormContext();
   const [flag, setFlag] = useState<boolean>(true);
 
@@ -57,25 +55,13 @@ const AddressModalContainer = ({ closeModal }: Props) => {
   }, 300);
 
   const onResetAddress = () => {
-    const index = diaryEditorStore.currentDay - 1;
-    const addressList: string[] = formContext.getValues("address");
-    addressList[index] = "";
-    formContext.setValue("address", addressList);
+    formContext.setValue("address", "");
     formContext.trigger("address");
     closeModal();
   };
 
   const onChangeAddress = (placeInfo: { address_name: string }) => {
-    const index = diaryEditorStore.currentDay - 1;
-    const addressList: string[] = formContext.getValues("address");
-
-    for (let i = 0; i < addressList.length; i++) {
-      if (addressList[i] === "") {
-        addressList[i] = placeInfo.address_name;
-      }
-    }
-    addressList[index] = placeInfo.address_name;
-    formContext.setValue("address", addressList);
+    formContext.setValue("address", placeInfo.address_name);
     formContext.trigger("address");
     closeModal();
   };

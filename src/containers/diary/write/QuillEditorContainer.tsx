@@ -2,7 +2,6 @@
 
 import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/store/authStore";
-import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { useMemo, useRef, useState } from "react";
@@ -11,15 +10,12 @@ import ReactQuill, { Quill } from "react-quill";
 
 const QuillEditorContainer = () => {
   const authStore = useAuthStore();
-  const diaryEditorStore = useDiaryEditorStore();
   const quillRef = useRef<ReactQuill>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const formContext = useFormContext();
 
   const onContentChange = (value: string) => {
-    const contents: string[] = formContext.getValues("contents");
-    contents[diaryEditorStore.currentDay - 1] = value;
-    formContext.setValue("contents", contents);
+    formContext.setValue("contents", value);
     formContext.trigger("contents");
   };
 
@@ -163,9 +159,7 @@ const QuillEditorContainer = () => {
       loading={loading}
       quillRef={quillRef}
       modules={modules}
-      content={
-        formContext.getValues("contents")[diaryEditorStore.currentDay - 1]
-      }
+      content={formContext.getValues("contents")}
       onChange={onContentChange}
     />
   );
