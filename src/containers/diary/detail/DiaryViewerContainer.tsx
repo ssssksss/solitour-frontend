@@ -4,7 +4,7 @@ import DiaryViewer from "@/components/diary/detail/DiaryViewer";
 import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface Props {
   data: GetDiaryResponseDto;
@@ -29,6 +29,14 @@ const DiaryViewerContainer = ({ data }: Props) => {
 
   usePreventBodyScroll(modalVisible);
   useModalBackHandler(modalVisible, () => setModalVisible(false));
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.querySelectorAll("img").forEach((img) => {
+        img.style.borderRadius = "1rem";
+      });
+    }, 100);
+  }, []);
 
   return (
     <DiaryViewer

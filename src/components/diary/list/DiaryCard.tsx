@@ -122,7 +122,7 @@ const DiaryCard = ({
       <div className="absolute bottom-0 h-[11.5rem] w-full rounded-b-2xl bg-gradient-to-b from-black/0 to-black/50" />
       <div className="absolute bottom-9 left-9 flex flex-col items-start gap-1 pr-9 text-white">
         <h2 className="text-start text-2xl font-bold">{diaryData.title}</h2>
-        <p className="text-lg">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")} ~ ${new Date(new Date(diaryData.endDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
+        <p className="text-lg">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
       </div>
     </button>
   );

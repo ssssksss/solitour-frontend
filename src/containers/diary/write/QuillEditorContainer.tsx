@@ -4,7 +4,7 @@ import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/store/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill";
 
@@ -58,6 +58,7 @@ const QuillEditorContainer = () => {
         const imageElement = document.querySelector(`img[src="${url}"]`);
         if (imageElement) {
           (imageElement as HTMLElement).style.borderRadius = "1rem";
+          onContentChange(quillRef.current!.getEditorContents().toString());
         }
       }, 100);
     }
@@ -126,6 +127,16 @@ const QuillEditorContainer = () => {
         handler: imageDropAndPasteHandler,
       },
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.querySelectorAll("img").forEach((img) => {
+        img.style.borderRadius = "1rem";
+      });
+      onContentChange(quillRef.current!.getEditorContents().toString());
+    }, 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

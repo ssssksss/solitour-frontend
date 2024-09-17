@@ -13,7 +13,9 @@ export const DiaryCreateFormSchema = z.object({
       required_error: "제목을 입력해 주세요.",
       invalid_type_error: "Title must be a string.",
     })
-    .min(1, { message: "제목을 입력해 주세요." }),
+    .min(1, { message: "제목을 입력해 주세요." })
+    .max(50, { message: "제목 길이는 50자 이하여야 합니다." }),
+
   startDate: z
     .date({
       required_error: "날짜를 입력해 주세요.",
@@ -38,10 +40,10 @@ export const DiaryCreateFormSchema = z.object({
     .min(1, { message: "주소를 입력해 주세요." }),
   image: z
     .string({
-      required_error: "Day1에 최소 1장의 이미지를 등록해 주세요.",
+      required_error: "최소 1장의 이미지를 등록해 주세요.",
       invalid_type_error: "Image must be a string.",
     })
-    .min(1, { message: "Day1에 최소 1장의 이미지를 등록해 주세요." }),
+    .min(1, { message: "최소 1장의 이미지를 등록해 주세요." }),
   moodLevels: z
     .number({
       required_error: "기분을 선택해 주세요.",

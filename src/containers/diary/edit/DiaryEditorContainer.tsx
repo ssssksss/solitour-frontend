@@ -89,11 +89,11 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     const data: UpdateDiaryRequestDto = {
       title: title,
-      deleteTitleImage: ![image, ...contentImagesUrl[0].split(",")].includes(
+      deleteTitleImage: [image, ...contentImagesUrl.split(",")].includes(
         originalThumbnailUrl,
       )
-        ? originalThumbnailUrl
-        : "",
+        ? ""
+        : originalThumbnailUrl,
       saveTitleImage: image,
       startDatetime: startDate!,
       endDatetime: endDate!,

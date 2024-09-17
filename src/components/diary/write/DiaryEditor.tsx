@@ -58,7 +58,7 @@ const DiaryEditor = ({
         <input
           className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
           type="text"
-          placeholder="제목을 입력하세요."
+          placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("title")}
           maxLength={50}
           onChange={(e) => {
