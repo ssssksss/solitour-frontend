@@ -16,7 +16,6 @@ interface Props {
   address: string;
   likeCount: number;
   viewCount: number;
-  loading?: boolean;
   onBookMarkClick: () => void;
 }
 
@@ -31,7 +30,6 @@ const InformationItem = ({
   address,
   likeCount,
   viewCount,
-  loading = false,
   onBookMarkClick,
 }: Props) => {
   let style = "";
@@ -51,7 +49,6 @@ const InformationItem = ({
 
   return (
     <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main">
-      <HashSpinner loading={loading} />
       <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
         <Image
           className="-z-10 rounded-[0.875rem]"
