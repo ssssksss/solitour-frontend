@@ -23,17 +23,17 @@ const GatheringUpdateDeleteButtonComponent = ({
       {authStore.id == userId && authStore.id > 0 && (
         <div className="mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
           <Link
-            className="flex flex-row items-center gap-1 stroke-gray2 hover:text-main"
+            className="flex flex-row items-center gap-1 stroke-gray2 hover:stroke-main hover:text-main"
             href={updateHref}
           >
             <EditIcon />
             수정
           </Link>
           <button
-            className="items-center stroke-gray2 flex flex-row gap-1 hover:text-main"
+            className="flex flex-row items-center gap-1 stroke-gray2 hover:fill-main hover:stroke-main hover:text-main"
             onClick={() => deleteHandler()}
           >
-            <DeleteIcon />
+            <DeleteIcon className="fill-inherit" />
             삭제
           </button>
         </div>
