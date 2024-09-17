@@ -45,7 +45,6 @@ const MyPageInformationList = ({
                 address={item.zoneCategoryChildName}
                 likeCount={item.likeCount}
                 viewCount={item.viewCount}
-                loading={false}
                 userId={authStore.id}
                 onBookMarkClick={() => onBookMarkClick(item.informationId)}
               />
