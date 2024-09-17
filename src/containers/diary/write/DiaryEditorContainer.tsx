@@ -65,7 +65,7 @@ const DiaryEditorContainer = () => {
       .join(",");
 
     if (imageUrl === "") {
-      alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
+      alert("최소 1장의 이미지를 등록해 주세요.");
       return;
     }
 

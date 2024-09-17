@@ -54,5 +54,6 @@ export async function DELETE(
   );
 
   revalidateTag("getDiaryList");
+  revalidateTag(`getDiary/${params.id}`);
   return response;
 }
