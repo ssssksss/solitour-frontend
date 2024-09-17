@@ -78,7 +78,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
             {/* 모임 장소 */}
             <div className={"flex h-4 min-w-[0.875rem] items-center"}>
               <Image
-                src={`/location-icon.svg`}
+                src={`/gathering/location-icon.svg`}
                 alt="location-icon"
                 width={14}
                 height={14}

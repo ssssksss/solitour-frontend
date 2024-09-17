@@ -30,7 +30,7 @@ const GatheringUpdateDeleteButtonComponent = ({
             수정
           </Link>
           <button
-            className="flex flex-row items-center gap-1 stroke-gray2 hover:fill-main hover:stroke-main hover:text-main"
+            className="flex flex-row items-center gap-1 fill-gray2 stroke-gray2 hover:fill-main hover:stroke-main hover:text-main"
             onClick={() => deleteHandler()}
           >
             <DeleteIcon className="fill-inherit" />
