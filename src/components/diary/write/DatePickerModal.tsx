@@ -32,6 +32,7 @@ const DatePickerModal = ({
           <Calendar
             date={date}
             onChange={(date) => setDate(date)}
+            minDate={new Date("1970-01-01")}
             maxDate={new Date()}
             locale={ko}
             color="#00B488"
@@ -48,6 +49,7 @@ const DatePickerModal = ({
                   setDate(e.target.valueAsDate);
                 }
               }}
+              min="1970-01"
               max={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`}
               value={`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`}
             />
