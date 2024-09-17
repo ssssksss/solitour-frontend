@@ -120,7 +120,7 @@ const DiaryEditor = ({
           </button>
           {formContext.formState.errors.address && (
             <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
-              모든 날짜의 주소를 입력해 주세요.
+              {formContext.formState.errors.address.message as String}
             </p>
           )}
         </div>
@@ -155,7 +155,7 @@ const DiaryEditor = ({
         </div>
         {formContext.formState.errors.moodLevels && (
           <p className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
-            모든 날짜의 기분 정보를 입력해 주세요.
+            {formContext.formState.errors.moodLevels.message as String}
           </p>
         )}
       </div>

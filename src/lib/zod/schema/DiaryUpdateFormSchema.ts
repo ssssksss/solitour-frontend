@@ -44,11 +44,11 @@ export const DiaryUpdateFormSchema = z.object({
     .min(1, { message: "Day1에 최소 1장의 이미지를 등록해 주세요." }),
   moodLevels: z
     .number({
-      required_error: "기분 정보를 입력해 주세요.",
+      required_error: "기분을 선택해 주세요.",
       invalid_type_error: "MoodLevel must be a integer.",
     })
-    .int({ message: "기분 정보를 입력해 주세요." })
-    .positive({ message: "기분 정보를 입력해 주세요." }),
+    .int({ message: "기분을 선택해 주세요." })
+    .positive({ message: "기분을 선택해 주세요." }),
   contents: z.string({
     required_error: "내용을 입력해 주세요.",
     invalid_type_error: "Content must be a string.",
