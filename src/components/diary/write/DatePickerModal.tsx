@@ -1,27 +1,19 @@
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { MdClose } from "react-icons/md";
-import { DateRange } from "react-date-range";
-import { Dispatch, SetStateAction } from "react";
+import { Calendar } from "react-date-range";
 import { ko } from "date-fns/locale";
-import { addDays, min } from "date-fns";
 
 interface Props {
-  width: number;
-  state: { startDate: Date; endDate: Date; key: string }[];
-  isStartDateSelected: boolean;
-  setState: Dispatch<SetStateAction<any[]>>;
-  setIsStartDateSelected: Dispatch<SetStateAction<boolean>>;
+  date: Date;
+  setDate: (date: Date) => void;
   closeModal: () => void;
   onChangeDateRange: () => void;
 }
 
-const DateRangeModal = ({
-  width,
-  state,
-  isStartDateSelected,
-  setState,
-  setIsStartDateSelected,
+const DatePickerModal = ({
+  date,
+  setDate,
   closeModal,
   onChangeDateRange,
 }: Props) => {
@@ -35,7 +27,14 @@ const DateRangeModal = ({
             onClick={() => closeModal()}
           />
         </div>
-        <DateRange
+        <Calendar
+          date={date}
+          onChange={(date) => setDate(date)}
+          maxDate={new Date()}
+          locale={ko}
+          color="#00B488"
+        />
+        {/* <DateRange
           editableDateInputs={true}
           onChange={(item) => {
             setState([item.selection]);
@@ -57,9 +56,9 @@ const DateRangeModal = ({
           }
           locale={ko}
           rangeColors={["#00B488"]}
-        />
+        /> */}
         <button
-          className="mt-4 min-h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
+          className="min-h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
           type="button"
           onClick={() => onChangeDateRange()}
         >
@@ -70,4 +69,4 @@ const DateRangeModal = ({
   );
 };
 
-export default DateRangeModal;
+export default DatePickerModal;
