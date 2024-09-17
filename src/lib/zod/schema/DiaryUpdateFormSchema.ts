@@ -37,12 +37,10 @@ export const DiaryUpdateFormSchema = z.object({
       invalid_type_error: "Address must be a string.",
     })
     .min(1, { message: "주소를 입력해 주세요." }),
-  image: z
-    .string({
-      required_error: "최소 1장의 이미지를 등록해 주세요.",
-      invalid_type_error: "Image must be a string.",
-    })
-    .min(1, { message: "최소 1장의 이미지를 등록해 주세요." }),
+  image: z.string({
+    required_error: "최소 1장의 이미지를 등록해 주세요.",
+    invalid_type_error: "Image must be a string.",
+  }),
   moodLevels: z
     .number({
       required_error: "기분을 선택해 주세요.",

@@ -119,7 +119,11 @@ const DiaryCard = ({
     >
       <Image
         className="-z-10 rounded-[0.9375rem]"
-        src={diaryData.titleImage}
+        src={
+          diaryData.titleImage !== ""
+            ? diaryData.titleImage
+            : `/diary/season${new Date(diaryData.startDatetime).getMonth() + 1}.jpg`
+        }
         alt="diary-image"
         fill={true}
         style={{ objectFit: "cover" }}

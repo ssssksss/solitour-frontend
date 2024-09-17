@@ -70,11 +70,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       .map((img) => img.getAttribute("src") ?? "")
       .join(",");
 
-    if (imageUrl === "") {
-      alert("최소 1장의 이미지를 등록해 주세요.");
-      return;
-    }
-
     methods.setValue("image", imageUrl);
 
     await methods.trigger();
