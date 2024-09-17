@@ -15,6 +15,8 @@ const DatePickerModalContainer = ({ closeModal }: Props) => {
   const onChangeDateRange = () => {
     formContext.setValue("startDate", date);
     formContext.setValue("endDate", date);
+    formContext.trigger("startDate");
+    formContext.trigger("endDate");
     closeModal();
   };
 
