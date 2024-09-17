@@ -21,7 +21,7 @@ const TabList = () => {
               alt={"Trip-search-icon"}
               fill={true}
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
             />
           </div>
@@ -43,7 +43,7 @@ const TabList = () => {
               src={"/home/Gathering-search-icon.svg"}
               alt={"Gathering-search-icon"}
               fill={true}
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "contain" }}
             />
           </div>
         </div>
