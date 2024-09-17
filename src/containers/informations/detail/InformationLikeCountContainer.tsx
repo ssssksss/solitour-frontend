@@ -19,15 +19,23 @@ const InformationLikeCountContainer = ({
 }: Props) => {
   const userId = useAuthStore().id;
   const informationLikeStore = useInformationLikeStore();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const onLikesClick = async () => {
-    setLoading(true);
+    if (loading) {
+      return;
+    }
 
+    setLoading(true);
     const data = new URLSearchParams();
     data.append("infoId", informationId.toString());
 
     if (informationLikeStore.isLiked) {
+      informationLikeStore.setInformationLike({
+        likeCount: informationLikeStore.likeCount - 1,
+        isLiked: false,
+      });
+
       const response = await fetchWithAuth("/api/informations/great", {
         method: "DELETE",
         headers: {
@@ -38,16 +46,20 @@ const InformationLikeCountContainer = ({
       });
 
       if (!response.ok) {
-        alert("좋아요 취소에 실패하였습니다.");
+        informationLikeStore.setInformationLike({
+          likeCount: informationLikeStore.likeCount + 1,
+          isLiked: true,
+        });
         setLoading(false);
+        alert("좋아요 취소에 실패하였습니다.");
         throw new Error(response.statusText);
       }
-
-      informationLikeStore.setInformationLike({
-        likeCount: informationLikeStore.likeCount - 1,
-        isLiked: false,
-      });
     } else {
+      informationLikeStore.setInformationLike({
+        likeCount: informationLikeStore.likeCount + 1,
+        isLiked: true,
+      });
+
       const response = await fetchWithAuth("/api/informations/great", {
         method: "POST",
         headers: {
@@ -58,15 +70,14 @@ const InformationLikeCountContainer = ({
       });
 
       if (!response.ok) {
-        alert("좋아요 등록에 실패하였습니다.");
+        informationLikeStore.setInformationLike({
+          likeCount: informationLikeStore.likeCount - 1,
+          isLiked: false,
+        });
         setLoading(false);
+        alert("좋아요 등록에 실패하였습니다.");
         throw new Error(response.statusText);
       }
-
-      informationLikeStore.setInformationLike({
-        likeCount: informationLikeStore.likeCount + 1,
-        isLiked: true,
-      });
     }
 
     setLoading(false);
@@ -83,7 +94,6 @@ const InformationLikeCountContainer = ({
   return (
     <InformationLikeCount
       clickable={userId > 0}
-      loading={loading}
       likeCount={informationLikeStore.likeCount}
       isLiked={informationLikeStore.isLiked}
       onLikesClick={onLikesClick}

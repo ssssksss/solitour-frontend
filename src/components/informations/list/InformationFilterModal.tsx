@@ -22,7 +22,10 @@ const InformationFilterModal = ({
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
             size={"2.5rem"}
-            onClick={closeModal}
+            onClick={() => {
+              window.history.back();
+              closeModal();
+            }}
           />
         </div>
         <div className="flex flex-col gap-4 px-5 pb-2">

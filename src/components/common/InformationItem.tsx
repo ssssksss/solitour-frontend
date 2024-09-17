@@ -1,7 +1,6 @@
 import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TiLocation } from "react-icons/ti";
 import HashSpinner from "./HashSpinner";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
@@ -17,7 +16,6 @@ interface Props {
   address: string;
   likeCount: number;
   viewCount: number;
-  loading?: boolean;
   onBookMarkClick: () => void;
 }
 
@@ -32,7 +30,6 @@ const InformationItem = ({
   address,
   likeCount,
   viewCount,
-  loading = false,
   onBookMarkClick,
 }: Props) => {
   let style = "";
@@ -52,7 +49,6 @@ const InformationItem = ({
 
   return (
     <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main">
-      <HashSpinner loading={loading} />
       <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
         <Image
           className="-z-10 rounded-[0.875rem]"
@@ -111,7 +107,23 @@ const InformationItem = ({
             <div
               className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs`}
             >
-              {isLike ? <FaHeart /> : <FaRegHeart />}
+              <div className="relative h-4 w-4 text-white">
+                {isLike ? (
+                  <Image
+                    src="/common/heart-active-icon.svg"
+                    alt="like-icon"
+                    fill={true}
+                    style={{ objectFit: "contain" }}
+                  />
+                ) : (
+                  <Image
+                    src="/common/heart-empty-icon.svg"
+                    alt="like-icon"
+                    fill={true}
+                    style={{ objectFit: "contain" }}
+                  />
+                )}
+              </div>
               <p>{convertNumberToShortForm(likeCount)}</p>
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">

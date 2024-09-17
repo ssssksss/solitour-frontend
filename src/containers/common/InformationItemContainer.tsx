@@ -33,12 +33,17 @@ const InformationItemContainer = ({
   const [loading, setLoading] = useState<boolean>(false);
 
   const onBookMarkClick = async () => {
-    setLoading(true);
+    if (loading) {
+      return;
+    }
 
+    setLoading(true);
     const data = new URLSearchParams();
     data.append("infoId", informationId.toString());
 
     if (isBookMarked) {
+      setIsBookMarked(false);
+
       const response = await fetchWithAuth("/api/bookmark/information", {
         method: "DELETE",
         headers: {
@@ -49,13 +54,14 @@ const InformationItemContainer = ({
       });
 
       if (!response.ok) {
-        alert("북마크 취소에 실패하였습니다.");
+        setIsBookMarked(true);
         setLoading(false);
+        alert("북마크 취소에 실패하였습니다.");
         throw new Error(response.statusText);
       }
-
-      setIsBookMarked(false);
     } else {
+      setIsBookMarked(true);
+
       const response = await fetchWithAuth("/api/bookmark/information", {
         method: "POST",
         headers: {
@@ -66,12 +72,11 @@ const InformationItemContainer = ({
       });
 
       if (!response.ok) {
-        alert("북마크 등록에 실패하였습니다.");
+        setIsBookMarked(false);
         setLoading(false);
+        alert("북마크 등록에 실패하였습니다.");
         throw new Error(response.statusText);
       }
-
-      setIsBookMarked(true);
     }
 
     setLoading(false);
@@ -89,7 +94,6 @@ const InformationItemContainer = ({
       address={address}
       likeCount={likeCount}
       viewCount={viewCount}
-      loading={loading}
       onBookMarkClick={onBookMarkClick}
     />
   );
