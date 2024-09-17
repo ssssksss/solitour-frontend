@@ -9,23 +9,12 @@ import { TiLocation } from "react-icons/ti";
 
 interface Props {
   data: GetDiaryResponseDto;
-  days: number;
-  currentDay: number;
   modalVisible: boolean;
-  changeDay: (day: number) => void;
   openModal: () => void;
   closeModal: () => void;
 }
 
-const DiaryViewer = ({
-  data,
-  days,
-  currentDay,
-  modalVisible,
-  changeDay,
-  openModal,
-  closeModal,
-}: Props) => {
+const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
   return (
     <div className="flex w-full flex-col items-start">
       {modalVisible && (
@@ -34,21 +23,9 @@ const DiaryViewer = ({
           closeModal={closeModal}
         />
       )}
-      <div className="flex w-full flex-row items-center gap-14 overflow-x-auto">
-        <Image src="/day-text.svg" alt="day-text" width={41} height={25} />
-        {Array.from({ length: days }, (_, index) => index + 1).map((day) => (
-          <button
-            key={day}
-            className={`${day === currentDay ? "text-main" : "text-gray2"} font-semibold hover:text-main`}
-            onClick={() => changeDay(day)}
-          >
-            {day}
-          </button>
-        ))}
-      </div>
       <div className="relative mt-[5.5rem] h-20 w-16">
         <Image
-          src={`/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
+          src={`/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
@@ -61,7 +38,7 @@ const DiaryViewer = ({
         <p>
           {new Date(
             new Date(data.diaryContentResponse.startDatetime).getTime() +
-              (1000 * 60 * 60 * 24 * currentDay - 1),
+              (1000 * 60 * 60 * 24 - 1),
           ).toLocaleDateString("ko-KR")}
         </p>
         <div className="flex flex-row items-center gap-1">
@@ -69,17 +46,17 @@ const DiaryViewer = ({
           <p>
             {
               data.diaryContentResponse.diaryDayContentResponses
-                .diaryDayContentDetail[currentDay - 1].place
+                .diaryDayContentDetail[0].place
             }
           </p>
         </div>
       </div>
       <div
-        className="mt-16"
+        className="diaryViewerContent mt-16"
         dangerouslySetInnerHTML={{
           __html:
             data.diaryContentResponse.diaryDayContentResponses
-              .diaryDayContentDetail[currentDay - 1].content,
+              .diaryDayContentDetail[0].content,
         }}
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
