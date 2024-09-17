@@ -7,7 +7,7 @@ interface IMyPageHeader {
   userInfo: userResponseDto;
 }
 
-const MyPageHeader = ({userInfo}:IMyPageHeader) => {
+const MyPageHeader = ({ userInfo }: IMyPageHeader) => {
   return (
     <div className={"flex w-full max-w-[60rem] flex-col pt-[2.5rem]"}>
       <h1 className={"text-3xl font-semibold"}> 마이페이지 </h1>
@@ -30,7 +30,7 @@ const MyPageHeader = ({userInfo}:IMyPageHeader) => {
               >
                 <div className="relative h-[1.25rem] w-[1.25rem]">
                   <Image
-                    src={"/setting-icon.svg"}
+                    src={"/mypage/setting-icon.svg"}
                     alt={"setting-icon-image"}
                     fill
                   />

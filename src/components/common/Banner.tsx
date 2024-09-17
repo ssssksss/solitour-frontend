@@ -58,7 +58,7 @@ const Banner = ({ content, buttonText, category }: Props) => {
         <div className="relative flex h-[13.5rem] w-[24.875rem] animate-bannerImage items-center justify-end max-[1024px]:mt-8 max-[1024px]:h-[10.6875rem] max-[744px]:justify-center">
           <Image
             className="object-contain"
-            src="/banner-image.png"
+            src="/information/banner-image.png"
             alt="banner-image"
             fill={true}
           />

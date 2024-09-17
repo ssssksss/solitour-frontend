@@ -25,7 +25,7 @@ const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
       )}
       <div className="relative mt-[5.5rem] h-20 w-16">
         <Image
-          src={`/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
+          src={`/diary/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}

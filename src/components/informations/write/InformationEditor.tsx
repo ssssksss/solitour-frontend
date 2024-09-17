@@ -312,7 +312,7 @@ const InformationEditor = ({
             <div className="flex flex-row items-center gap-3">
               <Image
                 className="animate-spin"
-                src="/loading-icon.png"
+                src="/common/loading-icon.png"
                 alt="loading-icon"
                 width={20}
                 height={20}

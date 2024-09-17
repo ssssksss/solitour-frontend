@@ -34,7 +34,11 @@ const SignUp = () => {
         href="/api/auth/kakao"
       >
         <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
-          <Image src={"/kakao-icon.svg"} alt={"kakao-logo-image"} fill={true} />
+          <Image
+            src={"/auth/kakao-icon.svg"}
+            alt={"kakao-logo-image"}
+            fill={true}
+          />
         </div>
         <span className="text-sm font-semibold text-black">
           카카오로 1초만에 시작하기
@@ -48,7 +52,7 @@ const SignUp = () => {
       >
         <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
           <Image
-            src={"/google-icon.svg"}
+            src={"/auth/google-icon.svg"}
             alt={"google-logo-image"}
             fill={true}
           />

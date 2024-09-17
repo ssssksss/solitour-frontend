@@ -57,7 +57,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         }
       >
         <GatheringEditorTitleContainer />
-        <div className="grid w-full gap-y-[2.375rem] gap-x-[1.875rem] max-[576px]:grid-cols-1 min-[575px]:grid-cols-2 min-[960px]:grid-cols-3">
+        <div className="grid w-full gap-x-[1.875rem] gap-y-[2.375rem] max-[576px]:grid-cols-1 min-[575px]:grid-cols-2 min-[960px]:grid-cols-3">
           <GatheringEditorPeriodContainer />
           <GatheringEditorPlaceContainer />
           <GatheringEditorTimeContainer />
@@ -74,7 +74,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
             onClick={() => {
               if (!formContext.formState.isValid) {
                 formContext.trigger();
-                return ;
+                return;
               }
               props.isEdit == true
                 ? props.updateGatheringHandler()
@@ -85,7 +85,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
               <div className="flex flex-row items-center gap-3">
                 <Image
                   className="animate-spin"
-                  src="/loading-icon.png"
+                  src="/common/loading-icon.png"
                   alt="loading-icon"
                   width={20}
                   height={20}

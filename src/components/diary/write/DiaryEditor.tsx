@@ -91,7 +91,7 @@ const DiaryEditor = ({
               <div className="flex flex-row items-center gap-2">
                 {"YYYY.MM.DD"}
                 <Image
-                  src={"/calendar-icon.svg"}
+                  src={"/gathering/calendar-icon.svg"}
                   alt={"calendar-icon"}
                   width={16}
                   height={16}
@@ -143,7 +143,7 @@ const DiaryEditor = ({
             >
               <div className="relative h-10 w-8">
                 <Image
-                  src={`/mood-icon${index + 1}.svg`}
+                  src={`/diary/mood-icon${index + 1}.svg`}
                   alt="mood-icon"
                   fill={true}
                   style={{ objectFit: "contain" }}
@@ -170,7 +170,7 @@ const DiaryEditor = ({
           <div className="flex flex-row items-center gap-3">
             <Image
               className="animate-spin"
-              src="/loading-icon.png"
+              src="/common/loading-icon.png"
               alt="loading-icon"
               width={20}
               height={20}

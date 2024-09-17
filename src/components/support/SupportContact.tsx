@@ -14,26 +14,22 @@ interface ISupportContact {
 const SupportContact = (props: ISupportContact) => {
   return (
     <div className="flex w-full flex-col items-center p-4">
-      <div className="grid max-[806px]:grid-cols-1 min-[807px]:grid-cols-2  gap-4">
+      <div className="grid gap-4 max-[806px]:grid-cols-1 min-[807px]:grid-cols-2">
         {props.teamMembers.map((member, index) => (
           <div
             key={index}
-            className="flex w-80 flex-col items-center rounded bg-white p-4 shadow-lg gap-2"
+            className="flex w-80 flex-col items-center gap-2 rounded bg-white p-4 shadow-lg"
           >
             <div className="relative flex aspect-square w-full items-center justify-center rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
               <Image
-                src={"/Solitour-logo.svg"}
+                src={"/common/solitour-logo.svg"}
                 alt={member.name}
                 fill={true}
               />
             </div>
             <h2 className="text-xl font-semibold">{member.name}</h2>
             <p className="text-gray-600">{member.role}</p>
-            <p
-              className="text-blue-500 hover:underline"
-            >
-              {member.email}
-            </p>
+            <p className="text-blue-500 hover:underline">{member.email}</p>
           </div>
         ))}
       </div>

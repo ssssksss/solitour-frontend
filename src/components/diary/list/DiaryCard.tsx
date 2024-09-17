@@ -47,7 +47,12 @@ const DiaryCard = ({
         }}
       >
         <div className="flex flex-row items-center gap-14">
-          <Image src="/day-text.svg" alt="day-text" width={41} height={25} />
+          <Image
+            src="/diary/day-text.svg"
+            alt="day-text"
+            width={41}
+            height={25}
+          />
           <div className="flex flex-row items-center gap-8 truncate">
             {Array.from({ length: days }, (_, index) => index + 1).map(
               (day) => (
@@ -68,7 +73,7 @@ const DiaryCard = ({
         <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
           <div className="relative h-20 w-16">
             <Image
-              src={`/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
+              src={`/diary/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}

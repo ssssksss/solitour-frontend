@@ -17,8 +17,8 @@ const TabList = () => {
         <div className="flex items-center justify-end">
           <div className="relative h-[7.875rem] w-[7.875rem] max-[1024px]:h-20 max-[1024px]:w-20">
             <Image
-              src={"/Trip-search-icon.svg"}
-              alt={"Trip-search-icon"}
+              src={"/home/trip-search-icon.svg"}
+              alt={"trip-search-icon"}
               fill={true}
               style={{
                 objectFit: "contain",

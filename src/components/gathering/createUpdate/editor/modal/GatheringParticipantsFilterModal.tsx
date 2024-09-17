@@ -1,6 +1,4 @@
-import {
-  SETTING_MODAL_SEX,
-} from "@/constants/gathering/GatheringConstant";
+import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import "@/styles/reactDataRange.css";
 import Image from "next/image";
 import { useState } from "react";
@@ -30,7 +28,7 @@ const SETTING_MODAL_AGE = {
     startAge: 50,
     endAge: 59,
   },
-}
+};
 
 const GatheringParticipantsFilterModal = (
   props: IGatheringParticipantsFilterModalProps,
@@ -53,7 +51,10 @@ const GatheringParticipantsFilterModal = (
   const [directInput, setDirectInput] = useState(false);
 
   const submitHandler = () => {
-    formContext.setValue("startAge", new Date().getFullYear() - (startAge || 0));
+    formContext.setValue(
+      "startAge",
+      new Date().getFullYear() - (startAge || 0),
+    );
     formContext.setValue("endAge", new Date().getFullYear() - (endAge || 0));
     formContext.setValue("personCount", peopleCount);
     formContext.setValue("allowedSex", sex);
@@ -68,7 +69,7 @@ const GatheringParticipantsFilterModal = (
   }: {
     _startAge: number;
     _endAge: number;
-    }) => {
+  }) => {
     setDirectInput(false);
     if ((endAge || 0) + 1 == _startAge) {
       setEndAge(_endAge);
@@ -91,7 +92,7 @@ const GatheringParticipantsFilterModal = (
         onClick={() => props.closeModal()}
       >
         <Image
-          src={"/close-icon.svg"}
+          src={"/gathering/close-icon.svg"}
           alt={"close-icon"}
           width={20}
           height={20}
@@ -114,7 +115,7 @@ const GatheringParticipantsFilterModal = (
             >
               {peopleCount > 2 ? (
                 <Image
-                  src={"/minus-icon.svg"}
+                  src={"/gathering/minus-icon.svg"}
                   alt={"minus-icon"}
                   width={28}
                   height={28}
@@ -134,7 +135,7 @@ const GatheringParticipantsFilterModal = (
             >
               {peopleCount < 10 ? (
                 <Image
-                  src={"/plus-icon.svg"}
+                  src={"/gathering/plus-icon.svg"}
                   alt={"plus-icon"}
                   width={28}
                   height={28}
@@ -278,7 +279,7 @@ const GatheringParticipantsFilterModal = (
                 className={`${
                   sex == i[0]
                     ? "bg-main text-white"
-                    : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] text-gray-1"
+                    : "text-gray-1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"
                 } flex items-center rounded-[4rem] px-4 py-2`}
               >
                 {i[1]}

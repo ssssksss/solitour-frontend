@@ -92,7 +92,7 @@ const InformationSearch = ({
           onClick={() => onSearchClick()}
         >
           <Image
-            src="/search-icon.png"
+            src="/common/search-icon.png"
             alt="search-icon"
             width={16}
             height={16}

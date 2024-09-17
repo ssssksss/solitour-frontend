@@ -23,29 +23,36 @@ const GatheringPlace = ({
     >
       {placeName && (
         <a
-          className={"relative flex h-full flex-col items-center justify-center gap-[.25rem] rounded-[1rem]"}
-            href={
-              searchId ? `https://place.map.kakao.com/${searchId}` :
-              `http://map.kakao.com/link/map/${placeName},${yAxis},${xAxis}`
-            }
+          className={
+            "relative flex h-full flex-col items-center justify-center gap-[.25rem] rounded-[1rem]"
+          }
+          href={
+            searchId
+              ? `https://place.map.kakao.com/${searchId}`
+              : `http://map.kakao.com/link/map/${placeName},${yAxis},${xAxis}`
+          }
           target="_blank"
           rel="noopener noreferrer"
         >
           <div
             id="map"
             style={{ width: "100%", height: "calc(100% - 6rem)" }}
-            className={"rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"}
+            className={
+              "rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+            }
           ></div>
 
           <div
-            className={"flex h-[6rem] w-full flex-col justify-between gap-[1rem] rounded-[1rem] bg-white p-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"}
+            className={
+              "flex h-[6rem] w-full flex-col justify-between gap-[1rem] rounded-[1rem] bg-white p-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+            }
           >
             <div className={"flex items-center text-2xl font-bold"}>
               {placeName}
             </div>
             <div className={"flex items-center gap-[1rem]"}>
               <Image
-                src={"/location-icon.svg"}
+                src={"/gathering/location-icon.svg"}
                 alt={"location-icon"}
                 width={14}
                 height={14}
