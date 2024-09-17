@@ -60,7 +60,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
   const onSubmit = async () => {
     const imageUrl =
-      parse(methods.getValues("contents")[0])
+      parse(methods.getValues("contents"))
         .querySelector("img")
         ?.getAttribute("src") ?? "";
 
