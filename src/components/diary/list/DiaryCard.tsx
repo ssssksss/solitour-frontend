@@ -113,7 +113,7 @@ const DiaryCard = ({
       }}
     >
       <Image
-        className="-z-10 rounded-2xl"
+        className="-z-10 rounded-[0.9375rem]"
         src={diaryData.titleImage}
         alt="diary-image"
         fill={true}
