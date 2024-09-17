@@ -21,13 +21,13 @@ const DiaryEditorContainer = () => {
   const router = useRouter();
   const authStore = useAuthStore();
   const diaryEditorStore = useDiaryEditorStore();
-  const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
+  const [datePickerModal, setDatePickerModal] = useState<boolean>(false);
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  usePreventBodyScroll(dateRangeModal);
+  usePreventBodyScroll(datePickerModal);
   usePreventBodyScroll(addressModal);
-  useModalBackHandler(dateRangeModal, () => setDateRangeModal(false));
+  useModalBackHandler(datePickerModal, () => setDatePickerModal(false));
   useModalBackHandler(addressModal, () => setAddressModal(false));
 
   const methods = useForm<{
@@ -137,22 +137,19 @@ const DiaryEditorContainer = () => {
       <DiaryEditor
         text="등록"
         diaryEditorStore={diaryEditorStore}
-        dateRangeModal={dateRangeModal}
+        datePickerModal={datePickerModal}
         addressModal={addressModal}
         loading={loading}
-        showDateRangeModal={() => setDateRangeModal(true)}
+        showDateRangeModal={() => setDatePickerModal(true)}
         closeDateRangeModal={() => {
           window.history.back();
-          setDateRangeModal(false);
+          setDatePickerModal(false);
         }}
         showAddressModal={() => setAddressModal(true)}
         closeAddressModal={() => {
           window.history.back();
           setAddressModal(false);
         }}
-        setCurrentDay={(day: number) =>
-          diaryEditorStore.setDiaryEditor({ currentDay: day })
-        }
         onSubmit={onSubmit}
       />
     </FormProvider>

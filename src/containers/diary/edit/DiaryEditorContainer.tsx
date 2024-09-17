@@ -211,7 +211,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       <DiaryEditor
         text="수정"
         diaryEditorStore={diaryEditorStore}
-        dateRangeModal={dateRangeModal}
+        datePickerModal={dateRangeModal}
         addressModal={addressModal}
         loading={loading}
         showDateRangeModal={() => setDateRangeModal(true)}

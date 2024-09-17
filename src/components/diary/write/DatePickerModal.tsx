@@ -1,5 +1,6 @@
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import "@/styles/reactDataRange.css";
 import { MdClose } from "react-icons/md";
 import { Calendar } from "react-date-range";
 import { ko } from "date-fns/locale";
@@ -27,38 +28,33 @@ const DatePickerModal = ({
             onClick={() => closeModal()}
           />
         </div>
-        <Calendar
-          date={date}
-          onChange={(date) => setDate(date)}
-          maxDate={new Date()}
-          locale={ko}
-          color="#00B488"
-        />
-        {/* <DateRange
-          editableDateInputs={true}
-          onChange={(item) => {
-            setState([item.selection]);
-            setIsStartDateSelected(!isStartDateSelected);
-          }}
-          moveRangeOnFirstSelection={false}
-          ranges={state}
-          months={width >= 744 ? 2 : 1}
-          direction="horizontal"
-          minDate={
-            isStartDateSelected
-              ? addDays(state[0].startDate, -6)
-              : new Date("1970-1-1")
-          }
-          maxDate={
-            isStartDateSelected
-              ? min([addDays(state[0].startDate, 6), new Date()])
-              : new Date()
-          }
-          locale={ko}
-          rangeColors={["#00B488"]}
-        /> */}
+        <div className="relative h-[22.5rem]">
+          <Calendar
+            date={date}
+            onChange={(date) => setDate(date)}
+            maxDate={new Date()}
+            locale={ko}
+            color="#00B488"
+            onShownDateChange={(date) => {
+              setDate(date);
+            }}
+          />
+          <div className="absolute left-[50%] top-10 translate-x-[-50%] font-semibold">
+            <input
+              className="w-32 outline-none"
+              type="month"
+              onChange={(e) => {
+                if (e.target.valueAsDate) {
+                  setDate(e.target.valueAsDate);
+                }
+              }}
+              max={`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`}
+              value={`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`}
+            />
+          </div>
+        </div>
         <button
-          className="min-h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
+          className="z-10 min-h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
           type="button"
           onClick={() => onChangeDateRange()}
         >

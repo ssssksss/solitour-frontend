@@ -17,35 +17,33 @@ const QuillEditorContainer = dynamic(
 interface Props {
   text: string;
   diaryEditorStore: useDiaryEditorStoreType;
-  dateRangeModal: boolean;
+  datePickerModal: boolean;
   addressModal: boolean;
   loading: boolean;
   showDateRangeModal: () => void;
   closeDateRangeModal: () => void;
   showAddressModal: () => void;
   closeAddressModal: () => void;
-  setCurrentDay: (day: number) => void;
   onSubmit: () => void;
 }
 
 const DiaryEditor = ({
   text,
   diaryEditorStore,
-  dateRangeModal,
+  datePickerModal,
   addressModal,
   loading,
   showDateRangeModal,
   closeDateRangeModal,
   showAddressModal,
   closeAddressModal,
-  setCurrentDay,
   onSubmit,
 }: Props) => {
   const formContext = useFormContext();
 
   return (
     <div className="flex w-full flex-col">
-      {dateRangeModal && (
+      {datePickerModal && (
         <DatePickerModalContainer closeModal={closeDateRangeModal} />
       )}
       {addressModal && <AddressModalContainer closeModal={closeAddressModal} />}
