@@ -62,10 +62,7 @@ const InformationSearchContainer = () => {
       orderDropdownVisible={orderDropdownVisible}
       searchDropdownVisible={searchDropdownVisible}
       onChangeSearchValue={onChangeSearchValue}
-      closeModal={() => {
-        window.history.back();
-        setModalVisible(false);
-      }}
+      closeModal={() => setModalVisible(false)}
       openModal={() => setModalVisible(true)}
       onOrderDropdownClick={() =>
         setOrderDropdownVisible(!orderDropdownVisible)
