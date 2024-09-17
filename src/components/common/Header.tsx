@@ -42,7 +42,7 @@ const Header = ({
           <div className="flex flex-row items-center">
             <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
               <Image
-                src={"/Solitour-logo.svg"}
+                src={"/common/solitour-logo.svg"}
                 alt={"/background"}
                 fill={true}
                 style={{

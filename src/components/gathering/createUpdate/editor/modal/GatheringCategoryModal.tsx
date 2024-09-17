@@ -28,7 +28,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   return (
     <div
       className={
-        "flex flex-col relative h-auto w-[calc(100vw-2rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
+        "relative flex h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col overflow-y-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
       }
     >
       <button
@@ -36,14 +36,16 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
         onClick={() => props.closeModal()}
       >
         <Image
-          src={"/close-icon.svg"}
+          src={"/gathering/close-icon.svg"}
           alt={"close-icon"}
           width={20}
           height={20}
         />
       </button>
       <div className={"flex flex-col gap-y-1"}>
-        <h3 className="text-lg font-medium text-black text-start">카테고리 선택</h3>
+        <h3 className="text-start text-lg font-medium text-black">
+          카테고리 선택
+        </h3>
         <div className={"flex flex-wrap gap-x-2 gap-y-[.5rem]"}>
           {props.categoryList.map((i) => (
             <button
@@ -51,14 +53,14 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
               onClick={() => {
                 setMainCategoryId(i.id);
               }}
-              className={`${mainCategoryId == i.id ? "bg-main text-white outline-none" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-3 py-1 `}
+              className={`${mainCategoryId == i.id ? "bg-main text-white outline-none" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-3 py-1`}
             >
               {i.name}
             </button>
           ))}
         </div>
       </div>
-      <div className={"pt-8 flex w-full justify-center"}>
+      <div className={"flex w-full justify-center pt-8"}>
         <button
           className={
             "h-[3rem] w-full max-w-[18.625rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"

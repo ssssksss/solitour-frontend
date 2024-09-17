@@ -166,7 +166,7 @@ const MyProfile = (props: IMyProfileProps) => {
                 </span>
                 <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[18px] bg-[#FEE501]">
                   <Image
-                    src={"/kakao-icon.svg"}
+                    src={"/auth/kakao-icon.svg"}
                     alt={"kakao-icon-image"}
                     width={20}
                     height={20}

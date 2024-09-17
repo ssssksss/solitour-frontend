@@ -115,15 +115,21 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     formContext.setValue("yAxis", Number(element.y));
     formContext.setValue("searchId", element.id);
     formContext.setValue("roadAddressName", element.road_address_name);
-    formContext.trigger(["placeName","xAxis", "yAxis", "searchId", "roadAddressName"]);
+    formContext.trigger([
+      "placeName",
+      "xAxis",
+      "yAxis",
+      "searchId",
+      "roadAddressName",
+    ]);
     props.closeModal();
   };
-  
+
   const pickAddress = (element: PlaceElement1) => {
     setRoadAddress(element.road_address.address_name);
     setPlaceData(element);
   };
-  
+
   const applyAddressHandler = () => {
     formContext.setValue("placeName", placeCustomName);
     formContext.setValue("xAxis", Number(placeData?.x));
@@ -157,7 +163,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
 
   return (
     <div
-      className={`scrollbar-hide relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[1rem] ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
+      className={`relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[1rem] scrollbar-hide ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
     >
       <button
         className="absolute right-[1.5rem] top-[1.5rem]"
@@ -166,13 +172,17 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
         }}
       >
         <Image
-          src={"/close-icon.svg"}
+          src={"/gathering/close-icon.svg"}
           alt={"close-icon"}
           width={20}
           height={20}
         />
       </button>
-      <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black mb-[1.875rem]"}>
+      <h2
+        className={
+          "mb-[1.875rem] mt-[2rem] h-[2rem] text-2xl font-bold text-black"
+        }
+      >
         장소 선택
       </h2>
       <section className={"flex flex-col items-center gap-[1.875rem]"}>
@@ -210,7 +220,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                   }
                 >
                   <Image
-                    src={"/search-icon.svg"}
+                    src={"/gathering/search-icon.svg"}
                     alt={"search-icon"}
                     width={16}
                     height={16}
@@ -245,7 +255,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                         >
                           <div className={"flex gap-1"}>
                             <Image
-                              src={"/location-icon.svg"}
+                              src={"/gathering/location-icon.svg"}
                               alt={"location-icon"}
                               width={14}
                               height={14}
@@ -277,7 +287,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                   }
                 >
                   <Image
-                    src={"/search-icon.svg"}
+                    src={"/gathering/search-icon.svg"}
                     alt={"search-icon"}
                     width={16}
                     height={16}
@@ -328,7 +338,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                           >
                             <div className={"flex items-center gap-1"}>
                               <Image
-                                src={"/location-icon.svg"}
+                                src={"/gathering/location-icon.svg"}
                                 alt={"location-icon"}
                                 width={14}
                                 height={14}

@@ -39,8 +39,12 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               "absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-white"
             }
           >
-            <div className="relative h-[1.25rem] w-[1.25rem] ">
-              <Image src={"/camera-icon.svg"} alt={"camera-icon-image"} fill />
+            <div className="relative h-[1.25rem] w-[1.25rem]">
+              <Image
+                src="/mypage/camera-icon.svg"
+                alt="camera-icon-image"
+                fill
+              />
             </div>
           </div>
           <input
@@ -60,9 +64,9 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
           imageBase64Data={props.imageBase64Data}
           closeCropModal={props.closeCropModal}
           onChangeImageUrl={props.onChangeImageUrl}
-          />
+        />
       </Modal>
     </article>
   );
 };
-export default MyPageUserImage
+export default MyPageUserImage;

@@ -78,7 +78,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
         onClick={() => props.closeModal()}
       >
         <Image
-          src={"/close-icon.svg"}
+          src={"/gathering/close-icon.svg"}
           alt={"close-icon"}
           width={20}
           height={20}

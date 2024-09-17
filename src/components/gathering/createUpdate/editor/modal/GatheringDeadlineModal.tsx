@@ -1,5 +1,13 @@
 import "@/styles/reactDataRange.css";
-import { add, compareAsc, format, isAfter, isBefore, isValid, subDays } from "date-fns";
+import {
+  add,
+  compareAsc,
+  format,
+  isAfter,
+  isBefore,
+  isValid,
+  subDays,
+} from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import { useState } from "react";
@@ -63,7 +71,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
         onClick={() => props.closeModal()}
       >
         <Image
-          src={"/close-icon.svg"}
+          src={"/gathering/close-icon.svg"}
           alt={"close-icon"}
           width={20}
           height={20}
@@ -101,7 +109,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
           onClick={() => submitHandler()}
           disabled={
             !(
-              isAfter(new Date(deadlineDate), subDays(new Date(),1)) &&
+              isAfter(new Date(deadlineDate), subDays(new Date(), 1)) &&
               isBefore(new Date(deadlineDate), getMaxDate())
             )
           }

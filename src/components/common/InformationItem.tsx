@@ -2,7 +2,6 @@ import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
-import HashSpinner from "./HashSpinner";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 
 interface Props {
@@ -52,8 +51,8 @@ const InformationItem = ({
       <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
         <Image
           className="-z-10 rounded-[0.875rem]"
-          src={image || "/next.svg"}
-          alt={"PostImage"}
+          src={image}
+          alt="information-image"
           fill={true}
           style={{
             objectFit: "cover",
@@ -80,7 +79,7 @@ const InformationItem = ({
               }}
             >
               <Image
-                src={`/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
+                src={`/common/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
                 alt="bookmark-icon"
                 fill={true}
                 style={{
@@ -128,7 +127,7 @@ const InformationItem = ({
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">
               <Image
-                src="/eyes-icon.svg"
+                src="/common/eyes-icon.svg"
                 alt="eyes-icon.svg"
                 width={15}
                 height={15}

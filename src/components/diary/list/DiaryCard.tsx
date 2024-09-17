@@ -47,7 +47,12 @@ const DiaryCard = ({
         }}
       >
         <div className="flex flex-row items-center gap-14">
-          <Image src="/day-text.svg" alt="day-text" width={41} height={25} />
+          <Image
+            src="/diary/day-text.svg"
+            alt="day-text"
+            width={41}
+            height={25}
+          />
           <div className="flex flex-row items-center gap-8 truncate">
             {Array.from({ length: days }, (_, index) => index + 1).map(
               (day) => (
@@ -68,7 +73,7 @@ const DiaryCard = ({
         <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
           <div className="relative h-20 w-16">
             <Image
-              src={`/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
+              src={`/diary/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}
@@ -113,15 +118,16 @@ const DiaryCard = ({
       }}
     >
       <Image
-        className="-z-10 rounded-2xl"
+        className="-z-10 rounded-[0.9375rem]"
         src={diaryData.titleImage}
         alt="diary-image"
         fill={true}
         style={{ objectFit: "cover" }}
       />
+      <div className="absolute bottom-0 h-[11.5rem] w-full rounded-b-2xl bg-gradient-to-b from-black/0 to-black/50" />
       <div className="absolute bottom-9 left-9 flex flex-col items-start gap-1 pr-9 text-white">
         <h2 className="text-start text-2xl font-bold">{diaryData.title}</h2>
-        <p className="text-lg">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")} ~ ${new Date(new Date(diaryData.endDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
+        <p className="text-lg">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
       </div>
     </button>
   );

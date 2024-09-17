@@ -31,7 +31,6 @@ const regions = [
   { id: 16, name: "전북" },
 ];
 
-
 const SELECTED_SCHEDULE_DATA = [
   {
     name: "7일",
@@ -47,17 +46,17 @@ const SELECTED_SCHEDULE_DATA = [
   },
   {
     name: "30일",
-    value: 30
+    value: 30,
   },
   {
     name: "60일",
-    value: 60
+    value: 60,
   },
   {
     name: "90일",
-    value: 90
+    value: 90,
   },
-]
+];
 
 const SEX = [
   ["전체", "ALL"],
@@ -71,11 +70,9 @@ function calculateDateDifference(startDate: Date, endDate: Date): number {
   return differenceInDays;
 }
 
-const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
+const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
   const searchParams = useSearchParams();
-  const [location, setLocation] = useState(
-    searchParams.get("location") || 0,
-  );
+  const [location, setLocation] = useState(searchParams.get("location") || 0);
   const [sex, setSex] = useState(searchParams.get("allowedSex") || "ALL");
   const [startAge, setStartAge] = useState<number | undefined>(
     searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
@@ -83,7 +80,9 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
   const [endAge, setEndAge] = useState<number | undefined>(
     searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
   );
-  const [isFilterSchedule, setIsFilterSchedule] = useState((searchParams.get("startDate") || searchParams.get("endDate")) ? true : false);
+  const [isFilterSchedule, setIsFilterSchedule] = useState(
+    searchParams.get("startDate") || searchParams.get("endDate") ? true : false,
+  );
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [calendarDate, setCalendarDate] = useState([
@@ -98,23 +97,23 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     },
   ]);
   const [directInput, setDirectInput] = useState(false);
-    const ageHandler = ({
-      _startAge,
-      _endAge,
-    }: {
-      _startAge: number;
-      _endAge: number;
-    }) => {
-      setDirectInput(false);
-      if ((endAge || 0) + 1 == _startAge) {
-        setEndAge(_endAge);
-      } else if ((startAge || 0) - 1 == _endAge) {
-        setStartAge(_startAge);
-      } else {
-        setStartAge(_startAge);
-        setEndAge(_endAge);
-      }
-    };
+  const ageHandler = ({
+    _startAge,
+    _endAge,
+  }: {
+    _startAge: number;
+    _endAge: number;
+  }) => {
+    setDirectInput(false);
+    if ((endAge || 0) + 1 == _startAge) {
+      setEndAge(_endAge);
+    } else if ((startAge || 0) - 1 == _endAge) {
+      setStartAge(_startAge);
+    } else {
+      setStartAge(_startAge);
+      setEndAge(_endAge);
+    }
+  };
 
   const initFilterOptionHandler = () => {
     setLocation(0);
@@ -123,8 +122,8 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     setEndAge(59);
     setCalendarDate([
       {
-      startDate: new Date(),
-      endDate: new Date(),
+        startDate: new Date(),
+        endDate: new Date(),
         key: "selection",
       },
     ]);
@@ -142,7 +141,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     params.delete("endDate");
     // 지역
     if (location != 0) {
-      params.set("location", location+"");
+      params.set("location", location + "");
     }
     // 성별
     if (sex != "ALL") {
@@ -162,23 +161,27 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
     url.search = params.toString();
     closeModal();
     setTimeout(() => {
-        window.history.pushState({}, "", url.toString());
-      }, 100);
+      window.history.pushState({}, "", url.toString());
+    }, 100);
   };
 
   useEffect(() => {
-    setLocation(+(searchParams.get('location') || 0));
-    setSex(searchParams.get('allowedSex') || "ALL");
-    setStartAge(+(searchParams.get('startAge') || 20));
-    setEndAge(+(searchParams.get('endAge') || 59));
+    setLocation(+(searchParams.get("location") || 0));
+    setSex(searchParams.get("allowedSex") || "ALL");
+    setStartAge(+(searchParams.get("startAge") || 20));
+    setEndAge(+(searchParams.get("endAge") || 59));
     setCalendarDate([
       {
-      startDate: (searchParams.get('startDate') ? new Date(searchParams.get('startDate') as string)  : new Date()),
-      endDate: (searchParams.get('endDate') ? new Date(searchParams.get('endDate') as string)  : new Date()),
+        startDate: searchParams.get("startDate")
+          ? new Date(searchParams.get("startDate") as string)
+          : new Date(),
+        endDate: searchParams.get("endDate")
+          ? new Date(searchParams.get("endDate") as string)
+          : new Date(),
         key: "selection",
       },
     ]);
-    }, [searchParams])
+  }, [searchParams]);
 
   return (
     <div
@@ -191,7 +194,7 @@ const GatheringFilterModal = ({closeModal}: IGatheringFilterModalProps) => {
         onClick={() => closeModal()}
       >
         <Image
-          src={"/close-icon.svg"}
+          src={"/gathering/close-icon.svg"}
           alt={"close-icon"}
           width={20}
           height={20}

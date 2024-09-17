@@ -8,7 +8,7 @@ const DiaryWriteButton = () => {
       href="/diary/write"
     >
       <Image
-        src="/pencil-green-icon.svg"
+        src="/diary/pencil-green-icon.svg"
         alt="pencil-green-icon"
         width={44}
         height={42}

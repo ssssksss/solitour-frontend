@@ -16,8 +16,6 @@
   font-style: normal;
 }
 
-
-
 :root {
   --foreground-rgb: 0, 0, 0;
   /*--background-start-rgb: 214, 219, 220;*/
@@ -154,4 +152,14 @@ body {
   .truncate-vertical {
     -webkit-line-clamp: 5;
   }
+}
+
+::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url("/gathering/calendar-icon.svg") no-repeat;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-width: thin;
 }

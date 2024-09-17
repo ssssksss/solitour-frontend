@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
         <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
-            src={"/Solitour-logo.svg"}
+            src={"/common/solitour-logo.svg"}
             alt={"/background"}
             fill={true}
             style={{

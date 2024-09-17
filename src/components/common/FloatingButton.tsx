@@ -57,7 +57,7 @@ const FloatingButton = ({ visible, ref, onClick, onScrollToTop }: Props) => {
         >
           <Image
             className="-ml-1"
-            src="/pencil-icon.png"
+            src="/common/pencil-icon.png"
             alt="pencil-icon"
             width={24}
             height={24}

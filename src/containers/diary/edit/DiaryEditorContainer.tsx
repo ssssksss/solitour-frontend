@@ -5,7 +5,6 @@ import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
 import useAuthStore from "@/store/authStore";
-import useDiaryEditorStore from "@/store/diaryEditorStore";
 import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,12 +23,11 @@ interface Props {
 const DiaryEditorContainer = ({ diaryData }: Props) => {
   const router = useRouter();
   const authStore = useAuthStore();
-  const diaryEditorStore = useDiaryEditorStore();
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
-  const [originalContentUrl, setOriginalContentUrl] = useState<string[][]>([]);
+  const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
 
   usePreventBodyScroll(dateRangeModal);
   usePreventBodyScroll(addressModal);
@@ -41,10 +39,10 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     title: string;
     startDate: Date | null;
     endDate: Date | null;
-    address: string[];
+    address: string;
     image: string;
-    moodLevels: number[];
-    contents: string[];
+    moodLevels: number;
+    contents: string;
   }>({
     resolver: zodResolver(DiaryUpdateFormSchema),
     defaultValues: {
@@ -52,27 +50,25 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
       title: "",
       startDate: null,
       endDate: null,
-      address: [],
+      address: "",
       image: "",
-      moodLevels: [],
-      contents: [],
+      moodLevels: 0,
+      contents: "",
     },
     mode: "onChange",
   });
 
   const onSubmit = async () => {
     const imageUrl =
-      parse(methods.getValues("contents")[0])
+      parse(methods.getValues("contents"))
         .querySelector("img")
         ?.getAttribute("src") ?? "";
 
-    const contentImagesUrl = methods.getValues("contents").map((content) =>
-      parse(content)
-        .querySelectorAll("img")
-        .filter((img) => img.getAttribute("src") !== imageUrl)
-        .map((img) => img.getAttribute("src") ?? "")
-        .join(","),
-    );
+    const contentImagesUrl = parse(methods.getValues("contents"))
+      .querySelectorAll("img")
+      .filter((img) => img.getAttribute("src") !== imageUrl)
+      .map((img) => img.getAttribute("src") ?? "")
+      .join(",");
 
     if (imageUrl === "") {
       alert("Day1에 최소 1장의 이미지를 등록해 주세요.");
@@ -93,32 +89,25 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     const data: UpdateDiaryRequestDto = {
       title: title,
-      deleteTitleImage: ![image, ...contentImagesUrl[0].split(",")].includes(
+      deleteTitleImage: [image, ...contentImagesUrl.split(",")].includes(
         originalThumbnailUrl,
       )
-        ? originalThumbnailUrl
-        : "",
+        ? ""
+        : originalThumbnailUrl,
       saveTitleImage: image,
       startDatetime: startDate!,
       endDatetime: endDate!,
-      diaryDayRequests: Array.from(
-        { length: diaryEditorStore.days },
-        (_, index) => ({
-          content: sanitizeHtml(contents[index], sanitizeOption),
-          feelingStatus: FEELING_STATUS[moodLevels[index]],
-          deleteImagesUrl:
-            originalContentUrl[index] !== undefined
-              ? originalContentUrl[index]
-                  .filter(
-                    (value) =>
-                      !contentImagesUrl[index].split(",").includes(value),
-                  )
-                  .join(",")
-              : "",
-          saveImagesUrl: contentImagesUrl[index],
-          place: address[index],
-        }),
-      ),
+      diaryDayRequests: [
+        {
+          content: sanitizeHtml(contents, sanitizeOption),
+          feelingStatus: FEELING_STATUS[moodLevels],
+          deleteImagesUrl: originalContentUrl
+            .filter((value) => !contentImagesUrl.split(",").includes(value))
+            .join(","),
+          saveImagesUrl: contentImagesUrl,
+          place: address,
+        },
+      ],
     };
 
     setLoading(true);
@@ -146,12 +135,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   };
 
   useEffect(() => {
-    diaryEditorStore.setDiaryEditor({
-      days: diaryData.diaryContentResponse.diaryDayContentResponses
-        .diaryDayContentDetail.length,
-      currentDay: 1,
-    });
-
     methods.setValue("title", diaryData.diaryContentResponse.title);
     methods.setValue(
       "startDate",
@@ -173,36 +156,32 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     );
     methods.setValue(
       "address",
-      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-        (value) => value.place,
-      ),
+      diaryData.diaryContentResponse.diaryDayContentResponses
+        .diaryDayContentDetail[0].place,
     );
     methods.setValue(
       "moodLevels",
-      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-        (value) => Number(FEELING_STATUS[value.feelingStatus]),
+      Number(
+        FEELING_STATUS[
+          diaryData.diaryContentResponse.diaryDayContentResponses
+            .diaryDayContentDetail[0].feelingStatus
+        ],
       ),
     );
     methods.setValue(
       "contents",
-      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-        (value) => value.content,
-      ),
+      diaryData.diaryContentResponse.diaryDayContentResponses
+        .diaryDayContentDetail[0].content,
     );
 
     methods.trigger();
 
     setOriginalThumbnailUrl(diaryData.diaryContentResponse.titleImage);
     setOriginalContentUrl(
-      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail.map(
-        (value) => value.diaryDayContentImages.split(","),
+      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].diaryDayContentImages.split(
+        ",",
       ),
     );
-
-    // 화면에서 벗어났을 때 초기화
-    return () => {
-      diaryEditorStore.initialize();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -210,8 +189,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     <FormProvider {...methods}>
       <DiaryEditor
         text="수정"
-        diaryEditorStore={diaryEditorStore}
-        dateRangeModal={dateRangeModal}
+        datePickerModal={dateRangeModal}
         addressModal={addressModal}
         loading={loading}
         showDateRangeModal={() => setDateRangeModal(true)}
@@ -224,9 +202,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
           window.history.back();
           setAddressModal(false);
         }}
-        setCurrentDay={(day: number) =>
-          diaryEditorStore.setDiaryEditor({ currentDay: day })
-        }
         onSubmit={onSubmit}
       />
     </FormProvider>

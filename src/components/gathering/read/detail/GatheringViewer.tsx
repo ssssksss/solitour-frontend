@@ -6,7 +6,7 @@ import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { ModalState } from "@/types/ModalState";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { format } from "date-fns";
-import { ko } from 'date-fns/locale';
+import { ko } from "date-fns/locale";
 import Image from "next/image";
 import GatheringDeleteModalContainer from "../../../../containers/gathering/read/detail/GatheringDeleteModalContainer";
 import GatheringLike from "../../../../containers/gathering/read/GatheringLikeContainer";
@@ -26,7 +26,6 @@ const GatheringViewer = ({
   modalState,
   currentParticipants,
 }: IGatheringViewer) => {
-
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
       {modalState.isOpen && (
@@ -46,15 +45,12 @@ const GatheringViewer = ({
             gatheringStatus={data.gatheringStatus}
             isFinish={data.isFinish}
             openChattingUrl={data.openChattingUrl}
-          />  
+          />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
         <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
           <div className={"flex items-center gap-x-3"}>
-            <UserImage
-              userImageAddress={data.userImage}
-              size={52}
-            />
+            <UserImage userImageAddress={data.userImage} size={52} />
             <div className="flex flex-col gap-y-[0.125rem]">
               <div className="text-xs font-semibold text-black">
                 {data.userPostingResponse.name}
@@ -74,7 +70,7 @@ const GatheringViewer = ({
                 />
                 <div className="flex items-center gap-1 text-sm text-gray2">
                   <Image
-                    src="/eyes-icon.svg"
+                    src="/common/eyes-icon.svg"
                     alt="eyes-icon"
                     width={16}
                     height={16}
@@ -90,7 +86,7 @@ const GatheringViewer = ({
       <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm sm:grid-cols-[320px_auto] min-[800px]:grid-cols-2">
         <div className="flex gap-x-3">
           <Image
-            src={"/calendar-icon.svg"}
+            src={"/gathering/calendar-icon.svg"}
             alt={"calendar-icon-image"}
             width={14}
             height={14}
@@ -109,7 +105,7 @@ const GatheringViewer = ({
         </div>
         <div className="flex gap-x-3">
           <Image
-            src={"/location-icon.svg"}
+            src={"/gathering/location-icon.svg"}
             alt={"location-icon-image"}
             width={14}
             height={14}
@@ -125,7 +121,7 @@ const GatheringViewer = ({
         </div>
         <div className="flex gap-x-3">
           <Image
-            src={"/people-icon.svg"}
+            src="/gathering/people-icon.svg"
             alt={"people-icon-image"}
             width={14}
             height={14}
@@ -154,7 +150,7 @@ const GatheringViewer = ({
         </div>
         <div className="flex gap-x-3">
           <Image
-            src={"/clock-icon.svg"}
+            src={"/gathering/clock-icon.svg"}
             alt={"clock-icon-image"}
             width={14}
             height={14}

@@ -13,7 +13,8 @@ export const DiaryUpdateFormSchema = z.object({
       required_error: "제목을 입력해 주세요.",
       invalid_type_error: "Title must be a string.",
     })
-    .min(1, { message: "제목을 입력해 주세요." }),
+    .min(1, { message: "제목을 입력해 주세요." })
+    .max(50, { message: "제목 길이는 50자 이하여야 합니다." }),
   startDate: z
     .date({
       required_error: "날짜를 입력해 주세요.",
@@ -35,29 +36,22 @@ export const DiaryUpdateFormSchema = z.object({
       required_error: "주소를 입력해 주세요.",
       invalid_type_error: "Address must be a string.",
     })
-    .min(1, { message: "주소를 입력해 주세요." })
-    .array()
     .min(1, { message: "주소를 입력해 주세요." }),
   image: z
     .string({
-      required_error: "Day1에 최소 1장의 이미지를 등록해 주세요.",
+      required_error: "최소 1장의 이미지를 등록해 주세요.",
       invalid_type_error: "Image must be a string.",
     })
-    .min(1, { message: "Day1에 최소 1장의 이미지를 등록해 주세요." }),
+    .min(1, { message: "최소 1장의 이미지를 등록해 주세요." }),
   moodLevels: z
     .number({
-      required_error: "모든 날짜의 기분 정보를 입력해 주세요.",
+      required_error: "기분을 선택해 주세요.",
       invalid_type_error: "MoodLevel must be a integer.",
     })
-    .int({ message: "모든 날짜의 기분 정보를 입력해 주세요." })
-    .positive({ message: "모든 날짜의 기분 정보를 입력해 주세요." })
-    .array()
-    .min(1, { message: "모든 날짜의 기분 정보를 입력해 주세요." }),
-  contents: z
-    .string({
-      required_error: "내용을 입력해 주세요.",
-      invalid_type_error: "Content must be a string.",
-    })
-    .array()
-    .min(1, { message: "내용을 입력해 주세요." }),
+    .int({ message: "기분을 선택해 주세요." })
+    .positive({ message: "기분을 선택해 주세요." }),
+  contents: z.string({
+    required_error: "내용을 입력해 주세요.",
+    invalid_type_error: "Content must be a string.",
+  }),
 });

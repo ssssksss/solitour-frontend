@@ -5,64 +5,61 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
+  useEffect(() => {
+    if (!placeResponse.name) return;
 
-useEffect(() => {
-  if (!placeResponse.name) return;
+    const lat = Number(placeResponse.yaxis);
+    const lng = Number(placeResponse.xaxis);
 
-  const lat = Number(placeResponse.yaxis);
-  const lng = Number(placeResponse.xaxis);
+    const initializeMap = () => {
+      const container = document.getElementById("map");
+      const options = {
+        center: new window.kakao.maps.LatLng(lat, lng),
+        level: 3,
+      };
 
-  const initializeMap = () => {
-    const container = document.getElementById("map");
-    const options = {
-      center: new window.kakao.maps.LatLng(lat, lng),
-      level: 3,
-    };
+      const map = new window.kakao.maps.Map(container, options);
 
-    const map = new window.kakao.maps.Map(container, options);
+      map.setDraggable(false);
+      map.setZoomable(false);
 
-    map.setDraggable(false);
-    map.setZoomable(false);
+      const marker = new window.kakao.maps.Marker({
+        position: new window.kakao.maps.LatLng(lat, lng),
+      });
 
-    const marker = new window.kakao.maps.Marker({
-      position: new window.kakao.maps.LatLng(lat, lng),
-    });
+      marker.setMap(map);
 
-    marker.setMap(map);
+      const debounce = (func: (...args: any[]) => void, delay: number) => {
+        let timeout: ReturnType<typeof setTimeout>;
+        return (...args: any[]) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            func(...args);
+          }, delay);
+        };
+      };
 
-    const debounce = (func: (...args: any[]) => void, delay: number) => {
-      let timeout: ReturnType<typeof setTimeout>;
-      return (...args: any[]) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          func(...args);
-        }, delay);
+      const handleResize = debounce(() => {
+        map.relayout();
+        map.setCenter(new window.kakao.maps.LatLng(lat, lng));
+      }, 300);
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
       };
     };
 
-
-    const handleResize = debounce(() => {
-      map.relayout();
-      map.setCenter(new window.kakao.maps.LatLng(lat, lng));
-    }, 300);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  };
-
-  window.kakao.maps.load(initializeMap);
-}, [placeResponse]);
-
+    window.kakao.maps.load(initializeMap);
+  }, [placeResponse]);
 
   return (
     <div className={"flex h-[21.125rem] w-full flex-col text-black"}>
       {placeResponse.name && (
         <a
           className={
-            "relative flex h-full cursor-pointer flex-col items-center justify-center border-[0.0625rem] rounded-2xl"
+            "relative flex h-full cursor-pointer flex-col items-center justify-center rounded-2xl border-[0.0625rem]"
           }
           href={
             placeResponse.searchId
@@ -92,7 +89,7 @@ useEffect(() => {
 
           <div
             className={
-              "-mt-4 flex h-fit w-full flex-col justify-center gap-2 border-[0.0625rem] px-6 pb-10 pt-12 rounded-b-2xl"
+              "-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-[0.0625rem] px-6 pb-10 pt-12"
             }
           >
             <div className="text-lg font-bold text-black">
@@ -100,7 +97,7 @@ useEffect(() => {
             </div>
             <div className="flex items-center gap-1 text-sm text-gray1">
               <Image
-                src={"/location-icon.svg"}
+                src={"/gathering/location-icon.svg"}
                 alt={"location-icon"}
                 width={14}
                 height={14}

@@ -12,7 +12,13 @@ interface ModalProps extends React.PropsWithChildren {
   headerBarStyle?: string;
 }
 
-export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle = "bg-white" }: ModalProps) => {
+export const Modal = ({
+  isOpen,
+  children,
+  onClose,
+  isHeaderBar,
+  headerBarStyle = "bg-white",
+}: ModalProps) => {
   const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   let flag = isOpen;
@@ -40,7 +46,7 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
 
   useEffect(() => {
     if (isOpen) {
-      history.pushState({isModal: true}, "");
+      history.pushState({ isModal: true }, "");
       window.addEventListener("popstate", handlePopState);
       window.addEventListener("beforeunload", handleBeforeUnload);
     }
@@ -65,7 +71,7 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
       <div className="absolute h-full w-full cursor-pointer bg-black/30"></div>
       <div
         ref={ref}
-        className="-z-1 relative flex h-[calc(100vh-1rem)] items-center justify-center flex-col"
+        className="-z-1 relative flex h-[calc(100vh-1rem)] flex-col items-center justify-center"
         onClick={(e) => {
           if (e.target == ref.current) {
             onClose();
@@ -79,7 +85,7 @@ export const Modal = ({ isOpen, children, onClose, isHeaderBar, headerBarStyle =
               className="transform-origin-center mr-[.5rem] mt-[1rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300 hover:scale-150"
             >
               <Image
-                src={"/close-icon.svg"}
+                src={"/gathering/close-icon.svg"}
                 alt={"close-icon"}
                 width={20}
                 height={20}
