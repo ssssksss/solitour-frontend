@@ -27,8 +27,12 @@ const config: Config = {
       },
       keyframes: {
         sidebarFadeIn: {
-          from: { top: "-35.5rem" },
-          to: { top: "0px" },
+          from: { transform: "translateY(-35.5rem)" },
+          to: { transform: "translateY(0)" },
+        },
+        sidebarFadeOut: {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(-35.5rem)" },
         },
         buttonRotation: {
           from: { transform: "rotate(-45deg)", "background-color": "black" },
@@ -72,6 +76,7 @@ const config: Config = {
       },
       animation: {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
+        sidebarFadeOut: "sidebarFadeOut 0.3s",
         buttonRotation: "buttonRotation 0.3s",
         fadeIn: "fadeIn 0.5s",
         bannerImage: "bannerImage 1.8s ease-in-out infinite",
