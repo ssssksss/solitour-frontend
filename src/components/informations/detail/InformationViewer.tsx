@@ -31,7 +31,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
               />
               <div className="space-y-1">
                 <p className="text-xs font-medium text-black">
-                  {data.userPostingResponse.name}
+                  {data.userPostingResponse.nickname}
                 </p>
                 <p className="text-xs text-gray1">
                   {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}
@@ -70,7 +70,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 />
                 <div className="space-y-1">
                   <p className="text-xs font-medium text-black">
-                    {data.userPostingResponse.name}
+                    {data.userPostingResponse.nickname}
                   </p>
                   <p className="text-xs text-gray1">
                     {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}

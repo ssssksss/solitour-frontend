@@ -84,7 +84,7 @@ export interface InformationDetailDto {
   viewCount: number;
   content: string;
   tip: string;
-  userPostingResponse: { id: number; name: string };
+  userPostingResponse: { id: number; nickname: string };
   tagResponses: Array<Readonly<{ name: string }>>;
   placeResponse: {
     searchId: number;
