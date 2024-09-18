@@ -43,16 +43,18 @@ const DiaryList = async ({ page }: Props) => {
           일기 쓰기
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
+      <div className="mb-10 grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
         {data.content.length < 6 && <DiaryWriteButton />}
         {data.content.map((value, index) => (
           <DiaryCardContainer key={index} diaryData={value} />
         ))}
       </div>
-      <DiaryPaginationContainer
-        currentPage={page}
-        totalPages={data.page.totalPages}
-      />
+      {data.content.length > 0 && (
+        <DiaryPaginationContainer
+          currentPage={page}
+          totalPages={data.page.totalPages}
+        />
+      )}
     </div>
   );
 };
