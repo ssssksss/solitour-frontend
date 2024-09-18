@@ -143,16 +143,14 @@ const HeaderSidebar = ({
           >
             {hoverNum === 5 ? (
               <Image
-                className="ml-[0.125rem]"
-                src="/home/diary-icon-hover.svg"
+                src="/home/support-icon-hover.png"
                 alt="diary-icon"
                 width={22}
                 height={22}
               />
             ) : (
               <Image
-                className="ml-[0.125rem]"
-                src="/home/diary-icon.svg"
+                src="/home/support-icon.png"
                 alt="diary-icon"
                 width={22}
                 height={22}
