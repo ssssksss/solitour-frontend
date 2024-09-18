@@ -1,7 +1,6 @@
-import LottieFile from "@/../public/lottie/list-not-found.json";
+import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 import { Gathering } from "@/types/GatheringDto";
 import GatheringItem from "../../common/GatheringItem";
-import LottieComponent from "../../common/lottie/LottieComponent";
 interface IGatheringCardList {
   data: Gathering[];
 }
@@ -10,8 +9,7 @@ const GatheringCardList = ({ data }: IGatheringCardList) => {
     <>
       {data.length == 0 ? (
         <div className={"flex w-full flex-col items-center"}>
-          <LottieComponent lottieFile={LottieFile} className={"w-[20rem]"} />
-          <div> 찾는 내용이 없습니다. </div>
+          <LottieNotFound text={"찾는 내용이 없습니다."} />
         </div>
       ) : (
         <div className="mt-6 grid h-auto w-full justify-items-center gap-5 min-[744px]:grid-cols-2 min-[1024px]:grid-cols-3">

@@ -1,7 +1,6 @@
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItemHome from "../common/GatheringItemHome";
-import LottieFile from "@/../public/lottie/list-not-found.json";
-import LottieComponent from "../common/lottie/LottieComponent";
+import LottieNotFound from "../common/lottie/LottieNotFound";
 
 async function getNewGatheringList() {
   const response = await fetch(
@@ -26,8 +25,7 @@ const NewGatheringList = async () => {
   if (elements.length === 0) {
     return (
       <div className="flex w-full flex-col items-center pb-12">
-        <LottieComponent lottieFile={LottieFile} className={"w-[20rem]"} />
-        <p>모임을 작성해 보세요.</p>
+        <LottieNotFound text={"모임을 작성해 보세요."} />
       </div>
     );
   }

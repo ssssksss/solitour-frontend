@@ -1,10 +1,9 @@
-import LottieComponent from "@/components/common/lottie/LottieComponent";
+import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 import { LOCATION_ID } from "@/constants/informations/location";
 import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import InformationPaginationContainer from "@/containers/informations/list/InformationPaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
-import LottieFile from "@/../public/lottie/list-not-found.json";
 
 async function getInformationList(
   page: number,
@@ -95,8 +94,7 @@ const InformationList = async ({
         </div>
       ) : (
         <div className="flex w-full flex-col items-center pb-12">
-          <LottieComponent lottieFile={LottieFile} className={"w-[20rem]"} />
-          <p> 찾는 내용이 없습니다. </p>
+          <LottieNotFound text={"찾는 내용이 없습니다."} />
         </div>
       )}
     </div>
