@@ -17,6 +17,7 @@ interface Props {
   userProfile: string;
 }
 
+
 const Header = ({
   pathname,
   visible,
@@ -39,7 +40,7 @@ const Header = ({
         }
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center max-[1024px]:pl-[1.875rem] p-0">
             <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
               <Image
                 src={"/common/solitour-logo.svg"}
@@ -51,78 +52,40 @@ const Header = ({
               />
             </Link>
           </div>
-          <div className="flex flex-grow flex-row justify-between pl-28 max-[744px]:hidden">
-            <nav>
-              <ul className="flex flex-row gap-10">
-                <li>
-                  <Link
-                    className={
-                      `${pathname === "/" ? "font-bold text-black" : "font-medium text-black"} ` +
-                      "text-sm hover:text-main"
-                    }
-                    href="/"
-                  >
-                    홈
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={
-                      `${
-                        pathname.includes("/informations")
-                          ? "font-bold text-black"
-                          : "font-medium text-black"
-                      } ` + "text-sm hover:text-main"
-                    }
-                    href="/informations/list?page=1&parentCategoryId=1"
-                  >
-                    정보
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={
-                      `${
-                        pathname.includes("/gathering")
-                          ? "font-bold text-black"
-                          : "font-medium text-black"
-                      } ` + "text-sm hover:text-main"
-                    }
-                    href="/gathering"
-                  >
-                    모임
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={
-                      `${
-                        pathname.includes("/diary")
-                          ? "font-bold text-black"
-                          : "font-medium text-black"
-                      } ` + "text-sm hover:text-main"
-                    }
-                    href="/diary/list?page=1"
-                    prefetch={userId > 0}
-                  >
-                    여행일기
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={
-                      `${
-                        pathname.includes("/support?menu=about")
-                          ? "font-bold text-black"
-                          : "font-medium text-black"
-                      } ` + "text-sm hover:text-main"
-                    }
-                    href="/support?menu=about"
-                    prefetch={userId > 0}
-                  >
-                    고객지원
-                  </Link>
-                </li>
+          <div className="flex h-full flex-grow flex-row justify-between pl-[5.625rem] max-[1024px]:pl-[3.375rem] max-[744px]:hidden">
+            <nav className="h-full">
+              <ul className="flex h-full items-center">
+                {[
+                  { name: "홈", href: "/", path: "/" },
+                  {
+                    name: "정보",
+                    href: "/informations/list?page=1&parentCategoryId=1",
+                    path: "/informations",
+                  },
+                  { name: "모임", href: "/gathering", path: "/gathering" },
+                  {
+                    name: "여행일기",
+                    href: "/diary/list?page=1",
+                    path: "/diary",
+                    prefetch: userId > 0,
+                  },
+                  {
+                    name: "고객지원",
+                    href: "/support?menu=about",
+                    path: "/support?menu=about",
+                    prefetch: userId > 0,
+                  },
+                ].map(({ name, href, path, prefetch }, index) => (
+                  <li key={index} className={"h-full"}>
+                    <Link
+                      className={`${pathname.includes(path) ? "font-bold text-black" : "font-medium text-black"} flex h-full w-full items-center justify-center max-[1024px]:px-3  px-5 text-sm hover:text-main`}
+                      href={href}
+                      prefetch={prefetch}
+                    >
+                      {name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>
