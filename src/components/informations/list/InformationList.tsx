@@ -96,7 +96,7 @@ const InformationList = async ({
       ) : (
         <div className="flex w-full flex-col items-center pb-12">
           <LottieComponent lottieFile={LottieFile} className={"w-[20rem]"} />
-          <div> 찾는 내용이 없습니다. </div>
+          <p> 찾는 내용이 없습니다. </p>
         </div>
       )}
     </div>
