@@ -35,17 +35,25 @@ const config: Config = {
           to: { transform: "translateY(-35.5rem)" },
         },
         buttonRotation: {
-          from: { transform: "rotate(-45deg)", "background-color": "black" },
+          from: { transform: "rotate(-90deg)", "background-color": "black" },
           to: { transform: "rotate(0deg)", "background-color": "bg-main" },
+        },
+        buttonReverseRotation: {
+          from: { transform: "rotate(0deg)", "background-color": "bg-main" },
+          to: { transform: "rotate(-90deg)", "background-color": "black" },
         },
         fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        fadeOut: {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
         bannerImage: {
-          "0%": { bottom: "-16px" },
-          "46.6%": { bottom: "12px" },
-          "100%": { bottom: "-16px" },
+          "0%": { transform: "translateY(-1rem)" },
+          "46.6%": { transform: "translateY(0.75rem)" },
+          "100%": { transform: "translateY(-1rem)" },
         },
         cardFlip: {
           from: { transform: "rotateY(-90deg)" },
@@ -78,7 +86,9 @@ const config: Config = {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
         sidebarFadeOut: "sidebarFadeOut 0.3s",
         buttonRotation: "buttonRotation 0.3s",
+        buttonReverseRotation: "buttonReverseRotation 0.3s",
         fadeIn: "fadeIn 0.5s",
+        fadeOut: "fadeOut 0.5s",
         bannerImage: "bannerImage 1.8s ease-in-out infinite",
         cardFlip: "cardFlip 0.5s linear",
         cardFlip2: "cardFlip2 0.5s linear",
