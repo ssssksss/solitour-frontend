@@ -12,6 +12,7 @@ interface Props {
 
 const HeaderSidebarContainer = ({ onClose }: Props) => {
   const [hoverNum, setHoverNum] = useState<number>(0);
+  const [animationFlag, setAnimationFlag] = useState(false);
   const { id, initialize } = useAuthStore();
   const router = useRouter();
 
@@ -22,6 +23,13 @@ const HeaderSidebarContainer = ({ onClose }: Props) => {
     onClose();
     router.push("/");
     router.refresh();
+  };
+
+  const closeWithFadeOut = async () => {
+    setAnimationFlag(true);
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    setAnimationFlag(false);
+    onClose();
   };
 
   useEffect(() => {
@@ -45,9 +53,11 @@ const HeaderSidebarContainer = ({ onClose }: Props) => {
     <HeaderSidebar
       signedIn={Number(id) > 0}
       hoverNum={hoverNum}
+      animationFlag={animationFlag}
       setHoverNum={setHoverNum}
       logoutHandler={logoutHandler}
       onClose={onClose}
+      closeWithFadeOut={closeWithFadeOut}
     />
   );
 };

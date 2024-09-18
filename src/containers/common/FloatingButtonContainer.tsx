@@ -6,9 +6,16 @@ import { useRef, useState } from "react";
 
 const FloatingButtonContainer = () => {
   const [visible, setVisible] = useState<boolean>(false);
+  const [animationFlag, setAnimationFlag] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const onClick = () => {
+  const onClick = async () => {
+    if (visible) {
+      setAnimationFlag(true);
+      await new Promise((resolve) => setTimeout(resolve, 250));
+      setAnimationFlag(false);
+    }
+
     setVisible(!visible);
   };
 
@@ -17,12 +24,13 @@ const FloatingButtonContainer = () => {
   };
 
   useOutsideClick(ref, () => {
-    setVisible(false);
+    onClick();
   });
 
   return (
     <FloatingButton
       visible={visible}
+      animationFlag={animationFlag}
       onClick={onClick}
       onScrollToTop={onScrollToTop}
       ref={ref}
