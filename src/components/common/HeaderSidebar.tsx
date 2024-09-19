@@ -28,15 +28,15 @@ const HeaderSidebar = ({
       onClick={closeWithFadeOut}
       className={`${animationFlag ? "animate-sidebarFadeOut" : "animate-sidebarFadeIn"} fixed left-0 top-0 z-50 flex h-[200%] w-full flex-row justify-end bg-black/25`}
     >
-      <nav className="flex h-[35.5rem] w-[20.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6">
+      <nav className="flex h-fit w-[20.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6">
         <div className="flex h-10 w-full items-center justify-end">
           <div className="cursor-pointer rounded-md bg-slate-100 p-2 hover:text-main">
             <MdClose onClick={closeWithFadeOut} />
           </div>
         </div>
-        <div className="flex flex-col gap-7 pl-[3.75rem] text-xl">
+        <div className="flex flex-col text-xl">
           <Link
-            className="flex flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
             href="/"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(1)}
@@ -61,7 +61,7 @@ const HeaderSidebar = ({
             <p>홈</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
             href="/informations/list?page=1&parentCategoryId=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(2)}
@@ -86,7 +86,7 @@ const HeaderSidebar = ({
             <p>여행 정보</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
             href="/gathering"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(3)}
@@ -111,7 +111,7 @@ const HeaderSidebar = ({
             <p>모임 정보</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
+            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
             href="/diary/list?page=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(4)}
@@ -138,7 +138,7 @@ const HeaderSidebar = ({
             <p>여행일기</p>
           </Link>
           <Link
-            className="flex flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
+            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
             href="/support?menu=about"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(5)}
@@ -163,9 +163,9 @@ const HeaderSidebar = ({
             <p>고객지원</p>
           </Link>
           {signedIn ? (
-            <div className="flex flex-col gap-7">
+            <div className="flex flex-col">
               <Link
-                className="flex flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+                className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
                 href="/mypage?mainCategory=정보&category=owner"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(6)}
@@ -192,7 +192,7 @@ const HeaderSidebar = ({
                 <p>마이페이지</p>
               </Link>
               <button
-                className="flex flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
+                className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
                 onClick={logoutHandler}
               >
                 <CiLogout className="-ml-[0.125rem]" size="1.7rem" />
@@ -201,7 +201,7 @@ const HeaderSidebar = ({
             </div>
           ) : (
             <Link
-              className="flex flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+              className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
               href="/auth/signin"
               onClick={onClose}
               onMouseEnter={() => setHoverNum(7)}
