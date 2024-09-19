@@ -7,7 +7,7 @@ interface TabMenuProps {
 const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
   return (
     <div className={"flex flex-col justify-end"}>
-      <div className={"flex w-full gap-[1.625rem] border-b-2 border-gray-200"}>
+      <div className={"flex w-full gap-[1.625rem] border-b-[1px] border-gray-200"}>
         {tabs.map((tab, index) => (
           <button
             key={index}
@@ -20,7 +20,7 @@ const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
           >
             {tab.label}
             <div
-              className={`absolute bottom-0 w-full ${activeIndex == index ? "h-[2px] bg-[#00B488]" : "opacity-0"}`}
+              className={`absolute bottom-[-1.5px] w-full ${activeIndex == index ? "h-[2px] bg-[#00B488]" : "opacity-0"}`}
             ></div>
           </button>
         ))}
@@ -28,7 +28,7 @@ const TabMenu = ({ tabs, activeIndex, handleTabClick }: TabMenuProps) => {
       <div className="">
         <div
           key={activeIndex}
-          className="transform transition-all duration-300 ease-in-out"
+          className="transform transition-all duration-300 ease-in-out whitespace-nowrap"
         >
           {tabs[activeIndex].content}
         </div>
