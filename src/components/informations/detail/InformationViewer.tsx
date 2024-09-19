@@ -30,7 +30,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 height={48}
               />
               <div className="space-y-1">
-                <p className="text-xs font-medium text-black">
+                <p className="text-xs font-semibold text-black">
                   {data.userPostingResponse.nickname}
                 </p>
                 <p className="text-xs text-gray1">
@@ -69,7 +69,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
                   height={48}
                 />
                 <div className="space-y-1">
-                  <p className="text-xs font-medium text-black">
+                  <p className="text-xs font-semibold text-black">
                     {data.userPostingResponse.nickname}
                   </p>
                   <p className="text-xs text-gray1">

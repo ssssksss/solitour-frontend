@@ -1,6 +1,8 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-export async function getNewAccessToken(refreshToken: RequestCookie): Promise<string | null> {
+export async function getNewAccessToken(
+  refreshToken: RequestCookie,
+): Promise<string | null> {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/auth/oauth2/token/refresh`,
@@ -31,7 +33,7 @@ interface IFetchWithTokenRefreshSSR {
   method?: string;
   cache?: RequestCache;
   contentType?: string;
-  next?: NextFetchRequestConfig | undefined;
+  next?: NextFetchRequestConfig;
 }
 
 export async function fetchWithTokenRefreshSSR({
@@ -49,7 +51,13 @@ export async function fetchWithTokenRefreshSSR({
       "Content-Type": contentType || "application/json",
       Cookie: `${accessToken?.name}=${accessToken?.value}`,
     },
-    cache: cache || "no-store",
+    cache:
+      cache !== undefined
+        ? cache
+        : next === undefined
+          ? "force-cache"
+          : undefined,
+    next: next,
   });
 
   if (response.status === 401 && refreshToken) {
@@ -63,7 +71,12 @@ export async function fetchWithTokenRefreshSSR({
           "Content-Type": contentType || "application/json",
           Cookie: `access_token=${newAccessToken}`,
         },
-        cache: cache || "no-store",
+        cache:
+          cache !== undefined
+            ? cache
+            : next === undefined
+              ? "force-cache"
+              : undefined,
         next: next,
       });
     } else {
@@ -90,5 +103,5 @@ export async function fetchWithTokenRefreshSSR({
     throw new Error("API 요청에 실패했습니다.");
   }
 
-  return await response.json();
+  return response;
 }

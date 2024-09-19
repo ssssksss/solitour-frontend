@@ -54,8 +54,15 @@ const Header = ({
           <div className="flex h-full flex-grow flex-row justify-between pl-[5.625rem] max-[1024px]:pl-[3.375rem] max-[744px]:hidden">
             <nav className="h-full">
               <ul className="flex h-full items-center">
+                <li className={"h-full"}>
+                  <Link
+                    className={`${pathname === "/" ? "font-bold" : "font-medium"} flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3`}
+                    href="/"
+                  >
+                    홈
+                  </Link>
+                </li>
                 {[
-                  { name: "홈", href: "/", path: "/" },
                   {
                     name: "정보",
                     href: "/informations/list?page=1&parentCategoryId=1",
@@ -77,7 +84,7 @@ const Header = ({
                 ].map(({ name, href, path, prefetch }, index) => (
                   <li key={index} className={"h-full"}>
                     <Link
-                      className={`${pathname.includes(path) ? "font-bold text-black" : "font-medium text-black"} flex h-full w-full items-center justify-center px-5 text-sm hover:text-main max-[1024px]:px-3`}
+                      className={`${pathname.includes(path) ? "font-bold" : "font-medium"} flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3`}
                       href={href}
                       prefetch={prefetch}
                     >
