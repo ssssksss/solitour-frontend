@@ -15,7 +15,7 @@ const Error = () => {
     <main className="flex w-full items-center justify-center px-6 py-20">
       <div className="flex w-full flex-col items-start justify-center">
         <div className="flex flex-col items-start justify-center gap-6">
-          <h1 className="text-[2.25rem] font-bold text-black max-[744px]:text-2xl">
+          <h1 className="text-3xl font-bold text-black max-[744px]:text-2xl">
             앗..오류가 발생하였습니다.
           </h1>
           <div className="flex flex-col items-start text-gray1">

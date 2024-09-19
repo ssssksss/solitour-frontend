@@ -19,7 +19,7 @@ const NotFound = () => {
           style={{ objectFit: "contain" }}
         />
       </div>
-      <div className="flex flex-row items-center justify-center gap-x-3 text-[2.25rem] font-bold text-black max-[744px]:flex-col">
+      <div className="flex flex-row items-center justify-center gap-x-3 text-3xl font-bold text-black max-[744px]:flex-col">
         <h1>앗..요청하신 페이지를</h1>
         <h1>찾을 수 없습니다.</h1>
       </div>
