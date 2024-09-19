@@ -36,7 +36,7 @@ const SupportNoticeList = ({
         </span>
         <SupportSearch loading={loading} />
       </div>
-      <div className={"w-full border-t-2 border-t-black"}>
+      <div className={"w-full border-t-[1px] border-t-black"}>
         {data.map((notice, index) => (
           <Link
             href={`/support/notice/${notice.id}`}
