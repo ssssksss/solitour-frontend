@@ -16,7 +16,7 @@ const MyBookmark = ({
           <button
             key={index}
             onClick={() => onClickMenu(index)}
-            className={`outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] h-[2rem] px-2 rounded-[4rem] text-sm  ${activeBookmarkMenuIndex == index ? "bg-main text-white" : "bg-white text-gray1 outline outline-offset-[1px] outline-[#E9EBED]"} `}
+            className={`h-[2rem] px-2 rounded-[4rem] text-sm  ${activeBookmarkMenuIndex == index ? "bg-main text-white outline-0" : "bg-white text-gray1 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#E9EBED]"} `}
           >
             {menu[index]}
           </button>

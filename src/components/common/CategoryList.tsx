@@ -28,8 +28,8 @@ const CategoryList = <T extends string | number>({
             onClick={() => onClickMenu(i.value)}
             className={`h-[2.25rem] rounded-[4rem] px-4 py-2 text-sm  ${
               i.value == activeCategory
-                ? "bg-main text-white outline-none"
-                : "bg-white text-gray1 outline outline-offset-[1px] outline-[#E9EBED]"
+                ? "bg-main text-white outline-0"
+                : "bg-white text-gray1 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#E9EBED]"
             } `}
           >
             {i.name}

@@ -21,7 +21,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
       <div className={"flex flex-col items-center"}>
         <label
           className={
-            "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
+            "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
           }
           htmlFor={"imageUpload"}
           onDragEnter={props.dragAndDrop.onDragEnter}
