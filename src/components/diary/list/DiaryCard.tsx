@@ -2,6 +2,7 @@ import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
+import { motion } from "framer-motion";
 
 interface Props {
   diaryData: {
@@ -20,21 +21,10 @@ interface Props {
   };
   flag: boolean;
   isFlipped: boolean;
-  days: number;
-  currentDay: number;
   flip: () => void;
-  setCurrentDay: (day: number) => void;
 }
 
-const DiaryCard = ({
-  diaryData,
-  flag,
-  isFlipped,
-  days,
-  currentDay,
-  flip,
-  setCurrentDay,
-}: Props) => {
+const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
   // 뒷면
   if (isFlipped) {
     return (
@@ -53,27 +43,12 @@ const DiaryCard = ({
             width={41}
             height={25}
           />
-          <div className="flex flex-row items-center gap-8 truncate">
-            {Array.from({ length: days }, (_, index) => index + 1).map(
-              (day) => (
-                <button
-                  key={day}
-                  className={`${day === currentDay ? "text-main" : "text-gray2"} font-semibold`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setCurrentDay(day);
-                  }}
-                >
-                  {day}
-                </button>
-              ),
-            )}
-          </div>
+          <p className="font-semibold text-main">1</p>
         </div>
         <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
           <div className="relative h-20 w-16">
             <Image
-              src={`/diary/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[currentDay - 1].feelingStatus]}.svg`}
+              src={`/diary/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}
@@ -90,15 +65,13 @@ const DiaryCard = ({
           </Link>
           <p className="mt-3 text-lg text-gray1">
             {new Date(
-              new Date(diaryData.startDatetime).getTime() +
-                (1000 * 60 * 60 * 24 * currentDay - 1),
+              new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24,
             ).toLocaleDateString("ko-KR")}
           </p>
           <p className="truncate-vertical mt-6 text-black max-[845px]:mt-3">
             {sanitizeHtml(
-              diaryData.diaryDayContentResponses.diaryDayContentDetail[
-                currentDay - 1
-              ].content,
+              diaryData.diaryDayContentResponses.diaryDayContentDetail[0]
+                .content,
               { allowedTags: [] },
             )}
           </p>
@@ -109,13 +82,16 @@ const DiaryCard = ({
 
   // 앞면
   return (
-    <button
+    <motion.button
       className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative aspect-[3/4] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
       onClick={() => {
         if (!flag) {
           flip();
         }
       }}
+      initial={{ rotateY: -90 }}
+      whileInView={{ rotateY: 0 }}
+      transition={{ duration: 0.5, ease: "linear" }}
     >
       <Image
         className="-z-10 rounded-[0.9375rem]"
@@ -133,7 +109,7 @@ const DiaryCard = ({
         <h2 className="text-start text-2xl font-bold">{diaryData.title}</h2>
         <p className="text-lg">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
       </div>
-    </button>
+    </motion.button>
   );
 };
 

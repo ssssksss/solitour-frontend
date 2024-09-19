@@ -17,7 +17,6 @@ interface Props {
   userProfile: string;
 }
 
-
 const Header = ({
   pathname,
   visible,
@@ -40,7 +39,7 @@ const Header = ({
         }
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
-          <div className="flex flex-row items-center max-[1024px]:pl-[1.875rem] p-0">
+          <div className="flex flex-row items-center p-0 max-[1024px]:pl-[1.875rem]">
             <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
               <Image
                 src={"/common/solitour-logo.svg"}
@@ -78,7 +77,7 @@ const Header = ({
                 ].map(({ name, href, path, prefetch }, index) => (
                   <li key={index} className={"h-full"}>
                     <Link
-                      className={`${pathname.includes(path) ? "font-bold text-black" : "font-medium text-black"} flex h-full w-full items-center justify-center max-[1024px]:px-3  px-5 text-sm hover:text-main`}
+                      className={`${pathname.includes(path) ? "font-bold text-black" : "font-medium text-black"} flex h-full w-full items-center justify-center px-5 text-sm hover:text-main max-[1024px]:px-3`}
                       href={href}
                       prefetch={prefetch}
                     >
