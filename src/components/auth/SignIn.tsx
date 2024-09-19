@@ -20,7 +20,7 @@ const SignIn = () => {
         <LottieComponent lottieFile={introLottie} className="h-full w-full" />
         <div className="absolute left-[50%] top-[7.0625rem] h-[6.875rem] w-[11rem] translate-x-[-50%]">
           <Image
-            src={"/auth/solitour-auth-intro-image.svg"}
+            src={"/user/solitour-auth-intro-image.svg"}
             alt={"solitour-intro-image"}
             fill={true}
             style={{ objectFit: "cover" }}
@@ -35,7 +35,7 @@ const SignIn = () => {
       >
         <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
           <Image
-            src={"/auth/kakao-icon.svg"}
+            src={"/user/kakao-icon.svg"}
             alt={"kakao-logo-image"}
             fill={true}
           />
@@ -52,7 +52,7 @@ const SignIn = () => {
       >
         <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%]">
           <Image
-            src={"/auth/google-icon.svg"}
+            src={"/user/google-icon.svg"}
             alt={"google-logo-image"}
             fill={true}
           />
