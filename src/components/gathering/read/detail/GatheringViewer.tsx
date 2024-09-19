@@ -53,10 +53,10 @@ const GatheringViewer = ({
             <UserImage userImageAddress={data.userImage} size={52} />
             <div className="flex flex-col gap-y-[0.125rem]">
               <div className="text-xs font-semibold text-black">
-                {data.userPostingResponse.name}
+                {data.userPostingResponse?.nickname}
               </div>
-              <div className="w-[4rem] text-xs text-gray1">
-                {data.createdAt.substring(0, 10)}
+              <div className="whitespace-nowrap w-fit flex-shrink-0 text-xs text-gray1">
+                {format(new Date(data.createdAt), "yyyy-MM-dd")}
               </div>
             </div>
           </div>
