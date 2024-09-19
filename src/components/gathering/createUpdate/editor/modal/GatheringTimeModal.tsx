@@ -80,7 +80,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
             {/* 날짜 */}
             <article
               className={
-                "w-[9.75rem] rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:col-span-2"
+                "flex items-center w-[9.75rem] rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:col-span-2"
               }
             >
               {format(calendarDate[0].startDate, "yyyy.MM.dd(EE)", {

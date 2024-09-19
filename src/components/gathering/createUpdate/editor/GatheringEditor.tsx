@@ -70,7 +70,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         <GatheringEditorHashTagContainer />
         <div className={"flex w-full justify-end"}>
           <button
-            className={`h-[2.625rem] w-[9.5rem] rounded-[2rem] px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main"}`}
+            className={`w-[9.5rem] h-[3rem] rounded-[2rem] px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main"}`}
             onClick={() => {
               if (!formContext.formState.isValid) {
                 formContext.trigger();
