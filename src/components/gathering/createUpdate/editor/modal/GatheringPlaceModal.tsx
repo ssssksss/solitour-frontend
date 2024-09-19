@@ -296,8 +296,8 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                     type="text"
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="도로명주소를 입력하세요"
-                    className={"h-[3rem] bg-transparent focus:outline-none"}
+                    placeholder="도로명을 입력해주세요. ex) 올림픽로, 수목원길"
+                    className={"w-full h-[3rem] bg-transparent focus:outline-none"}
                   />
                 </label>
 
