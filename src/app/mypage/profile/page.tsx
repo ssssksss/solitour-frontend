@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 };
 
 async function getUserInfo() {
-
   return fetchWithTokenRefreshSSR({
     accessToken: cookies().get("access_token"),
     refreshToken: cookies().get("refresh_token"),
@@ -17,17 +16,12 @@ async function getUserInfo() {
   });
 }
 
-  export default async function page() {
+export default async function page() {
   const userInfo = await getUserInfo();
-  
-    return (
-    <div
-      className={
-        "w-full px-[.5rem] pb-[2.5rem] min-h-[calc(100vh-25rem)]"
-      }
-    >
-        <MyProfileContainer userInfo={userInfo} />
+
+  return (
+    <div className={"min-h-[calc(100vh-25rem)] w-full px-[.5rem] pb-[2.5rem]"}>
+      <MyProfileContainer userInfo={await userInfo.json()} />
     </div>
   );
 }
-              

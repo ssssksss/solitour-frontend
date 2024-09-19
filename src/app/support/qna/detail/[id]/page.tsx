@@ -39,7 +39,7 @@ export default async function Page({ params: { id } }: Props) {
 
   return (
     <main className="mb-8 w-full">
-      <SupportQnADetailEditContainer data={data} />
+      <SupportQnADetailEditContainer data={await data.json()} />
     </main>
   );
 }
