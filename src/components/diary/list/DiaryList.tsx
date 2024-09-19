@@ -31,6 +31,7 @@ interface Props {
 
 const DiaryList = async ({ page }: Props) => {
   const data = await getDiaryList(page - 1);
+  console.log(data);
 
   return (
     <div className="w-full">
