@@ -1,5 +1,4 @@
-import useAuthStore from "@/store/authStore";
-import InformationItem from "../common/InformationItem";
+import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import InformationItemSkeleton from "../skeleton/common/InformationItemSkeleton";
 
 interface Information {
@@ -15,16 +14,13 @@ interface Information {
 
 interface IMyPageInformationList {
   elements: Information[];
-  onBookMarkClick: (id: number) => void;
   isLoading: boolean;
 }
 
 const MyPageInformationList = ({
   elements,
-  onBookMarkClick,
   isLoading,
 }: IMyPageInformationList) => {
-  const authStore = useAuthStore();
 
   return (
     <div className="flex w-full flex-col">
@@ -33,20 +29,22 @@ const MyPageInformationList = ({
           ? Array.from({ length: 6 }).map((_, index) => (
               <InformationItemSkeleton key={index} />
             ))
-          : elements.map((item) => (
-              <InformationItem
-                key={item.informationId}
-                informationId={item.informationId}
-                categoryId={1}
-                isBookMark={item.isBookMark}
-                isLike={false} // TODO
-                title={item.title}
-                image={item.thumbNailImage}
-                address={item.zoneCategoryChildName}
-                likeCount={item.likeCount}
-                viewCount={item.viewCount}
-                userId={authStore.id}
-                onBookMarkClick={() => onBookMarkClick(item.informationId)}
+          : elements.map((value) => (
+              <InformationItemContainer
+                key={value.informationId}
+                informationId={value.informationId}
+                categoryId={0}
+                isBookMark={value.isBookMark}
+                isLike={false}
+                title={value.title}
+                image={value.thumbNailImage}
+                address={
+                  value.zoneCategoryParentName +
+                  ", " +
+                  value.zoneCategoryChildName
+                }
+                likeCount={value.likeCount}
+                viewCount={value.viewCount}
               />
             ))}
       </div>

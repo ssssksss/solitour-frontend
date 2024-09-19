@@ -32,7 +32,7 @@ interface Information {
 }
 
 
-const MyPageInformationContainer = (props: IMyPageInformationContainer) => {
+const MyPageInformationContainer = () => {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,69 +47,17 @@ const MyPageInformationContainer = (props: IMyPageInformationContainer) => {
     setCurrentPage(page);
     window.history.pushState({}, "", url.toString());
   };
-    const onClickCategoryHandler = (value: string) => {
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      params.delete("page");
-      params.set("category", value);
-      url.search = params.toString();
-      window.history.pushState({}, "", url.toString());
-      setActiveCategory(value);
-      setCurrentPage(1);
-  }
+  const onClickCategoryHandler = (value: string) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.delete("page");
+    params.set("category", value);
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
+    setActiveCategory(value);
+    setCurrentPage(1);
+  };
 
-const onBookMarkClick = async (id: number) => {
-  const data = new URLSearchParams();
-  data.append("infoId", id.toString());
-
-  // Use Promise.all to handle the async map
-  const updatedElements = await Promise.all(
-    elements.map(async (i) => {
-      if (i.informationId === id) {
-        if (i.isBookMark) {
-          // delete bookmark
-          const response = await fetchWithAuth(`/api/bookmark/information`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data.toString(),
-            cache: "no-store",
-          });
-
-          if (!response.ok) {
-            alert("북마크 취소에 실패하였습니다.");
-            return i;
-          }
-
-          // Toggle bookmark state
-          return { ...i, isBookMark: false };
-        } else {
-          // create bookmark
-          const response = await fetchWithAuth(`/api/bookmark/information`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data.toString(),
-            cache: "no-store",
-          });
-
-          if (!response.ok) {
-            alert("북마크 추가에 실패하였습니다.");
-            return i;
-          }
-
-          return { ...i, isBookMark: true };
-        }
-      }
-      return i;
-    }),
-  );
-
-  setElements(updatedElements);
-};
-  
   useEffect(() => {
     setIsLoading(true);
     const url = new URL(window.location.href);
@@ -123,7 +71,7 @@ const onBookMarkClick = async (id: number) => {
     }
     const fetchData = async () => {
       const res = await fetchWithAuth(
-        `/api/mypage/information?category=${category}&page=${currentPage-1}`,
+        `/api/mypage/information?category=${category}&page=${currentPage - 1}`,
         {
           method: "GET",
           headers: {
@@ -150,7 +98,6 @@ const onBookMarkClick = async (id: number) => {
       />
       <MyPageInformationList
         elements={elements}
-        onBookMarkClick={onBookMarkClick}
         isLoading={isLoading}
       />
       <Pagination
