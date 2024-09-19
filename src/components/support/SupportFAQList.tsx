@@ -41,7 +41,7 @@ const SupportFAQList = () => {
   };
 
   return (
-    <div className="flex w-full flex-col border-t-2 border-t-black">
+    <div className="flex w-full flex-col border-t-[1px] border-t-black">
       {Array.from(new Set(faqData.map((faq) => faq.topic))).map((topic) => (
         <div
           key={topic}
