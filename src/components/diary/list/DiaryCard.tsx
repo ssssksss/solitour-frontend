@@ -94,7 +94,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             className="truncate-vertical mt-6 text-black max-[845px]:mt-3"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
             dangerouslySetInnerHTML={{
               __html: sanitizeHtml(
                 diaryData.diaryDayContentResponses.diaryDayContentDetail[0]
