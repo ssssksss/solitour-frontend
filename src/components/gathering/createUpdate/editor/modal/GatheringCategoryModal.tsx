@@ -43,17 +43,17 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
         />
       </button>
       <div className={"flex flex-col gap-y-1"}>
-        <h3 className="text-start text-lg font-medium text-black">
+        <h2 className="w-full text-start text-2xl font-bold text-black">
           카테고리 선택
-        </h3>
-        <div className={"flex flex-wrap gap-x-2 gap-y-[.5rem]"}>
+        </h2>
+        <div className={"flex flex-wrap gap-x-2 gap-y-[.5rem] pt-[3rem]"}>
           {props.categoryList.map((i) => (
             <button
               key={i.id}
               onClick={() => {
                 setMainCategoryId(i.id);
               }}
-              className={`${mainCategoryId == i.id ? "bg-main text-white outline-none" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-3 py-1`}
+              className={`${mainCategoryId == i.id ? "bg-main text-white outline-none" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-4 py-2`}
             >
               {i.name}
             </button>

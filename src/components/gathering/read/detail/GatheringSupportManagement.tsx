@@ -54,7 +54,7 @@ const GatheringSupportManagement = ({
         </Modal>
         <button
           className={
-            "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] outline outline-[1px] outline-offset-[-1px] outline-gray3"
+            "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3"
           }
           onClick={() => modalState1.openModal()}
         >
@@ -62,18 +62,11 @@ const GatheringSupportManagement = ({
         </button>
         <button
           onClick={() => {
-            isFinish ? reOpenGathering() : modalState.openModal()
+            isFinish ? reOpenGathering() : modalState.openModal();
           }}
-          className={
-            `h-[3.125rem] w-[7.5rem] rounded-[2.125rem] outline outline-[1px] outline-offset-[-1px] outline-gray3 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`
-          }
+          className={`h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`}
         >
-          {
-            isFinish ? 
-            "모임 마감"
-            :
-          "모임 마감하기"
-          }
+          {isFinish ? "모임 마감" : "모임 마감하기"}
         </button>
       </div>
     );
@@ -110,7 +103,7 @@ const GatheringSupportManagement = ({
           <button
             disabled={gatheringStatus != "CONSENT"}
             className={
-              "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] outline outline-[1px] outline-offset-[-1px] outline-gray3 disabled:bg-gray3"
+              "h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3 disabled:bg-gray3"
             }
             onClick={() => modalState1.openModal()}
           >
@@ -120,7 +113,7 @@ const GatheringSupportManagement = ({
         {gatheringStatus == "REFUSE" && (
           <div
             className={
-              "flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] bg-[#EE4C4A] text-white"
+              "flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] bg-[#EE4C4A] text-sm text-white"
             }
           >
             신청 거부

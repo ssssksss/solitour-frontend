@@ -144,7 +144,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
         <div className={"flex w-full justify-center gap-[1rem]"}>
           <button
             className={
-              "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
+              "h-[3rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
             }
             onClick={() => submitHandler()}
             disabled={
@@ -157,9 +157,11 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
               )
             }
           >
-            <span> {format(calendarDate[0].startDate, "yy-MM-dd")} </span>
-            <span>{format(calendarDate[0].startDate, "yy-MM-dd") && "~"}</span>
-            <span> {format(calendarDate[0].endDate, "yy-MM-dd")} </span>
+            <span> {format(calendarDate[0].startDate, "yy.MM.dd")} </span>
+            {
+              format(calendarDate[0].startDate, "yy.MM.dd") != format(calendarDate[0].endDate, "yy.MM.dd") &&
+              <span> {format(calendarDate[0].endDate, "~ yy.MM.dd")} </span>
+            }
             <span className={"pl-[.5rem] text-[1.1rem]"}> 적용하기 </span>
           </button>
         </div>

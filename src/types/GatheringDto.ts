@@ -28,6 +28,7 @@ export interface TopGatheringResponseDto {
 type UserPostingResponse = {
   id: number;
   name: string;
+  nickname: string;
 };
 
 export type PlaceResponse = {
