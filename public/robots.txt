@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://solitour.ssssksss.xyz
+Host: https://www.solitourist.com/
 
 # Sitemaps
-Sitemap: https://solitour.ssssksss.xyz/sitemap.xml
+Sitemap: https://www.solitourist.com/sitemap.xml
