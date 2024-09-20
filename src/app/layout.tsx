@@ -37,7 +37,14 @@ export default function RootLayout({
         name="naver-site-verification"
         content="4da70e879bd32d934e1a503b1a86d3e3cae4e0a3"
       />
-      {/* <body className={`${notoSansKr.className} flex h-full flex-col`}> */}
+      <meta
+        name="google-site-verification"
+        content="3mtzBvqxMZ31vvaa0SmQaIJEiY6HUHLnyMqM5qGZvVU"
+      />
+      <meta
+        name="naver-site-verification"
+        content="f3050a18a497b05cce9e8a446425f3182c3c368b"
+      />
       <body className={`flex h-full flex-col`}>
         <HeaderContainer />
         <div className="flex w-full items-center justify-center">
