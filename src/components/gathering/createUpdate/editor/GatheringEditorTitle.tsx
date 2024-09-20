@@ -31,7 +31,7 @@ const GatheringEditorTitle = () => {
           }}
         />
         {formContext.formState.errors.title && (
-          <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+          <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
             {formContext.formState.errors.title.message as String}
           </span>
         )}

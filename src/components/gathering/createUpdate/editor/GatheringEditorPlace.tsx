@@ -6,7 +6,7 @@ import GatheringPlaceModal from "./modal/GatheringPlaceModal";
 interface IGatheringEditorPlace {
   modalState: ModalState;
 }
-const GatheringEditorPlace = ({modalState}: IGatheringEditorPlace) => {
+const GatheringEditorPlace = ({ modalState }: IGatheringEditorPlace) => {
   const formContext = useFormContext();
   return (
     <div
@@ -32,7 +32,7 @@ const GatheringEditorPlace = ({modalState}: IGatheringEditorPlace) => {
           {formContext.getValues("placeName") || "장소명을 입력하세요."}
         </button>
         {formContext.formState.errors.placeName && (
-          <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+          <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
             {formContext.formState.errors.placeName.message as String}
           </span>
         )}
@@ -43,4 +43,4 @@ const GatheringEditorPlace = ({modalState}: IGatheringEditorPlace) => {
     </div>
   );
 };
-export default GatheringEditorPlace
+export default GatheringEditorPlace;
