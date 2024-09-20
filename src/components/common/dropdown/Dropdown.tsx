@@ -90,13 +90,12 @@ export default function Dropdown<T>({
           />
         )}
       </button>
-
       {isOpen &&
         (isOnRightSide ? (
           <div
             className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
             style={{
-              transform: dropdownOptionStyle?.transformX
+              transform: dropdownOptionStyle?.transformX,
             }}
           >
             {options.map((i) => (
