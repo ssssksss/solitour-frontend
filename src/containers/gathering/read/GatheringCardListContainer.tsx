@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 const SkeletonGatheringList = () => {
   return (
-    <div className="my-6 grid min-h-[20rem] w-full justify-items-center gap-x-3 gap-y-3 min-[745px]:grid-cols-2">
+    <div className="my-6 grid min-h-[20rem] w-full justify-items-center gap-x-3 gap-y-3 min-[744px]:grid-cols-2 min-[1024px]:grid-cols-3">
       {Array.from({ length: 6 }).map((_, index) => (
         <GatheringItemSkeleton key={index} />
       ))}
@@ -63,7 +63,6 @@ const GatheringCardListContainer = () => {
         }
 
         const data = await response.json();
-        console.log(data.content); // TODO
         setElements(data.content);
         setTotalElements(data.page.totalElements);
         setCurrentPage(data.page.number + 1);
