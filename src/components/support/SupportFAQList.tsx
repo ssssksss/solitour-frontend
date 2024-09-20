@@ -10,20 +10,17 @@ const faqData: FAQ[] = [
   {
     topic: "정보 서비스",
     question: "",
-    answer:
-      "",
+    answer: "",
   },
   {
     topic: "모임 서비스",
     question: "",
-    answer:
-      "",
+    answer: "",
   },
   {
     topic: "여행일기 서비스",
     question: "",
-    answer:
-      "",
+    answer: "",
   },
   {
     topic: "회원",
@@ -45,7 +42,7 @@ const SupportFAQList = () => {
       {Array.from(new Set(faqData.map((faq) => faq.topic))).map((topic) => (
         <div
           key={topic}
-          className="flex w-full flex-col border-b-2 border-b-gray3 px-5"
+          className="flex w-full flex-col border-b-[0.0625rem] border-b-gray3 px-5"
         >
           <button
             className="grid h-[4.625rem] w-full grid-cols-[6.0625rem_auto] items-center rounded-md"
@@ -55,8 +52,8 @@ const SupportFAQList = () => {
             <div className={"text-start text-lg font-bold"}> {topic} </div>
           </button>
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col ${
-              expandedTopic === topic ? "max-h-screen py-2 gap-y-2" : "max-h-0"
+            className={`flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${
+              expandedTopic === topic ? "max-h-screen gap-y-2 py-2" : "max-h-0"
             }`}
           >
             {faqData
