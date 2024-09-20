@@ -36,7 +36,7 @@ const HeaderSidebar = ({
         </div>
         <div className="flex flex-col text-xl">
           <Link
-            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
             href="/"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(1)}
@@ -61,7 +61,7 @@ const HeaderSidebar = ({
             <p>홈</p>
           </Link>
           <Link
-            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
             href="/informations/list?page=1&parentCategoryId=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(2)}
@@ -86,7 +86,7 @@ const HeaderSidebar = ({
             <p>여행 정보</p>
           </Link>
           <Link
-            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
             href="/gathering"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(3)}
@@ -111,7 +111,7 @@ const HeaderSidebar = ({
             <p>모임 정보</p>
           </Link>
           <Link
-            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-[0.875rem] pl-[3.75rem] hover:text-main"
             href="/diary/list?page=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(4)}
@@ -138,7 +138,7 @@ const HeaderSidebar = ({
             <p>여행일기</p>
           </Link>
           <Link
-            className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-[0.875rem] pl-[3.75rem] hover:text-main"
             href="/support?menu=about"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(5)}
@@ -165,7 +165,7 @@ const HeaderSidebar = ({
           {signedIn ? (
             <div className="flex flex-col">
               <Link
-                className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
                 href="/mypage?mainCategory=정보&category=owner"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(6)}
@@ -192,7 +192,7 @@ const HeaderSidebar = ({
                 <p>마이페이지</p>
               </Link>
               <button
-                className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-[0.875rem] hover:bg-slate-100 hover:text-main"
+                className="flex h-[5rem] flex-row items-center gap-[0.875rem] pl-[3.75rem] hover:text-main"
                 onClick={logoutHandler}
               >
                 <CiLogout className="-ml-[0.125rem]" size="1.7rem" />
@@ -201,7 +201,7 @@ const HeaderSidebar = ({
             </div>
           ) : (
             <Link
-              className="pl-[3.75rem]  flex h-[5rem] flex-row items-center gap-4 hover:bg-slate-100 hover:text-main"
+              className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
               href="/auth/signin"
               onClick={onClose}
               onMouseEnter={() => setHoverNum(7)}
