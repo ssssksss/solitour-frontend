@@ -1,12 +1,17 @@
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItemHome from "../common/GatheringItemHome";
 import LottieNotFound from "../common/lottie/LottieNotFound";
+import { cookies } from "next/headers";
 
 async function getNewGatheringList() {
+  const cookie = cookies().get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/gatherings/home`,
     {
       method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
       next: { revalidate: 60, tags: ["getNewGatheringList"] },
     },
   );
