@@ -23,6 +23,7 @@ const QuillEditor = ({
     <div className="relative flex flex-col">
       <HashSpinner loading={loading} />
       <ReactQuill
+        className="quillEditor"
         ref={quillRef}
         theme="snow"
         placeholder="여행은 어땠나요? 자유롭게 기록하고 싶은 것들을 작성해보세요."

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
 import { motion } from "framer-motion";
+import { TiLocation } from "react-icons/ti";
 
 interface Props {
   diaryData: {
@@ -37,18 +38,15 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         }}
       >
         <motion.div
-          className="flex flex-row items-center gap-14"
+          className="flex flex-row items-center gap-1"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <Image
-            src="/diary/day-text.svg"
-            alt="day-text"
-            width={41}
-            height={25}
-          />
-          <p className="font-semibold text-main">1</p>
+          <TiLocation className="text-main" size={"1.3rem"} />
+          <p className="text-lg text-gray1">
+            {diaryData.diaryDayContentResponses.diaryDayContentDetail[0].place}
+          </p>
         </motion.div>
         <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
           <motion.div

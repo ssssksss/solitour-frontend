@@ -7,7 +7,7 @@ import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
 import useAuthStore from "@/store/authStore";
 import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

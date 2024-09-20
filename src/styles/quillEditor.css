@@ -20,8 +20,10 @@
 
 .ql-editor.ql-blank::before {
   font-style: normal;
+  font-family: "pretendrad";
+  src: url("/fonts/PretendardVariable.ttf") format("truetype");
   left: 1rem;
   color: darkgray;
   font-weight: 550;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
