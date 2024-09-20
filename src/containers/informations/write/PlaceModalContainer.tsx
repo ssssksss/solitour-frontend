@@ -85,7 +85,10 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }) => {
     const temp = placeInfo.address_name.split(" ");
     formContext.setValue("province", temp[0].slice(0, 2) ?? "");
-    formContext.setValue("city", temp[1] ?? "");
+    formContext.setValue(
+      "city",
+      temp[0].slice(0, 2) === "세종" ? "세종" : temp[1] ?? "",
+    );
     formContext.setValue("informationAddress", placeInfo.address_name);
     formContext.setValue("placeId", placeInfo.id);
     formContext.setValue("placeXAxis", placeInfo.x);
@@ -102,7 +105,10 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
   }) => {
     const temp = addressInfo.address_name.split(" ");
     formContext.setValue("province", temp[0].slice(0, 2) ?? "");
-    formContext.setValue("city", temp[1] ?? "");
+    formContext.setValue(
+      "city",
+      temp[0].slice(0, 2) === "세종" ? "세종" : temp[1] ?? "",
+    );
     formContext.setValue("informationAddress", addressInfo.address_name);
     formContext.setValue("placeXAxis", addressInfo.x);
     formContext.setValue("placeYAxis", addressInfo.y);
