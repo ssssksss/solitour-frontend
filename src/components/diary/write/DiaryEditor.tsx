@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
 import { useFormContext } from "react-hook-form";
 import DatePickerModalContainer from "@/containers/diary/write/DatePickerModalContainer";
+import HashSpinner from "@/components/common/HashSpinner";
 
 const QuillEditorContainer = dynamic(
   () => import("@/containers/diary/write/QuillEditorContainer"),
@@ -44,6 +45,7 @@ const DiaryEditor = ({
         <DatePickerModalContainer closeModal={closeDateRangeModal} />
       )}
       {addressModal && <AddressModalContainer closeModal={closeAddressModal} />}
+      <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`일기 ${text}하기`}
       </h1>
