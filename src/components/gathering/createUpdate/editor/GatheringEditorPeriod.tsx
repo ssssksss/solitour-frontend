@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 import GatheringPeriodModal from "./modal/GatheringPeriodModal";
 
 interface IGatheringEditorPeriod {
-  modalState: ModalState
+  modalState: ModalState;
 }
 const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
   const formContext = useFormContext();
@@ -69,7 +69,7 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
           )}
         </button>
         {formContext.formState.errors.scheduleStartDate && (
-          <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+          <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
             {formContext.formState.errors.scheduleStartDate.message as String}
           </span>
         )}
@@ -80,4 +80,4 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
     </div>
   );
 };
-export default GatheringEditorPeriod
+export default GatheringEditorPeriod;

@@ -29,15 +29,16 @@ const GatheringEditorParticipantsFilter = ({
             <div className="flex h-full w-full items-center justify-start">
               <div className={"flex"}>
                 <div className="rounded-full py-1 font-semibold text-black">
-                  {formContext.getValues("personCount")}명 <span className={"text-black px-1"}> | </span>
+                  {formContext.getValues("personCount")}명{" "}
+                  <span className={"px-1 text-black"}> | </span>
                 </div>
               </div>
               <div className={"flex"}>
                 <div className="flex items-center rounded-full py-1 font-semibold text-black">
                   {new Date().getFullYear() - formContext.getValues("startAge")}
                   세<span>~</span>
-                  {new Date().getFullYear() - formContext.getValues("endAge")}
-                  세 <span className={"text-black px-1"}> | </span>
+                  {new Date().getFullYear() - formContext.getValues("endAge")}세{" "}
+                  <span className={"px-1 text-black"}> | </span>
                 </div>
 
                 <div className="rounded-full py-1 font-semibold text-black">
@@ -60,7 +61,7 @@ const GatheringEditorParticipantsFilter = ({
             </div>
           )}
           {formContext.formState.errors.allowedSex && (
-            <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+            <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
               {formContext.formState.errors.allowedSex.message as String}
             </span>
           )}

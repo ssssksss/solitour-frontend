@@ -176,7 +176,7 @@ const GatheringViewer = ({
         {data.content}
       </div>
       {data.tagResponses?.length > 0 && (
-        <div className={"mb-[2.625rem] flex gap-x-[.25rem]"}>
+        <div className={"mb-[2.625rem] flex flex-wrap gap-[.25rem]"}>
           {data.tagResponses?.map((i) => (
             <div
               key={i.name}
