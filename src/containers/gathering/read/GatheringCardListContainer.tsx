@@ -27,13 +27,13 @@ const GatheringCardListContainer = () => {
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
 
-    const pageHandler = (page: number) => {
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      params.set("page", page + "");
-      url.search = params.toString();
-      window.history.pushState({}, "", url.toString());
-    };
+  const pageHandler = (page: number) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set("page", page + "");
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
+  };
 
   useEffect(() => {
     const temp = async () => {
@@ -56,9 +56,8 @@ const GatheringCardListContainer = () => {
           setElements([]);
           setTotalElements(0);
           setCurrentPage(0);
-          router.push("/not-found");
-          // throw new Error(response.statusText);
-          return ;
+
+          throw new Error(response.statusText);
         }
         const data = await response.json();
         setElements(data.content);
