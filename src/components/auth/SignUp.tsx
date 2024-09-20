@@ -44,9 +44,9 @@ const SignUp = () => {
           카카오로 1초만에 시작하기
         </span>
       </Link>
-      <Link
+      {/* <Link
         className={
-          "relative mb-[3rem] flex h-[2.875rem] w-full items-center justify-center rounded-3xl outline outline-[1px] outline-offset-[-1px] outline-gray3"
+          "relative mb-[.75rem] flex h-[2.875rem] w-full items-center justify-center rounded-3xl outline outline-[1px] outline-offset-[-1px] outline-gray3"
         }
         href="/api/auth/google"
       >
@@ -60,8 +60,8 @@ const SignUp = () => {
         <span className="text-sm font-semibold text-black">
           구글로 1초만에 시작하기
         </span>
-      </Link>
-      <div className={"relative flex w-full justify-center"}>
+      </Link> */}
+      <div className={"relative flex w-full justify-center mt-[2.25rem]"}>
         <p
           className={
             "relative flex w-full justify-center font-semibold text-black"
