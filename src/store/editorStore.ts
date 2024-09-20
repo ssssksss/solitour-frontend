@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware";
 
 // 1. 상태 인터페이스 정의
 interface EditorState {
+  imageLoading: boolean;
   images: string[];
   mainImageIndex: number;
 }
@@ -17,6 +18,7 @@ interface EditorActions {
 
 // 3. 초기 상태 정의
 const initialState: EditorState = {
+  imageLoading: false,
   images: [""],
   mainImageIndex: 0,
 };

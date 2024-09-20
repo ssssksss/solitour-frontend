@@ -13,6 +13,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useFormContext } from "react-hook-form";
 import GatheringEditorTimeContainer from "../../../../containers/gathering/createUpdate/editor/GatheringEditorTimeContainer";
+import HashSpinner from "@/components/common/HashSpinner";
 
 interface IGatheringEditorEditProps {
   isEdit: true;
@@ -36,6 +37,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
 
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
+      <HashSpinner loading={props.loading} />
       <Breadcrumbs
         categories={[
           { label: "모임", href: "/gathering" },
@@ -70,7 +72,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         <GatheringEditorHashTagContainer />
         <div className={"flex w-full justify-end"}>
           <button
-            className={`w-[9.5rem] h-[3rem] rounded-[2rem] px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main"}`}
+            className={`flex h-[3rem] w-[9.5rem] flex-row items-center justify-center rounded-[2rem] px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main hover:scale-105"}`}
             onClick={() => {
               if (!formContext.formState.isValid) {
                 formContext.trigger();

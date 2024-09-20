@@ -2,6 +2,7 @@ import HashSpinner from "@/components/common/HashSpinner";
 import Image from "next/image";
 import { RefObject } from "react";
 import { MdClose } from "react-icons/md";
+import { HashLoader } from "react-spinners";
 
 interface Props {
   index: number;
@@ -61,33 +62,42 @@ const ImageUploadItem = ({
     );
   }
 
-  return (
-    <div>
-      <HashSpinner loading={loading} />
-      <label
-        className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main focus:border-main`}
-        htmlFor="file"
-        onClick={() => onUploadButtonClicked()}
-        onTouchEnd={() => onUploadButtonClicked()}
-      >
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border-[0.0625rem] border-main text-xl text-main">
-          +
-        </div>
-        <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1">
-          사진 추가
-        </p>
-        <p className="text-xs font-medium text-gray2">{index}/12</p>
-        <input
-          className="hidden"
-          type="file"
-          id="photo"
-          name="photo"
-          accept=".png, .jpeg, .jpg"
-          onChange={previewImage}
-          ref={imageRef}
+  if (loading) {
+    return (
+      <div className="flex h-[9.375rem] w-40 items-center justify-center rounded-xl border-[0.0625rem] border-main">
+        <HashLoader
+          color="#00B488"
+          loading={loading}
+          cssOverride={{ display: "block", margin: "0 auto" }}
         />
-      </label>
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <label
+      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main focus:border-main`}
+      htmlFor="file"
+      onClick={() => onUploadButtonClicked()}
+      onTouchEnd={() => onUploadButtonClicked()}
+    >
+      <div className="flex h-12 w-12 items-center justify-center rounded-full border-[0.0625rem] border-main text-xl text-main">
+        +
+      </div>
+      <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1">
+        사진 추가
+      </p>
+      <p className="text-xs font-medium text-gray2">{index}/12</p>
+      <input
+        className="hidden"
+        type="file"
+        id="photo"
+        name="photo"
+        accept=".png, .jpeg, .jpg"
+        onChange={previewImage}
+        ref={imageRef}
+      />
+    </label>
   );
 };
 
