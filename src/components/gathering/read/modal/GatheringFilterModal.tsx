@@ -29,6 +29,7 @@ const regions = [
   { id: 14, name: "충북" },
   { id: 15, name: "충남" },
   { id: 16, name: "전북" },
+  { id: 245, name: "세종" },
 ];
 
 const SELECTED_SCHEDULE_DATA = [

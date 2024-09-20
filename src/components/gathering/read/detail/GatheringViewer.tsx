@@ -55,7 +55,7 @@ const GatheringViewer = ({
               <div className="text-xs font-semibold text-black">
                 {data.userPostingResponse?.nickname}
               </div>
-              <div className="whitespace-nowrap w-fit flex-shrink-0 text-xs text-gray1">
+              <div className="w-fit flex-shrink-0 whitespace-nowrap text-xs text-gray1">
                 {format(new Date(data.createdAt), "yyyy-MM-dd")}
               </div>
             </div>
@@ -112,7 +112,7 @@ const GatheringViewer = ({
           />
           <div>
             {data.zoneCategoryResponse.parentZoneCategory?.name == "세종"
-              ? "세종"
+              ? "세종특별자치시"
               : `
               ${data.zoneCategoryResponse.parentZoneCategory?.name} ,
               ${data.zoneCategoryResponse.name}
@@ -135,7 +135,7 @@ const GatheringViewer = ({
               >
                 {currentParticipants || data.nowPersonCount}
               </span>
-              / {data.personCount}
+              {" /"} {data.personCount}
             </span>
             <span className="text-gray2">
               {"(" +

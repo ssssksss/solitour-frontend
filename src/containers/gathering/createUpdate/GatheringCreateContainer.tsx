@@ -38,7 +38,6 @@ const GatheringCreateContainer = () => {
   });
 
   const createGatheringHandler = async () => {
-
     const {
       gatheringCategoryId,
       allowedSex,
@@ -64,17 +63,26 @@ const GatheringCreateContainer = () => {
             searchId: searchId,
             name: placeName,
             xAxis: Number(xAxis),
-            yAxis: Number(yAxis), 
+            yAxis: Number(yAxis),
             address: roadAddressName,
-      },
+          },
           allowedSex: allowedSex.toUpperCase(),
           // gatheringCategoryId: +subCategoryId,
           gatheringCategoryId: gatheringCategoryId,
-          zoneCategoryNameParent: convertRegionToTwoLetters(roadAddressName.split(" ")[0]),
-          zoneCategoryNameChild: roadAddressName.split(" ")[1],
-          tagRegisterRequests: hashtags.length > 0 ? hashtags.map(i=>{return {name: i}}) : []
-          
-    }),
+          zoneCategoryNameParent: convertRegionToTwoLetters(
+            roadAddressName.split(" ")[0],
+          ),
+          zoneCategoryNameChild:
+            convertRegionToTwoLetters(roadAddressName.split(" ")[0]) === "세종"
+              ? "세종"
+              : roadAddressName.split(" ")[1],
+          tagRegisterRequests:
+            hashtags.length > 0
+              ? hashtags.map((i) => {
+                  return { name: i };
+                })
+              : [],
+        }),
       });
 
       if (!response.ok) {
@@ -91,7 +99,7 @@ const GatheringCreateContainer = () => {
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
-  }
+  };
 
   return (
     <FormProvider {...methods}>

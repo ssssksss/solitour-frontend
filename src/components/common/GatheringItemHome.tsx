@@ -85,7 +85,9 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
               />
             </div>
             <p className="overflow-hidden truncate whitespace-nowrap">
-              {data.zoneCategoryParentName} {","} {data.zoneCategoryChildName}
+              {data.zoneCategoryParentName === "세종"
+                ? "세종특별자치시"
+                : `${data.zoneCategoryParentName}, ${data.zoneCategoryChildName}`}
             </p>
           </div>
           <article className="flex flex-col-reverse gap-2">
