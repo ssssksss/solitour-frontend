@@ -1,21 +1,21 @@
 import GatheringSearch from "@/components/gathering/read/GatheringSearch";
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IGatheringSearchContainer {
-
-}
+interface IGatheringSearchContainer {}
 const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
   const searchParams = useSearchParams();
-  const [searchValue, setSearchValue] = useState<string>(searchParams.get("search") || searchParams.get("tagName") ||  "");
+  const [searchValue, setSearchValue] = useState<string>(
+    searchParams.get("search") || searchParams.get("tagName") || "",
+  );
   const [dropdownValue, setDropdownValue] = useState(
     searchParams.get("tagName") != null ? "태그" : "제목",
   );
   const [loading, setLoading] = useState(true);
 
   const searchHandler = () => {
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
     if (dropdownValue == "태그") {
       // 태그 검색일 경우
       params.set("tagName", searchValue);
@@ -32,8 +32,8 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
       url.search = params.toString();
       window.history.pushState({}, "", url.toString());
     }
-  }
-  
+  };
+
   const dropDownHandler = (value: string) => {
     setDropdownValue(value);
     const url = new URL(window.location.href);
@@ -59,7 +59,7 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
     setSearchValue(params.get("search") || params.get("tagName") || "");
     setDropdownValue(params.get("tagName") != null ? "태그" : "제목");
     setLoading(false);
-  },[searchParams])
+  }, [searchParams]);
 
   return (
     <GatheringSearch
@@ -72,4 +72,4 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
     />
   );
 };
-export default GatheringSearchContainer
+export default GatheringSearchContainer;

@@ -141,7 +141,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
                   (new Date().getFullYear() - data.startAge) +
                   "세 ~ " +
                   (new Date().getFullYear() - data.endAge) +
-                  "세 ," +
+                  "세, " +
                   SEX[data.allowedSex] +
                   ")"}
               </p>

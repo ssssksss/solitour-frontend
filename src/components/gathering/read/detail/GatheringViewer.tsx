@@ -113,9 +113,7 @@ const GatheringViewer = ({
           <div>
             {data.zoneCategoryResponse.parentZoneCategory?.name == "세종"
               ? "세종특별자치시"
-              : `
-              ${data.zoneCategoryResponse.parentZoneCategory?.name} ,
-              ${data.zoneCategoryResponse.name}
+              : `${data.zoneCategoryResponse.parentZoneCategory?.name}, ${data.zoneCategoryResponse.name}
             `}
           </div>
         </div>
@@ -138,11 +136,11 @@ const GatheringViewer = ({
               {" /"} {data.personCount}
             </span>
             <span className="text-gray2">
-              {"(" +
+              {" (" +
                 (new Date().getFullYear() - data.startAge) +
                 "세 ~ " +
                 (new Date().getFullYear() - data.endAge) +
-                "세 ," +
+                "세, " +
                 SETTING_MODAL_SEX[data.allowedSex] +
                 ")"}
             </span>
