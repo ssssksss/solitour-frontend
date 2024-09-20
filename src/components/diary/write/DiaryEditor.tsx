@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
 import { useFormContext } from "react-hook-form";
 import DatePickerModalContainer from "@/containers/diary/write/DatePickerModalContainer";
+import HashSpinner from "@/components/common/HashSpinner";
 
 const QuillEditorContainer = dynamic(
   () => import("@/containers/diary/write/QuillEditorContainer"),
@@ -44,6 +45,7 @@ const DiaryEditor = ({
         <DatePickerModalContainer closeModal={closeDateRangeModal} />
       )}
       {addressModal && <AddressModalContainer closeModal={closeAddressModal} />}
+      <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`일기 ${text}하기`}
       </h1>
@@ -52,11 +54,11 @@ const DiaryEditor = ({
         추억카드를 만들어보세요!
       </p>
       <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
-        <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+        <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
+          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("title")}
@@ -74,7 +76,7 @@ const DiaryEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:flex-col max-[1024px]:items-start max-[1024px]:gap-10">
         <div className="relative flex h-[3.3125rem] flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+          <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
             날짜<span className="text-main">*</span>
           </h2>
           <button
@@ -106,7 +108,7 @@ const DiaryEditor = ({
           )}
         </div>
         <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+          <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
             주소<span className="text-main">*</span>
           </h2>
           <button

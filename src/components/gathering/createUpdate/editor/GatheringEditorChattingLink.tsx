@@ -5,7 +5,9 @@ const GatheringEditorChattingLink = () => {
 
   return (
     <div className="relative flex w-full flex-shrink-0 items-center gap-[0.625rem]">
-      <div className={"relative w-[2.75rem] flex-shrink-0 text-lg font-semibold"}>
+      <div
+        className={"relative w-[2.75rem] flex-shrink-0 text-lg font-semibold"}
+      >
         링크
       </div>
       <div className="relative w-full">
@@ -26,7 +28,7 @@ const GatheringEditorChattingLink = () => {
           }}
         />
         {formContext.formState.errors.openChattingUrl && (
-          <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+          <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
             {formContext.formState.errors.openChattingUrl.message as String}
           </span>
         )}

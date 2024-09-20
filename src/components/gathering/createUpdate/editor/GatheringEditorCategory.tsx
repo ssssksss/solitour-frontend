@@ -13,10 +13,12 @@ interface IGatheringEditorCategory {
   modalState: ModalState;
   categoryList: ICategory[];
 }
-const GatheringEditorCategory = ({ modalState, categoryList }: IGatheringEditorCategory) => {
+const GatheringEditorCategory = ({
+  modalState,
+  categoryList,
+}: IGatheringEditorCategory) => {
   const formContext = useFormContext();
 
-  
   return (
     <div
       className={
@@ -56,7 +58,7 @@ const GatheringEditorCategory = ({ modalState, categoryList }: IGatheringEditorC
           </div>
         </button>
         {formContext.formState.errors.gatheringCategoryId && (
-          <span className="absolute bottom-[-16px] left-4 mt-1 text-xs text-red-500">
+          <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
             {formContext.formState.errors.gatheringCategoryId.message as String}
           </span>
         )}
@@ -70,4 +72,4 @@ const GatheringEditorCategory = ({ modalState, categoryList }: IGatheringEditorC
     </div>
   );
 };
-export default GatheringEditorCategory
+export default GatheringEditorCategory;

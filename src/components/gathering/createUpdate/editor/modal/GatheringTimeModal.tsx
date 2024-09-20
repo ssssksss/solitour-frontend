@@ -54,7 +54,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
     >
       <div
         className={
-          "flex min-h-full flex-col items-start justify-start bg-white"
+          "flex min-h-full flex-col items-center justify-start bg-white"
         }
       >
         <button
@@ -71,7 +71,11 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
         <h2 className={"w-full text-start text-2xl font-bold text-black"}>
           시간 선택
         </h2>
-        <div className={"flex w-full flex-col gap-x-[1.25rem]"}>
+        <div
+          className={
+            "flex w-full flex-col items-center gap-x-[1.25rem] max-[440px]:max-w-[18.625rem]"
+          }
+        >
           <div
             className={
               "flex w-full justify-center gap-[1.25rem] py-[4.1875rem] max-[440px]:flex-col max-[440px]:p-[2.875rem_0px_1.6875rem_0px]"
@@ -80,20 +84,20 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
             {/* 날짜 */}
             <article
               className={
-                "flex items-center w-[9.75rem] rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:col-span-2"
+                "flex w-[9.75rem] items-center rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:col-span-2 max-[440px]:w-full"
               }
             >
               {format(calendarDate[0].startDate, "yyyy.MM.dd(EE)", {
                 locale: ko,
               })}
             </article>
-            <div className="flex w-full gap-[1.25rem]">
+            <div className="flex w-full gap-[1.25rem] max-[440px]:max-w-[18.625rem]">
               {/* 시 */}
-              <article className="relative flex h-[2.75rem] w-[6.375rem] gap-[6px]">
+              <article className="relative flex h-[2.75rem] w-[6.375rem] gap-[6px] max-[440px]:w-full">
                 <select
                   name="hour"
                   className={
-                    "w-[5.125rem] cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                    "w-[5.125rem] cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:w-full"
                   }
                   onChange={(e) =>
                     setStartDateTime((prev) => ({
@@ -109,7 +113,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
                     </option>
                   ))}
                 </select>
-                <div className="absolute left-[3.25rem] top-1/2 -translate-y-1/2">
+                <div className="absolute right-[2.5rem] top-1/2 -translate-y-1/2">
                   <Image
                     src="/common/dropdown-down-arrow.svg"
                     alt="location-icon"
@@ -120,11 +124,11 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
                 <div className={"flex items-center"}> 시 </div>
               </article>
               {/* 분 */}
-              <article className="relative flex h-[2.75rem] w-[6.375rem] gap-[6px]">
+              <article className="relative flex h-[2.75rem] w-[6.375rem] gap-[6px] max-[440px]:w-full">
                 <select
                   name="minute"
                   className={
-                    "w-[5.125rem] cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                    "w-[5.125rem] cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:w-full"
                   }
                   onChange={(e) =>
                     setStartDateTime((prev) => ({
@@ -148,7 +152,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
                     </option>
                   ))}
                 </select>
-                <div className="absolute left-[3.25rem] top-1/2 -translate-y-1/2">
+                <div className="absolute right-[2.5rem] top-1/2 -translate-y-1/2">
                   <Image
                     src="/common/dropdown-down-arrow.svg"
                     alt="location-icon"

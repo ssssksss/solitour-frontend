@@ -10,6 +10,7 @@ import { MdClose } from "react-icons/md";
 import { useFormContext } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
+import HashSpinner from "@/components/common/HashSpinner";
 
 interface Props {
   pathname: string;
@@ -54,6 +55,7 @@ const InformationEditor = ({
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
       )}
+      <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`정보 ${pathname}하기`}
       </h1>
@@ -62,11 +64,11 @@ const InformationEditor = ({
         솔리들과 공유해보세요!
       </p>
       <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
-        <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+        <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-none`}
+          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-none`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("informationTitle")}
@@ -85,7 +87,7 @@ const InformationEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
         <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+          <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
             장소<span className="text-main">*</span>
           </h2>
           <button
@@ -304,10 +306,10 @@ const InformationEditor = ({
       </div>
       <div className="flex flex-col items-end">
         <button
-          className="mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
+          className={`${editorStore.imageLoading ? "cursor-not-allowed bg-gray1" : "bg-main hover:scale-105"} mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow`}
           type="submit"
           onClick={() => onSubmit()}
-          disabled={loading}
+          disabled={loading || editorStore.imageLoading}
         >
           {loading ? (
             <div className="flex flex-row items-center gap-3">

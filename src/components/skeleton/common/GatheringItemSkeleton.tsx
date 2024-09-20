@@ -1,6 +1,6 @@
 const GatheringItemSkeleton = () => {
   return (
-    <div className="flex w-full animate-pulse flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 max-[744px]:max-w-[27.5rem] min-[745px]:min-w-[312px]">
+    <div className="flex w-full animate-pulse flex-col gap-[1.25rem] rounded-2xl border-0 p-6 outline outline-2 outline-offset-[-2px] outline-gray3 min-[745px]:min-w-[312px]">
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <div className="h-6 w-24 rounded-full bg-gray-300"></div>

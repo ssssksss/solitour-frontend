@@ -17,7 +17,6 @@ const ImageUploadItemContainer = ({ index }: Props) => {
     useEditorStore();
   const editorStore = useEditorStore();
   const authStore = useAuthStore();
-  const [loading, setLoading] = useState<boolean>(false);
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
@@ -41,7 +40,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       formData.append("image", file);
       formData.append("type", "INFORMATION");
 
-      setLoading(true);
+      editorStore.setEditor({ imageLoading: true });
 
       const response = await fetchWithAuth("/api/image/upload", {
         method: "POST",
@@ -49,7 +48,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
         cache: "no-store",
       });
 
-      setLoading(false);
+      editorStore.setEditor({ imageLoading: false });
 
       if (!response.ok) {
         alert("이미지 처리 중 오류가 발생하였습니다.");
@@ -63,6 +62,10 @@ const ImageUploadItemContainer = ({ index }: Props) => {
   };
 
   const onRemove = (index: number) => {
+    if (editorStore.imageLoading) {
+      return;
+    }
+
     setEditor({
       images: editorStore.images.filter((_, i) => index !== i),
     });
@@ -80,7 +83,7 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       image={images[index]}
       mainImageIndex={mainImageIndex}
       imageRef={imageRef}
-      loading={loading}
+      loading={editorStore.imageLoading}
       onUploadButtonClicked={onUploadButtonClicked}
       previewImage={previewImage}
       setMainImageIndex={(index) => setEditor({ mainImageIndex: index })}
