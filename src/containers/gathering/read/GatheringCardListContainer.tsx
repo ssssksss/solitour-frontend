@@ -52,6 +52,7 @@ const GatheringCardListContainer = () => {
         const response = await fetch("/api/gathering" + url.search, {
           cache: "no-store",
         });
+
         if (!response.ok) {
           setElements([]);
           setTotalElements(0);
@@ -60,7 +61,9 @@ const GatheringCardListContainer = () => {
           // throw new Error(response.statusText);
           return;
         }
+
         const data = await response.json();
+        console.log(data.content); // TODO
         setElements(data.content);
         setTotalElements(data.page.totalElements);
         setCurrentPage(data.page.number + 1);
