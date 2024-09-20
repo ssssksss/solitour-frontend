@@ -56,8 +56,9 @@ const GatheringCardListContainer = () => {
           setElements([]);
           setTotalElements(0);
           setCurrentPage(0);
-
-          throw new Error(response.statusText);
+          router.push("/not-found");
+          // throw new Error(response.statusText);
+          return;
         }
         const data = await response.json();
         setElements(data.content);
