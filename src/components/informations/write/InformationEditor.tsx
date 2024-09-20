@@ -64,11 +64,11 @@ const InformationEditor = ({
         솔리들과 공유해보세요!
       </p>
       <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
-        <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+        <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-none`}
+          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-none`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("informationTitle")}
@@ -87,7 +87,7 @@ const InformationEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
         <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-black">
+          <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
             장소<span className="text-main">*</span>
           </h2>
           <button

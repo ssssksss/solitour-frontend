@@ -45,6 +45,7 @@ const HeaderSidebar = ({
           >
             {hoverNum === 1 ? (
               <Image
+                className="aspect-square"
                 src="/home/home-icon-hover.svg"
                 alt="home-icon"
                 width={22}
@@ -52,6 +53,7 @@ const HeaderSidebar = ({
               />
             ) : (
               <Image
+                className="aspect-square"
                 src="/home/home-icon.svg"
                 alt="home-icon"
                 width={22}
@@ -70,6 +72,7 @@ const HeaderSidebar = ({
           >
             {hoverNum === 2 ? (
               <Image
+                className="aspect-square"
                 src="/home/information-icon-hover.svg"
                 alt="information-icon"
                 width={22}
@@ -77,6 +80,7 @@ const HeaderSidebar = ({
               />
             ) : (
               <Image
+                className="aspect-square"
                 src="/home/information-icon.svg"
                 alt="information-icon"
                 width={22}
@@ -95,6 +99,7 @@ const HeaderSidebar = ({
           >
             {hoverNum === 3 ? (
               <Image
+                className="aspect-square"
                 src="/home/gathering-icon-hover.svg"
                 alt="gathering-icon"
                 width={22}
@@ -102,6 +107,7 @@ const HeaderSidebar = ({
               />
             ) : (
               <Image
+                className="aspect-square"
                 src="/home/gathering-icon.svg"
                 alt="gathering-icon"
                 width={22}
@@ -111,7 +117,7 @@ const HeaderSidebar = ({
             <p>모임 정보</p>
           </Link>
           <Link
-            className="flex h-[5rem] flex-row items-center gap-[0.875rem] pl-[3.75rem] hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
             href="/diary/list?page=1"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(4)}
@@ -120,7 +126,7 @@ const HeaderSidebar = ({
           >
             {hoverNum === 4 ? (
               <Image
-                className="ml-[0.125rem]"
+                className="aspect-square"
                 src="/home/diary-icon-hover.svg"
                 alt="diary-icon"
                 width={22}
@@ -128,7 +134,7 @@ const HeaderSidebar = ({
               />
             ) : (
               <Image
-                className="ml-[0.125rem]"
+                className="aspect-square"
                 src="/home/diary-icon.svg"
                 alt="diary-icon"
                 width={22}
@@ -138,7 +144,7 @@ const HeaderSidebar = ({
             <p>여행일기</p>
           </Link>
           <Link
-            className="flex h-[5rem] flex-row items-center gap-[0.875rem] pl-[3.75rem] hover:text-main"
+            className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
             href="/support?menu=about"
             onClick={onClose}
             onMouseEnter={() => setHoverNum(5)}
@@ -147,6 +153,7 @@ const HeaderSidebar = ({
           >
             {hoverNum === 5 ? (
               <Image
+                className="aspect-square"
                 src="/home/support-icon-hover.png"
                 alt="diary-icon"
                 width={22}
@@ -154,6 +161,7 @@ const HeaderSidebar = ({
               />
             ) : (
               <Image
+                className="aspect-square"
                 src="/home/support-icon.png"
                 alt="diary-icon"
                 width={22}
@@ -174,7 +182,7 @@ const HeaderSidebar = ({
               >
                 {hoverNum === 6 ? (
                   <Image
-                    className="ml-[0.0625rem]"
+                    className="aspect-square"
                     src="/home/mypage-icon-hover.svg"
                     alt="signin-icon"
                     width={22}
@@ -182,7 +190,7 @@ const HeaderSidebar = ({
                   />
                 ) : (
                   <Image
-                    className="ml-[0.0625rem]"
+                    className="aspect-square"
                     src="/home/mypage-icon.svg"
                     alt="signin-icon"
                     width={22}
@@ -192,10 +200,10 @@ const HeaderSidebar = ({
                 <p>마이페이지</p>
               </Link>
               <button
-                className="flex h-[5rem] flex-row items-center gap-[0.875rem] pl-[3.75rem] hover:text-main"
+                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
                 onClick={logoutHandler}
               >
-                <CiLogout className="-ml-[0.125rem]" size="1.7rem" />
+                <CiLogout size="1.375rem" />
                 <p>로그아웃</p>
               </button>
             </div>
@@ -210,7 +218,7 @@ const HeaderSidebar = ({
             >
               {hoverNum === 7 ? (
                 <Image
-                  className="-ml-[0.0625rem]"
+                  className="aspect-square"
                   src="/home/signin-icon-hover.svg"
                   alt="signin-icon"
                   width={22}
@@ -218,7 +226,7 @@ const HeaderSidebar = ({
                 />
               ) : (
                 <Image
-                  className="-ml-[0.0625rem]"
+                  className="aspect-square"
                   src="/home/signin-icon.svg"
                   alt="signin-icon"
                   width={22}
