@@ -39,7 +39,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 hover:outline-main max-[744px]:max-w-[28.75rem]`}
+      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main max-[744px]:max-w-[28.75rem]`}
     >
       <div className="flex flex-col">
         {/* 상태와 북마크 */}
@@ -102,7 +102,9 @@ const GatheringItem = ({ data }: IGatheringItem) => {
                 />
               </div>
               <p className="overflow-hidden truncate whitespace-nowrap">
-                {data.zoneCategoryParentName} {","} {data.zoneCategoryChildName}
+                {data.zoneCategoryParentName === "세종"
+                  ? "세종특별자치시"
+                  : `${data.zoneCategoryParentName}, ${data.zoneCategoryChildName}`}
               </p>
             </article>
           </div>

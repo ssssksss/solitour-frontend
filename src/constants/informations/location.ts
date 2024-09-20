@@ -15,6 +15,7 @@ export const LOCATION = [
   "충북",
   "충남",
   "전북",
+  "세종",
 ];
 
 type LOCATION_ID_TYPE = {
@@ -38,4 +39,5 @@ export const LOCATION_ID: LOCATION_ID_TYPE = {
   충북: 14,
   충남: 15,
   전북: 16,
+  세종: 245,
 };

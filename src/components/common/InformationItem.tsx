@@ -100,7 +100,9 @@ const InformationItem = ({
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center gap-1 text-gray1">
             <TiLocation />
-            <p className="text-xs font-medium">{address}</p>
+            <p className="text-xs font-medium">
+              {address.slice(0, 2) === "세종" ? "세종특별자치시" : address}
+            </p>
           </div>
           <div className="flex flex-row items-center gap-3">
             <div

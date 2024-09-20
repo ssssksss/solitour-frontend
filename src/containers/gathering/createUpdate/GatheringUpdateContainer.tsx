@@ -13,10 +13,12 @@ import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface IGatheringUpdateContainer {
-    gatheringData: GatheringDetailResponseDto
+  gatheringData: GatheringDetailResponseDto;
 }
 
-const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) => {
+const GatheringUpdateContainer = ({
+  gatheringData,
+}: IGatheringUpdateContainer) => {
   const router = useRouter();
   const toastifyStore = useToastifyStore();
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,7 +56,7 @@ const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) =>
   const params = useParams();
 
   const updateGatheringHandler = async () => {
-  const { id } = params;
+    const { id } = params;
     const {
       gatheringCategoryId,
       allowedSex,
@@ -88,7 +90,10 @@ const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) =>
           zoneCategoryNameParent: convertRegionToTwoLetters(
             roadAddressName.split(" ")[0],
           ),
-          zoneCategoryNameChild: roadAddressName.split(" ")[1],
+          zoneCategoryNameChild:
+            convertRegionToTwoLetters(roadAddressName.split(" ")[0]) === "세종"
+              ? "세종"
+              : roadAddressName.split(" ")[1],
           tagRegisterRequests:
             hashtags.length > 0
               ? hashtags.map((i) => {
@@ -97,7 +102,7 @@ const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) =>
               : [],
         }),
       });
-      
+
       if (!response.ok) {
         setLoading(false);
         toastifyStore.setToastify({
@@ -112,20 +117,18 @@ const GatheringUpdateContainer = ({gatheringData}: IGatheringUpdateContainer) =>
       router.replace(`/gathering`);
       router.refresh();
       setLoading(false);
-
     } catch (error) {
       setLoading(false);
       console.error("There was a problem with the fetch operation:", error);
     }
-  }
+  };
 
   useEffect(() => {
     methods.trigger();
-  },[])
-  
+  }, []);
 
   return (
-      <FormProvider {...methods}>
+    <FormProvider {...methods}>
       <GatheringEditor
         updateGatheringHandler={updateGatheringHandler}
         isEdit={true}
