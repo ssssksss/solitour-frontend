@@ -132,9 +132,12 @@ const QuillEditorContainer = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      document.querySelectorAll("img").forEach((img) => {
-        img.style.borderRadius = "1rem";
-      });
+      document
+        .querySelector(".quillEditor")
+        ?.querySelectorAll("img")
+        .forEach((img) => {
+          img.style.borderRadius = "1rem";
+        });
       onContentChange(quillRef.current!.getEditorContents().toString());
     }, 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
