@@ -72,7 +72,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
             />
             {format(new Date(data.scheduleStartDate), "yyyy-MM-dd")}
             {data.scheduleEndDate &&
-              format(new Date(data.scheduleEndDate), "~ yyyy-MM-dd")}
+              format(new Date(data.scheduleEndDate), " ~ yyyy-MM-dd")}
           </div>
           <div className=":text-slate-400 flex items-center gap-2">
             {/* 모임 장소 */}
@@ -120,7 +120,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
                   (new Date().getFullYear() - data.startAge) +
                   "세 ~ " +
                   (new Date().getFullYear() - data.endAge) +
-                  "세 ," +
+                  "세, " +
                   SEX[data.allowedSex] +
                   ")"}
               </p>
