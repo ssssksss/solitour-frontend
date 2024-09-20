@@ -10,6 +10,7 @@ import { MdClose } from "react-icons/md";
 import { useFormContext } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
+import HashSpinner from "@/components/common/HashSpinner";
 
 interface Props {
   pathname: string;
@@ -54,6 +55,7 @@ const InformationEditor = ({
       {categoryModal && (
         <CategoryModalContainer closeModal={closeCategoryModal} />
       )}
+      <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`정보 ${pathname}하기`}
       </h1>
@@ -304,10 +306,10 @@ const InformationEditor = ({
       </div>
       <div className="flex flex-col items-end">
         <button
-          className="mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full bg-main font-medium text-white shadow hover:scale-105"
+          className={`${editorStore.imageLoading ? "cursor-not-allowed bg-gray1" : "bg-main hover:scale-105"} mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow`}
           type="submit"
           onClick={() => onSubmit()}
-          disabled={loading}
+          disabled={loading || editorStore.imageLoading}
         >
           {loading ? (
             <div className="flex flex-row items-center gap-3">
