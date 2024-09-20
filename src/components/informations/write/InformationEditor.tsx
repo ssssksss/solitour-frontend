@@ -145,7 +145,7 @@ const InformationEditor = ({
         사진 최대 용량은 10MB입니다.
       </p>
       <textarea
-        className="mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-none placeholder:text-sm"
+        className="mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-none hover:border-main focus:border-main"
         {...formContext.register("informationContent")}
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         onChange={(e) => {
