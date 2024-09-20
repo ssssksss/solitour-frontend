@@ -44,7 +44,6 @@ const InformationEditorContainer = () => {
     thumbnailImageUrl: string;
     contentImagesUrl: string[];
     informationContent: string;
-    contentLength: number;
     hashtags: string[];
     tips: string[];
   }>({
@@ -64,7 +63,6 @@ const InformationEditorContainer = () => {
       thumbnailImageUrl: "",
       contentImagesUrl: [""],
       informationContent: "",
-      contentLength: 0,
       hashtags: [],
       tips: [],
     },

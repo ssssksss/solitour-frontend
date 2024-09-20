@@ -55,7 +55,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     newContentImagesUrl: string[];
     deleteImagesUrl: string[];
     informationContent: string;
-    contentLength: number;
     hashtags: string[];
     tips: string[];
   }>({
@@ -78,7 +77,6 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
       newContentImagesUrl: Array<string>(0),
       deleteImagesUrl: Array<string>(0),
       informationContent: "",
-      contentLength: 0,
       hashtags: Array<string>(0),
       tips: [""],
     },

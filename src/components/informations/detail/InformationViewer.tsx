@@ -96,10 +96,9 @@ const InformationViewer = ({ informationId, data }: Props) => {
             <TiLocation className="text-main" size={"1.1rem"} />
             <p className="text-xs font-medium text-gray1">{data.address}</p>
           </div>
-          <p
-            className="break-words py-4 font-medium text-gray1"
-            dangerouslySetInnerHTML={{ __html: data.content }}
-          />
+          <p className="whitespace-pre-wrap break-words py-4 font-medium text-gray1">
+            {data.content}
+          </p>
           <div className="flex flex-row flex-wrap items-center gap-1 pb-8">
             {data.tagResponses.map((tag, index) => (
               <ItemTag

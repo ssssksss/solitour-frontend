@@ -7,7 +7,6 @@ import PlaceModalContainer from "@/containers/informations/write/PlaceModalConta
 import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
-import QuillEditor from "./QuillEditor";
 import { useFormContext } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
@@ -145,16 +144,18 @@ const InformationEditor = ({
       <p className="text-sm font-medium text-gray1">
         사진 최대 용량은 10MB입니다.
       </p>
-      <QuillEditor
-        content={formContext.getValues("informationContent")}
-        onChange={(value: string, length: number) => {
-          formContext.setValue("informationContent", value);
-          formContext.setValue("contentLength", length);
+      <textarea
+        className="mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-none placeholder:text-sm"
+        {...formContext.register("informationContent")}
+        placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
+        onChange={(e) => {
+          formContext.setValue("informationContent", e.target.value);
           formContext.trigger("informationContent");
         }}
+        maxLength={500}
       />
       <p className="pt-3 text-end text-sm font-medium text-gray1">
-        {formContext.getValues("contentLength")}/500
+        {formContext.getValues("informationContent").length}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
         <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black">
