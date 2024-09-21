@@ -2,7 +2,6 @@
 
 import Header from "@/components/common/Header";
 import useAuthStore from "@/store/authStore";
-import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -62,7 +61,7 @@ const HeaderContainer = () => {
       try {
         const data = await fetchWithAuth("/api/auth/user");
         if (data.status == 200) {
-          data.json().then((res: userResponseDto) => {
+          data.json().then((res) => {
             authStore.setUser(res);
           });
         } else {

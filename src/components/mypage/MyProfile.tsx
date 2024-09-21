@@ -38,7 +38,7 @@ const MyProfile = (props: IMyProfileProps) => {
       >
         <div
           className={
-            "relative flex gap-y-[1rem] max-h-[24rem] p-[2.75rem] w-[calc(100vw-1rem)] max-w-[40rem] flex-col overflow-y-scroll rounded-b-xl bg-white scrollbar-hide"
+            "relative flex max-h-[24rem] w-[calc(100vw-1rem)] max-w-[40rem] flex-col gap-y-[1rem] overflow-y-scroll rounded-b-xl bg-white p-[2.75rem] scrollbar-hide"
           }
         >
           <div className={"flex flex-col gap-y-[.5rem]"}>
@@ -53,8 +53,10 @@ const MyProfile = (props: IMyProfileProps) => {
             </p>
             <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
           </div>
-          <div className="select-none flex items-end gap-x-[.25rem]">
-            <span className={"text-main text-lg"}> '회원탈퇴를 하겠습니다.' </span>
+          <div className="flex select-none items-end gap-x-[.25rem]">
+            <span className={"text-lg text-main"}>
+              {`'회원탈퇴를 하겠습니다.'`}
+            </span>
             <span> 라고 입력해주세요. </span>
           </div>
           <input
@@ -66,7 +68,7 @@ const MyProfile = (props: IMyProfileProps) => {
             disabled={props.userDeleteText !== "회원탈퇴를 하겠습니다."}
             onClick={props.userDeleteHandler}
             className={
-              "h-[3rem] flex-shrink-0 w-full rounded-full bg-main text-white disabled:bg-gray2"
+              "h-[3rem] w-full flex-shrink-0 rounded-full bg-main text-white disabled:bg-gray2"
             }
           >
             회원탈퇴
@@ -166,24 +168,22 @@ const MyProfile = (props: IMyProfileProps) => {
                   {props.userInfo.userImage.createdDate}
                 </span>
                 <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[18px] bg-[#FEE501]">
-                  {
-                    props.userInfo.provider == "kakao" &&
+                  {props.userInfo.provider == "kakao" && (
                     <Image
                       src={"/user/kakao-icon.svg"}
                       alt={"kakao-icon-image"}
                       width={20}
                       height={20}
                     />
-                  }
-                  {
-                    props.userInfo.provider == "google" &&
+                  )}
+                  {props.userInfo.provider == "google" && (
                     <Image
                       src={"/user/google-icon.svg"}
                       alt={"google-icon-image"}
                       width={20}
                       height={20}
                     />
-                  }
+                  )}
                 </div>
               </div>
             </div>

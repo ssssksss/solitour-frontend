@@ -5,7 +5,6 @@ import useAuthStore from "@/store/authStore";
 import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { userResponseDto } from "../../types/UserDto";
 
 const AuthKaKaoContainer = () => {
   const router = useRouter();
@@ -37,7 +36,7 @@ const AuthKaKaoContainer = () => {
         const userDataResponse = await fetch("/api/auth/user");
         if (userDataResponse.status == 200) {
           const userData = await userDataResponse.json();
-          authStore.setUser(userData as userResponseDto);
+          authStore.setUser(userData);
           router.push("/");
         } else {
           throw new Error("Failed to fetch user data");
