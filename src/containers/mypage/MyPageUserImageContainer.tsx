@@ -5,7 +5,7 @@ import { useState } from "react";
 
 interface IMyPageUserImageContainer {
   userImageUrl: string;
-  userSex: string;
+  userSex: string | null;
 }
 
 const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {

@@ -1,3 +1,4 @@
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -56,15 +57,20 @@ export async function DELETE(request: NextRequest) {
     return new NextResponse("Refresh token not found", { status: 401 });
   }
 
-  // 사용자 정보 조회 API
-  const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
-    method: "DELETE",
-    headers: {
-      Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
-      "Content-Type": "application/json",
+  const url = new URL(request.url);
+
+  // 사용자 삭제
+  const response = await fetchWithAuth(
+    `${process.env.BACKEND_URL}/api/auth/oauth2?type=${url.searchParams.get("type")}`,
+    {
+      method: "DELETE",
+      headers: {
+        Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
     },
-    cache: "no-store",
-  });
+  );
 
   if (!response.ok) {
     return new NextResponse(`${response.statusText}`, { status: response.status });

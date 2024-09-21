@@ -1,16 +1,20 @@
 // Request 요청 결과 Dto
-export interface userResponseDto {
-  age: number; // 연도
-  email: string;
+interface UserImage {
   id: number;
-  isAdmin: boolean;
+  address: string;
+  createdDate: string;
+}
+
+export interface userResponseDto {
+  id: number;
+  userStatus: string;
+  userImage: UserImage;
   nickname: string;
-  phoneNumber: string;
-  sex: string; // "male, female"
-  userImage: {
-    id: number;
-    address: string;
-    createdDate: string; // "2024-07-12",
-  };
-  userStatus: string; // "활성화" | "휴먼" | "삭제" | "관리자" | "";
+  age: number;
+  sex: string | null;
+  email: string;
+  provider: string;
+  phoneNumber: string | null;
+  createdAt: string;
+  isAdmin: boolean;
 }

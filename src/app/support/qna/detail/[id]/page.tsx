@@ -1,4 +1,5 @@
 import SupportQnADetailEditContainer from "@/containers/support/qna/SupportQnADetailEditContainer";
+import { QnADetailType } from "@/types/QnADto";
 import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
 import { cookies } from "next/headers";
 
@@ -22,7 +23,7 @@ async function fetchData(id: number) {
   const accessToken = cookies().get("access_token");
   const refreshToken = cookies().get("refresh_token");
 
-  return fetchWithTokenRefreshSSR({
+  return await fetchWithTokenRefreshSSR<QnADetailType>({
     url: `${process.env.BACKEND_URL}/api/qna/${id}`,
     accessToken: accessToken,
     refreshToken: refreshToken,
@@ -39,7 +40,7 @@ export default async function Page({ params: { id } }: Props) {
 
   return (
     <main className="mb-8 w-full">
-      <SupportQnADetailEditContainer data={await data.json()} />
+      <SupportQnADetailEditContainer data={data} />
     </main>
   );
 }

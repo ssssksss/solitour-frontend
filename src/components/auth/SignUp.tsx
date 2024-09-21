@@ -61,7 +61,7 @@ const SignUp = () => {
           구글로 1초만에 시작하기
         </span>
       </Link> */}
-      <div className={"relative flex w-full justify-center mt-[2.25rem]"}>
+      <div className={"relative flex w-full justify-center"}>
         <p
           className={
             "relative flex w-full justify-center font-semibold text-black"

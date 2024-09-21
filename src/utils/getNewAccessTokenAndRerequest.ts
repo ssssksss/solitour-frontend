@@ -36,7 +36,7 @@ interface IFetchWithTokenRefreshSSR {
   next?: NextFetchRequestConfig;
 }
 
-export async function fetchWithTokenRefreshSSR({
+export async function fetchWithTokenRefreshSSR<T>({
   accessToken,
   refreshToken,
   url,
@@ -44,7 +44,7 @@ export async function fetchWithTokenRefreshSSR({
   cache,
   contentType,
   next,
-}: IFetchWithTokenRefreshSSR) {
+}: IFetchWithTokenRefreshSSR): Promise<T> {
   let response = await fetch(url, {
     method: method || "GET",
     headers: {
@@ -103,5 +103,6 @@ export async function fetchWithTokenRefreshSSR({
     throw new Error("API 요청에 실패했습니다.");
   }
 
-  return response;
+  const data = await response.json();
+  return data as T;
 }

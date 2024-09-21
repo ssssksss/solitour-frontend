@@ -8,7 +8,7 @@ interface IMyPageUserImage {
   dragAndDrop: dragAndDropProps;
   imageBase64Data: string;
   userImageUrl: string;
-  userSex: string;
+  userSex: string | null;
   isModalOpen: boolean;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;

@@ -59,7 +59,8 @@ const SignIn = () => {
         </div>
         <span className="text-sm font-semibold text-black">구글로 로그인</span>
       </Link> */}
-      <div className={"relative flex w-full justify-center mt-[2.25rem]"}>
+
+      <div className={"relative flex w-full justify-center mt-[3rem]"}>
         <div className={"absolute top-[-.5rem] flex flex-col items-center"}>
           <div
             className={
