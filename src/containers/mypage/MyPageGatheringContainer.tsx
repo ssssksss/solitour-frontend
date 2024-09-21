@@ -1,11 +1,15 @@
 "use client"
 
+import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
 import CategoryList from "@/components/common/CategoryList";
+import { Modal } from "@/components/common/modal/Modal";
 import Pagination from "@/components/common/Pagination";
 import MyPageGatheringList from "@/components/mypage/MyPageGatheringList";
+import useModalState from "@/hooks/useModalState";
+import useAuthStore from "@/store/authStore";
 import { Gathering } from "@/types/GatheringDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IMyPageGatheringContainer {
@@ -32,8 +36,11 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
     const [activeCategory, setActiveCategory] = useState("");
     const [currentPage, setCurrentPage] = useState(
       Number(searchParams.get("page")) || 1,
-    );
-    const [elements, setElements] = useState<Gathering[]>([]);
+  );
+  const router = useRouter();
+  const modalState = useModalState();
+  const [elements, setElements] = useState<Gathering[]>([]);
+    const authStore = useAuthStore();
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const pageHandler = (page: number) => {
@@ -54,6 +61,20 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
       setActiveCategory(value);
       setCurrentPage(1);
   }
+
+  const checkAccessGathering = async (
+    e: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
+      e.preventDefault();
+      modalState.openModal();
+    }
+    if (authStore.id < 1) {
+      e.preventDefault();
+      router.push("/auth/signin");
+    }
+  };
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -96,15 +117,25 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
 
   return (
     <div className="w-full">
+      <Modal isOpen={modalState.isOpen} onClose={modalState.closeModal} isHeaderBar={true}>
+        <AddUserInformationForm />
+      </Modal>
       <CategoryList
         categories={categories}
         onClickHandler={onClickCategoryHandler}
         activeCategory={activeCategory}
       />
-      <MyPageGatheringList elements={elements} isLoading={isLoading} />
+      <MyPageGatheringList
+        elements={elements}
+        isLoading={isLoading}
+        checkAccessGathering={checkAccessGathering}
+        isAccessGathering={
+          !!authStore.sex && !!authStore.age && authStore.id > 0
+        }
+      />
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.floor(totalElements / 6) + 1}
+        totalPages={Math.ceil(totalElements / 6)}
         pageHandler={pageHandler}
       />
     </div>

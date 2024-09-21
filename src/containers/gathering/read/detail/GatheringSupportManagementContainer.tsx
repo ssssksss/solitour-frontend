@@ -12,6 +12,11 @@ interface IGatheringSupportManagementContainer {
   gatheringStatus: string;
   isFinish: boolean;
   openChattingUrl: string;
+  allowedGender: string;
+  allowedAgeRange: {
+    startAge: number,
+    endAge: number,
+  }
 }
 const GatheringSupportManagementContainer = (
   props: IGatheringSupportManagementContainer,
@@ -54,9 +59,11 @@ const GatheringSupportManagementContainer = (
     });
     if (res.ok) {
       setGatheringStatus(null);
-      gatheringStore.setGathering({
-        currentParticipants: gatheringStore.currentParticipants - 1,
-      });
+      if(gatheringStatus == "CONSENT") {
+        gatheringStore.setGathering({
+          currentParticipants: gatheringStore.currentParticipants - 1,
+        });
+      }
       toastifyStore.setToastify({
         type: "warning",
         message: "모임을 취소했습니다.",
@@ -123,6 +130,8 @@ const GatheringSupportManagementContainer = (
       isFullParticipants={
         gatheringStore.personCount == gatheringStore.currentParticipants
       }
+      isAllowedGender={props.allowedGender == "ALL" || authStore.sex.toUpperCase() == props.allowedGender}
+      isAllowedAgeRange={authStore.age <= props.allowedAgeRange.startAge && authStore.age >= props.allowedAgeRange.endAge}
     />
   );
 };

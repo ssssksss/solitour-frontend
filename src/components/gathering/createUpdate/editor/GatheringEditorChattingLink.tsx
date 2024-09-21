@@ -6,9 +6,10 @@ const GatheringEditorChattingLink = () => {
   return (
     <div className="relative flex w-full flex-shrink-0 items-center gap-[0.625rem]">
       <div
-        className={"relative w-[2.75rem] flex-shrink-0 text-lg font-semibold"}
+        className={"relative w-[2.75rem] flex-shrink-0"}
       >
-        링크
+        <span className={"text-lg font-semibold"}>링크</span>
+        <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
       <div className="relative w-full">
         <input

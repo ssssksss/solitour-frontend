@@ -9,10 +9,11 @@ interface Props {
   animationFlag: boolean;
   onClick: () => void;
   onScrollToTop: () => void;
+  createGatheringClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const FloatingButton = forwardRef<HTMLDivElement, Props>(
-  ({ visible, animationFlag, onClick, onScrollToTop }, ref) => {
+  ({ visible, animationFlag, onClick, onScrollToTop, createGatheringClick }, ref) => {
     return (
       <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 translate-x-[-100%] flex-col items-center gap-3">
         {visible && (
@@ -31,7 +32,7 @@ const FloatingButton = forwardRef<HTMLDivElement, Props>(
               <Link
                 className="flex flex-col items-center text-sm hover:text-main"
                 href="/gathering/write"
-                onClick={onClick}
+                onClick={(e) => createGatheringClick(e)}
               >
                 <p>모임</p>
                 <p>등록하기</p>

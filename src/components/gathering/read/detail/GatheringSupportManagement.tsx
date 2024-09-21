@@ -13,10 +13,12 @@ interface IGatheringSupportManagement {
   modalState: ModalState;
   modalState1: ModalState;
   modalState2: ModalState;
-  isFinish: boolean,
+  isFinish: boolean;
   openChattingUrl: string;
   reOpenGathering: () => void;
   isFullParticipants: boolean;
+  isAllowedGender: boolean;
+  isAllowedAgeRange: boolean;
 }
 const GatheringSupportManagement = ({
   postUserId,
@@ -31,8 +33,9 @@ const GatheringSupportManagement = ({
   openChattingUrl,
   reOpenGathering,
   isFullParticipants,
+  isAllowedGender,
+  isAllowedAgeRange,
 }: IGatheringSupportManagement) => {
-
   if (postUserId == userId && userId > 0) {
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
@@ -142,10 +145,10 @@ const GatheringSupportManagement = ({
         {gatheringStatus == null && (
           <button
             onClick={applyGathering}
-            className={`${isFullParticipants && "bg-gray3"} flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
-            disabled={isFullParticipants}
+            className={`${isFullParticipants || !isAllowedGender || !isAllowedAgeRange && "bg-gray3"} flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
+            disabled={isFullParticipants || !isAllowedGender || !isAllowedAgeRange}
           >
-            {isFullParticipants ? "정원 초과" : "모임 신청하기"}
+            {isFullParticipants ? "정원 초과" : !isAllowedGender ? "성별 제한" : !isAllowedAgeRange ? "나이 제한" : "모임 신청하기"}
           </button>
         )}
       </div>

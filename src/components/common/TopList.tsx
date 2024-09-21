@@ -31,7 +31,7 @@ async function getTopGatheringList() {
     `${process.env.BACKEND_URL}/api/gatherings/ranks`,
     {
       method: "GET",
-      next: { revalidate: 3600, tags: ["getTopGatheringList"] },
+      next: { revalidate: 60, tags: ["getTopGatheringList"] },
     },
   );
 
