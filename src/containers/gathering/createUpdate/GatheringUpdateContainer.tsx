@@ -1,7 +1,7 @@
 "use client";
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
-import { gatheringCreateFormSchema } from "@/lib/examples/zod/schema/GatheringCreateFormSchema";
+import { GatheringCreateFormSchema } from "@/lib/zod/schema/GatheringCreateFormSchema";
 import useToastifyStore from "@/store/toastifyStore";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
@@ -23,7 +23,7 @@ const GatheringUpdateContainer = ({
   const toastifyStore = useToastifyStore();
   const [loading, setLoading] = useState<boolean>(false);
   const methods = useForm({
-    resolver: zodResolver(gatheringCreateFormSchema),
+    resolver: zodResolver(GatheringCreateFormSchema),
     defaultValues: {
       title: gatheringData.title,
       content: gatheringData.content,

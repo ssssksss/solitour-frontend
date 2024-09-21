@@ -47,7 +47,7 @@ const InformationItem = ({
   }
 
   return (
-    <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main">
+    <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main max-[744px]:min-w-[19.183125rem]">
       <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
         <Image
           className="-z-10 rounded-[0.875rem]"
