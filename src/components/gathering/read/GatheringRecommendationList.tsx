@@ -1,9 +1,16 @@
-"use client"
+"use client";
 
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItem from "../../common/GatheringItem";
+import useAuthStore from "@/store/authStore";
 
-const GatheringRecommendationList = ({data}: {data: GatheringRecommend[]}) => {
+const GatheringRecommendationList = ({
+  data,
+}: {
+  data: GatheringRecommend[];
+}) => {
+  const authStore = useAuthStore();
+
   return (
     <div className="mt-[4.875rem] flex w-full flex-col">
       <h2 className="text-2xl font-bold text-black">추천 모임 정보</h2>
@@ -13,8 +20,11 @@ const GatheringRecommendationList = ({data}: {data: GatheringRecommend[]}) => {
             key={i.gatheringId}
             data={{
               ...i,
-              openChattingUrl: ""
+              openChattingUrl: "",
             }}
+            isAccessGathering={
+              !!authStore.sex && !!authStore.age && authStore.id > 0
+            }
           />
         ))}
       </div>
