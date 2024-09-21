@@ -1,11 +1,13 @@
 import DeleteIcon from "@/components/common/icons/DeleteIcon";
 import EditIcon from "@/components/common/icons/EditIcon";
+import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import DiaryDeleteModalContainer from "@/containers/diary/detail/DiaryDeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
+import sanitizeHtml from "sanitize-html";
 
 interface Props {
   data: GetDiaryResponseDto;
@@ -54,9 +56,11 @@ const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
       <div
         className="diaryViewerContent mt-16"
         dangerouslySetInnerHTML={{
-          __html:
+          __html: sanitizeHtml(
             data.diaryContentResponse.diaryDayContentResponses
               .diaryDayContentDetail[0].content,
+            sanitizeOption,
+          ),
         }}
       />
       <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
