@@ -1,8 +1,12 @@
 "use client";
 
+import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
+import { Modal } from "@/components/common/modal/Modal";
 import Pagination from "@/components/common/Pagination";
 import GatheringCardList from "@/components/gathering/read/GatheringCardList";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
+import useModalState from "@/hooks/useModalState";
+import useAuthStore from "@/store/authStore";
 import { Gathering } from "@/types/GatheringDto";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,7 +26,9 @@ const GatheringCardListContainer = () => {
   const [totalElements, setTotalElements] = useState(1);
   const [elements, setElements] = useState<Gathering[]>([]);
   const [loading, setLoading] = useState(true);
+  const authStore = useAuthStore();
   const router = useRouter();
+  const modalState = useModalState();
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
@@ -33,6 +39,19 @@ const GatheringCardListContainer = () => {
     params.set("page", page + "");
     url.search = params.toString();
     window.history.pushState({}, "", url.toString());
+  };
+
+  const checkAccessGathering = async (
+    e: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
+      e.preventDefault();
+      modalState.openModal();
+    }
+    if (authStore.id < 1) {
+      e.preventDefault();
+      router.push("/auth/signin");
+    }
   };
 
   useEffect(() => {
@@ -78,8 +97,17 @@ const GatheringCardListContainer = () => {
       {loading ? (
         <SkeletonGatheringList />
       ) : (
-        <>
-          <GatheringCardList data={elements} />
+          <>
+          <Modal isOpen={modalState.isOpen} onClose={modalState.closeModal} isHeaderBar={true}>
+            <AddUserInformationForm />
+          </Modal>
+          <GatheringCardList
+            data={elements}
+            checkAccessGathering={checkAccessGathering}
+            isAccessGathering={
+              !!authStore.sex && !!authStore.age && authStore.id > 0
+            }
+          />
           {elements.length != 0 && (
             <Pagination
               currentPage={currentPage}

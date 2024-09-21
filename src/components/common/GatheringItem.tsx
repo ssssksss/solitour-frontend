@@ -9,6 +9,7 @@ import Link from "next/link";
 
 interface IGatheringItem {
   data: Gathering;
+  isAccessGathering: boolean;
 }
 
 const SEX: { [key: string]: string } = {
@@ -35,11 +36,16 @@ const status: { [key: string]: string } = {
 };
 
 // todo
-const GatheringItem = ({ data }: IGatheringItem) => {
+const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
       className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 duration-300 hover:bg-[#F2FAF7] hover:outline-main`}
+      onClick={(e) => {
+        if (!isAccessGathering) {
+          e.preventDefault();
+        }
+      }}
     >
       <div className="flex flex-col">
         {/* 상태와 북마크 */}
