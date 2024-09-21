@@ -57,14 +57,6 @@ export default function RootLayout({
     <html lang="ko" className={"h-full"}>
       <meta
         name="google-site-verification"
-        content="4uK8QzlAEyT9nriZXww7-TpyUEm5Pgz6FAbEBy0F4_4"
-      />
-      <meta
-        name="naver-site-verification"
-        content="4da70e879bd32d934e1a503b1a86d3e3cae4e0a3"
-      />
-      <meta
-        name="google-site-verification"
         content="3mtzBvqxMZ31vvaa0SmQaIJEiY6HUHLnyMqM5qGZvVU"
       />
       <meta
