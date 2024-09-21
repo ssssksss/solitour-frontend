@@ -72,7 +72,7 @@ const MyProfile = (props: IMyProfileProps) => {
           </button>
         </div>
       </Modal>
-      <div className={"flex flex-col gap-y-[2.375rem]"}>
+      <div className={"flex flex-col gap-y-[2.375rem] mt-[1rem]"}>
         <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
@@ -136,19 +136,19 @@ const MyProfile = (props: IMyProfileProps) => {
             />
           </div>
         </article>
-        <article>
+        {/* <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
               <span className={"text-lg font-semibold"}>성별</span>
             </div>
             <input
               disabled={true}
-              placeholder="이메일을 입력해주세요"
+              placeholder="성별을 입력해주세요"
               className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               defaultValue={props.userInfo.sex == "male" ? "남성" : "여성"}
             />
           </div>
-        </article>
+        </article> */}
         <article>
           <div
             className={
@@ -177,8 +177,8 @@ const MyProfile = (props: IMyProfileProps) => {
           </div>
         </article>
       </div>
-      <div className="flex w-full justify-end pt-[3rem] text-[#999999] hover:text-main">
-        <button onClick={props.modalState.openModal}>회원탈퇴</button>
+      <div className="flex w-full justify-end pt-[3rem] text-[#999999]">
+        <button className={"hover:text-main hover:font-bold"} onClick={props.modalState.openModal}>회원탈퇴</button>
       </div>
     </div>
   );
