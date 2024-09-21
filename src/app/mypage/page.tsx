@@ -11,21 +11,16 @@ export const metadata: Metadata = {
 };
 
 async function getUserInfo() {
+
   const access_token = cookies().get("access_token");
   const refresh_token = cookies().get("refresh_token");
-  const response = await fetchWithTokenRefreshSSR(
-    {
-      url: `${process.env.BACKEND_URL}/api/users/info`,
-      accessToken: access_token,
-      refreshToken: refresh_token,
-    });
+  const response = await fetchWithTokenRefreshSSR<userResponseDto>({
+    url: `${process.env.BACKEND_URL}/api/users/info`,
+    accessToken: access_token,
+    refreshToken: refresh_token,
+  });
 
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<userResponseDto>;
+  return response;
 }
 
 
