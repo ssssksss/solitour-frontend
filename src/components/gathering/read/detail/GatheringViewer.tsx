@@ -45,6 +45,11 @@ const GatheringViewer = ({
             gatheringStatus={data.gatheringStatus}
             isFinish={data.isFinish}
             openChattingUrl={data.openChattingUrl}
+            allowedGender={data.allowedSex}
+            allowedAgeRange={{
+              startAge: data.startAge,
+              endAge: data.endAge,
+            }}
           />
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}

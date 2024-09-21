@@ -2,6 +2,7 @@
 
 import MyProfile from "@/components/mypage/MyProfile";
 import useModalState from "@/hooks/useModalState";
+import useAuthStore from "@/store/authStore";
 import useToastifyStore from "@/store/toastifyStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
@@ -20,6 +21,7 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
   const [userDeleteText, setUserDeleteText] = useState("");
   const router = useRouter();
   const toastifyStore = useToastifyStore();
+  const authStore = useAuthStore();
 
   const submitChangeNicknameHandler = async () => {
     if (nickname == "" && nickname == defaultNickname) return;
@@ -50,28 +52,33 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
   }
 
   const userDeleteHandler = async () => {
-
-    const response = await fetchWithAuth("/api/auth/user", {
+    const response = await fetchWithAuth(`/api/auth/user?type=${userInfo.provider}`, {
       method: "DELETE",
       "Content-Type": "application/json",
     });
 
     if (response.ok) {
-      toastifyStore.setToastify({
+      modalState.closeModal();
+      await toastifyStore.setToastify({
         type: "success",
-        message: "회원탈퇴에 성공했습니다."
-      })
-      router.push("/");
+        message: "회원탈퇴에 성공했습니다.",
+      });
+      authStore.initialize();
+      setTimeout(() => {
+        router.replace("/");
+      }, 300);
     }
-
+    else {
       toastifyStore.setToastify({
         type: "error",
         message: "회원탈퇴에 실패했습니다.",
       });
+    }
   }
 
 
   return (
+    <>
     <MyProfile
       userInfo={userInfo}
       submitChangeNicknameHandler={submitChangeNicknameHandler}
@@ -83,7 +90,8 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
       changeUserDeleteText={changeUserDeleteText}
       userDeleteText={userDeleteText}
       userDeleteHandler={userDeleteHandler}
-    />
+      />
+      </>
   );
 };
 export default MyProfileContainer;

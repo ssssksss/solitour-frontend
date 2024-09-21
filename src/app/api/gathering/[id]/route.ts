@@ -8,7 +8,6 @@ export async function GET(
   try {
     const cookie = request.cookies.get("access_token");
 
-    // Back-end API 호출
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/gatherings/${params.id}`,
       {
@@ -43,7 +42,6 @@ export async function PUT(
     const cookie = request.cookies.get("access_token");
     const bodyData = await request.json();
 
-    // Back-end API 호출
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/gatherings/${params.id}`,
       {
@@ -60,11 +58,9 @@ export async function PUT(
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    await revalidatePath(`/gathering/${params.id}`);
-    // return NextResponse.redirect(
-    //   new URL(`/getGathering/${params.id}`),
-    // );
-    
+    revalidatePath(`/gathering/${params.id}`);
+    revalidatePath("/mypage");
+    revalidatePath("/gathering");
     return response;
   } catch (e) {
     return new Response(JSON.stringify({ error: "Failed to update data." }), {

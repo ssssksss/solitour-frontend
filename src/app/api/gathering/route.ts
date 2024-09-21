@@ -31,6 +31,8 @@ export async function POST(request: NextRequest) {
       throw new Error(`Error: ${errorData.error || "Unknown error occurred"}`);
     }
     const resultData = await response.json();
+    // 생성시 홈 화면에 new모임 최신화
+    revalidateTag("getNewGatheringList");
     return NextResponse.json(
       { data: resultData, message: "데이터가 성공적으로 처리되었습니다." },
       { status: 200 },
@@ -90,6 +92,8 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "서버 오류" }, { status: 500 });
   }
 
+  revalidateTag("getNewGatheringList");
   revalidatePath("/gathering", "layout");
+  revalidatePath("/mypage");
   return response;
 }

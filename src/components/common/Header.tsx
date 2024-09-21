@@ -39,7 +39,7 @@ const Header = ({
         }
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
-          <div className="flex flex-row items-center p-0 max-[1024px]:pl-[1.875rem]">
+          <div className="flex flex-row items-center p-0 max-[744px]:pl-0 max-[1024px]:pl-[1.875rem]">
             <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
               <Image
                 src={"/common/solitour-logo.svg"}

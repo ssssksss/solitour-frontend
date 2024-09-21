@@ -30,7 +30,7 @@ const GatheringEditorHashTag = ({
         </div>
         <div className="relative w-full">
           <input
-            placeholder="해시태그로 키워드를 써보세요!"
+            placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             className="h-[3.25rem] w-full rounded-[3rem] px-[1rem] pr-[3rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]" // 오른쪽 padding 추가
             onKeyUp={onChangeHashTagHandler}
             disabled={tags.length > 9}

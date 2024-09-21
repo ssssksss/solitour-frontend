@@ -12,16 +12,17 @@ interface IMyPageUserImage {
   isModalOpen: boolean;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
+  deleteImage: () => void;
 }
 const MyPageUserImage = (props: IMyPageUserImage) => {
   return (
     <article
       className={"flex items-center justify-center pb-[5.25rem] pt-[4.25rem]"}
     >
-      <div className={"flex flex-col items-center"}>
+      <div className={"group flex flex-col items-center"}>
         <label
           className={
-            "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
+            "relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
           }
           htmlFor={"imageUpload"}
           onDragEnter={props.dragAndDrop.onDragEnter}
@@ -47,12 +48,19 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               />
             </div>
           </div>
-          <input
-            type={"file"}
-            id={"imageUpload"}
-            className="hidden"
-            onChange={(e) => props.dragAndDrop.onDropOrInputEvent(e)}
-          />
+          <button
+            className={
+              "invisible absolute right-0 top-0 z-10 flex aspect-square w-[1rem] items-center justify-center rounded-[50%] bg-black group-hover:visible"
+            }
+            onClick={() => props.deleteImage()}
+          >
+            <Image
+              src="/gathering/close-icon.svg"
+              alt="close-icon-image"
+              width={8}
+              height={8}
+            />
+          </button>
         </label>
       </div>
       <Modal

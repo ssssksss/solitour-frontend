@@ -38,7 +38,7 @@ const MyProfile = (props: IMyProfileProps) => {
       >
         <div
           className={
-            "relative flex h-full w-[calc(100vw-1rem)] max-w-[40rem] flex-col gap-y-[1rem] overflow-y-scroll rounded-b-xl bg-white p-[1rem] scrollbar-hide"
+            "relative flex gap-y-[1rem] max-h-[24rem] p-[2.75rem] w-[calc(100vw-1rem)] max-w-[40rem] flex-col overflow-y-scroll rounded-b-xl bg-white scrollbar-hide"
           }
         >
           <div className={"flex flex-col gap-y-[.5rem]"}>
@@ -53,8 +53,9 @@ const MyProfile = (props: IMyProfileProps) => {
             </p>
             <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
           </div>
-          <div className="select-none text-orange-400">
-            {"'회원탈퇴를 하겠습니다.' 라고 입력해주세요."}
+          <div className="select-none flex items-end gap-x-[.25rem]">
+            <span className={"text-main text-lg"}> '회원탈퇴를 하겠습니다.' </span>
+            <span> 라고 입력해주세요. </span>
           </div>
           <input
             className="w-full rounded-[1rem] px-4 py-4 outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
@@ -65,14 +66,14 @@ const MyProfile = (props: IMyProfileProps) => {
             disabled={props.userDeleteText !== "회원탈퇴를 하겠습니다."}
             onClick={props.userDeleteHandler}
             className={
-              "h-[3rem] w-full rounded-full bg-main text-white disabled:bg-gray2"
+              "h-[3rem] flex-shrink-0 w-full rounded-full bg-main text-white disabled:bg-gray2"
             }
           >
             회원탈퇴
           </button>
         </div>
       </Modal>
-      <div className={"flex flex-col gap-y-[2.375rem]"}>
+      <div className={"mt-[1rem] flex flex-col gap-y-[2.375rem]"}>
         <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
@@ -136,19 +137,19 @@ const MyProfile = (props: IMyProfileProps) => {
             />
           </div>
         </article>
-        <article>
+        {/* <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
             <div className={"relative w-[3.5rem] flex-shrink-0"}>
               <span className={"text-lg font-semibold"}>성별</span>
             </div>
             <input
               disabled={true}
-              placeholder="이메일을 입력해주세요"
+              placeholder="성별을 입력해주세요"
               className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
               defaultValue={props.userInfo.sex == "male" ? "남성" : "여성"}
             />
           </div>
-        </article>
+        </article> */}
         <article>
           <div
             className={
@@ -159,26 +160,43 @@ const MyProfile = (props: IMyProfileProps) => {
               연동된 계정
             </div>
             <div className={"flex items-center justify-between"}>
-              <span> 카카오톡 </span>
+              <span> {props.userInfo.provider} </span>
               <div className={"flex items-center gap-x-[.875rem]"}>
                 <span className={"font-medium text-gray1"}>
                   {props.userInfo.userImage.createdDate}
                 </span>
                 <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[18px] bg-[#FEE501]">
-                  <Image
-                    src={"/user/kakao-icon.svg"}
-                    alt={"kakao-icon-image"}
-                    width={20}
-                    height={20}
-                  />
+                  {
+                    props.userInfo.provider == "kakao" &&
+                    <Image
+                      src={"/user/kakao-icon.svg"}
+                      alt={"kakao-icon-image"}
+                      width={20}
+                      height={20}
+                    />
+                  }
+                  {
+                    props.userInfo.provider == "google" &&
+                    <Image
+                      src={"/user/google-icon.svg"}
+                      alt={"google-icon-image"}
+                      width={20}
+                      height={20}
+                    />
+                  }
                 </div>
               </div>
             </div>
           </div>
         </article>
       </div>
-      <div className="flex w-full justify-end pt-[3rem] text-[#999999] hover:text-main">
-        <button onClick={props.modalState.openModal}>회원탈퇴</button>
+      <div className="flex w-full justify-end pt-[3rem] text-[#999999]">
+        <button
+          className={"hover:font-bold hover:text-main"}
+          onClick={props.modalState.openModal}
+        >
+          회원탈퇴
+        </button>
       </div>
     </div>
   );
