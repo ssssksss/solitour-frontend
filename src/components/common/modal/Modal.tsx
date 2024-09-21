@@ -79,7 +79,9 @@ export const Modal = ({
         }}
       >
         {isHeaderBar && (
-          <div className={`flex h-[3rem] w-full justify-end ${headerBarStyle}`}>
+          <div
+            className={`flex h-[3rem] w-full justify-end rounded-t-[1rem] ${headerBarStyle}`}
+          >
             <button
               onClick={() => onClose()}
               className="transform-origin-center mr-[.5rem] mt-[1rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300 hover:scale-150"
