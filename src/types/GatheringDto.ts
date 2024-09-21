@@ -22,7 +22,6 @@ export interface TopGatheringResponseDto {
   title: string;
 }
 
-
 // types.ts
 
 type UserPostingResponse = {
@@ -40,7 +39,10 @@ export type PlaceResponse = {
 };
 
 type ZoneCategoryResponse = {
-  parentZoneCategory: { parentZoneCategory: null | ZoneCategoryResponse; name: string } | null;
+  parentZoneCategory: {
+    parentZoneCategory: null | ZoneCategoryResponse;
+    name: string;
+  } | null;
   name: string;
 };
 
@@ -53,7 +55,7 @@ export type GatheringRecommend = {
   isBookMark: boolean;
   likeCount: number;
   gatheringCategoryName: string;
-  userName: string;
+  nickname: string;
   scheduleStartDate: string;
   scheduleEndDate: string;
   deadline: string;
@@ -74,8 +76,8 @@ export interface gatheringApplicantsResponsesDto {
     nickname: string;
     age: number;
     sex: string;
-  },
-  gatheringStatus: 'WAIT' | 'CONSENT' | 'REFUSE'
+  };
+  gatheringStatus: "WAIT" | "CONSENT" | "REFUSE";
 }
 
 export interface GatheringDetailResponseDto {
@@ -104,8 +106,7 @@ export interface GatheringDetailResponseDto {
   gatheringStatus: string;
   openChattingUrl: string;
   userImage: string;
-};
-
+}
 
 // 모임 리스트 조회
 
@@ -118,7 +119,7 @@ export interface Gathering {
   isBookMark: boolean;
   likeCount: number;
   gatheringCategoryName: string;
-  userName: string;
+  nickname: string;
   scheduleStartDate: string; // ISO 8601 format
   scheduleEndDate: string; // ISO 8601 format
   deadline: string; // ISO 8601 format

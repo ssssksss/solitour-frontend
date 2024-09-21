@@ -63,7 +63,7 @@ const GatheringItem = ({ data }: IGatheringItem) => {
           {data.title}
         </p>
         <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1">
-          {data.userName}
+          {data.nickname}
         </p>
       </div>
       {/* 마감일 포함 영역 */}
