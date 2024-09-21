@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.solitourist.com"),
   title: {
     template: "Solitour | %s",
     default: "Solitour - 새로운 나를 찾는 여행",

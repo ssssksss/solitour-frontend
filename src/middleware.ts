@@ -4,8 +4,10 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
-    pathname.startsWith("/informations") ||
-    pathname.startsWith("/gathering") ||
+    pathname.startsWith("/informations/write") ||
+    pathname.startsWith("/informations/edit") ||
+    pathname.startsWith("/gathering/write") ||
+    pathname.startsWith("/gathering/edit") ||
     pathname.startsWith("/diary") ||
     pathname.startsWith("/mypage") ||
     pathname.startsWith("/support/qna/write") ||
