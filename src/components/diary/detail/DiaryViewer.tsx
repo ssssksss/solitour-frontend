@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import sanitizeHtml from "sanitize-html";
+import { motion } from "framer-motion";
 
 interface Props {
   data: GetDiaryResponseDto;
@@ -25,25 +26,37 @@ const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
           closeModal={closeModal}
         />
       )}
-      <div className="relative mt-[5.5rem] h-20 w-16">
+      <motion.div
+        className="relative mt-[5.5rem] h-20 w-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
         <Image
           src={`/diary/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
         />
-      </div>
-      <h1 className="mt-12 text-[1.75rem] font-bold">
+      </motion.div>
+      <motion.h1
+        className="mt-12 text-[1.75rem] font-bold"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
         {data.diaryContentResponse.title}
-      </h1>
+      </motion.h1>
       <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1">
-        <p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {new Date(
             new Date(data.diaryContentResponse.startDatetime).getTime() +
               (1000 * 60 * 60 * 24 - 1),
           ).toLocaleDateString("ko-KR")}
-        </p>
-        <div className="flex flex-row items-center gap-1">
+        </motion.p>
+        <motion.div
+          className="flex flex-row items-center gap-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
           <TiLocation className="text-main" size={"1.3rem"} />
           <p>
             {
@@ -51,7 +64,7 @@ const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
                 .diaryDayContentDetail[0].place
             }
           </p>
-        </div>
+        </motion.div>
       </div>
       <div
         className="diaryViewerContent mt-16"
