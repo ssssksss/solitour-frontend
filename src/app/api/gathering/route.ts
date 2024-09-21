@@ -90,7 +90,6 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "서버 오류" }, { status: 500 });
   }
 
-  revalidateTag("getNewGatheringList");
   revalidatePath("/gathering", "layout");
   return response;
 }
