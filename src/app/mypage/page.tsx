@@ -1,7 +1,7 @@
 import MyPageHeaderContainer from "@/containers/mypage/MyPageHeaderContainer";
 import MyPageMainContainer from "@/containers/mypage/MyPageMainContainer";
 import { userResponseDto } from "@/types/UserDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 
@@ -11,16 +11,14 @@ export const metadata: Metadata = {
 };
 
 async function getUserInfo() {
-  const cookie = cookies().get("access_token");
-  const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/users/info`,
+  const access_token = cookies().get("access_token");
+  const refresh_token = cookies().get("refresh_token");
+  const response = await fetchWithTokenRefreshSSR(
     {
-      method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-    },
-  );
+      url: `${process.env.BACKEND_URL}/api/users/info`,
+      accessToken: access_token,
+      refreshToken: refresh_token,
+    });
 
   if (!response.ok) {
     // This will activate the closest 'error.tsx' Error Boundary.

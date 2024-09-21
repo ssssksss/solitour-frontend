@@ -1,6 +1,7 @@
 import MyPageUserImage from "@/components/mypage/MyPageUserImage";
 import { useDragAndDrop } from "@/hooks/useDragAndDrop";
 import useModalState from "@/hooks/useModalState";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useState } from "react";
 
 interface IMyPageUserImageContainer {
@@ -16,6 +17,16 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
   const imageUpload = (imageDataUrl: string) => {
     setImageBase64Data(imageDataUrl);
     modalState.openModal(); // 이미지 편집을 위한 모달창
+  }
+
+  const deleteImage = () => {
+    alert("개발중");
+
+    const response = fetchWithAuth("/api/auth/user-image", {
+      method: "DELETE",
+      "Content-Type": "application/json",
+    });
+    
   }
   
   const closeCropModal = () => {
@@ -51,6 +62,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
         imageBase64Data={imageBase64Data}
         closeCropModal={closeCropModal}
         onChangeImageUrl={onChangeImageUrl}
+        deleteImage={deleteImage}
       />
     </div>
   );
