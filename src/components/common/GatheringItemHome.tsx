@@ -57,7 +57,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
           {data.title}
         </p>
         <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1">
-          {data.userName}
+          {data.nickname}
         </p>
       </div>
       <div className="flex flex-col gap-5">
