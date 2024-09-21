@@ -1,10 +1,12 @@
 import GatheringSearch from "@/components/gathering/read/GatheringSearch";
+import useToastifyStore from "@/store/toastifyStore";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IGatheringSearchContainer {}
 const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
   const searchParams = useSearchParams();
+  const toastifyStore = useToastifyStore();
   const [searchValue, setSearchValue] = useState<string>(
     searchParams.get("search") || searchParams.get("tagName") || "",
   );
@@ -17,7 +19,6 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     if (dropdownValue == "태그") {
-      // 태그 검색일 경우
       params.set("tagName", searchValue);
       params.delete("page");
       url.search = params.toString();
@@ -36,6 +37,7 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
 
   const dropDownHandler = (value: string) => {
     setDropdownValue(value);
+    if (value == dropdownValue) return;
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     params.delete("page");
@@ -47,8 +49,10 @@ const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
     }
     params.delete("search");
     // 태그 검색인 경우 글자 수 제한이 15글자이므로 글자를 제거해주는 작업
-    setSearchValue(searchValue.trim().slice(0, 15));
-    params.set("tagName", searchValue.trim().slice(0, 15) || "");
+    let _text = searchValue.trim().slice(0, 15) || "";
+    if (_text.length < 2) _text = "";
+    setSearchValue(_text);
+    params.set("tagName", _text);
     url.search = params.toString();
     window.history.pushState({}, "", url.toString());
   };

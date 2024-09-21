@@ -24,6 +24,10 @@ const onChangeHashTagHandler = (
       .replace(/,$/, "")
       .trim();
     if (tempTag === "") return;
+    if (tempTag.length < 2) {
+      (inputTagRef.current as HTMLInputElement).value = "";
+      return;
+    }
     setTags((prev) => Array.from(new Set([...prev, tempTag])));
     (inputTagRef.current as HTMLInputElement).value = "";
     formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
@@ -36,7 +40,11 @@ const onChangeHashTagHandler = (
       const tempTag = (inputTagRef.current as HTMLInputElement).value
         .replace(/,$/, "")
         .trim();
-      if (tempTag === "") return;
+    if (tempTag === "") return;
+    if (tempTag.length < 2) {
+      (inputTagRef.current as HTMLInputElement).value = "";
+      return;
+    }
       setTags((prev) => Array.from(new Set([...prev, tempTag])));
       (inputTagRef.current as HTMLInputElement).value = "";
       formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
