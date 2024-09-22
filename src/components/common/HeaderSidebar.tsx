@@ -30,9 +30,11 @@ const HeaderSidebar = ({
     >
       <nav className="flex h-fit w-[20.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6">
         <div className="flex h-10 w-full items-center justify-end">
-          <div className="cursor-pointer rounded-md bg-slate-100 p-2 hover:text-main">
-            <MdClose onClick={closeWithFadeOut} />
-          </div>
+          <MdClose
+            className="cursor-pointer text-gray2 hover:text-main"
+            size={"2.5rem"}
+            onClick={() => closeWithFadeOut}
+          />
         </div>
         <div className="flex flex-col text-xl">
           <Link
