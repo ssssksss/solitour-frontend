@@ -52,7 +52,7 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()}>
+      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
         <GatheringDeadlineModal closeModal={() => modalState.closeModal()} />
       </Modal>
     </div>

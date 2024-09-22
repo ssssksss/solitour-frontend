@@ -28,7 +28,7 @@ const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
         <VscSettings size={"1.25rem"} />
         <div>필터</div>
       </button>
-      <Modal isOpen={isModal} onClose={() => setIsModal(false)}>
+      <Modal isOpen={isModal} onClose={() => setIsModal(false)} isHeaderBar={true}>
         <GatheringFilterModal closeModal={() => setIsModal(false)} />
       </Modal>
     </>

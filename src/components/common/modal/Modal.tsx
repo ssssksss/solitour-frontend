@@ -1,8 +1,8 @@
 import useOutsideClick from "@/hooks/useOutsideClick";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { MdClose } from "react-icons/md";
 
 interface ModalProps extends React.PropsWithChildren {
   isOpen: boolean;
@@ -80,17 +80,18 @@ export const Modal = ({
       >
         {isHeaderBar && (
           <div
-            className={`flex h-[3rem] w-full justify-end rounded-t-[1rem] ${headerBarStyle}`}
+            className={`relative flex h-[3rem] w-full justify-end rounded-t-[1rem] ${headerBarStyle}`}
           >
             <button
               onClick={() => onClose()}
-              className="transform-origin-center mr-[.5rem] mt-[1rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300 hover:scale-150"
+              className="sticky mt-[2.5rem] mr-[2.5rem] z-50 h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
             >
-              <Image
-                src={"/gathering/close-icon.svg"}
-                alt={"close-icon"}
-                width={20}
-                height={20}
+              <MdClose
+                className="cursor-pointer text-gray2 hover:text-main"
+                size={"2.5rem"}
+                onClick={() => {
+                  onClose();
+                }}
               />
             </button>
           </div>

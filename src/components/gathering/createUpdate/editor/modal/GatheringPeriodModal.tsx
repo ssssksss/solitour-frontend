@@ -1,7 +1,6 @@
 import "@/styles/reactDataRange.css";
 import { add, addDays, format, isAfter } from "date-fns";
 import ko from "date-fns/locale/ko";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 import { useFormContext } from "react-hook-form";
@@ -70,20 +69,9 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-2xl bg-white p-[1rem] scrollbar-hide max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
+        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-b-2xl bg-white p-[1rem] scrollbar-hide max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
       }
     >
-      <button
-        className="absolute right-[1rem] top-[1.5rem]"
-        onClick={() => props.closeModal()}
-      >
-        <Image
-          src={"/gathering/close-icon.svg"}
-          alt={"close-icon"}
-          width={20}
-          height={20}
-        />
-      </button>
       <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         날짜 선택
       </h2>

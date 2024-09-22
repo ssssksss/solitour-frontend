@@ -49,7 +49,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[22rem] w-[calc(100vw-1rem)] max-w-[30rem] overflow-y-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
+        "relative h-full max-h-[22rem] w-[calc(100vw-1rem)] max-w-[30rem] overflow-y-scroll rounded-b-[1rem] bg-white p-[2.75rem] scrollbar-hide"
       }
     >
       <div
@@ -57,17 +57,6 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
           "flex min-h-full flex-col items-center justify-start bg-white"
         }
       >
-        <button
-          className="absolute right-[1.5rem] top-[1.5rem]"
-          onClick={() => props.closeModal()}
-        >
-          <Image
-            src={"/gathering/close-icon.svg"}
-            alt={"close-icon"}
-            width={20}
-            height={20}
-          />
-        </button>
         <h2 className={"w-full text-start text-2xl font-bold text-black"}>
           시간 선택
         </h2>
