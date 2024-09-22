@@ -61,6 +61,13 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
               height={8}
             />
           </button>
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={props.dragAndDrop.onDropOrInputEvent}
+          />
         </label>
       </div>
       <Modal
