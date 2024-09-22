@@ -167,13 +167,14 @@ const MyProfile = (props: IMyProfileProps) => {
                 <span className={"font-medium text-gray1"}>
                   {props.userInfo.userImage.createdDate}
                 </span>
-                <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[18px] bg-[#FEE501]">
+                <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-[#FEE501]">
                   {props.userInfo.provider == "kakao" && (
                     <Image
                       src={"/user/kakao-icon.svg"}
                       alt={"kakao-icon-image"}
                       width={20}
                       height={20}
+                      className={"absolute translate-x-[1px]"}
                     />
                   )}
                   {props.userInfo.provider == "google" && (
