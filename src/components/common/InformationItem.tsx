@@ -49,7 +49,7 @@ const InformationItem = ({
       style = "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]";
       break;
     case "액티비티":
-    case "수상레저":
+    case "레저":
     case "관광지":
     case "전시":
     case "편집/소품샵":
