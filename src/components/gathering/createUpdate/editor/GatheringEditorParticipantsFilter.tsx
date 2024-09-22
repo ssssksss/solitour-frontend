@@ -67,7 +67,7 @@ const GatheringEditorParticipantsFilter = ({
           )}
         </button>
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()}>
+      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
         <GatheringParticipantsFilterModal closeModal={modalState.closeModal} />
       </Modal>
     </div>

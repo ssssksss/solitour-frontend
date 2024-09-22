@@ -9,7 +9,6 @@ import {
   subDays,
 } from "date-fns";
 import { ko } from "date-fns/locale";
-import Image from "next/image";
 import { useState } from "react";
 import { Calendar } from "react-date-range";
 import { useFormContext } from "react-hook-form";
@@ -63,20 +62,9 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-2xl bg-white p-[1rem] scrollbar-hide"
+        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-b-2xl bg-white p-[1rem] scrollbar-hide"
       }
     >
-      <button
-        className="absolute right-[1rem] top-[1.5rem]"
-        onClick={() => props.closeModal()}
-      >
-        <Image
-          src={"/gathering/close-icon.svg"}
-          alt={"close-icon"}
-          width={20}
-          height={20}
-        />
-      </button>
       <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         모임 마감일 선택
       </h2>

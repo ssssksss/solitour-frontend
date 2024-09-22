@@ -74,7 +74,7 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()}>
+      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
         <GatheringPeriodModal closeModal={() => modalState.closeModal()} />
       </Modal>
     </div>

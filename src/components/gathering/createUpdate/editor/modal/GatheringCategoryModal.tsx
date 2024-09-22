@@ -1,5 +1,4 @@
 import "@/styles/reactDataRange.css";
-import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -28,20 +27,9 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   return (
     <div
       className={
-        "relative flex h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col overflow-y-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
+        "relative flex h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col overflow-y-scroll rounded-b-2xl bg-white p-[2.75rem] scrollbar-hide"
       }
     >
-      <button
-        className="absolute right-[1.5rem] top-[1.5rem]"
-        onClick={() => props.closeModal()}
-      >
-        <Image
-          src={"/gathering/close-icon.svg"}
-          alt={"close-icon"}
-          width={20}
-          height={20}
-        />
-      </button>
       <div className={"flex flex-col gap-y-1"}>
         <h2 className="w-full text-start text-2xl font-bold text-black">
           카테고리 선택

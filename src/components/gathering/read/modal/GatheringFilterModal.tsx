@@ -187,20 +187,9 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
   return (
     <div
       className={
-        "relative h-full max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[3rem] scrollbar-hide"
+        "relative h-full max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-b-2xl bg-white p-[3rem] scrollbar-hide"
       }
     >
-      <button
-        className="absolute right-[1.5rem] top-[1.5rem]"
-        onClick={() => closeModal()}
-      >
-        <Image
-          src={"/gathering/close-icon.svg"}
-          alt={"close-icon"}
-          width={20}
-          height={20}
-        />
-      </button>
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 조건 선택 </h2>
       <div className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
         <div className={"flex flex-col gap-y-[1rem]"}>

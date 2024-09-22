@@ -163,21 +163,8 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
 
   return (
     <div
-      className={`relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-2xl bg-white p-[1rem] scrollbar-hide ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
+      className={`relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-b-2xl bg-white p-[1rem] scrollbar-hide ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
     >
-      <button
-        className="absolute right-[1.5rem] top-[1.5rem]"
-        onClick={() => {
-          props.closeModal();
-        }}
-      >
-        <Image
-          src={"/gathering/close-icon.svg"}
-          alt={"close-icon"}
-          width={20}
-          height={20}
-        />
-      </button>
       <h2
         className={
           "mb-[1.875rem] mt-[2rem] h-[2rem] text-2xl font-bold text-black"
