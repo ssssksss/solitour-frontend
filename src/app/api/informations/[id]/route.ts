@@ -1,5 +1,5 @@
 import { UpdateInformationRequestDto } from "@/types/InformationDto";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 /**
@@ -57,6 +57,7 @@ export async function PUT(
   );
 
   // Revalidate the cache
+  revalidateTag("getBestInformationList");
   revalidatePath("/informations", "layout");
   return response;
 }
@@ -80,6 +81,7 @@ export async function DELETE(
     },
   );
 
+  revalidateTag("getBestInformationList");
   revalidatePath("/informations", "layout");
   return response;
 }

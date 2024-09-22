@@ -1,13 +1,6 @@
 import { z } from "zod";
 
 export const DiaryUpdateFormSchema = z.object({
-  userId: z
-    .number({
-      required_error: "로그인을 해야 일기 작성이 가능합니다.",
-      invalid_type_error: "UserId must be a integer.",
-    })
-    .int()
-    .positive(),
   title: z
     .string({
       required_error: "제목을 입력해 주세요.",

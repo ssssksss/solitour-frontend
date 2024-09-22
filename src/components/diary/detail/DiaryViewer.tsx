@@ -45,7 +45,7 @@ const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
       >
         {data.diaryContentResponse.title}
       </motion.h1>
-      <div className="mt-6 flex w-full flex-row items-center justify-between text-lg text-gray1">
+      <div className="mt-6 flex w-full flex-row flex-wrap items-center justify-between gap-x-12 gap-y-4 text-lg text-gray1">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {new Date(
             new Date(data.diaryContentResponse.startDatetime).getTime() +

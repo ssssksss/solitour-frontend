@@ -113,11 +113,8 @@ const QuillEditorContainer = () => {
       // https://quilljs.com/docs/modules/toolbar
       toolbar: {
         container: [
-          [{ size: ["small", false, "large", "huge"] }, { font: [] }],
           [{ color: [] }, { background: [] }],
-          [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
           ["bold", "italic", "underline", "strike"],
-          [{ indent: "-1" }, { indent: "+1" }, { align: [] }],
           ["link", "image", "video"],
         ],
         handlers: { image: imageHandler },

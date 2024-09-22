@@ -4,7 +4,6 @@ import DiaryEditor from "@/components/diary/write/DiaryEditor";
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
-import useAuthStore from "@/store/authStore";
 import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,7 +17,6 @@ import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 const DiaryEditorContainer = () => {
   const router = useRouter();
-  const authStore = useAuthStore();
   const [datePickerModal, setDatePickerModal] = useState<boolean>(false);
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,7 +27,6 @@ const DiaryEditorContainer = () => {
   useModalBackHandler(addressModal, () => setAddressModal(false));
 
   const methods = useForm<{
-    userId: number;
     title: string;
     startDate: Date | null;
     endDate: Date | null;
@@ -40,7 +37,6 @@ const DiaryEditorContainer = () => {
   }>({
     resolver: zodResolver(DiaryCreateFormSchema),
     defaultValues: {
-      userId: authStore.id,
       title: "",
       startDate: null,
       endDate: null,

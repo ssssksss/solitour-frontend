@@ -25,10 +25,6 @@ export async function PUT(
     },
   );
 
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
   revalidateTag("getDiaryList");
   revalidateTag(`getDiary/${params.id}`);
   return response;
