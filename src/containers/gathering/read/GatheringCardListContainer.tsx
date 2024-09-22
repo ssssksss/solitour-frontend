@@ -9,7 +9,7 @@ import useModalState from "@/hooks/useModalState";
 import useAuthStore from "@/store/authStore";
 import { Gathering } from "@/types/GatheringDto";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const SkeletonGatheringList = () => {
   return (
@@ -29,7 +29,6 @@ const GatheringCardListContainer = () => {
   const authStore = useAuthStore();
   const router = useRouter();
   const modalState = useModalState();
-  const initRef = useRef(true);
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
@@ -56,10 +55,6 @@ const GatheringCardListContainer = () => {
   };
 
   useEffect(() => {
-    if (initRef.current) {
-      initRef.current = false;
-      return;
-    }
     const temp = async () => {
       try {
         const url = new URL(window.location.href);
