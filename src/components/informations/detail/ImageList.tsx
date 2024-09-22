@@ -73,7 +73,7 @@ const ImageList = ({
             }}
           >
             <Image
-              className="cursor-pointer rounded-lg"
+              className="cursor-pointer rounded-[0.4375rem]"
               src={image.address}
               alt={"/background"}
               fill={true}
