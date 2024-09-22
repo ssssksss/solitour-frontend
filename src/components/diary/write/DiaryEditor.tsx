@@ -93,7 +93,7 @@ const DiaryEditor = ({
               <div className="flex flex-row items-center gap-2">
                 {"YYYY.MM.DD"}
                 <Image
-                  src={"/gathering/calendar-icon.svg"}
+                  src={"/diary/calendar-icon.svg"}
                   alt={"calendar-icon"}
                   width={16}
                   height={16}
