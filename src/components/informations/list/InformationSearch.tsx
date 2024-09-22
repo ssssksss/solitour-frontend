@@ -18,8 +18,8 @@ interface Props {
   onChangeSearchValue: (value: string) => void;
   closeModal: () => void;
   openModal: () => void;
-  onOrderDropdownClick: () => void;
-  onSearchDropdownClick: () => void;
+  onOrderDropdownClick: (visible: boolean) => void;
+  onSearchDropdownClick: (visible: boolean) => void;
   onSearchClick: () => void;
   setSearchMethod: (value: string) => void;
 }
@@ -55,14 +55,17 @@ const InformationSearch = ({
         <button
           className="absolute left-0 top-0 flex h-[2.75rem] flex-row items-center gap-2 pl-[1.125rem] text-sm text-gray1 hover:text-main"
           type="button"
-          onClick={() => onSearchDropdownClick()}
+          onClick={() => {
+            onOrderDropdownClick(false);
+            onSearchDropdownClick(true);
+          }}
         >
           <p>{searchMethod}</p>
           <IoIosArrowDown className="mt-1" />
         </button>
         <div
           className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow`}
-          onClick={() => onSearchDropdownClick()}
+          onClick={() => onSearchDropdownClick(false)}
         >
           <button
             className={`${searchMethod === "제목" && "text-main"} h-[3.75rem] w-[4.6875rem] hover:text-main`}
@@ -89,7 +92,7 @@ const InformationSearch = ({
         />
         <button
           className="absolute right-[0.375rem] top-[0.3125rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full bg-[#F2FAF7] hover:scale-110"
-          onClick={() => onSearchClick()}
+          type="submit"
         >
           <Image
             src="/common/search-icon.png"
@@ -110,14 +113,17 @@ const InformationSearch = ({
         <div className="relative">
           <button
             className="flex flex-row items-center text-gray1 hover:text-main"
-            onClick={() => onOrderDropdownClick()}
+            onClick={() => {
+              onSearchDropdownClick(false);
+              onOrderDropdownClick(true);
+            }}
           >
             <p className="text-nowrap">{`${order === "latest" ? "최신순" : order === "likes" ? "좋아요순" : "조회순"}`}</p>
             <IoIosArrowDown />
           </button>
           <div
             className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow`}
-            onClick={() => onOrderDropdownClick()}
+            onClick={() => onOrderDropdownClick(false)}
           >
             <Link
               className={`${order === "latest" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
