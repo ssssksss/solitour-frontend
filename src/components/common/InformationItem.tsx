@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import InformationLikeCountContainer from "@/containers/common/InformationLikeCountContainer";
 
 interface Props {
   informationId: number;
@@ -117,28 +118,11 @@ const InformationItem = ({
             </p>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <div
-              className={`${isLike ? "text-[#F85E5E]" : "text-gray2"} flex flex-row items-center gap-[0.3125rem] text-xs`}
-            >
-              <div className="relative h-4 w-4 text-white">
-                {isLike ? (
-                  <Image
-                    src="/common/heart-active-icon.svg"
-                    alt="like-icon"
-                    fill={true}
-                    style={{ objectFit: "contain" }}
-                  />
-                ) : (
-                  <Image
-                    src="/common/heart-empty-icon.svg"
-                    alt="like-icon"
-                    fill={true}
-                    style={{ objectFit: "contain" }}
-                  />
-                )}
-              </div>
-              <p>{convertNumberToShortForm(likeCount)}</p>
-            </div>
+            <InformationLikeCountContainer
+              informationId={informationId}
+              likeCount={likeCount}
+              isLike={isLike}
+            />
             <div className="flex flex-row items-center gap-1 text-gray2">
               <Image
                 src="/common/eyes-icon.svg"
