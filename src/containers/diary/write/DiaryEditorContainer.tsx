@@ -29,7 +29,6 @@ const DiaryEditorContainer = () => {
   useModalBackHandler(addressModal, () => setAddressModal(false));
 
   const methods = useForm<{
-    userId: number;
     title: string;
     startDate: Date | null;
     endDate: Date | null;
@@ -40,7 +39,6 @@ const DiaryEditorContainer = () => {
   }>({
     resolver: zodResolver(DiaryCreateFormSchema),
     defaultValues: {
-      userId: authStore.id,
       title: "",
       startDate: null,
       endDate: null,

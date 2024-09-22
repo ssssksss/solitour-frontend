@@ -35,7 +35,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   useModalBackHandler(addressModal, () => setAddressModal(false));
 
   const methods = useForm<{
-    userId: number;
     title: string;
     startDate: Date | null;
     endDate: Date | null;
@@ -46,7 +45,6 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
   }>({
     resolver: zodResolver(DiaryUpdateFormSchema),
     defaultValues: {
-      userId: authStore.id,
       title: "",
       startDate: null,
       endDate: null,
