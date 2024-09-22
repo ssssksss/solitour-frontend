@@ -185,7 +185,7 @@ const GatheringViewer = ({
           {data.tagResponses?.map((i) => (
             <div
               key={i.name}
-              className="max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-main outline outline-[1px] outline-offset-[-1px] outline-main"
+              className="max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm text-main outline outline-[1px] outline-offset-[-1px] outline-main"
             >
               {"#"}
               {i.name}
