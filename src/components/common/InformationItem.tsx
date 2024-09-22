@@ -6,7 +6,7 @@ import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 
 interface Props {
   informationId: number;
-  categoryId: number;
+  categoryName: string;
   userId?: number;
   isBookMark: boolean;
   isLike: boolean;
@@ -20,7 +20,7 @@ interface Props {
 
 const InformationItem = ({
   informationId,
-  categoryId,
+  categoryName,
   userId = 0,
   isBookMark,
   isLike,
@@ -32,14 +32,26 @@ const InformationItem = ({
   onBookMarkClick,
 }: Props) => {
   let style = "";
-  switch (categoryId) {
-    case 1:
+  switch (categoryName) {
+    case "맛집":
+    case "혼카페":
+    case "혼밥":
+    case "혼술":
       style = "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]";
       break;
-    case 2:
+    case "숙박":
+    case "호텔/펜션":
+    case "게스트하우스":
+    case "모텔":
+    case "홈/빌라":
+    case "한옥":
       style = "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]";
       break;
-    case 3:
+    case "액티비티":
+    case "수상레저":
+    case "관광지":
+    case "전시":
+    case "편집/소품샵":
       style = "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]";
       break;
     default:
@@ -63,7 +75,7 @@ const InformationItem = ({
             <p
               className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold ${style}`}
             >
-              {CATEGORY_TEXT[categoryId]}
+              {categoryName}
             </p>
           ) : (
             <div />

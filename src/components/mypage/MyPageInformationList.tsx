@@ -21,7 +21,6 @@ const MyPageInformationList = ({
   elements,
   isLoading,
 }: IMyPageInformationList) => {
-
   return (
     <div className="flex w-full flex-col">
       <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
@@ -33,7 +32,7 @@ const MyPageInformationList = ({
               <InformationItemContainer
                 key={value.informationId}
                 informationId={value.informationId}
-                categoryId={0}
+                categoryName={value.zoneCategoryParentName}
                 isBookMark={value.isBookMark}
                 isLike={false}
                 title={value.title}
