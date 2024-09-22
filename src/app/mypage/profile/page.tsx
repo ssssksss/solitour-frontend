@@ -14,6 +14,7 @@ async function getUserInfo() {
     accessToken: cookies().get("access_token"),
     refreshToken: cookies().get("refresh_token"),
     url: `${process.env.BACKEND_URL}/api/users/info`,
+    cache: "no-store",
   });
 
   return response;
