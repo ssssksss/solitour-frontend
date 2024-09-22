@@ -104,7 +104,7 @@ const GatheringCardListContainer = () => {
       ) : (
           <>
           <Modal isOpen={modalState.isOpen} onClose={modalState.closeModal} isHeaderBar={true}>
-            <AddUserInformationForm />
+            <AddUserInformationForm closeModal={modalState.closeModal} />
           </Modal>
           <GatheringCardList
             data={elements}

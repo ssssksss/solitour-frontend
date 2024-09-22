@@ -1,39 +1,43 @@
 "use client"
 
-import { useRef, useState } from "react";
+import useAuthStore from "@/store/authStore";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useState } from "react";
 
 interface IAddUserInformationForm {
-
+  closeModal: () => void;
 }
 const AddUserInformationForm = (props: IAddUserInformationForm) => {
   const [sex, setSex] = useState("");
-    const [date, setDate] = useState({
-      year: "",
-      month: "",
-      day: "",
-    });
-
-    const monthRef = useRef<HTMLInputElement>(null);
-    const dayRef = useRef<HTMLInputElement>(null);
+  const [age, setAge] = useState("");
+  const [name, setName] = useState("");
+  const authStore = useAuthStore();
 
   // 숫자만 입력되게 필터링
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     if (!/^\d*$/.test(value)) return;
-
-    setDate((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (name === "year" && value.length === 4) {
-      monthRef.current?.focus();
-    }
-
-    if (name === "month" && value.length === 2) {
-      dayRef.current?.focus();
-    }
+    setAge(value);
   };
+
+  const addUserInformationSubmit = async () => {
+    const response = await fetchWithAuth('/api/auth/user', {
+      method: "PUT",
+      body: JSON.stringify({
+        sex,
+        name,
+        age,
+      })
+    })
+
+    if (response.status == 204) {
+      authStore.setUser({
+        sex: sex,
+        age: Number(age),
+      })
+      props.closeModal();
+    }
+  }
 
   return (
     <section
@@ -52,60 +56,40 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
           <h3 className="text-[1.125rem] font-bold text-black"> 성별 </h3>
           <div className={"mt-3 flex h-10 w-full gap-x-3"}>
             <button
-              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${sex == "MALE" ? "font-bold bg-[#F2FAF7] text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
-              onClick={() => setSex("MALE")}
+              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${sex == "male" ? "font-bold bg-[#F2FAF7] text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+              onClick={() => setSex("male")}
             >
               남성
             </button>
             <button
-              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${sex == "FEMALE" ? "font-bold bg-[#F2FAF7] text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
-              onClick={() => setSex("FEMALE")}
+              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${sex == "female" ? "font-bold bg-[#F2FAF7] text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+              onClick={() => setSex("female")}
             >
               여성
             </button>
           </div>
         </article>
         <article className="flex flex-col">
-          <h3 className="text-[1.125rem] font-bold text-black"> 생년월일 </h3>
+          <h3 className="text-[1.125rem] font-bold text-black"> 나이(연도) </h3>
           <div className="mt-3 flex h-10 items-center justify-center rounded-[1.5rem] bg-white py-[0.375rem] text-main outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#F0F0F0]">
             <input
               type="text"
               name="year"
-              value={date.year}
+              value={age}
               onChange={handleInputChange}
               placeholder="YYYY"
               maxLength={4}
               min={1965}
               className="w-[2.5rem] bg-transparent text-center outline-none"
               />
-            <span className="">.</span>
-            <input
-              type="text"
-              name="month"
-              value={date.month}
-              onChange={handleInputChange}
-              placeholder="MM"
-              maxLength={2}
-              ref={monthRef}
-              className="w-[1.675rem] bg-transparent text-center outline-none"
-              />
-            <span className="">.</span>
-            <input
-              type="text"
-              name="day"
-              value={date.day}
-              onChange={handleInputChange}
-              placeholder="DD"
-              maxLength={2}
-              ref={dayRef}
-              className="w-[1.375rem] bg-transparent text-center outline-none"
-            />
           </div>
         </article>
         <article className="flex flex-col">
           <h3 className="text-[1.125rem] font-bold text-black"> 이름 </h3>
           <input
             type={"text"}
+            value={name}
+            onChange={(e)=> setName(e.target.value)}
             className={"mt-3 h-10 w-full rounded-[1.5rem] px-3"}
             placeholder="이름을 입력해주세요"
           />
@@ -116,9 +100,10 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
         제한될 수 있습니다
       </p>
       <button
+        onClick={()=> addUserInformationSubmit()}
         className={"mt-5 min-h-[4rem] w-full rounded-[1.5rem] bg-main text-white"}
       >
-        입력 완료
+        추가 정보 제출
       </button>
     </section>
   );
