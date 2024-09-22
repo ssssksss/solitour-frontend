@@ -14,7 +14,7 @@ async function getTopInformationList() {
     `${process.env.BACKEND_URL}/api/informations/ranks`,
     {
       method: "GET",
-      next: { revalidate: 3600, tags: ["getTopInformationList"] },
+      next: { revalidate: 60, tags: ["getTopInformationList"] },
     },
   );
 
