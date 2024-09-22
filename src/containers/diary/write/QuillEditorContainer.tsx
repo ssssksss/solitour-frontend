@@ -7,6 +7,7 @@ import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill";
+import { ImageResize } from "quill-image-resize-module-ts";
 
 const QuillEditorContainer = () => {
   const authStore = useAuthStore();
@@ -106,6 +107,7 @@ const QuillEditorContainer = () => {
   };
 
   const modules = useMemo(() => {
+    ReactQuill.Quill.register("modules/imageResize", ImageResize);
     ReactQuill.Quill.register("modules/imageDropAndPaste", ImageDropAndPaste);
 
     return {
@@ -118,6 +120,14 @@ const QuillEditorContainer = () => {
           ["link", "image", "video"],
         ],
         handlers: { image: imageHandler },
+      },
+      imageResize: {
+        modules: ["Resize", "DisplaySize", "Toolbar"],
+        handleStyles: {
+          backgroundColor: "#00B488",
+          border: "none",
+          // other camelCase styles for size display
+        },
       },
       imageDropAndPaste: {
         // add an custom image handler

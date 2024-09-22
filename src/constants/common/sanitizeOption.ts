@@ -29,7 +29,7 @@ const sanitizeOption = {
     blockquote: ["class", "style"],
     pre: ["class", "style", "spellcheck"],
     a: ["class", "style", "href", "rel", "target", "style"],
-    img: ["class", "style", "src"],
+    img: ["class", "style", "src", "width"],
     iframe: ["class", "style", "frameborder", "allowfullscreen", "src"],
   },
   allowedSchemes: ["data", "http", "https"],
