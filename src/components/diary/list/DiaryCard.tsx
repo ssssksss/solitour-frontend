@@ -79,7 +79,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             </Link>
           </motion.div>
           <motion.p
-            className="mt-3 text-lg text-gray1"
+            className="mt-3 text-lg text-gray1 max-[1024px]:mt-2 max-[744px]:mt-1"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
