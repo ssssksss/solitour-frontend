@@ -290,7 +290,7 @@ const GatheringParticipantsFilterModal = (
       </section>
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
         <button
-          className={`h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1`}
+          className={`h-[3rem] max-w-[18.625rem] w-full rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1`}
           disabled={
             !sex ||
             (startAge || 0) < 20 ||
