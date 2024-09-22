@@ -64,11 +64,11 @@ const InformationSearchContainer = () => {
       onChangeSearchValue={onChangeSearchValue}
       closeModal={() => setModalVisible(false)}
       openModal={() => setModalVisible(true)}
-      onOrderDropdownClick={() =>
-        setOrderDropdownVisible(!orderDropdownVisible)
+      onOrderDropdownClick={(visible: boolean) =>
+        setOrderDropdownVisible(visible)
       }
-      onSearchDropdownClick={() =>
-        setSearchDropdownVisible(!searchDropdownVisible)
+      onSearchDropdownClick={(visible: boolean) =>
+        setSearchDropdownVisible(visible)
       }
       onSearchClick={onSearchClick}
       setSearchMethod={(value: string) => {
