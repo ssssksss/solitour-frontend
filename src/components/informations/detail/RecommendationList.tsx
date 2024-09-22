@@ -19,7 +19,7 @@ const RecommendationList = ({ data }: Props) => {
           {data.recommendInformation.map((value, index) => (
             <InformationItemContainer
               key={index}
-              informationId={index + 1}
+              informationId={value.informationId}
               categoryName={value.categoryName}
               isBookMark={value.isBookMark}
               isLike={value.isLike}
