@@ -13,6 +13,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import useModalBackHandler from "@/hooks/useModalBackHandler";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
 interface Props {
   diaryData: GetDiaryResponseDto;
@@ -105,7 +106,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     setLoading(true);
 
-    const response = await fetch(
+    const response = await fetchWithAuth(
       `/api/diary/${diaryData.diaryContentResponse.diaryId}`,
       {
         method: "PUT",

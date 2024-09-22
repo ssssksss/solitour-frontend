@@ -1,5 +1,5 @@
 import { CreateInformationRequestDto } from "@/types/InformationDto";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 // 정보 글 작성
@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
   });
 
   // Revalidate the cache
+  revalidateTag("getBestInformationList");
   revalidatePath("/informations", "layout");
   return response;
 }
