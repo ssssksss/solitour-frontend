@@ -210,7 +210,7 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
               <button
                 key={i.id}
                 onClick={() => setLocation(i.id)}
-                className={`${location == i.id ? "bg-main text-white" : "text-gray1"} flex items-center rounded-[4rem] px-4 py-2 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]`}
+                className={`${location == i.id ? "bg-main text-white outline-0" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
               >
                 {i.name}
               </button>
@@ -244,13 +244,13 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
                       _endAge: i[1].endAge,
                     })
                   }
-                  className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge && "bg-main text-white"} flex flex-shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] hover:bg-main hover:text-white`}
+                  className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white outline-0" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex flex-shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
                 >
                   {i[0]}
                 </button>
               ))}
               <button
-                className={`${directInput && "bg-main text-white"} rounded-[4rem] px-4 py-2 text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED] hover:bg-main hover:text-white`}
+                className={`${directInput ? "bg-main text-white outline-0" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
                 onClick={() => setDirectInput(true)}
               >
                 직접 입력
@@ -465,20 +465,20 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
       </div>
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
         <button
-          onClick={() => submitApplyFilter()}
-          className={
-            "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white"
-          }
-        >
-          적용하기
-        </button>
-        <button
           onClick={() => initFilterOptionHandler()}
           className={
             "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white"
           }
         >
           설정 초기화
+        </button>
+        <button
+          onClick={() => submitApplyFilter()}
+          className={
+            "h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white"
+          }
+        >
+          적용하기
         </button>
       </div>
     </div>
