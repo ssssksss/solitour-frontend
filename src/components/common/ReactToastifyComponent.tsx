@@ -35,7 +35,7 @@ const ReactToastifyComponent = () => {
   }, [toastifyStore]);
 
   return (
-    <div className="fixed z-999 text-[1rem] w-full translate-y-[4rem]">
+    <div className="fixed z-50 text-[1rem] w-full translate-y-[4rem]">
       <ToastContainer
         position={"top-right"} // 알람 위치 지정
         autoClose={1000} // 자동 off 시간
