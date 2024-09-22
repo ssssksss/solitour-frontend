@@ -4,7 +4,6 @@ import DiaryEditor from "@/components/diary/write/DiaryEditor";
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
-import useAuthStore from "@/store/authStore";
 import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,7 +12,6 @@ import { parse } from "node-html-parser";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 interface Props {
@@ -22,7 +20,6 @@ interface Props {
 
 const DiaryEditorContainer = ({ diaryData }: Props) => {
   const router = useRouter();
-  const authStore = useAuthStore();
   const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
   const [addressModal, setAddressModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -108,7 +105,7 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
 
     setLoading(true);
 
-    const response = await fetchWithAuth(
+    const response = await fetch(
       `/api/diary/${diaryData.diaryContentResponse.diaryId}`,
       {
         method: "PUT",
