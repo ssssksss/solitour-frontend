@@ -36,7 +36,7 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
             <InformationItemContainer
               key={"post" + post.id}
               informationId={post.id}
-              categoryId={1}
+              categoryName={post.category}
               isBookMark={true}
               isLike={false} // TODO: 수정 필요
               title={post.title}

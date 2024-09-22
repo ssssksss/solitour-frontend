@@ -63,6 +63,7 @@ export interface InformationListResponseDto {
     title: string;
     zoneCategoryParentName: string;
     zoneCategoryChildName: string;
+    categoryName: string;
     viewCount: number;
     isBookMark: boolean;
     thumbNailImage: string;
@@ -119,6 +120,7 @@ export interface InformationDetailDto {
       title: string;
       zoneCategoryParentName: string;
       zoneCategoryChildName: string;
+      categoryName: string;
       viewCount: number;
       isBookMark: boolean;
       isLike: boolean;
