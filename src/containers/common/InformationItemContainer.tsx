@@ -7,7 +7,7 @@ import { useState } from "react";
 
 interface Props {
   informationId: number;
-  categoryId: number;
+  categoryName: string;
   isBookMark: boolean;
   isLike: boolean;
   title: string;
@@ -19,7 +19,7 @@ interface Props {
 
 const InformationItemContainer = ({
   informationId,
-  categoryId,
+  categoryName,
   isBookMark,
   isLike,
   title,
@@ -85,7 +85,7 @@ const InformationItemContainer = ({
   return (
     <InformationItem
       informationId={informationId}
-      categoryId={categoryId}
+      categoryName={categoryName}
       userId={userId}
       isBookMark={isBookMarked}
       isLike={isLike}

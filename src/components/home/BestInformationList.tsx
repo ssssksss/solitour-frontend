@@ -45,7 +45,7 @@ const BestInformationList = async () => {
         <InformationItemContainer
           key={index}
           informationId={value.informationId}
-          categoryId={Number(CATEGORY_TEXT[value.parentCategoryName])}
+          categoryName={value.parentCategoryName}
           isBookMark={value.isBookMark}
           isLike={value.isLike}
           title={value.title}

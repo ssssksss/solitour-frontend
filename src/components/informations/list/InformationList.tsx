@@ -72,7 +72,7 @@ const InformationList = async ({
               <InformationItemContainer
                 key={value.informationId}
                 informationId={value.informationId}
-                categoryId={parentCategoryId}
+                categoryName={value.categoryName}
                 isBookMark={value.isBookMark}
                 isLike={value.isLike}
                 title={value.title}
