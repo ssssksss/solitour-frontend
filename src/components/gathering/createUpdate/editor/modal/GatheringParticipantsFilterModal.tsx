@@ -84,7 +84,7 @@ const GatheringParticipantsFilterModal = (
   return (
     <div
       className={
-        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
+        "relative h-full max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-2xl bg-white p-[2.75rem] scrollbar-hide"
       }
     >
       <button
