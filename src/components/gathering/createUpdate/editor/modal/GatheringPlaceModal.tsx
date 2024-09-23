@@ -114,7 +114,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     formContext.setValue("xAxis", Number(element.x));
     formContext.setValue("yAxis", Number(element.y));
     formContext.setValue("searchId", element.id);
-    formContext.setValue("roadAddressName", element.road_address_name);
+    formContext.setValue("roadAddressName", element.address_name);
     formContext.trigger([
       "placeName",
       "xAxis",
@@ -126,7 +126,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
   };
 
   const pickAddress = (element: PlaceElement1) => {
-    setRoadAddress(element.road_address.address_name);
+    setRoadAddress(element.address_name);
     setPlaceData(element);
   };
 
@@ -136,7 +136,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
     formContext.setValue("yAxis", Number(placeData?.y));
     formContext.setValue(
       "roadAddressName",
-      placeData?.road_address.address_name,
+      placeData?.address_name,
     );
     formContext.setValue("searchId", "");
     formContext.trigger([
@@ -250,7 +250,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
                             <span> {result.place_name} </span>
                           </div>
                           <div className={"text-sm text-gray2"}>
-                            {result.road_address_name}
+                            {result.address_name}
                           </div>
                         </li>
                       ))}
