@@ -1,5 +1,5 @@
 import "@/styles/reactDataRange.css";
-import { add, addDays, format, isAfter } from "date-fns";
+import { add, addDays, format, isAfter, isSameDay } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
@@ -80,14 +80,18 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           <DateRangePicker
             onChange={(rangesByKey: RangeKeyDict) => {
               const selection = rangesByKey.selection;
-              if (
-                selection.startDate?.getFullYear() !=
-                  selection.endDate?.getFullYear() ||
-                selection.startDate?.getMonth() != selection.endDate?.getMonth()
-              ) {
-                setMonth(selection.startDate!.getMonth() + 1);
-                setYear(selection.startDate!.getFullYear());
+              if (selection.startDate && selection.endDate && isSameDay(selection.startDate, selection.endDate)) {
+                setMonth(selection.startDate.getMonth() + 1);
               }
+                if (
+                  selection.startDate?.getFullYear() !=
+                    selection.endDate?.getFullYear() ||
+                  selection.startDate?.getMonth() !=
+                    selection.endDate?.getMonth()
+                ) {
+                  setMonth(selection.startDate!.getMonth() + 1);
+                  setYear(selection.startDate!.getFullYear());
+                }
               setCalendarDate([
                 {
                   startDate: selection.startDate as Date,
