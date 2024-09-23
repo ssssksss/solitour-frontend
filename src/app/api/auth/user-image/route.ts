@@ -13,7 +13,7 @@ export async function DELETE(request: NextRequest) {
     return new NextResponse("Refresh token not found", { status: 401 });
   }
 
-  const response = await fetch(`${process.env.BACKEND_URL}/api/user-image`, {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/users/profile`, {
     method: "DELETE",
     headers: {
       Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
@@ -26,5 +26,5 @@ export async function DELETE(request: NextRequest) {
     return new NextResponse(`${response.statusText}`, { status: response.status });
   }
 
-    return await response.json();
+    return response;
 }
