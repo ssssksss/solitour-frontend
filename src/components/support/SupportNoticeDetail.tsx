@@ -42,7 +42,10 @@ const SupportNoticeDetail = ({ data }: ISupportNoticeDetail) => {
         <hr className="my-4 border-t-2 border-gray-300" />
 
         {/* 본문 내용 */}
-        <div className="text-lg text-gray-800">{data.content}</div>
+        <p
+            className="break-words py-4 font-medium text-black"
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          />
       </div>
     </div>
   );
