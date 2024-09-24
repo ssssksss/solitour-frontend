@@ -8,7 +8,7 @@ const tabs = [
   { name: "서비스소개", value: "about" },
   { name: "공지사항", value: "notice" },
   { name: "FAQ", value: "faq" },
-  { name: "1:1 문의", value: "qna" },
+  // { name: "1:1 문의", value: "qna" },
   // { name: "1:1 문의", value: "contact" },
   { name: "이용약관", value: "terms" },
 ];
