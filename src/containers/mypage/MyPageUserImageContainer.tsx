@@ -86,8 +86,6 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
       onDropOrInputEvent,
   } = useDragAndDrop({ imageUpload });
   
-  console.log("MyPageUserImageContainer.tsx 파일 : ", useAuthStore.getState());
-
   return (
     <div>
       <MyPageUserImage
