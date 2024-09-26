@@ -118,6 +118,10 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
         정보를 입력하지 않아도 서비스를 이용할 수 있으나 일부 서비스 이용이
         제한될 수 있습니다
       </p>
+      <label>
+        <input type={"checkbox"} />
+        사용자 개인 정보 처리에 동의
+      </label>
       <button
         onClick={() => addUserInformationSubmit()}
         className={
@@ -126,6 +130,15 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
         disabled={!formState.isValid}
       >
         추가 정보 제출
+      </button>
+      <button
+        onClick={() => addUserInformationSubmit()}
+        className={
+          `mt-5 min-h-[4rem] w-full rounded-[1.5rem] ${formState.isValid ? "bg-main text-white" : "bg-gray3"}`
+        }
+        disabled={!formState.isValid}
+      >
+        나중에 등록하기
       </button>
     </section>
   );
