@@ -7,17 +7,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const InformationSearchContainer = () => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [orderDropdownVisible, setOrderDropdownVisible] =
-    useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [orderDropdownVisible, setOrderDropdownVisible] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const parentCategoryId = searchParams.get("parentCategoryId")!;
   const childCategoryId = searchParams.get("childCategoryId");
   const place = searchParams.get("place") ?? "";
   const order = searchParams.get("order") ?? "latest";
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [searchMethod, setSearchMethod] = useState<string>("제목");
+  const [searchValue, setSearchValue] = useState("");
+  const [searchMethod, setSearchMethod] = useState("제목");
   const [searchDropdownVisible, setSearchDropdownVisible] =
     useState<boolean>(false);
   const router = useRouter();
@@ -34,12 +33,7 @@ const InformationSearchContainer = () => {
   };
 
   const onSearchClick = () => {
-    if (searchMethod === "제목" && searchValue.length < 1) {
-      alert("최소 한 글자의 제목을 입력해 주세요.");
-      return;
-    }
-
-    if (searchMethod === "태그" && searchValue.length < 2) {
+    if (searchMethod === "태그" && searchValue.length === 1) {
       alert("2 ~ 15자의 태그를 입력해 주세요.");
       return;
     }
