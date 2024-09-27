@@ -1,50 +1,79 @@
 "use client";
 
 import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
+import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import React, { useState } from "react";
 import { useRef } from "react";
 
-type MyProps = {
+interface Props {
   index: number;
-};
+}
 
-const ImageUploadItemContainer = ({ index }: MyProps) => {
+const ImageUploadItemContainer = ({ index }: Props) => {
   const imageRef = useRef<HTMLInputElement>(null);
-  const {
-    images,
-    mainImageIndex,
-    changeImage,
-    changeMainImageIndex,
-    addImage,
-    removeImage,
-  } = useEditorStore();
+  const { images, mainImageIndex, setEditor, changeImage, addImage } =
+    useEditorStore();
+  const editorStore = useEditorStore();
+  const authStore = useAuthStore();
 
   const onUploadButtonClicked = () => {
     imageRef.current?.click();
   };
 
-  const previewImage = () => {
+  const previewImage = async () => {
     if (
       imageRef.current &&
       imageRef.current.files &&
       imageRef.current.files.length >= 1
     ) {
       const file = imageRef.current.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        changeImage(index, reader.result as string);
-        addImage();
-      };
+
+      if (file.size > 10485760) {
+        alert("사진 용량이 10MB를 초과합니다.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("id", authStore.id.toString());
+      formData.append("image", file);
+      formData.append("type", "INFORMATION");
+
+      editorStore.setEditor({ imageLoading: true });
+
+      const response = await fetchWithAuth("/api/image/upload", {
+        method: "POST",
+        body: formData,
+        cache: "no-store",
+      });
+
+      editorStore.setEditor({ imageLoading: false });
+
+      if (!response.ok) {
+        alert("이미지 처리 중 오류가 발생하였습니다.");
+        throw new Error(response.statusText);
+      }
+
+      const result: { fileUrl: string } = await response.json();
+      changeImage(index, result.fileUrl);
+      addImage();
     }
   };
 
   const onRemove = (index: number) => {
-    removeImage(index);
+    if (editorStore.imageLoading) {
+      return;
+    }
+
+    setEditor({
+      images: editorStore.images.filter((_, i) => index !== i),
+    });
+
     if (index < mainImageIndex) {
-      changeMainImageIndex(mainImageIndex - 1);
+      setEditor({ mainImageIndex: mainImageIndex - 1 });
     } else if (index === mainImageIndex) {
-      changeMainImageIndex(0);
+      setEditor({ mainImageIndex: 0 });
     }
   };
 
@@ -54,9 +83,10 @@ const ImageUploadItemContainer = ({ index }: MyProps) => {
       image={images[index]}
       mainImageIndex={mainImageIndex}
       imageRef={imageRef}
+      loading={editorStore.imageLoading}
       onUploadButtonClicked={onUploadButtonClicked}
       previewImage={previewImage}
-      setMainImageIndex={changeMainImageIndex}
+      setMainImageIndex={(index) => setEditor({ mainImageIndex: index })}
       onRemove={onRemove}
     />
   );

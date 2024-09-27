@@ -1,68 +1,27 @@
+import { userResponseDto } from "@/types/UserDto";
 import Image from "next/image";
 import Link from "next/link";
+import UserImage from "../auth/UserImage";
 
-interface IDummyData {
-  user_id?: number,
-  user_status_id?: string,
-  user_oauth_id?: string,
-  user_nickname?: string,
-  user_age?: number | null,
-  user_sex?: string | null,
-  user_email?: string | null,
-  user_phone_number?: string | null,
-  user_image?: string | null,
-  // is_admin: boolean,
+interface IMyPageHeader {
+  userInfo: userResponseDto;
 }
 
-
-const dummyData: IDummyData = {
-    user_id: 1,
-  user_status_id: "1",
-  user_oauth_id: "1",
-  user_nickname: "하몽님",
-  user_age: 20,
-  user_sex: "woman",
-  user_email: "sola240@gmail.com",
-  user_phone_number: "010-1234-5678",
-  user_image: null,
-}
-
-
-const MyPageHeader = () => {
+const MyPageHeader = ({ userInfo }: IMyPageHeader) => {
   return (
-    <div className={"flex w-full max-w-[60rem] flex-col"}>
+    <div className={"flex w-full max-w-[60rem] flex-col pt-[2.5rem]"}>
       <h1 className={"text-3xl font-semibold"}> 마이페이지 </h1>
       <div className={"flex items-center justify-center pb-[5rem] pt-[6.5rem]"}>
         <article className={"flex flex-col items-center"}>
           <div
             className={
-              "relative mb-[1rem] aspect-square w-[6.75rem] cursor-pointer rounded-[3rem] bg-[#F2FAF7] outline outline-[1px] outline-offset-[1px] outline-[#B8EDD9]"
+              "relative mb-[1rem] aspect-square w-[6.75rem] rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
             }
           >
-            {/* ? 유저의 썸네일 이미지가 있는지? */}
-            {/* ? 썸네일 이미지가 없다면 남자인지 여자인지? => 만약에 성별을 선택안하게 되면 어떻게 해야할지? */}
-            {dummyData.user_image ? (
-              <Image
-                src={dummyData.user_image}
-                alt={"user_image"}
-                width={108}
-                height={108}
-              />
-            ) : dummyData.user_sex == "man" ? (
-              <Image
-                src={"/user_sex_man_default_image.svg"}
-                alt={"user_image"}
-                width={108}
-                height={108}
-              />
-            ) : (
-              <Image
-                src={"/user_sex_woman_default_image.svg"}
-                alt={"user_image"}
-                width={108}
-                height={108}
-              />
-            )}
+            <UserImage
+              userImageAddress={userInfo.userImage?.address}
+              size={108}
+            />
             <Link href="/mypage/profile">
               <div
                 className={
@@ -70,18 +29,22 @@ const MyPageHeader = () => {
                 }
               >
                 <div className="relative h-[1.25rem] w-[1.25rem]">
-                  <Image src={"/edit-icon.svg"} alt={"edit-icon-image"} fill />
+                  <Image
+                    src={"/mypage/setting-icon.svg"}
+                    alt={"setting-icon-image"}
+                    fill
+                  />
                 </div>
               </div>
             </Link>
           </div>
           <div className={"text-2xl font-semibold text-[#111]"}>
-            {dummyData.user_nickname}
+            {userInfo.nickname}
           </div>
-          <div className={"text-[#666]"}> {dummyData.user_email} </div>
+          <div className={"text-[#666]"}> {userInfo.email} </div>
         </article>
       </div>
     </div>
   );
 };
-export default MyPageHeader
+export default MyPageHeader;

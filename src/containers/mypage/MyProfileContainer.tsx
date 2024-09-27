@@ -1,66 +1,97 @@
-'use client'
+"use client";
 
 import MyProfile from "@/components/mypage/MyProfile";
-import { ChangeEvent, useRef, useState } from "react";
+import useModalState from "@/hooks/useModalState";
+import useAuthStore from "@/store/authStore";
+import useToastifyStore from "@/store/toastifyStore";
+import { userResponseDto } from "@/types/UserDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-const MyProfileContainer = () => {
-  const imageUploadRef = useRef<HTMLInputElement>(null);
-  const [, setIsDragging] = useState(false);
-  const [imageUrl, setImageUrl] = useState("/");
+interface IMyProfileContainer {
+  userInfo: userResponseDto;
+}
 
-  const onDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-  const onDragLeave = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  };
-  const onDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.dataTransfer.files) {
-      setIsDragging(true);
-    }
-  };
-  const onDrop = (e: React.DragEvent<HTMLLabelElement>) => {
-    const file = e.dataTransfer.files?.[0];
-    e.preventDefault();
-    e.stopPropagation();
-    if (!file) {
-      alert("파일이 없습니다!");
-      return;
-    }
-    const result = URL.createObjectURL(file);
-    setImageUrl(result);
-    setIsDragging(false);
-  };
-  const onChangeImageUploadInputHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    const file = event.target.files?.[0];
-    if (!file) {
-      alert("파일이 없습니다!");
-      return;
-    }
-    const result = URL.createObjectURL(file);
-    setImageUrl(result);
-  };
+const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
+  const [nickname, setNickname] = useState(userInfo.nickname);
+  const [defaultNickname, setDefaultNickname] = useState(userInfo.nickname);
+  const [message, setMessage] = useState("");
+  const modalState = useModalState();
+  const [userDeleteText, setUserDeleteText] = useState("");
+  const router = useRouter();
+  const toastifyStore = useToastifyStore();
+  const authStore = useAuthStore();
 
-  // TODO : 디폴트 이미지로 돌아가는 방법에 대해서도 코드 작성이 필요하다. 나중에 서버에 이미지 업로드 될 때 같이 변경해서 변경할 예정
+  const submitChangeNicknameHandler = async () => {
+    if (nickname == "" && nickname == defaultNickname) return;
+    const res = await fetchWithAuth("/api/mypage/change-nickname", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+      body: JSON.stringify({ nickname: nickname }),
+    })
+
+    const data = await res.json();
+    if (data.status == 200) {
+      setDefaultNickname(nickname);
+      setMessage("성공");
+    } else {
+      setMessage("실패");
+    }
+  }
+  
+  const changeNickname = (value: string) => {
+    setNickname(value);
+    setMessage("");
+  }
+
+  const changeUserDeleteText = (value: string) => {
+    setUserDeleteText(value);
+  }
+
+  const userDeleteHandler = async () => {
+    const response = await fetchWithAuth(`/api/auth/user?type=${userInfo.provider}`, {
+      method: "DELETE",
+      "Content-Type": "application/json",
+    });
+
+    if (response.ok) {
+      modalState.closeModal();
+      await toastifyStore.setToastify({
+        type: "success",
+        message: "회원탈퇴에 성공했습니다.",
+      });
+      authStore.initialize();
+      setTimeout(() => {
+        router.replace("/");
+      }, 300);
+    }
+    else {
+      toastifyStore.setToastify({
+        type: "error",
+        message: "회원탈퇴에 실패했습니다.",
+      });
+    }
+  }
+
 
   return (
+    <>
     <MyProfile
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDragOver={onDragOver}
-      onDrop={onDrop}
-      imageUploadRef={imageUploadRef}
-      imageUrl={imageUrl}
-      onChangeImageUploadInputHandler={onChangeImageUploadInputHandler}
-    />
+      userInfo={userInfo}
+      submitChangeNicknameHandler={submitChangeNicknameHandler}
+      nickname={nickname}
+      changeNickname={changeNickname}
+      defaultNickname={defaultNickname}
+      message={message}
+      modalState={modalState}
+      changeUserDeleteText={changeUserDeleteText}
+      userDeleteText={userDeleteText}
+      userDeleteHandler={userDeleteHandler}
+      />
+      </>
   );
 };
 export default MyProfileContainer;

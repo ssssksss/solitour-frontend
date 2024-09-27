@@ -21,8 +21,7 @@ export default function useDragScroll(): useDragScrollType {
 
   // 마우스 드래그 시작
   const onDragStart = (e: MouseEvent<HTMLDivElement>) => {
-    // TODO: InformationEditor에서 태그 입력칸에 이벤트가 전달되지 않는 문제를 해결하기 위해 주석 처리함.
-    //e.preventDefault();
+    e.preventDefault();
     setIsDragging(true);
 
     const x = e.clientX;
@@ -61,7 +60,6 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 시작
   const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
     setIsDragging(true);
 
     const x = e.touches[0].pageX;
@@ -72,7 +70,6 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 동작 중
   const onTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
     if (!isDragging) {
       return;
     }
@@ -86,8 +83,6 @@ export default function useDragScroll(): useDragScrollType {
 
   // 터치 드래그 종료
   const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
-    // TODO: InformationEditor에서 태그 입력칸에 이벤트가 전달되지 않는 문제를 해결하기 위해 주석 처리함.
-    //e.preventDefault();
     if (!isDragging) {
       return;
     }

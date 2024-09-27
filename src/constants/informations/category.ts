@@ -3,7 +3,10 @@ type CATEGORY_TEXT_TYPE = {
 };
 
 export const CATEGORY_TEXT: CATEGORY_TEXT_TYPE = {
-  맛집: "restaurant",
-  숙박: "accommondation",
-  액티비티: "activity",
+  1: "맛집",
+  2: "숙박",
+  3: "액티비티",
+  맛집: "1",
+  숙박: "2",
+  액티비티: "3",
 };

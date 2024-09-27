@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.solitourist.com/
+
+# Sitemaps
+Sitemap: https://www.solitourist.com/sitemap.xml

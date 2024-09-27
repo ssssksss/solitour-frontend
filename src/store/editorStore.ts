@@ -1,50 +1,33 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
 
+// 1. 상태 인터페이스 정의
 interface EditorState {
-  title: string;
-  location: string;
-  category: string;
-  subCategory: string;
+  imageLoading: boolean;
   images: string[];
   mainImageIndex: number;
-  content: string;
-  hashtags: string[];
-  tips: string[];
 }
 
+// 2. 액션 인터페이스 정의
 interface EditorActions {
   initialize: () => void;
-  changeField: (key: string, value: string) => void;
+  setEditor: (data: Partial<EditorState>) => void;
   changeImage: (index: number, image: string) => void;
-  changeMainImageIndex: (index: number) => void;
-  changeTip: (index: number, tip: string) => void;
   addImage: () => void;
-  addHashtag: (hashtag: string) => void;
-  addTip: () => void;
-  removeImage: (index: number) => void;
-  removeHashtag: (index: number) => void;
-  removeTip: () => void;
 }
 
-type EditorStoreType = StateCreator<EditorState & EditorActions>;
-
+// 3. 초기 상태 정의
 const initialState: EditorState = {
-  title: "",
-  location: "",
-  category: "",
-  subCategory: "",
+  imageLoading: false,
   images: [""],
   mainImageIndex: 0,
-  content: "",
-  hashtags: [],
-  tips: [""],
 };
 
-const editorStore: EditorStoreType = (set, get) => ({
+// 4. 상태 및 액션 생성
+const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
-  changeField: (key: string, value: string) => set({ [key]: value }),
+  setEditor: (data: Partial<EditorState>) => set(() => ({ ...data })),
   changeImage: (index: number, image: string) =>
     set((state) => {
       const images = [...state.images];
@@ -53,33 +36,10 @@ const editorStore: EditorStoreType = (set, get) => ({
         images: images,
       };
     }),
-  changeMainImageIndex: (index: number) => set({ mainImageIndex: index }),
-  changeTip: (index: number, tip: string) =>
-    set((state) => {
-      const tips = [...state.tips];
-      tips[index] = tip;
-      return {
-        tips: tips,
-      };
-    }),
-  addImage: () => set((state) => ({ images: [...state.images, ""] })),
-  addHashtag: (hashtag: string) =>
-    set((state) => {
-      if (!state.hashtags.includes(hashtag) && hashtag !== "") {
-        return { hashtags: [...state.hashtags, hashtag] };
-      } else {
-        return { hashtags: state.hashtags };
-      }
-    }),
-  addTip: () => set((state) => ({ tips: [...state.tips, ""] })),
-  removeImage: (index: number) =>
-    set((state) => ({ images: state.images.filter((_, i) => index !== i) })),
-  removeHashtag: (index: number) =>
+  addImage: () =>
     set((state) => ({
-      hashtags: state.hashtags.filter((_, i) => index !== i),
+      images: [...state.images, ""],
     })),
-  removeTip: () =>
-    set((state) => ({ tips: state.tips.slice(0, state.tips.length - 1) })),
 });
 
 const useEditorStore = create<EditorState & EditorActions>()<any>(

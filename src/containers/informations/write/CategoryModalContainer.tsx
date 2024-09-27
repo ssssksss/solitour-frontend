@@ -1,37 +1,68 @@
+"use client";
+
 import CategoryModal from "@/components/informations/write/CategoryModal";
-import useEditorStore from "@/store/editorStore";
+import { CategoryResponseDto } from "@/types/CategoryDto";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-type MyProps = {
+interface Props {
   closeModal: () => void;
-};
+}
 
-const CategoryModalContainer = ({ closeModal }: MyProps) => {
-  const { category, subCategory, changeField } = useEditorStore();
+const CategoryModalContainer = ({ closeModal }: Props) => {
+  const [parentCategory, setParentCategory] = useState<number>(0);
+  const [categories, setCategories] = useState<CategoryResponseDto[]>();
+  const formContext = useFormContext();
 
-  const setCategory = (category: string) => {
-    changeField("category", category);
-    changeField("subCategory", "");
+  const setParentCategoryId = (parentCategoryId: number) => {
+    setParentCategory(parentCategoryId);
+    formContext.setValue("categoryId", 0);
+    formContext.setValue("categoryName", "");
+    formContext.watch();
   };
 
-  const setSubCategory = (subCategory: string) => {
-    changeField("subCategory", subCategory);
+  const setCategory = (categoryId: number, categoryName: string) => {
+    formContext.setValue("categoryId", categoryId);
+    formContext.setValue("categoryName", categoryName);
+    formContext.trigger("categoryId");
   };
 
-  const onClick = () => {
-    if (category === "" || subCategory === "") {
-      changeField("category", "");
-      changeField("subCategory", "");
-    }
+  const onCancel = () => {
+    setParentCategory(0);
+    formContext.setValue("categoryId", 0);
+    formContext.trigger("categoryId");
     closeModal();
   };
 
+  const onSave = () => {
+    closeModal();
+  };
+
+  useEffect(() => {
+    (async function () {
+      const response = await fetchWithAuth("/api/categories", {
+        method: "GET",
+        next: { revalidate: 60, tags: ["getCategoryList"] },
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      setCategories(await (response.json() as Promise<CategoryResponseDto[]>));
+    })();
+  }, []);
+
   return (
     <CategoryModal
-      category={category}
-      subCategory={subCategory}
+      categories={categories}
+      parentCategory={parentCategory}
+      categoryId={formContext.getValues("categoryId")}
+      setParentCategoryId={setParentCategoryId}
       setCategory={setCategory}
-      setSubCategory={setSubCategory}
-      onClick={onClick}
+      onCancel={onCancel}
+      onSave={onSave}
     />
   );
 };

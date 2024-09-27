@@ -1,18 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   ref: React.RefObject<T>,
-  callback: (event?: CustomEvent<MouseEvent>) => void,
+  callback: (event?: MouseEvent) => void,
 ) => {
+  const [isDragging, setIsDragging] = useState(true);
+
   useEffect(() => {
-    const listener = (event: CustomEvent<MouseEvent>) => {
+    const listener = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
+        if (isDragging) return;
+
+        // Exclude back button clicks
+        if (event.button === 3) return;
+        if (event.button === 4) return;
+
         callback(event);
       }
     };
-    document.addEventListener("click", listener as EventListener);
-    return () => {
-      document.removeEventListener("click", listener as EventListener);
+
+    const listener1 = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsDragging(false);
+      } else {
+        setIsDragging(true);
+      }
     };
-  }, [ref, callback]);
+
+    document.addEventListener("mouseup", listener);
+    document.addEventListener("mousedown", listener1);
+
+    return () => {
+      document.removeEventListener("mouseup", listener);
+      document.removeEventListener("mousedown", listener1);
+    };
+  }, [callback, isDragging, ref]);
 };
+
 export default useOutsideClick;

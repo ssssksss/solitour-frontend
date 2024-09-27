@@ -1,76 +1,60 @@
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import InformationItem from "../common/InformationItem";
+import { CATEGORY_TEXT } from "@/constants/informations/category";
+import InformationItemContainer from "@/containers/common/InformationItemContainer";
+import { BestInformationResponseDto } from "@/types/InformationDto";
+import { cookies } from "next/headers";
+import LottieNotFound from "../common/lottie/LottieNotFound";
 
-const BestInformationList = () => {
-  // TODO
-  const data: {
-    category: string;
-    title: string;
-    image: string;
-  }[] = [
+/**
+ * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.
+ */
+async function getBestInformationList() {
+  const cookie = cookies().get("access_token");
+  const response = await fetch(
+    `${process.env.BACKEND_URL}/api/informations/main-page`,
     {
-      category: "맛집",
-      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
-      image: "/PostImage.svg",
+      method: "GET",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      next: { revalidate: 60, tags: ["getBestInformationList"] },
     },
-    {
-      category: "숙박",
-      title: "다양한 프로그램이 있는 제주 월정리 게하",
-      image: "/PostImage2.svg",
-    },
-    {
-      category: "액티비티",
-      title: "혼자 놀기 초보도 가능한 국립현대미술관",
-      image: "/PostImage3.svg",
-    },
-    {
-      category: "맛집",
-      title: "커피와 프렌치토스트가 맛있는 재즈카페 시노라 북촌점",
-      image: "/PostImage.svg",
-    },
-    {
-      category: "숙박",
-      title: "다양한 프로그램이 있는 제주 월정리 게하",
-      image: "/PostImage2.svg",
-    },
-    {
-      category: "액티비티",
-      title: "혼자 놀기 초보도 가능한 국립현대미술관",
-      image: "/PostImage3.svg",
-    },
-  ];
+  );
+
+  if (!response.ok) {
+    // This will activate the closest 'error.tsx' Error Boundary.
+    throw new Error(response.statusText);
+  }
+
+  return response.json() as Promise<BestInformationResponseDto[]>;
+}
+
+const BestInformationList = async () => {
+  const data = await getBestInformationList();
+
+  if (data.length === 0) {
+    return (
+      <div className="flex w-full flex-col items-center pb-12">
+        <LottieNotFound text={"여행 정보를 작성해 보세요."} />
+      </div>
+    );
+  }
 
   return (
-    <div className="mt-20 w-[60rem] max-[1024px]:w-[90%]">
-      <div className="flex flex-row items-center justify-between">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-black max-[768px]:text-xl">
-            고민을 덜어줄, <span className="text-main">BEST</span> 여행 정보
-          </h2>
-          <p className="text-sm font-medium text-gray1 max-[768px]:text-xs">
-            솔리투어에서 인기 여행 정보를 확인해보세요!
-          </p>
-        </div>
-        <div className="flex flex-row items-center space-x-2">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
-            <IoIosArrowBack size={"1.25rem"} />
-          </button>
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray3 hover:border-black hover:bg-black hover:text-white">
-            <IoIosArrowForward size={"1.25rem"} />
-          </button>
-        </div>
-      </div>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-        {data.map((post, index) => (
-          <InformationItem
-            key={index}
-            id={index + 1}
-            category={post.category}
-            title={post.title}
-            image={post.image}
-          />
-        ))}
-      </div>
+    <div className="mt-6 grid w-full grid-cols-3 items-center gap-4 p-1 max-[1024px]:grid-cols-2 max-[744px]:flex max-[744px]:w-fit">
+      {data.map((value, index) => (
+        <InformationItemContainer
+          key={index}
+          informationId={value.informationId}
+          categoryName={value.parentCategoryName}
+          isBookMark={value.isBookMark}
+          isLike={value.isLike}
+          title={value.title}
+          image={value.thumbNailImage}
+          address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}
+          likeCount={value.likeCount}
+          viewCount={value.viewCount}
+        />
+      ))}
     </div>
   );
 };

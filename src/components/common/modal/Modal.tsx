@@ -1,38 +1,104 @@
 import useOutsideClick from "@/hooks/useOutsideClick";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { MdClose } from "react-icons/md";
 
 interface ModalProps extends React.PropsWithChildren {
   isOpen: boolean;
   className?: React.HTMLProps<HTMLElement>["className"];
   onClose: () => void;
+  isHeaderBar?: boolean;
+  headerBarStyle?: string;
 }
 
-/**
- * 
- * @param param0 
- * <Modal isOpen={isModal} onClose={() => setIsModal(false)} className="flex items-center justify-center">
- *   <ModalComponent closeModal={() => setIsModal(false)} />
- * </Modal>
- */
-
-export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
+export const Modal = ({
+  isOpen,
+  children,
+  onClose,
+  isHeaderBar,
+  headerBarStyle = "bg-white",
+}: ModalProps) => {
   const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  let flag = isOpen;
+  usePreventBodyScroll(isOpen);
 
   useEffect(() => {
     setDocumentBody(document.body);
   }, []);
+
   useOutsideClick(ref, () => {
     onClose();
   });
 
-  if (documentBody == null) return;
-  if (isOpen === false) return;
-    return createPortal(
-      <div className="fixed inset-0 z-10 flex h-full w-full items-center justify-center bg-black/30">
-        <div ref={ref}>{children}</div>
-      </div>,
-      documentBody,
-    );
+  const handlePopState = () => {
+    flag = false;
+    if (isOpen) {
+      onClose();
+    }
+  };
+
+  const handleBeforeUnload = () => {
+    // 모달창이 열린 상태로 새로고침을 하게되면 나중에 헤더에서 뒤로가기를 실행하는 용도로 사용
+    localStorage.setItem("isModal", "true");
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      history.pushState({ isModal: true }, "");
+      window.addEventListener("popstate", handlePopState);
+      window.addEventListener("beforeunload", handleBeforeUnload);
+    }
+
+    return () => {
+      if (flag) {
+        window.history.back();
+        flag = false;
+      }
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isOpen]);
+
+  if (!documentBody || !isOpen) return null;
+
+  return createPortal(
+    <div
+      className="fixed inset-0 flex h-full w-full items-center justify-center"
+      style={{ zIndex: "100" }}
+    >
+      <div className="absolute h-full w-full cursor-pointer bg-black/30"></div>
+      <div
+        ref={ref}
+        className="-z-1 relative flex h-[calc(100vh-1rem)] flex-col items-center justify-center"
+        onClick={(e) => {
+          if (e.target == ref.current) {
+            onClose();
+          }
+        }}
+      >
+        {isHeaderBar && (
+          <div
+            className={`relative flex h-[3rem] w-full justify-end rounded-t-[1rem] ${headerBarStyle}`}
+          >
+            <button
+              onClick={() => onClose()}
+              className="sticky mt-[2.5rem] mr-[2.5rem] z-50 h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
+            >
+              <MdClose
+                className="cursor-pointer text-gray2 hover:text-main"
+                size={"2.5rem"}
+                onClick={() => {
+                  onClose();
+                }}
+              />
+            </button>
+          </div>
+        )}
+        {children}
+      </div>
+    </div>,
+    document.getElementById("modal-root") as HTMLElement,
+  );
 };

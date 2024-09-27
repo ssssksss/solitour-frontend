@@ -1,32 +1,36 @@
+import HashSpinner from "@/components/common/HashSpinner";
 import Image from "next/image";
 import { RefObject } from "react";
 import { MdClose } from "react-icons/md";
+import { HashLoader } from "react-spinners";
 
-type MyProps = {
+interface Props {
   index: number;
   image: string;
   mainImageIndex: number;
   imageRef: RefObject<HTMLInputElement>;
+  loading: boolean;
   onUploadButtonClicked: () => void;
   previewImage: () => void;
   setMainImageIndex: (index: number) => void;
   onRemove: (index: number) => void;
-};
+}
 
 const ImageUploadItem = ({
   index,
   image,
   mainImageIndex,
   imageRef,
+  loading,
   onUploadButtonClicked,
   previewImage,
   setMainImageIndex,
   onRemove,
-}: MyProps) => {
+}: Props) => {
   if (image !== "") {
     return (
       <div
-        className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-2 hover:border-main"
+        className="relative flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-between rounded-xl border-[0.0625rem] p-2 hover:border-main"
         onDragStart={(e) => e.preventDefault()}
         onClick={() => setMainImageIndex(index)}
         onTouchEnd={() => setMainImageIndex(index)}
@@ -35,7 +39,10 @@ const ImageUploadItem = ({
           <MdClose
             className="z-10 cursor-pointer rounded-full bg-main p-1 text-white hover:scale-110"
             size={"1.75rem"}
-            onClick={() => onRemove(index)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemove(index);
+            }}
           />
         </div>
         <Image
@@ -55,13 +62,25 @@ const ImageUploadItem = ({
     );
   }
 
+  if (loading) {
+    return (
+      <div className="flex h-[9.375rem] w-40 items-center justify-center rounded-xl border-[0.0625rem] border-main">
+        <HashLoader
+          color="#00B488"
+          loading={loading}
+          cssOverride={{ display: "block", margin: "0 auto" }}
+        />
+      </div>
+    );
+  }
+
   return (
     <label
-      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-2 hover:border-main`}
+      className={`${index >= 12 ? "hidden" : ""} flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border-[0.0625rem] hover:border-main focus:border-main`}
       htmlFor="file"
-      onClick={onUploadButtonClicked}
+      onClick={() => onUploadButtonClicked()}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-main text-xl text-main">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full border-[0.0625rem] border-main text-xl text-main">
         +
       </div>
       <p className="pb-[0.375rem] pt-3 text-xs font-medium text-gray1">
