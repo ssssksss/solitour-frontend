@@ -23,8 +23,10 @@ export async function DELETE(request: NextRequest) {
   });
 
   if (!response.ok) {
-    return new NextResponse(`${response.statusText}`, { status: response.status });
+    return new NextResponse(`${response.statusText}`, {
+      status: response.status,
+    });
   }
 
-    return response;
+  return response;
 }

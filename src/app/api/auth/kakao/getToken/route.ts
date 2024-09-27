@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     // Query string 파싱
     const url = new URL(request.url);
     const code = url.searchParams.get("code");
-    const body = await request.json()
+    const body = await request.json();
 
     // 백엔드에 액세스 토큰 재요청
     const backendResponse = await fetch(
@@ -60,8 +60,8 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           createUserInfoRequest: {
-            ...body
-          }
+            ...body,
+          },
         }),
         cache: "no-store",
         credentials: "include",

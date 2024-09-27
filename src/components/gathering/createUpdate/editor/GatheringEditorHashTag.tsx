@@ -13,7 +13,7 @@ interface IGatheringEditorHashTag {
 const GatheringEditorHashTag = ({
   onChangeHashTagHandler,
   deleteTagHandler,
-  tags, 
+  tags,
   inputTagRef,
 }: IGatheringEditorHashTag) => {
   return (
@@ -36,10 +36,7 @@ const GatheringEditorHashTag = ({
             disabled={tags.length > 9}
             maxLength={15}
             onKeyDown={(e) => {
-              if (
-                e.key === " " ||
-                e.key === "#"
-              ) {
+              if (e.key === " " || e.key === "#") {
                 e.preventDefault();
               }
             }}
@@ -74,4 +71,4 @@ const GatheringEditorHashTag = ({
     </article>
   );
 };
-export default GatheringEditorHashTag
+export default GatheringEditorHashTag;

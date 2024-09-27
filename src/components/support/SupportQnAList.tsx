@@ -8,23 +8,26 @@ interface ISupportQnAListProps {
   userId: number;
 }
 
-  const STATUS: { [key: string]: { name: string; style: string } } = {
-    WAIT: {
-      name: "답변 대기중",
-      style: "bg-red-100 text-red-700",
-    },
-    ANSWER: {
-      name: "답변 완료",
-      style: "bg-green-100 text-green-700",
-    },
-    CLOSED: {
-      name: "답변 종료",
-      style: "bg-gray-400 text-black",
-    },
-  };
+const STATUS: { [key: string]: { name: string; style: string } } = {
+  WAIT: {
+    name: "답변 대기중",
+    style: "bg-red-100 text-red-700",
+  },
+  ANSWER: {
+    name: "답변 완료",
+    style: "bg-green-100 text-green-700",
+  },
+  CLOSED: {
+    name: "답변 종료",
+    style: "bg-gray-400 text-black",
+  },
+};
 
-const SupportQnAList = ({ elements, loading, userId }: ISupportQnAListProps) => {
-
+const SupportQnAList = ({
+  elements,
+  loading,
+  userId,
+}: ISupportQnAListProps) => {
   return (
     <div className="flex w-full flex-col">
       {loading ? (
@@ -70,7 +73,7 @@ const SupportQnAList = ({ elements, loading, userId }: ISupportQnAListProps) => 
                       {qna.title}
                     </span>
                     <span
-                      className={`rounded-md min-w-[5rem] flex justify-center px-2 py-1 text-xs font-semibold shadow-sm ${STATUS[qna.status].style}`}
+                      className={`flex min-w-[5rem] justify-center rounded-md px-2 py-1 text-xs font-semibold shadow-sm ${STATUS[qna.status].style}`}
                     >
                       {STATUS[qna.status].name}
                     </span>

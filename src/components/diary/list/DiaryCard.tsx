@@ -137,7 +137,13 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-start text-2xl font-bold">{diaryData.title}</h2>
+        <Link
+          className="text-start text-2xl font-bold hover:text-main"
+          href={`/diary/${diaryData.diaryId}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {diaryData.title}
+        </Link>
         <p className="text-lg">{`${new Date(new Date(diaryData.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
       </motion.div>
     </motion.button>

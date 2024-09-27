@@ -43,7 +43,7 @@ const GatheringBookMarkContainer = (props: IGatheringBookMarkContainer) => {
 
   return (
     <button
-      className={`${userId < 1 && `cursor-default`} relative h-7 w-5 hover:scale-105`}
+      className={`${userId < 1 && "cursor-default"} relative h-7 w-5 hover:scale-105`}
       onClick={(e) => userId > 0 && handleClick(e)}
       disabled={loading}
     >

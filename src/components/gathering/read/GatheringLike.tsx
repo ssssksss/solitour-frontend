@@ -20,7 +20,7 @@ const GatheringLike = ({
     <button
       onClick={(e) => handleClick(e)}
       disabled={loading || userId < 1}
-      className={`${userId < 1 ? `cursor-default` : "cursor-pointer"} hover:size-110 flex flex-row items-center gap-1 text-sm ${loading ? "text-gray-400" : "text-gray-600"} `}
+      className={`${userId < 1 ? "cursor-default" : "cursor-pointer"} hover:size-110 flex flex-row items-center gap-1 text-sm ${loading ? "text-gray-400" : "text-gray-600"} `}
     >
       <div className="relative h-4 w-4 text-white">
         {isLike ? (

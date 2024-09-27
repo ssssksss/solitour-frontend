@@ -80,18 +80,21 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           <DateRangePicker
             onChange={(rangesByKey: RangeKeyDict) => {
               const selection = rangesByKey.selection;
-              if (selection.startDate && selection.endDate && isSameDay(selection.startDate, selection.endDate)) {
+              if (
+                selection.startDate &&
+                selection.endDate &&
+                isSameDay(selection.startDate, selection.endDate)
+              ) {
                 setMonth(selection.startDate.getMonth() + 1);
               }
-                if (
-                  selection.startDate?.getFullYear() !=
-                    selection.endDate?.getFullYear() ||
-                  selection.startDate?.getMonth() !=
-                    selection.endDate?.getMonth()
-                ) {
-                  setMonth(selection.startDate!.getMonth() + 1);
-                  setYear(selection.startDate!.getFullYear());
-                }
+              if (
+                selection.startDate?.getFullYear() !=
+                  selection.endDate?.getFullYear() ||
+                selection.startDate?.getMonth() != selection.endDate?.getMonth()
+              ) {
+                setMonth(selection.startDate!.getMonth() + 1);
+                setYear(selection.startDate!.getFullYear());
+              }
               setCalendarDate([
                 {
                   startDate: selection.startDate as Date,
@@ -150,10 +153,10 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
             }
           >
             <span> {format(calendarDate[0].startDate, "yy.MM.dd")} </span>
-            {
-              format(calendarDate[0].startDate, "yy.MM.dd") != format(calendarDate[0].endDate, "yy.MM.dd") &&
+            {format(calendarDate[0].startDate, "yy.MM.dd") !=
+              format(calendarDate[0].endDate, "yy.MM.dd") && (
               <span> {format(calendarDate[0].endDate, "~ yy.MM.dd")} </span>
-            }
+            )}
             <span className={"pl-[.5rem] text-[1.1rem]"}> 적용하기 </span>
           </button>
         </div>

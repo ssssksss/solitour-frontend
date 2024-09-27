@@ -10,9 +10,7 @@ const GatheringEditorContent = (props: IGatheringEditorContent) => {
           className={`min-h-[17.5rem] w-full resize-none rounded-[1rem] p-6 outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.content
               ? "outline-red-500"
-              : // : formContext.getValues("content")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
           placeholder={
             "어떤 모임을 만들어볼까요? 모임 정보 및 목표를 작성해 새로운 솔리들과 함께해보세요."

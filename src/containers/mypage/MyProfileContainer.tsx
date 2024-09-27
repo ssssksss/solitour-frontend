@@ -13,7 +13,7 @@ interface IMyProfileContainer {
   userInfo: userResponseDto;
 }
 
-const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
+const MyProfileContainer = ({ userInfo }: IMyProfileContainer) => {
   const [nickname, setNickname] = useState(userInfo.nickname);
   const [defaultNickname, setDefaultNickname] = useState(userInfo.nickname);
   const [message, setMessage] = useState("");
@@ -26,12 +26,12 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
   const submitChangeNicknameHandler = async () => {
     if (nickname == "" && nickname == defaultNickname) return;
     const res = await fetchWithAuth("/api/mypage/change-nickname", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ nickname: nickname }),
-    })
+    });
 
     const data = await res.json();
     if (data.status == 200) {
@@ -40,22 +40,25 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
     } else {
       setMessage("실패");
     }
-  }
-  
+  };
+
   const changeNickname = (value: string) => {
     setNickname(value);
     setMessage("");
-  }
+  };
 
   const changeUserDeleteText = (value: string) => {
     setUserDeleteText(value);
-  }
+  };
 
   const userDeleteHandler = async () => {
-    const response = await fetchWithAuth(`/api/auth/user?type=${userInfo.provider}`, {
-      method: "DELETE",
-      "Content-Type": "application/json",
-    });
+    const response = await fetchWithAuth(
+      `/api/auth/user?type=${userInfo.provider}`,
+      {
+        method: "DELETE",
+        "Content-Type": "application/json",
+      },
+    );
 
     if (response.ok) {
       modalState.closeModal();
@@ -67,31 +70,29 @@ const MyProfileContainer = ({userInfo}: IMyProfileContainer) => {
       setTimeout(() => {
         router.replace("/");
       }, 300);
-    }
-    else {
+    } else {
       toastifyStore.setToastify({
         type: "error",
         message: "회원탈퇴에 실패했습니다.",
       });
     }
-  }
-
+  };
 
   return (
     <>
-    <MyProfile
-      userInfo={userInfo}
-      submitChangeNicknameHandler={submitChangeNicknameHandler}
-      nickname={nickname}
-      changeNickname={changeNickname}
-      defaultNickname={defaultNickname}
-      message={message}
-      modalState={modalState}
-      changeUserDeleteText={changeUserDeleteText}
-      userDeleteText={userDeleteText}
-      userDeleteHandler={userDeleteHandler}
+      <MyProfile
+        userInfo={userInfo}
+        submitChangeNicknameHandler={submitChangeNicknameHandler}
+        nickname={nickname}
+        changeNickname={changeNickname}
+        defaultNickname={defaultNickname}
+        message={message}
+        modalState={modalState}
+        changeUserDeleteText={changeUserDeleteText}
+        userDeleteText={userDeleteText}
+        userDeleteHandler={userDeleteHandler}
       />
-      </>
+    </>
   );
 };
 export default MyProfileContainer;

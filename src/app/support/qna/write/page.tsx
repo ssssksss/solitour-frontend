@@ -1,11 +1,8 @@
 import SupportQnAWriteContainer from "@/containers/support/qna/SupportQnAWriteContainer";
 
-interface IPage {
+interface IPage {}
 
-}
 const Page = (props: IPage) => {
-  return (
-     <SupportQnAWriteContainer /> 
-  );
+  return <SupportQnAWriteContainer />;
 };
-export default Page
+export default Page;

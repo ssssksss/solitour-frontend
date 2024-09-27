@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import GatheringCardListContainer from "@/containers/gathering/read/GatheringCardListContainer";
 import GatheringCategoryListContainer from "@/containers/gathering/read/GatheringCategoryListContainer";
@@ -15,25 +15,26 @@ interface IGatheringList {
 }
 
 const GatheringList = (props: IGatheringList) => {
-
   return (
-    <div className="w-full flex flex-col pt-[5.5rem] min-w-[19.1875rem]">
+    <div className="flex w-full min-w-[19.1875rem] flex-col pt-[5.5rem]">
       <article className="flex flex-col gap-y-4 min-[960px]:flex-row-reverse min-[960px]:gap-x-6">
-        <div className="w-full flex flex-row gap-x-2 max-[744px]:flex-col justify-between gap-y-5 min-[960px]:gap-x-6 ">
+        <div className="flex w-full flex-row justify-between gap-x-2 gap-y-5 max-[744px]:flex-col min-[960px]:gap-x-6">
           <GatheringSearchContainer />
-          <div className="max-[744px]:w-full flex flex-row justify-between items-center gap-4 text-sm font-medium text-gray1 ">
-            <div className={"flex justify-between gap-4 w-[7.5rem] z-10"}>
+          <div className="flex flex-row items-center justify-between gap-4 text-sm font-medium text-gray1 max-[744px]:w-full">
+            <div className={"z-10 flex w-[7.5rem] justify-between gap-4"}>
               <GatheringFilterContainer />
               <GatheringSortContainer />
             </div>
             <div className="min-[745px]:hidden">
-            <GatheringExcludeCompleteContainer />
+              <GatheringExcludeCompleteContainer />
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-between items-center ">
-          <GatheringCategoryListContainer gatheringCategoryList={props.gatheringCategoryList} />
-          <div className="flex max-[744px]:hidden min-w-max">
+        <div className="flex w-full items-center justify-between">
+          <GatheringCategoryListContainer
+            gatheringCategoryList={props.gatheringCategoryList}
+          />
+          <div className="flex min-w-max max-[744px]:hidden">
             <GatheringExcludeCompleteContainer />
           </div>
         </div>

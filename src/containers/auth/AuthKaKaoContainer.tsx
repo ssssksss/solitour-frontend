@@ -48,6 +48,7 @@ const AuthKaKaoContainer = () => {
     };
 
     kakaoLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <AuthLoading />;

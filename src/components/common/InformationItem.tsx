@@ -1,4 +1,3 @@
-import { CATEGORY_TEXT } from "@/constants/informations/category";
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";

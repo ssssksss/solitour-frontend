@@ -5,8 +5,10 @@ interface IMyPageHeaderContainer {
   userInfo: userResponseDto;
 }
 const MyPageHeaderContainer = (props: IMyPageHeaderContainer) => {
-  return <>
-    <MyPageHeader userInfo={props.userInfo} />
-  </>;
+  return (
+    <>
+      <MyPageHeader userInfo={props.userInfo} />
+    </>
+  );
 };
-export default MyPageHeaderContainer
+export default MyPageHeaderContainer;

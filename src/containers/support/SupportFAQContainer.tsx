@@ -1,11 +1,7 @@
 import SupportFAQList from "@/components/support/SupportFAQList";
 
-interface ISupportFAQContainer {
-
-}
+interface ISupportFAQContainer {}
 const SupportFAQContainer = (props: ISupportFAQContainer) => {
-  return (
-     <SupportFAQList /> 
-  );
+  return <SupportFAQList />;
 };
-export default SupportFAQContainer
+export default SupportFAQContainer;

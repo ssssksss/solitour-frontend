@@ -1,4 +1,3 @@
-import { CATEGORY_TEXT } from "@/constants/informations/category";
 import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import { BestInformationResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";

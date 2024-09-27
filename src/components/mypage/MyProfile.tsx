@@ -54,9 +54,7 @@ const MyProfile = (props: IMyProfileProps) => {
             <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
           </div>
           <div className="flex select-none items-end gap-x-[.25rem]">
-            <span className={"text-lg text-main"}>
-              {`'회원탈퇴를 하겠습니다.'`}
-            </span>
+            <span className={"text-lg text-main"}>회원탈퇴를 하겠습니다.</span>
             <span> 라고 입력해주세요. </span>
           </div>
           <input

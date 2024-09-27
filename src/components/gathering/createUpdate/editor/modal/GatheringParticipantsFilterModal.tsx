@@ -240,7 +240,7 @@ const GatheringParticipantsFilterModal = (
                     input.value = input.value.replace(/[^0-9]/g, "");
                   }}
                   value={endAge}
-                  className={`w-full pr-[0.625rem] text-center text-lg`}
+                  className="w-full pr-[0.625rem] text-center text-lg"
                 />
                 <div
                   className={"absolute bottom-2 h-[1px] w-[5.125rem] bg-black"}
@@ -279,7 +279,7 @@ const GatheringParticipantsFilterModal = (
       </section>
       <div className={"flex w-full justify-center gap-[1rem] pt-[2rem]"}>
         <button
-          className={`h-[3rem] max-w-[18.625rem] w-full rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1`}
+          className="h-[3rem] w-full max-w-[18.625rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           disabled={
             !sex ||
             (startAge || 0) < 20 ||

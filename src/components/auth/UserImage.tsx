@@ -1,18 +1,16 @@
 import Image from "next/image";
 
 interface IUserImage {
-  userImageAddress: string,
-  userSex?: string,
-  size: number,
-  addressStyle?: string,
-  defaultStyle?: string,
+  userImageAddress: string;
+  userSex?: string;
+  size: number;
+  addressStyle?: string;
+  defaultStyle?: string;
 }
 const UserImage = ({
   userImageAddress,
-  userSex,
   size,
   addressStyle = "rounded-[50%] border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]",
-  defaultStyle = "rounded-[50%] border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]",
 }: IUserImage) => {
   return (
     <>
@@ -30,4 +28,4 @@ const UserImage = ({
     </>
   );
 };
-export default UserImage
+export default UserImage;

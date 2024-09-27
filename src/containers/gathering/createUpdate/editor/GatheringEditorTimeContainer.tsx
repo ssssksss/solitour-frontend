@@ -1,14 +1,11 @@
 import useModalState from "@/hooks/useModalState";
 import GatheringEditorTime from "../../../../components/gathering/createUpdate/editor/GatheringEditorTime";
 
-interface IGatheringEditorTimeContainer {
+interface IGatheringEditorTimeContainer {}
 
-}
 const GatheringEditorTimeContainer = (props: IGatheringEditorTimeContainer) => {
-   const modalState = useModalState(); 
-  
-  return (
-    <GatheringEditorTime modalState={modalState} />
-  )
+  const modalState = useModalState();
+
+  return <GatheringEditorTime modalState={modalState} />;
 };
-export default GatheringEditorTimeContainer
+export default GatheringEditorTimeContainer;

@@ -77,11 +77,7 @@ const GatheringCreateContainer = () => {
               ? "세종"
               : roadAddressName.split(" ")[1],
           tagRegisterRequests:
-            hashtags.length > 0
-              ? hashtags.map((i) => {
-                  return { name: i };
-                })
-              : [],
+            hashtags.length > 0 ? hashtags.map((i) => ({ name: i })) : [],
         }),
       });
 

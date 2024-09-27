@@ -20,9 +20,7 @@ const GatheringEditorParticipantsFilter = ({
           className={`flex h-[3.25rem] w-full items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.allowedSex
               ? "outline-red-500"
-              : // : formContext.getValues("allowedSex")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
         >
           {formContext.getValues("allowedSex") ? (
@@ -37,7 +35,8 @@ const GatheringEditorParticipantsFilter = ({
                 <div className="flex items-center rounded-full py-1 font-semibold text-black">
                   {new Date().getFullYear() - formContext.getValues("startAge")}
                   세<span>~</span>
-                  {new Date().getFullYear() - formContext.getValues("endAge")}세{" "}
+                  {new Date().getFullYear() -
+                    formContext.getValues("endAge")}세{" "}
                   <span className={"px-1 text-black"}> | </span>
                 </div>
 
@@ -67,7 +66,11 @@ const GatheringEditorParticipantsFilter = ({
           )}
         </button>
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => modalState.closeModal()}
+        isHeaderBar={true}
+      >
         <GatheringParticipantsFilterModal closeModal={modalState.closeModal} />
       </Modal>
     </div>

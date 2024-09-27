@@ -6,15 +6,13 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ISupportQnAContainer {
-
-}
+interface ISupportQnAContainer {}
 const SupportQnAContainer = (props: ISupportQnAContainer) => {
   const [totalElements, setTotalElements] = useState(0);
   const [elements, setElements] = useState<QnAListElementType[]>([]);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
-  const authStore = useAuthStore(); 
+  const authStore = useAuthStore();
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
@@ -23,10 +21,10 @@ const SupportQnAContainer = (props: ISupportQnAContainer) => {
     const params = new URLSearchParams(url.search);
     setCurrentPage(page);
     getQnAList(page);
-      url.search = params.toString();
-      window.history.pushState({}, "", url.toString());
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
   };
-  
+
   const getQnAList = async (page: number) => {
     if (isNaN(page) || page < 1) {
       // 페이지가 숫자가 아닌 경우, 에러 페이지로 이동
@@ -34,15 +32,12 @@ const SupportQnAContainer = (props: ISupportQnAContainer) => {
       return;
     }
 
-    const response = await fetchWithAuth(
-      `/api/support/qna?page=${page}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const response = await fetchWithAuth(`/api/support/qna?page=${page}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (!response.ok) {
       setLoading(false);
@@ -54,12 +49,13 @@ const SupportQnAContainer = (props: ISupportQnAContainer) => {
     setElements(data.content);
     setLoading(false);
   };
-  
+
   useEffect(() => {
     setLoading(true);
     getQnAList(currentPage);
-  },[])
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="flex w-full flex-col">
       <SupportQnAList
@@ -77,4 +73,4 @@ const SupportQnAContainer = (props: ISupportQnAContainer) => {
     </div>
   );
 };
-export default SupportQnAContainer
+export default SupportQnAContainer;

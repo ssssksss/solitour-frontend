@@ -5,33 +5,19 @@ import SupportNoticeContainer from "./SupportNoticeContainer";
 import SupportQnAContainer from "./SupportQnAContainer";
 import SupportTermsContainer from "./SupportTermsContainer";
 
-
-
 interface ISupportBodyContainer {
-    active: string | null;
+  active: string | null;
 }
-const SupportBodyContainer = ({active}: ISupportBodyContainer) => {
+const SupportBodyContainer = ({ active }: ISupportBodyContainer) => {
   return (
-      <>
-        {
-          active == "about" && <SupportAboutContainer />
-        }
-        {
-        active == "notice" && <SupportNoticeContainer />
-        }
-        {
-          active == "faq" && <SupportFAQContainer />
-        }
-        {
-          active == "qna" && <SupportQnAContainer />
-        }
-        {
-          active == "terms" && <SupportTermsContainer />
-        }
-        {
-          active == "contact" && <SupportContactContainer />
-        }
-      </>
+    <>
+      {active == "about" && <SupportAboutContainer />}
+      {active == "notice" && <SupportNoticeContainer />}
+      {active == "faq" && <SupportFAQContainer />}
+      {active == "qna" && <SupportQnAContainer />}
+      {active == "terms" && <SupportTermsContainer />}
+      {active == "contact" && <SupportContactContainer />}
+    </>
   );
 };
-export default SupportBodyContainer
+export default SupportBodyContainer;

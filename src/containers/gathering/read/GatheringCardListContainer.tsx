@@ -41,9 +41,7 @@ const GatheringCardListContainer = () => {
     window.history.pushState({}, "", url.toString());
   };
 
-  const checkAccessGathering = async (
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => {
+  const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
       e.preventDefault();
       modalState.openModal();
@@ -90,6 +88,7 @@ const GatheringCardListContainer = () => {
       }
     };
     temp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
@@ -97,8 +96,12 @@ const GatheringCardListContainer = () => {
       {loading ? (
         <SkeletonGatheringList />
       ) : (
-          <>
-          <Modal isOpen={modalState.isOpen} onClose={modalState.closeModal} isHeaderBar={true}>
+        <>
+          <Modal
+            isOpen={modalState.isOpen}
+            onClose={modalState.closeModal}
+            isHeaderBar={true}
+          >
             <AddUserInformationForm closeModal={modalState.closeModal} />
           </Modal>
           <GatheringCardList
