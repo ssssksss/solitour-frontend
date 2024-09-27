@@ -27,17 +27,19 @@ const GatheringEditorTime = ({ modalState }: IGatheringEditorTime) => {
           className={`${formContext.getValues("scheduleStartDate") || "cursor-not-allowed bg-gray-100"} flex h-[3.25rem] w-full items-center justify-start rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
-              : // : formContext.getValues("scheduleStartDate")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
         >
-          {formContext.getValues("scheduleStartDate")
-            ? format(
-                new Date(formContext.getValues("scheduleStartDate")),
-                "HH : mm",
-              )
-            : "00 : 00"}
+          {
+            formContext.getValues("scheduleStartDate")
+              ? /* eslint-disable indent */
+                format(
+                  new Date(formContext.getValues("scheduleStartDate")),
+                  "HH : mm",
+                )
+              : "00 : 00"
+            /* eslint-enable indent */
+          }
         </button>
         {formContext.formState.errors.scheduleStartDate && (
           <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">
@@ -45,8 +47,12 @@ const GatheringEditorTime = ({ modalState }: IGatheringEditorTime) => {
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
-        <GatheringTimeModal closeModal={() => modalState.closeModal()}  />
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => modalState.closeModal()}
+        isHeaderBar={true}
+      >
+        <GatheringTimeModal closeModal={() => modalState.closeModal()} />
       </Modal>
     </div>
   );

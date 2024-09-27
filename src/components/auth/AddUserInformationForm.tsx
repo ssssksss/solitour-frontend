@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
 import useAuthStore from "@/store/authStore";
@@ -15,13 +15,13 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
   const toastifyStore = useToastifyStore();
 
   const { formState, register, setValue, getValues, trigger } = useForm({
-      resolver: zodResolver(AddUserInformationFormSchema),
-      defaultValues: {
-        name: "",
-        age: 0,
-        sex: "",
-      },
-    });
+    resolver: zodResolver(AddUserInformationFormSchema),
+    defaultValues: {
+      name: "",
+      age: 0,
+      sex: "",
+    },
+  });
 
   // 숫자만 입력되게 필터링
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,27 +32,27 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
   };
 
   const addUserInformationSubmit = async () => {
-    const response = await fetchWithAuth('/api/auth/user', {
+    const response = await fetchWithAuth("/api/auth/user", {
       method: "PUT",
       body: JSON.stringify({
         sex: getValues("sex"),
         name: getValues("name"),
         age: getValues("age"),
-      })
-    })
+      }),
+    });
 
     if (response.status == 204) {
       toastifyStore.setToastify({
         type: "success",
-        message: "등록 성공"
-      })
+        message: "등록 성공",
+      });
       authStore.setUser({
         sex: getValues("sex"),
         age: getValues("age"),
       });
       props.closeModal();
     }
-  }
+  };
 
   return (
     <section
@@ -71,7 +71,7 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
           <h3 className="text-[1.125rem] font-bold text-black"> 이름 </h3>
           <input
             type={"text"}
-            className={`mt-3 h-10 w-full rounded-[1.5rem] px-3 text-center text-main focus:outline-main`}
+            className="mt-3 h-10 w-full rounded-[1.5rem] px-3 text-center text-main focus:outline-main"
             placeholder="이름을 입력해주세요"
             maxLength={10}
             {...register("name")}
@@ -101,7 +101,14 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
           </div>
         </article>
         <article className="flex flex-col">
-          <h3 className="flex items-center gap-x-2 text-[1.125rem] font-bold text-black"> 연도(나이) <span className="text-gray2 flex items-center"> {new Date().getFullYear() - 58} ~ {new Date().getFullYear() - 19} </span></h3>
+          <h3 className="flex items-center gap-x-2 text-[1.125rem] font-bold text-black">
+            {" "}
+            연도(나이){" "}
+            <span className="flex items-center text-gray2">
+              {" "}
+              {new Date().getFullYear() - 58} ~ {new Date().getFullYear() - 19}{" "}
+            </span>
+          </h3>
           <div className="mt-3 flex h-10 items-center justify-center rounded-[1.5rem] bg-white py-[0.375rem] text-main outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#F0F0F0]">
             <input
               type="text"
@@ -124,18 +131,14 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
       </label>
       <button
         onClick={() => addUserInformationSubmit()}
-        className={
-          `mt-5 min-h-[4rem] w-full rounded-[1.5rem] ${formState.isValid ? "bg-main text-white" : "bg-gray3"}`
-        }
+        className={`mt-5 min-h-[4rem] w-full rounded-[1.5rem] ${formState.isValid ? "bg-main text-white" : "bg-gray3"}`}
         disabled={!formState.isValid}
       >
         추가 정보 제출
       </button>
       <button
         onClick={() => addUserInformationSubmit()}
-        className={
-          `mt-5 min-h-[4rem] w-full rounded-[1.5rem] ${formState.isValid ? "bg-main text-white" : "bg-gray3"}`
-        }
+        className={`mt-5 min-h-[4rem] w-full rounded-[1.5rem] ${formState.isValid ? "bg-main text-white" : "bg-gray3"}`}
         disabled={!formState.isValid}
       >
         나중에 등록하기
@@ -143,4 +146,4 @@ const AddUserInformationForm = (props: IAddUserInformationForm) => {
     </section>
   );
 };
-export default AddUserInformationForm
+export default AddUserInformationForm;

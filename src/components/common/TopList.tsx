@@ -80,7 +80,7 @@ const TopList = async ({ title }: Props) => {
               {data.map((value, index) => (
                 <li
                   key={index}
-                  className={`flex items-center ${index > 2 ? `col-start-2` : `col-start-1`}`}
+                  className={`flex items-center ${index > 2 ? "col-start-2" : "col-start-1"}`}
                   style={{ gridRowStart: index > 2 ? index - 2 : index + 1 }}
                 >
                   <p className="w-6 font-bold text-main">{index + 1}.</p>

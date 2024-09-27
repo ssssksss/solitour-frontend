@@ -1,11 +1,8 @@
 import SupportTerms from "@/components/support/SupportTerms";
 import { useEffect } from "react";
 
-interface ISupportTermsContainer {
-
-}
+interface ISupportTermsContainer {}
 const SupportTermsContainer = (props: ISupportTermsContainer) => {
-
   useEffect(() => {
     // 페이지가 로드된 후 URL의 해시를 감지
     const hash = window.location.hash;
@@ -29,8 +26,6 @@ const SupportTermsContainer = (props: ISupportTermsContainer) => {
     }
   }, []);
 
-  return (
-    <SupportTerms />
-  );
+  return <SupportTerms />;
 };
-export default SupportTermsContainer
+export default SupportTermsContainer;

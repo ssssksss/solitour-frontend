@@ -14,9 +14,7 @@ const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
 
   if (loading)
     return (
-      <div
-        className={`relative flex h-[2rem] w-[3.5rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left`}
-      ></div>
+      <div className="relative flex h-[2rem] w-[3.5rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
 
   return (
@@ -28,7 +26,11 @@ const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
         <VscSettings size={"1.25rem"} />
         <div>필터</div>
       </button>
-      <Modal isOpen={isModal} onClose={() => setIsModal(false)} isHeaderBar={true}>
+      <Modal
+        isOpen={isModal}
+        onClose={() => setIsModal(false)}
+        isHeaderBar={true}
+      >
         <GatheringFilterModal closeModal={() => setIsModal(false)} />
       </Modal>
     </>

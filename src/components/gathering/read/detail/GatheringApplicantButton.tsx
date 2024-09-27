@@ -16,15 +16,15 @@ const GatheringApplicantButton = ({
   updateGatheringApplicantStatusHandler,
 }: IGatheringApplicantButton) => {
   const [isStatusOpen, setIsStatusOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const toastifyStore = useToastifyStore();
+  const [loading, setLoading] = useState(false);
+  const toastifyStore = useToastifyStore();
   const toggleStatusHandler = () => {
     setIsStatusOpen((prev) => !prev);
-    };
-    
-    if (loading) {
-        return <HashSpinner loading={loading} />
-    }
+  };
+
+  if (loading) {
+    return <HashSpinner loading={loading} />;
+  }
 
   return (
     <div className={"h-full w-full"}>
@@ -149,4 +149,4 @@ const GatheringApplicantButton = ({
     </div>
   );
 };
-export default GatheringApplicantButton
+export default GatheringApplicantButton;

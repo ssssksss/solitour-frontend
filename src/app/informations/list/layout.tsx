@@ -17,8 +17,8 @@ export default function RootLayout({
   return (
     <div className="flex w-full flex-col items-center">
       <Banner
-        content={[`유용한 <b>여행 정보</b>를`, "<b>공유</b>해보세요!"]}
-        buttonText={`정보 등록하기`}
+        content={["유용한 <b>여행 정보</b>를", "<b>공유</b>해보세요!"]}
+        buttonText="정보 등록하기"
         category="정보"
       />
       <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />

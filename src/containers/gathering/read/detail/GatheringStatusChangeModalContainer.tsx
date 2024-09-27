@@ -18,16 +18,19 @@ const GatheringStatusChangeModalContainer = ({
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const params = useParams();
-    const toastifyStore = useToastifyStore();
+  const toastifyStore = useToastifyStore();
 
   const removeHandle = async () => {
     setLoading(true);
 
     // 모임 제거
-    const response = await fetchWithAuth(`/api/gathering/finish?isFinish=${isFinish}&id=${params.id}`, {
-      method: "PUT",
-      cache: "no-store",
-    });
+    const response = await fetchWithAuth(
+      `/api/gathering/finish?isFinish=${isFinish}&id=${params.id}`,
+      {
+        method: "PUT",
+        cache: "no-store",
+      },
+    );
 
     if (!response.ok) {
       toastifyStore.setToastify({
@@ -51,7 +54,8 @@ const GatheringStatusChangeModalContainer = ({
       onCancelClick={() => closeModal()}
       mainMessage={["모임을 마감하시겠습니까?"]}
       subMessage={[
-        "모임을 마감하시면 추가적으로 인원을 받을 수 없고 검색에서 제외됩니다.","단, 기존 승인된 회원은 조회가 가능합니다.",
+        "모임을 마감하시면 추가적으로 인원을 받을 수 없고 검색에서 제외됩니다.",
+        "단, 기존 승인된 회원은 조회가 가능합니다.",
       ]}
     />
   );

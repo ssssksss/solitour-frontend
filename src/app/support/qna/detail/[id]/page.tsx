@@ -14,7 +14,7 @@ export async function generateMetadata({ params: { id } }: Props) {
   }
 
   return {
-    title: `QnA 상세 조회`,
+    title: "QnA 상세 조회",
     description: "QnA 상세 조회",
   };
 }

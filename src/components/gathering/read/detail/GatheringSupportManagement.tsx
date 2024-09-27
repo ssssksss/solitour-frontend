@@ -1,7 +1,7 @@
 import { Modal } from "@/components/common/modal/Modal";
 import GatheringStatusChangeModalContainer from "@/containers/gathering/read/detail/GatheringStatusChangeModalContainer";
 import { ModalState } from "@/types/ModalState";
-import ConfirmModal from './../../../common/modal/ConfirmModal';
+import ConfirmModal from "./../../../common/modal/ConfirmModal";
 import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
 
 interface IGatheringSupportManagement {
@@ -145,10 +145,18 @@ const GatheringSupportManagement = ({
         {gatheringStatus == null && (
           <button
             onClick={applyGathering}
-            className={`${isFullParticipants || !isAllowedGender || !isAllowedAgeRange && "bg-gray3"} flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
-            disabled={isFullParticipants || !isAllowedGender || !isAllowedAgeRange}
+            className={`${isFullParticipants || !isAllowedGender || (!isAllowedAgeRange && "bg-gray3")} flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
+            disabled={
+              isFullParticipants || !isAllowedGender || !isAllowedAgeRange
+            }
           >
-            {isFullParticipants ? "정원 초과" : !isAllowedGender ? "성별 제한" : !isAllowedAgeRange ? "나이 제한" : "모임 신청하기"}
+            {isFullParticipants
+              ? "정원 초과"
+              : !isAllowedGender
+                ? "성별 제한"
+                : !isAllowedAgeRange
+                  ? "나이 제한"
+                  : "모임 신청하기"}
           </button>
         )}
       </div>
@@ -156,4 +164,4 @@ const GatheringSupportManagement = ({
   }
   return <></>;
 };
-export default GatheringSupportManagement
+export default GatheringSupportManagement;

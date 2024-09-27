@@ -54,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={"h-full"}>
+    <html lang="ko" className="h-full">
       <meta
         name="google-site-verification"
         content="3mtzBvqxMZ31vvaa0SmQaIJEiY6HUHLnyMqM5qGZvVU"
@@ -63,7 +63,7 @@ export default function RootLayout({
         name="naver-site-verification"
         content="f3050a18a497b05cce9e8a446425f3182c3c368b"
       />
-      <body className={`flex h-full flex-col`}>
+      <body className="flex h-full flex-col">
         <HeaderContainer />
         <div className="flex w-full items-center justify-center">
           <div className="flex w-[60rem] flex-col items-center max-[1024px]:w-full max-[1024px]:px-[3.375rem] max-[744px]:px-6">

@@ -54,11 +54,11 @@ export const Modal = ({
     return () => {
       if (flag) {
         window.history.back();
-        flag = false;
       }
       window.removeEventListener("popstate", handlePopState);
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   if (!documentBody || !isOpen) return null;
@@ -84,7 +84,7 @@ export const Modal = ({
           >
             <button
               onClick={() => onClose()}
-              className="sticky mt-[2.5rem] mr-[2.5rem] z-50 h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
+              className="sticky z-50 mr-[2.5rem] mt-[2.5rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
             >
               <MdClose
                 className="cursor-pointer text-gray2 hover:text-main"

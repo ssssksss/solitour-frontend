@@ -1,6 +1,6 @@
-import MyBookmarkList from "@/components/mypage/MyBookmarkList";
+"use client";
 
-`use client`;
+import MyBookmarkList from "@/components/mypage/MyBookmarkList";
 
 interface MyBookmarkListContainerProps {
   activeBookmarkMenuIndex: number;

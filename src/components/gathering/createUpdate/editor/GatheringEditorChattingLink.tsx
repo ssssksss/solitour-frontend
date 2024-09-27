@@ -5,9 +5,7 @@ const GatheringEditorChattingLink = () => {
 
   return (
     <div className="relative flex w-full flex-shrink-0 items-center gap-[0.625rem]">
-      <div
-        className={"relative w-[2.75rem] flex-shrink-0"}
-      >
+      <div className={"relative w-[2.75rem] flex-shrink-0"}>
         <span className={"text-lg font-semibold"}>링크</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
@@ -18,9 +16,7 @@ const GatheringEditorChattingLink = () => {
           className={`h-[3.25rem] w-full rounded-[3rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.openChattingUrl
               ? "outline-red-500"
-              : // : formContext.getValues("openChattingUrl")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
           {...formContext.register("openChattingUrl")}
           onChange={(e) => {

@@ -84,22 +84,28 @@ const DiaryEditor = ({
             type="button"
             onClick={() => showDateRangeModal()}
           >
-            {formContext.getValues("startDate") !== null &&
-            formContext.getValues("endDate") !== null ? (
-              <p>
-                {formContext.getValues("startDate").toLocaleDateString("ko-KR")}
-              </p>
-            ) : (
-              <div className="flex flex-row items-center gap-2">
-                {"YYYY.MM.DD"}
-                <Image
-                  src={"/diary/calendar-icon.svg"}
-                  alt={"calendar-icon"}
-                  width={16}
-                  height={16}
-                />
-              </div>
-            )}
+            {
+              /* eslint-disable indent */
+              formContext.getValues("startDate") !== null &&
+              formContext.getValues("endDate") !== null ? (
+                <p>
+                  {formContext
+                    .getValues("startDate")
+                    .toLocaleDateString("ko-KR")}
+                </p>
+              ) : (
+                <div className="flex flex-row items-center gap-2">
+                  {"YYYY.MM.DD"}
+                  <Image
+                    src={"/diary/calendar-icon.svg"}
+                    alt={"calendar-icon"}
+                    width={16}
+                    height={16}
+                  />
+                </div>
+              )
+              /* eslint-enable indent */
+            }
           </button>
           {formContext.formState.errors.startDate && (
             <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">

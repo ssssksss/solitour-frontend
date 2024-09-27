@@ -1,9 +1,6 @@
 import AuthKaKaoContainer from "@/containers/auth/AuthKaKaoContainer";
 
 const Page = () => {
-
-  return (
-     <AuthKaKaoContainer />
-  );
+  return <AuthKaKaoContainer />;
 };
-export default Page
+export default Page;

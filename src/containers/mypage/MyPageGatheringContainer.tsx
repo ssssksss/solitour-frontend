@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
 import CategoryList from "@/components/common/CategoryList";
@@ -12,9 +12,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IMyPageGatheringContainer {
-
-}
+interface IMyPageGatheringContainer {}
 // value 변경하지 말것 api주소와 연결되어있음
 const categories = [
   {
@@ -33,14 +31,14 @@ const categories = [
 
 const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
   const searchParams = useSearchParams();
-    const [activeCategory, setActiveCategory] = useState("");
-    const [currentPage, setCurrentPage] = useState(
-      Number(searchParams.get("page")) || 1,
+  const [activeCategory, setActiveCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("page")) || 1,
   );
   const router = useRouter();
   const modalState = useModalState();
   const [elements, setElements] = useState<Gathering[]>([]);
-    const authStore = useAuthStore();
+  const authStore = useAuthStore();
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const pageHandler = (page: number) => {
@@ -51,20 +49,18 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
     setCurrentPage(page);
     window.history.pushState({}, "", url.toString());
   };
-    const onClickCategoryHandler = (value: string) => {
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      params.delete("page");
-      params.set("category", value);
-      url.search = params.toString();
-      window.history.pushState({}, "", url.toString());
-      setActiveCategory(value);
-      setCurrentPage(1);
-  }
+  const onClickCategoryHandler = (value: string) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.delete("page");
+    params.set("category", value);
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
+    setActiveCategory(value);
+    setCurrentPage(1);
+  };
 
-  const checkAccessGathering = async (
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => {
+  const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
       e.preventDefault();
       modalState.openModal();
@@ -74,7 +70,6 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
       router.push("/auth/signin");
     }
   };
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -89,7 +84,7 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
     }
     const fetchData = async () => {
       const res = await fetchWithAuth(
-        `/api/mypage/gathering?category=${category}&page=${currentPage-1}`,
+        `/api/mypage/gathering?category=${category}&page=${currentPage - 1}`,
         {
           method: "GET",
           headers: {
@@ -117,7 +112,11 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
 
   return (
     <div className="w-full">
-      <Modal isOpen={modalState.isOpen} onClose={modalState.closeModal} isHeaderBar={true}>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={modalState.closeModal}
+        isHeaderBar={true}
+      >
         <AddUserInformationForm closeModal={modalState.closeModal} />
       </Modal>
       <CategoryList
@@ -141,4 +140,4 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
     </div>
   );
 };
-export default MyPageGatheringContainer
+export default MyPageGatheringContainer;

@@ -1,4 +1,3 @@
-// app/page.tsx
 import SupportNoticeDetail from "@/components/support/SupportNoticeDetail";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -16,16 +15,13 @@ async function fetchData(id: number) {
   const cookie = cookies().get("access_token");
 
   try {
-    const res = await fetch(
-      `${process.env.BACKEND_URL}/api/notice/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Cookie: `${cookie?.name}=${cookie?.value}`,
-        },
-        next: { revalidate: 3600 },
+    const res = await fetch(`${process.env.BACKEND_URL}/api/notice/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${cookie?.name}=${cookie?.value}`,
       },
-    );
+      next: { revalidate: 3600 },
+    });
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
@@ -43,7 +39,5 @@ export default async function Page({ params: { id } }: PageProps) {
 
   const data = await fetchData(noticeId);
 
-  return (
-      <SupportNoticeDetail data={data} />
-  );
+  return <SupportNoticeDetail data={data} />;
 }

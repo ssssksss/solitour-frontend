@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useSearchParams } from "next/navigation";
 import TabMenuContainer from "../common/TabMenuContainer";
@@ -13,13 +13,13 @@ const MyPageMainContainer = () => {
       tabs={[
         {
           label: "정보",
-          active: {name: "mainCategory", value: "정보"},
+          active: { name: "mainCategory", value: "정보" },
           content: <MyPageInformationContainer />,
           href: "/mypage?mainCategory=정보&category=owner",
         },
         {
           label: "모임",
-          active: {name: "mainCategory", value: "모임"},
+          active: { name: "mainCategory", value: "모임" },
           content: <MyPageGatheringContainer />,
           href: "/mypage?mainCategory=모임&category=host",
         },

@@ -30,12 +30,13 @@ const ReactToastifyComponent = () => {
 
   useEffect(() => {
     if (toastifyStore.message == "") return;
-      if (isMounted.current) notify();
-      else isMounted.current = true;
+    if (isMounted.current) notify();
+    else isMounted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toastifyStore]);
 
   return (
-    <div className="fixed z-50 text-[1rem] w-full translate-y-[4rem]">
+    <div className="fixed z-50 w-full translate-y-[4rem] text-[1rem]">
       <ToastContainer
         position={"top-right"} // 알람 위치 지정
         autoClose={1000} // 자동 off 시간

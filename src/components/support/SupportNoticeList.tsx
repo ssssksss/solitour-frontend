@@ -19,7 +19,6 @@ const categoryStyles: { [key: string]: string } = {
   기타: "text-gray-800",
 };
 
-
 const SupportNoticeList = ({
   data,
   viewedNotices,
@@ -41,19 +40,23 @@ const SupportNoticeList = ({
           <Link
             href={`/support/notice/${notice.id}`}
             key={notice.id}
-            className={`relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:shadow`}
+            className="relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:shadow"
             onClick={() => onClickNotice(notice.id)}
           >
-            {differenceInDays(new Date(), new Date(notice.createdAt)) < 2 &&
-              !viewedNotices.includes(notice.id) && (
-                <div className="absolute right-2 top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
-                  New
-                </div>
-              )}
+            {
+              differenceInDays(new Date(), new Date(notice.createdAt)) < 2 &&
+                /* eslint-disable indent */
+                !viewedNotices.includes(notice.id) && (
+                  <div className="absolute right-2 top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
+                    New
+                  </div>
+                )
+              /* eslint-enable indent */
+            }
             <div className={"flex pl-[1.25rem] font-bold"}>
               {((currentPage || 1) - 1) * 10 + index + 1}
             </div>
-            <div className="grid grid-cols-[3.5rem_auto] pr-2 w-full items-center gap-x-4 ">
+            <div className="grid w-full grid-cols-[3.5rem_auto] items-center gap-x-4 pr-2">
               <div
                 className={`${categoryStyles[notice.categoryName]} flex-shrink-0`}
               >

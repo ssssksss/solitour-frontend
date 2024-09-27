@@ -1,3 +1,17 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "semi": "error",
+    "quotes": "error",
+    "jsx-quotes": "error",
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1 // Switch 문을 사용할 때 case가 switch보다 한 단계 들여쓰기되도록 합니다.
+      }
+    ],
+    "no-tabs": "error",
+    "max-len": "off"
+  }
 }

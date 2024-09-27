@@ -14,13 +14,11 @@ const GatheringCategoryList = ({
 }: IGatheringCategoryList) => {
   if (loading)
     return (
-      <div
-        className={`flex animate-pulse flex-wrap items-center gap-2 text-left`}
-      >
+      <div className="flex animate-pulse flex-wrap items-center gap-2 text-left">
         {Array.from({ length: 2 }, (i) => i).map((_, index) => (
           <div
             key={index}
-            className={`h-[2rem] w-[4rem] rounded-xl border-2 border-[#E9EBED] bg-gray-300 px-3 py-[0.375rem] text-sm font-medium hover:scale-105`}
+            className="h-[2rem] w-[4rem] rounded-xl border-2 border-[#E9EBED] bg-gray-300 px-3 py-[0.375rem] text-sm font-medium hover:scale-105"
           ></div>
         ))}
       </div>
@@ -48,4 +46,4 @@ const GatheringCategoryList = ({
     </div>
   );
 };
-export default GatheringCategoryList
+export default GatheringCategoryList;

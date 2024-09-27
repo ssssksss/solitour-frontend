@@ -51,8 +51,8 @@ const SupportQnAWriteContainer: React.FC<ISupportQnAWriteContainer> = () => {
   };
 
   const handleConsentCheck = () => {
-    setIsConsent(prev => !prev);
-  }
+    setIsConsent((prev) => !prev);
+  };
 
   return (
     <SupportQnAWrite
