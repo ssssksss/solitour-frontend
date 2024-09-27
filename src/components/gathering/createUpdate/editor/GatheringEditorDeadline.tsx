@@ -27,9 +27,7 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
           className={`flex h-[3.25rem] w-full items-center justify-start rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.deadline
               ? "outline-red-500"
-              : // : formContext.getValues("deadline")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
         >
           {formContext.getValues("deadline") ? (
@@ -52,7 +50,11 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => modalState.closeModal()}
+        isHeaderBar={true}
+      >
         <GatheringDeadlineModal closeModal={() => modalState.closeModal()} />
       </Modal>
     </div>

@@ -95,11 +95,7 @@ const GatheringUpdateContainer = ({
               ? "세종"
               : roadAddressName.split(" ")[1],
           tagRegisterRequests:
-            hashtags.length > 0
-              ? hashtags.map((i) => {
-                  return { name: i };
-                })
-              : [],
+            hashtags.length > 0 ? hashtags.map((i) => ({ name: i })) : [],
         }),
       });
 
@@ -114,7 +110,7 @@ const GatheringUpdateContainer = ({
 
       // const data = await response.json();
       // router.replace(`/gathering/${data.id}`);
-      router.replace(`/gathering`);
+      router.replace("/gathering");
       router.refresh();
       setLoading(false);
     } catch (error) {
@@ -125,6 +121,7 @@ const GatheringUpdateContainer = ({
 
   useEffect(() => {
     methods.trigger();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

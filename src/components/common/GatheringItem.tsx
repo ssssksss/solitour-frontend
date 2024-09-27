@@ -191,25 +191,29 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
           </div>
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
-              {data.isFinish ||
-              format(new Date(data.deadline), "yyyyMMdd") <
-                format(new Date(), "yyyyMMdd") ? (
-                <div className="flex items-center gap-1 text-sm">
-                  <Image
-                    src={"/common/check-gray-icon.svg"}
-                    alt="check-icon"
-                    width={16}
-                    height={16}
+              {
+                /* eslint-disable indent */
+                data.isFinish ||
+                format(new Date(data.deadline), "yyyyMMdd") <
+                  format(new Date(), "yyyyMMdd") ? (
+                  <div className="flex items-center gap-1 text-sm">
+                    <Image
+                      src={"/common/check-gray-icon.svg"}
+                      alt="check-icon"
+                      width={16}
+                      height={16}
+                    />
+                    {convertNumberToShortForm(data.likeCount)}
+                  </div>
+                ) : (
+                  <GatheringLikeContainer
+                    likes={data.likeCount}
+                    isLike={data.isLike}
+                    gatheringId={data.gatheringId}
                   />
-                  {convertNumberToShortForm(data.likeCount)}
-                </div>
-              ) : (
-                <GatheringLikeContainer
-                  likes={data.likeCount}
-                  isLike={data.isLike}
-                  gatheringId={data.gatheringId}
-                />
-              )}
+                )
+                /* eslint-enable indent */
+              }
               <div className="relative flex items-center gap-1">
                 <Image
                   src="/common/eyes-icon.svg"

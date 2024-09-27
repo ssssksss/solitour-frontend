@@ -9,7 +9,7 @@ interface ICropperComponent {
 }
 const CropperComponent = ({
   imageBase64Data,
-    closeCropModal,
+  closeCropModal,
   onChangeImageUrl,
 }: ICropperComponent) => {
   const [crop, setCrop] = useState<{ x: number; y: number }>({
@@ -37,7 +37,7 @@ const CropperComponent = ({
   };
 
   return (
-    <div className="relative h-[calc(100vh-8rem)] w-[calc(100vw-4rem)] bg-white flex flex-col justify-between py-4">
+    <div className="relative flex h-[calc(100vh-8rem)] w-[calc(100vw-4rem)] flex-col justify-between bg-white py-4">
       <div className={"relative h-[calc(100%-5rem)] w-full"}>
         <Cropper
           image={imageBase64Data}
@@ -64,4 +64,4 @@ const CropperComponent = ({
     </div>
   );
 };
-export default CropperComponent
+export default CropperComponent;

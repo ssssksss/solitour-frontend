@@ -24,9 +24,7 @@ const GatheringEditorPlace = ({ modalState }: IGatheringEditorPlace) => {
           className={`flex h-[3.25rem] w-full items-center justify-start overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.placeName
               ? "outline-red-500"
-              : // : formContext.getValues("placeName")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
         >
           {formContext.getValues("placeName") || "장소명을 입력하세요."}
@@ -37,7 +35,11 @@ const GatheringEditorPlace = ({ modalState }: IGatheringEditorPlace) => {
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => modalState.closeModal()}
+        isHeaderBar={true}
+      >
         <GatheringPlaceModal closeModal={() => modalState.closeModal()} />
       </Modal>
     </div>

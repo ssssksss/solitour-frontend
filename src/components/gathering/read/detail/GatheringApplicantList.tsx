@@ -101,7 +101,9 @@ const GatheringApplicantList = ({
               >
                 <div className="flex h-full items-center justify-center py-4">
                   <UserImage
-                    userImageAddress={applicant.userGatheringResponse.profileUrl}
+                    userImageAddress={
+                      applicant.userGatheringResponse.profileUrl
+                    }
                     size={48}
                   />
                 </div>
@@ -111,12 +113,7 @@ const GatheringApplicantList = ({
                 <div className="flex h-full flex-col items-center justify-center py-4">
                   {/* <span> {applicant.userGatheringResponse.age}년 </span> */}
                   <span>
-                    {`
-                  ${
-                    new Date().getFullYear() -
-                    applicant.userGatheringResponse.age
-                  }
-                  `}
+                    {`${new Date().getFullYear() - applicant.userGatheringResponse.age}`}
                   </span>
                 </div>
                 <div className="flex h-full items-center justify-center py-4">
@@ -140,4 +137,3 @@ const GatheringApplicantList = ({
 };
 
 export default GatheringApplicantList;
-

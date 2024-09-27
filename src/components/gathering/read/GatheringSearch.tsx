@@ -31,9 +31,7 @@ const GatheringSearch = ({
 }: Props) => {
   if (loading)
     return (
-      <div
-        className={`relative flex h-[2.75rem] w-[21.4375rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left`}
-      ></div>
+      <div className="relative flex h-[2.75rem] w-[21.4375rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
 
   return (

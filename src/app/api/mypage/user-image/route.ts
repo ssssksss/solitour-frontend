@@ -10,18 +10,21 @@ export async function PUT(request: NextRequest) {
     }
     // 리프레시 토큰으로 재발급 받아 재요청 보내기 위한 응답
     return new NextResponse("Refresh token not found", { status: 401 });
-    }
+  }
 
   const formData = await request.formData();
-    // formData.append("request", JSON.stringify({ userId: 11 }));
-    try {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/users/profile`, {
-      method: "PUT",
-      headers: {
-        Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
+  // formData.append("request", JSON.stringify({ userId: 11 }));
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_URL}/api/users/profile`,
+      {
+        method: "PUT",
+        headers: {
+          Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
+        },
+        body: formData,
       },
-      body: formData,
-    });
+    );
 
     if (response.status != 201) {
       throw new Error(response.statusText);

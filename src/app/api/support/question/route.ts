@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     return new NextResponse("Refresh token not found", { status: 401 });
   }
 
-      const bodyData = await request.json();
+  const bodyData = await request.json();
 
   const response = await fetch(`${process.env.BACKEND_URL}/api/qna/question`, {
     method: "POST",

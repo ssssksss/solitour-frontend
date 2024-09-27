@@ -42,11 +42,11 @@ export const useDragAndDrop = ({ imageUpload }: UseDragAndDropProps) => {
     if (!file) {
       alert("파일이 없습니다!");
       return;
-      }
+    }
     const imageDataUrl = await readFile(file);
     imageUpload(imageDataUrl);
     if ("target" in e && e.target instanceof HTMLInputElement) {
-          e.target.value = ""
+      e.target.value = "";
     }
     setIsDragging(false);
   };
@@ -67,5 +67,3 @@ export const useDragAndDrop = ({ imageUpload }: UseDragAndDropProps) => {
     onDropOrInputEvent,
   };
 };
-
-

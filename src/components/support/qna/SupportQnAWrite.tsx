@@ -44,7 +44,7 @@ const SupportQnAWrite: React.FC<ISupportQnAWrite> = ({
             value={title}
             onChange={(e) => onTitleChange(e.target.value)}
             placeholder="제목을 입력하세요."
-            className={`h-[3.25rem] w-full rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]`}
+            className="h-[3.25rem] w-full rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
           />
         </div>
 
@@ -107,7 +107,10 @@ const SupportQnAWrite: React.FC<ISupportQnAWrite> = ({
               />
             )}
             <div className="flex w-auto min-w-[5.25rem] items-center justify-start">
-              <span className={"text-main text underline"}> 개인정보 수집이용 </span>
+              <span className={"text text-main underline"}>
+                {" "}
+                개인정보 수집이용{" "}
+              </span>
               <span> 에 동의합니다. </span>
             </div>
           </button>

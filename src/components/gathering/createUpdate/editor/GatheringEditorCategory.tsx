@@ -31,9 +31,7 @@ const GatheringEditorCategory = ({
           className={`flex h-[3.25rem] w-full items-center whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.gatheringCategoryId
               ? "outline-red-500"
-              : // : formContext.getValues("gatheringCategoryId")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
         >
           <div
@@ -63,7 +61,11 @@ const GatheringEditorCategory = ({
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => modalState.closeModal()}
+        isHeaderBar={true}
+      >
         <GatheringCategoryModal
           closeModal={modalState.closeModal}
           categoryList={categoryList}

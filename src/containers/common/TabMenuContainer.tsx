@@ -1,7 +1,7 @@
 "use client";
 
 import TabMenu from "@/components/mypage/TabMenu";
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface TabMenuProps {
@@ -14,7 +14,6 @@ interface TabMenuProps {
   defaultActive: number;
 }
 
-  
 const TabMenuContainer: React.FC<TabMenuProps> = ({ tabs, defaultActive }) => {
   const [activeIndex, setActiveIndex] = useState(defaultActive || 0);
   const searchparams = useSearchParams();
@@ -35,6 +34,7 @@ const TabMenuContainer: React.FC<TabMenuProps> = ({ tabs, defaultActive }) => {
         setActiveIndex(index);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchparams]);
 
   return (

@@ -1,10 +1,8 @@
 import SupportContact from "@/components/support/SupportContact";
 
-interface ISupportContactContainer {
+interface ISupportContactContainer {}
 
-}
 const SupportContactContainer = (props: ISupportContactContainer) => {
-
   const teamMembers = [
     {
       name: "이름",
@@ -38,8 +36,6 @@ const SupportContactContainer = (props: ISupportContactContainer) => {
     },
   ];
 
-  return (
-    <SupportContact teamMembers={teamMembers} />
-  );
+  return <SupportContact teamMembers={teamMembers} />;
 };
-export default SupportContactContainer
+export default SupportContactContainer;

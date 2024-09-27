@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Pagination from "@/components/common/Pagination";
 import SupportNoticeList from "@/components/support/SupportNoticeList";
@@ -6,26 +6,24 @@ import { NoticeType } from "@/types/NoticeDto";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ISupportNoticeContainer {
-}
+interface ISupportNoticeContainer {}
 
 const Skeleton = () => (
   <div className="flex w-full flex-col space-y-4 pb-8">
     {Array.from({ length: 10 }).map((_, index) => (
       <div
         key={index}
-        className="flex flex-col gap-y-2 rounded-lg border border-gray-200 p-4 shadow-sm bg-gray-100 animate-pulse"
+        className="flex animate-pulse flex-col gap-y-2 rounded-lg border border-gray-200 bg-gray-100 p-4 shadow-sm"
       >
-        <div className="w-24 h-4 bg-gray-300 rounded-lg mb-2"></div>
-        <div className="w-48 h-6 bg-gray-300 rounded-lg mb-2"></div>
-        <div className="w-32 h-4 bg-gray-300 rounded-lg"></div>
+        <div className="mb-2 h-4 w-24 rounded-lg bg-gray-300"></div>
+        <div className="mb-2 h-6 w-48 rounded-lg bg-gray-300"></div>
+        <div className="h-4 w-32 rounded-lg bg-gray-300"></div>
       </div>
     ))}
   </div>
 );
 
 const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
-
   const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
@@ -64,11 +62,12 @@ const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
       viewedNotices.push(id);
       localStorage.setItem("viewedNotices", JSON.stringify(viewedNotices));
     }
-  }
+  };
 
   useEffect(() => {
     fetchNotice(currentPage);
     setViewedNotices(JSON.parse(localStorage.getItem("viewedNotices") || "[]"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -93,4 +92,4 @@ const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
     </>
   );
 };
-export default SupportNoticeContainer
+export default SupportNoticeContainer;

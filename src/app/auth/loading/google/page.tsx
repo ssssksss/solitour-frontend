@@ -1,9 +1,6 @@
 import AuthGoogleContainer from "@/containers/auth/AuthGoogleContainer";
 
 const Page = () => {
-
-  return (
-    <AuthGoogleContainer/>
-  );
+  return <AuthGoogleContainer />;
 };
-export default Page
+export default Page;

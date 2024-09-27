@@ -1,4 +1,3 @@
-
 export async function getCroppedImg(
   imageSrc: string,
   pixelCrop: { x: number; y: number; width: number; height: number },
@@ -57,10 +56,9 @@ export async function getCroppedImg(
   return new Promise<string | null>((resolve, reject) => {
     croppedCanvas.toBlob(async (blob) => {
       if (blob) {
-        const file = new File([blob], new Date().toString()+".png", {
+        const file = new File([blob], new Date().toString() + ".png", {
           type: "image/png",
         });
-
 
         try {
           const formData = new FormData();
@@ -68,14 +66,13 @@ export async function getCroppedImg(
           await fetch("/api/mypage/user-image", {
             method: "PUT",
             body: formData,
-          }).then(res => {
-          })
+          }).then(() => {});
           resolve(URL.createObjectURL(file));
         } catch (error) {
           console.error("Image upload failed", error);
           reject(new Error("Image upload failed"));
         }
-          return "success";
+        return "success";
       } else {
         reject(new Error("Canvas is empty"));
       }

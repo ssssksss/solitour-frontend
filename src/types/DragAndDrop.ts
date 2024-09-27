@@ -6,6 +6,6 @@ export type dragAndDropProps = {
   onDragLeave: (e: React.DragEvent<HTMLLabelElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLLabelElement>) => void;
   onDropOrInputEvent: (
-        e: ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>,
-    ) => void;
+    e: ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLElement>,
+  ) => void;
 };

@@ -12,14 +12,14 @@ export async function GET(request: Request) {
   }
 
   try {
-      const response = await fetch(
-        `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}`,
-        {
-          headers: {
-            Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}`,
-          },
+    const response = await fetch(
+      `https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}`,
+      {
+        headers: {
+          Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}`,
         },
-      );
+      },
+    );
 
     if (!response.ok) {
       throw new Error("Network response was not ok");

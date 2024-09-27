@@ -8,28 +8,33 @@ interface ICategory {
   childrenCategories: ICategory[];
 }
 
-interface IGatheringEditorCategoryContainer {
-  
-}
-const GatheringEditorCategoryContainer = (props: IGatheringEditorCategoryContainer) => {
+interface IGatheringEditorCategoryContainer {}
+const GatheringEditorCategoryContainer = (
+  props: IGatheringEditorCategoryContainer,
+) => {
   const modalState = useModalState();
-      const [categoryList, setCategoryList] = useState<ICategory[]>([]);
+  const [categoryList, setCategoryList] = useState<ICategory[]>([]);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch(`/api/gathering/category`);
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            const result = await response.json();
-            setCategoryList(result);
-          } catch (error) {}
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/gathering/category");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const result = await response.json();
+        setCategoryList(result);
+      } catch (error) {}
+    };
 
-        fetchData();
-      }, []);
-  
-  return <GatheringEditorCategory modalState={modalState} categoryList={categoryList} />;
+    fetchData();
+  }, []);
+
+  return (
+    <GatheringEditorCategory
+      modalState={modalState}
+      categoryList={categoryList}
+    />
+  );
 };
-export default GatheringEditorCategoryContainer
+export default GatheringEditorCategoryContainer;

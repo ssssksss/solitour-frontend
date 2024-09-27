@@ -325,7 +325,7 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
                     input.value = input.value.replace(/[^0-9]/g, "");
                   }}
                   value={endAge}
-                  className={`w-full pr-[0.625rem] text-center text-lg`}
+                  className="w-full pr-[0.625rem] text-center text-lg"
                 />
                 <div
                   className={"absolute bottom-2 h-[1px] w-[5.125rem] bg-black"}

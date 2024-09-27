@@ -20,9 +20,7 @@ const GatheringEditorTitle = () => {
           className={`h-[3.25rem] w-full rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.title
               ? "outline-red-500"
-              : // : formContext.getValues("title")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
           {...formContext.register("title")}
           onChange={(e) => {

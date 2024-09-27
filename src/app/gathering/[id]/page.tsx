@@ -13,7 +13,6 @@ const categories = [
   { label: "모임 상세", href: "" },
 ];
 
-
 async function getNewAccessToken(refreshToken: string): Promise<string | null> {
   try {
     const response = await fetch(
@@ -47,10 +46,10 @@ async function getGathering(id: number) {
   }
 
   if (!accessToken) {
-    const newAccessToken= await getNewAccessToken(refreshToken as string);
+    const newAccessToken = await getNewAccessToken(refreshToken as string);
     accessToken = newAccessToken as string;
   }
- 
+
   let response = await fetch(
     `${process.env.BACKEND_URL}/api/gatherings/${id}`,
     {
@@ -64,7 +63,7 @@ async function getGathering(id: number) {
   );
 
   if (response.status != 401 && !response.ok) {
-     throw new Error("서버 에러");
+    throw new Error("서버 에러");
   }
 
   // 액세스 토큰이 만료된 경우
@@ -84,7 +83,6 @@ async function getGathering(id: number) {
           cache: "no-store",
         },
       );
-
     } else {
       throw new Error("새로운 액세스 토큰 발급 실패");
     }
@@ -103,11 +101,10 @@ export async function generateMetadata({ params: { id } }: PageProps) {
   }
 
   return {
-    title: `모임 상세페이지`,
+    title: "모임 상세페이지",
     description: "Solitour의 모임 상세 페이지",
   };
 }
-
 
 export default async function Page({ params: { id } }: PageProps) {
   const postId = Number(id);
@@ -120,15 +117,15 @@ export default async function Page({ params: { id } }: PageProps) {
   const data = await getGathering(postId);
 
   return (
-      <div
-        className={
-          "m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]"
-        }
-      >
-        {/* 제일 상단 */}
-        <Breadcrumbs categories={categories} />
-        <GatheringViewerContainer postId={postId} data={data} />
-        <GatheringRecommendationList data={data.gatheringRecommend} />
-      </div>
-    );
+    <div
+      className={
+        "m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]"
+      }
+    >
+      {/* 제일 상단 */}
+      <Breadcrumbs categories={categories} />
+      <GatheringViewerContainer postId={postId} data={data} />
+      <GatheringRecommendationList data={data.gatheringRecommend} />
+    </div>
+  );
 }

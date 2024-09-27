@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import GatheringViewer from "@/components/gathering/read/detail/GatheringViewer";
 import useModalState from "@/hooks/useModalState";
@@ -10,35 +10,12 @@ interface IGatheringViewerContainer {
   data: GatheringDetailResponseDto;
   postId: number;
 }
-const GatheringViewerContainer = ({ postId,data }: IGatheringViewerContainer) => {
-    
+const GatheringViewerContainer = ({
+  postId,
+  data,
+}: IGatheringViewerContainer) => {
   const modalState = useModalState();
   const gatheringStore = useGatheringStore();
-  // const params = useParams();
-
-  // useEffect(() => {
-
-  //   const getGathering = async () => {
-  //     const res = await fetch(`/api/gathering/${params.id}`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       cache: "no-store",
-  //     });
-
-  //     const data = await res.json();
-  //     setData(data);
-  //     gatheringStore.setGathering({
-  //       currentParticipants: data.nowPersonCount,
-  //       gatheringApplicantsResponses: data.gatheringApplicantsResponses,
-  //       isFinish: data.isFinish,
-  //       deadline: data.deadline,
-  //       personCount: data.personCount,
-  //     });
-  //   }
-  //   getGathering();
-  // },[])
 
   useEffect(() => {
     gatheringStore.setGathering({
@@ -48,18 +25,19 @@ const GatheringViewerContainer = ({ postId,data }: IGatheringViewerContainer) =>
       deadline: data.deadline,
       personCount: data.personCount,
     });
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <GatheringViewer
-      data={data}
-      postId={postId}
-      modalState={modalState}
-      currentParticipants={gatheringStore.currentParticipants}
+        data={data}
+        postId={postId}
+        modalState={modalState}
+        currentParticipants={gatheringStore.currentParticipants}
       />
       {/* <GatheringRecommendationList data={data.gatheringRecommend} /> */}
     </>
   );
 };
-export default GatheringViewerContainer
+export default GatheringViewerContainer;

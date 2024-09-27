@@ -93,7 +93,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
       </section>
       <div className={"flex w-full justify-center pt-[1rem]"}>
         <button
-          className={`h-[3.375rem] min-w-[18.625rem] rounded-[1.75rem] bg-main px-[3.5rem] py-[1rem] text-white disabled:bg-gray1`}
+          className="h-[3.375rem] min-w-[18.625rem] rounded-[1.75rem] bg-main px-[3.5rem] py-[1rem] text-white disabled:bg-gray1"
           onClick={() => submitHandler()}
           disabled={
             !(

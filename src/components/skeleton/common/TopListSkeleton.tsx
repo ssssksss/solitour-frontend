@@ -14,7 +14,7 @@ const TopListSkeleton = ({ title }: Props) => {
           {[1, 2, 3, 4, 5].map((value, index) => (
             <li
               key={value}
-              className={`flex items-center gap-2 ${index > 2 ? `col-start-2` : `col-start-1`}`}
+              className={`flex items-center gap-2 ${index > 2 ? "col-start-2" : "col-start-1"}`}
               style={{ gridRowStart: index > 2 ? index - 2 : index + 1 }}
             >
               <div className="h-6 w-4 animate-pulse bg-gray-100" />

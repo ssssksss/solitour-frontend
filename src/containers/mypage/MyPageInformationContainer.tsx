@@ -5,9 +5,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IMyPageInformationContainer {
-
-}
+interface IMyPageInformationContainer {}
 // value 변경하지 말것 api주소와 연결되어있음
 const categories = [
   {
@@ -30,7 +28,6 @@ interface Information {
   thumbNailImage: string;
   likeCount: number;
 }
-
 
 const MyPageInformationContainer = () => {
   const searchParams = useSearchParams();
@@ -96,10 +93,7 @@ const MyPageInformationContainer = () => {
         onClickHandler={onClickCategoryHandler}
         activeCategory={activeCategory}
       />
-      <MyPageInformationList
-        elements={elements}
-        isLoading={isLoading}
-      />
+      <MyPageInformationList elements={elements} isLoading={isLoading} />
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(totalElements / 6)}
@@ -108,4 +102,4 @@ const MyPageInformationContainer = () => {
     </div>
   );
 };
-export default MyPageInformationContainer
+export default MyPageInformationContainer;

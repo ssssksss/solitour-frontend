@@ -43,9 +43,9 @@ const SupportNoticeDetail = ({ data }: ISupportNoticeDetail) => {
 
         {/* 본문 내용 */}
         <p
-            className="break-words py-4 font-medium text-black"
-            dangerouslySetInnerHTML={{ __html: data.content }}
-          />
+          className="break-words py-4 font-medium text-black"
+          dangerouslySetInnerHTML={{ __html: data.content }}
+        />
       </div>
     </div>
   );

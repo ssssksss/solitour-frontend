@@ -27,9 +27,7 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
           className={`flex h-[3.25rem] w-full items-center justify-start rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
-              : // : formContext.getValues("scheduleStartDate")
-                //   ? "outline-main"
-                "outline-[#E3E3E3]"
+              : "outline-[#E3E3E3]"
           }`}
         >
           {formContext.getValues("scheduleStartDate") ? (
@@ -74,7 +72,11 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
           </span>
         )}
       </div>
-      <Modal isOpen={modalState.isOpen} onClose={() => modalState.closeModal()} isHeaderBar={true}>
+      <Modal
+        isOpen={modalState.isOpen}
+        onClose={() => modalState.closeModal()}
+        isHeaderBar={true}
+      >
         <GatheringPeriodModal closeModal={() => modalState.closeModal()} />
       </Modal>
     </div>
