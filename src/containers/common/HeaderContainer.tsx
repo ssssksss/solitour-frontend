@@ -1,8 +1,6 @@
 "use client";
 
 import Header from "@/components/common/Header";
-import useModalState from "@/hooks/useModalState";
-import useOutsideClick from "@/hooks/useOutsideClick";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import useAuthStore from "@/store/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
@@ -14,6 +12,8 @@ const HeaderContainer = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(true);
   const authStore = useAuthStore();
+
+  usePreventBodyScroll(visible);
 
   const onScroll = () => {
     if (window.scrollY >= 500) {
