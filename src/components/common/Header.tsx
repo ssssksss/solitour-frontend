@@ -2,8 +2,8 @@ import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
-import UserImage from "../auth/UserImage";
 import ReactToastifyComponent from "./ReactToastifyComponent";
+import UserDropDown from "../auth/UserDropDown";
 
 interface Props {
   pathname: string;
@@ -11,10 +11,7 @@ interface Props {
   transparent: boolean;
   onMenuClicked: () => void;
   onClose: () => void;
-  logoutHandler: () => void;
   userId: number;
-  userSex: string;
-  userProfile: string;
 }
 
 const Header = ({
@@ -24,9 +21,6 @@ const Header = ({
   onMenuClicked,
   onClose,
   userId,
-  logoutHandler,
-  userSex,
-  userProfile,
 }: Props) => {
   return (
     <header className="flex w-full flex-row justify-center">
@@ -116,23 +110,7 @@ const Header = ({
               </>
             ) : userId > 0 ? (
               <>
-                <Link
-                  href={"/mypage?mainCategory=정보&category=owner"}
-                  className={"relative rounded-[50%]"}
-                >
-                  <UserImage
-                    userImageAddress={`${userProfile}`}
-                    userSex={`${userSex}`}
-                    size={30}
-                  />
-                </Link>
-
-                <button
-                  onClick={logoutHandler}
-                  className="font-semibold text-black hover:text-main"
-                >
-                  로그아웃
-                </button>
+                <UserDropDown />
               </>
             ) : (
               <>
