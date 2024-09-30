@@ -1,12 +1,10 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDebounce } from "use-debounce";
-
-interface IGatheringPlaceModalProps {
-  closeModal: () => void;
-}
 
 type PlaceElement = {
   address_name: string;
@@ -58,7 +56,7 @@ type PlaceElement1 = {
   y: string;
 };
 
-const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
+const GatheringPlaceModal = (props: IModalComponent) => {
   const [menu, setMenu] = useState("search");
   const [keyword, setKeyword] = useState("");
   const [placeCustomName, setPlaceCustomName] = useState("");
@@ -122,7 +120,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
       "searchId",
       "roadAddressName",
     ]);
-    props.closeModal();
+    props.closeModal!();
   };
 
   const pickAddress = (element: PlaceElement1) => {
@@ -146,7 +144,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
       "searchId",
       "roadAddressName",
     ]);
-    props.closeModal();
+    props.closeModal!();
   };
 
   useEffect(() => {
@@ -162,9 +160,10 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
   }, [debouncedKeyword]);
 
   return (
-    <div
-      className={`relative h-full w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-b-2xl bg-white p-[1rem] scrollbar-hide ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
+    <ModalTemplate
+      className={`w-[calc(100vw-1rem)] max-w-[40rem] ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
     >
+      {props.closeButtonComponent}
       <h2
         className={
           "mb-[1.875rem] mt-[2rem] h-[2rem] text-2xl font-bold text-black"
@@ -172,7 +171,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
       >
         장소 선택
       </h2>
-      <section className={"flex flex-col items-center gap-[1.875rem]"}>
+      <section className={"flex flex-col items-center gap-[1.875rem] w-full"}>
         <div className="flex w-full">
           <button
             className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline outline-[1px] outline-offset-[-1px] outline-black"}`}
@@ -400,7 +399,7 @@ const GatheringPlaceModal = (props: IGatheringPlaceModalProps) => {
           </div>
         )}
       </section>
-    </div>
+    </ModalTemplate>
   );
 };
 

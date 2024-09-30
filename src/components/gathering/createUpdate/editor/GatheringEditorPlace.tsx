@@ -36,11 +36,9 @@ const GatheringEditorPlace = ({ modalState }: IGatheringEditorPlace) => {
         )}
       </div>
       <Modal
-        isOpen={modalState.isOpen}
-        onClose={() => modalState.closeModal()}
-        isHeaderBar={true}
+        modalState={modalState}
       >
-        <GatheringPlaceModal closeModal={() => modalState.closeModal()} />
+        <GatheringPlaceModal/>
       </Modal>
     </div>
   );

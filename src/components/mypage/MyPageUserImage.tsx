@@ -1,4 +1,5 @@
 import { dragAndDropProps } from "@/types/DragAndDrop";
+import { ModalState } from "@/types/ModalState";
 import Image from "next/image";
 import UserImage from "../auth/UserImage";
 import CropperComponent from "../common/cropper/CropperComponent";
@@ -9,7 +10,7 @@ interface IMyPageUserImage {
   imageBase64Data: string;
   userImageUrl: string;
   userSex: string | null;
-  isModalOpen: boolean;
+  modalState: ModalState,
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
   deleteImage: () => void;
@@ -71,9 +72,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
         </label>
       </div>
       <Modal
-        isOpen={props.isModalOpen}
-        onClose={props.closeCropModal}
-        isHeaderBar={true}
+        modalState={props.modalState}
       >
         <CropperComponent
           imageBase64Data={props.imageBase64Data}

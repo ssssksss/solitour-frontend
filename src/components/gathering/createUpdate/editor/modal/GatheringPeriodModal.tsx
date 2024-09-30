@@ -1,15 +1,14 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import { add, addDays, format, isAfter, isSameDay } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 import { useFormContext } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
-interface IGatheringPeriodModalProps {
-  closeModal: () => void;
-}
 
-const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
+const GatheringPeriodModal = (props: IModalComponent) => {
   const formContext = useFormContext();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -63,15 +62,16 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
     formContext.watch();
     formContext.trigger("scheduleStartDate");
     formContext.trigger("scheduleEndDate");
-    props.closeModal();
+    props.closeModal!();
   };
 
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative h-full max-h-[50rem] w-[calc(100vw-1rem)] overflow-y-scroll rounded-b-2xl bg-white p-[1rem] scrollbar-hide max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
+        "max-h-[50rem] w-[calc(100vw-1rem)] max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
       }
     >
+      {props.closeButtonComponent}
       <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         날짜 선택
       </h2>
@@ -161,7 +161,7 @@ const GatheringPeriodModal = (props: IGatheringPeriodModalProps) => {
           </button>
         </div>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 export default GatheringPeriodModal;
