@@ -2,11 +2,8 @@
 
 import MyProfile from "@/components/mypage/MyProfile";
 import useModalState from "@/hooks/useModalState";
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface IMyProfileContainer {
@@ -18,11 +15,7 @@ const MyProfileContainer = ({ userInfo }: IMyProfileContainer) => {
   const [defaultNickname, setDefaultNickname] = useState(userInfo.nickname);
   const [message, setMessage] = useState("");
   const modalState = useModalState();
-  const [userDeleteText, setUserDeleteText] = useState("");
-  const router = useRouter();
-  const toastifyStore = useToastifyStore();
-  const authStore = useAuthStore();
-
+  
   const submitChangeNicknameHandler = async () => {
     if (nickname == "" && nickname == defaultNickname) return;
     const res = await fetchWithAuth("/api/mypage/change-nickname", {
@@ -47,37 +40,6 @@ const MyProfileContainer = ({ userInfo }: IMyProfileContainer) => {
     setMessage("");
   };
 
-  const changeUserDeleteText = (value: string) => {
-    setUserDeleteText(value);
-  };
-
-  const userDeleteHandler = async () => {
-    const response = await fetchWithAuth(
-      `/api/auth/user?type=${userInfo.provider}`,
-      {
-        method: "DELETE",
-        "Content-Type": "application/json",
-      },
-    );
-
-    if (response.ok) {
-      modalState.closeModal();
-      await toastifyStore.setToastify({
-        type: "success",
-        message: "회원탈퇴에 성공했습니다.",
-      });
-      authStore.initialize();
-      setTimeout(() => {
-        router.replace("/");
-      }, 300);
-    } else {
-      toastifyStore.setToastify({
-        type: "error",
-        message: "회원탈퇴에 실패했습니다.",
-      });
-    }
-  };
-
   return (
     <>
       <MyProfile
@@ -88,9 +50,6 @@ const MyProfileContainer = ({ userInfo }: IMyProfileContainer) => {
         defaultNickname={defaultNickname}
         message={message}
         modalState={modalState}
-        changeUserDeleteText={changeUserDeleteText}
-        userDeleteText={userDeleteText}
-        userDeleteHandler={userDeleteHandler}
       />
     </>
   );
