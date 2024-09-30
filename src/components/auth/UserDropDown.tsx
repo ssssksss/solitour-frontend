@@ -82,12 +82,13 @@ const UserDropDown = () => {
           >
             <div className={"relative w-[1.25rem] h-[1.25rem]"}>
               <Image
-                src={"/mypage/setting-icon.svg"}
-                alt={"setting-icon-image"}
+                className="aspect-square"
+                src="/home/mypage-icon.svg"
+                alt="signin-icon"
                 fill
               />
             </div>
-         사용자 설정
+         마이페이지
           </Link>
           <button
             onClick={logoutHandler}
