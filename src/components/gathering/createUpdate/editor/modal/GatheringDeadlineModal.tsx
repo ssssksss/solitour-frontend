@@ -1,4 +1,6 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import {
   add,
   compareAsc,
@@ -13,11 +15,7 @@ import { useState } from "react";
 import { Calendar } from "react-date-range";
 import { useFormContext } from "react-hook-form";
 
-interface IGatheringDeadlineModalProps {
-  closeModal: () => void;
-}
-
-const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
+const GatheringDeadlineModal = (props: IModalComponent) => {
   const formContext = useFormContext();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -36,7 +34,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
     formContext.setValue("deadline", deadline);
     formContext.watch();
     formContext.trigger("deadline");
-    props.closeModal();
+    props.closeModal!();
   };
 
   // maxDate를 결정하는 함수
@@ -60,11 +58,12 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
   };
 
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative h-full max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem] overflow-y-scroll rounded-b-2xl bg-white p-[1rem] scrollbar-hide"
+        "max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem]"
       }
     >
+      {props.closeButtonComponent}
       <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         모임 마감일 선택
       </h2>
@@ -105,7 +104,7 @@ const GatheringDeadlineModal = (props: IGatheringDeadlineModalProps) => {
           {format(new Date(deadlineDate), "yyyy년 MM월 dd일")} 적용하기
         </button>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 

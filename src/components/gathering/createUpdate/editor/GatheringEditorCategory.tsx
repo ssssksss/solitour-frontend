@@ -62,12 +62,9 @@ const GatheringEditorCategory = ({
         )}
       </div>
       <Modal
-        isOpen={modalState.isOpen}
-        onClose={() => modalState.closeModal()}
-        isHeaderBar={true}
+        modalState={modalState}
       >
         <GatheringCategoryModal
-          closeModal={modalState.closeModal}
           categoryList={categoryList}
         />
       </Modal>

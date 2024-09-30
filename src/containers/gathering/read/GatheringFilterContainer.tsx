@@ -1,11 +1,12 @@
 import { Modal } from "@/components/common/modal/Modal";
 import GatheringFilterModal from "@/components/gathering/read/modal/GatheringFilterModal";
+import useModalState from "@/hooks/useModalState";
 import { useEffect, useState } from "react";
 import { VscSettings } from "react-icons/vsc";
 
 interface IGatheringFilterContainer {}
 const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
-  const [isModal, setIsModal] = useState(false);
+  const modalState = useModalState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,17 +22,15 @@ const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
     <>
       <button
         className="flex flex-row items-center hover:text-main"
-        onClick={() => setIsModal(true)}
+        onClick={() => modalState.openModal()}
       >
         <VscSettings size={"1.25rem"} />
         <div>필터</div>
       </button>
       <Modal
-        isOpen={isModal}
-        onClose={() => setIsModal(false)}
-        isHeaderBar={true}
+        modalState={modalState}
       >
-        <GatheringFilterModal closeModal={() => setIsModal(false)} />
+        <GatheringFilterModal/>
       </Modal>
     </>
   );

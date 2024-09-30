@@ -98,7 +98,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
         }}
         userImageUrl={imageUrl}
         userSex={props.userSex}
-        isModalOpen={modalState.isOpen}
+        modalState={modalState}
         imageBase64Data={imageBase64Data}
         closeCropModal={closeCropModal}
         onChangeImageUrl={onChangeImageUrl}

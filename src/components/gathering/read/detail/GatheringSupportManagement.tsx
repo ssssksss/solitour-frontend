@@ -39,19 +39,17 @@ const GatheringSupportManagement = ({
   if (postUserId == userId && userId > 0) {
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
-        {modalState.isOpen && (
+        <Modal
+          modalState={modalState}
+        >
           <GatheringStatusChangeModalContainer
             isFinish={isFinish}
-            closeModal={() => modalState.closeModal()}
           />
-        )}
+        </Modal>
         <Modal
-          isOpen={modalState1.isOpen}
-          onClose={() => modalState1.closeModal()}
-          isHeaderBar={true}
+          modalState={modalState1}
         >
           <GatheringChattingLinkCheckModal
-            closeModal={() => modalState1.closeModal()}
             openChattingUrl={openChattingUrl}
           />
         </Modal>
@@ -78,19 +76,14 @@ const GatheringSupportManagement = ({
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
         <Modal
-          isOpen={modalState1.isOpen}
-          onClose={() => modalState1.closeModal()}
-          isHeaderBar={true}
+          modalState={modalState1}
         >
           <GatheringChattingLinkCheckModal
-            closeModal={() => modalState1.closeModal()}
             openChattingUrl={openChattingUrl}
           />
         </Modal>
         <Modal
-          isOpen={modalState2.isOpen}
-          onClose={() => modalState2.closeModal()}
-          isHeaderBar={true}
+          modalState={modalState2}
         >
           <ConfirmModal
             onConfirmClick={() => {
