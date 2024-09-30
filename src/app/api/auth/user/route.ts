@@ -58,7 +58,6 @@ export async function PUT(request: NextRequest) {
   }
 
   const requestData = await request.json();
-  console.log("route.ts 파일1 : ", requestData);
 
   // 사용자 정보 조회 API
   const response = await fetch(`${process.env.BACKEND_URL}/api/users/info`, {
