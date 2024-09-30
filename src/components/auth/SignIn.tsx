@@ -59,6 +59,21 @@ const SignIn = () => {
         </div>
         <span className="text-sm font-semibold text-black">구글로 로그인</span>
       </Link> */}
+      {/* <Link
+        className={
+          "relative mb-[.75rem] flex h-[2.875rem] w-full items-center justify-center rounded-3xl outline outline-[1px] outline-offset-[-1px] outline-gray3 bg-[#03C75A]"
+        }
+        href="/api/auth/naver"
+      >
+        <div className="absolute left-[1rem] top-[50%] aspect-square w-[1rem] translate-y-[-50%] outline outline-[.125rem] outline-white rounded-[.125rem]">
+          <Image
+            src={"/user/naver-icon.svg"}
+            alt={"naver-logo-image"}
+            fill={true}
+          />
+        </div>
+        <span className="text-sm font-semibold text-[#f9f9f9]">네이버로 로그인</span>
+      </Link> */}
 
       <div className={"relative flex w-full justify-center mt-[3rem]"}>
         <div className={"absolute top-[-.5rem] flex flex-col items-center"}>
