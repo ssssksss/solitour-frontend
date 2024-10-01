@@ -9,6 +9,7 @@ interface Props {
 }
 
 const CommentListContainer = ({ informationId }: Props) => {
+  const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState<InformationCommentResponseDto[]>([]);
 
   useEffect(() => {
@@ -18,6 +19,9 @@ const CommentListContainer = ({ informationId }: Props) => {
     //     method: "GET",
     //     cache: "no-store",
     //   });
+    //
+    //   setLoading(false);
+    //
     //   if (!response.ok) {
     //     throw new Error(response.statusText);
     //   }
@@ -30,6 +34,7 @@ const CommentListContainer = ({ informationId }: Props) => {
     (async function () {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
+      setLoading(false);
       setComments([
         {
           userImage: "/user/default-female.svg",
@@ -47,7 +52,7 @@ const CommentListContainer = ({ informationId }: Props) => {
     })();
   }, []);
 
-  return <CommentList comments={comments} />;
+  return <CommentList loading={loading} comments={comments} />;
 };
 
 export default CommentListContainer;

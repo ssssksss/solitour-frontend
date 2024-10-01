@@ -1,11 +1,13 @@
 import { InformationCommentResponseDto } from "@/types/InformationDto";
 import CommentItem from "./CommentItem";
+import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
 
 interface Props {
+  loading: boolean;
   comments: InformationCommentResponseDto[];
 }
 
-const CommentList = ({ comments }: Props) => {
+const CommentList = ({ loading, comments }: Props) => {
   return (
     <div className="mt-20 flex w-full flex-col border-t border-t-gray1">
       <h2 className="mt-[2.125rem] text-2xl font-bold">
@@ -28,9 +30,17 @@ const CommentList = ({ comments }: Props) => {
         </button>
       </form>
       <div className="mt-7 flex flex-col gap-4">
-        {comments.map((comment, index) => (
-          <CommentItem key={index} data={comment} />
-        ))}
+        {
+          loading
+            ? /* eslint-disable indent */
+              Array.from({ length: 2 }, (_, index) => index).map((value) => (
+                <CommentItemSkeleton key={value} />
+              ))
+            : comments.map((comment, index) => (
+                <CommentItem key={index} data={comment} />
+              ))
+          /* eslint-enable indent */
+        }
       </div>
     </div>
   );
