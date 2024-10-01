@@ -62,7 +62,7 @@ export default async function page({ params: { id } }: Props) {
         ]}
       />
       <InformationViewer informationId={informationId} data={data} />
-      <CommentListContainer informationId={informationId} />
+      {/* <CommentListContainer informationId={informationId} /> */}
       <RecommendationList data={data} />
     </div>
   );
