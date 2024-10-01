@@ -21,13 +21,13 @@ const InformationViewer = ({ informationId, data }: Props) => {
         <div className="w-full pb-4 lg:hidden">
           <h1 className="break-words text-2xl font-bold">{data.title}</h1>
           <div className="flex flex-row items-end justify-between py-4">
-            <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-row items-center gap-3">
               <Image
                 className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
                 src={`${data.userImage}`}
                 alt="userImage"
-                width={48}
-                height={48}
+                width={54}
+                height={54}
               />
               <div className="space-y-1">
                 <p className="text-xs font-semibold text-black">
@@ -60,13 +60,13 @@ const InformationViewer = ({ informationId, data }: Props) => {
           <div className="max-[1024px]:hidden">
             <h1 className="break-words text-2xl font-bold">{data.title}</h1>
             <div className="flex flex-row items-end justify-between py-4">
-              <div className="flex flex-row items-center gap-2">
+              <div className="flex h-[3.375rem] flex-row items-center gap-3">
                 <Image
                   className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
                   src={`${data.userImage}`}
                   alt="userImage"
-                  width={48}
-                  height={48}
+                  width={54}
+                  height={54}
                 />
                 <div className="space-y-1">
                   <p className="text-xs font-semibold text-black">

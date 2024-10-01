@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
-import { CiLogout } from "react-icons/ci";
 import { MdClose } from "react-icons/md";
 
 interface Props {
@@ -28,7 +27,7 @@ const HeaderSidebar = ({
       onClick={closeWithFadeOut}
       className={`${animationFlag ? "animate-sidebarFadeOut" : "animate-sidebarFadeIn"} fixed left-0 top-0 z-50 flex h-[200%] w-full flex-row justify-end bg-black/25`}
     >
-      <nav className="flex h-fit w-[20.375rem] flex-col gap-4 rounded-b-lg bg-white p-4 pb-6">
+      <nav className="flex h-fit w-[20.375rem] max-h-[calc(100vh-1rem)] flex-col gap-4 rounded-b-lg bg-white overflow-y-scroll p-4 pb-6">
         <div className="flex h-10 w-full items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"

@@ -1,51 +1,49 @@
 import useOutsideClick from "@/hooks/useOutsideClick";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import { useEffect, useRef, useState } from "react";
+import { ModalState } from "@/types/ModalState";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { MdClose } from "react-icons/md";
 
 interface ModalProps extends React.PropsWithChildren {
-  isOpen: boolean;
   className?: React.HTMLProps<HTMLElement>["className"];
-  onClose: () => void;
-  isHeaderBar?: boolean;
-  headerBarStyle?: string;
+  modalState: ModalState
 }
 
 export const Modal = ({
-  isOpen,
   children,
-  onClose,
-  isHeaderBar,
-  headerBarStyle = "bg-white",
+  modalState
 }: ModalProps) => {
   const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-  let flag = isOpen;
-  usePreventBodyScroll(isOpen);
+  let flag = modalState.isOpen;
+  usePreventBodyScroll(modalState.isOpen);
 
   useEffect(() => {
     setDocumentBody(document.body);
   }, []);
 
   useOutsideClick(ref, () => {
-    onClose();
+    modalState.closeModal();
   });
 
   const handlePopState = () => {
     flag = false;
-    if (isOpen) {
-      onClose();
+    if (modalState.isOpen) {
+      modalState.closeModal();
     }
   };
 
   const handleBeforeUnload = () => {
     // 모달창이 열린 상태로 새로고침을 하게되면 나중에 헤더에서 뒤로가기를 실행하는 용도로 사용
-    localStorage.setItem("isModal", "true");
+    if (modalState.isOpen) {
+      window.history.back();
+    //   localStorage.setItem("isModal", "true");
+    }
   };
 
   useEffect(() => {
-    if (isOpen) {
+    if (modalState.isOpen) {
       history.pushState({ isModal: true }, "");
       window.addEventListener("popstate", handlePopState);
       window.addEventListener("beforeunload", handleBeforeUnload);
@@ -59,10 +57,37 @@ export const Modal = ({
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [modalState.isOpen]);
 
-  if (!documentBody || !isOpen) return null;
+  if (!documentBody || !modalState.isOpen) return null;
 
+  const childrenArray = React.Children.toArray(children);
+  const childComponent = childrenArray.map((child, index) => {
+    if (index === 0 && React.isValidElement(child)) {
+      // child의 props를 변경하려면 React.cloneElement 사용
+      return React.cloneElement(child as React.ReactElement<{ closeModal: () => void; closeButtonComponent: JSX.Element }>, {
+        closeModal: modalState.closeModal,
+        closeButtonComponent: (
+          <button
+            onClick={() => modalState.closeModal()}
+            className="absolute top-[2rem] right-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
+            style={{ zIndex: 200 }}
+          >
+            <MdClose
+              className="cursor-pointer text-gray2 hover:text-main bg-red-60"
+              size={"2.5rem"}
+              onClick={() => {
+                modalState.closeModal();
+              }}
+            />
+          </button>
+        ),
+      }
+      );
+    }
+    return child;
+  });
+  
   return createPortal(
     <div
       className="fixed inset-0 flex h-full w-full items-center justify-center"
@@ -71,32 +96,15 @@ export const Modal = ({
       <div className="absolute h-full w-full cursor-pointer bg-black/30"></div>
       <div
         ref={ref}
-        className="-z-1 relative flex h-[calc(100vh-1rem)] flex-col items-center justify-center"
+        className="w-full -z-1 relative flex h-[calc(100vh-1rem)] flex-col items-center justify-center"
         onClick={(e) => {
           if (e.target == ref.current) {
-            onClose();
+            modalState.closeModal();
           }
         }}
       >
-        {isHeaderBar && (
-          <div
-            className={`relative flex h-[3rem] w-full justify-end rounded-t-[1rem] ${headerBarStyle}`}
-          >
-            <button
-              onClick={() => onClose()}
-              className="sticky z-50 mr-[2.5rem] mt-[2.5rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
-            >
-              <MdClose
-                className="cursor-pointer text-gray2 hover:text-main"
-                size={"2.5rem"}
-                onClick={() => {
-                  onClose();
-                }}
-              />
-            </button>
-          </div>
-        )}
-        {children}
+        {childComponent}
+        {/* {children} */}
       </div>
     </div>,
     document.getElementById("modal-root") as HTMLElement,

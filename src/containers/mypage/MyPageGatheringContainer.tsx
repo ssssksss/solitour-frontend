@@ -113,11 +113,9 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
   return (
     <div className="w-full">
       <Modal
-        isOpen={modalState.isOpen}
-        onClose={modalState.closeModal}
-        isHeaderBar={true}
+        modalState={modalState}
       >
-        <AddUserInformationForm closeModal={modalState.closeModal} />
+        <AddUserInformationForm />
       </Modal>
       <CategoryList
         categories={categories}

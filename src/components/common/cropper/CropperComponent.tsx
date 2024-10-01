@@ -1,8 +1,10 @@
+import { IModalComponent } from "@/types/ModalState";
 import { getCroppedImg } from "@/utils/getCroppedImg";
 import { useState } from "react";
 import Cropper from "react-easy-crop";
+import ModalTemplate from "../modal/ModalTemplate";
 
-interface ICropperComponent {
+interface ICropperComponent extends IModalComponent {
   imageBase64Data: string;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
@@ -11,6 +13,7 @@ const CropperComponent = ({
   imageBase64Data,
   closeCropModal,
   onChangeImageUrl,
+  ...props
 }: ICropperComponent) => {
   const [crop, setCrop] = useState<{ x: number; y: number }>({
     x: 0,
@@ -37,7 +40,8 @@ const CropperComponent = ({
   };
 
   return (
-    <div className="relative flex h-[calc(100vh-8rem)] w-[calc(100vw-4rem)] flex-col justify-between bg-white py-4">
+    <ModalTemplate className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between ">
+      {props.closeButtonComponent}
       <div className={"relative h-[calc(100%-5rem)] w-full"}>
         <Cropper
           image={imageBase64Data}
@@ -53,7 +57,7 @@ const CropperComponent = ({
           zoomWithScroll={true} // 스크롤 확대/축소 허용할지
         />
       </div>
-      <div className="flex w-full px-4">
+      <div className="flex w-full">
         <button
           onClick={showCroppedImage}
           className="h-[4rem] w-full rounded-lg bg-main text-white shadow-md"
@@ -61,7 +65,7 @@ const CropperComponent = ({
           편집 완료
         </button>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 export default CropperComponent;

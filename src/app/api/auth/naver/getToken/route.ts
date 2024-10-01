@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 
     // 백엔드에 액세스 토큰 재요청
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=kakao&redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${code}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?type=naver&redirectUrl=${process.env.NEXT_PUBLIC_NAVER_REDIRECT_URL}&code=${code}`,
       {
         method: "GET",
         headers: {
@@ -18,14 +18,13 @@ export async function GET(request: NextRequest) {
         credentials: "include",
       },
     );
-    
 
     const data = await response.json();
     const result = new NextResponse(JSON.stringify(data), {
       status: 200,
     });
     
-    if (response.status == 200) {
+    if (response.ok) {
       const cookies = response.headers.get("set-cookie");
       if (cookies) {
         // 받은 쿠키를 파싱하여 설정
@@ -50,7 +49,7 @@ export async function POST(request: NextRequest) {
 
     // 백엔드에 액세스 토큰 재요청
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login?redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${code}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/login/kakao?redirectUrl=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${code}`,
       {
         method: "POST",
         headers: {
@@ -58,8 +57,8 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           createUserInfoRequest: {
-            ...body,
-          },
+            ...body
+          }
         }),
         cache: "no-store",
         credentials: "include",
