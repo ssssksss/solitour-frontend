@@ -1,11 +1,10 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-interface IGatheringParticipantsFilterModalProps {
-  closeModal: () => void;
-}
 
 const SETTING_MODAL_AGE = {
   전체: {
@@ -31,7 +30,7 @@ const SETTING_MODAL_AGE = {
 };
 
 const GatheringParticipantsFilterModal = (
-  props: IGatheringParticipantsFilterModalProps,
+  props: IModalComponent,
 ) => {
   const formContext = useFormContext();
   const [peopleCount, setPeopleCount] = useState(
@@ -60,7 +59,7 @@ const GatheringParticipantsFilterModal = (
     formContext.setValue("allowedSex", sex);
     formContext.watch();
     formContext.trigger(["startAge", "endAge", "personCount", "allowedSex"]);
-    props.closeModal();
+    props.closeModal!();
   };
 
   const ageHandler = ({
@@ -82,11 +81,12 @@ const GatheringParticipantsFilterModal = (
   };
 
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative h-full max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-scroll rounded-b-2xl bg-white p-[2.75rem] scrollbar-hide"
+        "max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem]"
       }
     >
+      {props.closeButtonComponent}
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}>참여자 선택</h2>
       <section className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
         <article
@@ -291,7 +291,7 @@ const GatheringParticipantsFilterModal = (
           적용하기
         </button>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 export default GatheringParticipantsFilterModal;

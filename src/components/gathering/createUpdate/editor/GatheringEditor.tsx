@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
+import HashSpinner from "@/components/common/HashSpinner";
 import GatheringEditorCategoryContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorCategoryContainer";
 import GatheringEditorChattingLinkContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorChattingLinkContainer";
 import GatheringEditorContentContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorContentContainer";
@@ -13,7 +14,6 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useFormContext } from "react-hook-form";
 import GatheringEditorTimeContainer from "../../../../containers/gathering/createUpdate/editor/GatheringEditorTimeContainer";
-import HashSpinner from "@/components/common/HashSpinner";
 
 interface IGatheringEditorEditProps {
   isEdit: true;
@@ -59,7 +59,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         }
       >
         <GatheringEditorTitleContainer />
-        <div className="grid w-full gap-x-[1.875rem] gap-y-[2.375rem] max-[576px]:grid-cols-1 min-[575px]:grid-cols-2 min-[960px]:grid-cols-3">
+        <div className="grid w-full gap-x-[1.875rem] gap-y-[2.375rem] max-[576px]:grid-cols-1 min-[576px]:grid-cols-2 min-[960px]:grid-cols-3">
           <GatheringEditorPeriodContainer />
           <GatheringEditorPlaceContainer />
           <GatheringEditorTimeContainer />

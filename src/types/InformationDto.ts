@@ -153,3 +153,13 @@ export interface BestInformationResponseDto {
   thumbNailImage: string; // 썸네일 이미지 주소
   likeCount: number; // 좋아요 수
 }
+
+/**
+ * 정보 댓글 조회 결과 DTO
+ */
+export interface InformationCommentResponseDto {
+  userImage: string;
+  nickname: string;
+  createdDate: Date;
+  content: string;
+}

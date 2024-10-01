@@ -52,11 +52,9 @@ const FloatingButtonContainer = () => {
   return (
     <>
       <Modal
-        isOpen={modalState.isOpen}
-        onClose={modalState.closeModal}
-        isHeaderBar={true}
+        modalState={modalState}
       >
-        <AddUserInformationForm closeModal={modalState.closeModal} />
+        <AddUserInformationForm />
       </Modal>
       <FloatingButton
         visible={visible}

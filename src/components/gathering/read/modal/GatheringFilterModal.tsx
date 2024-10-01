@@ -1,5 +1,7 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { SETTING_MODAL_AGE } from "@/constants/gathering/GatheringConstant";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";
@@ -7,9 +9,6 @@ import { useSearchParams } from "next/navigation";
 import "rc-slider/assets/index.css";
 import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
-interface IGatheringFilterModalProps {
-  closeModal: () => void;
-}
 
 const regions = [
   { id: 0, name: "전체" },
@@ -71,7 +70,7 @@ function calculateDateDifference(startDate: Date, endDate: Date): number {
   return differenceInDays;
 }
 
-const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
+const GatheringFilterModal = (props: IModalComponent ) => {
   const searchParams = useSearchParams();
   const [location, setLocation] = useState(searchParams.get("location") || 0);
   const [sex, setSex] = useState(searchParams.get("allowedSex") || "ALL");
@@ -160,7 +159,7 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
     }
     params.delete("page");
     url.search = params.toString();
-    closeModal();
+    props.closeModal!();
     setTimeout(() => {
       window.history.pushState({}, "", url.toString());
     }, 100);
@@ -185,11 +184,12 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
   }, [searchParams]);
 
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative h-full max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll rounded-b-2xl bg-white p-[3rem] scrollbar-hide"
+        "max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem]"
       }
     >
+      {props.closeButtonComponent}
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 조건 선택 </h2>
       <div className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
         <div className={"flex flex-col gap-y-[1rem]"}>
@@ -470,7 +470,7 @@ const GatheringFilterModal = ({ closeModal }: IGatheringFilterModalProps) => {
           적용하기
         </button>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 export default GatheringFilterModal;

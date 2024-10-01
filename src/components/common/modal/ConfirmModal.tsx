@@ -1,6 +1,8 @@
+import { IModalComponent } from "@/types/ModalState";
 import HashSpinner from "../HashSpinner";
+import ModalTemplate from "./ModalTemplate";
 
-interface Props {
+interface IConfirmModal extends IModalComponent {
   loading: boolean;
   onConfirmClick: () => void;
   onCancelClick: () => void;
@@ -14,9 +16,11 @@ const ConfirmModal = ({
   onCancelClick,
   mainMessage,
   subMessage,
-}: Props) => {
+  ...props
+}: IConfirmModal) => {
   return (
-    <div className="relative flex h-full max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem] items-center justify-center overflow-y-scroll bg-white p-[1rem]">
+    <ModalTemplate className="max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem]">
+      {props.closeButtonComponent}
       <HashSpinner loading={loading} />
       <div className="flex h-fit w-full flex-col items-center gap-6 rounded-xl bg-white p-6">
         <h1 className="text-3xl">
@@ -42,7 +46,7 @@ const ConfirmModal = ({
           </button>
         </div>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 

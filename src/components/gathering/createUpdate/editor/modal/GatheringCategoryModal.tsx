@@ -1,4 +1,6 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -7,8 +9,7 @@ interface ICategory {
   name: string;
   childrenCategories: ICategory[];
 }
-interface IGatheringCategoryModalProps {
-  closeModal: () => void;
+interface IGatheringCategoryModalProps extends IModalComponent {
   categoryList: ICategory[];
 }
 
@@ -21,16 +22,17 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
   const submitHandler = () => {
     formContext.setValue("gatheringCategoryId", mainCategoryId);
     formContext.trigger("gatheringCategoryId");
-    props.closeModal();
+    props.closeModal!();
   };
 
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative flex h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col overflow-y-scroll rounded-b-2xl bg-white p-[2.75rem] scrollbar-hide"
+        "h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col"
       }
     >
-      <div className={"flex flex-col gap-y-1"}>
+      {props.closeButtonComponent}
+      <div className={"flex flex-col gap-y-1 w-full"}>
         <h2 className="w-full text-start text-2xl font-bold text-black">
           카테고리 선택
         </h2>
@@ -60,7 +62,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
           적용하기
         </button>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 export default GatheringCategoryModal;

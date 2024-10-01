@@ -5,6 +5,7 @@ import { MYPAGE_PROFILE_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirec
 import Image from "next/image";
 import Breadcrumbs from "../common/Breadcrumb";
 import { Modal } from "../common/modal/Modal";
+import UserDeleteConfirmModal from "./UserDeleteConfirmModal";
 
 interface IMyProfileProps {
   userInfo: userResponseDto;
@@ -14,9 +15,6 @@ interface IMyProfileProps {
   defaultNickname: string;
   message: string;
   modalState: ModalState;
-  changeUserDeleteText: (value: string) => void;
-  userDeleteText: string;
-  userDeleteHandler: () => void;
 }
 
 const NICKNAME_LENGTH = 30;
@@ -30,49 +28,6 @@ const MyProfile = (props: IMyProfileProps) => {
         userImageUrl={props.userInfo.userImage.address}
         userSex={props.userInfo.sex}
       />
-      <Modal
-        onClose={props.modalState.closeModal}
-        isOpen={props.modalState.isOpen}
-        isHeaderBar={true}
-        headerBarStyle="rounded-t-xl bg-white"
-      >
-        <div
-          className={
-            "relative flex max-h-[24rem] w-[calc(100vw-1rem)] max-w-[40rem] flex-col gap-y-[1rem] overflow-y-scroll rounded-b-xl bg-white p-[2.75rem] scrollbar-hide"
-          }
-        >
-          <div className={"flex flex-col gap-y-[.5rem]"}>
-            <p>
-              1. 회원 탈퇴 후에는 복구가 불가능하며, 현재 진행 중인 모임
-              서비스나 여행일기 서비스 이용 내역이 있을 경우, 관련 정보도 함께
-              삭제됩니다.
-            </p>
-            <p>
-              2. 정보 게시글은 삭제되지 않지만 사용자와 관련된 내용은 전부
-              비공개 처리되고 이후에는 수정이나 삭제는 불가능해집니다.
-            </p>
-            <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
-          </div>
-          <div className="flex select-none items-end gap-x-[.25rem]">
-            <span className={"text-lg text-main"}>회원탈퇴를 하겠습니다.</span>
-            <span> 라고 입력해주세요. </span>
-          </div>
-          <input
-            className="w-full rounded-[1rem] px-4 py-4 outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
-            placeholder="텍스트를 입력해주세요."
-            onChange={(e) => props.changeUserDeleteText(e.target.value)}
-          />
-          <button
-            disabled={props.userDeleteText !== "회원탈퇴를 하겠습니다."}
-            onClick={props.userDeleteHandler}
-            className={
-              "h-[3rem] w-full flex-shrink-0 rounded-full bg-main text-white disabled:bg-gray2"
-            }
-          >
-            회원탈퇴
-          </button>
-        </div>
-      </Modal>
       <div className={"mt-[1rem] flex flex-col gap-y-[2.375rem]"}>
         <article>
           <div className={"flex w-full items-center gap-x-[2.375rem]"}>
@@ -165,25 +120,37 @@ const MyProfile = (props: IMyProfileProps) => {
                 <span className={"font-medium text-gray1"}>
                   {props.userInfo.userImage.createdDate}
                 </span>
-                <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-[#FEE501]">
-                  {props.userInfo.provider == "kakao" && (
-                    <Image
-                      src={"/user/kakao-icon.svg"}
-                      alt={"kakao-icon-image"}
-                      width={20}
-                      height={20}
-                      className={"absolute translate-x-[1px]"}
-                    />
-                  )}
-                  {props.userInfo.provider == "google" && (
+                {props.userInfo.provider == "kakao" && 
+                       <div className="relative flex h-[2.5rem] w-[2.5rem] p-4 items-center justify-center rounded-[50%] bg-[#FEE501]">
+                         <Image
+                           src={"/user/kakao-icon.svg"}
+                           alt={"kakao-icon-image"}
+                           width={20}
+                           height={20}
+                           className={"absolute translate-x-[1px] "}
+                         />
+                       </div>
+                }
+                {/* {props.userInfo.provider == "google" && 
+                    <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-white">
                     <Image
                       src={"/user/google-icon.svg"}
                       alt={"google-icon-image"}
                       width={20}
                       height={20}
-                    />
-                  )}
-                </div>
+                      />
+                    </div>
+                  } */}
+                {props.userInfo.provider == "naver" && 
+                    <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-[#03C75A]">
+                      <Image
+                        src={"/user/naver-icon.svg"}
+                        alt={"naver-icon-image"}
+                        width={28}
+                        height={28}
+                      />
+                    </div>
+                }
               </div>
             </div>
           </div>
@@ -197,6 +164,11 @@ const MyProfile = (props: IMyProfileProps) => {
           회원탈퇴
         </button>
       </div>
+      <Modal
+        modalState={props.modalState}
+      >
+        <UserDeleteConfirmModal userInfo={props.userInfo} />
+      </Modal>
     </div>
   );
 };

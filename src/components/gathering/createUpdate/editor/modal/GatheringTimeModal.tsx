@@ -1,14 +1,13 @@
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
+import { IModalComponent } from "@/types/ModalState";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-interface IGatheringTimeModalProps {
-  closeModal: () => void;
-}
 
-const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
+const GatheringTimeModal = (props: IModalComponent) => {
   const formContext = useFormContext();
   const [startDateTime, setStartDateTime] = useState({
     hour: formContext.getValues("scheduleStartDate")
@@ -43,15 +42,16 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
     );
     formContext.watch();
     formContext.trigger(["scheduleStartDate"]);
-    props.closeModal();
+    props.closeModal!();
   };
 
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative h-full max-h-[22rem] w-[calc(100vw-1rem)] max-w-[30rem] overflow-y-scroll rounded-b-[1rem] bg-white p-[2.75rem] scrollbar-hide"
+        "max-h-[22rem] w-[calc(100vw-1rem)] max-w-[30rem]"
       }
     >
+      {props.closeButtonComponent}
       <div
         className={
           "flex min-h-full flex-col items-center justify-start bg-white"
@@ -165,7 +165,7 @@ const GatheringTimeModal = (props: IGatheringTimeModalProps) => {
           </button>
         </div>
       </div>
-    </div>
+    </ModalTemplate>
   );
 };
 export default GatheringTimeModal;

@@ -1,19 +1,18 @@
-import React from "react";
+import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import { IModalComponent } from "@/types/ModalState";
 
-interface GatheringChattingLinkCheckModalProps {
-  closeModal: () => void;
+interface GatheringChattingLinkCheckModalProps extends IModalComponent {
   openChattingUrl: string;
 }
 
-const GatheringChattingLinkCheckModal: React.FC<
-  GatheringChattingLinkCheckModalProps
-> = ({ closeModal, openChattingUrl }) => {
+const GatheringChattingLinkCheckModal = ({ openChattingUrl, ...props }:GatheringChattingLinkCheckModalProps) => {
   return (
-    <div
+    <ModalTemplate
       className={
-        "relative h-full max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem] overflow-y-scroll bg-white p-[1rem]"
+        "max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem] "
       }
     >
+      {props.closeButtonComponent}
       <article className={"flex w-full flex-col"}>
         <h3 className="text-lg font-medium text-gray-900">링크 확인</h3>
         <p className="mt-2 text-sm text-gray-500">이 링크를 확인해보세요 ⚠️</p>
@@ -44,7 +43,7 @@ const GatheringChattingLinkCheckModal: React.FC<
           </ul>
         </div>
       </article>
-    </div>
+    </ModalTemplate>
   );
 };
 
