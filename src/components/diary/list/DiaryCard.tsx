@@ -89,7 +89,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             ).toLocaleDateString("ko-KR")}
           </motion.p>
           <motion.div
-            className="truncate-vertical mt-6 text-black max-[845px]:mt-3"
+            className="truncate-vertical-diary-content mt-6 text-black max-[845px]:mt-3"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}

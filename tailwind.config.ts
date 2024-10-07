@@ -101,9 +101,9 @@ const config: Config = {
     ({ addComponents }: PluginAPI) => {
       addComponents({
         ".truncate-vertical-information-title": {
-          textOverflow: "ellipsis",
+          "text-overflow": "ellipsis",
           overflow: "hidden",
-          wordBreak: "break-word",
+          "word-break": "break-word",
           display: "-webkit-box",
           "-webkit-line-clamp": "2",
           "-webkit-box-orient": "vertical",
@@ -113,6 +113,64 @@ const config: Config = {
           "scrollbar-width": "none" /* Firefox */,
           "&::-webkit-scrollbar": {
             display: "none" /* Chrome, Safari, and Opera */,
+          },
+        },
+        ".truncate-vertical-diary-content": {
+          "text-overflow": "ellipsis",
+          overflow: "hidden",
+          "work-break": "break-word",
+          display: "-webkit-box",
+          "-webkit-line-clamp": "7",
+          "-webkit-box-orient": "vertical",
+        },
+        "@media (max-width: 1024px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "6",
+          },
+        },
+        "@media (max-width: 1000px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "5",
+          },
+        },
+        "@media (max-width: 972px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "7",
+          },
+        },
+        "@media (max-width: 950px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "6",
+          },
+        },
+        "@media (max-width: 910px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "5",
+          },
+        },
+        "@media (max-width: 875px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "4",
+          },
+        },
+        "@media (max-width: 845px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "5",
+          },
+        },
+        "@media (max-width: 820px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "4",
+          },
+        },
+        "@media (max-width: 780px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "3",
+          },
+        },
+        "@media (max-width: 744px)": {
+          ".truncate-vertical-diary-content": {
+            "-webkit-line-clamp": "5",
           },
         },
       });
