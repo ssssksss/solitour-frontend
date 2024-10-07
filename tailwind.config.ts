@@ -98,8 +98,16 @@ const config: Config = {
     },
   },
   plugins: [
-    function ({ addUtilities }: PluginAPI) {
-      addUtilities({
+    ({ addComponents }: PluginAPI) => {
+      addComponents({
+        ".truncate-vertical-information-title": {
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+          wordBreak: "break-word",
+          display: "-webkit-box",
+          "-webkit-line-clamp": "2",
+          "-webkit-box-orient": "vertical",
+        },
         ".scrollbar-hide": {
           "-ms-overflow-style": "none" /* IE and Edge */,
           "scrollbar-width": "none" /* Firefox */,
