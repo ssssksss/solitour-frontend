@@ -38,7 +38,7 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
               informationId={post.id}
               categoryName={post.category}
               isBookMark={true}
-              isLike={false} // TODO: 수정 필요
+              isLike={false}
               title={post.title}
               image={post.image}
               address="테스트 주소"

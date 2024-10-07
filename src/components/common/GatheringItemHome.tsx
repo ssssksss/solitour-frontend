@@ -22,19 +22,6 @@ const categoryStyle: { [key: string]: string } = {
   활동: "outline-[#DDE5FF] text-[#0036C2] bg-[#F2F6FF]",
 };
 
-// const statusStyle: { [key: string]: string } = {
-//   WAIT: "outline-none text-white bg-gray2",
-//   CONSENT: "outline-none text-white bg-main",
-//   REFUSE: "outline-none text-white bg-[#EE4C4A]",
-// };
-
-// const status: {[key: string]: string} = {
-//   WAIT: "대기",
-//   CONSENT: "승인",
-//   REFUSE: "거절",
-// };
-
-// todo
 const GatheringItemHome = ({ data }: IGatheringItemHome) => {
   return (
     <Link

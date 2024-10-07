@@ -1,7 +1,6 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";
-import CommentListContainer from "@/containers/informations/detail/CommentListContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 

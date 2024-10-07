@@ -7,36 +7,11 @@ import HomeCarouselContainer from "@/containers/home/HomeCarouselContainer";
 import ListTemplateContainer from "@/containers/home/ListTemplateContainer";
 import { Suspense } from "react";
 
-// async function fetchBannerList(): Promise<Banner[]> {
-//   const url = `${process.env.BACKEND_URL}/api/banner`;
-
-//   try {
-//     const response = await fetch(url);
-
-//     if (!response.ok) {
-//       const errorText = await response.text();
-//       console.error(`Failed to fetch data: ${response.status} - ${errorText}`);
-//       return []; // 빈 배열 반환
-//     }
-
-//     const data: Banner[] = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error("An error occurred while fetching the banner list:", error);
-//     return []; // 빈 배열 반환
-//   }
-// }
-
-export default async function Home() {
-  // const initBannerList = await fetchBannerList();
-
+export default function Home() {
   return (
     <div className="mb-20 flex w-full flex-col items-center gap-20">
       <div className="absolute w-full">
-        <HomeCarouselContainer
-          // initBannerList={initBannerList.length > 0 ? initBannerList : []}
-          initBannerList={[]}
-        />
+        <HomeCarouselContainer />
       </div>
       <div className="mt-[32.5rem] max-[1024px]:mt-60" />
       <TabList />
