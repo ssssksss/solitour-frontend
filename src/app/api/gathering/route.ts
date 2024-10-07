@@ -16,7 +16,6 @@ export async function POST(request: NextRequest) {
 
   try {
     const requestData = await request.json();
-
     const response = await fetch(`${process.env.BACKEND_URL}/api/gatherings`, {
       method: "POST",
       headers: {
@@ -25,7 +24,7 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify(requestData),
     });
-    //  TODO : 에러처리 작업 필요함
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Error: ${errorData.error || "Unknown error occurred"}`);
