@@ -63,13 +63,13 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             />
           </motion.div>
           <motion.div
-            className="mt-12 w-full max-[845px]:mt-5"
+            className="mt-12 w-full truncate max-[845px]:mt-5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
             <Link
-              className="w-full truncate text-2xl font-bold hover:text-main"
+              className="w-full text-2xl font-bold hover:text-main"
               href={`/diary/${diaryData.diaryId}`}
               onClick={(e) => {
                 e.stopPropagation();
@@ -89,7 +89,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             ).toLocaleDateString("ko-KR")}
           </motion.p>
           <motion.div
-            className="truncate-vertical mt-6 text-black max-[845px]:mt-3"
+            className="truncate-vertical-diary-content mt-6 text-black max-[845px]:mt-3"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}

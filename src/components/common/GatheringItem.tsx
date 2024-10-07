@@ -35,7 +35,6 @@ const status: { [key: string]: string } = {
   REFUSE: "거절",
 };
 
-// todo
 const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
   return (
     <Link
