@@ -1,19 +1,15 @@
 "use client";
 
 import HomeCarousel from "@/components/home/HomeCarousel";
-import { Banner } from "@/types/BannerDto";
 import { useEffect, useState } from "react";
-interface IHomeCarouselContainer {
-  initBannerList: Banner[] | [];
-}
-const HomeCarouselContainer = (props: IHomeCarouselContainer) => {
+
+const HomeCarouselContainer = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [bannerList, _] = useState([
     { id: 0, name: "", url: "/home/background1.png" },
     { id: 0, name: "", url: "/home/background2.png" },
     { id: 0, name: "", url: "/home/background3.png" },
     { id: 0, name: "", url: "/home/background4.png" },
-    ...props.initBannerList,
   ]);
 
   const onClick = (index: number) => {
