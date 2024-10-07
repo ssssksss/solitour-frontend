@@ -75,15 +75,6 @@ body {
   background: linear-gradient(to bottom, #dad0e9, #bae5ee);
 }
 
-.truncate-vertical-diary-content {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 7;
-  -webkit-box-orient: vertical;
-}
-
 ::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
   opacity: 1;
