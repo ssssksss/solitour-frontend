@@ -1,8 +1,6 @@
 import SupportAbout from "@/components/support/SupportAbout";
 
-interface ISupportAboutContainer {}
-
-const SupportAboutContainer = (props: ISupportAboutContainer) => {
+const SupportAboutContainer = () => {
   return <SupportAbout />;
 };
 export default SupportAboutContainer;

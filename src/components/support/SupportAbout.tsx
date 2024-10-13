@@ -1,8 +1,6 @@
 import React from "react";
 
-interface ISupportAbout {}
-
-const SupportAbout: React.FC<ISupportAbout> = (props) => {
+const SupportAbout = () => {
   return (
     <div className="flex w-full flex-col">
       <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
@@ -14,7 +12,6 @@ const SupportAbout: React.FC<ISupportAbout> = (props) => {
           있도록 합니다.
         </p>
       </div>
-
       <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-4 text-2xl font-semibold text-gray-700">2. 모임</h2>
         <p className="text-gray-600">
@@ -24,7 +21,6 @@ const SupportAbout: React.FC<ISupportAbout> = (props) => {
           원활하게 할 수 있습니다.
         </p>
       </div>
-
       <div className="rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-4 text-2xl font-semibold text-gray-700">
           3. 여행일기
