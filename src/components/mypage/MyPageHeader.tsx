@@ -15,7 +15,7 @@ const MyPageHeader = ({ userInfo }: IMyPageHeader) => {
         <article className={"flex flex-col items-center"}>
           <div
             className={
-              "relative mb-[1rem] aspect-square w-[6.75rem] rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
+              "bg-lightGreen relative mb-[1rem] aspect-square w-[6.75rem] rounded-[50%] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
             }
           >
             <UserImage

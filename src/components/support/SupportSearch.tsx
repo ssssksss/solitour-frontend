@@ -50,7 +50,7 @@ const SupportSearch = ({ loading }: Props) => {
           }}
         />
         <button
-          className="absolute right-[0.375rem] top-[0.3125rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full bg-[#F2FAF7] hover:scale-110"
+          className="bg-lightGreen absolute right-[0.375rem] top-[0.3125rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full hover:scale-110"
           onClick={() => searchHandler()}
         >
           <Image

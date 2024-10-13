@@ -4,9 +4,7 @@ import { useSearchParams } from "next/navigation";
 import SupportHeader from "../../components/support/SupportHeader";
 import SupportBodyContainer from "./SupportBodyContainer";
 
-interface ISupportHeaderContainer {}
-
-const SupportHeaderContainer = (props: ISupportHeaderContainer) => {
+const SupportHeaderContainer = () => {
   const searchParams = useSearchParams();
 
   return (
