@@ -18,7 +18,7 @@ const SupportAboutGathering = () => {
             initial={{ translateX: "-1rem", opacity: 0 }}
             whileInView={{ translateX: "0rem", opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.5 }}
-            viewport={{ once: true }}
+            viewport={{ amount: 0.5, once: true }}
           >
             <div className="relative h-6 w-6">
               <Image
