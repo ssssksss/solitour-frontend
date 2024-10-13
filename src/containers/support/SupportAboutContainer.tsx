@@ -1,4 +1,4 @@
-import SupportAbout from "@/components/support/SupportAbout";
+import SupportAbout from "@/components/support/about/SupportAbout";
 
 const SupportAboutContainer = () => {
   return <SupportAbout />;
