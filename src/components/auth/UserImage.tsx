@@ -10,7 +10,7 @@ interface IUserImage {
 const UserImage = ({
   userImageAddress,
   size,
-  addressStyle = "rounded-[50%] border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]",
+  addressStyle = "rounded-[50%] border-[0.03125rem] border-[#B8EDD9] bg-lightGreen",
 }: IUserImage) => {
   return (
     <>

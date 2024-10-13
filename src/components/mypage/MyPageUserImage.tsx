@@ -10,7 +10,7 @@ interface IMyPageUserImage {
   imageBase64Data: string;
   userImageUrl: string;
   userSex: string | null;
-  modalState: ModalState,
+  modalState: ModalState;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
   deleteImage: () => void;
@@ -23,7 +23,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
       <div className={"group flex flex-col items-center"}>
         <label
           className={
-            "relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-[#F2FAF7] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
+            "bg-lightGreen relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
           }
           htmlFor={"imageUpload"}
           onDragEnter={props.dragAndDrop.onDragEnter}
@@ -71,9 +71,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
           />
         </label>
       </div>
-      <Modal
-        modalState={props.modalState}
-      >
+      <Modal modalState={props.modalState}>
         <CropperComponent
           imageBase64Data={props.imageBase64Data}
           closeCropModal={props.closeCropModal}

@@ -1,8 +1,10 @@
 import React from "react";
+import SupportAboutBanner from "./about/SupportAboutBanner";
 
 const SupportAbout = () => {
   return (
     <div className="flex w-full flex-col">
+      <SupportAboutBanner />
       <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-4 text-2xl font-semibold text-gray-700">1. 정보</h2>
         <p className="text-gray-600">
