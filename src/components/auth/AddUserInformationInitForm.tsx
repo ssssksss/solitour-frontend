@@ -22,13 +22,13 @@ const AddUserInformationInitForm = ({
     >
       <section
         className={
-          "flex max-h-[calc(100vh-1rem)] max-w-[50rem] w-full pt-2 pb-4 flex-col items-center overflow-y-scroll rounded-[1rem] rounded-b-[1rem] bg-white px-[3.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray2 scrollbar-hide"
+          "scrollbar-hide flex max-h-[calc(100vh-1rem)] w-full max-w-[50rem] flex-col items-center overflow-y-scroll rounded-[1rem] rounded-b-[1rem] bg-white px-[3.5rem] pb-4 pt-2 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray2"
         }
       >
         <div className="flex w-full py-2">
           <button
             className="bg-gray relative z-50 scale-100 transform rounded-[1rem] bg-gray3 p-2 transition-transform duration-300"
-            onClick={()=>handleHomeButtonClick()}
+            onClick={() => handleHomeButtonClick()}
           >
             <Image
               className="aspect-square"
@@ -60,7 +60,7 @@ const AddUserInformationInitForm = ({
             <h3 className="text-[1.125rem] font-bold text-black"> 성별 </h3>
             <div className={"mt-3 flex h-[3rem] w-full gap-x-3"}>
               <button
-                className={`h-full w-full rounded-[1.5rem] py-4 outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${formContext.getValues("sex") == "male" ? "bg-[#F2FAF7] font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+                className={`h-full w-full rounded-[1.5rem] py-4 outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${formContext.getValues("sex") == "male" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
                 onClick={() => {
                   formContext.setValue("sex", "male");
                   formContext.trigger();
@@ -69,7 +69,7 @@ const AddUserInformationInitForm = ({
                 남성
               </button>
               <button
-                className={`h-full w-full rounded-[1.5rem] py-4 outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${formContext.getValues("sex") == "female" ? "bg-[#F2FAF7] font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+                className={`h-full w-full rounded-[1.5rem] py-4 outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${formContext.getValues("sex") == "female" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
                 onClick={() => {
                   formContext.setValue("sex", "female");
                   formContext.trigger();
@@ -83,7 +83,8 @@ const AddUserInformationInitForm = ({
             <h3 className="flex items-center gap-x-2 text-[1.125rem] font-bold text-black">
               연도(나이)
               <span className="flex items-center text-gray2">
-                {new Date().getFullYear() - 58} ~ {new Date().getFullYear() - 19}
+                {new Date().getFullYear() - 58} ~{" "}
+                {new Date().getFullYear() - 19}
               </span>
             </h3>
             <span className="flex items-center text-gray2">

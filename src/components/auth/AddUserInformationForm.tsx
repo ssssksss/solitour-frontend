@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ModalTemplate from "../common/modal/ModalTemplate";
 
-
 const AddUserInformationForm = (props: IModalComponent) => {
   const authStore = useAuthStore();
   const toastifyStore = useToastifyStore();
@@ -67,12 +66,12 @@ const AddUserInformationForm = (props: IModalComponent) => {
       <p className="mt-[0.625rem] max-w-[15.875rem] text-center text-gray1">
         신뢰할 수 있는 이용 환경을 위해 필요한 정보를 입력해 주세요
       </p>
-      <div className="mt-[1.25rem] flex w-full flex-col gap-y-[2.375rem] rounded-[1.125rem] px-[2.25rem] pb-[1.875rem] pt-[1.5rem] bg-[#F7F7F7]">
+      <div className="mt-[1.25rem] flex w-full flex-col gap-y-[2.375rem] rounded-[1.125rem] bg-[#F7F7F7] px-[2.25rem] pb-[1.875rem] pt-[1.5rem]">
         <article className="flex flex-col">
           <h3 className="text-[1.125rem] font-bold text-black"> 이름 </h3>
           <input
             type={"text"}
-            className="mt-3 h-10 w-full rounded-[1.5rem] px-3 text-center text-main focus:outline-main outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#f0f0f0]"
+            className="mt-3 h-10 w-full rounded-[1.5rem] px-3 text-center text-main outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#f0f0f0] focus:outline-main"
             placeholder="이름을 입력해주세요"
             maxLength={10}
             {...register("name")}
@@ -82,7 +81,7 @@ const AddUserInformationForm = (props: IModalComponent) => {
           <h3 className="text-[1.125rem] font-bold text-black"> 성별 </h3>
           <div className={"mt-3 flex h-10 w-full gap-x-3"}>
             <button
-              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${getValues("sex") == "male" ? "bg-[#F2FAF7] font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${getValues("sex") == "male" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
               onClick={() => {
                 setValue("sex", "male");
                 trigger();
@@ -91,7 +90,7 @@ const AddUserInformationForm = (props: IModalComponent) => {
               남성
             </button>
             <button
-              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${getValues("sex") == "female" ? "bg-[#F2FAF7] font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${getValues("sex") == "female" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
               onClick={() => {
                 setValue("sex", "female");
                 trigger();
@@ -114,7 +113,7 @@ const AddUserInformationForm = (props: IModalComponent) => {
             onChange={handleInputChange}
             placeholder="YYYY"
             maxLength={4}
-            className="w-full bg-transparent text-center outline-none focus:outline-main mt-3 flex h-10 items-center justify-center rounded-[1.5rem] bg-white py-[0.375rem] text-main outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#F0F0F0]"
+            className="mt-3 flex h-10 w-full items-center justify-center rounded-[1.5rem] bg-transparent bg-white py-[0.375rem] text-center text-main outline-none outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#F0F0F0] focus:outline-main"
           />
         </article>
       </div>
