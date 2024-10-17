@@ -10,7 +10,7 @@ const CommentItem = ({ data }: Props) => {
     <div className="flex flex-col gap-[0.625rem] border-b border-b-gray3">
       <div className="flex flex-row items-center gap-3">
         <Image
-          className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-[#F2FAF7]"
+          className="bg-lightGreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
           src={data.userImage}
           alt="userImage"
           width={54}

@@ -143,7 +143,7 @@ const DiaryEditor = ({
           {["최고", "좋아", "무난", "슬퍼", "화나"].map((value, index) => (
             <button
               key={index + 1}
-              className={`${formContext.getValues("moodLevels") === index + 1 ? "bg-[#F2FAF7] text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-[#F2FAF7] hover:text-main`}
+              className={`${formContext.getValues("moodLevels") === index + 1 ? "bg-lightGreen text-main" : "text-gray1"} hover:bg-lightGreen flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:text-main`}
               onClick={() => {
                 formContext.setValue("moodLevels", index + 1);
                 formContext.trigger("moodLevels");

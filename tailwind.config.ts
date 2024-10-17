@@ -18,6 +18,7 @@ const config: Config = {
         gray1: "#666666",
         gray2: "#A3A3A3",
         gray3: "#d9d9d9",
+        lightGreen: "#F2FAF7",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -81,6 +82,14 @@ const config: Config = {
           from: { transform: "scale(1)" },
           to: { transform: "scale(1.5)" },
         },
+        rotate: {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        rotateReversed: {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(-360deg)" },
+        },
       },
       animation: {
         sidebarFadeIn: "sidebarFadeIn 0.3s",
@@ -94,6 +103,8 @@ const config: Config = {
         cardFlip2: "cardFlip2 0.5s linear",
         pulseAuth: "pulseAuth 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         arrow: "arrow 1s linear infinite alternate",
+        rotate: "rotate 15s linear infinite",
+        rotateReversed: "rotateReversed 15s linear infinite",
       },
     },
   },

@@ -70,7 +70,6 @@ export default function RootLayout({
             {children}
           </div>
         </div>
-
         <Footer />
         <FloatingButtonContainer />
         <div id="modal-root"></div>
