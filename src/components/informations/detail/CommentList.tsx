@@ -30,9 +30,6 @@ const CommentList = ({ loading, comments }: CommentListProps) => {
         </button>
       </form>
       <div className="mt-9 flex flex-col gap-4">
-        {Array.from({ length: 2 }, (_, index) => index).map((value) => (
-          <CommentItemSkeleton key={value} />
-        ))}
         {loading ? (
           Array.from({ length: 2 }, (_, index) => index).map((value) => (
             <CommentItemSkeleton key={value} />
