@@ -2,12 +2,12 @@ import { InformationCommentResponseDto } from "@/types/InformationDto";
 import CommentItem from "./CommentItem";
 import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
 
-interface Props {
+interface CommentListProps {
   loading: boolean;
   comments: InformationCommentResponseDto[];
 }
 
-const CommentList = ({ loading, comments }: Props) => {
+const CommentList = ({ loading, comments }: CommentListProps) => {
   return (
     <div className="mt-20 flex w-full flex-col border-t border-t-gray1">
       <h2 className="mt-[2.125rem] text-2xl font-bold">
