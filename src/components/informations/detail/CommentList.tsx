@@ -2,12 +2,12 @@ import { InformationCommentResponseDto } from "@/types/InformationDto";
 import CommentItem from "./CommentItem";
 import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
 
-interface Props {
+interface CommentListProps {
   loading: boolean;
   comments: InformationCommentResponseDto[];
 }
 
-const CommentList = ({ loading, comments }: Props) => {
+const CommentList = ({ loading, comments }: CommentListProps) => {
   return (
     <div className="mt-20 flex w-full flex-col border-t border-t-gray1">
       <h2 className="mt-[2.125rem] text-2xl font-bold">
@@ -29,18 +29,20 @@ const CommentList = ({ loading, comments }: Props) => {
           등록하기
         </button>
       </form>
-      <div className="mt-7 flex flex-col gap-4">
-        {
-          loading
-            ? /* eslint-disable indent */
-              Array.from({ length: 2 }, (_, index) => index).map((value) => (
-                <CommentItemSkeleton key={value} />
-              ))
-            : comments.map((comment, index) => (
-                <CommentItem key={index} data={comment} />
-              ))
-          /* eslint-enable indent */
-        }
+      <div className="mt-9 flex flex-col gap-4">
+        {loading ? (
+          Array.from({ length: 2 }, (_, index) => index).map((value) => (
+            <CommentItemSkeleton key={value} />
+          ))
+        ) : comments.length === 0 ? (
+          <p className="flex h-[6.0625rem] w-full items-center justify-center text-sm text-gray1">
+            아직 댓글이 없어요.
+          </p>
+        ) : (
+          comments.map((comment, index) => (
+            <CommentItem key={index} data={comment} />
+          ))
+        )}
       </div>
     </div>
   );

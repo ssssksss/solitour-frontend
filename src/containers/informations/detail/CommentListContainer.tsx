@@ -4,11 +4,11 @@ import CommentList from "@/components/informations/detail/CommentList";
 import { InformationCommentResponseDto } from "@/types/InformationDto";
 import { useEffect, useState } from "react";
 
-interface Props {
+interface CommentListContainerProps {
   informationId: number;
 }
 
-const CommentListContainer = ({ informationId }: Props) => {
+const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState<InformationCommentResponseDto[]>([]);
 
@@ -32,7 +32,7 @@ const CommentListContainer = ({ informationId }: Props) => {
 
     // TODO: 임시 코드입니다.
     (async function () {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
 
       setLoading(false);
       setComments([
