@@ -29,18 +29,23 @@ const CommentList = ({ loading, comments }: CommentListProps) => {
           등록하기
         </button>
       </form>
-      <div className="mt-7 flex flex-col gap-4">
-        {
-          loading
-            ? /* eslint-disable indent */
-              Array.from({ length: 2 }, (_, index) => index).map((value) => (
-                <CommentItemSkeleton key={value} />
-              ))
-            : comments.map((comment, index) => (
-                <CommentItem key={index} data={comment} />
-              ))
-          /* eslint-enable indent */
-        }
+      <div className="mt-9 flex flex-col gap-4">
+        {Array.from({ length: 2 }, (_, index) => index).map((value) => (
+          <CommentItemSkeleton key={value} />
+        ))}
+        {loading ? (
+          Array.from({ length: 2 }, (_, index) => index).map((value) => (
+            <CommentItemSkeleton key={value} />
+          ))
+        ) : comments.length === 0 ? (
+          <p className="flex h-[6.0625rem] w-full items-center justify-center text-sm text-gray1">
+            아직 댓글이 없어요.
+          </p>
+        ) : (
+          comments.map((comment, index) => (
+            <CommentItem key={index} data={comment} />
+          ))
+        )}
       </div>
     </div>
   );

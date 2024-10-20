@@ -32,7 +32,7 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
 
     // TODO: 임시 코드입니다.
     (async function () {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
 
       setLoading(false);
       setComments([
