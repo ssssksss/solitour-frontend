@@ -14,7 +14,6 @@ const tabs = [
 ];
 
 const SupportHeader = ({ active }: ISupportHeader) => {
-
   return (
     <div className="mb-4 flex w-full flex-col items-start py-1">
       <div className={"flex w-full flex-col items-start gap-y-4 pt-[2.375rem]"}>
@@ -23,7 +22,7 @@ const SupportHeader = ({ active }: ISupportHeader) => {
         </h1>
         <p className={"text-gray1"}> 솔리투어 고객지원에서 도와드릴게요 </p>
       </div>
-      <article className="flex justify-start gap-1 pt-12 max-w-full overflow-x-scroll scrollbar-hide">
+      <article className="flex max-w-full flex-wrap justify-start gap-x-1 gap-y-2 pt-12">
         {tabs.map((tab) => (
           <Link
             key={tab.value}

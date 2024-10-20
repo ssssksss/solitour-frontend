@@ -4,14 +4,14 @@ import * as motion from "framer-motion/client";
 const SupportAboutBanner = () => {
   return (
     <motion.div
-      className="bg-lightGreen absolute left-0 flex h-[35rem] w-full items-center justify-center"
+      className="absolute left-0 flex h-[35rem] w-full items-center justify-center overflow-hidden bg-lightGreen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="animate-rotate absolute z-10 flex flex-col items-center justify-between">
+      <div className="absolute z-10 flex animate-rotate flex-col items-center justify-between">
         <motion.div
-          className="animate-rotateReversed absolute bottom-[4.125rem] flex h-[11.875rem] w-[11.875rem] flex-col items-center justify-center gap-2 rounded-full border-2 border-[#E4E5FB] bg-white"
+          className="absolute bottom-[4.125rem] flex h-[11.875rem] w-[11.875rem] animate-rotateReversed flex-col items-center justify-center gap-2 rounded-full border-2 border-[#E4E5FB] bg-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
@@ -25,7 +25,7 @@ const SupportAboutBanner = () => {
           <p className="text-sm font-semibold text-black">정보</p>
         </motion.div>
         <motion.div
-          className="animate-rotateReversed absolute right-[2.6875rem] top-0 flex h-[11.875rem] w-[11.875rem] flex-col items-center justify-center gap-2.5 rounded-full border-2 border-[#D7EDFD] bg-white"
+          className="absolute right-[2.6875rem] top-0 flex h-[11.875rem] w-[11.875rem] animate-rotateReversed flex-col items-center justify-center gap-2.5 rounded-full border-2 border-[#D7EDFD] bg-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
@@ -39,7 +39,7 @@ const SupportAboutBanner = () => {
           <p className="text-sm font-semibold text-black">모임</p>
         </motion.div>
         <motion.div
-          className="animate-rotateReversed absolute left-[2.6875rem] top-0 flex h-[11.875rem] w-[11.875rem] flex-col items-center justify-center gap-2.5 rounded-full border-2 border-[#DBF6EB] bg-white"
+          className="absolute left-[2.6875rem] top-0 flex h-[11.875rem] w-[11.875rem] animate-rotateReversed flex-col items-center justify-center gap-2.5 rounded-full border-2 border-[#DBF6EB] bg-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1 }}
