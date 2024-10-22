@@ -28,11 +28,11 @@ const CommentItem = ({ data }: CommentItemProps) => {
         <ReportIcon className="mb-[0.5625rem] cursor-pointer hover:stroke-main" />
       </div>
       <div>
-        <p className="h-[4.375rem] break-words pl-[4.125rem] text-sm text-black">
+        <p className="h-[4.375rem] break-words pl-[4.125rem] text-[0.9375rem] text-black">
           {data.content}
         </p>
         <div className="h-8 w-full">
-          <div className="flex flex-row items-center justify-end gap-4 text-xs text-gray1">
+          <div className="flex flex-row items-center justify-end gap-4 text-sm text-gray1">
             <button className="hover:text-main">수정</button>
             <button className="hover:text-main">삭제</button>
           </div>
