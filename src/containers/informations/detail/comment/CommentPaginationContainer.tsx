@@ -1,6 +1,6 @@
 "use client";
 
-import CommentPagination from "@/components/informations/detail/CommentPagination";
+import CommentPagination from "@/components/informations/detail/comment/CommentPagination";
 import { useState } from "react";
 
 const CommentPaginationContainer = () => {
