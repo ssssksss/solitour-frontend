@@ -1,6 +1,6 @@
 "use client";
 
-import CommentList from "@/components/informations/detail/CommentList";
+import CommentList from "@/components/informations/detail/comment/CommentList";
 import { InformationCommentResponseDto } from "@/types/InformationDto";
 import { useEffect, useState } from "react";
 
@@ -37,12 +37,14 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
       setLoading(false);
       setComments([
         {
+          commentId: 1,
           userImage: "/user/default-female.svg",
           nickname: "하몽",
           createdDate: new Date(),
           content: "좋아보여요~",
         },
         {
+          commentId: 2,
           userImage: "/user/default-female.svg",
           nickname: "유저d0f",
           createdDate: new Date(),

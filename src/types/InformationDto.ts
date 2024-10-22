@@ -158,6 +158,7 @@ export interface BestInformationResponseDto {
  * 정보 댓글 조회 결과 DTO
  */
 export interface InformationCommentResponseDto {
+  commentId: number;
   userImage: string;
   nickname: string;
   createdDate: Date;

@@ -1,12 +1,16 @@
 import HashSpinner from "./HashSpinner";
 
-interface Props {
+interface DeleteModalProps {
   loading: boolean;
   onDeleteClick: () => void;
   onCancelClick: () => void;
 }
 
-const DeleteModal = ({ loading, onDeleteClick, onCancelClick }: Props) => {
+const DeleteModal = ({
+  loading,
+  onDeleteClick,
+  onCancelClick,
+}: DeleteModalProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <HashSpinner loading={loading} />

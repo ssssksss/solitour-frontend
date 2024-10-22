@@ -1,6 +1,7 @@
 import { InformationCommentResponseDto } from "@/types/InformationDto";
 import CommentItem from "./CommentItem";
 import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
+import CommentItemContainer from "@/containers/informations/detail/comment/CommentItemContainer";
 
 interface CommentListProps {
   loading: boolean;
@@ -40,7 +41,7 @@ const CommentList = ({ loading, comments }: CommentListProps) => {
           </p>
         ) : (
           comments.map((comment, index) => (
-            <CommentItem key={index} data={comment} />
+            <CommentItemContainer key={index} data={comment} />
           ))
         )}
       </div>

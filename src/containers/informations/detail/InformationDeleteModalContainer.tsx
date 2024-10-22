@@ -5,7 +5,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface Props {
+interface InformationDeleteModalContainerProps {
   informationId: number;
   closeModal: () => void;
 }
@@ -13,8 +13,8 @@ interface Props {
 const InformationDeleteModalContainer = ({
   informationId,
   closeModal,
-}: Props) => {
-  const [loading, setLoading] = useState<boolean>(false);
+}: InformationDeleteModalContainerProps) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onDeleteClick = async () => {
@@ -35,15 +35,11 @@ const InformationDeleteModalContainer = ({
     router.refresh();
   };
 
-  const onCancelClick = () => {
-    closeModal();
-  };
-
   return (
     <DeleteModal
       loading={loading}
       onDeleteClick={onDeleteClick}
-      onCancelClick={onCancelClick}
+      onCancelClick={closeModal}
     />
   );
 };
