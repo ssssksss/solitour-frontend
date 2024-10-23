@@ -1,8 +1,11 @@
 "use client";
 
 import CommentList from "@/components/informations/detail/comment/CommentList";
-import { InformationCommentResponseDto } from "@/types/InformationDto";
+import { InformationCommentCreateFormSchema } from "@/lib/zod/schema/InformationCommentCreateFormSchema";
+import { InformationCommentListResponseDto } from "@/types/InformationCommentDto";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
 interface CommentListContainerProps {
   informationId: number;
@@ -10,51 +13,43 @@ interface CommentListContainerProps {
 
 const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState<InformationCommentResponseDto[]>([]);
+  const [comments, setComments] = useState<InformationCommentListResponseDto>();
+
+  const methods = useForm<{ comment: string }>({
+    resolver: zodResolver(InformationCommentCreateFormSchema),
+    defaultValues: {
+      comment: "",
+    },
+    mode: "onChange",
+  });
 
   useEffect(() => {
-    // TODO: API 연동 필요
-    // (async function () {
-    //   const response = await fetch(`/api/informations/comment/${informationId}`, {
-    //     method: "GET",
-    //     cache: "no-store",
-    //   });
-    //
-    //   setLoading(false);
-    //
-    //   if (!response.ok) {
-    //     throw new Error(response.statusText);
-    //   }
-    //   setComments(
-    //     await (response.json() as Promise<InformationCommentResponseDto[]>),
-    //   );
-    // })();
-
-    // TODO: 임시 코드입니다.
     (async function () {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      const response = await fetch(
+        `/api/informations/comments/${informationId}`,
+        {
+          method: "GET",
+          cache: "no-store",
+        },
+      );
 
       setLoading(false);
-      setComments([
-        {
-          commentId: 1,
-          userImage: "/user/default-female.svg",
-          nickname: "하몽",
-          createdDate: new Date(),
-          content: "좋아보여요~",
-        },
-        {
-          commentId: 2,
-          userImage: "/user/default-female.svg",
-          nickname: "유저d0f",
-          createdDate: new Date(),
-          content: "추천 메뉴 있을까요?",
-        },
-      ]);
-    })();
-  }, []);
 
-  return <CommentList loading={loading} comments={comments} />;
+      if (!response.ok) {
+        alert("댓글 조회에 실패하였습니다.");
+        throw new Error(response.statusText);
+      }
+
+      const result: InformationCommentListResponseDto = await response.json();
+      setComments(result);
+    })();
+  }, [informationId]);
+
+  return (
+    <FormProvider {...methods}>
+      <CommentList loading={loading} comments={comments} />
+    </FormProvider>
+  );
 };
 
 export default CommentListContainer;

@@ -1,7 +1,7 @@
 "use client";
 
 import CommentItem from "@/components/informations/detail/comment/CommentItem";
-import { InformationCommentResponseDto } from "@/types/InformationDto";
+import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import { useState } from "react";
 
 interface CommentItemContainerProps {

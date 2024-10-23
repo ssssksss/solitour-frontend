@@ -1,6 +1,6 @@
 import ReportIcon from "@/components/common/icons/ReportIcon";
 import CommentDeleteModalContainer from "@/containers/informations/detail/comment/CommentDeleteModalContainer";
-import { InformationCommentResponseDto } from "@/types/InformationDto";
+import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import Image from "next/image";
 
 interface CommentItemProps {
@@ -28,15 +28,17 @@ const CommentItem = ({
         <div className="flex flex-row items-center gap-3">
           <Image
             className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-lightGreen"
-            src={data.userImage}
+            src={data.userProfile}
             alt="userImage"
             width={54}
             height={54}
           />
           <div className="flex flex-col gap-1">
-            <p className="text-xs font-semibold text-black">{data.nickname}</p>
+            <p className="text-xs font-semibold text-black">
+              {data.userNickname}
+            </p>
             <p className="text-xs text-gray1">
-              {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}
+              {`${new Date(data.updatedAt).toLocaleDateString("ko-KR")}`}
             </p>
           </div>
         </div>
