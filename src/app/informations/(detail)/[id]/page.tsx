@@ -2,7 +2,6 @@ import Breadcrumbs from "@/components/common/Breadcrumb";
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";
 import CommentListContainer from "@/containers/informations/detail/comment/CommentListContainer";
-import CommentPaginationContainer from "@/containers/informations/detail/comment/CommentPaginationContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
@@ -64,7 +63,6 @@ export default async function page({ params: { id } }: Props) {
       />
       <InformationViewer informationId={informationId} data={data} />
       <CommentListContainer informationId={informationId} />
-      <CommentPaginationContainer />
       <RecommendationList data={data} />
     </div>
   );
