@@ -1,3 +1,7 @@
+import {
+  CreateInformationCommentRequestDto,
+  UpdateInformationCommentRequestDto,
+} from "@/types/InformationCommentDto";
 import { NextRequest } from "next/server";
 
 /**
@@ -36,7 +40,7 @@ export async function POST(
   { params }: { params: { id: number } },
 ) {
   const cookie = request.cookies.get("access_token");
-  const body = await request.json();
+  const body: CreateInformationCommentRequestDto = await request.json();
   return await fetch(
     `${process.env.BACKEND_URL}/api/informations/comments/${params.id}`,
     {
@@ -61,6 +65,19 @@ export async function PUT(
   { params }: { params: { id: number } },
 ) {
   const cookie = request.cookies.get("access_token");
+  const body: UpdateInformationCommentRequestDto = await request.json();
+  return await fetch(
+    `${process.env.BACKEND_URL}/api/informations/comments/${params.id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    },
+  );
 }
 
 /**

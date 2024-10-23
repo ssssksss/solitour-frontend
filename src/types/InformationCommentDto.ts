@@ -6,6 +6,13 @@ export interface CreateInformationCommentRequestDto {
 }
 
 /**
+ * @description 정보 댓글 수정 요청 DTO
+ */
+export interface UpdateInformationCommentRequestDto {
+  comment: string;
+}
+
+/**
  * @description 정보 댓글 조회 DTO
  */
 export interface InformationCommentResponseDto {
