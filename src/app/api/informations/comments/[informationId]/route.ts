@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 /**
  * @method GET
- * @url /api/informations/comments/:informationId
+ * @url /api/informations/comments/:informationId?page=0
  * @description 댓글 목록 조회
  */
 export async function GET(
@@ -10,8 +10,11 @@ export async function GET(
   { params }: { params: { informationId: string } },
 ) {
   const cookie = request.cookies.get("access_token");
+  const searchParams = request.nextUrl.searchParams;
+  const page = searchParams.get("page") ?? "0";
+
   return await fetch(
-    `${process.env.BACKEND_URL}/api/informations/comments/${params.informationId}`,
+    `${process.env.BACKEND_URL}/api/informations/comments/${params.informationId}?page=${page}`,
     {
       method: "GET",
       headers: {

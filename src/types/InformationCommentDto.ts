@@ -1,10 +1,13 @@
 /**
- * @description 댓글 등록 요청 DTO
+ * @description 정보 댓글 등록 요청 DTO
  */
 export interface CreateInformationCommentRequestDto {
   comment: string;
 }
 
+/**
+ * @description 정보 댓글 조회 DTO
+ */
 export interface InformationCommentResponseDto {
   commentId: number;
   userId: number;

@@ -1,24 +1,41 @@
+import HashSpinner from "@/components/common/HashSpinner";
 import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
 import CommentItemContainer from "@/containers/informations/detail/comment/CommentItemContainer";
 import { InformationCommentListResponseDto } from "@/types/InformationCommentDto";
 import { useFormContext } from "react-hook-form";
+import CommentPagination from "./CommentPagination";
 
 interface CommentListProps {
-  loading: boolean;
-  comments?: InformationCommentListResponseDto;
+  isFetching: boolean;
+  submissionLoading: boolean;
+  commentList?: InformationCommentListResponseDto;
+  page: number;
+  setPage: (newPage: number) => void;
+  onSubmit: () => Promise<void>;
 }
 
-const CommentList = ({ loading, comments }: CommentListProps) => {
+const CommentList = ({
+  isFetching,
+  submissionLoading,
+  commentList,
+  page,
+  setPage,
+  onSubmit,
+}: CommentListProps) => {
   const formContext = useFormContext();
 
   return (
     <div className="mt-20 flex w-full flex-col border-t border-t-gray1">
-      <h2 className="mt-[2.125rem] text-2xl font-bold">
-        댓글 <span className="text-main">{comments?.content.length ?? 0}</span>
+      <HashSpinner loading={submissionLoading} />
+      <h2 className="mt-[2.125rem] flex flex-row gap-2 text-2xl font-bold">
+        댓글
+        <span className="text-main">
+          {commentList?.page.totalElements ?? 0}
+        </span>
       </h2>
       <form
         className="mt-6 flex flex-row items-center gap-6"
-        action={() => alert("구현 예정입니다.")}
+        action={() => onSubmit()}
       >
         <div className="relative w-full">
           <input
@@ -30,7 +47,11 @@ const CommentList = ({ loading, comments }: CommentListProps) => {
             autoComplete="off"
             onChange={(e) => {
               formContext.setValue("comment", e.target.value);
-              formContext.trigger("comment");
+              if (formContext.formState.errors.comment) {
+                formContext.trigger("comment");
+              } else {
+                formContext.watch("comment");
+              }
             }}
           />
           {formContext.formState.errors.comment && (
@@ -47,18 +68,25 @@ const CommentList = ({ loading, comments }: CommentListProps) => {
         </button>
       </form>
       <div className="mt-9 flex flex-col gap-4">
-        {loading ? (
-          Array.from({ length: 2 }, (_, index) => index).map((value) => (
+        {isFetching ? (
+          Array.from({ length: 5 }, (_, index) => index).map((value) => (
             <CommentItemSkeleton key={value} />
           ))
-        ) : (comments?.content.length ?? 0) === 0 ? (
+        ) : (commentList?.content.length ?? 0) === 0 ? (
           <p className="flex h-[6.0625rem] w-full items-center justify-center text-sm text-gray1">
             아직 댓글이 없어요.
           </p>
         ) : (
-          comments?.content.map((comment) => (
-            <CommentItemContainer key={comment.commentId} data={comment} />
-          ))
+          <div className="flex flex-col gap-4">
+            {commentList?.content.map((comment) => (
+              <CommentItemContainer key={comment.commentId} data={comment} />
+            ))}
+            <CommentPagination
+              currentPage={page}
+              totalPages={commentList!.page.totalPages}
+              setPage={setPage}
+            />
+          </div>
         )}
       </div>
     </div>
