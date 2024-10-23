@@ -8,12 +8,18 @@ import {
 } from "@/types/InformationCommentDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface CommentListContainerProps {
   informationId: number;
 }
+
+export const CommentContext = createContext({
+  page: 0,
+  setPage: (_newPage: number) => {},
+  getCommentList: async () => {},
+});
 
 const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
   const [isFetching, setIsFetching] = useState(true);
@@ -95,14 +101,22 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
 
   return (
     <FormProvider {...methods}>
-      <CommentList
-        isFetching={isFetching}
-        submissionLoading={submissionLoading}
-        commentList={commentList}
-        page={page}
-        setPage={(newPage: number) => setPage(newPage)}
-        onSubmit={onSubmit}
-      />
+      <CommentContext.Provider
+        value={{
+          page,
+          setPage: (newPage: number) => setPage(newPage),
+          getCommentList,
+        }}
+      >
+        <CommentList
+          isFetching={isFetching}
+          submissionLoading={submissionLoading}
+          commentList={commentList}
+          page={page}
+          setPage={(newPage: number) => setPage(newPage)}
+          onSubmit={onSubmit}
+        />
+      </CommentContext.Provider>
     </FormProvider>
   );
 };

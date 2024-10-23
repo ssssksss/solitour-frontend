@@ -2,8 +2,8 @@
 
 import CommentDeleteModal from "@/components/informations/detail/comment/CommentDeleteModal";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CommentContext } from "./CommentListContainer";
 
 interface CommentDeleteModalContainerProps {
   commentId: number;
@@ -15,6 +15,7 @@ const CommentDeleteModalContainer = ({
   closeModal,
 }: CommentDeleteModalContainerProps) => {
   const [loading, setLoading] = useState(false);
+  const { page, setPage, getCommentList } = useContext(CommentContext);
 
   const onDeleteClick = async () => {
     setLoading(true);
@@ -24,11 +25,16 @@ const CommentDeleteModalContainer = ({
       { method: "DELETE", cache: "no-store" },
     );
 
-    setLoading(false);
-
     if (!response.ok) {
       alert("댓글 삭제에 실패하였습니다.");
+      setLoading(false);
       throw new Error(response.statusText);
+    }
+
+    if (page !== 1) {
+      setPage(1);
+    } else {
+      getCommentList();
     }
   };
 
