@@ -44,7 +44,7 @@ const CommentItem = ({
         </div>
         <button
           className="stroke-gray1 hover:stroke-main"
-          onClick={() => openModal()}
+          onClick={() => alert("구현 예정")}
         >
           <ReportIcon className="mb-[0.5625rem] cursor-pointer stroke-inherit" />
         </button>
@@ -56,7 +56,9 @@ const CommentItem = ({
         <div className="h-8 w-full">
           <div className="flex flex-row items-center justify-end gap-4 text-sm text-gray1">
             <button className="hover:text-main">수정</button>
-            <button className="hover:text-main">삭제</button>
+            <button className="hover:text-main" onClick={() => openModal()}>
+              삭제
+            </button>
           </div>
         </div>
       </div>

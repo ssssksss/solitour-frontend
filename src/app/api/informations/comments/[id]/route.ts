@@ -7,14 +7,14 @@ import { NextRequest } from "next/server";
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { informationId: string } },
+  { params }: { params: { id: string } },
 ) {
   const cookie = request.cookies.get("access_token");
   const searchParams = request.nextUrl.searchParams;
   const page = searchParams.get("page") ?? "0";
 
   return await fetch(
-    `${process.env.BACKEND_URL}/api/informations/comments/${params.informationId}?page=${page}`,
+    `${process.env.BACKEND_URL}/api/informations/comments/${params.id}?page=${page}`,
     {
       method: "GET",
       headers: {
@@ -33,12 +33,12 @@ export async function GET(
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: { informationId: number } },
+  { params }: { params: { id: number } },
 ) {
   const cookie = request.cookies.get("access_token");
   const body = await request.json();
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/comments/${params.informationId}`,
+  return await fetch(
+    `${process.env.BACKEND_URL}/api/informations/comments/${params.id}`,
     {
       method: "POST",
       headers: {
@@ -49,30 +49,38 @@ export async function POST(
       cache: "no-store",
     },
   );
-
-  return response;
 }
 
-// /**
-//  * @method PUT
-//  * @url /api/informations/comments/:informationId
-//  * @description 댓글 수정
-//  */
-// export async function PUT(
-//   request: NextRequest,
-//   { params }: { params: { informationId: number } },
-// ) {
-//   const cookie = request.cookies.get("access_token");
-// }
+/**
+ * @method PUT
+ * @url /api/informations/comments/:informationId
+ * @description 댓글 수정
+ */
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: number } },
+) {
+  const cookie = request.cookies.get("access_token");
+}
 
-// /**
-//  * @method DELETE
-//  * @url /api/informations/comments/:informationId
-//  * @description 댓글 삭제
-//  */
-// export async function DELETE(
-//   request: NextRequest,
-//   { params }: { params: { informationId: number } },
-// ) {
-//   const cookie = request.cookies.get("access_token");
-// }
+/**
+ * @method DELETE
+ * @url /api/informations/comments/:informationCommentId
+ * @description 댓글 삭제
+ */
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: number } },
+) {
+  const cookie = request.cookies.get("access_token");
+  return await fetch(
+    `${process.env.BACKEND_URL}/api/informations/comments/${params.id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Cookie: `${cookie?.name}=${cookie?.value}`,
+      },
+      cache: "no-store",
+    },
+  );
+}

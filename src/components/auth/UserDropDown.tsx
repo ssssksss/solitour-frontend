@@ -74,7 +74,7 @@ const UserDropDown = () => {
         >
           <div className="relative flex h-[12rem] w-full items-center justify-center p-4">
             <Image
-              className="rounded-full"
+              className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-lightGreen"
               src={authStore.userImage.address}
               alt={"유저 이미지"}
               width={140}
