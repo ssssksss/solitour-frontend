@@ -68,28 +68,24 @@ const UserDropDown = () => {
         <section
           ref={ref1}
           onClick={(e) => e.preventDefault()}
-          className={
-            "outline-primary-20 fixed right-0 top-[4rem] flex h-auto w-[20rem] cursor-default flex-col gap-y-4 rounded-2xl bg-white p-4 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray2"
-          }
+          className="outline-primary-20 fixed right-0 top-[4rem] flex h-auto w-[20rem] cursor-default flex-col gap-y-4 rounded-2xl bg-white p-4 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray2"
         >
           <div className="relative flex h-[12rem] w-full items-center justify-center p-4">
             <Image
               className="rounded-full border-[0.03125rem] border-[#B8EDD9] bg-lightGreen"
               src={authStore.userImage.address}
-              alt={"유저 이미지"}
+              alt="유저 이미지"
               width={140}
               height={140}
             />
           </div>
           <Link
-            href={"/mypage?mainCategory=정보&category=owner"}
-            className={
-              "outline-primary-20 flex items-center justify-center gap-x-2 rounded-[1rem] bg-white px-8 py-2 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray3"
-            }
+            href="/mypage?mainCategory=정보&category=owner"
+            className="outline-primary-20 flex items-center justify-center gap-x-2 rounded-[1rem] bg-white px-8 py-2 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray3"
             onClick={() => modalState.closeModal()}
             prefetch={true}
           >
-            <div className={"relative h-[1.25rem] w-[1.25rem]"}>
+            <div className="relative h-[1.25rem] w-[1.25rem]">
               <Image
                 className="aspect-square"
                 src="/home/mypage-icon.svg"

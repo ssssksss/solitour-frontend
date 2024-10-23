@@ -50,7 +50,7 @@ const CommentItem = ({
         </button>
       </div>
       <div>
-        <p className="h-[4.375rem] break-words pl-[4.125rem] text-[0.9375rem] text-black">
+        <p className="min-h-[4.375rem] break-words pl-[4.125rem] text-[0.9375rem] text-black">
           {data.content}
         </p>
         <div className="h-8 w-full">
