@@ -6,6 +6,7 @@ import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { FormEvent, useContext, useState } from "react";
 import { CommentContext } from "./CommentListContainer";
+import useAuthStore from "@/store/authStore";
 
 interface CommentItemContainerProps {
   data: InformationCommentResponseDto;
@@ -16,6 +17,7 @@ const CommentItemContainer = ({ data }: CommentItemContainerProps) => {
   const [editable, setEditable] = useState(false);
   const [comment, setComment] = useState(data.content);
   const [loading, setLoading] = useState(false);
+  const { id } = useAuthStore();
   const { getCommentList } = useContext(CommentContext);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -60,6 +62,7 @@ const CommentItemContainer = ({ data }: CommentItemContainerProps) => {
       editable={editable}
       comment={comment}
       loading={loading}
+      userId={id}
       openModal={() => setModalVisible(true)}
       closeModal={() => setModalVisible(false)}
       setEditable={setEditable}

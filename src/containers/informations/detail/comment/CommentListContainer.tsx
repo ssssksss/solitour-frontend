@@ -2,13 +2,15 @@
 
 import CommentList from "@/components/informations/detail/comment/CommentList";
 import { InformationCommentCreateFormSchema } from "@/lib/zod/schema/InformationCommentCreateFormSchema";
+import useAuthStore from "@/store/authStore";
 import {
   CreateInformationCommentRequestDto,
   InformationCommentListResponseDto,
 } from "@/types/InformationCommentDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createContext, FormEvent, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface CommentListContainerProps {
@@ -27,6 +29,8 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
   const [commentList, setCommentList] =
     useState<InformationCommentListResponseDto>();
   const [page, setPage] = useState(1);
+  const { id } = useAuthStore();
+  const router = useRouter();
 
   const methods = useForm<{ comment: string }>({
     resolver: zodResolver(InformationCommentCreateFormSchema),
@@ -58,7 +62,9 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
     setCommentList(result);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     await methods.trigger();
     if (!methods.formState.isValid) {
       methods.trigger();
@@ -113,6 +119,8 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
           submissionLoading={submissionLoading}
           commentList={commentList}
           page={page}
+          userId={id}
+          router={router}
           setPage={(newPage: number) => setPage(newPage)}
           onSubmit={onSubmit}
         />

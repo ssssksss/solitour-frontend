@@ -11,6 +11,7 @@ interface CommentItemProps {
   editable: boolean;
   comment: string;
   loading: boolean;
+  userId: number;
   openModal: () => void;
   closeModal: () => void;
   setEditable: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +25,7 @@ const CommentItem = ({
   editable,
   comment,
   loading,
+  userId,
   openModal,
   closeModal,
   setEditable,
@@ -58,8 +60,8 @@ const CommentItem = ({
           </div>
         </div>
         <button
-          className="stroke-gray1 hover:stroke-main"
-          onClick={() => alert("구현 예정")}
+          className="invisible stroke-gray1 hover:stroke-main"
+          onClick={() => alert("TODO: 구현 예정")}
         >
           <ReportIcon className="mb-[0.5625rem] cursor-pointer stroke-inherit" />
         </button>
@@ -100,20 +102,22 @@ const CommentItem = ({
           <p className="min-h-[4.375rem] break-words pl-[4.125rem] text-[0.9375rem] text-black">
             {data.content}
           </p>
-          <div className="flex h-8 w-full flex-row items-start justify-end gap-4 text-sm text-gray1">
-            <button
-              className="hover:text-main"
-              onClick={() => {
-                setComment(data.content);
-                setEditable(true);
-              }}
-            >
-              수정
-            </button>
-            <button className="hover:text-main" onClick={() => openModal()}>
-              삭제
-            </button>
-          </div>
+          {userId === data.userId && (
+            <div className="flex h-8 w-full flex-row items-start justify-end gap-4 text-sm text-gray1">
+              <button
+                className="hover:text-main"
+                onClick={() => {
+                  setComment(data.content);
+                  setEditable(true);
+                }}
+              >
+                수정
+              </button>
+              <button className="hover:text-main" onClick={() => openModal()}>
+                삭제
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

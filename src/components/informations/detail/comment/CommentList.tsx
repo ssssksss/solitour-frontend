@@ -4,14 +4,18 @@ import CommentItemContainer from "@/containers/informations/detail/comment/Comme
 import { InformationCommentListResponseDto } from "@/types/InformationCommentDto";
 import { useFormContext } from "react-hook-form";
 import CommentPagination from "./CommentPagination";
+import { FormEvent } from "react";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface CommentListProps {
   isFetching: boolean;
   submissionLoading: boolean;
   commentList?: InformationCommentListResponseDto;
   page: number;
+  userId: number;
+  router: AppRouterInstance;
   setPage: (newPage: number) => void;
-  onSubmit: () => Promise<void>;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
 const CommentList = ({
@@ -19,6 +23,8 @@ const CommentList = ({
   submissionLoading,
   commentList,
   page,
+  userId,
+  router,
   setPage,
   onSubmit,
 }: CommentListProps) => {
@@ -35,7 +41,15 @@ const CommentList = ({
       </h2>
       <form
         className="mt-6 flex flex-row items-center gap-6"
-        action={() => onSubmit()}
+        onSubmit={onSubmit}
+        onClick={(e) => {
+          if (userId === -1) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert("로그인 후 이용하실 수 있습니다.");
+            router.push("/auth/signin");
+          }
+        }}
       >
         <div className="relative w-full">
           <input
