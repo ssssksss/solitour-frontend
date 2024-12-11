@@ -31,8 +31,6 @@ const HeaderContainer = () => {
     setVisible(false);
   };
 
-
-
   useEffect(() => {
     // 모달창이 열린 상태로 새로고침을 하게되는 경우 히스토리 스택을 제거하기 위해서 뒤로가기 실행
     if (localStorage.getItem("isModal")) {
@@ -55,13 +53,12 @@ const HeaderContainer = () => {
           // 유저 상태가 '대기'인 경우는 쿠키를 제거하기 위해 로그아웃 처리
           if (data.userStatus == "대기") {
             await fetchWithAuth("/api/auth/logout", {
-              method: "POST"
+              method: "POST",
             });
             authStore.setUser({
               id: -1,
             });
-          }
-          else {
+          } else {
             authStore.setUser(data);
           }
           return;

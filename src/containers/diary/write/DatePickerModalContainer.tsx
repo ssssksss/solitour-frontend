@@ -4,15 +4,18 @@ import DatePickerModal from "@/components/diary/write/DatePickerModal";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-interface Props {
+interface DatePickerModalContainerProps {
   closeModal: () => void;
 }
 
-const DatePickerModalContainer = ({ closeModal }: Props) => {
-  const [date, setDate] = useState(new Date());
+const DatePickerModalContainer = ({
+  closeModal,
+}: DatePickerModalContainerProps) => {
+  const [date, setDate] = useState(new Date(new Date().toDateString()));
   const formContext = useFormContext();
 
   const onChangeDateRange = () => {
+    alert(date);
     formContext.setValue("startDate", date);
     formContext.setValue("endDate", date);
     formContext.trigger("startDate");
