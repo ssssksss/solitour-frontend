@@ -1,8 +1,16 @@
-<h1>Solitour - 새로운 나를 찾는 여행 (Front-end)</h1>
+<h1>Solitour - 새로운 나를 찾는 여행</h1>
 
 ![image](https://github.com/user-attachments/assets/e65f5376-ecf0-4b69-aab0-df5920130856)
 
 > 배포 링크 <br/> **https://www.solitourist.com**
+
+<br/>
+
+<div align="center">
+
+<!-- [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTripInfoWeb%2Fsolitour-frontend&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) -->
+
+</div>
 
 <br/>
 <br/>
@@ -177,6 +185,8 @@
 <br/>
 
 ## 🏛️️ 아키텍처
+
+![아키텍처](https://github.com/user-attachments/assets/68f28ee1-0651-463e-a26b-5238661a12a5)
 
 <br/>
 <br/>
