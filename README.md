@@ -1,6 +1,6 @@
 <h1>Solitour - 새로운 나를 찾는 여행</h1>
 
-![image](https://github.com/user-attachments/assets/e65f5376-ecf0-4b69-aab0-df5920130856)
+![394534337-e65f5376-ecf0-4b69-aab0-df5920130856](https://github.com/user-attachments/assets/806b95bd-ab25-462c-adde-e292e36a4754)
 
 > 배포 링크 <br/> **https://www.solitourist.com**
 
@@ -58,7 +58,7 @@
 
 ### 메인 페이지
 
-![홈](https://github.com/user-attachments/assets/e0a0440a-50bc-4d8b-947c-b59c37d768bf)
+![홈](https://github.com/user-attachments/assets/b22587af-d65b-4414-96a7-bc681c68d8b4)
 
 - 메인 페이지에서는 최근 3개월 내에 사람들이 많이 찾아본 여행 정보를 확인할 수 있습니다.
 - 또한 최근 모집 중인 모임에 대한 정보를 확인할 수 있습니다.
@@ -67,7 +67,7 @@
 
 ### 정보 목록 조회
 
-![정보 목록](https://github.com/user-attachments/assets/fb301714-e96b-4fbd-8d3e-3448d5a23386)
+![정보목록](https://github.com/user-attachments/assets/2f19b727-ac94-45bf-ba2a-b9f73f9bdc91)
 
 - 최근 3개월 내의 가장 인기 있는 여행 정보 글 Top 5를 확인할 수 있습니다.
 - 정보 목록 페이지에서는 작성된 여행 정보 목록을 확인할 수 있습니다.
@@ -81,7 +81,7 @@
 
 ### 정보 생성
 
-![정보생성](https://github.com/user-attachments/assets/ac722e12-4a78-494a-834f-e17120a9648f)
+![정보생성](https://github.com/user-attachments/assets/0f0aed95-a886-40c1-8774-fcee5722f9b7)
 
 - 제목, 장소, 카테고리, 이미지, 내용, 해시태그, 정보 Tip을 등록할 수 있습니다.
 - 이미지는 최대 12개까지 등록할 수 있습니다.
@@ -90,7 +90,7 @@
 
 ### 정보 상세 조회
 
-![정보상세](https://github.com/user-attachments/assets/459ac4b2-ae8b-4ad6-958c-51c9c84673d5)
+![정보상세](https://github.com/user-attachments/assets/553b23ad-f79d-4e9c-a958-2b280cee33b5)
 
 - 다른 사용자가 작성한 여행 상세 정보를 조회할 수 있습니다.
 - 좋아요수, 조회수를 확인할 수 있습니다.
@@ -101,7 +101,7 @@
 
 ### 정보 수정
 
-![정보수정](https://github.com/user-attachments/assets/f7db717a-468c-4693-abc9-559e63f7fd2c)
+![정보수정](https://github.com/user-attachments/assets/65edb0b8-f783-4149-979e-4f22aaf8cb3f)
 
 - 자신이 작성한 정보 글을 수정할 수 있습니다.
 
@@ -109,7 +109,7 @@
 
 ### 모임 목록 조회
 
-![모임목록](https://github.com/user-attachments/assets/f89c666c-2e9f-4398-b9a9-4dc34764c6a0)
+![모임목록](https://github.com/user-attachments/assets/8dfa1152-cd9c-4bb2-a8f5-6c9ec140fcc8)
 
 - 최근 3개월 내의 가장 인기 있는 모임 모집 글 Top 5를 확인할 수 있습니다.
 - 모임 목록 페이지에서는 현재 모집 중인 모임 목록을 확인할 수 있습니다.
@@ -123,7 +123,7 @@
 
 ### 모임 상세 조회
 
-![모임상세](https://github.com/user-attachments/assets/e722c2f2-f3f8-431d-a991-a0355822dddd)
+![모임상세](https://github.com/user-attachments/assets/5a034d53-c0ed-4167-9509-4ccaae242059)
 
 - 모임을 생성한 사용자는 현재 모임 참가 신청자 목록을 확인할 수 있습니다.
 - 모임 주최자는 모임 신청에 대해 승인 또는 거절을 할 수 있습니다.
@@ -134,7 +134,7 @@
 
 ### 모임 수정
 
-![모임수정](https://github.com/user-attachments/assets/0a2a5814-1d50-4e5e-a53b-b25f185751f8)
+![모임수정](https://github.com/user-attachments/assets/e4945527-630b-4e87-b8ca-1bb8a3562b73)
 
 - 자신이 작성한 모임 글을 수정할 수 있습니다.
 
@@ -142,7 +142,7 @@
 
 ### 모임 삭제
 
-![모임삭제](https://github.com/user-attachments/assets/949caa51-6ff9-4e9e-91bc-3384aa869c8b)
+![모임삭제](https://github.com/user-attachments/assets/63770824-00c1-48bf-98b4-bd5ebc9017d9)
 
 - 자신이 작성한 모임 글을 삭제할 수 있습니다.
 
@@ -150,7 +150,7 @@
 
 ### 모임 참가
 
-![모임참가](https://github.com/user-attachments/assets/3b828ef2-6681-41b6-ab23-80c3c8bde21d)
+![모임참가](https://github.com/user-attachments/assets/395ea2a7-07f6-4efb-8945-f74561a4dc47)
 
 - 사용자는 다른 사용자가 생성한 모임에 대해 참가 신청을 하거나 취소할 수 있습니다.
 
@@ -158,7 +158,7 @@
 
 ### 로그인
 
-![로그인](https://github.com/user-attachments/assets/5075bc9d-0a31-4029-bb0c-5252e5ad40bb)
+![로그인](https://github.com/user-attachments/assets/093e6cc5-eccb-4ac3-b2fb-e711447f081e)
 
 - 사용자가 서비스를 쉽게 이용할 수 있도록 Kakao OAuth 로그인을 지원합니다.
 
@@ -166,7 +166,7 @@
 
 ### 마이페이지
 
-![마이페이지](https://github.com/user-attachments/assets/0a6febed-3694-4a38-a2bd-9c30bc3518ce)
+![마이페이지](https://github.com/user-attachments/assets/5e377b07-36e6-47a5-b2a1-782a5da4815a)
 
 - 마이페이지에서 자신이 작성한 정보 또는 모임 글을 확인할 수 있습니다.
 - 북마크한 정보 또는 모임 글을 확인할 수 있습니다.
@@ -177,7 +177,7 @@
 
 ### 고객지원
 
-![고객지원](https://github.com/user-attachments/assets/dad337af-e5a8-4bb3-8de4-e4c5a65f792f)
+![고객지원](https://github.com/user-attachments/assets/f05d6538-4296-4ba2-ac44-d81f638c3f43)
 
 - 서비스 소개, 공지사항, FAQ, 이용약관 정보를 제공합니다.
 
@@ -186,7 +186,7 @@
 
 ## 🏛️️ 아키텍처
 
-![아키텍처](https://github.com/user-attachments/assets/68f28ee1-0651-463e-a26b-5238661a12a5)
+![architecture](https://github.com/user-attachments/assets/b543874f-f861-4ad5-9c9e-32a58a2648f9)
 
 <br/>
 <br/>
