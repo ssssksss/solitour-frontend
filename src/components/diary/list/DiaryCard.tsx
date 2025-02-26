@@ -56,7 +56,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             transition={{ delay: 0.4 }}
           >
             <Image
-              src={`/common/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
+              src={`/icons/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}

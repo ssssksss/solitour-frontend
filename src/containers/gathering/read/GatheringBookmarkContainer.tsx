@@ -48,7 +48,7 @@ const GatheringBookMarkContainer = (props: IGatheringBookMarkContainer) => {
       disabled={loading}
     >
       <Image
-        src={`/common/bookmark-${isBookMark ? "active-" : ""}icon.svg`}
+        src={`/icons/bookmark-${isBookMark ? "active-" : ""}icon.svg`}
         alt="bookmark-icon"
         fill={true}
         style={{ objectFit: "contain" }}

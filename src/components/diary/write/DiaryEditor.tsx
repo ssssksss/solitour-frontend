@@ -151,7 +151,7 @@ const DiaryEditor = ({
             >
               <div className="relative h-10 w-8">
                 <Image
-                  src={`/common/mood-icon${index + 1}.svg`}
+                  src={`/icons/mood-icon${index + 1}.svg`}
                   alt="mood-icon"
                   fill={true}
                   style={{ objectFit: "contain" }}
