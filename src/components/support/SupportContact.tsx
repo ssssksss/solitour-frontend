@@ -22,7 +22,7 @@ const SupportContact = (props: ISupportContact) => {
           >
             <div className="relative flex aspect-square w-full items-center justify-center rounded-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
               <Image
-                src={"/common/solitour-logo.svg"}
+                src="/logos/solitour-logo.svg"
                 alt={member.name}
                 fill={true}
               />

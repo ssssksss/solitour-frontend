@@ -20,8 +20,8 @@ const SupportAboutInformation = () => {
             <div className="relative h-[7.8125rem] w-[7.8125rem]">
               <Image
                 className="object-contain"
-                src="/home/trip-search-icon.svg"
-                alt="trip-search-icon"
+                src="/icons/information-icon.svg"
+                alt="information-icon"
                 fill={true}
               />
             </div>
@@ -38,7 +38,7 @@ const SupportAboutInformation = () => {
             <div className="relative h-6 w-6">
               <Image
                 className="object-contain"
-                src="/support/speech-bubble.png"
+                src="/images/speech-bubble.webp"
                 alt="speech-bubble"
                 fill={true}
               />

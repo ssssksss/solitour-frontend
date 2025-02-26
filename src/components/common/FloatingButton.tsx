@@ -22,7 +22,7 @@ const FloatingButton = forwardRef<HTMLDivElement, Props>(
         {visible && (
           <div ref={ref} className="flex flex-col items-center gap-3">
             <div
-              className={`${animationFlag ? "animate-fadeOut" : "animate-fadeIn"} bg-lightGreen flex flex-col items-center gap-6 rounded-full px-4 py-[1.875rem]`}
+              className={`${animationFlag ? "animate-fadeOut" : "animate-fadeIn"} flex flex-col items-center gap-6 rounded-full bg-lightGreen px-4 py-[1.875rem]`}
             >
               <Link
                 className="flex flex-col items-center text-sm hover:text-main"
@@ -64,7 +64,7 @@ const FloatingButton = forwardRef<HTMLDivElement, Props>(
           >
             <Image
               className="-ml-1"
-              src="/common/pencil-icon.png"
+              src="/icons/pencil-icon.svg"
               alt="pencil-icon"
               width={24}
               height={24}

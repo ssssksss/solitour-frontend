@@ -91,7 +91,7 @@ const InformationItem = ({
               }}
             >
               <Image
-                src={`/common/bookmark-icon${isBookMark ? "-marked" : ""}.svg`}
+                src={`/common/bookmark-${isBookMark ? "active-" : ""}icon.svg`}
                 alt="bookmark-icon"
                 fill={true}
                 style={{
@@ -124,7 +124,7 @@ const InformationItem = ({
             />
             <div className="flex flex-row items-center gap-1 text-gray2">
               <Image
-                src="/common/eyes-icon.svg"
+                src="/icons/eyes-icon.svg"
                 alt="eyes-icon.svg"
                 width={15}
                 height={15}

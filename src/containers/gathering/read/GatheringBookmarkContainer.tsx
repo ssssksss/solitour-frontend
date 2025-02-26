@@ -47,25 +47,12 @@ const GatheringBookMarkContainer = (props: IGatheringBookMarkContainer) => {
       onClick={(e) => userId > 0 && handleClick(e)}
       disabled={loading}
     >
-      {isBookMark ? (
-        <Image
-          src="/gathering/bookmark-active-icon.svg"
-          alt="bookmark-icon"
-          fill={true}
-          style={{
-            objectFit: "contain",
-          }}
-        />
-      ) : (
-        <Image
-          src="/gathering/bookmark-empty-icon.svg"
-          alt="bookmark-icon"
-          fill={true}
-          style={{
-            objectFit: "contain",
-          }}
-        />
-      )}
+      <Image
+        src={`/common/bookmark-${isBookMark ? "active-" : ""}icon.svg`}
+        alt="bookmark-icon"
+        fill={true}
+        style={{ objectFit: "contain" }}
+      />
     </button>
   );
 };

@@ -23,7 +23,7 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
       <div className={"group flex flex-col items-center"}>
         <label
           className={
-            "bg-lightGreen relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
+            "relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-lightGreen outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
           }
           htmlFor={"imageUpload"}
           onDragEnter={props.dragAndDrop.onDragEnter}
@@ -43,9 +43,9 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
           >
             <div className="relative h-[1.25rem] w-[1.25rem]">
               <Image
-                src="/mypage/camera-icon.svg"
-                alt="camera-icon-image"
-                fill
+                src="/icons/camera-icon.svg"
+                alt="camera-icon"
+                fill={true}
               />
             </div>
           </div>
@@ -56,8 +56,8 @@ const MyPageUserImage = (props: IMyPageUserImage) => {
             onClick={() => props.deleteImage()}
           >
             <Image
-              src="/gathering/close-icon.svg"
-              alt="close-icon-image"
+              src="/icons/close-icon.svg"
+              alt="close-icon"
               width={8}
               height={8}
             />

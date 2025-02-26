@@ -88,8 +88,8 @@ const UserDropDown = () => {
             <div className="relative h-[1.25rem] w-[1.25rem]">
               <Image
                 className="aspect-square"
-                src="/home/mypage-icon.svg"
-                alt="signin-icon"
+                src="/icons/mypage-empty-icon.svg"
+                alt="mypage-empty-icon"
                 fill
               />
             </div>

@@ -70,7 +70,7 @@ function calculateDateDifference(startDate: Date, endDate: Date): number {
   return differenceInDays;
 }
 
-const GatheringFilterModal = (props: IModalComponent ) => {
+const GatheringFilterModal = (props: IModalComponent) => {
   const searchParams = useSearchParams();
   const [location, setLocation] = useState(searchParams.get("location") || 0);
   const [sex, setSex] = useState(searchParams.get("allowedSex") || "ALL");
@@ -185,9 +185,7 @@ const GatheringFilterModal = (props: IModalComponent ) => {
 
   return (
     <ModalTemplate
-      className={
-        "max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem]"
-      }
+      className={"max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem]"}
     >
       {props.closeButtonComponent}
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}> 조건 선택 </h2>
@@ -354,15 +352,15 @@ const GatheringFilterModal = (props: IModalComponent ) => {
             >
               {isFilterSchedule ? (
                 <Image
-                  src="/common/check-active-icon.svg"
-                  alt="location-icon"
+                  src="/icons/check-active-icon.svg"
+                  alt="check-active-icon"
                   width={20}
                   height={20}
                 />
               ) : (
                 <Image
-                  src="/common/check-empty-icon.svg"
-                  alt="location-icon"
+                  src="/icons/check-empty-icon.svg"
+                  alt="check-empty-icon"
                   width={20}
                   height={20}
                 />

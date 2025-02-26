@@ -75,7 +75,7 @@ const GatheringViewer = ({
                 />
                 <div className="flex items-center gap-1 text-sm text-gray2">
                   <Image
-                    src="/common/eyes-icon.svg"
+                    src="/icons/eyes-icon.svg"
                     alt="eyes-icon"
                     width={16}
                     height={16}
@@ -91,8 +91,8 @@ const GatheringViewer = ({
       <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm sm:grid-cols-[320px_auto] min-[800px]:grid-cols-2">
         <div className="flex gap-x-3">
           <Image
-            src={"/gathering/calendar-icon.svg"}
-            alt={"calendar-icon-image"}
+            src="/icons/gathering-calendar-icon.svg"
+            alt="gathering-calendar-icon"
             width={14}
             height={14}
           />
@@ -110,8 +110,8 @@ const GatheringViewer = ({
         </div>
         <div className="flex gap-x-3">
           <Image
-            src={"/gathering/location-icon.svg"}
-            alt={"location-icon-image"}
+            src="/icons/location-icon.svg"
+            alt="location-icon"
             width={14}
             height={14}
           />
@@ -124,8 +124,8 @@ const GatheringViewer = ({
         </div>
         <div className="flex gap-x-3">
           <Image
-            src="/gathering/people-icon.svg"
-            alt={"people-icon-image"}
+            src="/icons/people-icon.svg"
+            alt="people-icon-image"
             width={14}
             height={14}
           />
@@ -153,8 +153,8 @@ const GatheringViewer = ({
         </div>
         <div className="flex gap-x-3">
           <Image
-            src={"/gathering/clock-icon.svg"}
-            alt={"clock-icon-image"}
+            src="/icons/clock-icon.svg"
+            alt="clock-icon-image"
             width={14}
             height={14}
           />
@@ -164,8 +164,8 @@ const GatheringViewer = ({
       {/* 내용 부분 */}
       <div className={"my-[1rem] flex gap-1 text-gray1"}>
         <Image
-          src={"/gathering/green_pin.svg"}
-          alt={"clock-icon-image"}
+          src="/icons/pin-green-icon.svg"
+          alt="pin-green-icon"
           width={14}
           height={14}
         />

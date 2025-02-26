@@ -36,7 +36,7 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
             <div className="flex justify-center gap-x-[.5rem] max-[360px]:justify-start max-[360px]:pl-[.75rem]">
               <span> YY.MM.DD </span>
               <Image
-                src="/common/calendar-icon.svg"
+                src="/icons/calendar-icon.svg"
                 alt="calendar-icon"
                 width={16}
                 height={16}
@@ -50,9 +50,7 @@ const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
           </span>
         )}
       </div>
-      <Modal
-        modalState={modalState}
-      >
+      <Modal modalState={modalState}>
         <GatheringDeadlineModal />
       </Modal>
     </div>

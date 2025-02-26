@@ -25,15 +25,15 @@ const GatheringLike = ({
       <div className="relative h-4 w-4 text-white">
         {isLike ? (
           <Image
-            src="/common/heart-active-icon.svg"
-            alt="like-icon"
+            src="/icons/heart-active-icon.svg"
+            alt="heart-active-icon"
             fill={true}
             style={{ objectFit: "contain" }}
           />
         ) : (
           <Image
-            src="/common/heart-empty-icon.svg"
-            alt="like-icon"
+            src="/icons/heart-empty-icon.svg"
+            alt="heart-empty-icon"
             fill={true}
             style={{ objectFit: "contain" }}
           />

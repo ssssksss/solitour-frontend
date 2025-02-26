@@ -17,7 +17,7 @@ const SupportAboutBanner = () => {
           transition={{ delay: 1, duration: 1 }}
         >
           <Image
-            src="/support/information.png"
+            src="/images/information.webp"
             alt="information"
             width={68}
             height={61}
@@ -31,7 +31,7 @@ const SupportAboutBanner = () => {
           transition={{ delay: 1.5, duration: 1 }}
         >
           <Image
-            src="/support/gathering.png"
+            src="/images/gathering.webp"
             alt="gathering"
             width={62}
             height={66}
@@ -46,7 +46,7 @@ const SupportAboutBanner = () => {
         >
           <Image
             className="ml-4"
-            src="/support/diary.png"
+            src="/images/diary.webp"
             alt="diary"
             width={62}
             height={60}
@@ -58,7 +58,7 @@ const SupportAboutBanner = () => {
         <div className="absolute h-[17.5rem] w-[17.5rem]">
           <Image
             className="object-contain"
-            src="/support/circle.png"
+            src="/images/circle.webp"
             alt="circle"
             fill={true}
           />
@@ -71,8 +71,8 @@ const SupportAboutBanner = () => {
         >
           <Image
             className="object-contain"
-            src="/common/solitour-logo.svg"
-            alt="solitour_logo"
+            src="/logos/solitour-logo.svg"
+            alt="solitour-logo"
             fill={true}
           />
         </motion.div>

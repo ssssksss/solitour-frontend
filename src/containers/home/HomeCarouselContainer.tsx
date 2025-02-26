@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 const HomeCarouselContainer = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [bannerList, _] = useState([
-    { id: 0, name: "", url: "/home/background1.png" },
-    { id: 0, name: "", url: "/home/background2.png" },
-    { id: 0, name: "", url: "/home/background3.png" },
-    { id: 0, name: "", url: "/home/background4.png" },
+    { id: 0, name: "", url: "/images/carousel-image1.avif" },
+    { id: 0, name: "", url: "/images/carousel-image2.avif" },
+    { id: 0, name: "", url: "/images/carousel-image3.avif" },
+    { id: 0, name: "", url: "/images/carousel-image4.avif" },
   ]);
 
   const onClick = (index: number) => {

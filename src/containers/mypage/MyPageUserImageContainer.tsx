@@ -39,30 +39,30 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
     if (response.ok) {
       const { ...prevState } = authStore;
       if (props.userSex == "male") {
-        setImageUrl("/user/default-male.svg");
+        setImageUrl("/icons/default-male-icon.svg");
         authStore.setUser({
           ...prevState,
           userImage: {
             ...authStore.userImage,
-            address: "/user/default-male.svg",
+            address: "/icons/default-male-icon.svg",
           },
         });
       } else if (props.userSex == "female") {
-        setImageUrl("/user/default-female.svg");
+        setImageUrl("/icons/default-female-icon.svg");
         authStore.setUser({
           ...prevState,
           userImage: {
             ...authStore.userImage,
-            address: "/user/default-female.svg",
+            address: "/icons/default-female-icon.svg",
           },
         });
       } else if (!props.userSex) {
-        setImageUrl("/user/default-user.svg");
+        setImageUrl("/icons/default-user-icon.svg");
         authStore.setUser({
           ...prevState,
           userImage: {
             ...authStore.userImage,
-            address: "/user/default-user.svg",
+            address: "/icons/default-user-icon.svg",
           },
         });
       }

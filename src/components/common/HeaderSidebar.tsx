@@ -27,7 +27,7 @@ const HeaderSidebar = ({
       onClick={closeWithFadeOut}
       className={`${animationFlag ? "animate-sidebarFadeOut" : "animate-sidebarFadeIn"} fixed left-0 top-0 z-50 flex h-[200%] w-full flex-row justify-end bg-black/25`}
     >
-      <nav className="flex h-fit w-[20.375rem] max-h-[calc(100vh-1rem)] flex-col gap-4 rounded-b-lg bg-white overflow-y-scroll p-4 pb-6">
+      <nav className="flex h-fit max-h-[calc(100vh-1rem)] w-[20.375rem] flex-col gap-4 overflow-y-scroll rounded-b-lg bg-white p-4 pb-6">
         <div className="flex h-10 w-full items-center justify-end">
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
@@ -47,16 +47,16 @@ const HeaderSidebar = ({
             {hoverNum === 1 ? (
               <Image
                 className="aspect-square"
-                src="/home/home-icon-hover.svg"
-                alt="home-icon"
+                src="/icons/home-green-icon.svg"
+                alt="home-green-icon"
                 width={22}
                 height={22}
               />
             ) : (
               <Image
                 className="aspect-square"
-                src="/home/home-icon.svg"
-                alt="home-icon"
+                src="/icons/home-empty-icon.svg"
+                alt="home-empty-icon"
                 width={22}
                 height={22}
               />
@@ -74,16 +74,16 @@ const HeaderSidebar = ({
             {hoverNum === 2 ? (
               <Image
                 className="aspect-square"
-                src="/home/information-icon-hover.svg"
-                alt="information-icon"
+                src="/icons/information-green-icon.svg"
+                alt="information-green-icon"
                 width={24}
                 height={24}
               />
             ) : (
               <Image
                 className="aspect-square"
-                src="/home/information-icon.svg"
-                alt="information-icon"
+                src="/icons/information-empty-icon.svg"
+                alt="information-empty-icon"
                 width={24}
                 height={24}
               />
@@ -101,16 +101,16 @@ const HeaderSidebar = ({
             {hoverNum === 3 ? (
               <Image
                 className="aspect-square"
-                src="/home/gathering-icon-hover.svg"
-                alt="gathering-icon"
+                src="/icons/gathering-green-icon.svg"
+                alt="gathering-green-icon"
                 width={24}
                 height={24}
               />
             ) : (
               <Image
                 className="aspect-square"
-                src="/home/gathering-icon.svg"
-                alt="gathering-icon"
+                src="/icons/gathering-empty-icon.svg"
+                alt="gathering-empty-icon"
                 width={24}
                 height={24}
               />
@@ -128,16 +128,16 @@ const HeaderSidebar = ({
             {hoverNum === 4 ? (
               <Image
                 className="aspect-square"
-                src="/home/diary-icon-hover.svg"
-                alt="diary-icon"
+                src="/icons/diary-green-icon.svg"
+                alt="diary-green-icon"
                 width={24}
                 height={24}
               />
             ) : (
               <Image
                 className="aspect-square"
-                src="/home/diary-icon.svg"
-                alt="diary-icon"
+                src="/icons/diary-empty-icon.svg"
+                alt="diary-empty-icon"
                 width={24}
                 height={24}
               />
@@ -155,16 +155,16 @@ const HeaderSidebar = ({
             {hoverNum === 5 ? (
               <Image
                 className="aspect-square"
-                src="/home/support-icon-hover.svg"
-                alt="diary-icon"
+                src="/icons/support-green-icon.svg"
+                alt="support-green-icon"
                 width={24}
                 height={24}
               />
             ) : (
               <Image
                 className="aspect-square"
-                src="/home/support-icon.svg"
-                alt="diary-icon"
+                src="/icons/support-empty-icon.svg"
+                alt="support-empty-icon"
                 width={24}
                 height={24}
               />
@@ -184,16 +184,16 @@ const HeaderSidebar = ({
                 {hoverNum === 6 ? (
                   <Image
                     className="aspect-square"
-                    src="/home/mypage-icon-hover.svg"
-                    alt="signin-icon"
+                    src="/icons/mypage-green-icon.svg"
+                    alt="mypage-green-icon"
                     width={24}
                     height={24}
                   />
                 ) : (
                   <Image
                     className="aspect-square"
-                    src="/home/mypage-icon.svg"
-                    alt="signin-icon"
+                    src="/icons/mypage-empty-icon.svg"
+                    alt="mypage-empty-icon"
                     width={24}
                     height={24}
                   />
@@ -210,16 +210,16 @@ const HeaderSidebar = ({
                 {hoverNum === 7 ? (
                   <Image
                     className="aspect-square"
-                    src="/home/logout-icon-hover.svg"
-                    alt="logout-icon"
+                    src="/icons/logout-green-icon.svg"
+                    alt="logout-green-icon"
                     width={24}
                     height={24}
                   />
                 ) : (
                   <Image
                     className="aspect-square"
-                    src="/home/logout-icon.svg"
-                    alt="logout-icon"
+                    src="/icons/logout-empty-icon.svg"
+                    alt="logout-empty-icon"
                     width={24}
                     height={24}
                   />
@@ -239,16 +239,16 @@ const HeaderSidebar = ({
               {hoverNum === 7 ? (
                 <Image
                   className="aspect-square"
-                  src="/home/signin-icon-hover.svg"
-                  alt="signin-icon"
+                  src="/icons/signin-green-icon.svg"
+                  alt="signin-green-icon"
                   width={24}
                   height={24}
                 />
               ) : (
                 <Image
                   className="aspect-square"
-                  src="/home/signin-icon.svg"
-                  alt="signin-icon"
+                  src="/icons/signin-empty-icon.svg"
+                  alt="signin-empty-icon"
                   width={24}
                   height={24}
                 />

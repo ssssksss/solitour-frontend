@@ -26,7 +26,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className="hover:bg-lightGreen flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 outline-gray3 duration-300 hover:outline-main max-[744px]:min-w-[19.183125rem]"
+      className="flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 outline-gray3 duration-300 hover:bg-lightGreen hover:outline-main max-[744px]:min-w-[19.183125rem]"
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
@@ -52,8 +52,8 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
           <div className="flex flex-row items-center gap-2">
             {/* 모임 기간 */}
             <Image
-              src="/gathering/calendar-icon.svg"
-              alt="calendar-icon"
+              src="/icons/gathering-calendar-icon.svg"
+              alt="gathering-calendar-icon"
               width={14}
               height={14}
             />
@@ -65,7 +65,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
             {/* 모임 장소 */}
             <div className={"flex h-4 min-w-[0.875rem] items-center"}>
               <Image
-                src="/gathering/location-icon.svg"
+                src="/icons/location-icon.svg"
                 alt="location-icon"
                 width={14}
                 height={14}
@@ -83,7 +83,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
                 <div className={"relative h-5 w-[0.875rem]"}>
                   {/* 모임 인원 */}
                   <Image
-                    src="/gathering/people-icon.svg"
+                    src="/icons/people-icon.svg"
                     alt="people-icon"
                     width={14}
                     height={14}
@@ -118,7 +118,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
             >
               {/* 모임 시간 */}
               <Image
-                src="/gathering/clock-icon.svg"
+                src="/icons/clock-icon.svg"
                 alt="clock-icon"
                 width={14}
                 height={14}
@@ -133,8 +133,8 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-1">
             <Image
-              src="/gathering/pin-icon.svg"
-              alt="pin-icon"
+              src="/icons/pin-green-icon.svg"
+              alt="pin-green-icon"
               width={16}
               height={16}
             />
@@ -155,7 +155,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
               />
               <div className="flex flex-row items-center gap-1 text-gray2">
                 <Image
-                  src="/common/eyes-icon.svg"
+                  src="/icons/eyes-icon.svg"
                   alt="eyes-icon"
                   width={15}
                   height={15}

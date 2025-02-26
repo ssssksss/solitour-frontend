@@ -32,7 +32,7 @@ const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
         animate={{ opacity: 1 }}
       >
         <Image
-          src={`/diary/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
+          src={`/common/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}

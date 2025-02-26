@@ -30,7 +30,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
   if (isFlipped) {
     return (
       <div
-        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} hover:bg-lightGreen aspect-[3/4] w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
+        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} aspect-[3/4] w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-lightGreen max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
         onClick={() => {
           if (flag) {
             flip();
@@ -56,7 +56,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
             transition={{ delay: 0.4 }}
           >
             <Image
-              src={`/diary/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
+              src={`/common/mood-icon${FEELING_STATUS[diaryData.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
               style={{ objectFit: "contain" }}
@@ -124,9 +124,9 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         src={
           diaryData.titleImage !== ""
             ? diaryData.titleImage
-            : `/diary/season${new Date(diaryData.startDatetime).getMonth() + 1}.jpg`
+            : `/diary/season${new Date(diaryData.startDatetime).getMonth() + 1}.avif`
         }
-        alt="diary-image"
+        alt="season-image"
         fill={true}
         style={{ objectFit: "cover" }}
       />

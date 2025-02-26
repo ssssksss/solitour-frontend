@@ -97,8 +97,8 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
             </div>
             <div className="flex items-center gap-1 text-sm text-gray1">
               <Image
-                src={"/gathering/location-icon.svg"}
-                alt={"location-icon"}
+                src="/icons/location-icon.svg"
+                alt="location-icon"
                 width={14}
                 height={14}
               />

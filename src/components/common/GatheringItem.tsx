@@ -39,7 +39,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} hover:bg-lightGreen h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 duration-300 hover:outline-main`}
+      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 duration-300 hover:bg-lightGreen hover:outline-main`}
       onClick={(e) => {
         if (!isAccessGathering) {
           e.preventDefault();
@@ -83,8 +83,8 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
             <article className="flex flex-row items-center gap-2">
               {/* 모임 기간 */}
               <Image
-                src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/gathering/calendar-gray-icon.svg" : "/gathering/calendar-icon.svg"}`}
-                alt="calendar-icon"
+                src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/gathering-calendar-gray-icon.svg" : "/icons/gathering-calendar-icon.svg"}`}
+                alt="gathering-calendar-icon"
                 width={16}
                 height={16}
               />
@@ -100,7 +100,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
               {/* 모임 장소 */}
               <div className={"flex items-center"}>
                 <Image
-                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/gathering/location-gray-icon.svg" : "/gathering/location-icon.svg"}`}
+                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/location-gray-icon.svg" : "/icons/location-icon.svg"}`}
                   alt="location-icon"
                   width={16}
                   height={16}
@@ -123,7 +123,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                 <div className={"relative flex items-center"}>
                   {/* 모임 인원 */}
                   <Image
-                    src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/gathering/people-gray-icon.svg" : "/gathering/people-icon.svg"}`}
+                    src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/people-gray-icon.svg" : "/icons/people-icon.svg"}`}
                     alt="people-icon"
                     width={16}
                     height={16}
@@ -158,7 +158,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
               <div className={"relative"}>
                 {/* 모임 시간 */}
                 <Image
-                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/gathering/clock-gray-icon.svg" : "/gathering/clock-icon.svg"}`}
+                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/clock-gray-icon.svg" : "/icons/clock-icon.svg"}`}
                   alt="clock-icon"
                   width={16}
                   height={16}
@@ -175,7 +175,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
         <div className="flex flex-row items-center justify-between pt-[0.4375rem]">
           <div className="flex flex-row items-center gap-1">
             <Image
-              src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/gathering/pin-gray-icon.svg" : "/gathering/pin-icon.svg"}`}
+              src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/pin-gray-icon.svg" : "/icons/pin-green-icon.svg"}`}
               alt="pin-icon"
               width={16}
               height={16}
@@ -197,8 +197,8 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                   format(new Date(), "yyyyMMdd") ? (
                   <div className="flex items-center gap-1 text-sm">
                     <Image
-                      src={"/common/check-gray-icon.svg"}
-                      alt="check-icon"
+                      src={"/icons/heart-gray-icon.svg"}
+                      alt="heart-gray-icon"
                       width={16}
                       height={16}
                     />
@@ -215,7 +215,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
               }
               <div className="relative flex items-center gap-1">
                 <Image
-                  src="/common/eyes-icon.svg"
+                  src="/icons/eyes-icon.svg"
                   alt="eyes-icon"
                   width={16}
                   height={16}
