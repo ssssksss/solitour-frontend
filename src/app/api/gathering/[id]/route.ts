@@ -1,11 +1,14 @@
 import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function GET(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
+
   try {
     const cookie = request.cookies.get("access_token");
-
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/gatherings/${params.id}`,
       {
@@ -32,7 +35,10 @@ export async function GET(request: NextRequest, props: { params: Promise<{ id: s
   }
 }
 
-export async function PUT(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
   try {
     const cookie = request.cookies.get("access_token");

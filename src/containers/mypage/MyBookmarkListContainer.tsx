@@ -2,10 +2,6 @@
 
 import MyBookmarkList from "@/components/mypage/MyBookmarkList";
 
-interface MyBookmarkListContainerProps {
-  activeBookmarkMenuIndex: number;
-}
-
 const data: (
   | {
       id: number;
@@ -31,9 +27,7 @@ const data: (
     }
 )[] = [];
 
-const MyBookmarkListContainer = ({
-  activeBookmarkMenuIndex,
-}: MyBookmarkListContainerProps) => {
+const MyBookmarkListContainer = () => {
   return <MyBookmarkList data={data} />;
 };
 

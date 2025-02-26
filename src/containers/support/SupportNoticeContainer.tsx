@@ -6,8 +6,6 @@ import { NoticeType } from "@/types/NoticeDto";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ISupportNoticeContainer {}
-
 const Skeleton = () => (
   <div className="flex w-full flex-col space-y-4 pb-8">
     {Array.from({ length: 10 }).map((_, index) => (
@@ -23,13 +21,12 @@ const Skeleton = () => (
   </div>
 );
 
-const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
+const SupportNoticeContainer = () => {
   const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
   const [elements, setElements] = useState<NoticeType[]>([]);
-  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [viewedNotices, setViewedNotices] = useState([]);
   const [totalElements, setTotalElements] = useState(0);
@@ -49,7 +46,6 @@ const SupportNoticeContainer = (props: ISupportNoticeContainer) => {
     const response = await fetch(`/api/support/notice?page=${page}`);
     const data = await response.json();
     setElements(data.content);
-    setTotalPages(data.page.totalPages);
     setTotalElements(data.page.totalElements);
     setLoading(false);
   };

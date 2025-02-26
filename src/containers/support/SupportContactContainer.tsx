@@ -1,8 +1,6 @@
 import SupportContact from "@/components/support/SupportContact";
 
-interface ISupportContactContainer {}
-
-const SupportContactContainer = (props: ISupportContactContainer) => {
+const SupportContactContainer = () => {
   const teamMembers = [
     {
       name: "이름",

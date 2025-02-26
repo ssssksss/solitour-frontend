@@ -2,8 +2,6 @@ import Dropdown from "@/components/common/dropdown/Dropdown";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IGatheringSortContainer {}
-
 const OPTIONS = [
   {
     value: "",
@@ -19,7 +17,7 @@ const OPTIONS = [
   },
 ];
 
-const GatheringSortContainer = (props: IGatheringSortContainer) => {
+const GatheringSortContainer = () => {
   const searchParams = useSearchParams();
   const [sort, setSort] = useState<string>("");
   const [loading, setLoading] = useState(true);

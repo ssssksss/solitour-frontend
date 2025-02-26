@@ -3,10 +3,6 @@ import TopList from "@/components/common/TopList";
 import GatheringListContainer from "@/containers/gathering/read/GatheringListContainer";
 import { Metadata } from "next";
 
-type MyProps = {
-  searchParams: { [key: string]: string | undefined };
-};
-
 export const metadata: Metadata = {
   title: "모임",
   description: "Solitour의 모임(탭)",
@@ -27,11 +23,7 @@ async function getData() {
   return res.json();
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | undefined };
-}) {
+export default async function Page() {
   const gatheringCategoryList = await getData();
 
   return (

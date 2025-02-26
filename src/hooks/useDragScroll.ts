@@ -82,7 +82,7 @@ export default function useDragScroll(): useDragScrollType {
   };
 
   // 터치 드래그 종료
-  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+  const onTouchEnd = () => {
     if (!isDragging) {
       return;
     }

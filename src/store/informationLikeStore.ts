@@ -22,7 +22,7 @@ const initialState: InformationLikeState = {
 // 상태 및 액션 생성
 const InformationLikeStore: StateCreator<
   InformationLikeState & InformationLikeActions
-> = (set, get) => ({
+> = (set) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
   setInformationLike: (data: Partial<InformationLikeState>) =>

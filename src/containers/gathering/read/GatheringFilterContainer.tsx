@@ -4,8 +4,7 @@ import useModalState from "@/hooks/useModalState";
 import { useEffect, useState } from "react";
 import { VscSettings } from "react-icons/vsc";
 
-interface IGatheringFilterContainer {}
-const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
+const GatheringFilterContainer = () => {
   const modalState = useModalState();
   const [loading, setLoading] = useState(true);
 
@@ -27,10 +26,8 @@ const GatheringFilterContainer = (props: IGatheringFilterContainer) => {
         <VscSettings size={"1.25rem"} />
         <div>필터</div>
       </button>
-      <Modal
-        modalState={modalState}
-      >
-        <GatheringFilterModal/>
+      <Modal modalState={modalState}>
+        <GatheringFilterModal />
       </Modal>
     </>
   );

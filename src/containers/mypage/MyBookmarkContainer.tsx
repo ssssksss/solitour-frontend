@@ -19,9 +19,7 @@ const MyBookmarkContainer = () => {
         onClickMenu={onClickMenu}
         activeBookmarkMenuIndex={activeBookmarkMenuIndex}
       />
-      <MyBookmarkListContainer
-        activeBookmarkMenuIndex={activeBookmarkMenuIndex}
-      />
+      <MyBookmarkListContainer />
     </>
   );
 };

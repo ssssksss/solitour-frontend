@@ -24,7 +24,7 @@ const initialState: EditorState = {
 };
 
 // 4. 상태 및 액션 생성
-const editorStore: StateCreator<EditorState & EditorActions> = (set, get) => ({
+const editorStore: StateCreator<EditorState & EditorActions> = (set) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
   setEditor: (data: Partial<EditorState>) => set(() => ({ ...data })),
