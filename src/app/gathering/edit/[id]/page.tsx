@@ -3,7 +3,7 @@ import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { NextResponse } from "next/server";
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 async function fetchGatheringData(
@@ -30,7 +30,13 @@ async function fetchGatheringData(
   }
 }
 
-export async function generateMetadata({ params: { id } }: PageProps) {
+export async function generateMetadata(props: PageProps) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const postId = Number(id);
   if (postId <= 0 || !Number.isSafeInteger(postId)) {
     throw new Error("페이지를 찾을 수 없습니다.");
@@ -42,7 +48,13 @@ export async function generateMetadata({ params: { id } }: PageProps) {
   };
 }
 
-export default async function Page({ params: { id } }: PageProps) {
+export default async function Page(props: PageProps) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const postId = Number(id);
 
   if (postId <= 0 || !Number.isSafeInteger(postId)) {

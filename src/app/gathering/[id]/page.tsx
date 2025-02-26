@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const categories = [
@@ -38,8 +38,8 @@ async function getNewAccessToken(refreshToken: string): Promise<string | null> {
 }
 
 async function getGathering(id: number) {
-  let accessToken = cookies().get("access_token")?.value;
-  const refreshToken = cookies().get("refresh_token")?.value;
+  let accessToken = (await cookies()).get("access_token")?.value;
+  const refreshToken = (await cookies()).get("refresh_token")?.value;
 
   if (!accessToken && !refreshToken) {
     redirect("/auth/signin");
@@ -94,7 +94,13 @@ async function getGathering(id: number) {
   return await response.json();
 }
 
-export async function generateMetadata({ params: { id } }: PageProps) {
+export async function generateMetadata(props: PageProps) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const postId = Number(id);
   if (postId <= 0 || !Number.isSafeInteger(postId)) {
     throw new Error("페이지를 찾을 수 없습니다.");
@@ -106,7 +112,13 @@ export async function generateMetadata({ params: { id } }: PageProps) {
   };
 }
 
-export default async function Page({ params: { id } }: PageProps) {
+export default async function Page(props: PageProps) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const postId = Number(id);
   if (postId <= 0 || !Number.isSafeInteger(postId)) {
     return NextResponse.json(

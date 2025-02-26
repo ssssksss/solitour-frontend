@@ -4,7 +4,7 @@ import LottieNotFound from "../common/lottie/LottieNotFound";
 import { cookies } from "next/headers";
 
 async function getNewGatheringList() {
-  const cookie = cookies().get("access_token");
+  const cookie = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/gatherings/home`,
     {

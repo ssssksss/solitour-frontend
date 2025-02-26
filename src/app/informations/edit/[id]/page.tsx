@@ -4,7 +4,7 @@ import { InformationDetailDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
 async function getInformation(id: number) {
-  const cookie = cookies().get("access_token");
+  const cookie = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
@@ -25,10 +25,16 @@ async function getInformation(id: number) {
 }
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params: { id } }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const informationId = Number(id);
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw new Error("Not Found");
@@ -40,7 +46,13 @@ export async function generateMetadata({ params: { id } }: Props) {
   };
 }
 
-export default async function page({ params: { id } }: Props) {
+export default async function page(props: Props) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const informationId = Number(id);
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");

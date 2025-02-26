@@ -1,7 +1,7 @@
 import useOutsideClick from "@/hooks/useOutsideClick";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { ModalState } from "@/types/ModalState";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, type JSX } from "react";
 import { createPortal } from "react-dom";
 import { MdClose } from "react-icons/md";
 

@@ -6,7 +6,7 @@ import HashSpinner from "@/components/common/HashSpinner";
 
 interface Props {
   loading: boolean;
-  quillRef: RefObject<ReactQuill>;
+  quillRef: RefObject<ReactQuill | null>;
   modules: {};
   content: string;
   onChange: (value: string) => void;

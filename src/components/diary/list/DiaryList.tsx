@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import DiaryPaginationContainer from "@/containers/diary/list/DiaryPaginationContainer";
 
 async function getDiaryList(page: number) {
-  const cookie = cookies().get("access_token");
+  const cookie = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/diary?page=${page}`,
     {

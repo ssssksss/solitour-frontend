@@ -11,8 +11,8 @@ const UserDropDown = () => {
   const authStore = useAuthStore();
   const modalState = useModalState();
   const router = useRouter();
-  const ref = useRef<any>();
-  const ref1 = useRef<any>();
+  const ref = useRef<any>(undefined);
+  const ref1 = useRef<any>(undefined);
 
   const logoutHandler = async () => {
     // api로 로그아웃 요청해서 쿠키제거

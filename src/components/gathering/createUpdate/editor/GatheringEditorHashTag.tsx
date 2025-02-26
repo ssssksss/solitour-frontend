@@ -8,7 +8,7 @@ interface IGatheringEditorHashTag {
   ) => void;
   deleteTagHandler: (tag: string) => void;
   tags: string[];
-  inputTagRef: React.RefObject<HTMLInputElement>;
+  inputTagRef: React.RefObject<HTMLInputElement | null>;
 }
 const GatheringEditorHashTag = ({
   onChangeHashTagHandler,

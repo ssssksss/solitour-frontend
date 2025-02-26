@@ -1,7 +1,7 @@
 import { MouseEvent, RefObject, TouchEvent, useRef, useState } from "react";
 
 export type useDragScrollType = {
-  listRef: RefObject<HTMLDivElement>;
+  listRef: RefObject<HTMLDivElement | null>;
   onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
   onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
   onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
