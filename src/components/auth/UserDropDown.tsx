@@ -1,3 +1,5 @@
+"use client";
+
 import useModalState from "@/hooks/useModalState";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import useAuthStore from "@/stores/authStore";
@@ -34,8 +36,8 @@ const UserDropDown = () => {
   });
 
   return (
-    <button
-      className="flex w-full items-center gap-x-2"
+    <div
+      className="flex w-full cursor-pointer items-center gap-x-2"
       onClick={(e) => {
         if (!modalState.isOpen) {
           modalState.openModal();
@@ -103,7 +105,7 @@ const UserDropDown = () => {
           </button>
         </section>
       )}
-    </button>
+    </div>
   );
 };
 export default UserDropDown;

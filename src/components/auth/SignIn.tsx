@@ -40,35 +40,6 @@ const SignIn = () => {
           카카오로 로그인
         </span>
       </Link>
-      <div className={"relative mt-[3rem] flex w-full justify-center"}>
-        <div className={"absolute top-[-.5rem] flex flex-col items-center"}>
-          <div
-            className={
-              "relative translate-y-[-100%] rounded-[2.5rem] bg-[#000] px-[1rem] py-[0.5rem] text-[0.625rem] text-[#fff]"
-            }
-          >
-            1초만의 빠른 회원가입
-            <div
-              className={
-                "absolute left-[50%] top-[2rem] h-0 w-0 translate-x-[-50%] translate-y-[-50%] border-l-[7px] border-r-[7px] border-t-[7px] border-x-transparent border-t-[black]"
-              }
-            ></div>
-          </div>
-        </div>
-        <p
-          className={
-            "relative flex w-full justify-center font-semibold text-black"
-          }
-        >
-          아직 계정이 없으신가요?
-          <Link
-            href={"/auth/signup"}
-            className={"px-[0.25rem] font-bold text-[#00B488]"}
-          >
-            회원가입
-          </Link>
-        </p>
-      </div>
     </div>
   );
 };

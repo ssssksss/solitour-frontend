@@ -5,23 +5,23 @@ import { MdOutlineMenu } from "react-icons/md";
 import ReactToastifyComponent from "./ReactToastifyComponent";
 import UserDropDown from "../auth/UserDropDown";
 
-interface Props {
+interface HeaderProps {
+  userId: number;
   pathname: string;
   visible: boolean;
   transparent: boolean;
   onMenuClicked: () => void;
   onClose: () => void;
-  userId: number;
 }
 
 const Header = ({
+  userId,
   pathname,
   visible,
   transparent,
   onMenuClicked,
   onClose,
-  userId,
-}: Props) => {
+}: HeaderProps) => {
   return (
     <header className="flex w-full flex-row justify-center">
       {visible && <HeaderSidebarContainer onClose={onClose} />}
@@ -94,40 +94,21 @@ const Header = ({
             size="1.5rem"
             onClick={onMenuClicked}
           />
-          <div
-            className={
-              "absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
-            }
-          >
+          <div className="absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden">
             {userId == 0 ? (
               <>
-                <div
-                  className={
-                    "relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow"
-                  }
-                ></div>
-                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main"></div>
+                <div className="relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow" />
+                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main" />
               </>
             ) : userId > 0 ? (
-              <>
-                <UserDropDown />
-              </>
+              <UserDropDown />
             ) : (
-              <>
-                <Link
-                  className="font-semibold text-black hover:text-main"
-                  href="/auth/signin"
-                >
-                  로그인
-                </Link>
-                <div className="text-gray-400">|</div>
-                <Link
-                  className="font-semibold text-black hover:text-main"
-                  href="/auth/signup"
-                >
-                  회원가입
-                </Link>
-              </>
+              <Link
+                className="ml-10 font-semibold text-black hover:text-main"
+                href="/auth/signin"
+              >
+                로그인
+              </Link>
             )}
           </div>
         </div>
