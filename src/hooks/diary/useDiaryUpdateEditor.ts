@@ -1,37 +1,26 @@
 "use client";
 
-import DiaryEditor from "@/components/diary/write/DiaryEditor";
-import sanitizeOption from "@/constants/common/sanitizeOption";
-import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
-import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
-import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import sanitizeHtml from "sanitize-html";
-import { parse } from "node-html-parser";
-import { FormProvider, useForm } from "react-hook-form";
+import usePreventBodyScroll from "../usePreventBodyScroll";
+import useModalBackHandler from "../useModalBackHandler";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
+import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
+import parse from "node-html-parser";
+import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
+import sanitizeHtml from "sanitize-html";
+import sanitizeOption from "@/constants/common/sanitizeOption";
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-interface Props {
-  diaryData: GetDiaryResponseDto;
-}
-
-const DiaryEditorContainer = ({ diaryData }: Props) => {
+export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
   const router = useRouter();
-  const [dateRangeModal, setDateRangeModal] = useState<boolean>(false);
-  const [addressModal, setAddressModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
+  const [dateRangeModalVisible, setDateRangeModalVisible] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
-
-  usePreventBodyScroll(dateRangeModal);
-  usePreventBodyScroll(addressModal);
-  useModalBackHandler(dateRangeModal, () => setDateRangeModal(false));
-  useModalBackHandler(addressModal, () => setAddressModal(false));
-
   const methods = useForm<{
     title: string;
     startDate: Date | null;
@@ -54,7 +43,25 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     mode: "onChange",
   });
 
-  const onSubmit = async () => {
+  const openDateRangeModal = () => {
+    setDateRangeModalVisible(true);
+  };
+
+  const closeDateRangeModal = () => {
+    window.history.back();
+    setDateRangeModalVisible(false);
+  };
+
+  const openAddressModal = () => {
+    setAddressModalVisible(true);
+  };
+
+  const closeAddressModal = () => {
+    window.history.back();
+    setAddressModalVisible(false);
+  };
+
+  const handleSubmit = async () => {
     const imageUrl =
       parse(methods.getValues("contents"))
         .querySelector("img")
@@ -128,6 +135,13 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     router.refresh();
   };
 
+  usePreventBodyScroll(dateRangeModalVisible);
+  usePreventBodyScroll(addressModalVisible);
+  useModalBackHandler(dateRangeModalVisible, () =>
+    setDateRangeModalVisible(false),
+  );
+  useModalBackHandler(addressModalVisible, () => setAddressModalVisible(false));
+
   useEffect(() => {
     methods.setValue("title", diaryData.diaryContentResponse.title);
     methods.setValue(
@@ -179,27 +193,15 @@ const DiaryEditorContainer = ({ diaryData }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <FormProvider {...methods}>
-      <DiaryEditor
-        text="수정"
-        datePickerModal={dateRangeModal}
-        addressModal={addressModal}
-        loading={loading}
-        showDateRangeModal={() => setDateRangeModal(true)}
-        closeDateRangeModal={() => {
-          window.history.back();
-          setDateRangeModal(false);
-        }}
-        showAddressModal={() => setAddressModal(true)}
-        closeAddressModal={() => {
-          window.history.back();
-          setAddressModal(false);
-        }}
-        onSubmit={onSubmit}
-      />
-    </FormProvider>
-  );
+  return {
+    loading,
+    methods,
+    dateRangeModalVisible,
+    addressModalVisible,
+    openDateRangeModal,
+    closeDateRangeModal,
+    openAddressModal,
+    closeAddressModal,
+    handleSubmit,
+  };
 };
-
-export default DiaryEditorContainer;

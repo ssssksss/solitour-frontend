@@ -4,20 +4,16 @@ import "@/styles/reactDataRange.css";
 import { MdClose } from "react-icons/md";
 import { Calendar } from "react-date-range";
 import { ko } from "date-fns/locale";
+import { useDatePickerModal } from "@/hooks/diary/useDatePickerModal";
 
-interface Props {
-  date: Date;
-  setDate: (date: Date) => void;
+interface DatePickerModalProps {
   closeModal: () => void;
-  onChangeDateRange: () => void;
 }
 
-const DatePickerModal = ({
-  date,
-  setDate,
-  closeModal,
-  onChangeDateRange,
-}: Props) => {
+const DatePickerModal = ({ closeModal }: DatePickerModalProps) => {
+  const { date, setDate, handleDateRangeChange } =
+    useDatePickerModal(closeModal);
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit max-h-[calc(100%_-_48px)] w-fit max-w-[90%] flex-col gap-4 overflow-y-auto rounded-xl bg-white p-6">
@@ -58,7 +54,7 @@ const DatePickerModal = ({
         <button
           className="z-10 min-h-10 w-32 self-center rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
           type="button"
-          onClick={() => onChangeDateRange()}
+          onClick={handleDateRangeChange}
         >
           적용하기
         </button>

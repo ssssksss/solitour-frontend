@@ -1,17 +1,12 @@
 "use client";
 
-import AddressModal from "@/components/diary/write/AddressModal";
-import { useDebounce } from "@/hooks/useDebounce";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { useDebounce } from "../useDebounce";
 
-interface Props {
-  closeModal: () => void;
-}
-
-const AddressModalContainer = ({ closeModal }: Props) => {
+export const useAddressModal = (closeModal: () => void) => {
   const formContext = useFormContext();
-  const [flag, setFlag] = useState<boolean>(true);
+  const [flag, setFlag] = useState(true);
 
   // 장소 검색 객체 (place search)
   const [ps, setPs] = useState<any>();
@@ -54,13 +49,13 @@ const AddressModalContainer = ({ closeModal }: Props) => {
     });
   }, 300);
 
-  const onResetAddress = () => {
+  const handleAddressReset = () => {
     formContext.setValue("address", "");
     formContext.trigger("address");
     closeModal();
   };
 
-  const onChangeAddress = (placeInfo: { address_name: string }) => {
+  const handleAddressChange = (placeInfo: { address_name: string }) => {
     formContext.setValue("address", placeInfo.address_name);
     formContext.trigger("address");
     closeModal();
@@ -78,22 +73,14 @@ const AddressModalContainer = ({ closeModal }: Props) => {
     }
   }, []);
 
-  const changeFlag = (flag: boolean) => {
-    setFlag(flag);
+  return {
+    flag,
+    placeInfos,
+    addressInfos,
+    setFlag,
+    handleLocationSearch,
+    handleAddressSearch,
+    handleAddressReset,
+    handleAddressChange,
   };
-
-  return (
-    <AddressModal
-      placeInfos={placeInfos}
-      addressInfos={addressInfos}
-      handleLocationSearch={handleLocationSearch}
-      handleAddressSearch={handleAddressSearch}
-      flag={flag}
-      onResetAddress={onResetAddress}
-      onChangeAddress={onChangeAddress}
-      changeFlag={changeFlag}
-    />
-  );
 };
-
-export default AddressModalContainer;

@@ -1,17 +1,40 @@
-"use client";
-
-import DiaryViewer from "@/components/diary/detail/DiaryViewer";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import { useEffect, useState } from "react";
+import usePreventBodyScroll from "../usePreventBodyScroll";
+import useModalBackHandler from "../useModalBackHandler";
+import { useRouter } from "next/navigation";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-interface Props {
-  data: GetDiaryResponseDto;
-}
+export const useDiaryViewer = (diaryId: number) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-const DiaryViewerContainer = ({ data }: Props) => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    window.history.back();
+    setModalVisible(false);
+  };
+
+  const handleDeleteClick = async () => {
+    setLoading(true);
+
+    const response = await fetchWithAuth(`/api/diary/${diaryId}`, {
+      method: "DELETE",
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      alert("일기 삭제에 실패하였습니다.");
+      setLoading(false);
+      throw new Error(response.statusText);
+    }
+
+    router.replace("/diary/list?page=1");
+    router.refresh();
+  };
 
   usePreventBodyScroll(modalVisible);
   useModalBackHandler(modalVisible, () => setModalVisible(false));
@@ -48,17 +71,11 @@ const DiaryViewerContainer = ({ data }: Props) => {
     }, 100);
   }, []);
 
-  return (
-    <DiaryViewer
-      data={data}
-      modalVisible={modalVisible}
-      openModal={() => setModalVisible(true)}
-      closeModal={() => {
-        window.history.back();
-        setModalVisible(false);
-      }}
-    />
-  );
+  return {
+    modalVisible,
+    loading,
+    openModal,
+    closeModal,
+    handleDelete: handleDeleteClick,
+  };
 };
-
-export default DiaryViewerContainer;

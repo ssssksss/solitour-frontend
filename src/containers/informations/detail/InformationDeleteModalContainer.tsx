@@ -17,7 +17,7 @@ const InformationDeleteModalContainer = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onDeleteClick = async () => {
+  const handleDeleteClick = async () => {
     setLoading(true);
 
     const response = await fetchWithAuth(`/api/informations/${informationId}`, {
@@ -38,8 +38,8 @@ const InformationDeleteModalContainer = ({
   return (
     <DeleteModal
       loading={loading}
-      onDeleteClick={onDeleteClick}
-      onCancelClick={closeModal}
+      handleDeleteClick={handleDeleteClick}
+      handleCancelClick={closeModal}
     />
   );
 };

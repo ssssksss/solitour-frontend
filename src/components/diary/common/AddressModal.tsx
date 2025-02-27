@@ -1,32 +1,25 @@
+"use client";
+
+import { useAddressModal } from "@/hooks/diary/useAddressModal";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
 
-interface Props {
-  placeInfos?: {
-    place_name: string;
-    address_name: string;
-  }[];
-  addressInfos?: {
-    address_name: string;
-  }[];
-  handleLocationSearch: (search: string) => void;
-  handleAddressSearch: (search: string) => void;
-  flag: boolean;
-  onResetAddress: () => void;
-  onChangeAddress: (value: { address_name: string }) => void;
-  changeFlag: (flag: boolean) => void;
+interface AddressModalProps {
+  closeModal: () => void;
 }
 
-const AddressModal = ({
-  placeInfos,
-  addressInfos,
-  handleLocationSearch,
-  handleAddressSearch,
-  flag,
-  onResetAddress,
-  onChangeAddress,
-  changeFlag,
-}: Props) => {
+const AddressModal = ({ closeModal }: AddressModalProps) => {
+  const {
+    flag,
+    placeInfos,
+    addressInfos,
+    setFlag,
+    handleLocationSearch,
+    handleAddressSearch,
+    handleAddressReset,
+    handleAddressChange,
+  } = useAddressModal(closeModal);
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit max-h-[calc(100%_-_48px)] w-[39.75rem] flex-col overflow-y-auto rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)]">
@@ -34,7 +27,7 @@ const AddressModal = ({
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
             size={"2.5rem"}
-            onClick={onResetAddress}
+            onClick={handleAddressReset}
           />
         </div>
         <div className="flex flex-col gap-8 px-5">
@@ -44,14 +37,14 @@ const AddressModal = ({
               <button
                 className={`h-11 flex-[50%] ${!flag ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
-                onClick={() => changeFlag(true)}
+                onClick={() => setFlag(true)}
               >
                 장소 검색하기
               </button>
               <button
                 className={`h-11 flex-[50%] ${!flag ? "bg-main text-white" : "text-gray1"}`}
                 type="button"
-                onClick={() => changeFlag(false)}
+                onClick={() => setFlag(false)}
               >
                 도로명주소 찾기
               </button>
@@ -75,7 +68,7 @@ const AddressModal = ({
                       key={index}
                       className="flex w-full flex-col gap-1 hover:bg-gray-100"
                       type="button"
-                      onClick={() => onChangeAddress(placeInfo)}
+                      onClick={() => handleAddressChange(placeInfo)}
                     >
                       <div className="flex flex-row items-center gap-2 text-sm text-black">
                         <TiLocation />
@@ -108,7 +101,7 @@ const AddressModal = ({
                       key={index}
                       className="flex w-full flex-col gap-1 hover:bg-gray-100"
                       type="button"
-                      onClick={() => onChangeAddress(addressInfo)}
+                      onClick={() => handleAddressChange(addressInfo)}
                     >
                       <div className="flex flex-row items-center gap-2 text-sm text-black">
                         <TiLocation />

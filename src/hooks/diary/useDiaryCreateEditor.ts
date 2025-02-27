@@ -1,31 +1,24 @@
 "use client";
 
-import DiaryEditor from "@/components/diary/write/DiaryEditor";
-import sanitizeOption from "@/constants/common/sanitizeOption";
-import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
-import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
-import { CreateDiaryRequestDto } from "@/types/DiaryDto";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import sanitizeHtml from "sanitize-html";
-import { FormProvider, useForm } from "react-hook-form";
+import usePreventBodyScroll from "../usePreventBodyScroll";
+import useModalBackHandler from "../useModalBackHandler";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
 import parse from "node-html-parser";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import { CreateDiaryRequestDto } from "@/types/DiaryDto";
+import sanitizeOption from "@/constants/common/sanitizeOption";
+import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
+import sanitizeHtml from "sanitize-html";
 
-const DiaryEditorContainer = () => {
+export const useDiaryCreateEditor = () => {
   const router = useRouter();
-  const [datePickerModal, setDatePickerModal] = useState<boolean>(false);
-  const [addressModal, setAddressModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  usePreventBodyScroll(datePickerModal);
-  usePreventBodyScroll(addressModal);
-  useModalBackHandler(datePickerModal, () => setDatePickerModal(false));
-  useModalBackHandler(addressModal, () => setAddressModal(false));
-
+  const [dateRangeModalVisible, setDateRangeModalVisible] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const methods = useForm<{
     title: string;
     startDate: Date | null;
@@ -48,7 +41,25 @@ const DiaryEditorContainer = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async () => {
+  const openDateRangeModal = () => {
+    setDateRangeModalVisible(true);
+  };
+
+  const closeDateRangeModal = () => {
+    window.history.back();
+    setDateRangeModalVisible(false);
+  };
+
+  const openAddressModal = () => {
+    setAddressModalVisible(true);
+  };
+
+  const closeAddressModal = () => {
+    window.history.back();
+    setAddressModalVisible(false);
+  };
+
+  const handleSubmit = async () => {
     const imageUrl =
       parse(methods.getValues("contents"))
         .querySelector("img")
@@ -109,27 +120,22 @@ const DiaryEditorContainer = () => {
     router.refresh();
   };
 
-  return (
-    <FormProvider {...methods}>
-      <DiaryEditor
-        text="등록"
-        datePickerModal={datePickerModal}
-        addressModal={addressModal}
-        loading={loading}
-        showDateRangeModal={() => setDatePickerModal(true)}
-        closeDateRangeModal={() => {
-          window.history.back();
-          setDatePickerModal(false);
-        }}
-        showAddressModal={() => setAddressModal(true)}
-        closeAddressModal={() => {
-          window.history.back();
-          setAddressModal(false);
-        }}
-        onSubmit={onSubmit}
-      />
-    </FormProvider>
+  usePreventBodyScroll(dateRangeModalVisible);
+  usePreventBodyScroll(addressModalVisible);
+  useModalBackHandler(dateRangeModalVisible, () =>
+    setDateRangeModalVisible(false),
   );
-};
+  useModalBackHandler(addressModalVisible, () => setAddressModalVisible(false));
 
-export default DiaryEditorContainer;
+  return {
+    loading,
+    methods,
+    dateRangeModalVisible,
+    addressModalVisible,
+    openDateRangeModal,
+    closeDateRangeModal,
+    openAddressModal,
+    closeAddressModal,
+    handleSubmit,
+  };
+};

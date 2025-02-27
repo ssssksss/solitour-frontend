@@ -2,14 +2,14 @@ import HashSpinner from "./HashSpinner";
 
 interface DeleteModalProps {
   loading: boolean;
-  onDeleteClick: () => void;
-  onCancelClick: () => void;
+  handleDeleteClick: () => void;
+  handleCancelClick: () => void;
 }
 
 const DeleteModal = ({
   loading,
-  onDeleteClick,
-  onCancelClick,
+  handleDeleteClick,
+  handleCancelClick,
 }: DeleteModalProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
@@ -20,13 +20,13 @@ const DeleteModal = ({
         <div className="flex flex-row gap-4">
           <button
             className="h-10 w-20 rounded-full bg-main text-white hover:scale-105"
-            onClick={() => onDeleteClick()}
+            onClick={handleDeleteClick}
           >
             삭제
           </button>
           <button
             className="h-10 w-20 rounded-full bg-black text-white hover:scale-105"
-            onClick={() => onCancelClick()}
+            onClick={handleCancelClick}
           >
             취소
           </button>

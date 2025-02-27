@@ -1,29 +1,29 @@
 import Image from "next/image";
-import AddressModalContainer from "@/containers/diary/write/AddressModalContainer";
 import dynamic from "next/dynamic";
 import QuillEditorSkeleton from "@/components/skeleton/common/QuillEditorSkeleton";
 import { useFormContext } from "react-hook-form";
-import DatePickerModalContainer from "@/containers/diary/write/DatePickerModalContainer";
 import HashSpinner from "@/components/common/HashSpinner";
+import DatePickerModal from "./DatePickerModal";
+import AddressModal from "./AddressModal";
 
-const QuillEditorContainer = dynamic(
-  () => import("@/containers/diary/write/QuillEditorContainer"),
+const QuillEditor = dynamic(
+  () => import("@/components/diary/common/QuillEditor"),
   {
     ssr: false,
     loading: () => <QuillEditorSkeleton />,
   },
 );
 
-interface Props {
+interface DiaryEditorProps {
   text: string;
   datePickerModal: boolean;
   addressModal: boolean;
   loading: boolean;
-  showDateRangeModal: () => void;
+  openDateRangeModal: () => void;
   closeDateRangeModal: () => void;
-  showAddressModal: () => void;
+  openAddressModal: () => void;
   closeAddressModal: () => void;
-  onSubmit: () => void;
+  handleSubmit: () => void;
 }
 
 const DiaryEditor = ({
@@ -31,20 +31,18 @@ const DiaryEditor = ({
   datePickerModal,
   addressModal,
   loading,
-  showDateRangeModal,
+  openDateRangeModal,
   closeDateRangeModal,
-  showAddressModal,
+  openAddressModal,
   closeAddressModal,
-  onSubmit,
-}: Props) => {
+  handleSubmit,
+}: DiaryEditorProps) => {
   const formContext = useFormContext();
 
   return (
     <div className="flex w-full flex-col">
-      {datePickerModal && (
-        <DatePickerModalContainer closeModal={closeDateRangeModal} />
-      )}
-      {addressModal && <AddressModalContainer closeModal={closeAddressModal} />}
+      {datePickerModal && <DatePickerModal closeModal={closeDateRangeModal} />}
+      {addressModal && <AddressModal closeModal={closeAddressModal} />}
       <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`일기 ${text}하기`}
@@ -82,7 +80,7 @@ const DiaryEditor = ({
           <button
             className={`${formContext.getValues("startDate") ? "text-black" : "text-gray2"} ${formContext.formState.errors.startDate ? "border-red-500" : "border-gray3 hover:border-main"} h-[3.3125rem] w-[21.75rem] flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm`}
             type="button"
-            onClick={() => showDateRangeModal()}
+            onClick={() => openDateRangeModal()}
           >
             {
               /* eslint-disable indent */
@@ -120,7 +118,7 @@ const DiaryEditor = ({
           <button
             className={`${formContext.getValues("address") === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-none`}
             type="button"
-            onClick={() => showAddressModal()}
+            onClick={() => openAddressModal()}
           >
             {formContext.getValues("address") === ""
               ? "주소를 입력하세요."
@@ -167,11 +165,11 @@ const DiaryEditor = ({
           </p>
         )}
       </div>
-      <QuillEditorContainer />
+      <QuillEditor />
       <button
         className="mb-[5.3125rem] mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center self-end rounded-full bg-main text-[0.9375rem] text-white hover:scale-105"
         type="submit"
-        onClick={() => onSubmit()}
+        onClick={handleSubmit}
         disabled={loading}
       >
         {loading ? (

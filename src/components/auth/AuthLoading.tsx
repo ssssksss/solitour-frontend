@@ -3,7 +3,7 @@
 import LottieAirplane from "@/../public/lottie/loading-airplane.json";
 import LottieComponent from "@/components/common/lottie/LottieComponent";
 import AddUserInformationInitForm from "./AddUserInformationInitForm";
-import { useAuthKakao } from "@/hooks/common/useAuthKakao";
+import { useAuthKakao } from "@/hooks/auth/useAuthKakao";
 import { FormProvider } from "react-hook-form";
 
 const AuthLoading = () => {

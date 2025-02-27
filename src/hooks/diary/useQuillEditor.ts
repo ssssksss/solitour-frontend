@@ -1,21 +1,20 @@
 "use client";
 
-import QuillEditor from "@/components/diary/write/QuillEditor";
 import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill-new";
 import { ImageResize } from "quill-image-resize-module-ts";
+import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 
-const QuillEditorContainer = () => {
+export const useQuillEditor = () => {
   const authStore = useAuthStore();
   const quillRef = useRef<ReactQuill>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const formContext = useFormContext();
 
-  const onContentChange = (value: string) => {
+  const handleContentChange = (value: string) => {
     formContext.setValue("contents", value);
     formContext.trigger("contents");
   };
@@ -59,7 +58,7 @@ const QuillEditorContainer = () => {
         const imageElement = document.querySelector(`img[src="${url}"]`);
         if (imageElement) {
           (imageElement as HTMLElement).style.borderRadius = "1rem";
-          onContentChange(quillRef.current!.getEditorContents().toString());
+          handleContentChange(quillRef.current!.getEditorContents().toString());
         }
       }, 100);
     }
@@ -145,20 +144,16 @@ const QuillEditorContainer = () => {
         .forEach((img) => {
           img.style.borderRadius = "1rem";
         });
-      onContentChange(quillRef.current!.getEditorContents().toString());
+      handleContentChange(quillRef.current!.getEditorContents().toString());
     }, 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <QuillEditor
-      loading={loading}
-      quillRef={quillRef}
-      modules={modules}
-      content={formContext.getValues("contents")}
-      onChange={onContentChange}
-    />
-  );
+  return {
+    loading,
+    quillRef,
+    modules,
+    content: formContext.getValues("content"),
+    handleContentChange,
+  };
 };
-
-export default QuillEditorContainer;

@@ -43,8 +43,8 @@ const GatheringDeleteModalContainer = ({
   return (
     <DeleteModal
       loading={loading}
-      onDeleteClick={deleteHandle}
-      onCancelClick={() => closeModal()}
+      handleDeleteClick={deleteHandle}
+      handleCancelClick={() => closeModal()}
     />
   );
 };

@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
-import DiaryViewerContainer from "@/containers/diary/detail/DiaryViewerContainer";
+import DiaryViewer from "@/components/diary/detail/DiaryViewer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";
 
@@ -27,9 +27,7 @@ interface Props {
 export async function generateMetadata(props: Props) {
   const params = await props.params;
 
-  const {
-    id
-  } = params;
+  const { id } = params;
 
   const diaryId = Number(id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
@@ -44,11 +42,7 @@ export async function generateMetadata(props: Props) {
 
 export default async function page(props: Props) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const diaryId = Number(id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
     throw Error("Not Found");
@@ -64,7 +58,7 @@ export default async function page(props: Props) {
           { label: "일기 상세", href: "" },
         ]}
       />
-      <DiaryViewerContainer data={data} />
+      <DiaryViewer data={data} />
     </div>
   );
 }

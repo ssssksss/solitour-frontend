@@ -2,28 +2,30 @@ import DeleteIcon from "@/components/common/icons/DeleteIcon";
 import EditIcon from "@/components/common/icons/EditIcon";
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
-import DiaryDeleteModalContainer from "@/containers/diary/detail/DiaryDeleteModalContainer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import sanitizeHtml from "sanitize-html";
 import { motion } from "motion/react";
+import { useDiaryViewer } from "@/hooks/diary/useDiaryViewer";
+import DeleteModal from "@/components/common/DeleteModal";
 
-interface Props {
+interface DiaryViewerProps {
   data: GetDiaryResponseDto;
-  modalVisible: boolean;
-  openModal: () => void;
-  closeModal: () => void;
 }
 
-const DiaryViewer = ({ data, modalVisible, openModal, closeModal }: Props) => {
+const DiaryViewer = ({ data }: DiaryViewerProps) => {
+  const { modalVisible, loading, openModal, closeModal, handleDelete } =
+    useDiaryViewer(data.diaryContentResponse.diaryId);
+
   return (
     <div className="flex w-full flex-col items-start">
       {modalVisible && (
-        <DiaryDeleteModalContainer
-          diaryId={data.diaryContentResponse.diaryId}
-          closeModal={closeModal}
+        <DeleteModal
+          loading={loading}
+          handleDeleteClick={handleDelete}
+          handleCancelClick={closeModal}
         />
       )}
       <motion.div
