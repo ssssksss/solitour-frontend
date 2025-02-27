@@ -2,7 +2,7 @@ import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { TiLocation } from "react-icons/ti";
 
 interface Props {

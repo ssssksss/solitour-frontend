@@ -27,14 +27,6 @@ const config: Config = {
         "search-icon": "url('/common/search-icon.png')",
       },
       keyframes: {
-        sidebarFadeIn: {
-          from: { transform: "translateY(-35.5rem)" },
-          to: { transform: "translateY(0)" },
-        },
-        sidebarFadeOut: {
-          from: { transform: "translateY(0)" },
-          to: { transform: "translateY(-35.5rem)" },
-        },
         buttonRotation: {
           from: { transform: "rotate(-90deg)", "background-color": "black" },
           to: { transform: "rotate(0deg)", "background-color": "bg-main" },
@@ -92,8 +84,6 @@ const config: Config = {
         },
       },
       animation: {
-        sidebarFadeIn: "sidebarFadeIn 0.3s",
-        sidebarFadeOut: "sidebarFadeOut 0.3s",
         buttonRotation: "buttonRotation 0.3s",
         buttonReverseRotation: "buttonReverseRotation 0.3s",
         fadeIn: "fadeIn 0.5s",

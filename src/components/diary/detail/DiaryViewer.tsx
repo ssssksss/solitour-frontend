@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import sanitizeHtml from "sanitize-html";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface Props {
   data: GetDiaryResponseDto;

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Dispatch, SetStateAction } from "react";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
