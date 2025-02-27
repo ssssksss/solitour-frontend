@@ -1,10 +1,10 @@
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+"use client";
 
-interface Props {
-  router: AppRouterInstance;
-}
+import { useRouter } from "next/navigation";
 
-const BackButton = ({ router }: Props) => {
+const BackButton = () => {
+  const router = useRouter();
+
   return (
     <button
       className="h-[2.625rem] w-[9.4375rem] rounded-full bg-main text-white hover:scale-105"

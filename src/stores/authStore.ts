@@ -41,24 +41,19 @@ const initialState: AuthState = {
   },
 };
 
+type AuthStoreType = AuthState & AuthActions;
+
 // 4. 상태 및 액션 생성
-const authStore: StateCreator<AuthState & AuthActions> = (set) => ({
+const authStore: StateCreator<AuthStoreType> = (set) => ({
   ...initialState,
-  initialize: () =>
-    set({
-      ...initialState,
-      id: -1,
-    }),
-  setUser: (data) =>
-    set(() => ({
-      ...data,
-    })),
+  initialize: () => set({ ...initialState, id: -1 }),
+  setUser: (data) => set(() => ({ ...data })),
 });
 
-const useAuthStore = create<AuthState & AuthActions>()<any>(
-  process.env.NODE_ENV === "development" ? devtools(authStore) : authStore,
+const useAuthStore = create<AuthStoreType>()(
+  process.env.NODE_ENV === "development"
+    ? (devtools(authStore) as StateCreator<AuthStoreType>)
+    : authStore,
 );
-
-export type useAuthStoreType = AuthState & AuthActions;
 
 export default useAuthStore;

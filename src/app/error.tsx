@@ -1,13 +1,13 @@
 "use client"; // Error components must be Client Components
 
-import BackButtonContainer from "@/containers/common/BackButtonContainer";
+import BackButton from "@/components/common/BackButton";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "error",
-  description: "Solitour의 error 페이지",
+  title: "Error",
+  description: "Solitour의 Error 페이지",
 };
 
 const Error = () => {
@@ -29,7 +29,7 @@ const Error = () => {
             >
               홈으로
             </Link>
-            <BackButtonContainer />
+            <BackButton />
           </div>
         </div>
         <div className="flex w-full flex-row justify-end">

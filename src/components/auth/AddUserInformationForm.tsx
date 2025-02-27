@@ -12,7 +12,6 @@ import ModalTemplate from "../common/modal/ModalTemplate";
 const AddUserInformationForm = (props: IModalComponent) => {
   const authStore = useAuthStore();
   const toastifyStore = useToastifyStore();
-
   const { formState, register, setValue, getValues, trigger } = useForm({
     resolver: zodResolver(AddUserInformationFormSchema),
     defaultValues: {
@@ -131,4 +130,5 @@ const AddUserInformationForm = (props: IModalComponent) => {
     </ModalTemplate>
   );
 };
+
 export default AddUserInformationForm;

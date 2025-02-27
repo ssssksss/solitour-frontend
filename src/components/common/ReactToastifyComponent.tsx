@@ -1,3 +1,5 @@
+"use client";
+
 import useToastifyStore from "@/stores/toastifyStore";
 import { useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";

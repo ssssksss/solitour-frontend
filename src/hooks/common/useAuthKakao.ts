@@ -1,17 +1,15 @@
 "use client";
 
-import AddUserInformationInitForm from "@/components/auth/AddUserInformationInitForm";
-import AuthLoading from "@/components/auth/AuthLoading";
 import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
 import useAuthStore from "@/stores/authStore";
-import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-const AuthKaKaoContainer = () => {
+export const useAuthKakao = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { setUser } = useAuthStore();
   const [loading, setLoading] = useState(true);
   const methods = useForm({
@@ -23,7 +21,20 @@ const AuthKaKaoContainer = () => {
       isCheckTerm: false,
       isCheckPrivacy: false,
     },
+    mode: "onChange",
   });
+
+  // 액세스 토큰을 이용해서 사용자 정보 조회
+  const getUserInfo = async () => {
+    const userDataResponse = await fetch("/api/auth/user");
+    if (userDataResponse.status == 200) {
+      const userData = await userDataResponse.json();
+      setUser(userData);
+      router.push("/");
+    } else {
+      throw new Error("Failed to fetch user data");
+    }
+  };
 
   const handleSubmit = async (isAgree: boolean) => {
     setLoading(true);
@@ -48,11 +59,9 @@ const AuthKaKaoContainer = () => {
         isAgree ? "/api/auth/user/info/agree" : "/api/auth/user/info/disagree",
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          cache: "no-store",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(requestData),
+          cache: "no-store",
         },
       );
 
@@ -60,17 +69,8 @@ const AuthKaKaoContainer = () => {
         throw new Error("Failed to login");
       }
 
-      // 액세스 토큰을 이용해서 사용자 정보 조회
-      const userDataResponse = await fetch("/api/auth/user");
-      if (userDataResponse.status == 200) {
-        const userData = await userDataResponse.json();
-        setUser(userData);
-        router.push("/");
-      } else {
-        throw new Error("Failed to fetch user data");
-      }
+      await getUserInfo();
     } catch (error) {
-      console.error("로그인 실패", error);
       router.push("/auth/signin");
     }
   };
@@ -89,13 +89,10 @@ const AuthKaKaoContainer = () => {
   };
 
   useEffect(() => {
-    const _queryStringObject = UrlQueryStringToObject<{
-      [key: string]: string;
-    }>(window.location.href);
-    const kakaoInitLogin = async () => {
+    (async () => {
       try {
         const response = await fetch(
-          `/api/auth/kakao/getToken?code=${_queryStringObject?.code}`,
+          `/api/auth/kakao/getToken?code=${searchParams.get("code")}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -107,46 +104,27 @@ const AuthKaKaoContainer = () => {
         if (!response.ok) {
           throw new Error("Failed to login");
         }
+
         const data = await response.json();
-        if (data == "PENDING") {
+
+        if (data === "PENDING") {
           setLoading(false);
           return;
         }
 
-        // 액세스 토큰을 이용해서 사용자 정보 조회
-        const userDataResponse = await fetch("/api/auth/user");
-        if (userDataResponse.status == 200) {
-          const userData = await userDataResponse.json();
-          setUser(userData);
-          router.push("/");
-        } else {
-          throw new Error("Failed to fetch user data");
-        }
+        await getUserInfo();
       } catch (error) {
-        console.error("로그인 실패", error);
         router.push("/auth/signin");
       }
-    };
-
-    kakaoInitLogin();
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      {loading ? (
-        <AuthLoading />
-      ) : (
-        <FormProvider {...methods}>
-          <AddUserInformationInitForm
-            handleSubmit={handleSubmit}
-            handleInputChange={handleInputChange}
-            handleHomeButtonClick={handleHomeButtonClick}
-          />
-        </FormProvider>
-      )}
-    </>
-  );
+  return {
+    loading,
+    methods,
+    handleSubmit,
+    handleInputChange,
+    handleHomeButtonClick,
+  };
 };
-
-export default AuthKaKaoContainer;

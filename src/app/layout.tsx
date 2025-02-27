@@ -1,6 +1,7 @@
+import FloatingButton from "@/components/common/FloatingButton";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
-import FloatingButtonContainer from "@/containers/common/FloatingButtonContainer";
+import ReactToastifyComponent from "@/components/common/ReactToastifyComponent";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import Script from "next/script";
@@ -64,6 +65,7 @@ export default function RootLayout({
         content="f3050a18a497b05cce9e8a446425f3182c3c368b"
       />
       <body className="flex h-full flex-col">
+        <ReactToastifyComponent />
         <Header />
         <div className="flex w-full items-center justify-center">
           <div className="flex w-[60rem] flex-col items-center max-[1024px]:w-full max-[1024px]:px-[3.375rem] max-[744px]:px-6">
@@ -71,7 +73,7 @@ export default function RootLayout({
           </div>
         </div>
         <Footer />
-        <FloatingButtonContainer />
+        <FloatingButton />
         <div id="modal-root"></div>
         <Script
           type="text/javascript"

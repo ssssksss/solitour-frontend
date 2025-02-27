@@ -1,7 +1,7 @@
-import AuthKaKaoContainer from "@/containers/auth/AuthKaKaoContainer";
+import AuthLoading from "@/components/auth/AuthLoading";
 
 const Page = () => {
-  return <AuthKaKaoContainer />;
+  return <AuthLoading />;
 };
 
 export default Page;
