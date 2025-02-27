@@ -12,9 +12,8 @@ import { FormProvider, useForm } from "react-hook-form";
 
 const AuthKaKaoContainer = () => {
   const router = useRouter();
-  const authStore = useAuthStore();
+  const { setUser } = useAuthStore();
   const [loading, setLoading] = useState(true);
-
   const methods = useForm({
     resolver: zodResolver(AddUserInformationFormSchema),
     defaultValues: {
@@ -65,7 +64,7 @@ const AuthKaKaoContainer = () => {
       const userDataResponse = await fetch("/api/auth/user");
       if (userDataResponse.status == 200) {
         const userData = await userDataResponse.json();
-        authStore.setUser(userData);
+        setUser(userData);
         router.push("/");
       } else {
         throw new Error("Failed to fetch user data");
@@ -99,9 +98,7 @@ const AuthKaKaoContainer = () => {
           `/api/auth/kakao/getToken?code=${_queryStringObject?.code}`,
           {
             method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             cache: "no-store",
             credentials: "include",
           },
@@ -120,7 +117,7 @@ const AuthKaKaoContainer = () => {
         const userDataResponse = await fetch("/api/auth/user");
         if (userDataResponse.status == 200) {
           const userData = await userDataResponse.json();
-          authStore.setUser(userData);
+          setUser(userData);
           router.push("/");
         } else {
           throw new Error("Failed to fetch user data");

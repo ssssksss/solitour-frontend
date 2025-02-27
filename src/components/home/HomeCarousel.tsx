@@ -15,9 +15,7 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
         src={images.length > 0 ? images[currentIndex] : ""}
         alt="carousel-image"
         fill={true}
-        style={{
-          objectFit: "cover",
-        }}
+        style={{ objectFit: "cover" }}
       />
       <div className="relative m-auto flex h-[33.75rem] w-[60rem] flex-col items-center justify-end max-[1024px]:h-72 max-[1024px]:w-[90%]">
         <div className="absolute bottom-52 left-0 flex flex-col gap-4 max-[1024px]:bottom-16">
