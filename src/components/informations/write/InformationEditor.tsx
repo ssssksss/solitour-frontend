@@ -1,18 +1,18 @@
 import { IoIosArrowDown } from "react-icons/io";
-import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
 import { useEditorStoreType } from "@/stores/editorStore";
 import ItemTag from "../common/ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
-import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";
-import CategoryModalContainer from "@/containers/informations/write/CategoryModalContainer";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { useFormContext } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
 import HashSpinner from "@/components/common/HashSpinner";
+import CategoryModal from "./CategoryModal";
+import ImageUploadItem from "./ImageUploadItem";
+import PlaceModal from "./PlaceModal";
 
-interface Props {
+interface InformationEditorProps {
   pathname: string;
   editorStore: useEditorStoreType;
   locationModal: boolean;
@@ -46,15 +46,13 @@ const InformationEditor = ({
   closeCategoryModal,
   onChangeHashTagHandler,
   onChangeTipHandler,
-}: Props) => {
+}: InformationEditorProps) => {
   const formContext = useFormContext();
 
   return (
     <div className="flex w-full flex-col">
-      {locationModal && <PlaceModalContainer closeModal={closeLocationModal} />}
-      {categoryModal && (
-        <CategoryModalContainer closeModal={closeCategoryModal} />
-      )}
+      {locationModal && <PlaceModal closeModal={closeLocationModal} />}
+      {categoryModal && <CategoryModal closeModal={closeCategoryModal} />}
       <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`정보 ${pathname}하기`}
@@ -139,7 +137,7 @@ const InformationEditor = ({
       >
         {editorStore.images.map((_, index) => (
           <div key={index}>
-            <ImageUploadItemContainer index={index} />
+            <ImageUploadItem imageIndex={index} />
           </div>
         ))}
       </div>

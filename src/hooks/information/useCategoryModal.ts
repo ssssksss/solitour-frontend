@@ -1,17 +1,12 @@
 "use client";
 
-import CategoryModal from "@/components/informations/write/CategoryModal";
 import { CategoryResponseDto } from "@/types/CategoryDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-interface Props {
-  closeModal: () => void;
-}
-
-const CategoryModalContainer = ({ closeModal }: Props) => {
-  const [parentCategory, setParentCategory] = useState<number>(0);
+export const useCategoryModal = (closeModal: () => void) => {
+  const [parentCategory, setParentCategory] = useState(0);
   const [categories, setCategories] = useState<CategoryResponseDto[]>();
   const formContext = useFormContext();
 
@@ -28,14 +23,14 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
     formContext.trigger("categoryId");
   };
 
-  const onCancel = () => {
+  const handleCancelClick = () => {
     setParentCategory(0);
     formContext.setValue("categoryId", 0);
     formContext.trigger("categoryId");
     closeModal();
   };
 
-  const onSave = () => {
+  const handleSaveClick = () => {
     closeModal();
   };
 
@@ -54,17 +49,13 @@ const CategoryModalContainer = ({ closeModal }: Props) => {
     })();
   }, []);
 
-  return (
-    <CategoryModal
-      categories={categories}
-      parentCategory={parentCategory}
-      categoryId={formContext.getValues("categoryId")}
-      setParentCategoryId={setParentCategoryId}
-      setCategory={setCategory}
-      onCancel={onCancel}
-      onSave={onSave}
-    />
-  );
+  return {
+    categories,
+    parentCategory,
+    categoryId: formContext.getValues("categoryId"),
+    setParentCategoryId,
+    setCategory,
+    handleCancelClick,
+    handleSaveClick,
+  };
 };
-
-export default CategoryModalContainer;

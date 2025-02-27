@@ -1,17 +1,12 @@
 "use client";
 
-import PlaceModal from "@/components/informations/write/PlaceModal";
-import { useDebounce } from "@/hooks/useDebounce";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { useDebounce } from "../useDebounce";
 
-interface Props {
-  closeModal: () => void;
-}
-
-const PlaceModalContainer = ({ closeModal }: Props) => {
+export const usePlaceModal = (closeModal: () => void) => {
   const formContext = useFormContext();
-  const [isCustom, setIsCustom] = useState<boolean>(false);
+  const [isCustom, setIsCustom] = useState(false);
 
   // 장소 검색 객체 (place search)
   const [ps, setPs] = useState<any>();
@@ -64,7 +59,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     });
   }, 300);
 
-  const onResetPlace = () => {
+  const handlePlaceReset = () => {
     formContext.setValue("province", "");
     formContext.setValue("city", "");
     formContext.setValue("informationAddress", "");
@@ -76,7 +71,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     closeModal();
   };
 
-  const onChangePlace = (placeInfo: {
+  const handlePlaceChange = (placeInfo: {
     place_name: string;
     address_name: string;
     id: string;
@@ -98,7 +93,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     closeModal();
   };
 
-  const onChangeAddress = (addressInfo: {
+  const handleAddressChange = (addressInfo: {
     address_name: string;
     x: string;
     y: string;
@@ -116,13 +111,9 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     formContext.watch();
   };
 
-  const onChangeCustomPlaceName = (placeName: string) => {
+  const handleCustomPlaceNameChange = (placeName: string) => {
     formContext.setValue("placeName", placeName);
     formContext.trigger("placeName");
-  };
-
-  const onClick = (isCustom: boolean) => {
-    setIsCustom(isCustom);
   };
 
   useEffect(() => {
@@ -137,26 +128,21 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     }
   }, []);
 
-  return (
-    <PlaceModal
-      placeInfos={placeInfos}
-      addressInfos={addressInfos}
-      handleLocationSearch={handleLocationSearch}
-      handleAddressSearch={handleAddressSearch}
-      isCustom={isCustom}
-      canTypePlaceName={formContext.getValues("placeId") === "0"}
-      canRegister={
-        formContext.getValues("informationAddress") !== "" &&
-        formContext.getValues("placeName") !== ""
-      }
-      onClick={onClick}
-      onResetPlace={onResetPlace}
-      onChangePlace={onChangePlace}
-      onChangeAddress={onChangeAddress}
-      onChangeCustomPlaceName={onChangeCustomPlaceName}
-      closeModal={closeModal}
-    />
-  );
+  return {
+    formContext,
+    placeInfos,
+    addressInfos,
+    isCustom,
+    canTypePlaceName: formContext.getValues("placeId") === "0",
+    canRegister:
+      formContext.getValues("informationAddress") !== "" &&
+      formContext.getValues("placeName") !== "",
+    setIsCustom,
+    handleLocationSearch,
+    handleAddressSearch,
+    handlePlaceReset,
+    handlePlaceChange,
+    handleAddressChange,
+    handleCustomPlaceNameChange,
+  };
 };
-
-export default PlaceModalContainer;

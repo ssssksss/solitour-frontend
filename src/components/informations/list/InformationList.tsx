@@ -1,9 +1,9 @@
 import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 import { LOCATION_ID } from "@/constants/informations/location";
 import InformationItemContainer from "@/containers/common/InformationItemContainer";
-import InformationPaginationContainer from "@/containers/informations/list/InformationPaginationContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
+import InformationPagination from "./InformationPagination";
 
 async function getInformationList(
   page: number,
@@ -87,7 +87,7 @@ const InformationList = async ({
               />
             ))}
           </div>
-          <InformationPaginationContainer
+          <InformationPagination
             currentPage={page}
             totalPages={data.page.totalPages}
           />

@@ -1,25 +1,23 @@
-import { CategoryResponseDto } from "@/types/CategoryDto";
+"use client";
+
+import { useCategoryModal } from "@/hooks/information/useCategoryModal";
 import { MdClose } from "react-icons/md";
 
-interface Props {
-  categories?: CategoryResponseDto[];
-  parentCategory: number;
-  categoryId: number;
-  setParentCategoryId: (parentCategoryId: number) => void;
-  setCategory: (categoryId: number, categoryName: string) => void;
-  onCancel: () => void;
-  onSave: () => void;
+interface CategoryModalProps {
+  closeModal: () => void;
 }
 
-const CategoryModal = ({
-  categories,
-  parentCategory,
-  categoryId,
-  setParentCategoryId,
-  setCategory,
-  onCancel,
-  onSave,
-}: Props) => {
+const CategoryModal = ({ closeModal }: CategoryModalProps) => {
+  const {
+    categories,
+    parentCategory,
+    categoryId,
+    setParentCategoryId,
+    setCategory,
+    handleCancelClick,
+    handleSaveClick,
+  } = useCategoryModal(closeModal);
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-[31.25rem] max-w-[calc(100%_-_48px)] flex-col gap-8 rounded-xl bg-white p-8">
@@ -28,8 +26,8 @@ const CategoryModal = ({
             <h3 className="text-lg font-medium text-black">카테고리 선택</h3>
             <MdClose
               className="cursor-pointer text-gray2 hover:text-main"
-              size={"2.5rem"}
-              onClick={onCancel}
+              size="2.5rem"
+              onClick={handleCancelClick}
             />
           </div>
           <div className="flex flex-row flex-wrap items-center gap-2">
@@ -80,7 +78,7 @@ const CategoryModal = ({
             <button
               className="h-[2.625rem] w-[9.5rem] rounded-full bg-main font-medium text-white shadow hover:scale-105"
               type="button"
-              onClick={onSave}
+              onClick={handleSaveClick}
             >
               적용하기
             </button>

@@ -7,20 +7,17 @@ import LottieNotFound from "../common/lottie/LottieNotFound";
  * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.
  */
 async function getBestInformationList() {
-  const cookie = (await cookies()).get("access_token");
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/main-page`,
     {
       method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       next: { revalidate: 60, tags: ["getBestInformationList"] },
     },
   );
 
   if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
     throw new Error(response.statusText);
   }
 
@@ -33,7 +30,7 @@ const BestInformationList = async () => {
   if (data.length === 0) {
     return (
       <div className="flex w-full flex-col items-center pb-12">
-        <LottieNotFound text={"여행 정보를 작성해 보세요."} />
+        <LottieNotFound text="여행 정보를 작성해 보세요." />
       </div>
     );
   }

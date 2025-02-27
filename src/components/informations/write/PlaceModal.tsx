@@ -1,59 +1,29 @@
-import { useFormContext } from "react-hook-form";
+"use client";
+
+import { usePlaceModal } from "@/hooks/information/usePlaceModal";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
 
-interface Props {
-  placeInfos?: {
-    place_name: string;
-    address_name: string;
-    id: string;
-    x: string;
-    y: string;
-  }[];
-  addressInfos?: {
-    address_name: string;
-    x: string;
-    y: string;
-  }[];
-  handleLocationSearch: (search: string) => void;
-  handleAddressSearch: (search: string) => void;
-  isCustom: boolean;
-  canTypePlaceName: boolean;
-  canRegister: boolean;
-  onClick: (isCustom: boolean) => void;
-  onResetPlace: () => void;
-  onChangePlace: (value: {
-    place_name: string;
-    address_name: string;
-    id: string;
-    x: string;
-    y: string;
-  }) => void;
-  onChangeAddress: (value: {
-    address_name: string;
-    x: string;
-    y: string;
-  }) => void;
-  onChangeCustomPlaceName: (placeName: string) => void;
+interface PlaceModalProps {
   closeModal: () => void;
 }
 
-const PlaceModal = ({
-  placeInfos,
-  addressInfos,
-  handleLocationSearch,
-  handleAddressSearch,
-  isCustom,
-  canTypePlaceName,
-  canRegister,
-  onClick,
-  onResetPlace,
-  onChangePlace,
-  onChangeAddress,
-  onChangeCustomPlaceName,
-  closeModal,
-}: Props) => {
-  const formContext = useFormContext();
+const PlaceModal = ({ closeModal }: PlaceModalProps) => {
+  const {
+    formContext,
+    placeInfos,
+    addressInfos,
+    isCustom,
+    canTypePlaceName,
+    canRegister,
+    setIsCustom,
+    handleLocationSearch,
+    handleAddressSearch,
+    handlePlaceReset,
+    handlePlaceChange,
+    handleAddressChange,
+    handleCustomPlaceNameChange,
+  } = usePlaceModal(closeModal);
 
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
@@ -62,7 +32,7 @@ const PlaceModal = ({
           <MdClose
             className="cursor-pointer text-gray2 hover:text-main"
             size={"2.5rem"}
-            onClick={onResetPlace}
+            onClick={handlePlaceReset}
           />
         </div>
         <div className="flex flex-col gap-8 px-5">
@@ -72,14 +42,14 @@ const PlaceModal = ({
               <button
                 className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
-                onClick={() => onClick(false)}
+                onClick={() => setIsCustom(false)}
               >
                 검색으로 찾기
               </button>
               <button
                 className={`h-11 flex-[50%] ${isCustom ? "bg-main text-white" : "text-gray1"}`}
                 type="button"
-                onClick={() => onClick(true)}
+                onClick={() => setIsCustom(true)}
               >
                 직접 장소 입력하기
               </button>
@@ -104,7 +74,7 @@ const PlaceModal = ({
                     key={index}
                     className="flex w-full flex-col gap-1 hover:bg-gray-100"
                     type="button"
-                    onClick={() => onChangePlace(placeInfo)}
+                    onClick={() => handlePlaceChange(placeInfo)}
                   >
                     <div className="flex flex-row items-center gap-2 text-sm text-black">
                       <TiLocation />
@@ -142,7 +112,7 @@ const PlaceModal = ({
                     key={index}
                     className="flex w-full flex-col gap-1 hover:bg-gray-100"
                     type="button"
-                    onClick={() => onChangeAddress(addressInfo)}
+                    onClick={() => handleAddressChange(addressInfo)}
                   >
                     <div className="flex flex-row items-center gap-2 text-sm text-black">
                       <TiLocation />
@@ -161,7 +131,7 @@ const PlaceModal = ({
                 autoComplete="off"
                 name="location"
                 placeholder="장소명을 입력하세요."
-                onChange={(e) => onChangeCustomPlaceName(e.target.value)}
+                onChange={(e) => handleCustomPlaceNameChange(e.target.value)}
               />
               <button
                 className={`h-[3.3125rem] w-40 rounded-full bg-main text-[0.9375rem] text-white hover:scale-105 ${canRegister ? "" : "hidden"}`}

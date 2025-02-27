@@ -76,6 +76,6 @@ export const useDiaryViewer = (diaryId: number) => {
     loading,
     openModal,
     closeModal,
-    handleDelete: handleDeleteClick,
+    handleDeleteClick,
   };
 };

@@ -4,20 +4,17 @@ import LottieNotFound from "../common/lottie/LottieNotFound";
 import { cookies } from "next/headers";
 
 async function getNewGatheringList() {
-  const cookie = (await cookies()).get("access_token");
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/gatherings/home`,
     {
       method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
 
   if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
     throw new Error("Failed to fetch data");
   }
 

@@ -16,7 +16,7 @@ interface DiaryViewerProps {
 }
 
 const DiaryViewer = ({ data }: DiaryViewerProps) => {
-  const { modalVisible, loading, openModal, closeModal, handleDelete } =
+  const { modalVisible, loading, openModal, closeModal, handleDeleteClick } =
     useDiaryViewer(data.diaryContentResponse.diaryId);
 
   return (
@@ -24,7 +24,7 @@ const DiaryViewer = ({ data }: DiaryViewerProps) => {
       {modalVisible && (
         <DeleteModal
           loading={loading}
-          handleDeleteClick={handleDelete}
+          handleDeleteClick={handleDeleteClick}
           handleCancelClick={closeModal}
         />
       )}

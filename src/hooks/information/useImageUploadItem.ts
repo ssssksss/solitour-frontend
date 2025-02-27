@@ -1,28 +1,22 @@
 "use client";
 
-import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
 import useAuthStore from "@/stores/authStore";
 import useEditorStore from "@/stores/editorStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import React from "react";
 import { useRef } from "react";
 
-interface Props {
-  index: number;
-}
-
-const ImageUploadItemContainer = ({ index }: Props) => {
+export const useImageUploadItem = (imageIndex: number) => {
   const imageRef = useRef<HTMLInputElement>(null);
   const { images, mainImageIndex, setEditor, changeImage, addImage } =
     useEditorStore();
   const editorStore = useEditorStore();
   const authStore = useAuthStore();
 
-  const onUploadButtonClicked = () => {
+  const handleUploadItemClick = () => {
     imageRef.current?.click();
   };
 
-  const previewImage = async () => {
+  const handleImageUpload = async () => {
     if (
       imageRef.current &&
       imageRef.current.files &&
@@ -56,12 +50,12 @@ const ImageUploadItemContainer = ({ index }: Props) => {
       }
 
       const result: { fileUrl: string } = await response.json();
-      changeImage(index, result.fileUrl);
+      changeImage(imageIndex, result.fileUrl);
       addImage();
     }
   };
 
-  const onRemove = (index: number) => {
+  const handleRemove = (index: number) => {
     if (editorStore.imageLoading) {
       return;
     }
@@ -77,19 +71,14 @@ const ImageUploadItemContainer = ({ index }: Props) => {
     }
   };
 
-  return (
-    <ImageUploadItem
-      index={index}
-      image={images[index]}
-      mainImageIndex={mainImageIndex}
-      imageRef={imageRef}
-      loading={editorStore.imageLoading}
-      onUploadButtonClicked={onUploadButtonClicked}
-      previewImage={previewImage}
-      setMainImageIndex={(index) => setEditor({ mainImageIndex: index })}
-      onRemove={onRemove}
-    />
-  );
+  return {
+    image: images[imageIndex],
+    mainImageIndex,
+    imageRef,
+    loading: editorStore.imageLoading,
+    handleUploadItemClick,
+    handleImageUpload,
+    setMainImageIndex: (value: number) => setEditor({ mainImageIndex: value }),
+    handleRemove,
+  };
 };
-
-export default ImageUploadItemContainer;
