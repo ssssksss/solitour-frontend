@@ -1,7 +1,7 @@
 "use client";
 
 import DeleteModal from "@/components/common/DeleteModal";
-import useToastifyStore from "@/store/toastifyStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import InformationItem from "@/components/common/InformationItem";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useState } from "react";
 

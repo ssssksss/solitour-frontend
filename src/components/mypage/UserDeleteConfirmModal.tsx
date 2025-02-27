@@ -1,5 +1,5 @@
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
+import useAuthStore from "@/stores/authStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";
 import { userResponseDto } from "@/types/UserDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
@@ -8,18 +8,18 @@ import { useState } from "react";
 import ModalTemplate from "../common/modal/ModalTemplate";
 
 interface IUserDeleteConfirmModal extends IModalComponent {
-    userInfo: userResponseDto
+  userInfo: userResponseDto;
 }
 const UserDeleteConfirmModal = (props: IUserDeleteConfirmModal) => {
   const [userDeleteText, setUserDeleteText] = useState("");
   const authStore = useAuthStore();
   const toastifyStore = useToastifyStore();
   const router = useRouter();
-    
+
   const changeUserDeleteText = (value: string) => {
     setUserDeleteText(value);
   };
-    
+
   const userDeleteHandler = async () => {
     const response = await fetchWithAuth(
       `/api/auth/user?type=${props.userInfo.provider}`,
@@ -56,13 +56,12 @@ const UserDeleteConfirmModal = (props: IUserDeleteConfirmModal) => {
       {props.closeButtonComponent}
       <div className={"flex flex-col gap-y-[.5rem]"}>
         <p>
-              1. 회원 탈퇴 후에는 복구가 불가능하며, 현재 진행 중인 모임
-              서비스나 여행일기 서비스 이용 내역이 있을 경우, 관련 정보도 함께
-              삭제됩니다.
+          1. 회원 탈퇴 후에는 복구가 불가능하며, 현재 진행 중인 모임 서비스나
+          여행일기 서비스 이용 내역이 있을 경우, 관련 정보도 함께 삭제됩니다.
         </p>
         <p>
-              2. 정보 게시글은 삭제되지 않지만 사용자와 관련된 내용은 전부
-              비공개 처리되고 이후에는 수정이나 삭제는 불가능해집니다.
+          2. 정보 게시글은 삭제되지 않지만 사용자와 관련된 내용은 전부 비공개
+          처리되고 이후에는 수정이나 삭제는 불가능해집니다.
         </p>
         <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
       </div>
@@ -82,7 +81,7 @@ const UserDeleteConfirmModal = (props: IUserDeleteConfirmModal) => {
           "h-[3rem] w-full flex-shrink-0 rounded-full bg-main text-white disabled:bg-gray2"
         }
       >
-            회원탈퇴
+        회원탈퇴
       </button>
     </ModalTemplate>
   );

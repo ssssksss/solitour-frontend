@@ -1,6 +1,6 @@
 import useModalState from "@/hooks/useModalState";
 import useOutsideClick from "@/hooks/useOutsideClick";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

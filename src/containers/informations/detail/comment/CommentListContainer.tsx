@@ -2,7 +2,7 @@
 
 import CommentList from "@/components/informations/detail/comment/CommentList";
 import { InformationCommentCreateFormSchema } from "@/lib/zod/schema/InformationCommentCreateFormSchema";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import {
   CreateInformationCommentRequestDto,
   InformationCommentListResponseDto,

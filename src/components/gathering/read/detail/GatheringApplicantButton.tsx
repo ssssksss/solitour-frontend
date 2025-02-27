@@ -1,5 +1,5 @@
 import HashSpinner from "@/components/common/HashSpinner";
-import useToastifyStore from "@/store/toastifyStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
 import { useState } from "react";
 interface IGatheringApplicantButton {

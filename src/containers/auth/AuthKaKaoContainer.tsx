@@ -3,8 +3,8 @@
 import AddUserInformationInitForm from "@/components/auth/AddUserInformationInitForm";
 import AuthLoading from "@/components/auth/AuthLoading";
 import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
+import useAuthStore from "@/stores/authStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -29,17 +29,19 @@ const AuthKaKaoContainer = () => {
 
   const handleSubmit = async (isAgree: boolean) => {
     setLoading(true);
-      
-    const requestData = isAgree ? {
-      name: methods.getValues("name"),
-      age: methods.getValues("age"),
-      sex: methods.getValues("sex"),
-      termConditionAgreement: methods.getValues("isCheckTerm"),
-      privacyPolicyAgreement: methods.getValues("isCheckPrivacy")
-    } : {
-      termConditionAgreement: methods.getValues("isCheckTerm"),
-      privacyPolicyAgreement: methods.getValues("isCheckPrivacy")
-    };
+
+    const requestData = isAgree
+      ? {
+          name: methods.getValues("name"),
+          age: methods.getValues("age"),
+          sex: methods.getValues("sex"),
+          termConditionAgreement: methods.getValues("isCheckTerm"),
+          privacyPolicyAgreement: methods.getValues("isCheckPrivacy"),
+        }
+      : {
+          termConditionAgreement: methods.getValues("isCheckTerm"),
+          privacyPolicyAgreement: methods.getValues("isCheckPrivacy"),
+        };
 
     try {
       const response = await fetch(
@@ -50,7 +52,7 @@ const AuthKaKaoContainer = () => {
             "Content-Type": "application/json",
           },
           cache: "no-store",
-          body: JSON.stringify(requestData)
+          body: JSON.stringify(requestData),
         },
       );
 
@@ -74,7 +76,7 @@ const AuthKaKaoContainer = () => {
   };
 
   const handleHomeButtonClick = async () => {
-    await fetch("/api/auth/logout", {method: "POST"});
+    await fetch("/api/auth/logout", { method: "POST" });
     router.push("/");
   };
 
@@ -103,7 +105,7 @@ const AuthKaKaoContainer = () => {
             credentials: "include",
           },
         );
-        
+
         if (!response.ok) {
           throw new Error("Failed to login");
         }
@@ -134,16 +136,17 @@ const AuthKaKaoContainer = () => {
 
   return (
     <>
-      {
-        loading ? <AuthLoading /> :
-          <FormProvider {...methods}>
-            <AddUserInformationInitForm
-              handleSubmit={handleSubmit}
-              handleInputChange={handleInputChange}
-              handleHomeButtonClick={handleHomeButtonClick}
-            />
-          </FormProvider>
-      }
+      {loading ? (
+        <AuthLoading />
+      ) : (
+        <FormProvider {...methods}>
+          <AddUserInformationInitForm
+            handleSubmit={handleSubmit}
+            handleInputChange={handleInputChange}
+            handleHomeButtonClick={handleHomeButtonClick}
+          />
+        </FormProvider>
+      )}
     </>
   );
 };

@@ -1,8 +1,8 @@
 "use client";
 
 import SupportQnADetailEdit from "@/components/support/qna/SupportQnADetailEdit";
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
+import useAuthStore from "@/stores/authStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { QnADetailType } from "@/types/QnADto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";

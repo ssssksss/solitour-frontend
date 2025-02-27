@@ -6,7 +6,7 @@ import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { FormEvent, useContext, useState } from "react";
 import { CommentContext } from "./CommentListContainer";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 
 interface CommentItemContainerProps {
   data: InformationCommentResponseDto;

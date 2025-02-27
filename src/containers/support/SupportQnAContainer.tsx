@@ -1,6 +1,6 @@
 import Pagination from "@/components/common/Pagination";
 import SupportQnAList from "@/components/support/SupportQnAList";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { QnAListElementType } from "@/types/QnADto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useSearchParams } from "next/navigation";

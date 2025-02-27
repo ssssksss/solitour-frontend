@@ -1,7 +1,7 @@
 "use client";
 
 import AuthLoading from "@/components/auth/AuthLoading";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

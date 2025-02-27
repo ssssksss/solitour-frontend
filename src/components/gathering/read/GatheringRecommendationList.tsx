@@ -2,7 +2,7 @@
 
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItem from "../../common/GatheringItem";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 
 const GatheringRecommendationList = ({

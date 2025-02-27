@@ -1,7 +1,7 @@
 "use client";
 
 import RemoveModal from "@/components/common/RemoveModal";
-import useToastifyStore from "@/store/toastifyStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams, useRouter } from "next/navigation";

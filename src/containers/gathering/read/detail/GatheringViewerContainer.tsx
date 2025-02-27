@@ -2,7 +2,7 @@
 
 import GatheringViewer from "@/components/gathering/read/detail/GatheringViewer";
 import useModalState from "@/hooks/useModalState";
-import useGatheringStore from "@/store/gatheringStore";
+import useGatheringStore from "@/stores/gatheringStore";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { useEffect } from "react";
 

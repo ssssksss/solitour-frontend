@@ -1,8 +1,8 @@
 "use client";
 
 import InformationLikeCount from "@/components/informations/detail/InformationLikeCount";
-import useAuthStore from "@/store/authStore";
-import useInformationLikeStore from "@/store/informationLikeStore";
+import useAuthStore from "@/stores/authStore";
+import useInformationLikeStore from "@/stores/informationLikeStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useEffect, useState } from "react";
 

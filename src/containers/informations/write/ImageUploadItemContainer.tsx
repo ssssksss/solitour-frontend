@@ -1,8 +1,8 @@
 "use client";
 
 import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
-import useAuthStore from "@/store/authStore";
-import useEditorStore from "@/store/editorStore";
+import useAuthStore from "@/stores/authStore";
+import useEditorStore from "@/stores/editorStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import React from "react";
 import { useRef } from "react";

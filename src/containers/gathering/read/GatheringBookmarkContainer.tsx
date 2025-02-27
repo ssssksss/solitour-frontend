@@ -1,5 +1,5 @@
 "use client";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import Image from "next/image";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import { IoIosArrowDown } from "react-icons/io";
 import ImageUploadItemContainer from "@/containers/informations/write/ImageUploadItemContainer";
-import { useEditorStoreType } from "@/store/editorStore";
+import { useEditorStoreType } from "@/stores/editorStore";
 import ItemTag from "../common/ItemTag";
 import { useDragScrollType } from "@/hooks/useDragScroll";
 import PlaceModalContainer from "@/containers/informations/write/PlaceModalContainer";

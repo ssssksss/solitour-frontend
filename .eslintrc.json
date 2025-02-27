@@ -5,7 +5,7 @@
     "semi": "error",
     "quotes": "error",
     "jsx-quotes": "error",
-    // "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "error",
     "indent": [
       "error",
       2,

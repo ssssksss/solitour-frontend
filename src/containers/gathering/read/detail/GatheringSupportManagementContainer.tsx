@@ -1,8 +1,8 @@
 import GatheringSupportManagement from "@/components/gathering/read/detail/GatheringSupportManagement";
 import useModalState from "@/hooks/useModalState";
-import useAuthStore from "@/store/authStore";
-import useGatheringStore from "@/store/gatheringStore";
-import useToastifyStore from "@/store/toastifyStore";
+import useAuthStore from "@/stores/authStore";
+import useGatheringStore from "@/stores/gatheringStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -14,9 +14,9 @@ interface IGatheringSupportManagementContainer {
   openChattingUrl: string;
   allowedGender: string;
   allowedAgeRange: {
-    startAge: number,
-    endAge: number,
-  }
+    startAge: number;
+    endAge: number;
+  };
 }
 const GatheringSupportManagementContainer = (
   props: IGatheringSupportManagementContainer,
@@ -59,7 +59,7 @@ const GatheringSupportManagementContainer = (
     });
     if (res.ok) {
       setGatheringStatus(null);
-      if(gatheringStatus == "CONSENT") {
+      if (gatheringStatus == "CONSENT") {
         gatheringStore.setGathering({
           currentParticipants: gatheringStore.currentParticipants - 1,
         });
@@ -130,8 +130,14 @@ const GatheringSupportManagementContainer = (
       isFullParticipants={
         gatheringStore.personCount == gatheringStore.currentParticipants
       }
-      isAllowedGender={props.allowedGender == "ALL" || authStore.sex.toUpperCase() == props.allowedGender}
-      isAllowedAgeRange={authStore.age <= props.allowedAgeRange.startAge && authStore.age >= props.allowedAgeRange.endAge}
+      isAllowedGender={
+        props.allowedGender == "ALL" ||
+        authStore.sex.toUpperCase() == props.allowedGender
+      }
+      isAllowedAgeRange={
+        authStore.age <= props.allowedAgeRange.startAge &&
+        authStore.age >= props.allowedAgeRange.endAge
+      }
     />
   );
 };

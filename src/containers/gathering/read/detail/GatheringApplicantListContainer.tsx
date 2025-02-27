@@ -1,8 +1,8 @@
 "use client";
 
 import GatheringApplicantList from "@/components/gathering/read/detail/GatheringApplicantList";
-import useAuthStore from "@/store/authStore";
-import useGatheringStore from "@/store/gatheringStore";
+import useAuthStore from "@/stores/authStore";
+import useGatheringStore from "@/stores/gatheringStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useParams } from "next/navigation";
 import { useState } from "react";

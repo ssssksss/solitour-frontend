@@ -6,7 +6,7 @@ import Pagination from "@/components/common/Pagination";
 import GatheringCardList from "@/components/gathering/read/GatheringCardList";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
 import useModalState from "@/hooks/useModalState";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { Gathering } from "@/types/GatheringDto";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -97,9 +97,7 @@ const GatheringCardListContainer = () => {
         <SkeletonGatheringList />
       ) : (
         <>
-          <Modal
-            modalState={modalState}
-          >
+          <Modal modalState={modalState}>
             <AddUserInformationForm />
           </Modal>
           <GatheringCardList

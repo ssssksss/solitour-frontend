@@ -2,10 +2,10 @@
 
 import Header from "@/components/common/Header";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const HeaderContainer = () => {
   const pathname = usePathname();
@@ -63,13 +63,9 @@ const HeaderContainer = () => {
           }
           return;
         }
-        authStore.setUser({
-          id: -1,
-        });
+        authStore.setUser({ id: -1 });
       } catch {
-        authStore.setUser({
-          id: -1,
-        });
+        authStore.setUser({ id: -1 });
       }
     };
     login();

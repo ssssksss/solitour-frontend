@@ -6,7 +6,7 @@ import { Modal } from "@/components/common/modal/Modal";
 import Pagination from "@/components/common/Pagination";
 import MyPageGatheringList from "@/components/mypage/MyPageGatheringList";
 import useModalState from "@/hooks/useModalState";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { Gathering } from "@/types/GatheringDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter, useSearchParams } from "next/navigation";

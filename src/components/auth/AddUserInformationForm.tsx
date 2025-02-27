@@ -1,8 +1,8 @@
 "use client";
 
 import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
+import useAuthStore from "@/stores/authStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";

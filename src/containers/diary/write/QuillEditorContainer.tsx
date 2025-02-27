@@ -1,7 +1,7 @@
 "use client";
 
 import QuillEditor from "@/components/diary/write/QuillEditor";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { useEffect, useMemo, useRef, useState } from "react";

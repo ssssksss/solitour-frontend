@@ -3,7 +3,7 @@
 import ButtonList from "@/components/informations/detail/ButtonList";
 import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { useState } from "react";
 
 interface Props {

@@ -5,7 +5,7 @@ import FloatingButton from "@/components/common/FloatingButton";
 import { Modal } from "@/components/common/modal/Modal";
 import useModalState from "@/hooks/useModalState";
 import useOutsideClick from "@/hooks/useOutsideClick";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
@@ -51,9 +51,7 @@ const FloatingButtonContainer = () => {
 
   return (
     <>
-      <Modal
-        modalState={modalState}
-      >
+      <Modal modalState={modalState}>
         <AddUserInformationForm />
       </Modal>
       <FloatingButton

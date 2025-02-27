@@ -1,8 +1,8 @@
 import MyPageUserImage from "@/components/mypage/MyPageUserImage";
 import { useDragAndDrop } from "@/hooks/useDragAndDrop";
 import useModalState from "@/hooks/useModalState";
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
+import useAuthStore from "@/stores/authStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useState } from "react";
 

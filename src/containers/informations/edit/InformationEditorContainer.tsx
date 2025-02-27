@@ -6,8 +6,8 @@ import useDragScroll from "@/hooks/useDragScroll";
 import useModalBackHandler from "@/hooks/useModalBackHandler";
 import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
 import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
-import useAuthStore from "@/store/authStore";
-import useEditorStore from "@/store/editorStore";
+import useAuthStore from "@/stores/authStore";
+import useEditorStore from "@/stores/editorStore";
 import {
   InformationDetailDto,
   InformationRegisterResponseDto,

@@ -1,8 +1,8 @@
 "use client";
 
 import HeaderSidebar from "@/components/common/HeaderSidebar";
-import useAuthStore from "@/store/authStore";
-import { debounce } from "@/utils/debounce";
+import { useDebounce } from "@/hooks/useDebounce";
+import useAuthStore from "@/stores/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -32,13 +32,13 @@ const HeaderSidebarContainer = ({ onClose }: Props) => {
     onClose();
   };
 
-  useEffect(() => {
-    const handleResize = debounce(() => {
-      if (window.innerWidth > 745) {
-        onClose();
-      }
-    }, 100);
+  const handleResize = useDebounce(() => {
+    if (window.innerWidth > 745) {
+      onClose();
+    }
+  }, 100);
 
+  useEffect(() => {
     handleResize();
 
     window.addEventListener("resize", handleResize);

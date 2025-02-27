@@ -1,6 +1,6 @@
 "use client";
 import GatheringLike from "@/components/gathering/read/GatheringLike";
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useState } from "react";
 

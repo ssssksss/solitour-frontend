@@ -2,7 +2,7 @@
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { GatheringCreateFormSchema } from "@/lib/zod/schema/GatheringCreateFormSchema";
-import useToastifyStore from "@/store/toastifyStore";
+import useToastifyStore from "@/stores/toastifyStore";
 import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
