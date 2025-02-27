@@ -24,7 +24,8 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(
-      `${process.env.BACKEND_URL}/api/users/mypage/information/${category}` +url.search,
+      `${process.env.BACKEND_URL}/api/users/mypage/information/${category}` +
+        url.search,
       {
         method: "GET",
         headers: {
@@ -41,7 +42,7 @@ export async function GET(request: NextRequest) {
 
     return response;
     // return NextResponse.json({ status: 200, message: "마이페이지 게시물 조회 성공" });
-  } catch (err) {
+  } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
   }
 }

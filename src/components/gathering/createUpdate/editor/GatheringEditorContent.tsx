@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form";
 
-interface IGatheringEditorContent {}
-const GatheringEditorContent = (props: IGatheringEditorContent) => {
+const GatheringEditorContent = () => {
   const formContext = useFormContext();
+
   return (
     <article className={"flex w-full flex-col"}>
       <div className="relative w-full">

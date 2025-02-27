@@ -1,10 +1,6 @@
 import GatheringEditorTitle from "@/components/gathering/createUpdate/editor/GatheringEditorTitle";
 
-interface IGatheringEditorTitleContainer {}
-
-const GatheringEditorTitleContainer = (
-  props: IGatheringEditorTitleContainer,
-) => {
+const GatheringEditorTitleContainer = () => {
   return <GatheringEditorTitle />;
 };
 export default GatheringEditorTitleContainer;

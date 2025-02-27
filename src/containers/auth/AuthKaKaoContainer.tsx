@@ -4,7 +4,6 @@ import AddUserInformationInitForm from "@/components/auth/AddUserInformationInit
 import AuthLoading from "@/components/auth/AuthLoading";
 import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
 import useAuthStore from "@/stores/authStore";
-import useToastifyStore from "@/stores/toastifyStore";
 import UrlQueryStringToObject from "@/utils/UrlQueryStringToObject";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -30,6 +29,7 @@ const AuthKaKaoContainer = () => {
   const handleSubmit = async (isAgree: boolean) => {
     setLoading(true);
 
+    /* eslint-disable indent */
     const requestData = isAgree
       ? {
           name: methods.getValues("name"),
@@ -42,6 +42,7 @@ const AuthKaKaoContainer = () => {
           termConditionAgreement: methods.getValues("isCheckTerm"),
           privacyPolicyAgreement: methods.getValues("isCheckPrivacy"),
         };
+    /* eslint-enable indent */
 
     try {
       const response = await fetch(

@@ -1,8 +1,6 @@
 import { userResponseDto } from "@/types/UserDto";
-import Image from "next/image";
 import Link from "next/link";
 import UserImage from "../auth/UserImage";
-import { MdKeyboardArrowRight } from "react-icons/md";
 
 interface MyPageHeaderProps {
   userInfo: userResponseDto;

@@ -19,7 +19,7 @@ interface CommentListContainerProps {
 
 export const CommentContext = createContext({
   page: 0,
-  setPage: (_newPage: number) => {},
+  setPage: (newPage: number) => {},
   getCommentList: async () => {},
 });
 

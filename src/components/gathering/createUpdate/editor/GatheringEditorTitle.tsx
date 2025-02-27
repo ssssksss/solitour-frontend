@@ -1,9 +1,5 @@
 import { useFormContext } from "react-hook-form";
 
-interface FormValues {
-  title: string;
-}
-
 const GatheringEditorTitle = () => {
   const formContext = useFormContext();
 

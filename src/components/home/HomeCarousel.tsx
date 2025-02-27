@@ -1,9 +1,8 @@
-import { Banner } from "@/types/BannerDto";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  images: Banner[];
+  images: string[];
   currentIndex: number;
   onClick: (index: number) => void;
 }
@@ -13,7 +12,7 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
     <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80">
       <Image
         className="-z-10"
-        src={images.length > 0 ? images[currentIndex].url : ""}
+        src={images.length > 0 ? images[currentIndex] : ""}
         alt="carousel-image"
         fill={true}
         style={{
@@ -34,14 +33,14 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
           </Link>
         </div>
         <div className="flex w-[60rem] flex-row items-center justify-center max-[1024px]:w-[90%]">
-          {images.map((image, index) => (
+          {images.map((_, index) => (
             <button
               key={index}
               className={
                 "flex-grow border-b-4" +
                 ` ${index === currentIndex ? "border-b-white" : "border-b-white/50"}`
               }
-              onClick={(e) => onClick(index)}
+              onClick={() => onClick(index)}
             />
           ))}
         </div>

@@ -8,9 +8,6 @@ interface Props {
 
 const SupportSearch = ({ loading }: Props) => {
   const searchParams = useSearchParams();
-  const [dropdownValue, setDropdownValue] = useState(
-    searchParams.get("tagName") != null ? "태그" : "제목",
-  );
   const [searchValue, setSearchValue] = useState<string>(
     searchParams.get("search") || searchParams.get("tagName") || "",
   );

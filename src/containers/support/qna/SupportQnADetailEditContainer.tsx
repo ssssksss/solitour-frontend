@@ -19,7 +19,6 @@ const SupportQnADetailEditContainer = ({
   const toastifyStore = useToastifyStore();
   const router = useRouter();
   const [content, setContent] = useState("");
-  const [messageList, setMessageList] = useState(data.qnaMessages || []);
 
   const changeInputHandler = (value: string) => {
     setContent(value);
@@ -86,7 +85,7 @@ const SupportQnADetailEditContainer = ({
     <>
       <SupportQnADetailEdit
         data={data}
-        messageList={messageList}
+        messageList={data.qnaMessages || []}
         userId={authStore.id}
         changeInputHandler={changeInputHandler}
         questionSubmitHandler={questionSubmitHandler}

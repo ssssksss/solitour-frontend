@@ -2,11 +2,7 @@ import GatheringExcludeComplete from "@/components/gathering/read/GatheringExclu
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IGatheringExcludeCompleteContainer {}
-
-const GatheringExcludeCompleteContainer = (
-  props: IGatheringExcludeCompleteContainer,
-) => {
+const GatheringExcludeCompleteContainer = () => {
   const [isExclude, setIsExclude] = useState(true);
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);

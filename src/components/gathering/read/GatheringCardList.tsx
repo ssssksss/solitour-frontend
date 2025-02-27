@@ -22,7 +22,7 @@ const GatheringCardList = ({
           onClick={(e) => checkAccessGathering(e)}
           className="mt-6 grid h-auto w-full justify-items-center gap-5 min-[744px]:grid-cols-2 min-[1024px]:grid-cols-3"
         >
-          {data?.map((i, index) => (
+          {data?.map((i) => (
             <GatheringItem
               key={i.gatheringId}
               data={i}

@@ -1,7 +1,7 @@
 "use client";
 
 import DiaryPagination from "@/components/diary/list/DiaryPagination";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface Props {
   currentPage: number;

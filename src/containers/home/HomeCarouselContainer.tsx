@@ -1,15 +1,15 @@
 "use client";
 
 import HomeCarousel from "@/components/home/HomeCarousel";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const HomeCarouselContainer = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [bannerList, _] = useState([
-    { id: 0, name: "", url: "/images/carousel-image1.avif" },
-    { id: 0, name: "", url: "/images/carousel-image2.avif" },
-    { id: 0, name: "", url: "/images/carousel-image3.avif" },
-    { id: 0, name: "", url: "/images/carousel-image4.avif" },
+  const bannerList = useRef([
+    "/images/carousel-image1.avif",
+    "/images/carousel-image2.avif",
+    "/images/carousel-image3.avif",
+    "/images/carousel-image4.avif",
   ]);
 
   const onClick = (index: number) => {
@@ -18,7 +18,8 @@ const HomeCarouselContainer = () => {
 
   useEffect(() => {
     const timer = setInterval(
-      () => setCurrentIndex((currentIndex + 1) % (bannerList.length || 1)),
+      () =>
+        setCurrentIndex((currentIndex + 1) % (bannerList.current.length || 1)),
       3000,
     );
 
@@ -30,7 +31,7 @@ const HomeCarouselContainer = () => {
 
   return (
     <HomeCarousel
-      images={bannerList}
+      images={bannerList.current}
       currentIndex={currentIndex}
       onClick={onClick}
     />

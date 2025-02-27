@@ -1,6 +1,4 @@
-interface ISupportTerms {}
-
-const SupportTerms = (props: ISupportTerms) => {
+const SupportTerms = () => {
   return (
     <section>
       <article className="mb-20 mt-10 flex w-full flex-col gap-10">
