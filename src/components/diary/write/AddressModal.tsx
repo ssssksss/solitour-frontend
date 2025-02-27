@@ -1,6 +1,5 @@
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
-import { DebouncedState } from "use-debounce";
 
 interface Props {
   placeInfos?: {
@@ -10,8 +9,8 @@ interface Props {
   addressInfos?: {
     address_name: string;
   }[];
-  handleLocationSearch: DebouncedState<(search: string) => void>;
-  handleAddressSearch: DebouncedState<(search: string) => void>;
+  handleLocationSearch: (search: string) => void;
+  handleAddressSearch: (search: string) => void;
   flag: boolean;
   onResetAddress: () => void;
   onChangeAddress: (value: { address_name: string }) => void;

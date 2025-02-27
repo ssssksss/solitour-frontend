@@ -31,7 +31,6 @@
     "react-toastify": "^10.0.6",
     "sanitize-html": "^2.13.1",
     "sharp": "^0.33.5",
-    "use-debounce": "^10.0.3",
     "uuid": "^10.0.0",
     "zod": "^3.23.8",
     "zustand": "^4.5.5"

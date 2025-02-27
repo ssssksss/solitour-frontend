@@ -1,9 +1,9 @@
 "use client";
 
 import PlaceModal from "@/components/informations/write/PlaceModal";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useDebouncedCallback } from "use-debounce";
 
 interface Props {
   closeModal: () => void;
@@ -39,7 +39,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     }[]
   >();
 
-  const handleLocationSearch = useDebouncedCallback((search: string) => {
+  const handleLocationSearch = useDebounce((search: string) => {
     // 키워드로 장소를 검색합니다.
     ps.keywordSearch(search, (result: any, status: any) => {
       // 정상적으로 검색이 완료됐으면
@@ -49,7 +49,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     });
   }, 300);
 
-  const handleAddressSearch = useDebouncedCallback((search: string) => {
+  const handleAddressSearch = useDebounce((search: string) => {
     // 주소로 좌표를 검색합니다.
     geocoder.addressSearch(search, (result: any, status: any) => {
       // 정상적으로 검색이 완료됐으면
@@ -87,7 +87,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     formContext.setValue("province", temp[0].slice(0, 2) ?? "");
     formContext.setValue(
       "city",
-      temp[0].slice(0, 2) === "세종" ? "세종" : temp[1] ?? "",
+      temp[0].slice(0, 2) === "세종" ? "세종" : (temp[1] ?? ""),
     );
     formContext.setValue("informationAddress", placeInfo.address_name);
     formContext.setValue("placeId", placeInfo.id);
@@ -107,7 +107,7 @@ const PlaceModalContainer = ({ closeModal }: Props) => {
     formContext.setValue("province", temp[0].slice(0, 2) ?? "");
     formContext.setValue(
       "city",
-      temp[0].slice(0, 2) === "세종" ? "세종" : temp[1] ?? "",
+      temp[0].slice(0, 2) === "세종" ? "세종" : (temp[1] ?? ""),
     );
     formContext.setValue("informationAddress", addressInfo.address_name);
     formContext.setValue("placeXAxis", addressInfo.x);

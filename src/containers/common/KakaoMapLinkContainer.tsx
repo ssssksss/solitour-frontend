@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
 
 interface Props {
   placeName: string; // 장소명

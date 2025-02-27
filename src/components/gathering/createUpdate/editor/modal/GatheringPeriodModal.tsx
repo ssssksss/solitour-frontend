@@ -1,4 +1,5 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import { useDebounce } from "@/hooks/useDebounce";
 import "@/styles/reactDataRange.css";
 import { IModalComponent } from "@/types/ModalState";
 import { add, addDays, format, isAfter, isSameDay } from "date-fns";
@@ -6,7 +7,6 @@ import ko from "date-fns/locale/ko";
 import { useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 import { useFormContext } from "react-hook-form";
-import { useDebouncedCallback } from "use-debounce";
 
 const GatheringPeriodModal = (props: IModalComponent) => {
   const formContext = useFormContext();
@@ -25,7 +25,7 @@ const GatheringPeriodModal = (props: IModalComponent) => {
     },
   ]);
 
-  const handleResize = useDebouncedCallback(() => {
+  const handleResize = useDebounce(() => {
     setWindowWidth(window.innerWidth);
   }, 16);
 

@@ -1,7 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
-import { DebouncedState } from "use-debounce";
 
 interface Props {
   placeInfos?: {
@@ -16,8 +15,8 @@ interface Props {
     x: string;
     y: string;
   }[];
-  handleLocationSearch: DebouncedState<(search: string) => void>;
-  handleAddressSearch: DebouncedState<(search: string) => void>;
+  handleLocationSearch: (search: string) => void;
+  handleAddressSearch: (search: string) => void;
   isCustom: boolean;
   canTypePlaceName: boolean;
   canRegister: boolean;
