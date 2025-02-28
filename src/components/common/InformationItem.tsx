@@ -1,9 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
-import InformationLikeCountContainer from "@/containers/common/InformationLikeCountContainer";
 import { useInformationItem } from "@/hooks/common/useInformationItem";
+import HeartIcon from "./icons/HeartIcon";
 
 interface InformationItemProps {
   informationId: number;
@@ -89,11 +91,10 @@ const InformationItem = ({
             </p>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <InformationLikeCountContainer
-              informationId={informationId}
-              likeCount={likeCount}
-              isLike={isLike}
-            />
+            <div className="flex flex-row items-center gap-1 stroke-gray2 text-xs text-gray2">
+              <HeartIcon className="stroke-inherit" />
+              <p>{convertNumberToShortForm(likeCount)}</p>
+            </div>
             <div className="flex flex-row items-center gap-1 text-gray2">
               <Image
                 src="/icons/eyes-icon.svg"

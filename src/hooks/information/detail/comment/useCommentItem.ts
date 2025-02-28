@@ -1,6 +1,6 @@
 "use client";
 
-import { CommentContext } from "@/containers/informations/detail/comment/CommentListContainer";
+import { CommentContext } from "@/components/informations/detail/comment/CommentList";
 import { InformationCommentUpdateFormSchema } from "@/lib/zod/schema/InformationCommentUpdateFormSchema";
 import useAuthStore from "@/stores/authStore";
 import { InformationCommentResponseDto } from "@/types/InformationCommentDto";

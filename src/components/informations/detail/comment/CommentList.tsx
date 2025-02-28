@@ -1,3 +1,5 @@
+"use client";
+
 import HashSpinner from "@/components/common/HashSpinner";
 import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
 import CommentPagination from "./CommentPagination";

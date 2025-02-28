@@ -1,6 +1,6 @@
 "use client";
 
-import { CommentContext } from "@/containers/informations/detail/comment/CommentListContainer";
+import { CommentContext } from "@/components/informations/detail/comment/CommentList";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useContext, useState } from "react";
 

@@ -5,7 +5,7 @@ interface SupportHeaderProps {
   menu: string;
 }
 
-const SupportHeader = ({ menu: active }: SupportHeaderProps) => {
+const SupportHeader = ({ menu }: SupportHeaderProps) => {
   return (
     <div className="mb-4 flex w-full flex-col items-start py-1">
       <div className="flex w-full flex-col items-start gap-y-4 pt-[2.375rem]">
@@ -20,7 +20,7 @@ const SupportHeader = ({ menu: active }: SupportHeaderProps) => {
             key={tab.value}
             href={`/support?menu=${tab.value}`}
             className={`flex max-w-fit flex-shrink-0 transform items-center justify-center rounded-full px-6 py-3 text-lg font-medium outline-[1px] outline-offset-[-1px] outline-[#e3e3e3b8] transition-transform duration-300 ease-in-out ${
-              tab.value === `${active}`
+              tab.value === menu
                 ? "bg-main text-white outline-0"
                 : "text-gray-700 outline hover:bg-gray-200 hover:text-main"
             }`}

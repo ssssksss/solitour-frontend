@@ -23,16 +23,6 @@ const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
               {userInfo.nickname}
             </div>
             <div className="text-gray1">{userInfo.email}</div>
-            {/* <Link
-              className="group flex flex-row items-center gap-1 pt-4 text-sm text-gray1 hover:text-main"
-              href="/point"
-            >
-              포인트
-              <span className="flex flex-row items-center font-semibold text-black group-hover:text-main">
-                100P <MdKeyboardArrowRight size="1rem" className="pt-px" />
-              </span>
-            </Link> */}
-            {/* TODO */}
           </div>
         </div>
         <Link
@@ -45,4 +35,5 @@ const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
     </div>
   );
 };
+
 export default MyPageHeader;
