@@ -53,7 +53,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname.startsWith("/support")) {
-    const validMenus = ["about", "notice", "faq", "qna", "contact", "terms"];
+    const validMenus = ["about", "notice", "faq", "terms"];
     const url = new URL(request.url);
     const menu = url.searchParams.get("menu");
     if (!menu && url.pathname == "/support") {
@@ -105,7 +105,5 @@ export const config = {
     "/auth/:path*",
     "/mypage/:path*",
     "/support",
-    "/support/qna/write",
-    "/support/qna/detail/:path*",
   ],
 };

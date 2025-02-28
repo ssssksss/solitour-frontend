@@ -2,13 +2,17 @@ import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdFirstPage, MdLastPage } from "react-icons/md";
 
-interface Props {
+interface PaginationProps {
   currentPage: number;
   totalPages: number;
   pageHandler: (currentPage: number) => void;
 }
 
-const Pagination = ({ currentPage, totalPages, pageHandler }: Props) => {
+const Pagination = ({
+  currentPage,
+  totalPages,
+  pageHandler,
+}: PaginationProps) => {
   const pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
   const leftPage = Math.max(currentPage - 2, 1);
   const rightPage = Math.min(leftPage + 4, totalPages);
@@ -78,7 +82,7 @@ const Pagination = ({ currentPage, totalPages, pageHandler }: Props) => {
           />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem] opacity-100"> </div>
+        <div className="aspect-square w-[0.875rem] opacity-100" />
       )}
     </div>
   );

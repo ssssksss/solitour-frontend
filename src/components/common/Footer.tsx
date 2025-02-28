@@ -53,7 +53,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link className="hover:text-main" href="/support?menu=about">
-                  서비스소개
+                  서비스 소개
                 </Link>
               </li>
             </ul>
