@@ -1,38 +1,43 @@
 "use client";
 
-import InformationItem from "@/components/common/InformationItem";
 import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-interface Props {
-  informationId: number;
-  categoryName: string;
-  isBookMark: boolean;
-  isLike: boolean;
-  title: string;
-  image: string;
-  address: string;
-  likeCount: number;
-  viewCount: number;
-}
-
-const InformationItemContainer = ({
-  informationId,
-  categoryName,
-  isBookMark,
-  isLike,
-  title,
-  image,
-  address,
-  likeCount,
-  viewCount,
-}: Props) => {
+export const useInformationItem = (
+  informationId: number,
+  categoryName: string,
+  initialIsBookMark: boolean,
+) => {
   const userId = useAuthStore().id;
-  const [isBookMarked, setIsBookMarked] = useState<boolean>(isBookMark);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isBookMarked, setIsBookMarked] = useState(initialIsBookMark);
+  const [loading, setLoading] = useState(false);
+  const categoryTagStyle = useMemo(() => {
+    switch (categoryName) {
+      case "맛집":
+      case "혼카페":
+      case "혼밥":
+      case "혼술":
+        return "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]";
+      case "숙박":
+      case "호텔/펜션":
+      case "게스트하우스":
+      case "모텔":
+      case "홈/빌라":
+      case "한옥":
+        return "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]";
+      case "액티비티":
+      case "레저":
+      case "관광지":
+      case "전시":
+      case "편집/소품샵":
+        return "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]";
+      default:
+        return "";
+    }
+  }, [categoryName]);
 
-  const onBookMarkClick = async () => {
+  const handleBookMarkClick = async () => {
     if (loading) {
       return;
     }
@@ -82,21 +87,5 @@ const InformationItemContainer = ({
     setLoading(false);
   };
 
-  return (
-    <InformationItem
-      informationId={informationId}
-      categoryName={categoryName}
-      userId={userId}
-      isBookMark={isBookMarked}
-      isLike={isLike}
-      title={title}
-      image={image}
-      address={address}
-      likeCount={likeCount}
-      viewCount={viewCount}
-      onBookMarkClick={onBookMarkClick}
-    />
-  );
+  return { userId, isBookMarked, categoryTagStyle, handleBookMarkClick };
 };
-
-export default InformationItemContainer;

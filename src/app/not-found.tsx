@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Solitour의 Not found 페이지",
 };
 
-const NotFound = () => {
+export default function NotFound() {
   return (
     <main className="flex flex-col items-center justify-center gap-6 py-20">
       <div className="relative aspect-[75/46] w-[23.4375rem] max-[744px]:w-80">
@@ -41,6 +41,4 @@ const NotFound = () => {
       </div>
     </main>
   );
-};
-
-export default NotFound;
+}

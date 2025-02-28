@@ -1,15 +1,15 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import TabMenuContainer from "../common/TabMenuContainer";
 import MyPageGatheringContainer from "./MyPageGatheringContainer";
 import MyPageInformationContainer from "./MyPageInformationContainer";
+import TabMenu from "@/components/mypage/TabMenu";
 
 const MyPageMainContainer = () => {
   const searchParams = useSearchParams();
 
   return (
-    <TabMenuContainer
+    <TabMenu
       tabs={[
         {
           label: "정보",

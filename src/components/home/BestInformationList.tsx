@@ -1,7 +1,7 @@
-import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import { BestInformationResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 import LottieNotFound from "../common/lottie/LottieNotFound";
+import InformationItem from "../common/InformationItem";
 
 /**
  * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.
@@ -37,12 +37,12 @@ const BestInformationList = async () => {
 
   return (
     <div className="mt-6 grid w-full grid-cols-3 items-center gap-4 p-1 max-[1024px]:grid-cols-2 max-[744px]:flex max-[744px]:w-fit">
-      {data.map((value, index) => (
-        <InformationItemContainer
-          key={index}
+      {data.map((value) => (
+        <InformationItem
+          key={value.informationId}
           informationId={value.informationId}
           categoryName={value.parentCategoryName}
-          isBookMark={value.isBookMark}
+          initialIsBookMarked={value.isBookMark}
           isLike={value.isLike}
           title={value.title}
           image={value.thumbNailImage}

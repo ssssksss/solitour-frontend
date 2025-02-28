@@ -1,6 +1,6 @@
-import InformationItemContainer from "@/containers/common/InformationItemContainer";
+import InformationItem from "../common/InformationItem";
 
-type MyBookmarkListProps = {
+interface MyBookmarkListProps {
   data: (
     | {
         id: number;
@@ -25,7 +25,7 @@ type MyBookmarkListProps = {
         views: number;
       }
   )[];
-};
+}
 
 const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
   return (
@@ -33,11 +33,11 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
       {data.map((post, index) => {
         if (!("qualification" in post)) {
           return (
-            <InformationItemContainer
-              key={"post" + post.id}
+            <InformationItem
+              key={post.id}
               informationId={post.id}
               categoryName={post.category}
-              isBookMark={true}
+              initialIsBookMarked={true}
               isLike={false}
               title={post.title}
               image={post.image}
@@ -47,25 +47,7 @@ const MyBookmarkList = ({ data }: MyBookmarkListProps) => {
             />
           );
         } else {
-          return (
-            // <GatheringItem
-            //   key={index}
-            //   id={index + 1}
-            //   category={post.category}
-            //   bookmark={post.bookmark}
-            //   title={post.title}
-            //   username={post.username}
-            //   date={post.date}
-            //   location={post.location}
-            //   time={post.time}
-            //   current={post.current}
-            //   total={post.total}
-            //   qualification={post.qualification}
-            //   likes={post.likes}
-            //   views={post.views}
-            // />
-            <div key={index}> </div>
-          );
+          return <div key={index} />;
         }
       })}
     </div>

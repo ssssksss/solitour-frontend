@@ -8,7 +8,7 @@ interface Props {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }
 
-export default async function page(props: Props) {
+export default async function Page(props: Props) {
   const searchParams = await props.searchParams;
   const page = Number(searchParams["page"]);
   if (page <= 0 || !Number.isSafeInteger(page)) {

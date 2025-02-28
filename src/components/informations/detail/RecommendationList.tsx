@@ -1,5 +1,5 @@
+import InformationItem from "@/components/common/InformationItem";
 import LottieNotFound from "@/components/common/lottie/LottieNotFound";
-import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
 
 interface RecommendationListProps {
@@ -17,11 +17,11 @@ const RecommendationList = ({ data }: RecommendationListProps) => {
       ) : (
         <div className="mt-6 grid grid-cols-3 items-center gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
           {data.recommendInformation.map((value) => (
-            <InformationItemContainer
+            <InformationItem
               key={value.informationId}
               informationId={value.informationId}
               categoryName={value.categoryName}
-              isBookMark={value.isBookMark}
+              initialIsBookMarked={value.isBookMark}
               isLike={value.isLike}
               title={value.title}
               image={value.thumbNailImage}

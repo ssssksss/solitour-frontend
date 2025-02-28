@@ -1,7 +1,5 @@
 import AuthLoading from "@/components/auth/AuthLoading";
 
-const Page = () => {
+export default function Page() {
   return <AuthLoading />;
-};
-
-export default Page;
+}

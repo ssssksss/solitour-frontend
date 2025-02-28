@@ -1,9 +1,7 @@
-import SupportAboutContainer from "./SupportAboutContainer";
-import SupportContactContainer from "./SupportContactContainer";
-import SupportFAQContainer from "./SupportFAQContainer";
+import SupportAbout from "@/components/support/about/SupportAbout";
 import SupportNoticeContainer from "./SupportNoticeContainer";
-import SupportQnAContainer from "./SupportQnAContainer";
-import SupportTermsContainer from "./SupportTermsContainer";
+import SupportFAQList from "@/components/support/SupportFAQList";
+import SupportTerms from "@/components/support/SupportTerms";
 
 interface ISupportBodyContainer {
   active: string | null;
@@ -11,12 +9,10 @@ interface ISupportBodyContainer {
 const SupportBodyContainer = ({ active }: ISupportBodyContainer) => {
   return (
     <>
-      {active == "about" && <SupportAboutContainer />}
+      {active == "about" && <SupportAbout />}
       {active == "notice" && <SupportNoticeContainer />}
-      {active == "faq" && <SupportFAQContainer />}
-      {active == "qna" && <SupportQnAContainer />}
-      {active == "terms" && <SupportTermsContainer />}
-      {active == "contact" && <SupportContactContainer />}
+      {active == "faq" && <SupportFAQList />}
+      {active == "terms" && <SupportTerms />}
     </>
   );
 };

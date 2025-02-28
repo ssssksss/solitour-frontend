@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "Solitour의 모임 등록하기 페이지",
 };
 
-export default function page() {
+export default function Page() {
   return (
     <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem]"}>
       <GatheringCreateContainer />

@@ -1,13 +1,13 @@
 import ItemTag from "../common/ItemTag";
 import Image from "next/image";
 import { TiLocation } from "react-icons/ti";
-import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import ButtonList from "./ButtonList";
 import ImageList from "./ImageList";
 import InformationLikeCount from "./InformationLikeCount";
+import KakaoMapLink from "./KakaoMapLink";
 
 interface InformationViewerProps {
   informationId: number;
@@ -125,7 +125,7 @@ const InformationViewer = ({ informationId, data }: InformationViewerProps) => {
         </div>
       </div>
       <div className="mt-20 flex h-48 flex-col">
-        <KakaoMapLinkContainer
+        <KakaoMapLink
           placeName={data.placeResponse.name}
           placeId={data.placeResponse.searchId}
           placeYAxis={data.placeResponse.yaxis}

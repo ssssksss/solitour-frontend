@@ -1,5 +1,5 @@
-import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import InformationItemSkeleton from "../skeleton/common/InformationItemSkeleton";
+import InformationItem from "../common/InformationItem";
 
 interface Information {
   informationId: number;
@@ -31,11 +31,11 @@ const MyPageInformationList = ({
                 <InformationItemSkeleton key={index} />
               ))
             : elements.map((value) => (
-                <InformationItemContainer
+                <InformationItem
                   key={value.informationId}
                   informationId={value.informationId}
                   categoryName={value.zoneCategoryParentName}
-                  isBookMark={value.isBookMark}
+                  initialIsBookMarked={value.isBookMark}
                   isLike={false}
                   title={value.title}
                   image={value.thumbNailImage}

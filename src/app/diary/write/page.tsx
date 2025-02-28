@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Solitour의 여행 일기 등록 페이지",
 };
 
-export default function page() {
+export default function Page() {
   return (
     <div className="flex w-full flex-col items-center">
       <Breadcrumbs

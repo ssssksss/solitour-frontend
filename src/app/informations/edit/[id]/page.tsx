@@ -43,7 +43,7 @@ export async function generateMetadata(props: Props) {
   };
 }
 
-export default async function page(props: Props) {
+export default async function Page(props: Props) {
   const params = await props.params;
   const { id } = params;
   const informationId = Number(id);

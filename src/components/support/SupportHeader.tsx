@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-interface ISupportHeader {
+interface SupportHeaderProps {
   active: string | null;
 }
 
@@ -8,12 +8,10 @@ const tabs = [
   { name: "서비스소개", value: "about" },
   { name: "공지사항", value: "notice" },
   { name: "FAQ", value: "faq" },
-  // { name: "1:1 문의", value: "qna" },
-  // { name: "1:1 문의", value: "contact" },
   { name: "이용약관", value: "terms" },
 ];
 
-const SupportHeader = ({ active }: ISupportHeader) => {
+const SupportHeader = ({ active }: SupportHeaderProps) => {
   return (
     <div className="mb-4 flex w-full flex-col items-start py-1">
       <div className={"flex w-full flex-col items-start gap-y-4 pt-[2.375rem]"}>

@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 };
 
 async function getUserInfo() {
-
   const access_token = (await cookies()).get("access_token");
   const refresh_token = (await cookies()).get("refresh_token");
   const response = await fetchWithTokenRefreshSSR<userResponseDto>({
@@ -23,18 +22,14 @@ async function getUserInfo() {
   return response;
 }
 
-
-export default async function page() {
+export default async function Page() {
   const userInfo = await getUserInfo();
   return (
     <main
-      className={
-        "flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]"
-      }
+      className={"flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]"}
     >
-      <MyPageHeaderContainer userInfo={userInfo} /> 
+      <MyPageHeaderContainer userInfo={userInfo} />
       <MyPageMainContainer />
     </main>
   );
 }
-              

@@ -7,7 +7,7 @@ import BestInformationListSkeleton from "@/components/skeleton/home/BestInformat
 import NewGatheringListSkeleton from "@/components/skeleton/home/NewGatheringListSkeleton";
 import { Suspense } from "react";
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="mb-20 flex w-full flex-col items-center gap-20">
       <div className="absolute w-full">

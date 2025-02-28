@@ -1,9 +1,9 @@
 import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 import { LOCATION_ID } from "@/constants/informations/location";
-import InformationItemContainer from "@/containers/common/InformationItemContainer";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 import InformationPagination from "./InformationPagination";
+import InformationItem from "@/components/common/InformationItem";
 
 async function getInformationList(
   page: number,
@@ -14,14 +14,12 @@ async function getInformationList(
   tagName?: string,
   search?: string,
 ) {
-  const cookie = (await cookies()).get("access_token");
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations${tagName !== undefined ? "/tag/search" : ""}?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${tagName !== undefined ? `&tagName=${encodeURIComponent(tagName)}` : ""}${search !== undefined ? `&search=${search}` : ""}`,
     {
       method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
@@ -34,7 +32,7 @@ async function getInformationList(
   return response.json() as Promise<InformationListResponseDto>;
 }
 
-interface Props {
+interface InformationListProps {
   page: number;
   parentCategoryId: number;
   childCategoryId: number;
@@ -52,7 +50,7 @@ const InformationList = async ({
   order,
   tagName,
   search,
-}: Props) => {
+}: InformationListProps) => {
   const data = await getInformationList(
     page - 1,
     parentCategoryId,
@@ -69,11 +67,11 @@ const InformationList = async ({
         <div className="mt-6 flex flex-col">
           <div className="grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
             {data.content.map((value) => (
-              <InformationItemContainer
+              <InformationItem
                 key={value.informationId}
                 informationId={value.informationId}
                 categoryName={value.categoryName}
-                isBookMark={value.isBookMark}
+                initialIsBookMarked={value.isBookMark}
                 isLike={value.isLike}
                 title={value.title}
                 image={value.thumbNailImage}

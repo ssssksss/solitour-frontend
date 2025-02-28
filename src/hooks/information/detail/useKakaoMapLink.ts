@@ -2,20 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-interface Props {
-  placeName: string; // 장소명
-  placeId: number; // 장소 id 값
-  placeYAxis: number;
-  placeXAxis: number;
-}
-
-const KakaoMapLinkContainer = ({
-  placeName,
-  placeId,
-  placeYAxis,
-  placeXAxis,
-}: Props) => {
-  const [loading, isLoading] = useState<boolean>(true);
+export const useKakaoMapLink = (placeName: string) => {
+  const [loading, isLoading] = useState(true);
 
   useEffect(() => {
     if (window.kakao) {
@@ -83,17 +71,5 @@ const KakaoMapLinkContainer = ({
     }
   }, [placeName]);
 
-  // 지도를 담을 영역
-  // 반드시 width, height 값을 지정해야 지도가 출력된다.
-  // 최상위 태그에 id 값을 지정해야 함.
-  return (
-    <a
-      id="map"
-      className={`${loading ? "animate-pulse" : ""} h-48 w-full rounded-t-2xl border-[0.0625rem] bg-slate-200`}
-      href={`https://map.kakao.com/link/map/${placeId.toString() !== "0" ? placeId : `${placeName},${placeYAxis},${placeXAxis}`}`}
-      target="_blank"
-    />
-  );
+  return { loading };
 };
-
-export default KakaoMapLinkContainer;

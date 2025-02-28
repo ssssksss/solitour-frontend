@@ -20,7 +20,7 @@ async function getUserInfo() {
   return response;
 }
 
-export default async function page() {
+export default async function Page() {
   const userInfo = await getUserInfo();
 
   return (

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Solitour의 Error 페이지",
 };
 
-const Error = () => {
+export default function Error() {
   return (
     <main className="flex w-full items-center justify-center px-6 py-20">
       <div className="flex w-full flex-col items-start justify-center">
@@ -45,6 +45,4 @@ const Error = () => {
       </div>
     </main>
   );
-};
-
-export default Error;
+}

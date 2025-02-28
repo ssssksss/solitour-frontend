@@ -3,60 +3,33 @@ import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import InformationLikeCountContainer from "@/containers/common/InformationLikeCountContainer";
+import { useInformationItem } from "@/hooks/common/useInformationItem";
 
-interface Props {
+interface InformationItemProps {
   informationId: number;
   categoryName: string;
-  userId?: number;
-  isBookMark: boolean;
+  initialIsBookMarked: boolean;
   isLike: boolean;
   title: string;
   image: string;
   address: string;
   likeCount: number;
   viewCount: number;
-  onBookMarkClick: () => void;
 }
 
 const InformationItem = ({
   informationId,
   categoryName,
-  userId = 0,
-  isBookMark,
+  initialIsBookMarked,
   isLike,
   title,
   image,
   address,
   likeCount,
   viewCount,
-  onBookMarkClick,
-}: Props) => {
-  let style = "";
-  switch (categoryName) {
-    case "맛집":
-    case "혼카페":
-    case "혼밥":
-    case "혼술":
-      style = "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]";
-      break;
-    case "숙박":
-    case "호텔/펜션":
-    case "게스트하우스":
-    case "모텔":
-    case "홈/빌라":
-    case "한옥":
-      style = "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]";
-      break;
-    case "액티비티":
-    case "레저":
-    case "관광지":
-    case "전시":
-    case "편집/소품샵":
-      style = "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]";
-      break;
-    default:
-      break;
-  }
+}: InformationItemProps) => {
+  const { userId, isBookMarked, categoryTagStyle, handleBookMarkClick } =
+    useInformationItem(informationId, categoryName, initialIsBookMarked);
 
   return (
     <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main max-[744px]:min-w-[19.183125rem]">
@@ -66,14 +39,15 @@ const InformationItem = ({
           src={image}
           alt="information-image"
           fill={true}
-          style={{
-            objectFit: "cover",
-          }}
+          style={{ objectFit: "cover" }}
         />
         <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
-          {style !== "" ? (
+          {categoryTagStyle !== "" ? (
             <p
-              className={`w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold ${style}`}
+              className={
+                `${categoryTagStyle}` +
+                "w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold"
+              }
             >
               {categoryName}
             </p>
@@ -87,16 +61,14 @@ const InformationItem = ({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onBookMarkClick();
+                handleBookMarkClick();
               }}
             >
               <Image
-                src={`/icons/bookmark-${isBookMark ? "active-" : ""}icon.svg`}
+                src={`/icons/bookmark-${isBookMarked ? "active-" : ""}icon.svg`}
                 alt="bookmark-icon"
                 fill={true}
-                style={{
-                  objectFit: "contain",
-                }}
+                style={{ objectFit: "contain" }}
               />
             </button>
           )}
