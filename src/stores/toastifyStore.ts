@@ -3,8 +3,7 @@ import { devtools } from "zustand/middleware";
 
 // 1. 상태 인터페이스 정의
 interface ToastifyStoreState {
-  // type: "success" | "error" | "warning" | "info" | "default",
-  type: string;
+  type: "success" | "error" | "warning" | "info" | "default";
   message: string;
 }
 
@@ -15,36 +14,23 @@ interface ToastifyStoreActions {
 }
 
 // 3. 초기 상태 정의
-const initialState: ToastifyStoreState = {
-  type: "success",
-  message: "",
-};
+const initialState: ToastifyStoreState = { type: "success", message: "" };
+
+export type ToastifyStoreType = ToastifyStoreState & ToastifyStoreActions;
 
 // 4. 상태 및 액션 생성
 const toastifyStore: StateCreator<ToastifyStoreState & ToastifyStoreActions> = (
   set,
 ) => ({
   ...initialState,
-  initialize: () =>
-    set({
-      ...initialState,
-      type: "default",
-      message: "",
-    }),
-  setToastify: (data) =>
-    set(() => ({
-      ...data,
-    })),
+  initialize: () => set({ ...initialState, type: "default", message: "" }),
+  setToastify: (data) => set(() => ({ ...data })),
 });
 
-const useToastifyStore = create<
-  ToastifyStoreState & ToastifyStoreActions
->()<any>(
+const useToastifyStore = create<ToastifyStoreState & ToastifyStoreActions>()(
   process.env.NODE_ENV === "development"
-    ? devtools(toastifyStore)
+    ? (devtools(toastifyStore) as StateCreator<ToastifyStoreType>)
     : toastifyStore,
 );
-
-export type useToastifyStoreType = ToastifyStoreState & ToastifyStoreActions;
 
 export default useToastifyStore;

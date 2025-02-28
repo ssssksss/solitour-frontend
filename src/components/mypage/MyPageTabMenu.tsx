@@ -1,18 +1,29 @@
 "use client";
 
+import MyPageGatheringContainer from "@/containers/mypage/MyPageGatheringContainer";
+import MyPageInformationContainer from "@/containers/mypage/MyPageInformationContainer";
 import { useTabMenu } from "@/hooks/mypage/useTabMenu";
 
-interface TabMenuProps {
-  tabs: {
-    label: string;
-    content: React.ReactNode;
-    href?: string;
-    active: { name: string; value: string };
-  }[];
+const tabs = [
+  {
+    label: "정보",
+    active: { name: "mainCategory", value: "정보" },
+    content: <MyPageInformationContainer />,
+    href: "/mypage?mainCategory=정보&category=owner",
+  },
+  {
+    label: "모임",
+    active: { name: "mainCategory", value: "모임" },
+    content: <MyPageGatheringContainer />,
+    href: "/mypage?mainCategory=모임&category=host",
+  },
+];
+
+interface MyPageTabMenuProps {
   defaultActive: number;
 }
 
-const TabMenu = ({ tabs, defaultActive }: TabMenuProps) => {
+const MyPageTabMenu = ({ defaultActive }: MyPageTabMenuProps) => {
   const { activeIndex, handleTabClick } = useTabMenu(tabs, defaultActive);
 
   return (
@@ -20,12 +31,13 @@ const TabMenu = ({ tabs, defaultActive }: TabMenuProps) => {
       <div className="flex w-full gap-[1.625rem] border-b-[1px] border-gray-200">
         {tabs.map((tab, index) => (
           <button
-            key={index}
-            className={`relative h-[2rem] w-[4rem] text-center ${
-              activeIndex === index
+            key={tab.label}
+            className={
+              (activeIndex === index
                 ? "font-bold text-[#00B488]"
-                : "font-medium text-[#666]"
-            }`}
+                : "font-medium text-[#666]") +
+              "relative h-[2rem] w-[4rem] text-center"
+            }
             onClick={() => handleTabClick(index)}
           >
             {tab.label}
@@ -45,4 +57,4 @@ const TabMenu = ({ tabs, defaultActive }: TabMenuProps) => {
   );
 };
 
-export default TabMenu;
+export default MyPageTabMenu;

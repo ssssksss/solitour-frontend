@@ -1,9 +1,9 @@
-import { userResponseDto } from "@/types/UserDto";
+import { UserResponseDto } from "@/types/UserDto";
 import Link from "next/link";
 import UserImage from "../auth/UserImage";
 
 interface MyPageHeaderProps {
-  userInfo: userResponseDto;
+  userInfo: UserResponseDto;
 }
 
 const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {

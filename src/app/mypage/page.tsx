@@ -1,6 +1,6 @@
 import MyPageHeader from "@/components/mypage/MyPageHeader";
-import MyPageMainContainer from "@/containers/mypage/MyPageMainContainer";
-import { userResponseDto } from "@/types/UserDto";
+import MyPageTabMenu from "@/components/mypage/MyPageTabMenu";
+import { UserResponseDto } from "@/types/UserDto";
 import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 async function getUserInfo() {
   const accessToken = (await cookies()).get("access_token");
   const refreshToken = (await cookies()).get("refresh_token");
-  const response = await fetchWithTokenRefreshSSR<userResponseDto>({
+  const response = await fetchWithTokenRefreshSSR<UserResponseDto>({
     url: `${process.env.BACKEND_URL}/api/users/info`,
     accessToken: accessToken,
     refreshToken: refreshToken,
@@ -37,7 +37,7 @@ export default async function Page({
   return (
     <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
       <MyPageHeader userInfo={userInfo} />
-      <MyPageMainContainer />
+      <MyPageTabMenu defaultActive={mainCategory === "정보" ? 0 : 1} />
     </main>
   );
 }

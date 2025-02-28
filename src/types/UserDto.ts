@@ -5,7 +5,7 @@ interface UserImage {
   createdDate: string;
 }
 
-export interface userResponseDto {
+export interface UserResponseDto {
   id: number;
   userStatus: string;
   userImage: UserImage;
