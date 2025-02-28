@@ -1,6 +1,6 @@
 "use client";
 
-import { useDiaryPagination } from "@/hooks/diary/useDiaryPagination";
+import { useDiaryPagination } from "@/hooks/diary/list/useDiaryPagination";
 import Link from "next/link";
 import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";

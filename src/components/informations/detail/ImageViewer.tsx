@@ -1,6 +1,6 @@
 "use client";
 
-import { useImageViewer } from "@/hooks/information/useImageViewer";
+import { useImageViewer } from "@/hooks/information/detail/useImageViewer";
 import { AnimatePresence, motion } from "motion/react";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { MdClose } from "react-icons/md";

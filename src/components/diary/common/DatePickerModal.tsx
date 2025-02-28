@@ -4,7 +4,7 @@ import "@/styles/reactDataRange.css";
 import { MdClose } from "react-icons/md";
 import { Calendar } from "react-date-range";
 import { ko } from "date-fns/locale";
-import { useDatePickerModal } from "@/hooks/diary/useDatePickerModal";
+import { useDatePickerModal } from "@/hooks/diary/common/useDatePickerModal";
 
 interface DatePickerModalProps {
   closeModal: () => void;

@@ -1,7 +1,7 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/common/DiaryEditor";
-import { useDiaryCreateEditor } from "@/hooks/diary/useDiaryCreateEditor";
+import { useDiaryCreateEditor } from "@/hooks/diary/write/useDiaryCreateEditor";
 import { FormProvider } from "react-hook-form";
 
 const DiaryCreateEditor = () => {

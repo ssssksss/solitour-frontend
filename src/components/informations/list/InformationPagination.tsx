@@ -1,6 +1,6 @@
 "use client";
 
-import { useInformationPagination } from "@/hooks/information/useInformationPagination";
+import { useInformationPagination } from "@/hooks/information/list/useInformationPagination";
 import Link from "next/link";
 import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";

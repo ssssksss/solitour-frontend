@@ -8,7 +8,7 @@ import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import sanitizeHtml from "sanitize-html";
 import { motion } from "motion/react";
-import { useDiaryViewer } from "@/hooks/diary/useDiaryViewer";
+import { useDiaryViewer } from "@/hooks/diary/detail/useDiaryViewer";
 import DeleteModal from "@/components/common/DeleteModal";
 
 interface DiaryViewerProps {

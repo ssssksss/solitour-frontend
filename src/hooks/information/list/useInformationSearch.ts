@@ -2,8 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import usePreventBodyScroll from "../usePreventBodyScroll";
-import useModalBackHandler from "../useModalBackHandler";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 export const useInformationSearch = () => {
   const [modalVisible, setModalVisible] = useState(false);

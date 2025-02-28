@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useImageList } from "@/hooks/information/useImageList";
+import { useImageList } from "@/hooks/information/detail/useImageList";
 import ImageViewer from "./ImageViewer";
 
 interface ImageListProps {

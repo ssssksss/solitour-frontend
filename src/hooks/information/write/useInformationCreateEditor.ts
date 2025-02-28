@@ -8,15 +8,15 @@ import {
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useEffect, useRef, useState } from "react";
 import sanitizeHtml from "sanitize-html";
-import useDragScroll from "../useDragScroll";
 import useAuthStore from "@/stores/authStore";
 import useEditorStore from "@/stores/editorStore";
 import { useForm } from "react-hook-form";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import usePreventBodyScroll from "../usePreventBodyScroll";
-import useModalBackHandler from "../useModalBackHandler";
 import { useRouter } from "next/navigation";
+import useDragScroll from "@/hooks/useDragScroll";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 export const useInformationCreateEditor = () => {
   const imagesHook = useDragScroll();

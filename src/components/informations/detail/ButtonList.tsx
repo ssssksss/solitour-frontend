@@ -3,7 +3,7 @@
 import DeleteModal from "@/components/common/DeleteModal";
 import DeleteIcon from "@/components/common/icons/DeleteIcon";
 import EditIcon from "@/components/common/icons/EditIcon";
-import { useButtonList } from "@/hooks/information/useButtonList";
+import { useButtonList } from "@/hooks/information/detail/useButtonList";
 import Link from "next/link";
 
 interface ButtonListProps {

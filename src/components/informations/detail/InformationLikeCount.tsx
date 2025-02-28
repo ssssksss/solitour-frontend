@@ -1,5 +1,7 @@
+"use client";
+
 import HeartIcon from "@/components/common/icons/HeartIcon";
-import { useInformationLikeCount } from "@/hooks/information/useInformationLikeCount";
+import { useInformationLikeCount } from "@/hooks/information/detail/useInformationLikeCount";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 
 interface InformationLikeCountProps {

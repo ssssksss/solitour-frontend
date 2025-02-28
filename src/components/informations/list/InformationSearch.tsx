@@ -5,7 +5,7 @@ import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { VscSettings } from "react-icons/vsc";
 import InformationFilterModal from "./InformationFilterModal";
-import { useInformationSearch } from "@/hooks/information/useInformationSearch";
+import { useInformationSearch } from "@/hooks/information/list/useInformationSearch";
 
 const InformationSearch = () => {
   const {

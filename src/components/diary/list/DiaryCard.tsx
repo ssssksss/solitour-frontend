@@ -6,7 +6,7 @@ import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
 import { motion } from "motion/react";
 import { TiLocation } from "react-icons/ti";
-import { useCardFlipAnimation } from "@/hooks/diary/useCardFlipAnimation";
+import { useCardFlipAnimation } from "@/hooks/diary/list/useCardFlipAnimation";
 
 interface Props {
   diaryData: {

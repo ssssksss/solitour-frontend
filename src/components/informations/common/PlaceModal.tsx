@@ -1,6 +1,6 @@
 "use client";
 
-import { usePlaceModal } from "@/hooks/information/usePlaceModal";
+import { usePlaceModal } from "@/hooks/information/common/usePlaceModal";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
 

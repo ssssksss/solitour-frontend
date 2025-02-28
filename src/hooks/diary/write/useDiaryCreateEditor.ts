@@ -2,8 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import usePreventBodyScroll from "../usePreventBodyScroll";
-import useModalBackHandler from "../useModalBackHandler";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DiaryCreateFormSchema } from "@/lib/zod/schema/DiaryCreateFormSchema";
@@ -13,6 +11,8 @@ import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import sanitizeHtml from "sanitize-html";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 export const useDiaryCreateEditor = () => {
   const router = useRouter();

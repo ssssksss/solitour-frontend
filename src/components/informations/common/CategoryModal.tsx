@@ -1,6 +1,6 @@
 "use client";
 
-import { useCategoryModal } from "@/hooks/information/useCategoryModal";
+import { useCategoryModal } from "@/hooks/information/common/useCategoryModal";
 import { MdClose } from "react-icons/md";
 
 interface CategoryModalProps {

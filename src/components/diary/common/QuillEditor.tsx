@@ -4,7 +4,7 @@ import "react-quill-new/dist/quill.snow.css";
 import "@/styles/quillEditor.css";
 import ReactQuill from "react-quill-new";
 import HashSpinner from "@/components/common/HashSpinner";
-import { useQuillEditor } from "@/hooks/diary/useQuillEditor";
+import { useQuillEditor } from "@/hooks/diary/common/useQuillEditor";
 
 const QuillEditor = () => {
   const { loading, quillRef, modules, content, handleContentChange } =

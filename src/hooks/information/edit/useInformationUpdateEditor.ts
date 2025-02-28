@@ -1,15 +1,15 @@
 "use client";
 
 import useAuthStore from "@/stores/authStore";
-import useDragScroll from "../useDragScroll";
+import useDragScroll from "@/hooks/useDragScroll";
 import useEditorStore from "@/stores/editorStore";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import usePreventBodyScroll from "../usePreventBodyScroll";
-import useModalBackHandler from "../useModalBackHandler";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 import {
   InformationDetailDto,
   InformationRegisterResponseDto,

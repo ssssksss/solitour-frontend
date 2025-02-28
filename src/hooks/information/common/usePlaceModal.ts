@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useDebounce } from "../useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export const usePlaceModal = (closeModal: () => void) => {
   const formContext = useFormContext();

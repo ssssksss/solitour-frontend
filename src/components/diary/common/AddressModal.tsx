@@ -1,6 +1,6 @@
 "use client";
 
-import { useAddressModal } from "@/hooks/diary/useAddressModal";
+import { useAddressModal } from "@/hooks/diary/common/useAddressModal";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
 

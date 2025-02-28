@@ -1,8 +1,8 @@
 "use client";
 
-import { useInformationCreateEditor } from "@/hooks/information/useInformationCreateEditor";
-import InformationEditor from "../common/InformationEditor";
+import { useInformationCreateEditor } from "@/hooks/information/write/useInformationCreateEditor";
 import { FormProvider } from "react-hook-form";
+import InformationEditor from "../common/InformationEditor";
 
 const InformationCreateEditor = () => {
   const {

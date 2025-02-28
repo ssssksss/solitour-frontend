@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import usePreventBodyScroll from "../usePreventBodyScroll";
-import useModalBackHandler from "../useModalBackHandler";
+
 import { useRouter } from "next/navigation";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
+import useModalBackHandler from "@/hooks/useModalBackHandler";
 
 export const useDiaryViewer = (diaryId: number) => {
   const [modalVisible, setModalVisible] = useState(false);

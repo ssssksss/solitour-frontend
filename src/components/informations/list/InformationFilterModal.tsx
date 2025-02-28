@@ -1,7 +1,7 @@
 "use client";
 
 import { LOCATION } from "@/constants/informations/location";
-import { useInformationFilterModal } from "@/hooks/information/useInformationFilterModal";
+import { useInformationFilterModal } from "@/hooks/information/list/useInformationFilterModal";
 import { MdClose } from "react-icons/md";
 
 interface InformationFilterModalProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useImageUploadItem } from "@/hooks/information/useImageUploadItem";
+import { useImageUploadItem } from "@/hooks/information/common/useImageUploadItem";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { HashLoader } from "react-spinners";
