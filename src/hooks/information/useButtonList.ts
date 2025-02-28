@@ -1,19 +1,15 @@
 "use client";
 
-import DeleteModal from "@/components/common/DeleteModal";
+import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import usePreventBodyScroll from "../usePreventBodyScroll";
+import useModalBackHandler from "../useModalBackHandler";
 
-interface InformationDeleteModalContainerProps {
-  informationId: number;
-  closeModal: () => void;
-}
-
-const InformationDeleteModalContainer = ({
-  informationId,
-  closeModal,
-}: InformationDeleteModalContainerProps) => {
+export const useButtonList = (informationId: number) => {
+  const { id } = useAuthStore();
+  const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -35,13 +31,8 @@ const InformationDeleteModalContainer = ({
     router.refresh();
   };
 
-  return (
-    <DeleteModal
-      loading={loading}
-      handleDeleteClick={handleDeleteClick}
-      handleCancelClick={closeModal}
-    />
-  );
-};
+  usePreventBodyScroll(modalVisible);
+  useModalBackHandler(modalVisible, () => setModalVisible(false));
 
-export default InformationDeleteModalContainer;
+  return { id, modalVisible, loading, setModalVisible, handleDeleteClick };
+};

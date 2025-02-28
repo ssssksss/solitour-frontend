@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
-import InformationEditorContainer from "@/containers/informations/write/InformationEditorContainer";
+import InformationCreateEditor from "@/components/informations/write/InformationCreateEditor";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function page() {
           { label: "정보 등록하기", href: "" },
         ]}
       />
-      <InformationEditorContainer />
+      <InformationCreateEditor />
     </div>
   );
 }

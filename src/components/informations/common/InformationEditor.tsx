@@ -1,61 +1,65 @@
+"use client";
+
 import { IoIosArrowDown } from "react-icons/io";
-import { useEditorStoreType } from "@/stores/editorStore";
-import ItemTag from "../common/ItemTag";
-import { useDragScrollType } from "@/hooks/useDragScroll";
+import ItemTag from "./ItemTag";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
-import { useFormContext } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
 import HashSpinner from "@/components/common/HashSpinner";
 import CategoryModal from "./CategoryModal";
 import ImageUploadItem from "./ImageUploadItem";
 import PlaceModal from "./PlaceModal";
+import { useFormContext } from "react-hook-form";
+import { useDragScrollType } from "@/hooks/useDragScroll";
+import { useEditorStoreType } from "@/stores/editorStore";
 
 interface InformationEditorProps {
-  pathname: string;
-  editorStore: useEditorStoreType;
-  locationModal: boolean;
-  categoryModal: boolean;
-  inputTagRef: React.RefObject<HTMLInputElement | null>;
-  inputTipRef: React.RefObject<HTMLInputElement | null>;
+  text: string;
   imagesHook: useDragScrollType;
   loading: boolean;
-  onSubmit: () => void;
-  showLocationModal: () => void;
+  locationModalVisible: boolean;
+  categoryModalVisible: boolean;
+  inputTagRef: React.RefObject<HTMLInputElement | null>;
+  inputTipRef: React.RefObject<HTMLInputElement | null>;
+  editorStore: useEditorStoreType;
+  openLocationModal: () => void;
   closeLocationModal: () => void;
-  showCategoryModal: () => void;
+  openCategoryModal: () => void;
   closeCategoryModal: () => void;
-  onChangeHashTagHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onChangeTipHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleHashTagChange: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleTipChange: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleSubmit: () => void;
 }
 
 const InformationEditor = ({
-  pathname,
-  editorStore,
-  locationModal,
-  categoryModal,
-  inputTagRef,
-  inputTipRef,
+  text,
   imagesHook,
   loading,
-  onSubmit,
-  showLocationModal,
+  locationModalVisible,
+  categoryModalVisible,
+  inputTagRef,
+  inputTipRef,
+  editorStore,
+  openLocationModal,
   closeLocationModal,
-  showCategoryModal,
+  openCategoryModal,
   closeCategoryModal,
-  onChangeHashTagHandler,
-  onChangeTipHandler,
+  handleHashTagChange,
+  handleTipChange,
+  handleSubmit,
 }: InformationEditorProps) => {
   const formContext = useFormContext();
 
   return (
     <div className="flex w-full flex-col">
-      {locationModal && <PlaceModal closeModal={closeLocationModal} />}
-      {categoryModal && <CategoryModal closeModal={closeCategoryModal} />}
+      {locationModalVisible && <PlaceModal closeModal={closeLocationModal} />}
+      {categoryModalVisible && (
+        <CategoryModal closeModal={closeCategoryModal} />
+      )}
       <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
-        {`정보 ${pathname}하기`}
+        {`정보 ${text}하기`}
       </h1>
       <p className="mt-6 font-medium text-gray1">
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
@@ -91,7 +95,7 @@ const InformationEditor = ({
           <button
             className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm font-medium outline-none`}
             type="button"
-            onClick={showLocationModal}
+            onClick={openLocationModal}
           >
             {formContext.getValues("placeName") !== ""
               ? formContext.getValues("placeName")
@@ -106,7 +110,7 @@ const InformationEditor = ({
         <button
           className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] flex-grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold`}
           type="button"
-          onClick={showCategoryModal}
+          onClick={openCategoryModal}
         >
           {formContext.getValues("categoryId") !== 0 ? (
             formContext.getValues("categoryName")
@@ -166,7 +170,7 @@ const InformationEditor = ({
             className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100/25" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
             placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             disabled={formContext.getValues("hashtags").length >= 10}
-            onKeyUp={onChangeHashTagHandler}
+            onKeyUp={handleHashTagChange}
             onKeyDown={(e) => {
               if (e.key === "#" || e.key === " ") {
                 e.preventDefault();
@@ -267,7 +271,7 @@ const InformationEditor = ({
                 className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 pr-14 text-sm outline-none`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
-                onKeyUp={onChangeTipHandler}
+                onKeyUp={handleTipChange}
                 onKeyDown={(e) => {
                   if (e.key === ";") {
                     e.preventDefault();
@@ -306,7 +310,7 @@ const InformationEditor = ({
         <button
           className={`${editorStore.imageLoading ? "cursor-not-allowed bg-gray1" : "bg-main hover:scale-105"} mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow`}
           type="submit"
-          onClick={() => onSubmit()}
+          onClick={() => handleSubmit()}
           disabled={loading || editorStore.imageLoading}
         >
           {loading ? (
@@ -321,7 +325,7 @@ const InformationEditor = ({
               <p>등록 중...</p>
             </div>
           ) : (
-            <p>{`정보 ${pathname}하기`}</p>
+            <p>{`정보 ${text}하기`}</p>
           )}
         </button>
       </div>

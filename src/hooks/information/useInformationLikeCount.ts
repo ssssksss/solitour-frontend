@@ -1,27 +1,20 @@
 "use client";
 
-import InformationLikeCount from "@/components/informations/detail/InformationLikeCount";
 import useAuthStore from "@/stores/authStore";
 import useInformationLikeStore from "@/stores/informationLikeStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useEffect, useState } from "react";
 
-interface Props {
-  informationId: number;
-  likeCount: number;
-  isLike: boolean;
-}
-
-const InformationLikeCountContainer = ({
-  informationId,
-  likeCount,
-  isLike,
-}: Props) => {
+export const useInformationLikeCount = (
+  informationId: number,
+  likeCount: number,
+  isLike: boolean,
+) => {
   const userId = useAuthStore().id;
   const informationLikeStore = useInformationLikeStore();
   const [loading, setLoading] = useState(false);
 
-  const onLikesClick = async () => {
+  const handleLikeClick = async () => {
     if (loading) {
       return;
     }
@@ -91,14 +84,10 @@ const InformationLikeCountContainer = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <InformationLikeCount
-      clickable={userId > 0}
-      likeCount={informationLikeStore.likeCount}
-      isLiked={informationLikeStore.isLiked}
-      onLikesClick={onLikesClick}
-    />
-  );
+  return {
+    clickable: userId > 0,
+    likeCount: informationLikeStore.likeCount,
+    isLike: informationLikeStore.isLiked,
+    handleLikeClick,
+  };
 };
-
-export default InformationLikeCountContainer;

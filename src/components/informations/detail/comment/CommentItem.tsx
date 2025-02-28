@@ -1,43 +1,35 @@
+"use client";
+
 import HashSpinner from "@/components/common/HashSpinner";
 import ReportIcon from "@/components/common/icons/ReportIcon";
-import CommentDeleteModalContainer from "@/containers/informations/detail/comment/CommentDeleteModalContainer";
 import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import Image from "next/image";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import CommentDeleteModal from "./CommentDeleteModal";
+import { useCommentItem } from "@/hooks/information/detail/comment/useCommentItem";
 
 interface CommentItemProps {
   data: InformationCommentResponseDto;
-  modalVisible: boolean;
-  editable: boolean;
-  comment: string;
-  loading: boolean;
-  userId: number;
-  openModal: () => void;
-  closeModal: () => void;
-  setEditable: Dispatch<SetStateAction<boolean>>;
-  setComment: (value: string) => void;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
-const CommentItem = ({
-  data,
-  modalVisible,
-  editable,
-  comment,
-  loading,
-  userId,
-  openModal,
-  closeModal,
-  setEditable,
-  setComment,
-  onSubmit,
-}: CommentItemProps) => {
+const CommentItem = ({ data }: CommentItemProps) => {
+  const {
+    userId,
+    loading,
+    modalVisible,
+    editable,
+    comment,
+    setModalVisible,
+    setEditable,
+    setComment,
+    handleSubmit,
+  } = useCommentItem(data);
+
   return (
     <div className="flex flex-col gap-[0.625rem] border-b border-b-gray3">
       {modalVisible && (
-        <CommentDeleteModalContainer
+        <CommentDeleteModal
           commentId={data.commentId}
-          closeModal={closeModal}
+          closeModal={() => setModalVisible(false)}
         />
       )}
       <HashSpinner loading={loading} />
@@ -67,7 +59,7 @@ const CommentItem = ({
         </button>
       </div>
       {editable ? (
-        <form className="pl-[4.125rem]" onSubmit={onSubmit}>
+        <form className="pl-[4.125rem]" onSubmit={handleSubmit}>
           <div className="relative h-[4.375rem]">
             <input
               className={`${comment.length === 0 ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[2.75rem] w-full rounded-3xl border px-6 text-sm text-black outline-none`}
@@ -113,7 +105,10 @@ const CommentItem = ({
               >
                 수정
               </button>
-              <button className="hover:text-main" onClick={() => openModal()}>
+              <button
+                className="hover:text-main"
+                onClick={() => setModalVisible(true)}
+              >
                 삭제
               </button>
             </div>

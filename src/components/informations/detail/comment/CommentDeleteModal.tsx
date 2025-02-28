@@ -1,16 +1,19 @@
+"use client";
+
 import HashSpinner from "@/components/common/HashSpinner";
+import { useCommentDeleteModal } from "@/hooks/information/detail/comment/useCommentDeleteModal";
 
 interface CommentDeleteModalProps {
-  loading: boolean;
-  onDeleteClick: () => void;
-  onCancelClick: () => void;
+  commentId: number;
+  closeModal: () => void;
 }
 
 const CommentDeleteModal = ({
-  loading,
-  onDeleteClick,
-  onCancelClick,
+  commentId,
+  closeModal,
 }: CommentDeleteModalProps) => {
+  const { loading, handleDeleteClick } = useCommentDeleteModal(commentId);
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <HashSpinner loading={loading} />
@@ -19,13 +22,13 @@ const CommentDeleteModal = ({
         <div className="flex flex-row items-center justify-between gap-2">
           <button
             className="h-[2.75rem] w-[7.75rem] rounded-[1.875rem] bg-main text-sm font-semibold text-white hover:scale-105"
-            onClick={() => onDeleteClick()}
+            onClick={() => handleDeleteClick()}
           >
             삭제
           </button>
           <button
             className="h-[2.75rem] w-[7.75rem] rounded-[1.875rem] bg-black text-sm font-semibold text-white hover:scale-105"
-            onClick={() => onCancelClick()}
+            onClick={closeModal}
           >
             취소
           </button>

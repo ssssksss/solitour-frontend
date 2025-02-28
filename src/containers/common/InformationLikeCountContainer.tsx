@@ -78,7 +78,7 @@ const InformationLikeCountContainer = ({
   return (
     <InformationLikeCount
       clickable={userId > 0}
-      likeCount={currentLikeCount}
+      initialLikeCount={currentLikeCount}
       isLiked={isLiked}
       onLikesClick={onLikesClick}
     />

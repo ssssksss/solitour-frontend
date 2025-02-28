@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
 
-interface Props {
+interface ItemTagProps {
   tag: string;
   borderColor?: string;
   textColor?: string;
@@ -18,10 +18,10 @@ const ItemTag = ({
   hover,
   removable,
   onClick,
-}: Props) => {
+}: ItemTagProps) => {
   return (
     <div
-      className={`flex flex-row text-sm items-center gap-1 text-nowrap rounded-[1rem] border-[0.0625rem] px-2 py-1 font-medium ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}
+      className={`flex flex-row items-center gap-1 text-nowrap rounded-[1rem] border-[0.0625rem] px-2 py-1 text-sm font-medium ${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`}
       onClick={onClick}
     >
       <p className={`${textColor} text-sm`}>#{tag}</p>

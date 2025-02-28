@@ -1,6 +1,5 @@
 "use client";
 
-import CommentList from "@/components/informations/detail/comment/CommentList";
 import { InformationCommentCreateFormSchema } from "@/lib/zod/schema/InformationCommentCreateFormSchema";
 import useAuthStore from "@/stores/authStore";
 import {
@@ -10,20 +9,10 @@ import {
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { createContext, FormEvent, useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-interface CommentListContainerProps {
-  informationId: number;
-}
-
-export const CommentContext = createContext({
-  page: 0,
-  setPage: (newPage: number) => {},
-  getCommentList: async () => {},
-});
-
-const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
+export const useCommentList = (informationId: number) => {
   const [isFetching, setIsFetching] = useState(true);
   const [submissionLoading, setSubmissionLoading] = useState(false);
   const [commentList, setCommentList] =
@@ -31,12 +20,9 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
   const [page, setPage] = useState(1);
   const { id } = useAuthStore();
   const router = useRouter();
-
   const methods = useForm<{ comment: string }>({
     resolver: zodResolver(InformationCommentCreateFormSchema),
-    defaultValues: {
-      comment: "",
-    },
+    defaultValues: { comment: "" },
     mode: "onChange",
   });
 
@@ -62,7 +48,7 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
     setCommentList(result);
   };
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     await methods.trigger();
@@ -80,9 +66,7 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
       `/api/informations/comments/${informationId}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
         cache: "no-store",
       },
@@ -105,28 +89,16 @@ const CommentListContainer = ({ informationId }: CommentListContainerProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  return (
-    <FormProvider {...methods}>
-      <CommentContext.Provider
-        value={{
-          page,
-          setPage: (newPage: number) => setPage(newPage),
-          getCommentList,
-        }}
-      >
-        <CommentList
-          isFetching={isFetching}
-          submissionLoading={submissionLoading}
-          commentList={commentList}
-          page={page}
-          userId={id}
-          router={router}
-          setPage={(newPage: number) => setPage(newPage)}
-          onSubmit={onSubmit}
-        />
-      </CommentContext.Provider>
-    </FormProvider>
-  );
+  return {
+    isFetching,
+    submissionLoading,
+    commentList,
+    page,
+    userId: id,
+    router,
+    methods,
+    getCommentList,
+    setPage,
+    handleSubmit,
+  };
 };
-
-export default CommentListContainer;

@@ -1,31 +1,28 @@
 "use client";
 
-import InformationEditor from "@/components/informations/write/InformationEditor";
-import sanitizeOption from "@/constants/common/sanitizeOption";
-import useDragScroll from "@/hooks/useDragScroll";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
 import useAuthStore from "@/stores/authStore";
+import useDragScroll from "../useDragScroll";
 import useEditorStore from "@/stores/editorStore";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import usePreventBodyScroll from "../usePreventBodyScroll";
+import useModalBackHandler from "../useModalBackHandler";
 import {
   InformationDetailDto,
   InformationRegisterResponseDto,
   UpdateInformationRequestDto,
 } from "@/types/InformationDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import sanitizeOption from "@/constants/common/sanitizeOption";
 import sanitizeHtml from "sanitize-html";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-interface Props {
-  informationId: number;
-  data: InformationDetailDto;
-}
-
-const InformationEditorContainer = ({ informationId, data }: Props) => {
+export const useInformationUpdateEditor = (
+  informationId: number,
+  data: InformationDetailDto,
+) => {
   const imagesHook = useDragScroll();
   const { id } = useAuthStore();
   const editorStore = useEditorStore();
@@ -33,9 +30,11 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
   const inputTagRef = useRef<HTMLInputElement>(null);
   const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
+  const [locationModalVisible, setLocationModalVisible] = useState(false);
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
   const methods = useForm<{
     userId: number;
@@ -83,18 +82,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     mode: "onChange",
   });
 
-  // 장소 선택 모달창이 보이는지 여부
-  const [locationModal, setLocationModal] = useState<boolean>(false);
-
-  // 카테고리 선택 모달창이 보이는지 여부
-  const [categoryModal, setCategoryModal] = useState<boolean>(false);
-
-  usePreventBodyScroll(locationModal);
-  usePreventBodyScroll(categoryModal);
-  useModalBackHandler(locationModal, () => setLocationModal(false));
-  useModalBackHandler(categoryModal, () => setCategoryModal(false));
-
-  const showLocationModal = () => {
+  const openLocationModal = () => {
     methods.setValue("province", "");
     methods.setValue("city", "");
     methods.setValue("informationAddress", "");
@@ -103,23 +91,25 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     methods.setValue("placeYAxis", "");
     methods.setValue("placeName", "");
     methods.watch();
-    setLocationModal(true);
+    setLocationModalVisible(true);
   };
 
   const closeLocationModal = () => {
-    setLocationModal(false);
+    window.history.back();
+    setLocationModalVisible(false);
   };
 
-  const showCategoryModal = () => {
+  const openCategoryModal = () => {
     methods.setValue("categoryId", 0);
-    setCategoryModal(true);
+    setCategoryModalVisible(true);
   };
 
   const closeCategoryModal = () => {
-    setCategoryModal(false);
+    window.history.back();
+    setCategoryModalVisible(false);
   };
 
-  const onChangeHashTagHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleHashTagChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const hashtag = inputTagRef.current?.value.trim() ?? "";
       if (hashtag.length < 2) {
@@ -136,7 +126,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     }
   };
 
-  const onChangeTipHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleTipChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const tip = inputTipRef.current?.value.trim() ?? "";
       if (tip === "") {
@@ -151,7 +141,7 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     }
   };
 
-  const onSubmit = async () => {
+  const handleSubmit = async () => {
     if (editorStore.images.filter((image) => image !== "").length === 0) {
       alert("최소 한 장의 사진을 추가해 주세요.");
       return;
@@ -287,6 +277,15 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     router.refresh();
   };
 
+  usePreventBodyScroll(locationModalVisible);
+  usePreventBodyScroll(categoryModalVisible);
+  useModalBackHandler(locationModalVisible, () =>
+    setLocationModalVisible(false),
+  );
+  useModalBackHandler(categoryModalVisible, () =>
+    setCategoryModalVisible(false),
+  );
+
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
   // 로그아웃 시 로그인 페이지로 이동.
   useEffect(() => {
@@ -345,33 +344,22 @@ const InformationEditorContainer = ({ informationId, data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialize]);
 
-  return (
-    <FormProvider {...methods}>
-      <InformationEditor
-        pathname="수정"
-        editorStore={editorStore}
-        locationModal={locationModal}
-        categoryModal={categoryModal}
-        inputTagRef={inputTagRef}
-        inputTipRef={inputTipRef}
-        imagesHook={imagesHook}
-        loading={loading}
-        onSubmit={onSubmit}
-        showLocationModal={showLocationModal}
-        closeLocationModal={() => {
-          window.history.back();
-          closeLocationModal();
-        }}
-        showCategoryModal={showCategoryModal}
-        closeCategoryModal={() => {
-          window.history.back();
-          closeCategoryModal();
-        }}
-        onChangeHashTagHandler={onChangeHashTagHandler}
-        onChangeTipHandler={onChangeTipHandler}
-      />
-    </FormProvider>
-  );
+  return {
+    text: "수정",
+    methods,
+    imagesHook,
+    loading,
+    locationModalVisible,
+    categoryModalVisible,
+    inputTagRef,
+    inputTipRef,
+    editorStore,
+    openLocationModal,
+    closeLocationModal,
+    openCategoryModal,
+    closeCategoryModal,
+    handleHashTagChange,
+    handleTipChange,
+    handleSubmit,
+  };
 };
-
-export default InformationEditorContainer;

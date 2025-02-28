@@ -1,23 +1,14 @@
 "use client";
 
-import CommentDeleteModal from "@/components/informations/detail/comment/CommentDeleteModal";
+import { CommentContext } from "@/containers/informations/detail/comment/CommentListContainer";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useContext, useState } from "react";
-import { CommentContext } from "./CommentListContainer";
 
-interface CommentDeleteModalContainerProps {
-  commentId: number;
-  closeModal: () => void;
-}
-
-const CommentDeleteModalContainer = ({
-  commentId,
-  closeModal,
-}: CommentDeleteModalContainerProps) => {
+export const useCommentDeleteModal = (commentId: number) => {
   const [loading, setLoading] = useState(false);
   const { page, setPage, getCommentList } = useContext(CommentContext);
 
-  const onDeleteClick = async () => {
+  const handleDeleteClick = async () => {
     setLoading(true);
 
     const response = await fetchWithAuth(
@@ -38,13 +29,5 @@ const CommentDeleteModalContainer = ({
     }
   };
 
-  return (
-    <CommentDeleteModal
-      loading={loading}
-      onDeleteClick={onDeleteClick}
-      onCancelClick={closeModal}
-    />
-  );
+  return { loading, handleDeleteClick };
 };
-
-export default CommentDeleteModalContainer;

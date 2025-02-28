@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
-import InformationEditorContainer from "@/containers/informations/edit/InformationEditorContainer";
+import InformationUpdateEditor from "@/components/informations/edit/InformationUpdateEditor";
 import { InformationDetailDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
@@ -30,12 +30,9 @@ interface Props {
 
 export async function generateMetadata(props: Props) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const informationId = Number(id);
+
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw new Error("Not Found");
   }
@@ -48,12 +45,9 @@ export async function generateMetadata(props: Props) {
 
 export default async function page(props: Props) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const informationId = Number(id);
+
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
@@ -71,7 +65,7 @@ export default async function page(props: Props) {
           { label: "정보 수정하기", href: "" },
         ]}
       />
-      <InformationEditorContainer informationId={informationId} data={data} />
+      <InformationUpdateEditor informationId={informationId} data={data} />
     </div>
   );
 }

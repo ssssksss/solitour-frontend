@@ -1,14 +1,8 @@
 "use client";
 
-import ImageViewer from "@/components/informations/detail/ImageViewer";
 import { useMemo, useState } from "react";
 
-interface Props {
-  imageUrls: string[];
-  closeViewer: () => void;
-}
-
-const ImageViewerContainer = ({ imageUrls, closeViewer }: Props) => {
+export const useImageViewer = (imageUrls: string[]) => {
   const [[index, direction], setIndex] = useState<number[]>([0, 0]);
   const length = useMemo(() => imageUrls.length, [imageUrls.length]);
   const variants = useMemo(
@@ -35,17 +29,5 @@ const ImageViewerContainer = ({ imageUrls, closeViewer }: Props) => {
     [],
   );
 
-  return (
-    <ImageViewer
-      imageUrls={imageUrls}
-      length={length}
-      index={index}
-      direction={direction}
-      variants={variants}
-      setIndex={setIndex}
-      closeViewer={closeViewer}
-    />
-  );
+  return { index, direction, length, variants, setIndex };
 };
-
-export default ImageViewerContainer;

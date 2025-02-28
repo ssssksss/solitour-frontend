@@ -1,19 +1,17 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
+import CommentList from "@/components/informations/detail/comment/CommentList";
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";
-import CommentListContainer from "@/containers/informations/detail/comment/CommentListContainer";
 import { InformationDetailDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 
 async function getInformation(id: number) {
-  const cookie = (await cookies()).get("access_token");
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${id}`,
     {
       method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       next: { revalidate: 60, tags: [`getInformation/${id}`] },
     },
   );
@@ -32,12 +30,9 @@ interface Props {
 
 export async function generateMetadata(props: Props) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const informationId = Number(id);
+
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
@@ -50,12 +45,9 @@ export async function generateMetadata(props: Props) {
 
 export default async function page(props: Props) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const informationId = Number(id);
+
   if (informationId < 1 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");
   }
@@ -74,7 +66,7 @@ export default async function page(props: Props) {
         ]}
       />
       <InformationViewer informationId={informationId} data={data} />
-      <CommentListContainer informationId={informationId} />
+      <CommentList informationId={informationId} />
       <RecommendationList data={data} />
     </div>
   );

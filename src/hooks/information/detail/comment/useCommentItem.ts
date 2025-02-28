@@ -1,26 +1,21 @@
 "use client";
 
-import CommentItem from "@/components/informations/detail/comment/CommentItem";
+import { CommentContext } from "@/containers/informations/detail/comment/CommentListContainer";
 import { InformationCommentUpdateFormSchema } from "@/lib/zod/schema/InformationCommentUpdateFormSchema";
+import useAuthStore from "@/stores/authStore";
 import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { FormEvent, useContext, useState } from "react";
-import { CommentContext } from "./CommentListContainer";
-import useAuthStore from "@/stores/authStore";
 
-interface CommentItemContainerProps {
-  data: InformationCommentResponseDto;
-}
-
-const CommentItemContainer = ({ data }: CommentItemContainerProps) => {
+export const useCommentItem = (data: InformationCommentResponseDto) => {
+  const { id } = useAuthStore();
+  const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [editable, setEditable] = useState(false);
   const [comment, setComment] = useState(data.content);
-  const [loading, setLoading] = useState(false);
-  const { id } = useAuthStore();
   const { getCommentList } = useContext(CommentContext);
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const validatedFields = InformationCommentUpdateFormSchema.safeParse({
@@ -55,21 +50,15 @@ const CommentItemContainer = ({ data }: CommentItemContainerProps) => {
     getCommentList();
   };
 
-  return (
-    <CommentItem
-      data={data}
-      modalVisible={modalVisible}
-      editable={editable}
-      comment={comment}
-      loading={loading}
-      userId={id}
-      openModal={() => setModalVisible(true)}
-      closeModal={() => setModalVisible(false)}
-      setEditable={setEditable}
-      setComment={(value: string) => setComment(value)}
-      onSubmit={onSubmit}
-    />
-  );
+  return {
+    userId: id,
+    loading,
+    modalVisible,
+    editable,
+    comment,
+    setModalVisible,
+    setEditable,
+    setComment,
+    handleSubmit,
+  };
 };
-
-export default CommentItemContainer;
