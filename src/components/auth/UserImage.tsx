@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface UserImageProps {
   userImageAddress: string;
-  userSex?: string;
+  userSex?: string | null;
   size: number;
   addressStyle?: string;
   defaultStyle?: string;
@@ -16,7 +16,7 @@ const UserImage = ({
   return userImageAddress ? (
     <Image
       src={userImageAddress}
-      alt={"user_image"}
+      alt="user_image"
       width={size}
       height={size}
       className={`${addressStyle}`}

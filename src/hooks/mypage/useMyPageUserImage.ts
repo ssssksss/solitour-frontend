@@ -1,18 +1,17 @@
-import MyPageUserImage from "@/components/mypage/MyPageUserImage";
-import { useDragAndDrop } from "@/hooks/useDragAndDrop";
-import useModalState from "@/hooks/useModalState";
+"use client";
+
+import { useState } from "react";
+import { useDragAndDrop } from "../useDragAndDrop";
+import useModalState from "../useModalState";
 import useAuthStore from "@/stores/authStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useState } from "react";
 
-interface IMyPageUserImageContainer {
-  userImageUrl: string;
-  userSex: string | null;
-}
-
-const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
-  const [imageUrl, setImageUrl] = useState(props.userImageUrl || "");
+export const useMyPageUserImage = (
+  userImageUrl: string,
+  userSex: string | null,
+) => {
+  const [imageUrl, setImageUrl] = useState(userImageUrl || "");
   const [imageBase64Data, setImageBase64Data] = useState<string>("");
   const modalState = useModalState();
   const authStore = useAuthStore();
@@ -23,7 +22,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
     modalState.openModal(); // 이미지 편집을 위한 모달창
   };
 
-  const deleteImage = async () => {
+  const handleDeleteClick = async () => {
     const response = await fetchWithAuth("/api/auth/user-image", {
       method: "DELETE",
       "Content-Type": "application/json",
@@ -38,7 +37,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
 
     if (response.ok) {
       const { ...prevState } = authStore;
-      if (props.userSex == "male") {
+      if (userSex == "male") {
         setImageUrl("/icons/default-male-icon.svg");
         authStore.setUser({
           ...prevState,
@@ -47,7 +46,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
             address: "/icons/default-male-icon.svg",
           },
         });
-      } else if (props.userSex == "female") {
+      } else if (userSex == "female") {
         setImageUrl("/icons/default-female-icon.svg");
         authStore.setUser({
           ...prevState,
@@ -56,7 +55,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
             address: "/icons/default-female-icon.svg",
           },
         });
-      } else if (!props.userSex) {
+      } else if (!userSex) {
         setImageUrl("/icons/default-user-icon.svg");
         authStore.setUser({
           ...prevState,
@@ -74,38 +73,23 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
     modalState.closeModal();
   };
 
-  const onChangeImageUrl = (url: string) => {
+  const handleImageUrlChange = (url: string) => {
     setImageUrl(url);
   };
 
-  const {
-    isDragging,
+  const { onDragEnter, onDragLeave, onDragOver, onDropOrInputEvent } =
+    useDragAndDrop({ imageUpload });
+
+  return {
+    imageUrl,
+    imageBase64Data,
+    modalState,
     onDragEnter,
     onDragLeave,
     onDragOver,
     onDropOrInputEvent,
-  } = useDragAndDrop({ imageUpload });
-
-  return (
-    <div>
-      <MyPageUserImage
-        dragAndDrop={{
-          isDragging,
-          onDragEnter,
-          onDragLeave,
-          onDragOver,
-          onDropOrInputEvent,
-        }}
-        userImageUrl={imageUrl}
-        userSex={props.userSex}
-        modalState={modalState}
-        imageBase64Data={imageBase64Data}
-        closeCropModal={closeCropModal}
-        onChangeImageUrl={onChangeImageUrl}
-        deleteImage={deleteImage}
-      />
-    </div>
-  );
+    handleDeleteClick,
+    closeCropModal,
+    handleImageUrlChange,
+  };
 };
-
-export default MyPageUserImageContainer;

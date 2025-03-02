@@ -1,6 +1,5 @@
 "use client";
 
-import MyPageUserImageContainer from "@/containers/mypage/MyPageUserImageContainer";
 import { MYPAGE_PROFILE_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import Image from "next/image";
 import { UserResponseDto } from "@/types/UserDto";
@@ -8,6 +7,7 @@ import Breadcrumbs from "@/components/common/Breadcrumb";
 import { useMyPageProfile } from "@/hooks/mypage/profile/useMyPageProfile";
 import { Modal } from "@/components/common/modal/Modal";
 import MyPageAccountDeleteModal from "./MyPageAccountDeleteModal";
+import MyPageUserImage from "../MyPageUserImage";
 
 const NICKNAME_LENGTH = 30;
 
@@ -29,7 +29,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
     <div className="flex w-full flex-col">
       <Breadcrumbs categories={MYPAGE_PROFILE_BREADCRUMB_PATH} />
       <h1 className="text-3xl font-semibold">프로필 설정</h1>
-      <MyPageUserImageContainer
+      <MyPageUserImage
         userImageUrl={userInfo.userImage.address}
         userSex={userInfo.sex}
       />

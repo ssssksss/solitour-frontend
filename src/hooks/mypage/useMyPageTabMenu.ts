@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const useTabMenu = (
+export const useMyPageTabMenu = (
   tabs: {
     label: string;
     content: React.ReactNode;

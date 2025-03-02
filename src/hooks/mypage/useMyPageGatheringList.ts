@@ -1,16 +1,11 @@
 "use client";
 
-import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
-import CategoryList from "@/components/common/CategoryList";
-import { Modal } from "@/components/common/modal/Modal";
-import Pagination from "@/components/common/Pagination";
-import MyPageGatheringList from "@/components/mypage/MyPageGatheringList";
-import useModalState from "@/hooks/useModalState";
-import useAuthStore from "@/stores/authStore";
-import { Gathering } from "@/types/GatheringDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import useModalState from "../useModalState";
+import { Gathering } from "@/types/GatheringDto";
+import useAuthStore from "@/stores/authStore";
 
 // value 변경하지 말것 api주소와 연결되어있음
 const categories = [
@@ -28,7 +23,7 @@ const categories = [
   },
 ];
 
-const MyPageGatheringContainer = () => {
+export const useMyPageGatheringList = () => {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(
@@ -40,6 +35,7 @@ const MyPageGatheringContainer = () => {
   const authStore = useAuthStore();
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   const pageHandler = (page: number) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -48,7 +44,8 @@ const MyPageGatheringContainer = () => {
     setCurrentPage(page);
     window.history.pushState({}, "", url.toString());
   };
-  const onClickCategoryHandler = (value: string) => {
+
+  const handleCategoryClick = (value: string) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     params.delete("page");
@@ -81,7 +78,7 @@ const MyPageGatheringContainer = () => {
       setIsLoading(false);
       return;
     }
-    const fetchData = async () => {
+    (async () => {
       const res = await fetchWithAuth(
         `/api/mypage/gathering?category=${category}&page=${currentPage - 1}`,
         {
@@ -104,35 +101,20 @@ const MyPageGatheringContainer = () => {
       setElements(data.content);
       setTotalElements(data.page.totalElements);
       setIsLoading(false);
-    };
-
-    fetchData();
+    })();
   }, [searchParams, currentPage]);
 
-  return (
-    <div className="w-full">
-      <Modal modalState={modalState}>
-        <AddUserInformationForm />
-      </Modal>
-      <CategoryList
-        categories={categories}
-        onClickHandler={onClickCategoryHandler}
-        activeCategory={activeCategory}
-      />
-      <MyPageGatheringList
-        elements={elements}
-        isLoading={isLoading}
-        checkAccessGathering={checkAccessGathering}
-        isAccessGathering={
-          !!authStore.sex && !!authStore.age && authStore.id > 0
-        }
-      />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={Math.ceil(totalElements / 6)}
-        pageHandler={pageHandler}
-      />
-    </div>
-  );
+  return {
+    categories,
+    activeCategory,
+    currentPage,
+    elements,
+    totalElements,
+    isLoading,
+    modalState,
+    isAccessible: !!authStore.sex && !!authStore.age && authStore.id > 0,
+    pageHandler,
+    handleCategoryClick,
+    checkAccessGathering,
+  };
 };
-export default MyPageGatheringContainer;

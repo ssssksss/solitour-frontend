@@ -1,20 +1,20 @@
 "use client";
 
-import MyPageGatheringContainer from "@/containers/mypage/MyPageGatheringContainer";
-import MyPageInformationContainer from "@/containers/mypage/MyPageInformationContainer";
-import { useTabMenu } from "@/hooks/mypage/useTabMenu";
+import { useMyPageTabMenu } from "@/hooks/mypage/useMyPageTabMenu";
+import MyPageInformationList from "./MyPageInformationList";
+import MyPageGatheringList from "./MyPageGatheringList";
 
 const tabs = [
   {
     label: "정보",
     active: { name: "mainCategory", value: "정보" },
-    content: <MyPageInformationContainer />,
+    content: <MyPageInformationList />,
     href: "/mypage?mainCategory=정보&category=owner",
   },
   {
     label: "모임",
     active: { name: "mainCategory", value: "모임" },
-    content: <MyPageGatheringContainer />,
+    content: <MyPageGatheringList />,
     href: "/mypage?mainCategory=모임&category=host",
   },
 ];
@@ -24,7 +24,7 @@ interface MyPageTabMenuProps {
 }
 
 const MyPageTabMenu = ({ defaultActive }: MyPageTabMenuProps) => {
-  const { activeIndex, handleTabClick } = useTabMenu(tabs, defaultActive);
+  const { activeIndex, handleTabClick } = useMyPageTabMenu(tabs, defaultActive);
 
   return (
     <div className="flex flex-col justify-end">

@@ -1,9 +1,19 @@
-import CategoryList from "@/components/common/CategoryList";
-import Pagination from "@/components/common/Pagination";
-import MyPageInformationList from "@/components/mypage/MyPageInformationList";
+"use client";
+
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+interface Information {
+  informationId: number;
+  title: string;
+  zoneCategoryParentName: string;
+  zoneCategoryChildName: string;
+  viewCount: number;
+  isBookMark: boolean;
+  thumbNailImage: string;
+  likeCount: number;
+}
 
 // value 변경하지 말것 api주소와 연결되어있음
 const categories = [
@@ -17,24 +27,14 @@ const categories = [
   },
 ];
 
-interface Information {
-  informationId: number;
-  title: string;
-  zoneCategoryParentName: string;
-  zoneCategoryChildName: string;
-  viewCount: number;
-  isBookMark: boolean;
-  thumbNailImage: string;
-  likeCount: number;
-}
-
-const MyPageInformationContainer = () => {
+export const useMyPageInformationList = () => {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [elements, setElements] = useState<Information[]>([]);
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   const pageHandler = (page: number) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -43,7 +43,8 @@ const MyPageInformationContainer = () => {
     setCurrentPage(page);
     window.history.pushState({}, "", url.toString());
   };
-  const onClickCategoryHandler = (value: string) => {
+
+  const handleCategoryClick = (value: string) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     params.delete("page");
@@ -65,7 +66,8 @@ const MyPageInformationContainer = () => {
       setIsLoading(false);
       return;
     }
-    const fetchData = async () => {
+
+    (async () => {
       const res = await fetchWithAuth(
         `/api/mypage/information?category=${category}&page=${currentPage - 1}`,
         {
@@ -80,25 +82,17 @@ const MyPageInformationContainer = () => {
       setElements(data.content);
       setTotalElements(data.page.totalElements);
       setIsLoading(false);
-    };
-
-    fetchData();
+    })();
   }, [searchParams, currentPage]);
 
-  return (
-    <div className="w-full">
-      <CategoryList
-        categories={categories}
-        onClickHandler={onClickCategoryHandler}
-        activeCategory={activeCategory}
-      />
-      <MyPageInformationList elements={elements} isLoading={isLoading} />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={Math.ceil(totalElements / 6)}
-        pageHandler={pageHandler}
-      />
-    </div>
-  );
+  return {
+    categories,
+    activeCategory,
+    currentPage,
+    elements,
+    totalElements,
+    isLoading,
+    pageHandler,
+    handleCategoryClick,
+  };
 };
-export default MyPageInformationContainer;
