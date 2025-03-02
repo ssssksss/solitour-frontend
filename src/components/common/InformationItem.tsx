@@ -9,7 +9,7 @@ import HeartIcon from "./icons/HeartIcon";
 
 interface InformationItemProps {
   informationId: number;
-  categoryName: string;
+  categoryName?: string;
   initialIsBookMarked: boolean;
   isLike: boolean;
   title: string;
@@ -31,11 +31,11 @@ const InformationItem = ({
   viewCount,
 }: InformationItemProps) => {
   const { userId, isBookMarked, categoryTagStyle, handleBookMarkClick } =
-    useInformationItem(informationId, categoryName, initialIsBookMarked);
+    useInformationItem(informationId, initialIsBookMarked, categoryName);
 
   return (
     <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main max-[744px]:min-w-[19.183125rem]">
-      <Link href={`/informations/${informationId}`} className="h-[12.6875rem]">
+      <Link className="h-[12.6875rem]" href={`/informations/${informationId}`}>
         <Image
           className="-z-10 rounded-[0.875rem]"
           src={image}
@@ -46,10 +46,10 @@ const InformationItem = ({
         <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
           {categoryTagStyle !== "" ? (
             <p
-              className={
-                `${categoryTagStyle}` +
-                "w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold"
-              }
+              className={[
+                categoryTagStyle,
+                "w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold",
+              ].join(" ")}
             >
               {categoryName}
             </p>
@@ -91,8 +91,15 @@ const InformationItem = ({
             </p>
           </div>
           <div className="flex flex-row items-center gap-3">
-            <div className="flex flex-row items-center gap-1 stroke-gray2 text-xs text-gray2">
-              <HeartIcon className="stroke-inherit" />
+            <div
+              className={[
+                isLike
+                  ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]"
+                  : "fill-none stroke-gray2 text-gray2",
+                "flex flex-row items-center gap-[0.3125rem] text-xs",
+              ].join(" ")}
+            >
+              <HeartIcon className="fill-inherit stroke-inherit" />
               <p>{convertNumberToShortForm(likeCount)}</p>
             </div>
             <div className="flex flex-row items-center gap-1 text-gray2">

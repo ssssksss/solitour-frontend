@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal } from "@/components/common/modal/Modal";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { SETTING_MODAL_AGE } from "@/constants/gathering/GatheringConstant";

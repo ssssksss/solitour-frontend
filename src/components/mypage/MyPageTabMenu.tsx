@@ -32,18 +32,18 @@ const MyPageTabMenu = ({ defaultActive }: MyPageTabMenuProps) => {
         {tabs.map((tab, index) => (
           <button
             key={tab.label}
-            className={
-              (activeIndex === index
+            className={[
+              activeIndex === index
                 ? "font-bold text-[#00B488]"
-                : "font-medium text-[#666]") +
-              "relative h-[2rem] w-[4rem] text-center"
-            }
+                : "font-medium text-[#666]",
+              "relative h-[2rem] w-[4rem] text-center",
+            ].join(" ")}
             onClick={() => handleTabClick(index)}
           >
             {tab.label}
             <div
               className={`absolute bottom-[-1.5px] w-full ${activeIndex == index ? "h-0.5 bg-[#00B488]" : "opacity-0"}`}
-            ></div>
+            />
           </button>
         ))}
       </div>

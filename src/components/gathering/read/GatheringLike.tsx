@@ -1,3 +1,5 @@
+"use client";
+
 import useAuthStore from "@/stores/authStore";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";

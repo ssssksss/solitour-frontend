@@ -6,8 +6,8 @@ import { useMemo, useState } from "react";
 
 export const useInformationItem = (
   informationId: number,
-  categoryName: string,
   initialIsBookMark: boolean,
+  categoryName?: string,
 ) => {
   const userId = useAuthStore().id;
   const [isBookMarked, setIsBookMarked] = useState(initialIsBookMark);
