@@ -1,24 +1,20 @@
+"use client";
+
 import { Modal } from "@/components/common/modal/Modal";
-import { ModalState } from "@/types/ModalState";
 import { format } from "date-fns";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import GatheringPeriodModal from "./modal/GatheringPeriodModal";
+import useModalState from "@/hooks/useModalState";
 
-interface IGatheringEditorPeriod {
-  modalState: ModalState;
-}
-const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
+const GatheringEditorPeriod = () => {
   const formContext = useFormContext();
+  const modalState = useModalState();
 
   return (
-    <div
-      className={
-        "flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start"
-      }
-    >
-      <div className={"relative w-[2.625rem] flex-shrink-0"}>
-        <span className={"text-lg font-semibold"}>날짜</span>
+    <div className="flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
+      <div className="relative w-[2.625rem] flex-shrink-0">
+        <span className="text-lg font-semibold">날짜</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
       <div className="relative w-full">
@@ -78,4 +74,5 @@ const GatheringEditorPeriod = ({ modalState }: IGatheringEditorPeriod) => {
     </div>
   );
 };
+
 export default GatheringEditorPeriod;

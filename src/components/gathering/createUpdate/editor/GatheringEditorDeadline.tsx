@@ -1,24 +1,20 @@
+"use client";
+
 import { Modal } from "@/components/common/modal/Modal";
-import { ModalState } from "@/types/ModalState";
 import { format } from "date-fns";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import GatheringDeadlineModal from "./modal/GatheringDeadlineModal";
+import useModalState from "@/hooks/useModalState";
 
-interface IGatheringEditorDeadline {
-  modalState: ModalState;
-}
-const GatheringEditorDeadline = ({ modalState }: IGatheringEditorDeadline) => {
+const GatheringEditorDeadline = () => {
   const formContext = useFormContext();
+  const modalState = useModalState();
 
   return (
-    <div
-      className={
-        "flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start"
-      }
-    >
-      <div className={"relative w-[2.625rem] flex-shrink-0"}>
-        <span className={"text-lg font-semibold"}>마감</span>
+    <div className="flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
+      <div className="relative w-[2.625rem] flex-shrink-0">
+        <span className="text-lg font-semibold">마감</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
       <div className="relative w-full">

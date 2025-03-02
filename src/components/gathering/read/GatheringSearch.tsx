@@ -1,34 +1,75 @@
+"use client";
+
 import Image from "next/image";
 import Dropdown from "../../common/dropdown/Dropdown";
-
-interface Props {
-  dropDownHandler: (value: string) => void;
-  dropdownValue: string;
-  searchValue: string;
-  setSearchValue: (value: string) => void;
-  searchHandler: () => void;
-  loading: boolean;
-}
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const OPTIONS = [
-  {
-    value: "제목",
-    name: "제목",
-  },
-  {
-    value: "태그",
-    name: "태그",
-  },
+  { value: "제목", name: "제목" },
+  { value: "태그", name: "태그" },
 ];
 
-const GatheringSearch = ({
-  dropDownHandler,
-  dropdownValue,
-  searchValue,
-  setSearchValue,
-  searchHandler,
-  loading,
-}: Props) => {
+const GatheringSearch = () => {
+  const searchParams = useSearchParams();
+  const [searchValue, setSearchValue] = useState<string>(
+    searchParams.get("search") || searchParams.get("tagName") || "",
+  );
+  const [dropdownValue, setDropdownValue] = useState(
+    searchParams.get("tagName") != null ? "태그" : "제목",
+  );
+  const [loading, setLoading] = useState(true);
+
+  const searchHandler = () => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    if (dropdownValue == "태그") {
+      params.set("tagName", searchValue);
+      params.delete("page");
+      url.search = params.toString();
+      window.history.pushState({}, "", url.toString());
+    } else {
+      // 일반 검색일 경우
+      if (searchValue == params.get("search")) return;
+      searchValue == ""
+        ? params.delete("search")
+        : params.set("search", searchValue);
+      params.delete("page");
+      url.search = params.toString();
+      window.history.pushState({}, "", url.toString());
+    }
+  };
+
+  const dropDownHandler = (value: string) => {
+    setDropdownValue(value);
+    if (value == dropdownValue) return;
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.delete("page");
+    if (value == "제목") {
+      params.delete("tagName");
+      url.search = params.toString();
+      window.history.pushState({}, "", url.toString());
+      return;
+    }
+    params.delete("search");
+    // 태그 검색인 경우 글자 수 제한이 15글자이므로 글자를 제거해주는 작업
+    let _text = searchValue.trim().slice(0, 15) || "";
+    if (_text.length < 2) _text = "";
+    setSearchValue(_text);
+    params.set("tagName", _text);
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
+  };
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    setSearchValue(params.get("search") || params.get("tagName") || "");
+    setDropdownValue(params.get("tagName") != null ? "태그" : "제목");
+    setLoading(false);
+  }, [searchParams]);
+
   if (loading)
     return (
       <div className="relative flex h-[2.75rem] w-[21.4375rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
@@ -37,11 +78,7 @@ const GatheringSearch = ({
   return (
     <div className="flex flex-row items-center gap-4 max-[1024px]:justify-between max-[744px]:w-full max-[744px]:flex-col max-[744px]:items-start">
       <div className="relative z-[20] flex flex-row items-center max-[744px]:w-full">
-        <div
-          className={
-            "absolute left-0 top-0 flex h-full flex-row items-center text-sm text-gray1 hover:text-main"
-          }
-        >
+        <div className="absolute left-0 top-0 flex h-full flex-row items-center text-sm text-gray1 hover:text-main">
           <Dropdown
             options={OPTIONS}
             dropdownHandler={dropDownHandler}

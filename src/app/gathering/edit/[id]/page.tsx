@@ -1,4 +1,4 @@
-import GatheringUpdateContainer from "@/containers/gathering/createUpdate/GatheringUpdateContainer";
+import GatheringUpdateEditor from "@/components/gathering/edit/GatheringUpdateEditor";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 import { NextResponse } from "next/server";
 
@@ -25,18 +25,13 @@ async function fetchGatheringData(
 
     return await response.json();
   } catch (error) {
-    console.error("데이터를 가져오는 중 오류 발생:", error);
     throw error;
   }
 }
 
 export async function generateMetadata(props: PageProps) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const postId = Number(id);
   if (postId <= 0 || !Number.isSafeInteger(postId)) {
     throw new Error("페이지를 찾을 수 없습니다.");
@@ -50,11 +45,7 @@ export async function generateMetadata(props: PageProps) {
 
 export default async function Page(props: PageProps) {
   const params = await props.params;
-
-  const {
-    id
-  } = params;
-
+  const { id } = params;
   const postId = Number(id);
 
   if (postId <= 0 || !Number.isSafeInteger(postId)) {
@@ -68,7 +59,7 @@ export default async function Page(props: PageProps) {
     const gatheringData = await fetchGatheringData(postId);
     return (
       <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem] pt-[2rem]"}>
-        <GatheringUpdateContainer gatheringData={gatheringData} />
+        <GatheringUpdateEditor gatheringData={gatheringData} />
       </div>
     );
   } catch (error) {

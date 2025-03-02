@@ -1,19 +1,21 @@
+"use client";
+
 import Breadcrumbs from "@/components/common/Breadcrumb";
 import HashSpinner from "@/components/common/HashSpinner";
-import GatheringEditorCategoryContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorCategoryContainer";
-import GatheringEditorChattingLinkContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorChattingLinkContainer";
-import GatheringEditorContentContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorContentContainer";
-import GatheringEditorDeadlineContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorDeadlineContainer";
-import GatheringEditorHashTagContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorHashTagContainer";
-import GatheringEditorParticipantsFilterContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorParticipantsFilterContainer";
-import GatheringEditorPeriodContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorPeriodContainer";
-import GatheringEditorPlaceContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorPlaceContainer";
-import GatheringEditorTitleContainer from "@/containers/gathering/createUpdate/editor/GatheringEditorTitleContainer";
 import Image from "next/image";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { useFormContext } from "react-hook-form";
-import GatheringEditorTimeContainer from "../../../../containers/gathering/createUpdate/editor/GatheringEditorTimeContainer";
+import GatheringEditorChattingLink from "./GatheringEditorChattingLink";
+import GatheringEditorContent from "./GatheringEditorContent";
+import GatheringEditorTitle from "./GatheringEditorTitle";
+import GatheringEditorDeadline from "./GatheringEditorDeadline";
+import GatheringEditorParticipantsFilter from "./GatheringEditorParticipantsFilter";
+import GatheringEditorPlace from "./GatheringEditorPlace";
+import GatheringEditorPeriod from "./GatheringEditorPeriod";
+import GatheringEditorTime from "./GatheringEditorTime";
+import GatheringEditorCategory from "./GatheringEditorCategory";
+import GatheringEditorHashTag from "./GatheringEditorHashTag";
 
 interface IGatheringEditorEditProps {
   isEdit: true;
@@ -28,15 +30,15 @@ interface IGatheringEditorCreateProps {
 }
 
 // `isEdit` 값에 관계없이 적용 가능한 타입
-type IGatheringEditorProps =
+type GatheringEditorProps =
   | IGatheringEditorEditProps
   | IGatheringEditorCreateProps;
 
-const GatheringEditor = (props: IGatheringEditorProps) => {
+const GatheringEditor = (props: GatheringEditorProps) => {
   const formContext = useFormContext();
 
   return (
-    <div className={"flex w-full max-w-[60rem] flex-col"}>
+    <div className="flex w-full max-w-[60rem] flex-col">
       <HashSpinner loading={props.loading} />
       <Breadcrumbs
         categories={[
@@ -45,7 +47,7 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
         ]}
       />
       <div className="flex flex-col gap-[1.5rem]">
-        <h1 className={"text-3xl font-semibold"}>
+        <h1 className="text-3xl font-semibold">
           {props.isEdit ? "모임 수정하기" : "모임 등록하기"}
         </h1>
         <p>
@@ -53,24 +55,20 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
           여행을 다채롭게 경험해보세요!
         </p>
       </div>
-      <section
-        className={
-          "flex w-full max-w-full flex-wrap gap-x-[3.5rem] gap-y-[2.375rem] pt-[3rem]"
-        }
-      >
-        <GatheringEditorTitleContainer />
+      <section className="flex w-full max-w-full flex-wrap gap-x-[3.5rem] gap-y-[2.375rem] pt-[3rem]">
+        <GatheringEditorTitle />
         <div className="grid w-full gap-x-[1.875rem] gap-y-[2.375rem] max-[576px]:grid-cols-1 min-[576px]:grid-cols-2 min-[960px]:grid-cols-3">
-          <GatheringEditorPeriodContainer />
-          <GatheringEditorPlaceContainer />
-          <GatheringEditorTimeContainer />
-          <GatheringEditorDeadlineContainer />
-          <GatheringEditorCategoryContainer />
-          <GatheringEditorParticipantsFilterContainer />
+          <GatheringEditorPeriod />
+          <GatheringEditorPlace />
+          <GatheringEditorTime />
+          <GatheringEditorDeadline />
+          <GatheringEditorCategory />
+          <GatheringEditorParticipantsFilter />
         </div>
-        <GatheringEditorContentContainer />
-        <GatheringEditorChattingLinkContainer />
-        <GatheringEditorHashTagContainer />
-        <div className={"flex w-full justify-end"}>
+        <GatheringEditorContent />
+        <GatheringEditorChattingLink />
+        <GatheringEditorHashTag />
+        <div className="flex w-full justify-end">
           <button
             className={`flex h-[3rem] w-[9.5rem] flex-row items-center justify-center rounded-[2rem] px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main hover:scale-105"}`}
             onClick={() => {

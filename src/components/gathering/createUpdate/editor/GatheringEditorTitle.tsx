@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
 
 const GatheringEditorTitle = () => {
@@ -5,8 +7,8 @@ const GatheringEditorTitle = () => {
 
   return (
     <div className="relative flex w-full flex-shrink-0 items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
-      <div className={"relative w-[2.625rem] flex-shrink-0"}>
-        <span className={"text-lg font-semibold"}>제목</span>
+      <div className="relative w-[2.625rem] flex-shrink-0">
+        <span className="text-lg font-semibold">제목</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
       <div className="relative w-full">

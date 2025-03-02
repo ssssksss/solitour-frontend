@@ -12,13 +12,13 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-interface IGatheringUpdateContainer {
+interface GatheringUpdateEditorProps {
   gatheringData: GatheringDetailResponseDto;
 }
 
-const GatheringUpdateContainer = ({
+const GatheringUpdateEditor = ({
   gatheringData,
-}: IGatheringUpdateContainer) => {
+}: GatheringUpdateEditorProps) => {
   const router = useRouter();
   const toastifyStore = useToastifyStore();
   const [loading, setLoading] = useState<boolean>(false);
@@ -108,8 +108,6 @@ const GatheringUpdateContainer = ({
         throw new Error("Network response was not ok");
       }
 
-      // const data = await response.json();
-      // router.replace(`/gathering/${data.id}`);
       router.replace("/gathering");
       router.refresh();
       setLoading(false);
@@ -135,4 +133,4 @@ const GatheringUpdateContainer = ({
   );
 };
 
-export default GatheringUpdateContainer;
+export default GatheringUpdateEditor;

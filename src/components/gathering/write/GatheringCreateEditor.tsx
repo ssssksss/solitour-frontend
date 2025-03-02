@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-const GatheringCreateContainer = () => {
+const GatheringCreateEditor = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const toastifyStore = useToastifyStore();
@@ -107,4 +107,4 @@ const GatheringCreateContainer = () => {
   );
 };
 
-export default GatheringCreateContainer;
+export default GatheringCreateEditor;

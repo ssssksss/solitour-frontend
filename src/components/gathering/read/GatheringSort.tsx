@@ -17,7 +17,7 @@ const OPTIONS = [
   },
 ];
 
-const GatheringSortContainer = () => {
+const GatheringSort = () => {
   const searchParams = useSearchParams();
   const [sort, setSort] = useState<string>("");
   const [loading, setLoading] = useState(true);
@@ -38,10 +38,12 @@ const GatheringSortContainer = () => {
     setLoading(false);
   }, [searchParams]);
 
-  if (loading)
+  if (loading) {
     return (
       <div className="relative flex h-[2rem] w-[3rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
+  }
+
   return (
     <Dropdown
       options={OPTIONS}
@@ -60,4 +62,5 @@ const GatheringSortContainer = () => {
     />
   );
 };
-export default GatheringSortContainer;
+
+export default GatheringSort;

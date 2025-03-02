@@ -4,12 +4,12 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import Image from "next/image";
 import { useState } from "react";
 
-interface IGatheringBookMarkContainer {
+interface GatheringBookMarkProps {
   isBookMark: boolean;
   postId: number;
 }
 
-const GatheringBookMarkContainer = (props: IGatheringBookMarkContainer) => {
+const GatheringBookMark = (props: GatheringBookMarkProps) => {
   const { id: userId } = useAuthStore();
   const [isBookMark, setIsBookMark] = useState(props.isBookMark);
   const [loading, setLoading] = useState(false);
@@ -57,4 +57,4 @@ const GatheringBookMarkContainer = (props: IGatheringBookMarkContainer) => {
   );
 };
 
-export default GatheringBookMarkContainer;
+export default GatheringBookMark;

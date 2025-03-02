@@ -1,19 +1,17 @@
+"use client";
+
 import { Modal } from "@/components/common/modal/Modal";
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
-import { ModalState } from "@/types/ModalState";
 import { useFormContext } from "react-hook-form";
 import GatheringParticipantsFilterModal from "./modal/GatheringParticipantsFilterModal";
+import useModalState from "@/hooks/useModalState";
 
-interface IGatheringEditorParticipantsFilter {
-  modalState: ModalState;
-}
-const GatheringEditorParticipantsFilter = ({
-  modalState,
-}: IGatheringEditorParticipantsFilter) => {
+const GatheringEditorParticipantsFilter = () => {
   const formContext = useFormContext();
+  const modalState = useModalState();
 
   return (
-    <div className={"flex w-full items-center"}>
+    <div className="flex w-full items-center">
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
@@ -25,13 +23,13 @@ const GatheringEditorParticipantsFilter = ({
         >
           {formContext.getValues("allowedSex") ? (
             <div className="flex h-full w-full items-center justify-start">
-              <div className={"flex"}>
+              <div className="flex">
                 <div className="rounded-full py-1 font-semibold text-black">
                   {formContext.getValues("personCount")}명{" "}
                   <span className={"px-1 text-black"}> | </span>
                 </div>
               </div>
-              <div className={"flex"}>
+              <div className="flex">
                 <div className="flex items-center rounded-full py-1 font-semibold text-black">
                   {new Date().getFullYear() - formContext.getValues("startAge")}
                   세<span>~</span>
@@ -39,19 +37,14 @@ const GatheringEditorParticipantsFilter = ({
                     formContext.getValues("endAge")}세{" "}
                   <span className={"px-1 text-black"}> | </span>
                 </div>
-
                 <div className="rounded-full py-1 font-semibold text-black">
                   {SETTING_MODAL_SEX[formContext.getValues("allowedSex")]}
                 </div>
               </div>
             </div>
           ) : (
-            <div
-              className={
-                "relative flex h-full w-full items-center justify-start"
-              }
-            >
-              <div className={"relative text-lg font-semibold"}>
+            <div className="relative flex h-full w-full items-center justify-start">
+              <div className="relative text-lg font-semibold">
                 참여자 선택
                 <span className="absolute top-[-.5rem] text-lg text-main">
                   *
@@ -66,12 +59,11 @@ const GatheringEditorParticipantsFilter = ({
           )}
         </button>
       </div>
-      <Modal
-        modalState={modalState}
-      >
-        <GatheringParticipantsFilterModal/>
+      <Modal modalState={modalState}>
+        <GatheringParticipantsFilterModal />
       </Modal>
     </div>
   );
 };
+
 export default GatheringEditorParticipantsFilter;

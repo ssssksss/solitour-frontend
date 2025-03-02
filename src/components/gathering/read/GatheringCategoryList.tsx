@@ -1,17 +1,36 @@
-import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
+"use client";
 
-interface IGatheringCategoryList {
-  changeGatheringCategoryHandler: (id: number) => void;
-  loading: boolean;
+import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+interface GatheringCategoryListProps {
   gatheringCategoryList: GatheringCategoryListType;
-  activeGatheringCategoryId: number;
 }
+
 const GatheringCategoryList = ({
-  changeGatheringCategoryHandler,
-  loading,
   gatheringCategoryList,
-  activeGatheringCategoryId,
-}: IGatheringCategoryList) => {
+}: GatheringCategoryListProps) => {
+  const [activeGatheringCategoryId, setActiveGatheringCategoryId] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const changeGatheringCategoryHandler = (id: number) => {
+    setActiveGatheringCategoryId(id);
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    if ((params.get("category") || 0) != id) {
+      params.delete("page");
+    }
+    id == 0 ? params.delete("category") : params.set("category", id + "");
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
+  };
+
+  useEffect(() => {
+    setActiveGatheringCategoryId(+(searchParams.get("category") || 0));
+    setLoading(false);
+  }, [searchParams]);
+
   if (loading)
     return (
       <div className="flex animate-pulse flex-wrap items-center gap-2 text-left">
