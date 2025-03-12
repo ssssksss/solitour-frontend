@@ -1,11 +1,7 @@
 import GatheringEditorPeriod from "@/components/gathering/createUpdate/editor/GatheringEditorPeriod";
 import useModalState from "@/hooks/useModalState";
 
-interface IGatheringEditorPeriodContainer {}
-
-const GatheringEditorPeriodContainer = (
-  props: IGatheringEditorPeriodContainer,
-) => {
+const GatheringEditorPeriodContainer = () => {
   const modalState = useModalState();
 
   return <GatheringEditorPeriod modalState={modalState} />;

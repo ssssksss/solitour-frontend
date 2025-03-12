@@ -4,10 +4,16 @@ import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest"
 import { cookies } from "next/headers";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params: { id } }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const qnaId = Number(id);
   if (qnaId <= 0 || !Number.isSafeInteger(qnaId)) {
     throw Error("Not Found");
@@ -20,8 +26,8 @@ export async function generateMetadata({ params: { id } }: Props) {
 }
 
 async function fetchData(id: number) {
-  const accessToken = cookies().get("access_token");
-  const refreshToken = cookies().get("refresh_token");
+  const accessToken = (await cookies()).get("access_token");
+  const refreshToken = (await cookies()).get("refresh_token");
 
   return await fetchWithTokenRefreshSSR<QnADetailType>({
     url: `${process.env.BACKEND_URL}/api/qna/${id}`,
@@ -30,7 +36,13 @@ async function fetchData(id: number) {
   });
 }
 
-export default async function Page({ params: { id } }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const qnaId = Number(id);
   if (qnaId <= 0 || !Number.isSafeInteger(qnaId)) {
     throw Error("Not Found");

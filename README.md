@@ -4,7 +4,14 @@
 
 > 배포 링크 <br/> **https://www.solitourist.com**
 
-<br/>
+<br />
+
+<div align="center">
+   <a href="https://github.com/TripInfoWeb/solitour-frontend/wiki" target="_blank"><img src="https://img.shields.io/badge/GitHub%20Wiki-181717?logo=github&logoColor=white"></a>
+   <a href="https://github.com/orgs/TripInfoWeb/projects/6" target="blank"><img src="https://img.shields.io/badge/🎯Backlog%20-02B78F?logo=none&logoColor=white"></a>
+</div>
+
+<br />
 
 <div align="center">
 

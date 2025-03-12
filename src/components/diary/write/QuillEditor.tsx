@@ -1,12 +1,12 @@
-import "react-quill/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css";
 import "@/styles/quillEditor.css";
-import ReactQuill from "react-quill";
+import ReactQuill from "react-quill-new";
 import { RefObject } from "react";
 import HashSpinner from "@/components/common/HashSpinner";
 
 interface Props {
   loading: boolean;
-  quillRef: RefObject<ReactQuill>;
+  quillRef: RefObject<ReactQuill | null>;
   modules: {};
   content: string;
   onChange: (value: string) => void;

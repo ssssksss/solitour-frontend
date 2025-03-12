@@ -4,8 +4,8 @@ import { devtools } from "zustand/middleware";
 // 1. 상태 인터페이스 정의
 interface ToastifyStoreState {
   // type: "success" | "error" | "warning" | "info" | "default",
-  type: string,
-  message: string,
+  type: string;
+  message: string;
 }
 
 // 2. 액션 인터페이스 정의
@@ -23,7 +23,6 @@ const initialState: ToastifyStoreState = {
 // 4. 상태 및 액션 생성
 const toastifyStore: StateCreator<ToastifyStoreState & ToastifyStoreActions> = (
   set,
-  get,
 ) => ({
   ...initialState,
   initialize: () =>
@@ -38,8 +37,12 @@ const toastifyStore: StateCreator<ToastifyStoreState & ToastifyStoreActions> = (
     })),
 });
 
-const useToastifyStore = create<ToastifyStoreState & ToastifyStoreActions>()<any>(
-  process.env.NODE_ENV === "development" ? devtools(toastifyStore) : toastifyStore,
+const useToastifyStore = create<
+  ToastifyStoreState & ToastifyStoreActions
+>()<any>(
+  process.env.NODE_ENV === "development"
+    ? devtools(toastifyStore)
+    : toastifyStore,
 );
 
 export type useToastifyStoreType = ToastifyStoreState & ToastifyStoreActions;

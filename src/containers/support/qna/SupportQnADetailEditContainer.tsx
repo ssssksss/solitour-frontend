@@ -11,6 +11,7 @@ import { useState } from "react";
 interface ISupportQnADetailEditContainer {
   data: QnADetailType;
 }
+
 const SupportQnADetailEditContainer = ({
   data,
 }: ISupportQnADetailEditContainer) => {

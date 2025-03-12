@@ -5,7 +5,7 @@ interface IGatheringContent {
   onChangeInputTagHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   deleteTagHandler: (tag: string) => void;
   tags: string[]; // Add this prop
-  inputTagRef: React.RefObject<HTMLInputElement>; // Add this prop
+  inputTagRef: React.RefObject<HTMLInputElement | null>; // Add this prop
 }
 
 const GatheringContent = ({

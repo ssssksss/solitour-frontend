@@ -6,8 +6,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ISupportQnAContainer {}
-const SupportQnAContainer = (props: ISupportQnAContainer) => {
+const SupportQnAContainer = () => {
   const [totalElements, setTotalElements] = useState(0);
   const [elements, setElements] = useState<QnAListElementType[]>([]);
   const [loading, setLoading] = useState(true);

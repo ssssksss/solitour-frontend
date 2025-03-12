@@ -14,13 +14,13 @@ export async function POST(request: NextRequest) {
         "Access-Control-Allow-Origin": "*",
       },
     });
-    cookies().delete("access_token");
-    cookies().delete("refresh_token");
+    (await cookies()).delete("access_token");
+    (await cookies()).delete("refresh_token");
     return new NextResponse("로그아웃", { status: 200 });
   } catch (error) {
     console.error(error);
-    cookies().delete("access_token");
-    cookies().delete("refresh_token");
+    (await cookies()).delete("access_token");
+    (await cookies()).delete("refresh_token");
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

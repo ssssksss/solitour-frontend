@@ -5,10 +5,11 @@ import InformationListSkeleton from "@/components/skeleton/informations/list/Inf
 import { Suspense } from "react";
 
 interface Props {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }
 
-export default function page({ searchParams }: Props) {
+export default async function page(props: Props) {
+  const searchParams = await props.searchParams;
   const page = Number(searchParams["page"]);
   if (page <= 0 || !Number.isSafeInteger(page)) {
     throw new Error("Invalid Page Number");

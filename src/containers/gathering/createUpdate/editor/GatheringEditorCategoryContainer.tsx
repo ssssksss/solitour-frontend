@@ -8,10 +8,7 @@ interface ICategory {
   childrenCategories: ICategory[];
 }
 
-interface IGatheringEditorCategoryContainer {}
-const GatheringEditorCategoryContainer = (
-  props: IGatheringEditorCategoryContainer,
-) => {
+const GatheringEditorCategoryContainer = () => {
   const modalState = useModalState();
   const [categoryList, setCategoryList] = useState<ICategory[]>([]);
 

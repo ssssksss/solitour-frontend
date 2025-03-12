@@ -1,12 +1,9 @@
 import GatheringSearch from "@/components/gathering/read/GatheringSearch";
-import useToastifyStore from "@/store/toastifyStore";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IGatheringSearchContainer {}
-const GatheringSearchContainer = (props: IGatheringSearchContainer) => {
+const GatheringSearchContainer = () => {
   const searchParams = useSearchParams();
-  const toastifyStore = useToastifyStore();
   const [searchValue, setSearchValue] = useState<string>(
     searchParams.get("search") || searchParams.get("tagName") || "",
   );

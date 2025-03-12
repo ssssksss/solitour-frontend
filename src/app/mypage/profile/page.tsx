@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 async function getUserInfo() {
   const response = fetchWithTokenRefreshSSR<userResponseDto>({
-    accessToken: cookies().get("access_token"),
-    refreshToken: cookies().get("refresh_token"),
+    accessToken: (await cookies()).get("access_token"),
+    refreshToken: (await cookies()).get("refresh_token"),
     url: `${process.env.BACKEND_URL}/api/users/info`,
     cache: "no-store",
   });

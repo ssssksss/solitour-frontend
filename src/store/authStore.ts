@@ -38,16 +38,17 @@ const initialState: AuthState = {
     id: 0,
     address: "",
     createdDate: "",
-  }
+  },
 };
 
 // 4. 상태 및 액션 생성
-const authStore: StateCreator<AuthState & AuthActions> = (set, get) => ({
+const authStore: StateCreator<AuthState & AuthActions> = (set) => ({
   ...initialState,
-  initialize: () => set({
-    ...initialState,
-    id: -1
-  }),
+  initialize: () =>
+    set({
+      ...initialState,
+      id: -1,
+    }),
   setUser: (data) =>
     set(() => ({
       ...data,

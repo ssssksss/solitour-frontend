@@ -17,8 +17,8 @@ interface Props {
   editorStore: useEditorStoreType;
   locationModal: boolean;
   categoryModal: boolean;
-  inputTagRef: React.RefObject<HTMLInputElement>;
-  inputTipRef: React.RefObject<HTMLInputElement>;
+  inputTagRef: React.RefObject<HTMLInputElement | null>;
+  inputTipRef: React.RefObject<HTMLInputElement | null>;
   imagesHook: useDragScrollType;
   loading: boolean;
   onSubmit: () => void;

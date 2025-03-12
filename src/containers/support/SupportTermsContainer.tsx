@@ -1,8 +1,7 @@
 import SupportTerms from "@/components/support/SupportTerms";
 import { useEffect } from "react";
 
-interface ISupportTermsContainer {}
-const SupportTermsContainer = (props: ISupportTermsContainer) => {
+const SupportTermsContainer = () => {
   useEffect(() => {
     // 페이지가 로드된 후 URL의 해시를 감지
     const hash = window.location.hash;

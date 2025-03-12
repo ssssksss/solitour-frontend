@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const useOutsideClick = <T extends HTMLElement = HTMLElement>(
-  ref: React.RefObject<T>,
+  ref: React.RefObject<T | null>,
   callback: (event?: MouseEvent) => void,
 ) => {
   const [isDragging, setIsDragging] = useState(true);

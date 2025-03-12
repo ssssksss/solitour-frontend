@@ -6,7 +6,7 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill, { Quill } from "react-quill-new";
 import { ImageResize } from "quill-image-resize-module-ts";
 
 const QuillEditorContainer = () => {
@@ -44,7 +44,7 @@ const QuillEditorContainer = () => {
     const result: { fileUrl: string } = await response.json();
     const url = result.fileUrl;
 
-    const Image = Quill.import("formats/image");
+    const Image: any = Quill.import("formats/image");
     Image.sanitize = (url: string) => url;
 
     const editor = quillRef.current!.getEditor();

@@ -38,8 +38,8 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  cookies().delete("access_token");
-  cookies().delete("refresh_token");
+  (await cookies()).delete("access_token");
+  (await cookies()).delete("refresh_token");
   return new NextResponse("서버 에러", {
     status: 500,
   });
@@ -112,8 +112,8 @@ export async function DELETE(request: NextRequest) {
     });
   }
 
-  cookies().delete("access_token");
-  cookies().delete("refresh_token");
+  (await cookies()).delete("access_token");
+  (await cookies()).delete("refresh_token");
   return new NextResponse("회원 탈퇴 성공", {
     status: 200,
   });

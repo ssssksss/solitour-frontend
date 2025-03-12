@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 };
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 async function fetchData(id: number) {
-  const cookie = cookies().get("access_token");
+  const cookie = (await cookies()).get("access_token");
 
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/api/notice/${id}`, {
@@ -31,7 +31,13 @@ async function fetchData(id: number) {
   }
 }
 
-export default async function Page({ params: { id } }: PageProps) {
+export default async function Page(props: PageProps) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const noticeId = Number(id);
   if (noticeId <= 0 || !Number.isSafeInteger(noticeId)) {
     throw Error("Not Found");

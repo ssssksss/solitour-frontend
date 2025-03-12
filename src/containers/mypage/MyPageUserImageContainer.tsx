@@ -37,7 +37,7 @@ const MyPageUserImageContainer = (props: IMyPageUserImageContainer) => {
     }
 
     if (response.ok) {
-      const { initialize, setUser, ...prevState } = authStore;
+      const { ...prevState } = authStore;
       if (props.userSex == "male") {
         setImageUrl("/user/default-male.svg");
         authStore.setUser({

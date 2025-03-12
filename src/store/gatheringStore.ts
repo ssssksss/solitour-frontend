@@ -6,9 +6,9 @@ import { devtools } from "zustand/middleware";
 interface GatheringState {
   currentParticipants: number;
   gatheringApplicantsResponses: gatheringApplicantsResponsesDto[];
-  isFinish: boolean,
-  deadline: string | null,
-  personCount: number,
+  isFinish: boolean;
+  deadline: string | null;
+  personCount: number;
 }
 
 // 2. 액션 인터페이스 정의
@@ -29,7 +29,6 @@ const initialState: GatheringState = {
 // 4. 상태 및 액션 생성
 const gatheringStore: StateCreator<GatheringState & GatheringActions> = (
   set,
-  get,
 ) => ({
   ...initialState,
   initialize: () =>

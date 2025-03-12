@@ -8,7 +8,7 @@ interface Props {
   index: number;
   image: string;
   mainImageIndex: number;
-  imageRef: RefObject<HTMLInputElement>;
+  imageRef: RefObject<HTMLInputElement | null>;
   loading: boolean;
   onUploadButtonClicked: () => void;
   previewImage: () => void;

@@ -12,7 +12,6 @@ import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IMyPageGatheringContainer {}
 // value 변경하지 말것 api주소와 연결되어있음
 const categories = [
   {
@@ -29,7 +28,7 @@ const categories = [
   },
 ];
 
-const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
+const MyPageGatheringContainer = () => {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(
@@ -112,9 +111,7 @@ const MyPageGatheringContainer = (props: IMyPageGatheringContainer) => {
 
   return (
     <div className="w-full">
-      <Modal
-        modalState={modalState}
-      >
+      <Modal modalState={modalState}>
         <AddUserInformationForm />
       </Modal>
       <CategoryList

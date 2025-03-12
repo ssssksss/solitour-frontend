@@ -1,7 +1,7 @@
 import { MouseEvent, RefObject, TouchEvent, useRef, useState } from "react";
 
 export type useDragScrollType = {
-  listRef: RefObject<HTMLDivElement>;
+  listRef: RefObject<HTMLDivElement | null>;
   onDragStart: (e: MouseEvent<HTMLDivElement>) => void;
   onDragMove: (e: MouseEvent<HTMLDivElement>) => void;
   onDragEnd: (e: MouseEvent<HTMLDivElement>) => void;
@@ -82,7 +82,7 @@ export default function useDragScroll(): useDragScrollType {
   };
 
   // 터치 드래그 종료
-  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+  const onTouchEnd = () => {
     if (!isDragging) {
       return;
     }

@@ -7,7 +7,7 @@ import LottieNotFound from "../common/lottie/LottieNotFound";
  * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.
  */
 async function getBestInformationList() {
-  const cookie = cookies().get("access_token");
+  const cookie = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/main-page`,
     {

@@ -4,7 +4,7 @@ import ImageUploadItem from "@/components/informations/write/ImageUploadItem";
 import useAuthStore from "@/store/authStore";
 import useEditorStore from "@/store/editorStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import React, { useState } from "react";
+import React from "react";
 import { useRef } from "react";
 
 interface Props {

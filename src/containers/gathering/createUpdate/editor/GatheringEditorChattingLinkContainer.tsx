@@ -1,10 +1,7 @@
 import GatheringEditorChattingLink from "@/components/gathering/createUpdate/editor/GatheringEditorChattingLink";
 
-interface IGatheringEditorChattingLinkContainer {}
-
-const GatheringEditorChattingLinkContainer = (
-  props: IGatheringEditorChattingLinkContainer,
-) => {
+const GatheringEditorChattingLinkContainer = () => {
   return <GatheringEditorChattingLink />;
 };
+
 export default GatheringEditorChattingLinkContainer;

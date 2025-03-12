@@ -14,7 +14,7 @@ async function getInformationList(
   tagName?: string,
   search?: string,
 ) {
-  const cookie = cookies().get("access_token");
+  const cookie = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations${tagName !== undefined ? "/tag/search" : ""}?page=${page}&parentCategoryId=${parentCategoryId}${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}${order !== undefined && order !== "latest" ? `&sort=${order}` : ""}${tagName !== undefined ? `&tagName=${encodeURIComponent(tagName)}` : ""}${search !== undefined ? `&search=${search}` : ""}`,
     {

@@ -1,10 +1,6 @@
 import GatheringEditorContent from "@/components/gathering/createUpdate/editor/GatheringEditorContent";
 
-interface IGatheringEditorContentContainer {}
-
-const GatheringEditorContentContainer = (
-  props: IGatheringEditorContentContainer,
-) => {
+const GatheringEditorContentContainer = () => {
   return <GatheringEditorContent />;
 };
 export default GatheringEditorContentContainer;

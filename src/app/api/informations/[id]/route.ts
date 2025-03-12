@@ -13,10 +13,8 @@ import { NextRequest } from "next/server";
  *
  * @param request
  */
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } },
-) {
+export async function GET(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${params.id}`,
     {
@@ -35,10 +33,8 @@ export async function GET(
  * @param params
  * @returns
  */
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } },
-) {
+export async function PUT(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const cookie = request.cookies.get("access_token");
   const body: UpdateInformationRequestDto = await request.json();
 
@@ -65,10 +61,8 @@ export async function PUT(
 /**
  * 정보 글 삭제
  */
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } },
-) {
+export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const cookie = request.cookies.get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${params.id}`,
