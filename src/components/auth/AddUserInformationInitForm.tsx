@@ -32,7 +32,7 @@ const AddUserInformationInitForm = ({
           >
             <Image
               className="aspect-square"
-              src="/home/home-icon.svg"
+              src="/icons/home-empty-icon.svg"
               alt="home-icon"
               width={24}
               height={24}

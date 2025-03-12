@@ -87,8 +87,8 @@ const GatheringEditor = (props: IGatheringEditorProps) => {
               <div className="flex flex-row items-center gap-3">
                 <Image
                   className="animate-spin"
-                  src="/common/loading-icon.png"
-                  alt="loading-icon"
+                  src="/images/loading.webp"
+                  alt="loading"
                   width={20}
                   height={20}
                 />

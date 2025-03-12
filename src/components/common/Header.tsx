@@ -36,8 +36,8 @@ const Header = ({
           <div className="flex flex-row items-center p-0 max-[1024px]:pl-[1.875rem] max-[744px]:pl-0">
             <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
               <Image
-                src={"/common/solitour-logo.svg"}
-                alt={"/background"}
+                src="/logos/solitour-logo.svg"
+                alt="solitour-logo"
                 fill={true}
                 style={{
                   objectFit: "contain",

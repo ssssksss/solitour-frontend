@@ -97,8 +97,8 @@ const DiaryEditor = ({
                 <div className="flex flex-row items-center gap-2">
                   {"YYYY.MM.DD"}
                   <Image
-                    src={"/diary/calendar-icon.svg"}
-                    alt={"calendar-icon"}
+                    src="/icons/calendar-icon.svg"
+                    alt="calendar-icon"
                     width={16}
                     height={16}
                   />
@@ -143,7 +143,7 @@ const DiaryEditor = ({
           {["최고", "좋아", "무난", "슬퍼", "화나"].map((value, index) => (
             <button
               key={index + 1}
-              className={`${formContext.getValues("moodLevels") === index + 1 ? "bg-lightGreen text-main" : "text-gray1"} hover:bg-lightGreen flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:text-main`}
+              className={`${formContext.getValues("moodLevels") === index + 1 ? "bg-lightGreen text-main" : "text-gray1"} flex h-[5.75rem] w-[6.5rem] flex-col items-center justify-between py-[0.5625rem] text-[0.9375rem] hover:bg-lightGreen hover:text-main`}
               onClick={() => {
                 formContext.setValue("moodLevels", index + 1);
                 formContext.trigger("moodLevels");
@@ -151,7 +151,7 @@ const DiaryEditor = ({
             >
               <div className="relative h-10 w-8">
                 <Image
-                  src={`/diary/mood-icon${index + 1}.svg`}
+                  src={`/icons/mood-icon${index + 1}.svg`}
                   alt="mood-icon"
                   fill={true}
                   style={{ objectFit: "contain" }}
@@ -178,8 +178,8 @@ const DiaryEditor = ({
           <div className="flex flex-row items-center gap-3">
             <Image
               className="animate-spin"
-              src="/common/loading-icon.png"
-              alt="loading-icon"
+              src="/images/loading.webp"
+              alt="loading"
               width={20}
               height={20}
             />

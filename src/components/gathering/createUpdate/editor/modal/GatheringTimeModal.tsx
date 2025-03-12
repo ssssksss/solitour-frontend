@@ -47,9 +47,7 @@ const GatheringTimeModal = (props: IModalComponent) => {
 
   return (
     <ModalTemplate
-      className={
-        "max-h-[22rem] w-[calc(100vw-1rem)] max-w-[30rem]"
-      }
+      className={"max-h-[22rem] w-[calc(100vw-1rem)] max-w-[30rem]"}
     >
       {props.closeButtonComponent}
       <div
@@ -104,8 +102,8 @@ const GatheringTimeModal = (props: IModalComponent) => {
                 </select>
                 <div className="absolute right-[2.5rem] top-1/2 -translate-y-1/2">
                   <Image
-                    src="/common/dropdown-down-arrow.svg"
-                    alt="location-icon"
+                    src="/icons/dropdown-down-arrow.svg"
+                    alt="dropdown-down-arrow"
                     width={8}
                     height={4}
                   />
@@ -143,8 +141,8 @@ const GatheringTimeModal = (props: IModalComponent) => {
                 </select>
                 <div className="absolute right-[2.5rem] top-1/2 -translate-y-1/2">
                   <Image
-                    src="/common/dropdown-down-arrow.svg"
-                    alt="location-icon"
+                    src="/icons/dropdown-down-arrow.svg"
+                    alt="dropdown-down-arrow"
                     width={8}
                     height={4}
                   />

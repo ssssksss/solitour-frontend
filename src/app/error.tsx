@@ -35,8 +35,8 @@ const Error = () => {
         <div className="flex w-full flex-row justify-end">
           <div className="relative h-[14.375rem] w-[18.375rem] max-[1024px]:w-[16rem] max-[744px]:w-[14rem]">
             <Image
-              src="/error/error_sign.svg"
-              alt="error_sign"
+              src="/images/error-sign.webp"
+              alt="error-sign"
               fill={true}
               style={{ objectFit: "contain" }}
             />

@@ -39,7 +39,7 @@ const ImageList = ({
         <Image
           className="cursor-pointer rounded-2xl border-[0.0625rem] hover:border-main"
           src={mainImageUrl}
-          alt={"/background"}
+          alt="mainImage"
           fill={true}
           style={{
             objectFit: "cover",
@@ -75,7 +75,7 @@ const ImageList = ({
             <Image
               className="cursor-pointer rounded-[0.4375rem]"
               src={image.address}
-              alt={"/background"}
+              alt="subImage"
               fill={true}
               style={{ objectFit: "cover" }}
             />

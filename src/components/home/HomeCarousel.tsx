@@ -14,7 +14,7 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
       <Image
         className="-z-10"
         src={images.length > 0 ? images[currentIndex].url : ""}
-        alt="background"
+        alt="carousel-image"
         fill={true}
         style={{
           objectFit: "cover",

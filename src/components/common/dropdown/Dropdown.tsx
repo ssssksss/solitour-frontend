@@ -74,17 +74,17 @@ export default function Dropdown<T>({
         </div>
         {isOpen ? (
           <Image
-            src="/common/dropdown-down-arrow.svg"
+            src="/icons/dropdown-down-arrow.svg"
             className="translate-y-[50%] rotate-180"
-            alt="location-icon"
+            alt="dropdown-down-arrow"
             width={8}
             height={4}
           />
         ) : (
           <Image
-            src="/common/dropdown-down-arrow.svg"
+            src="/icons/dropdown-down-arrow.svg"
             className="translate-y-[25%]"
-            alt="location-icon"
+            alt="dropdown-down-arrow"
             width={8}
             height={4}
           />

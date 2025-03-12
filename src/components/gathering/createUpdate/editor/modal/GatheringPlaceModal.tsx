@@ -132,10 +132,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
     formContext.setValue("placeName", placeCustomName);
     formContext.setValue("xAxis", Number(placeData?.x));
     formContext.setValue("yAxis", Number(placeData?.y));
-    formContext.setValue(
-      "roadAddressName",
-      placeData?.address_name,
-    );
+    formContext.setValue("roadAddressName", placeData?.address_name);
     formContext.setValue("searchId", "");
     formContext.trigger([
       "placeName",
@@ -171,7 +168,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
       >
         장소 선택
       </h2>
-      <section className={"flex flex-col items-center gap-[1.875rem] w-full"}>
+      <section className={"flex w-full flex-col items-center gap-[1.875rem]"}>
         <div className="flex w-full">
           <button
             className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline outline-[1px] outline-offset-[-1px] outline-black"}`}
@@ -206,7 +203,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                   }
                 >
                   <Image
-                    src={"/gathering/search-icon.svg"}
+                    src="/icons/search-icon.svg"
                     alt={"search-icon"}
                     width={16}
                     height={16}
@@ -241,8 +238,8 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                         >
                           <div className={"flex gap-1"}>
                             <Image
-                              src={"/gathering/location-icon.svg"}
-                              alt={"location-icon"}
+                              src="/icons/location-icon.svg"
+                              alt="location-icon"
                               width={14}
                               height={14}
                             />
@@ -273,7 +270,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                   }
                 >
                   <Image
-                    src={"/gathering/search-icon.svg"}
+                    src="/icons/search-icon.svg"
                     alt={"search-icon"}
                     width={16}
                     height={16}
@@ -283,7 +280,9 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="도로명을 입력해주세요. ex) 올림픽로, 수목원길"
-                    className={"w-full h-[3rem] bg-transparent focus:outline-none"}
+                    className={
+                      "h-[3rem] w-full bg-transparent focus:outline-none"
+                    }
                   />
                 </label>
 
@@ -324,8 +323,8 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                           >
                             <div className={"flex items-center gap-1"}>
                               <Image
-                                src={"/gathering/location-icon.svg"}
-                                alt={"location-icon"}
+                                src="/icons/location-icon.svg"
+                                alt="location-icon"
                                 width={14}
                                 height={14}
                               />

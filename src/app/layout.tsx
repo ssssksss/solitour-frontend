@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "솔리투어",
     images: [
       {
-        url: "/home/background1.png",
+        url: "/images/carousel-image1.avif",
         width: 1440,
         height: 600,
         alt: "솔리투어 메인 이미지",

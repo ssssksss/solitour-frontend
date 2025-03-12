@@ -93,15 +93,15 @@ const SupportQnAWrite: React.FC<ISupportQnAWrite> = ({
           >
             {isConsent ? (
               <Image
-                src="/common/check-active-icon.svg"
-                alt="location-icon"
+                src="/icons/check-active-icon.svg"
+                alt="check-active-icon"
                 width={20}
                 height={20}
               />
             ) : (
               <Image
-                src="/common/check-empty-icon.svg"
-                alt="location-icon"
+                src="/icons/check-empty-icon.svg"
+                alt="check-empty-icon"
                 width={20}
                 height={20}
               />

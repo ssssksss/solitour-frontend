@@ -20,8 +20,8 @@ const SupportAboutDiary = () => {
             <div className="relative h-[7.8125rem] w-[7.8125rem]">
               <Image
                 className="object-contain"
-                src="/support/diary-search-icon.png"
-                alt="diary-search-icon"
+                src="/icons/diary-icon.svg"
+                alt="diary-icon"
                 fill={true}
               />
             </div>
@@ -38,7 +38,7 @@ const SupportAboutDiary = () => {
             <div className="relative h-6 w-6">
               <Image
                 className="object-contain"
-                src="/support/speech-bubble.png"
+                src="/images/speech-bubble.webp"
                 alt="speech-bubble"
                 fill={true}
               />

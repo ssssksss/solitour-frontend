@@ -29,9 +29,7 @@ const SETTING_MODAL_AGE = {
   },
 };
 
-const GatheringParticipantsFilterModal = (
-  props: IModalComponent,
-) => {
+const GatheringParticipantsFilterModal = (props: IModalComponent) => {
   const formContext = useFormContext();
   const [peopleCount, setPeopleCount] = useState(
     formContext.getValues("personCount") || 5,
@@ -82,9 +80,7 @@ const GatheringParticipantsFilterModal = (
 
   return (
     <ModalTemplate
-      className={
-        "max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem]"
-      }
+      className={"max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem]"}
     >
       {props.closeButtonComponent}
       <h2 className={"h-[2rem] text-2xl font-bold text-black"}>참여자 선택</h2>
@@ -104,8 +100,8 @@ const GatheringParticipantsFilterModal = (
             >
               {peopleCount > 2 ? (
                 <Image
-                  src={"/gathering/minus-icon.svg"}
-                  alt={"minus-icon"}
+                  src="/icons/minus-icon.svg"
+                  alt="minus-icon"
                   width={28}
                   height={28}
                 />
@@ -124,8 +120,8 @@ const GatheringParticipantsFilterModal = (
             >
               {peopleCount < 10 ? (
                 <Image
-                  src={"/gathering/plus-icon.svg"}
-                  alt={"plus-icon"}
+                  src="/icons/plus-icon.svg"
+                  alt="plus-icon"
                   width={28}
                   height={28}
                 />

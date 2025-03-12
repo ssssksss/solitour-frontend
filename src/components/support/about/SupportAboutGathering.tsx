@@ -23,7 +23,7 @@ const SupportAboutGathering = () => {
             <div className="relative h-6 w-6">
               <Image
                 className="object-contain"
-                src="/support/speech-bubble.png"
+                src="/images/speech-bubble.webp"
                 alt="speech-bubble"
                 fill={true}
               />
@@ -59,8 +59,8 @@ const SupportAboutGathering = () => {
             <div className="relative h-[7.8125rem] w-[7.8125rem]">
               <Image
                 className="object-contain"
-                src="/home/Gathering-search-icon.svg"
-                alt="gathering-search-icon"
+                src="/icons/gathering-icon.svg"
+                alt="gathering-icon"
                 fill={true}
               />
             </div>

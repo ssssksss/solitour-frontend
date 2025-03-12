@@ -62,8 +62,8 @@ const TopList = async ({ title }: Props) => {
             className="translate-y-[-1rem] object-contain"
           />
           <Image
-            src={"/gathering/solitour_gathering_people.svg"}
-            alt={"bg"}
+            src="/icons/gathering-people.svg"
+            alt="gathering-people"
             fill={true}
             style={{ objectFit: "contain" }}
           />

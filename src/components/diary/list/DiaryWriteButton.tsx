@@ -22,7 +22,7 @@ const DiaryWriteButton = () => {
           transition={{ delay: 0.3 }}
         >
           <Image
-            src="/diary/pencil-green-icon.svg"
+            src="/icons/pencil-green-icon.svg"
             alt="pencil-green-icon"
             width={44}
             height={42}

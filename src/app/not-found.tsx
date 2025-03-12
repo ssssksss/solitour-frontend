@@ -13,8 +13,8 @@ const NotFound = () => {
     <main className="flex flex-col items-center justify-center gap-6 py-20">
       <div className="relative aspect-[75/46] w-[23.4375rem] max-[744px]:w-80">
         <Image
-          src="/not-found/404.svg"
-          alt="404"
+          src="/logos/404-logo.svg"
+          alt="404-logo"
           fill={true}
           style={{ objectFit: "contain" }}
         />

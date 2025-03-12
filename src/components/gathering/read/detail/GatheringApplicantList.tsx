@@ -47,9 +47,9 @@ const GatheringApplicantList = ({
             <div className={"flex gap-x-2"}>
               상태
               <Image
-                src="/common/dropdown-down-arrow.svg"
+                src="/icons/dropdown-down-arrow.svg"
                 className="translate-y-[0.125rem]"
-                alt="location-icon"
+                alt="dropdown-down-arrow"
                 width={12}
                 height={6}
               />
@@ -87,7 +87,7 @@ const GatheringApplicantList = ({
           지원자가 없습니다.
         </div>
       ) : (
-        <div className="max-h-[25rem] overflow-y-scroll scrollbar-hide">
+        <div className="scrollbar-hide max-h-[25rem] overflow-y-scroll">
           {gatheringApplicantsResponses
             .filter((i) => {
               if (isFinish) return i.gatheringStatus == "CONSENT";

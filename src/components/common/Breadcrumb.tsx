@@ -18,8 +18,8 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ categories }) => {
       <div className="text-gray1">
         <Link href={"/"}>
           <Image
-            src={"/common/home-icon.svg"}
-            alt={"home-icon-image"}
+            src="/icons/home-gray-icon.svg"
+            alt="home-gray-icon"
             width={12}
             height={12}
           />

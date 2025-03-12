@@ -120,37 +120,17 @@ const MyProfile = (props: IMyProfileProps) => {
                 <span className={"font-medium text-gray1"}>
                   {props.userInfo.userImage.createdDate}
                 </span>
-                {props.userInfo.provider == "kakao" && 
-                       <div className="relative flex h-[2.5rem] w-[2.5rem] p-4 items-center justify-center rounded-[50%] bg-[#FEE501]">
-                         <Image
-                           src={"/user/kakao-icon.svg"}
-                           alt={"kakao-icon-image"}
-                           width={20}
-                           height={20}
-                           className={"absolute translate-x-[1px] "}
-                         />
-                       </div>
-                }
-                {/* {props.userInfo.provider == "google" && 
-                    <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-white">
+                {props.userInfo.provider == "kakao" && (
+                  <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-[#FEE501] p-4">
                     <Image
-                      src={"/user/google-icon.svg"}
-                      alt={"google-icon-image"}
+                      src="/icons/kakao-icon.svg"
+                      alt="kakao-icon"
                       width={20}
                       height={20}
-                      />
-                    </div>
-                  } */}
-                {props.userInfo.provider == "naver" && 
-                    <div className="relative flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-[50%] bg-[#03C75A]">
-                      <Image
-                        src={"/user/naver-icon.svg"}
-                        alt={"naver-icon-image"}
-                        width={28}
-                        height={28}
-                      />
-                    </div>
-                }
+                      className={"absolute translate-x-[1px]"}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -164,9 +144,7 @@ const MyProfile = (props: IMyProfileProps) => {
           회원탈퇴
         </button>
       </div>
-      <Modal
-        modalState={props.modalState}
-      >
+      <Modal modalState={props.modalState}>
         <UserDeleteConfirmModal userInfo={props.userInfo} />
       </Modal>
     </div>
