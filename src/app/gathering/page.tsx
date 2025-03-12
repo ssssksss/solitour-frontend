@@ -1,6 +1,6 @@
 import Banner from "@/components/common/Banner";
 import TopList from "@/components/common/TopList";
-import GatheringListContainer from "@/containers/gathering/read/GatheringListContainer";
+import GatheringList from "@/components/gathering/read/GatheringList";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,23 +8,21 @@ export const metadata: Metadata = {
   description: "Solitour의 모임(탭)",
 };
 
-async function getData() {
-  const res = await fetch(
+async function getGatheringCategoryList() {
+  const response = await fetch(
     `${process.env.BACKEND_URL}/api/categories/gathering`,
-    {
-      cache: "no-store",
-    },
+    { cache: "no-store" },
   );
 
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json();
+  return response.json();
 }
 
 export default async function Page() {
-  const gatheringCategoryList = await getData();
+  const gatheringCategoryList = await getGatheringCategoryList();
 
   return (
     <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
@@ -32,14 +30,14 @@ export default async function Page() {
         <Banner
           content={["<b>직접 내 모임</b>을", "<b>만들어</b>보세요!"]}
           buttonText="모임 등록하기"
-          category={"모임"}
+          category="모임"
         />
         <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
       </div>
       <div className="flex w-full flex-col items-center">
         <TopList title="모임" />
       </div>
-      <GatheringListContainer gatheringCategoryList={gatheringCategoryList} />
+      <GatheringList gatheringCategoryList={gatheringCategoryList} />
     </div>
   );
 }

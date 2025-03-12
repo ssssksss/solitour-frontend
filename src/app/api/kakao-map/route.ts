@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const apiKey = process.env.KAKAO_MAPS_API_KEY; // 환경 변수에서 API 키 가져오기
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   if (!apiKey) {
     return NextResponse.json(
       { error: "API 키가 설정되어 있지 않습니다." },

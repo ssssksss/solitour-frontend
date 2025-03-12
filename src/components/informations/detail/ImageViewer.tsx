@@ -1,27 +1,19 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+"use client";
+
+import { useImageViewer } from "@/hooks/information/detail/useImageViewer";
+import { AnimatePresence, motion } from "motion/react";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 
-interface Props {
+interface ImageViewerProps {
   imageUrls: string[];
-  length: number;
-  index: number;
-  direction: number;
-  variants: {};
-  setIndex: Dispatch<SetStateAction<number[]>>;
   closeViewer: () => void;
 }
 
-const ImageViewer = ({
-  imageUrls,
-  length,
-  index,
-  direction,
-  variants,
-  setIndex,
-  closeViewer,
-}: Props) => {
+const ImageViewer = ({ imageUrls, closeViewer }: ImageViewerProps) => {
+  const { index, direction, length, variants, setIndex } =
+    useImageViewer(imageUrls);
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25 text-white">
       <div className="relative flex h-[calc(100%_-_48px)] w-[calc(100%_-_48px)] flex-col gap-3 rounded-2xl bg-gray-900 p-6">

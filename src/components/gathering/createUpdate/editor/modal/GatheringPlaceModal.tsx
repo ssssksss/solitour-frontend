@@ -4,7 +4,6 @@ import { IModalComponent } from "@/types/ModalState";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useDebounce } from "use-debounce";
 
 type PlaceElement = {
   address_name: string;
@@ -62,8 +61,6 @@ const GatheringPlaceModal = (props: IModalComponent) => {
   const [placeCustomName, setPlaceCustomName] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [debouncedKeyword] = useDebounce(keyword, 600);
-  const [_, setRoadAddress] = useState<string>();
   const [placeData, setPlaceData] = useState<PlaceElement1>();
   const formContext = useFormContext();
 
@@ -124,7 +121,6 @@ const GatheringPlaceModal = (props: IModalComponent) => {
   };
 
   const pickAddress = (element: PlaceElement1) => {
-    setRoadAddress(element.address_name);
     setPlaceData(element);
   };
 
@@ -145,16 +141,15 @@ const GatheringPlaceModal = (props: IModalComponent) => {
   };
 
   useEffect(() => {
-    if (debouncedKeyword) {
+    if (keyword) {
       if (menu == "search") {
-        handleSearch(debouncedKeyword);
+        handleSearch(keyword);
       }
       if (menu == "address") {
-        handleAddressSearch(debouncedKeyword);
+        handleAddressSearch(keyword);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedKeyword]);
+  }, [keyword, menu]);
 
   return (
     <ModalTemplate

@@ -1,5 +1,5 @@
+import * as motion from "motion/react-client";
 import Image from "next/image";
-import * as motion from "framer-motion/client";
 
 const SupportAboutBanner = () => {
   return (

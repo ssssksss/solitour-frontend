@@ -3,16 +3,17 @@
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 
-interface IAddUserInformationInitForm {
+interface AddUserInformationInitFormProps {
   handleSubmit: (isAgree: boolean) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleHomeButtonClick: () => void;
 }
+
 const AddUserInformationInitForm = ({
   handleSubmit,
   handleInputChange,
   handleHomeButtonClick,
-}: IAddUserInformationInitForm) => {
+}: AddUserInformationInitFormProps) => {
   const formContext = useFormContext();
 
   return (
@@ -20,11 +21,7 @@ const AddUserInformationInitForm = ({
       className="fixed inset-0 flex h-full w-full flex-col items-center justify-center bg-white px-[3.5rem]"
       style={{ zIndex: "100" }}
     >
-      <section
-        className={
-          "scrollbar-hide flex max-h-[calc(100vh-1rem)] w-full max-w-[50rem] flex-col items-center overflow-y-scroll rounded-[1rem] rounded-b-[1rem] bg-white px-[3.5rem] pb-4 pt-2 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray2"
-        }
-      >
+      <section className="scrollbar-hide flex max-h-[calc(100vh-1rem)] w-full max-w-[50rem] flex-col items-center overflow-y-scroll rounded-[1rem] rounded-b-[1rem] bg-white px-[3.5rem] pb-4 pt-2 outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-gray2">
         <div className="flex w-full py-2">
           <button
             className="bg-gray relative z-50 scale-100 transform rounded-[1rem] bg-gray3 p-2 transition-transform duration-300"
@@ -177,4 +174,5 @@ const AddUserInformationInitForm = ({
     </div>
   );
 };
+
 export default AddUserInformationInitForm;

@@ -1,11 +1,11 @@
-import GatheringBookMarkContainer from "@/containers/gathering/read/GatheringBookmarkContainer";
-import GatheringLikeContainer from "@/containers/gathering/read/GatheringLikeContainer";
+import GatheringBookMark from "@/components/gathering/read/GatheringBookmark";
 import { Gathering } from "@/types/GatheringDto";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
+import GatheringLike from "../gathering/read/GatheringLike";
 
 interface IGatheringItem {
   data: Gathering;
@@ -58,7 +58,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                 : data.gatheringCategoryName}
             </span>
           </p>
-          <GatheringBookMarkContainer
+          <GatheringBookMark
             isBookMark={data.isBookMark}
             postId={data.gatheringId}
           />
@@ -205,9 +205,9 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                     {convertNumberToShortForm(data.likeCount)}
                   </div>
                 ) : (
-                  <GatheringLikeContainer
-                    likes={data.likeCount}
-                    isLike={data.isLike}
+                  <GatheringLike
+                    initialLikes={data.likeCount}
+                    initialIsLike={data.isLike}
                     gatheringId={data.gatheringId}
                   />
                 )

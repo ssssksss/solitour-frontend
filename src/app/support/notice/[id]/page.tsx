@@ -1,4 +1,4 @@
-import SupportNoticeDetail from "@/components/support/SupportNoticeDetail";
+import SupportNoticeDetail from "@/components/support/notice/SupportNoticeDetail";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 
@@ -34,9 +34,7 @@ async function fetchData(id: number) {
 export default async function Page(props: PageProps) {
   const params = await props.params;
 
-  const {
-    id
-  } = params;
+  const { id } = params;
 
   const noticeId = Number(id);
   if (noticeId <= 0 || !Number.isSafeInteger(noticeId)) {

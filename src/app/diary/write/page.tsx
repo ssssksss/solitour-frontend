@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/components/common/Breadcrumb";
-import DiaryEditorContainer from "@/containers/diary/write/DiaryEditorContainer";
+import DiaryCreateEditor from "@/components/diary/write/DiaryCreateEditor";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Solitour의 여행 일기 등록 페이지",
 };
 
-export default function page() {
+export default function Page() {
   return (
     <div className="flex w-full flex-col items-center">
       <Breadcrumbs
@@ -16,7 +16,7 @@ export default function page() {
           { label: "일기 등록하기", href: "" },
         ]}
       />
-      <DiaryEditorContainer />
+      <DiaryCreateEditor />
     </div>
   );
 }

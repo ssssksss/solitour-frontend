@@ -1,61 +1,12 @@
 "use client";
 
-import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
-import useAuthStore from "@/store/authStore";
-import useToastifyStore from "@/store/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import ModalTemplate from "../common/modal/ModalTemplate";
+import { useAddUserInformationForm } from "@/hooks/auth/useAddUserInformationForm";
 
 const AddUserInformationForm = (props: IModalComponent) => {
-  const authStore = useAuthStore();
-  const toastifyStore = useToastifyStore();
-
-  const { formState, register, setValue, getValues, trigger } = useForm({
-    resolver: zodResolver(AddUserInformationFormSchema),
-    defaultValues: {
-      name: "",
-      age: 0,
-      sex: "",
-      termConditionAgreement: true,
-      privacyPolicyAgreement: true,
-    },
-  });
-
-  // 숫자만 입력되게 필터링
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (!/^\d*$/.test(value)) return;
-    setValue("age", Number(value));
-    trigger();
-  };
-
-  const addUserInformationSubmit = async () => {
-    const response = await fetchWithAuth("/api/auth/user/info/agree", {
-      method: "PUT",
-      body: JSON.stringify({
-        sex: getValues("sex"),
-        name: getValues("name"),
-        age: getValues("age"),
-        termConditionAgreement: true,
-        privacyPolicyAgreement: true,
-      }),
-    });
-
-    if (response.status == 204) {
-      toastifyStore.setToastify({
-        type: "success",
-        message: "제출 완료",
-      });
-      authStore.setUser({
-        sex: getValues("sex"),
-        age: getValues("age"),
-      });
-      props.closeModal!();
-    }
-  };
+  const { methods, handleInputChange, handleSubmit } =
+    useAddUserInformationForm(props);
 
   return (
     <ModalTemplate className="max-w-[31.25rem] px-[3.5rem]">
@@ -74,26 +25,26 @@ const AddUserInformationForm = (props: IModalComponent) => {
             className="mt-3 h-10 w-full rounded-[1.5rem] px-3 text-center text-main outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#f0f0f0] focus:outline-main"
             placeholder="이름을 입력해주세요"
             maxLength={10}
-            {...register("name")}
+            {...methods.register("name")}
           />
         </article>
         <article className="flex flex-col">
           <h3 className="text-[1.125rem] font-bold text-black"> 성별 </h3>
           <div className={"mt-3 flex h-10 w-full gap-x-3"}>
             <button
-              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${getValues("sex") == "male" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${methods.getValues("sex") == "male" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
               onClick={() => {
-                setValue("sex", "male");
-                trigger();
+                methods.setValue("sex", "male");
+                methods.trigger();
               }}
             >
               남성
             </button>
             <button
-              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${getValues("sex") == "female" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
+              className={`h-full w-full rounded-[1.5rem] outline outline-[0.0625rem] outline-offset-[-0.0625rem] ${methods.getValues("sex") == "female" ? "bg-lightGreen font-bold text-main outline-main" : "bg-white text-gray2 outline-[#f0f0f0]"}`}
               onClick={() => {
-                setValue("sex", "female");
-                trigger();
+                methods.setValue("sex", "female");
+                methods.trigger();
               }}
             >
               여성
@@ -122,13 +73,14 @@ const AddUserInformationForm = (props: IModalComponent) => {
         제한될 수 있습니다
       </p>
       <button
-        onClick={() => addUserInformationSubmit()}
-        className={`mt-5 min-h-[4rem] w-full rounded-[1.875rem] text-white ${formState.isValid ? "bg-main" : "bg-gray2"}`}
-        disabled={!formState.isValid}
+        onClick={handleSubmit}
+        className={`mt-5 min-h-[4rem] w-full rounded-[1.875rem] text-white ${methods.formState.isValid ? "bg-main" : "bg-gray2"}`}
+        disabled={!methods.formState.isValid}
       >
         입력 완료
       </button>
     </ModalTemplate>
   );
 };
+
 export default AddUserInformationForm;

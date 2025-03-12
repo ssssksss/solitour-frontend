@@ -1,32 +1,31 @@
+"use client";
+
+import DeleteModal from "@/components/common/DeleteModal";
 import DeleteIcon from "@/components/common/icons/DeleteIcon";
 import EditIcon from "@/components/common/icons/EditIcon";
-import InformationDeleteModalContainer from "@/containers/informations/detail/InformationDeleteModalContainer";
+import { useButtonList } from "@/hooks/information/detail/useButtonList";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
 
-interface Props {
-  visible: boolean;
+interface ButtonListProps {
+  userId: number;
   informationId: number;
-  modalVisible: boolean;
-  setModalVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const ButtonList = ({
-  visible,
-  informationId,
-  modalVisible,
-  setModalVisible,
-}: Props) => {
-  if (!visible) {
+const ButtonList = ({ userId, informationId }: ButtonListProps) => {
+  const { id, modalVisible, loading, setModalVisible, handleDeleteClick } =
+    useButtonList(informationId);
+
+  if (userId !== id) {
     return null;
   }
 
   return (
     <div className="mt-6 flex flex-row items-center justify-end gap-3">
       {modalVisible && (
-        <InformationDeleteModalContainer
-          informationId={informationId}
-          closeModal={() => {
+        <DeleteModal
+          loading={loading}
+          handleDeleteClick={handleDeleteClick}
+          handleCancelClick={() => {
             window.history.back();
             setModalVisible(false);
           }}

@@ -3,6 +3,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 interface UseDragAndDropProps {
   imageUpload: (imageDataUrl: string) => void;
 }
+
 export const useDragAndDrop = ({ imageUpload }: UseDragAndDropProps) => {
   const [isDragging, setIsDragging] = useState(false);
 

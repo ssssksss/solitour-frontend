@@ -1,31 +1,65 @@
-import ItemTag from "@/components/informations/common/ItemTag";
+"use client";
 
-interface IGatheringEditorHashTag {
-  onChangeHashTagHandler: (
+import ItemTag from "@/components/informations/common/ItemTag";
+import { useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
+
+const GatheringEditorHashTag = () => {
+  const formContext = useFormContext();
+  const [tags, setTags] = useState<string[]>(
+    formContext.getValues("hashtags") ? formContext.getValues("hashtags") : [],
+  );
+  const inputTagRef = useRef<HTMLInputElement>(null);
+
+  // 태그 클릭해서 지울 때
+  const deleteTagHandler = (tagName: string) => {
+    setTags((prev) => prev.filter((i: string) => i !== tagName));
+  };
+
+  // 태그 입력시 ,나 Enter로 태그블록 만들어 주는 기능
+  const onChangeHashTagHandler = (
     e:
       | React.KeyboardEvent<HTMLInputElement>
       | React.MouseEvent<HTMLButtonElement>,
-  ) => void;
-  deleteTagHandler: (tag: string) => void;
-  tags: string[];
-  inputTagRef: React.RefObject<HTMLInputElement | null>;
-}
-const GatheringEditorHashTag = ({
-  onChangeHashTagHandler,
-  deleteTagHandler,
-  tags,
-  inputTagRef,
-}: IGatheringEditorHashTag) => {
+  ) => {
+    // Enter 키가 눌렸을 때의 처리
+    if ("key" in e && e.key === "Enter") {
+      const tempTag = (inputTagRef.current as HTMLInputElement).value
+        .replace(/,$/, "")
+        .trim();
+      if (tempTag === "") return;
+      if (tempTag.length < 2) {
+        (inputTagRef.current as HTMLInputElement).value = "";
+        return;
+      }
+      setTags((prev) => Array.from(new Set([...prev, tempTag])));
+      (inputTagRef.current as HTMLInputElement).value = "";
+      formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
+      formContext.trigger("hashtags");
+    }
+
+    // 특정 버튼이 클릭되었을 때의 처리
+    if ("type" in e && e.type === "click") {
+      // 예: 특정 버튼의 id가 'addTagButton'인 경우
+      const tempTag = (inputTagRef.current as HTMLInputElement).value
+        .replace(/,$/, "")
+        .trim();
+      if (tempTag === "") return;
+      if (tempTag.length < 2) {
+        (inputTagRef.current as HTMLInputElement).value = "";
+        return;
+      }
+      setTags((prev) => Array.from(new Set([...prev, tempTag])));
+      (inputTagRef.current as HTMLInputElement).value = "";
+      formContext.setValue("hashtags", Array.from(new Set([...tags, tempTag])));
+      formContext.trigger("hashtags");
+    }
+  };
+
   return (
-    <article className={"flex w-full flex-col gap-[2rem]"}>
-      <div
-        className={
-          "flex w-full items-center gap-x-[0.625rem] max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3"
-        }
-      >
-        <div
-          className={"relative w-[2.75rem] flex-shrink-0 text-lg font-semibold"}
-        >
+    <article className="flex w-full flex-col gap-[2rem]">
+      <div className="flex w-full items-center gap-x-[0.625rem] max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3">
+        <div className="relative w-[2.75rem] flex-shrink-0 text-lg font-semibold">
           태그
         </div>
         <div className="relative w-full">
@@ -47,12 +81,6 @@ const GatheringEditorHashTag = ({
               해시태그는 최대 10개입니다.
             </div>
           )}
-          {/* <button
-            onClick={(e) => onChangeHashTagHandler(e)}
-            className="absolute right-[0.75rem] top-[50%] translate-y-[-50%] rounded-full bg-main px-3 py-1 text-white"
-          >
-            버튼
-          </button> */}
         </div>
       </div>
       <div className="flex min-h-8 flex-row flex-wrap items-center gap-1">
@@ -71,4 +99,5 @@ const GatheringEditorHashTag = ({
     </article>
   );
 };
+
 export default GatheringEditorHashTag;

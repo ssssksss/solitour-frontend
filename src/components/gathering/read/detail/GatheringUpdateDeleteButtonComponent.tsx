@@ -4,7 +4,7 @@ import DeleteIcon from "@/components/common/icons/DeleteIcon";
 import EditIcon from "@/components/common/icons/EditIcon";
 // 모임이나 정보에서 수정, 삭제를 담고 있는 컴포넌트
 
-import useAuthStore from "@/store/authStore";
+import useAuthStore from "@/stores/authStore";
 import Link from "next/link";
 
 interface IGatheringUpdateDeleteButtonComponent {

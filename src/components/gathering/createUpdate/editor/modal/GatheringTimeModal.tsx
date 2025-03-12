@@ -17,17 +17,6 @@ const GatheringTimeModal = (props: IModalComponent) => {
       ? +format(new Date(formContext.getValues("scheduleStartDate")), "mm")
       : Math.min(50, Math.ceil(new Date().getMinutes() / 10) * 10),
   });
-  const [calendarDate, setCalendarDate] = useState([
-    {
-      startDate: formContext.getValues("scheduleStartDate")
-        ? new Date(formContext.getValues("scheduleStartDate"))
-        : new Date(),
-      endDate: formContext.getValues("scheduleEndDate")
-        ? new Date(formContext.getValues("scheduleEndDate"))
-        : new Date(),
-      key: "selection",
-    },
-  ]);
 
   const submitHandler = () => {
     formContext.setValue(
@@ -74,9 +63,15 @@ const GatheringTimeModal = (props: IModalComponent) => {
                 "flex w-[9.75rem] items-center rounded-[4rem] px-[1.5rem] py-[.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] max-[440px]:col-span-2 max-[440px]:w-full"
               }
             >
-              {format(calendarDate[0].startDate, "yyyy.MM.dd(EE)", {
-                locale: ko,
-              })}
+              {format(
+                formContext.getValues("scheduleStartDate")
+                  ? new Date(formContext.getValues("scheduleStartDate"))
+                  : new Date(),
+                "yyyy.MM.dd(EE)",
+                {
+                  locale: ko,
+                },
+              )}
             </article>
             <div className="flex w-full gap-[1.25rem] max-[440px]:max-w-[18.625rem]">
               {/* 시 */}

@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       throw new Error(response.statusText);
     }
     return response;
-  } catch (e) {
+  } catch (error) {
     return new Response(JSON.stringify({ error: "Failed to update data." }), {
       status: 500,
       headers: {
@@ -59,7 +59,7 @@ export async function PUT(request: NextRequest) {
       throw new Error(response.statusText);
     }
     return response;
-  } catch (e) {
+  } catch (error) {
     return new Response(JSON.stringify({ error: "Failed to update data." }), {
       status: 500,
       headers: {
@@ -93,7 +93,7 @@ export async function DELETE(request: NextRequest) {
       throw new Error(response.statusText);
     }
     return response;
-  } catch (e) {
+  } catch (error) {
     return new Response(JSON.stringify({ error: "Failed to update data." }), {
       status: 500,
       headers: {

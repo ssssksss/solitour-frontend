@@ -1,7 +1,10 @@
+"use client";
+
 import { Modal } from "@/components/common/modal/Modal";
-import { ModalState } from "@/types/ModalState";
 import { useFormContext } from "react-hook-form";
 import GatheringCategoryModal from "./modal/GatheringCategoryModal";
+import useModalState from "@/hooks/useModalState";
+import { useEffect, useState } from "react";
 
 interface ICategory {
   id: number;
@@ -9,36 +12,35 @@ interface ICategory {
   childrenCategories: ICategory[];
 }
 
-interface IGatheringEditorCategory {
-  modalState: ModalState;
-  categoryList: ICategory[];
-}
-const GatheringEditorCategory = ({
-  modalState,
-  categoryList,
-}: IGatheringEditorCategory) => {
+const GatheringEditorCategory = () => {
   const formContext = useFormContext();
+  const modalState = useModalState();
+  const [categoryList, setCategoryList] = useState<ICategory[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("/api/gathering/category");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const result = await response.json();
+        setCategoryList(result);
+      } catch (error) {}
+    })();
+  }, []);
 
   return (
-    <div
-      className={
-        "flex w-full items-center gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start"
-      }
-    >
+    <div className="flex w-full items-center gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`flex h-[3.25rem] w-full items-center whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
-            formContext.formState.errors.gatheringCategoryId
-              ? "outline-red-500"
-              : "outline-[#E3E3E3]"
-          }`}
+          className={[
+            `${formContext.formState.errors.gatheringCategoryId ? "outline-red-500" : "outline-[#E3E3E3]"}`,
+            "flex h-[3.25rem] w-full items-center whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px]",
+          ].join(" ")}
         >
-          <div
-            className={
-              "flex h-full w-full items-center justify-start text-lg font-semibold"
-            }
-          >
+          <div className="flex h-full w-full items-center justify-start text-lg font-semibold">
             {formContext.getValues("gatheringCategoryId") ? (
               categoryList.map((i) => {
                 if (i.id == formContext.getValues("gatheringCategoryId")) {
@@ -46,7 +48,7 @@ const GatheringEditorCategory = ({
                 }
               })
             ) : (
-              <div className={"relative text-lg font-semibold"}>
+              <div className="relative text-lg font-semibold">
                 카테고리 선택
                 <span className="absolute top-[-.5rem] text-lg text-main">
                   *
@@ -61,14 +63,11 @@ const GatheringEditorCategory = ({
           </span>
         )}
       </div>
-      <Modal
-        modalState={modalState}
-      >
-        <GatheringCategoryModal
-          categoryList={categoryList}
-        />
+      <Modal modalState={modalState}>
+        <GatheringCategoryModal categoryList={categoryList} />
       </Modal>
     </div>
   );
 };
+
 export default GatheringEditorCategory;

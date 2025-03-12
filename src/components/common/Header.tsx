@@ -1,54 +1,47 @@
-import HeaderSidebarContainer from "@/containers/common/HeaderSidebarContainer";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
-import ReactToastifyComponent from "./ReactToastifyComponent";
 import UserDropDown from "../auth/UserDropDown";
+import HeaderSidebar from "./HeaderSidebar";
+import { useHeader } from "@/hooks/common/useHeader";
 
-interface Props {
-  pathname: string;
-  visible: boolean;
-  transparent: boolean;
-  onMenuClicked: () => void;
-  onClose: () => void;
-  userId: number;
-}
+const Header = () => {
+  const {
+    id,
+    pathname,
+    visible,
+    isTransparent,
+    handleMenuClick,
+    handleCloseButton,
+  } = useHeader();
 
-const Header = ({
-  pathname,
-  visible,
-  transparent,
-  onMenuClicked,
-  onClose,
-  userId,
-}: Props) => {
   return (
-    <header className="flex w-full flex-row justify-center">
-      {visible && <HeaderSidebarContainer onClose={onClose} />}
-      <ReactToastifyComponent />
+    <header className="w-full">
+      <HeaderSidebar visible={visible} onClose={handleCloseButton} />
       <div
-        className={
-          "fixed right-0 top-0 z-40 flex w-full justify-center shadow" +
-          ` ${transparent ? "bg-[#ffffff30] backdrop-blur-md" : "bg-white"}`
-        }
+        className={[
+          "fixed right-0 top-0 z-40 flex w-full justify-center shadow",
+          `${isTransparent ? "bg-white/30 backdrop-blur-md" : "bg-white"}`,
+        ].join(" ")}
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
-          <div className="flex flex-row items-center p-0 max-[1024px]:pl-[1.875rem] max-[744px]:pl-0">
-            <Link className="relative h-8 w-[6.9375rem] font-black" href="/">
-              <Image
-                src="/logos/solitour-logo.svg"
-                alt="solitour-logo"
-                fill={true}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </Link>
-          </div>
+          <Link
+            className="relative h-8 w-[6.9375rem] font-black max-[1024px]:ml-[1.875rem] max-[744px]:ml-0"
+            href="/"
+          >
+            <Image
+              src="/logos/solitour-logo.svg"
+              alt="solitour-logo"
+              fill={true}
+              style={{ objectFit: "contain" }}
+            />
+          </Link>
           <div className="flex h-full flex-grow flex-row justify-between pl-[5.625rem] max-[1024px]:pl-[3.375rem] max-[744px]:hidden">
-            <nav className="h-full">
+            <nav>
               <ul className="flex h-full items-center">
-                <li className={"h-full"}>
+                <li>
                   <Link
                     className={`${pathname === "/" ? "font-bold" : "font-medium"} flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3`}
                     href="/"
@@ -67,18 +60,21 @@ const Header = ({
                     name: "여행일기",
                     href: "/diary/list?page=1",
                     path: "/diary",
-                    prefetch: userId > 0,
+                    prefetch: id > 0,
                   },
                   {
                     name: "고객지원",
                     href: "/support?menu=about",
                     path: "/support",
-                    prefetch: userId > 0,
+                    prefetch: id > 0,
                   },
-                ].map(({ name, href, path, prefetch }, index) => (
-                  <li key={index} className={"h-full"}>
+                ].map(({ name, href, path, prefetch }) => (
+                  <li key={href}>
                     <Link
-                      className={`${pathname.includes(path) ? "font-bold" : "font-medium"} flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3`}
+                      className={[
+                        `${pathname.includes(path) ? "font-bold" : "font-medium"}`,
+                        "flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3",
+                      ].join(" ")}
                       href={href}
                       prefetch={prefetch}
                     >
@@ -92,42 +88,23 @@ const Header = ({
           <MdOutlineMenu
             className="absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer hover:text-main max-[744px]:flex"
             size="1.5rem"
-            onClick={onMenuClicked}
+            onClick={handleMenuClick}
           />
-          <div
-            className={
-              "absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden"
-            }
-          >
-            {userId == 0 ? (
+          <div className="absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden">
+            {id == 0 ? (
               <>
-                <div
-                  className={
-                    "relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow"
-                  }
-                ></div>
-                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth font-semibold text-black hover:text-main"></div>
+                <div className="relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow" />
+                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth" />
               </>
-            ) : userId > 0 ? (
-              <>
-                <UserDropDown />
-              </>
+            ) : id > 0 ? (
+              <UserDropDown />
             ) : (
-              <>
-                <Link
-                  className="font-semibold text-black hover:text-main"
-                  href="/auth/signin"
-                >
-                  로그인
-                </Link>
-                <div className="text-gray-400">|</div>
-                <Link
-                  className="font-semibold text-black hover:text-main"
-                  href="/auth/signup"
-                >
-                  회원가입
-                </Link>
-              </>
+              <Link
+                className="ml-10 font-semibold text-black hover:text-main"
+                href="/auth/signin"
+              >
+                로그인
+              </Link>
             )}
           </div>
         </div>

@@ -1,9 +1,9 @@
-import DiaryCardContainer from "@/containers/diary/list/DiaryCardContainer";
 import DiaryWriteButton from "./DiaryWriteButton";
 import Link from "next/link";
 import { GetDiaryListResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";
-import DiaryPaginationContainer from "@/containers/diary/list/DiaryPaginationContainer";
+import DiaryPagination from "./DiaryPagination";
+import DiaryCard from "./DiaryCard";
 
 async function getDiaryList(page: number) {
   const cookie = (await cookies()).get("access_token");
@@ -46,14 +46,11 @@ const DiaryList = async ({ page }: Props) => {
       <div className="mb-10 grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
         {data.content.length < 6 && <DiaryWriteButton />}
         {data.content.map((value, index) => (
-          <DiaryCardContainer key={index} diaryData={value} />
+          <DiaryCard key={index} diaryData={value} />
         ))}
       </div>
       {data.content.length > 0 && (
-        <DiaryPaginationContainer
-          currentPage={page}
-          totalPages={data.page.totalPages}
-        />
+        <DiaryPagination currentPage={page} totalPages={data.page.totalPages} />
       )}
     </div>
   );

@@ -2,16 +2,13 @@
 
 import Lottie from "lottie-react";
 
-const LottieComponent = (props: { lottieFile: any; className: string }) => {
-  return (
-    <>
-      <Lottie
-        animationData={props.lottieFile}
-        className={props.className}
-        style={{ padding: "0px" }}
-      />
-    </>
-  );
+interface LottieComponentProps {
+  lottieFile: any;
+  className?: string;
+}
+
+const LottieComponent = ({ lottieFile, className }: LottieComponentProps) => {
+  return <Lottie animationData={lottieFile} className={className} />;
 };
 
 export default LottieComponent;

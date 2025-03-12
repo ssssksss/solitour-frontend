@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Solitour의 정보 목록 페이지",
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;

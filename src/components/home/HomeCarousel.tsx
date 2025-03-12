@@ -1,24 +1,20 @@
-import { Banner } from "@/types/BannerDto";
+"use client";
+
+import { useHomeCarousel } from "@/hooks/home/useHomeCarousel";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Props {
-  images: Banner[];
-  currentIndex: number;
-  onClick: (index: number) => void;
-}
+const HomeCarousel = () => {
+  const { currentIndex, imageList, handleClick } = useHomeCarousel();
 
-const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
   return (
     <div className="relative -mt-20 flex h-[37.5rem] w-full items-center justify-center max-[1024px]:h-80">
       <Image
         className="-z-10"
-        src={images.length > 0 ? images[currentIndex].url : ""}
+        src={imageList[currentIndex]}
         alt="carousel-image"
         fill={true}
-        style={{
-          objectFit: "cover",
-        }}
+        style={{ objectFit: "cover" }}
       />
       <div className="relative m-auto flex h-[33.75rem] w-[60rem] flex-col items-center justify-end max-[1024px]:h-72 max-[1024px]:w-[90%]">
         <div className="absolute bottom-52 left-0 flex flex-col gap-4 max-[1024px]:bottom-16">
@@ -34,14 +30,14 @@ const HomeCarousel = ({ images, currentIndex, onClick }: Props) => {
           </Link>
         </div>
         <div className="flex w-[60rem] flex-row items-center justify-center max-[1024px]:w-[90%]">
-          {images.map((image, index) => (
+          {imageList.map((_, index) => (
             <button
               key={index}
               className={
                 "flex-grow border-b-4" +
                 ` ${index === currentIndex ? "border-b-white" : "border-b-white/50"}`
               }
-              onClick={(e) => onClick(index)}
+              onClick={() => handleClick(index)}
             />
           ))}
         </div>

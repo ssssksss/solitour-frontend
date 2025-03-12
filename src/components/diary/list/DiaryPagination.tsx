@@ -1,18 +1,21 @@
+"use client";
+
+import { useDiaryPagination } from "@/hooks/diary/list/useDiaryPagination";
 import Link from "next/link";
 import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdFirstPage, MdLastPage } from "react-icons/md";
 
-interface Props {
+interface DiaryPaginationProps {
   currentPage: number;
   totalPages: number;
-  pathname: string;
 }
 
-const DiaryPagination = ({ currentPage, totalPages, pathname }: Props) => {
-  const pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
-  const leftPage = Math.max(currentPage - 2, 1);
-  const rightPage = Math.min(leftPage + 4, totalPages);
+const DiaryPagination = ({ currentPage, totalPages }: DiaryPaginationProps) => {
+  const { pathname, pageList, leftPage, rightPage } = useDiaryPagination(
+    currentPage,
+    totalPages,
+  );
 
   return (
     <div className="mb-[8.625rem] flex flex-row items-center justify-center gap-3 text-sm text-black">

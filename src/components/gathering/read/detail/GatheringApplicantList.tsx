@@ -1,40 +1,84 @@
+"use client";
+
 import UserImage from "@/components/auth/UserImage";
-import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
 import Image from "next/image";
 import GatheringApplicantButton from "./GatheringApplicantButton";
+import useAuthStore from "@/stores/authStore";
+import useGatheringStore from "@/stores/gatheringStore";
+import { useParams } from "next/navigation";
+import { useState } from "react";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
 
-interface IGatheringApplicantList {
-  gatheringApplicantsResponses: gatheringApplicantsResponsesDto[];
-  updateGatheringApplicantStatusHandler: (
-    status: "WAIT" | "CONSENT" | "REFUSE",
-    userId: number,
-  ) => void;
-  isFullParticipants: boolean;
-  sort: string;
-  sortHandler: (value: string) => void;
-  setIsSortOpen: (value: boolean) => void;
-  isSortOpen: boolean;
-  isFinish: boolean;
+interface GatheringApplicantListProps {
+  postUserId: number;
 }
 
 const GatheringApplicantList = ({
-  gatheringApplicantsResponses,
-  updateGatheringApplicantStatusHandler,
-  isFullParticipants,
-  sort,
-  sortHandler,
-  setIsSortOpen,
-  isSortOpen,
-  isFinish,
-}: IGatheringApplicantList) => {
+  postUserId,
+}: GatheringApplicantListProps) => {
+  const authStore = useAuthStore();
+  const {
+    isFinish,
+    gatheringApplicantsResponses,
+    currentParticipants,
+    personCount,
+    setGathering,
+  } = useGatheringStore();
+  const params = useParams();
+  const [sort, setSort] = useState("");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+
+  const updateGatheringApplicantStatusHandler = async (
+    status: "WAIT" | "CONSENT" | "REFUSE",
+    userId: number,
+  ) => {
+    const res = await fetchWithAuth("/api/gathering/apply", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        gatheringStatus: status,
+        applyId: params.id,
+      }),
+    });
+
+    if (res.ok) {
+      let _prevStatus = "";
+      const temp = gatheringApplicantsResponses.map((i) => {
+        if (i.userGatheringResponse.id == userId) {
+          _prevStatus = i.gatheringStatus;
+          i.gatheringStatus = status;
+        }
+        return i;
+      });
+      setGathering({
+        gatheringApplicantsResponses: temp,
+        currentParticipants:
+          currentParticipants +
+          (_prevStatus == "CONSENT" ? -1 : status == "CONSENT" ? +1 : 0),
+      });
+    }
+  };
+
+  const sortHandler = (value: string) => {
+    setSort(value);
+    setIsSortOpen(false);
+  };
+
+  if (postUserId !== authStore.id || !gatheringApplicantsResponses) {
+    return null;
+  }
+
   return (
     <div className="mt-[3.625rem] flex h-auto w-full flex-col rounded-[1rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
       <div
         className={`grid h-[4.5rem] w-full border-b-[1px] border-b-gray3 py-1 font-bold ${isFinish ? "grid-cols-[80px_auto_40px_40px] min-[577px]:grid-cols-[80px_auto_80px_80px] min-[800px]:grid-cols-[120px_auto_120px_120px]" : "max-[576px]:grid-cols-[80px_auto_40px_40px_60px] min-[577px]:grid-cols-[80px_auto_40px_40px_200px] min-[800px]:grid-cols-[80px_260px_80px_80px_auto]"}`}
       >
         <div className="flex flex-col items-center justify-center max-[600px]:text-xs">
-          <span> 프로필 </span>
-          <span> 이미지 </span>
+          <span>프로필</span>
+          <span>이미지</span>
         </div>
         <div className="flex items-center justify-center">닉네임</div>
         <div className="flex items-center justify-center">나이</div>
@@ -111,7 +155,6 @@ const GatheringApplicantList = ({
                   {applicant.userGatheringResponse.nickname}
                 </div>
                 <div className="flex h-full flex-col items-center justify-center py-4">
-                  {/* <span> {applicant.userGatheringResponse.age}년 </span> */}
                   <span>
                     {`${new Date().getFullYear() - applicant.userGatheringResponse.age}`}
                   </span>
@@ -122,7 +165,7 @@ const GatheringApplicantList = ({
                 {!isFinish && (
                   <GatheringApplicantButton
                     applicant={applicant}
-                    isFullParticipants={isFullParticipants}
+                    isFullParticipants={currentParticipants === personCount}
                     updateGatheringApplicantStatusHandler={
                       updateGatheringApplicantStatusHandler
                     }

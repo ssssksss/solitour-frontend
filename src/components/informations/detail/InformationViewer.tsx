@@ -1,20 +1,20 @@
 import ItemTag from "../common/ItemTag";
 import Image from "next/image";
 import { TiLocation } from "react-icons/ti";
-import KakaoMapLinkContainer from "@/containers/common/KakaoMapLinkContainer";
 import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
-import ButtonListContainer from "@/containers/informations/detail/ButtonListContainer";
-import ImageListContainer from "@/containers/informations/detail/ImageListContainer";
-import InformationLikeCountContainer from "@/containers/informations/detail/InformationLikeCountContainer";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import ButtonList from "./ButtonList";
+import ImageList from "./ImageList";
+import InformationLikeCount from "./InformationLikeCount";
+import KakaoMapLink from "./KakaoMapLink";
 
-interface Props {
+interface InformationViewerProps {
   informationId: number;
   data: InformationDetailDto;
 }
 
-const InformationViewer = ({ informationId, data }: Props) => {
+const InformationViewer = ({ informationId, data }: InformationViewerProps) => {
   return (
     <div className="w-full">
       <div className="flex flex-row items-center justify-between overflow-x-hidden max-[1024px]:flex-col">
@@ -39,10 +39,10 @@ const InformationViewer = ({ informationId, data }: Props) => {
               </div>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <InformationLikeCountContainer
+              <InformationLikeCount
                 informationId={informationId}
-                likeCount={data.likeCount}
-                isLike={data.isLike}
+                initialLikeCount={data.likeCount}
+                initialIsLike={data.isLike}
               />
               <div className="flex flex-row items-center gap-1 text-gray2">
                 <LuEye />
@@ -54,7 +54,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
           </div>
         </div>
         <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
-          <ImageListContainer images={data.imageResponses} />
+          <ImageList images={data.imageResponses} />
         </div>
         <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
           <div className="max-[1024px]:hidden">
@@ -78,10 +78,10 @@ const InformationViewer = ({ informationId, data }: Props) => {
                 </div>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <InformationLikeCountContainer
+                <InformationLikeCount
                   informationId={informationId}
-                  likeCount={data.likeCount}
-                  isLike={data.isLike}
+                  initialLikeCount={data.likeCount}
+                  initialIsLike={data.isLike}
                 />
                 <div className="flex flex-row items-center gap-1 text-gray2">
                   <LuEye />
@@ -125,7 +125,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
         </div>
       </div>
       <div className="mt-20 flex h-48 flex-col">
-        <KakaoMapLinkContainer
+        <KakaoMapLink
           placeName={data.placeResponse.name}
           placeId={data.placeResponse.searchId}
           placeYAxis={data.placeResponse.yaxis}
@@ -145,7 +145,7 @@ const InformationViewer = ({ informationId, data }: Props) => {
           <p>{data.address}</p>
         </div>
       </a>
-      <ButtonListContainer
+      <ButtonList
         userId={data.userPostingResponse.id}
         informationId={informationId}
       />

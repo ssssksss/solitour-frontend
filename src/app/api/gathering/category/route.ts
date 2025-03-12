@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const response = await fetch(
       `${process.env.BACKEND_URL}/api/categories/gathering`,
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
 
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (err) {
+  } catch (error) {
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },

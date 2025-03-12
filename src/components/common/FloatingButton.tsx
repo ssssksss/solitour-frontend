@@ -1,67 +1,102 @@
+"use client";
+
+import { useFloatingButton } from "@/hooks/common/useFloatingButton";
 import Image from "next/image";
 import Link from "next/link";
-import { forwardRef } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
+import { Modal } from "./modal/Modal";
+import AddUserInformationForm from "../auth/AddUserInformationForm";
+import { AnimatePresence, motion } from "motion/react";
 
-interface Props {
-  visible: boolean;
-  animationFlag: boolean;
-  onClick: () => void;
-  onScrollToTop: () => void;
-  createGatheringClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-}
+const FloatingButton = () => {
+  const {
+    outside,
+    visible,
+    modalState,
+    handleScrollToTop,
+    handleWriteButtonClick,
+    handleGatheringClick,
+  } = useFloatingButton();
 
-const FloatingButton = forwardRef<HTMLDivElement, Props>(
-  (
-    { visible, animationFlag, onClick, onScrollToTop, createGatheringClick },
-    ref,
-  ) => {
-    return (
+  return (
+    <div>
+      <Modal modalState={modalState}>
+        <AddUserInformationForm />
+      </Modal>
       <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 translate-x-[-100%] flex-col items-center gap-3">
-        {visible && (
-          <div ref={ref} className="flex flex-col items-center gap-3">
-            <div
-              className={`${animationFlag ? "animate-fadeOut" : "animate-fadeIn"} flex flex-col items-center gap-6 rounded-full bg-lightGreen px-4 py-[1.875rem]`}
+        <AnimatePresence>
+          {visible && (
+            <motion.div
+              ref={outside}
+              className="flex flex-col items-center gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              <Link
-                className="flex flex-col items-center text-sm hover:text-main"
-                href="/diary/write"
-                onClick={onClick}
-              >
-                <p>일기</p>
-                <p>등록하기</p>
-              </Link>
-              <Link
-                className="flex flex-col items-center text-sm hover:text-main"
-                href="/gathering/write"
-                onClick={(e) => createGatheringClick(e)}
-              >
-                <p>모임</p>
-                <p>등록하기</p>
-              </Link>
-              <Link
-                className="flex flex-col items-center text-sm hover:text-main"
-                href="/informations/write"
-                onClick={onClick}
-              >
-                <p>여행정보</p>
-                <p>등록하기</p>
-              </Link>
-            </div>
-            <button
-              className={`${animationFlag ? "animate-buttonReverseRotation" : "animate-buttonRotation"} flex h-12 w-12 flex-row items-center justify-center rounded-full bg-main text-white shadow-md hover:scale-105`}
-              onClick={onClick}
+              <div className="flex flex-col items-center gap-6 rounded-full bg-lightGreen px-4 py-[1.875rem]">
+                <motion.div
+                  initial={{ opacity: 0, y: "0.5rem" }}
+                  animate={{ opacity: 1, y: "0rem" }}
+                  transition={{ bounce: false, delay: 0.4 }}
+                >
+                  <Link
+                    className="flex flex-col items-center text-sm hover:text-main"
+                    href="/diary/write"
+                    onClick={handleWriteButtonClick}
+                  >
+                    <p>일기</p>
+                    <p>등록하기</p>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: "0.5rem" }}
+                  animate={{ opacity: 1, y: "0rem" }}
+                  transition={{ bounce: false, delay: 0.3 }}
+                >
+                  <Link
+                    className="flex flex-col items-center text-sm hover:text-main"
+                    href="/gathering/write"
+                    onClick={(e) => handleGatheringClick(e)}
+                  >
+                    <p>모임</p>
+                    <p>등록하기</p>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: "0.5rem" }}
+                  animate={{ opacity: 1, y: "0rem" }}
+                  transition={{ bounce: false, delay: 0.2 }}
+                >
+                  <Link
+                    className="flex flex-col items-center text-sm hover:text-main"
+                    href="/informations/write"
+                    onClick={handleWriteButtonClick}
+                  >
+                    <p>여행정보</p>
+                    <p>등록하기</p>
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <button
+          className={[
+            "flex h-12 w-12 flex-row items-center justify-center rounded-full text-white shadow-md transition-all duration-300 hover:scale-105",
+            `${visible ? "bg-main" : "bg-black"}`,
+          ].join(" ")}
+          onClick={handleWriteButtonClick}
+        >
+          {visible ? (
+            <motion.div
+              initial={{ rotate: "-90deg" }}
+              animate={{ rotate: "0deg" }}
+              transition={{ bounce: false }}
             >
               <MdClose size={"1.5rem"} />
-            </button>
-          </div>
-        )}
-        {!visible && (
-          <button
-            className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
-            onClick={onClick}
-          >
+            </motion.div>
+          ) : (
             <Image
               className="-ml-1"
               src="/icons/pencil-icon.svg"
@@ -69,19 +104,17 @@ const FloatingButton = forwardRef<HTMLDivElement, Props>(
               width={24}
               height={24}
             />
-          </button>
-        )}
+          )}
+        </button>
         <button
           className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
-          onClick={onScrollToTop}
+          onClick={handleScrollToTop}
         >
-          <IoIosArrowUp size={"1.5rem"} />
+          <IoIosArrowUp size="1.5rem" />
         </button>
       </div>
-    );
-  },
-);
-
-FloatingButton.displayName = "FloatingButton";
+    </div>
+  );
+};
 
 export default FloatingButton;

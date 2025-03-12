@@ -1,20 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
-import { RiKakaoTalkFill } from "react-icons/ri";
 
 const Footer = () => {
   return (
-    <footer className="mt-auto flex h-fit w-full flex-row items-center justify-center bg-neutral-100 px-4">
+    <footer className="mt-auto flex h-fit w-full items-center justify-center bg-neutral-100 px-4">
       <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
         <Link className="relative h-8 w-[5.75rem]" href="/">
           <Image
             src="/logos/solitour-logo.svg"
             alt="solitour-logo"
             fill={true}
-            style={{
-              objectFit: "contain",
-            }}
+            style={{ objectFit: "contain" }}
           />
         </Link>
         <div className="text-sm font-medium text-gray1">
@@ -32,21 +28,13 @@ const Footer = () => {
           >
             둘러보기
           </Link>
-          <div className="flex w-fit flex-row items-center gap-4">
-            <button className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-200 hover:scale-105">
-              <RiKakaoTalkFill size={"1.5rem"} />
-            </button>
-            <button className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-200 hover:scale-105">
-              <FcGoogle size={"1.5rem"} />
-            </button>
-          </div>
         </div>
-        <div className="flex flex-row items-center justify-between pt-8 max-[744px]:flex-col-reverse max-[744px]:gap-4">
-          <p className="text-xs font-medium text-gray1">
+        <div className="flex flex-row items-center justify-between pt-8 text-gray1 max-[744px]:flex-col-reverse max-[744px]:gap-4">
+          <p className="text-xs font-medium">
             Copyright Solitour. All rights reserved
           </p>
           <nav>
-            <ul className="flex flex-row items-center gap-9 text-sm font-medium text-gray1">
+            <ul className="flex flex-row items-center gap-9 text-sm font-medium">
               <li>
                 <Link
                   className="hover:text-main"
@@ -65,7 +53,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link className="hover:text-main" href="/support?menu=about">
-                  서비스소개
+                  서비스 소개
                 </Link>
               </li>
             </ul>

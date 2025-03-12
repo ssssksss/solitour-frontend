@@ -1,21 +1,55 @@
-import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
-import Image from "next/image";
+"use client";
 
-interface IGatheringLike {
-  likes: number;
-  isLike: boolean;
+import useAuthStore from "@/stores/authStore";
+import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import Image from "next/image";
+import { useState } from "react";
+
+interface GatheringLikeProps {
+  initialLikes: number;
+  initialIsLike: boolean;
   gatheringId: number;
-  loading: boolean;
-  userId: number;
-  handleClick: (e: React.MouseEvent) => void;
 }
+
 const GatheringLike = ({
-  likes,
-  isLike,
-  loading,
-  userId,
-  handleClick,
-}: IGatheringLike) => {
+  initialLikes,
+  initialIsLike,
+  gatheringId,
+}: GatheringLikeProps) => {
+  const { id: userId } = useAuthStore();
+  const [isLike, setIsLike] = useState(initialIsLike); // 상태
+  const [likes, setLikes] = useState(initialLikes); // 숫자
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = async (e: React.MouseEvent) => {
+    if (loading) return;
+    e.preventDefault();
+    setLoading(true);
+
+    const newIsLike = !isLike;
+    const newLikes = newIsLike ? likes + 1 : likes - 1;
+
+    setIsLike(newIsLike);
+    setLikes(newLikes);
+
+    try {
+      const response = await fetchWithAuth(
+        `/api/gathering/like?id=${gatheringId}`,
+        { method: isLike ? "DELETE" : "POST" },
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      setIsLike(isLike);
+      setLikes(likes);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <button
       onClick={(e) => handleClick(e)}
@@ -43,4 +77,5 @@ const GatheringLike = ({
     </button>
   );
 };
+
 export default GatheringLike;

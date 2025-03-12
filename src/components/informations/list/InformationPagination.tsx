@@ -1,34 +1,32 @@
+"use client";
+
+import { useInformationPagination } from "@/hooks/information/list/useInformationPagination";
 import Link from "next/link";
 import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdFirstPage, MdLastPage } from "react-icons/md";
 
-interface Props {
+interface InformationPaginationProps {
   currentPage: number;
   totalPages: number;
-  pathname: string;
-  parentCategoryId: string | null;
-  childCategoryId: string | null;
-  place: string | null;
-  order: string | null;
-  tagName: string | null;
-  search: string | null;
 }
 
 const InformationPagination = ({
   currentPage,
   totalPages,
-  pathname,
-  parentCategoryId,
-  childCategoryId,
-  place,
-  order,
-  tagName,
-  search,
-}: Props) => {
-  const pageList = Array.from({ length: totalPages }, (_, index) => index + 1);
-  const leftPage = Math.max(currentPage - 2, 1);
-  const rightPage = Math.min(leftPage + 4, totalPages);
+}: InformationPaginationProps) => {
+  const {
+    pathname,
+    parentCategoryId,
+    childCategoryId,
+    place,
+    order,
+    tagName,
+    search,
+    pageList,
+    leftPage,
+    rightPage,
+  } = useInformationPagination(currentPage, totalPages);
 
   return (
     <div className="flex flex-row items-center justify-center gap-3 py-12 text-sm text-black">

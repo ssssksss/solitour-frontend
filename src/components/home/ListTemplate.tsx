@@ -1,21 +1,18 @@
-import { useDragScrollType } from "@/hooks/useDragScroll";
+"use client";
+
+import useDragScroll from "@/hooks/useDragScroll";
 import Link from "next/link";
 
 interface Props {
   titles: string[];
   description: string;
-  scrollHook: useDragScrollType;
+  href: string;
   children: React.ReactNode;
-  path: string;
 }
 
-const ListTemplate = ({
-  titles,
-  description,
-  scrollHook,
-  children,
-  path,
-}: Props) => {
+const ListTemplate = ({ titles, description, href, children }: Props) => {
+  const scrollHook = useDragScroll();
+
   return (
     <div className="flex w-full flex-col">
       <div className="flex flex-row items-center justify-between max-[744px]:justify-center">
@@ -29,7 +26,7 @@ const ListTemplate = ({
             </h2>
             <Link
               className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
-              href={path}
+              href={href}
             >
               전체보기
             </Link>
@@ -38,7 +35,7 @@ const ListTemplate = ({
         </div>
         <Link
           className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
-          href={path}
+          href={href}
         >
           전체보기
         </Link>

@@ -1,21 +1,18 @@
+"use client";
+
 import { Modal } from "@/components/common/modal/Modal";
-import { ModalState } from "@/types/ModalState";
 import { useFormContext } from "react-hook-form";
 import GatheringPlaceModal from "./modal/GatheringPlaceModal";
+import useModalState from "@/hooks/useModalState";
 
-interface IGatheringEditorPlace {
-  modalState: ModalState;
-}
-const GatheringEditorPlace = ({ modalState }: IGatheringEditorPlace) => {
+const GatheringEditorPlace = () => {
   const formContext = useFormContext();
+  const modalState = useModalState();
+
   return (
-    <div
-      className={
-        "flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start"
-      }
-    >
-      <div className={"relative w-[2.625rem] flex-shrink-0"}>
-        <span className={"text-lg font-semibold"}> 장소 </span>
+    <div className="flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
+      <div className="relative w-[2.625rem] flex-shrink-0">
+        <span className="text-lg font-semibold">장소</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>
       <div className="relative w-full">
@@ -35,12 +32,11 @@ const GatheringEditorPlace = ({ modalState }: IGatheringEditorPlace) => {
           </span>
         )}
       </div>
-      <Modal
-        modalState={modalState}
-      >
-        <GatheringPlaceModal/>
+      <Modal modalState={modalState}>
+        <GatheringPlaceModal />
       </Modal>
     </div>
   );
 };
+
 export default GatheringEditorPlace;

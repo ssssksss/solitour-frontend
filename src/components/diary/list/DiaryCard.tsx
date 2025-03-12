@@ -1,9 +1,12 @@
+"use client";
+
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { TiLocation } from "react-icons/ti";
+import { useCardFlipAnimation } from "@/hooks/diary/list/useCardFlipAnimation";
 
 interface Props {
   diaryData: {
@@ -20,12 +23,11 @@ interface Props {
       }[];
     };
   };
-  flag: boolean;
-  isFlipped: boolean;
-  flip: () => void;
 }
 
-const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
+const DiaryCard = ({ diaryData }: Props) => {
+  const { flag, isFlipped, handleFlip } = useCardFlipAnimation();
+
   // 뒷면
   if (isFlipped) {
     return (
@@ -33,7 +35,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
         className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} aspect-[3/4] w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-lightGreen max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
         onClick={() => {
           if (flag) {
-            flip();
+            handleFlip();
           }
         }}
       >
@@ -112,7 +114,7 @@ const DiaryCard = ({ diaryData, flag, isFlipped, flip }: Props) => {
       className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative aspect-[3/4] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
       onClick={() => {
         if (!flag) {
-          flip();
+          handleFlip();
         }
       }}
       initial={{ rotateY: -90 }}

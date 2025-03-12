@@ -1,37 +1,137 @@
+"use client";
+
 import LottieNotFound from "@/components/common/lottie/LottieNotFound";
-import { Gathering } from "@/types/GatheringDto";
 import GatheringItem from "../../common/GatheringItem";
-interface IGatheringCardList {
-  data: Gathering[];
-  checkAccessGathering: (e: React.MouseEvent<HTMLDivElement>) => void;
-  isAccessGathering: boolean;
-}
-const GatheringCardList = ({
-  data,
-  checkAccessGathering,
-  isAccessGathering,
-}: IGatheringCardList) => {
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Gathering } from "@/types/GatheringDto";
+import useAuthStore from "@/stores/authStore";
+import useModalState from "@/hooks/useModalState";
+import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
+import { Modal } from "@/components/common/modal/Modal";
+import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
+import Pagination from "@/components/common/Pagination";
+
+const SkeletonGatheringList = () => {
   return (
-    <>
-      {data.length == 0 ? (
-        <div className={"flex w-full flex-col items-center"}>
-          <LottieNotFound text={"찾는 내용이 없습니다."} />
-        </div>
-      ) : (
-        <div
-          onClick={(e) => checkAccessGathering(e)}
-          className="mt-6 grid h-auto w-full justify-items-center gap-5 min-[744px]:grid-cols-2 min-[1024px]:grid-cols-3"
-        >
-          {data?.map((i, index) => (
-            <GatheringItem
-              key={i.gatheringId}
-              data={i}
-              isAccessGathering={isAccessGathering}
-            />
-          ))}
-        </div>
-      )}
-    </>
+    <div className="my-6 grid min-h-[20rem] w-full justify-items-center gap-x-3 gap-y-3 min-[744px]:grid-cols-2 min-[1024px]:grid-cols-3">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <GatheringItemSkeleton key={index} />
+      ))}
+    </div>
   );
 };
+
+const GatheringCardList = () => {
+  const searchParams = useSearchParams();
+  const [totalElements, setTotalElements] = useState(1);
+  const [elements, setElements] = useState<Gathering[]>([]);
+  const [loading, setLoading] = useState(true);
+  const authStore = useAuthStore();
+  const router = useRouter();
+  const modalState = useModalState();
+  const [currentPage, setCurrentPage] = useState(
+    searchParams.get("page") ? Number(searchParams.get("page")) : 1,
+  );
+
+  const pageHandler = (page: number) => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set("page", page + "");
+    url.search = params.toString();
+    window.history.pushState({}, "", url.toString());
+  };
+
+  const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
+    if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
+      e.preventDefault();
+      modalState.openModal();
+    }
+    if (authStore.id < 1) {
+      e.preventDefault();
+      router.push("/auth/signin");
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        // validateQueryParams(params); // 프론트에서 url 검증 용도
+
+        // 페이지 숫자인지 여부와 1보다 큰지 여부
+        let page = params.get("page");
+        let pageNumber =
+          isNaN(Number(page)) || Number(page) <= 1 ? 0 : Number(page) - 1;
+        params.set("page", pageNumber + "");
+        url.search = params.toString();
+
+        const response = await fetch("/api/gathering" + url.search, {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          setElements([]);
+          setTotalElements(0);
+          setCurrentPage(0);
+          router.push("/not-found");
+          // throw new Error(response.statusText);
+          return;
+        }
+
+        const data = await response.json();
+        setElements(data.content);
+        setTotalElements(data.page.totalElements);
+        setCurrentPage(data.page.number + 1);
+      } finally {
+        setLoading(false);
+      }
+    })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  return (
+    <div>
+      {loading ? (
+        <SkeletonGatheringList />
+      ) : (
+        <>
+          <Modal modalState={modalState}>
+            <AddUserInformationForm />
+          </Modal>
+          {elements.length == 0 ? (
+            <div className={"flex w-full flex-col items-center"}>
+              <LottieNotFound text={"찾는 내용이 없습니다."} />
+            </div>
+          ) : (
+            <div
+              onClick={(e) => checkAccessGathering(e)}
+              className="mt-6 grid h-auto w-full justify-items-center gap-5 min-[744px]:grid-cols-2 min-[1024px]:grid-cols-3"
+            >
+              {elements?.map((i) => (
+                <GatheringItem
+                  key={i.gatheringId}
+                  data={i}
+                  isAccessGathering={
+                    !!authStore.sex && !!authStore.age && authStore.id > 0
+                  }
+                />
+              ))}
+            </div>
+          )}
+          {elements.length != 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(totalElements / 12)}
+              pageHandler={pageHandler}
+            />
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
 export default GatheringCardList;

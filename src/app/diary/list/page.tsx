@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Solitour 여행 일기 목록 페이지",
 };
 
-export default async function page(props: Props) {
+export default async function Page(props: Props) {
   const searchParams = await props.searchParams;
   const page = Number(searchParams["page"]);
   if (page <= 0 || !Number.isSafeInteger(page)) {

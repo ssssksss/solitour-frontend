@@ -58,9 +58,7 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
     <div className={"flex h-[21.125rem] w-full flex-col text-black"}>
       {placeResponse.name && (
         <a
-          className={
-            "relative flex h-full cursor-pointer flex-col items-center justify-center rounded-2xl border-[0.0625rem]"
-          }
+          className="relative flex h-full cursor-pointer flex-col items-center justify-center rounded-2xl border-[0.0625rem]"
           href={
             placeResponse.searchId
               ? `https://map.kakao.com/link/map/${placeResponse.searchId}`
@@ -87,11 +85,7 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
             }}
           ></div>
 
-          <div
-            className={
-              "-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-[0.0625rem] px-6 pb-10 pt-12"
-            }
-          >
+          <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-[0.0625rem] px-6 pb-10 pt-12">
             <div className="text-lg font-bold text-black">
               {placeResponse.name}
             </div>

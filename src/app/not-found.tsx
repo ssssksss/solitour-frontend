@@ -1,4 +1,4 @@
-import BackButtonContainer from "@/containers/common/BackButtonContainer";
+import BackButton from "@/components/common/BackButton";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Solitour의 Not found 페이지",
 };
 
-const NotFound = () => {
+export default function NotFound() {
   return (
     <main className="flex flex-col items-center justify-center gap-6 py-20">
       <div className="relative aspect-[75/46] w-[23.4375rem] max-[744px]:w-80">
@@ -20,8 +20,8 @@ const NotFound = () => {
         />
       </div>
       <div className="flex flex-row items-center justify-center gap-x-3 text-3xl font-bold text-black max-[744px]:flex-col">
-        <h1>앗..요청하신 페이지를</h1>
-        <h1>찾을 수 없습니다.</h1>
+        <p>앗..요청하신 페이지를</p>
+        <p>찾을 수 없습니다.</p>
       </div>
       <div className="flex flex-col items-center text-gray1">
         <p>존재하지 않는 주소를 입력하셨거나,</p>
@@ -37,10 +37,8 @@ const NotFound = () => {
         >
           홈으로
         </Link>
-        <BackButtonContainer />
+        <BackButton />
       </div>
     </main>
   );
-};
-
-export default NotFound;
+}

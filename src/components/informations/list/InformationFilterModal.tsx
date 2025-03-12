@@ -1,20 +1,19 @@
+"use client";
+
 import { LOCATION } from "@/constants/informations/location";
-import { Dispatch, SetStateAction } from "react";
+import { useInformationFilterModal } from "@/hooks/information/list/useInformationFilterModal";
 import { MdClose } from "react-icons/md";
 
-interface Props {
-  place: string | null;
-  setPlace: Dispatch<SetStateAction<string | null>>;
+interface InformationFilterModalProps {
   closeModal: () => void;
-  onClick: () => void;
 }
 
 const InformationFilterModal = ({
-  place,
-  setPlace,
   closeModal,
-  onClick,
-}: Props) => {
+}: InformationFilterModalProps) => {
+  const { place, setPlace, handleClick } =
+    useInformationFilterModal(closeModal);
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit max-h-[calc(100%_-_48px)] w-80 max-w-[calc(100%_-_48px)] flex-col overflow-y-auto rounded-xl bg-white p-6">
@@ -52,7 +51,7 @@ const InformationFilterModal = ({
           <button
             className={`${place === "" ? "hidden" : ""} h-11 w-full rounded-full bg-main text-[0.9375rem] text-white hover:scale-105`}
             type="button"
-            onClick={onClick}
+            onClick={handleClick}
           >
             필터 적용하기
           </button>

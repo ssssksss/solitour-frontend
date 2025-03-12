@@ -31,7 +31,7 @@ export async function PUT(request: NextRequest) {
     }
 
     return NextResponse.json({ status: 200, message: "닉네임 변경 성공" });
-  } catch (err) {
+  } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
   }
 }
