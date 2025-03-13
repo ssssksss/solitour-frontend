@@ -8,7 +8,7 @@ import useAuthStore from "@/stores/authStore";
 import useGatheringStore from "@/stores/gatheringStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { useParams } from "next/navigation";
-import useModalState from "@/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModalState";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
 

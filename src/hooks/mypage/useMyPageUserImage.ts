@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useDragAndDrop } from "../useDragAndDrop";
-import useModalState from "../useModalState";
+import { useDragAndDrop } from "../../shared/lib/hooks/useDragAndDrop";
 import useAuthStore from "@/stores/authStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useModalState } from "@/shared/lib/hooks";
 
 export const useMyPageUserImage = (
   userImageUrl: string,

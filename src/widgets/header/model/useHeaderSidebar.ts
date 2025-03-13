@@ -1,7 +1,7 @@
+import { useThrottle } from "@/shared/lib/hooks";
 import useAuthStore from "@/stores/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useThrottle } from "../useThrottle";
 
 export const useHeaderSidebar = (onClose: () => void) => {
   const [hoverNum, setHoverNum] = useState(0);

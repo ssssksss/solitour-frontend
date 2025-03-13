@@ -3,7 +3,7 @@
 import useToastifyStore from "@/stores/toastifyStore";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useModalState from "../useModalState";
+import useModalState from "../../shared/lib/hooks/useModalState";
 import useGatheringStore from "@/stores/gatheringStore";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
 

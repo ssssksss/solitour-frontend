@@ -1,6 +1,6 @@
 "use client";
 
-import useDragScroll from "@/hooks/useDragScroll";
+import { useDragScroll } from "@/shared/lib/hooks";
 import Link from "next/link";
 
 interface Props {

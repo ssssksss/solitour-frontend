@@ -11,8 +11,8 @@ import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import sanitizeHtml from "sanitize-html";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
+import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
+import { useModalBackHandler } from "@/shared/lib/hooks";
 
 export const useDiaryCreateEditor = () => {
   const router = useRouter();

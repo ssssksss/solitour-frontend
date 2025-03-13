@@ -3,7 +3,7 @@
 import { Modal } from "@/components/common/modal/Modal";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { SETTING_MODAL_AGE } from "@/constants/gathering/GatheringConstant";
-import useModalState from "@/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModalState";
 import "@/styles/reactDataRange.css";
 import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";

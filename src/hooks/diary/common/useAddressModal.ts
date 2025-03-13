@@ -1,6 +1,6 @@
 "use client";
 
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/shared/lib/hooks";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 

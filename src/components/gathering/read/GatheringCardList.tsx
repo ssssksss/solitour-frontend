@@ -1,16 +1,16 @@
 "use client";
 
-import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 import GatheringItem from "../../common/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Gathering } from "@/types/GatheringDto";
 import useAuthStore from "@/stores/authStore";
-import useModalState from "@/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModalState";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
 import { Modal } from "@/components/common/modal/Modal";
 import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
 import Pagination from "@/components/common/Pagination";
+import { LottieNotFound } from "@/shared/ui/lottie";
 
 const SkeletonGatheringList = () => {
   return (
@@ -103,7 +103,7 @@ const GatheringCardList = () => {
           </Modal>
           {elements.length == 0 ? (
             <div className={"flex w-full flex-col items-center"}>
-              <LottieNotFound text={"찾는 내용이 없습니다."} />
+              <LottieNotFound text="찾는 내용이 없습니다." />
             </div>
           ) : (
             <div

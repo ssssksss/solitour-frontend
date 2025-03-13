@@ -4,7 +4,7 @@ import { Modal } from "@/components/common/modal/Modal";
 import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import { useFormContext } from "react-hook-form";
 import GatheringParticipantsFilterModal from "./modal/GatheringParticipantsFilterModal";
-import useModalState from "@/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModalState";
 
 const GatheringEditorParticipantsFilter = () => {
   const formContext = useFormContext();

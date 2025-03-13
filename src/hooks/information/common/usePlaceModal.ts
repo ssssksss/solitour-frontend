@@ -1,8 +1,8 @@
 "use client";
 
+import { useDebounce } from "@/shared/lib/hooks";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useDebounce } from "@/hooks/useDebounce";
 
 export const usePlaceModal = (closeModal: () => void) => {
   const formContext = useFormContext();

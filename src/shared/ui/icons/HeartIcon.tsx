@@ -1,8 +1,8 @@
-interface Props {
+interface HeartIconProps {
   className?: string;
 }
 
-const HeartIcon = ({ className }: Props) => {
+export const HeartIcon = ({ className }: HeartIconProps) => {
   return (
     <svg
       className={className}
@@ -16,5 +16,3 @@ const HeartIcon = ({ className }: Props) => {
     </svg>
   );
 };
-
-export default HeartIcon;

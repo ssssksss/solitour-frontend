@@ -1,5 +1,5 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/shared/lib/hooks";
 import "@/styles/reactDataRange.css";
 import { IModalComponent } from "@/types/ModalState";
 import { add, addDays, format, isAfter, isSameDay } from "date-fns";

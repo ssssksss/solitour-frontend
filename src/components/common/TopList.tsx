@@ -3,7 +3,7 @@ import { TopGatheringResponseDto } from "@/types/GatheringDto";
 import { TopInformationResponseDto } from "@/types/InformationDto";
 import Image from "next/image";
 import Link from "next/link";
-import LottieComponent from "./lottie/LottieComponent";
+import Lottie from "lottie-react";
 
 interface Props {
   title: "여행" | "모임";
@@ -57,8 +57,8 @@ const TopList = async ({ title }: Props) => {
             "-z-5 max-[14.375rem] absolute right-0 top-0 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]"
           }
         >
-          <LottieComponent
-            lottieFile={LottieImage}
+          <Lottie
+            animationData={LottieImage}
             className="translate-y-[-1rem] object-contain"
           />
           <Image

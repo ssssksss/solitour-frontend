@@ -1,15 +1,15 @@
-import { useHeaderSidebar } from "@/hooks/common/useHeaderSidebar";
 import Image from "next/image";
 import Link from "next/link";
 import { MdClose } from "react-icons/md";
 import { AnimatePresence, motion } from "motion/react";
+import { useHeaderSidebar } from "../model/useHeaderSidebar";
 
 interface HeaderSidebarProps {
   visible: boolean;
   onClose: () => void;
 }
 
-const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
+export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
   const { id, hoverNum, setHoverNum, handleLogout } = useHeaderSidebar(onClose);
 
   return (
@@ -259,5 +259,3 @@ const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
     </AnimatePresence>
   );
 };
-
-export default HeaderSidebar;

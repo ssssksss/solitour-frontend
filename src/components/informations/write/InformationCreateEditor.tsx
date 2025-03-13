@@ -8,7 +8,6 @@ const InformationCreateEditor = () => {
   const {
     text,
     methods,
-    imagesHook,
     loading,
     locationModalVisible,
     categoryModalVisible,
@@ -28,7 +27,6 @@ const InformationCreateEditor = () => {
     <FormProvider {...methods}>
       <InformationEditor
         text={text}
-        imagesHook={imagesHook}
         loading={loading}
         locationModalVisible={locationModalVisible}
         categoryModalVisible={categoryModalVisible}

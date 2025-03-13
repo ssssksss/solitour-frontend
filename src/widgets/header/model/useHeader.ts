@@ -3,9 +3,9 @@
 import useAuthStore from "@/stores/authStore";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import usePreventBodyScroll from "../usePreventBodyScroll";
-import { useThrottle } from "../useThrottle";
+import usePreventBodyScroll from "../../../shared/lib/hooks/usePreventBodyScroll";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useThrottle } from "@/shared/lib/hooks";
 
 export const useHeader = () => {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ export const useHeader = () => {
   const [isTransparent, setIsTransparent] = useState(true);
   const { id, setUser } = useAuthStore();
 
-  const onScroll = useThrottle(() => {
+  const handleScroll = useThrottle(() => {
     if (window.scrollY >= 500) {
       setIsTransparent(false);
     } else {
@@ -37,11 +37,11 @@ export const useHeader = () => {
       history.back();
       localStorage.removeItem("isModal");
     }
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [onScroll]);
+  }, [handleScroll]);
 
   useEffect(() => {
     // 자동 로그인

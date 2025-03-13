@@ -4,8 +4,8 @@ import useAuthStore from "@/stores/authStore";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
+import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
+import { useModalBackHandler } from "@/shared/lib/hooks";
 
 export const useButtonList = (informationId: number) => {
   const { id } = useAuthStore();

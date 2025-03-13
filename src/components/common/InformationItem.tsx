@@ -5,7 +5,7 @@ import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
 import { useInformationItem } from "@/hooks/common/useInformationItem";
-import HeartIcon from "./icons/HeartIcon";
+import HeartIcon from "../../shared/ui/icons/HeartIcon";
 
 interface InformationItemProps {
   informationId: number;

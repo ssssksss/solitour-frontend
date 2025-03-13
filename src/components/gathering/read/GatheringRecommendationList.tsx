@@ -3,7 +3,7 @@
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItem from "../../common/GatheringItem";
 import useAuthStore from "@/stores/authStore";
-import LottieNotFound from "@/components/common/lottie/LottieNotFound";
+import { LottieNotFound } from "@/shared/ui/lottie";
 
 const GatheringRecommendationList = ({
   data,
@@ -17,7 +17,7 @@ const GatheringRecommendationList = ({
       <h2 className="text-2xl font-bold text-black">추천 모임 정보</h2>
       {data.length === 0 ? (
         <div className="flex w-full flex-col items-center">
-          <LottieNotFound text={"추천 모임 정보가 없습니다."} />
+          <LottieNotFound text="추천 모임 정보가 없습니다." />
         </div>
       ) : (
         <div className="mt-6 grid w-full justify-items-center gap-x-3 gap-y-3 min-[745px]:grid-cols-2">

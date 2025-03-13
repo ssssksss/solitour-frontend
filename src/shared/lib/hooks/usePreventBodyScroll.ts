@@ -1,10 +1,12 @@
+"use client";
+
 import { useEffect } from "react";
 
 /**
  * @description 모달창을 열었을 때 바디 스크롤을 막으려고 만든 hook
  * @example usePreventBodyScroll(isOpenModal);
  */
-const usePreventBodyScroll = (dependency: boolean) => {
+export const usePreventBodyScroll = (dependency: boolean) => {
   useEffect(() => {
     if (!dependency) return;
 
@@ -21,5 +23,3 @@ const usePreventBodyScroll = (dependency: boolean) => {
     };
   }, [dependency]);
 };
-
-export default usePreventBodyScroll;

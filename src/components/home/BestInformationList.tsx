@@ -1,7 +1,7 @@
 import { BestInformationResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
-import LottieNotFound from "../common/lottie/LottieNotFound";
 import InformationItem from "../common/InformationItem";
+import { LottieNotFound } from "@/shared/ui/lottie";
 
 /**
  * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.

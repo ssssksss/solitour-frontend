@@ -1,5 +1,5 @@
 import InformationItem from "@/components/common/InformationItem";
-import LottieNotFound from "@/components/common/lottie/LottieNotFound";
+import { LottieNotFound } from "@/shared/ui/lottie";
 import { InformationDetailDto } from "@/types/InformationDto";
 
 interface RecommendationListProps {

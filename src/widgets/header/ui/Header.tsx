@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
-import UserDropDown from "../auth/UserDropDown";
-import HeaderSidebar from "./HeaderSidebar";
-import { useHeader } from "@/hooks/common/useHeader";
+import { HeaderSidebar } from "./HeaderSidebar";
+import UserDropDown from "@/components/auth/UserDropDown";
+import { useHeader } from "../model/useHeader";
 
-const Header = () => {
+export const Header = () => {
   const {
     id,
     pathname,
@@ -113,5 +113,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

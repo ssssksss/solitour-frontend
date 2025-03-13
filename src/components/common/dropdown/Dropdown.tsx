@@ -1,4 +1,4 @@
-import useOutsideClick from "@/hooks/useOutsideClick";
+import useOutsideClick from "@/shared/lib/hooks/useOutsideClick";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 

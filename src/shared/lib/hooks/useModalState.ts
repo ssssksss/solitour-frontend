@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 
-const useModalState = () => {
+export const useModalState = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => {
@@ -19,5 +19,3 @@ const useModalState = () => {
     closeModal,
   };
 };
-
-export default useModalState;

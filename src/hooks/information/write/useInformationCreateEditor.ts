@@ -14,12 +14,10 @@ import { useForm } from "react-hook-form";
 import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import useDragScroll from "@/hooks/useDragScroll";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
+import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
+import { useModalBackHandler } from "@/shared/lib/hooks";
 
 export const useInformationCreateEditor = () => {
-  const imagesHook = useDragScroll();
   const { id } = useAuthStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
@@ -242,7 +240,6 @@ export const useInformationCreateEditor = () => {
   return {
     text: "등록",
     methods,
-    imagesHook,
     loading,
     locationModalVisible,
     categoryModalVisible,

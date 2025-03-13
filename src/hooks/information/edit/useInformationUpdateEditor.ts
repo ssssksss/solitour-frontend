@@ -1,15 +1,13 @@
 "use client";
 
 import useAuthStore from "@/stores/authStore";
-import useDragScroll from "@/hooks/useDragScroll";
 import useEditorStore from "@/stores/editorStore";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import usePreventBodyScroll from "@/hooks/usePreventBodyScroll";
-import useModalBackHandler from "@/hooks/useModalBackHandler";
+import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
 import {
   InformationDetailDto,
   InformationRegisterResponseDto,
@@ -18,12 +16,12 @@ import {
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import sanitizeHtml from "sanitize-html";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { useModalBackHandler } from "@/shared/lib/hooks";
 
 export const useInformationUpdateEditor = (
   informationId: number,
   data: InformationDetailDto,
 ) => {
-  const imagesHook = useDragScroll();
   const { id } = useAuthStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
@@ -347,7 +345,6 @@ export const useInformationUpdateEditor = (
   return {
     text: "수정",
     methods,
-    imagesHook,
     loading,
     locationModalVisible,
     categoryModalVisible,

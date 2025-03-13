@@ -1,5 +1,5 @@
 import introLottie from "@/../public/lottie/solitour-auth-intro-image.json";
-import LottieComponent from "@/components/common/lottie/LottieComponent";
+import Lottie from "lottie-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ const SignIn = () => {
       <p className="h-[2.875rem] max-w-[21rem] font-medium text-gray1">
         SNS로 솔리투어에 로그인하고 더 많은 서비스를 즐겨보세요!
       </p>
-      <LottieComponent lottieFile={introLottie} />
+      <Lottie animationData={introLottie} />
       <Image
         className="-mt-36 mb-8 h-[6.875rem] w-[11rem] self-center"
         src="/icons/solitour-auth-intro-icon.svg"

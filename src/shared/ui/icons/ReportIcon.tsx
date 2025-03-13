@@ -2,7 +2,7 @@ interface ReportIconProps {
   className?: string;
 }
 
-const ReportIcon = ({ className }: ReportIconProps) => {
+export const ReportIcon = ({ className }: ReportIconProps) => {
   return (
     <svg
       className={className}
@@ -40,5 +40,3 @@ const ReportIcon = ({ className }: ReportIconProps) => {
     </svg>
   );
 };
-
-export default ReportIcon;

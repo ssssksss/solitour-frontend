@@ -1,8 +1,8 @@
-interface Props {
+interface EditIconProps {
   className?: string;
 }
 
-const EditIcon = ({ className }: Props) => {
+export const EditIcon = ({ className }: EditIconProps) => {
   return (
     <svg
       className={className}
@@ -27,5 +27,3 @@ const EditIcon = ({ className }: Props) => {
     </svg>
   );
 };
-
-export default EditIcon;

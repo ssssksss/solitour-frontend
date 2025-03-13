@@ -1,9 +1,9 @@
-import LottieNotFound from "@/components/common/lottie/LottieNotFound";
 import { LOCATION_ID } from "@/constants/informations/location";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 import InformationPagination from "./InformationPagination";
 import InformationItem from "@/components/common/InformationItem";
+import { LottieNotFound } from "@/shared/ui/lottie";
 
 async function getInformationList(
   page: number,

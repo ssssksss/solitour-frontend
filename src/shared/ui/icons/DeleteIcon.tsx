@@ -1,8 +1,8 @@
-interface Props {
+interface DeleteIconProps {
   className?: string;
 }
 
-const DeleteIcon = ({ className }: Props) => {
+export const DeleteIcon = ({ className }: DeleteIconProps) => {
   return (
     <svg
       className={className}
@@ -47,5 +47,3 @@ const DeleteIcon = ({ className }: Props) => {
     </svg>
   );
 };
-
-export default DeleteIcon;

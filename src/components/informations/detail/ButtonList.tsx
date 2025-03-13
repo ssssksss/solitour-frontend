@@ -1,8 +1,8 @@
 "use client";
 
 import DeleteModal from "@/components/common/DeleteModal";
-import DeleteIcon from "@/components/common/icons/DeleteIcon";
-import EditIcon from "@/components/common/icons/EditIcon";
+import DeleteIcon from "@/shared/ui/icons/DeleteIcon";
+import EditIcon from "@/shared/ui/icons/EditIcon";
 import { useButtonList } from "@/hooks/information/detail/useButtonList";
 import Link from "next/link";
 

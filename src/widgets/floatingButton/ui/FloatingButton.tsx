@@ -1,15 +1,15 @@
 "use client";
 
-import { useFloatingButton } from "@/hooks/common/useFloatingButton";
 import Image from "next/image";
 import Link from "next/link";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
-import { Modal } from "./modal/Modal";
-import AddUserInformationForm from "../auth/AddUserInformationForm";
+import { Modal } from "../../../components/common/modal/Modal";
+import AddUserInformationForm from "../../../components/auth/AddUserInformationForm";
 import { AnimatePresence, motion } from "motion/react";
+import { useFloatingButton } from "../model/useFloatingButton";
 
-const FloatingButton = () => {
+export const FloatingButton = () => {
   const {
     outside,
     visible,
@@ -116,5 +116,3 @@ const FloatingButton = () => {
     </div>
   );
 };
-
-export default FloatingButton;

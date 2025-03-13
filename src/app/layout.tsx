@@ -1,8 +1,8 @@
-import FloatingButton from "@/components/common/FloatingButton";
-import Footer from "@/components/common/Footer";
-import Header from "@/components/common/Header";
 import ReactToastifyComponent from "@/components/common/ReactToastifyComponent";
 import "@/styles/globals.css";
+import { FloatingButton } from "@/widgets/floatingButton";
+import { Footer } from "@/widgets/footer";
+import { Header } from "@/widgets/header";
 import type { Metadata } from "next";
 import Script from "next/script";
 

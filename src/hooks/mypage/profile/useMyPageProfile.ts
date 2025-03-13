@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { UserResponseDto } from "@/types/UserDto";
-import useModalState from "@/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModalState";
 
 export const useMyPageProfile = (userInfo: UserResponseDto) => {
   const [nickname, setNickname] = useState(userInfo.nickname);

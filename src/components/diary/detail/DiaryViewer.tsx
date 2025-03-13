@@ -1,5 +1,3 @@
-import DeleteIcon from "@/components/common/icons/DeleteIcon";
-import EditIcon from "@/components/common/icons/EditIcon";
 import sanitizeOption from "@/constants/common/sanitizeOption";
 import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
@@ -10,6 +8,7 @@ import sanitizeHtml from "sanitize-html";
 import { motion } from "motion/react";
 import { useDiaryViewer } from "@/hooks/diary/detail/useDiaryViewer";
 import DeleteModal from "@/components/common/DeleteModal";
+import { DeleteIcon, EditIcon } from "@/shared/ui/icons";
 
 interface DiaryViewerProps {
   data: GetDiaryResponseDto;

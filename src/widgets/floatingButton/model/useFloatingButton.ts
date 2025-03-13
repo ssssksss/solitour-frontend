@@ -2,9 +2,9 @@
 
 import useAuthStore from "@/stores/authStore";
 import { useRef, useState } from "react";
-import useModalState from "../useModalState";
+import useModalState from "../../../shared/lib/hooks/useModalState";
 import { useRouter } from "next/navigation";
-import useOutsideClick from "../useOutsideClick";
+import useOutsideClick from "../../../shared/lib/hooks/useOutsideClick";
 
 export const useFloatingButton = () => {
   const [visible, setVisible] = useState(false);

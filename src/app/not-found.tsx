@@ -1,4 +1,4 @@
-import BackButton from "@/components/common/BackButton";
+import { BackButton } from "@/shared/ui/buttons";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItemHome from "../common/GatheringItemHome";
-import LottieNotFound from "../common/lottie/LottieNotFound";
 import { cookies } from "next/headers";
+import { LottieNotFound } from "@/shared/ui/lottie";
 
 async function getNewGatheringList() {
   const accessToken = (await cookies()).get("access_token");
@@ -27,7 +27,7 @@ const NewGatheringList = async () => {
   if (elements.length === 0) {
     return (
       <div className="flex w-full flex-col items-center pb-12">
-        <LottieNotFound text={"모임을 작성해 보세요."} />
+        <LottieNotFound text="모임을 작성해 보세요." />
       </div>
     );
   }

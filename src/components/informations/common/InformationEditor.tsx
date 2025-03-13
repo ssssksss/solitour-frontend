@@ -11,12 +11,11 @@ import CategoryModal from "./CategoryModal";
 import ImageUploadItem from "./ImageUploadItem";
 import PlaceModal from "./PlaceModal";
 import { useFormContext } from "react-hook-form";
-import { useDragScrollType } from "@/hooks/useDragScroll";
 import { useEditorStoreType } from "@/stores/editorStore";
+import { useDragScroll } from "@/shared/lib/hooks";
 
 interface InformationEditorProps {
   text: string;
-  imagesHook: useDragScrollType;
   loading: boolean;
   locationModalVisible: boolean;
   categoryModalVisible: boolean;
@@ -34,7 +33,6 @@ interface InformationEditorProps {
 
 const InformationEditor = ({
   text,
-  imagesHook,
   loading,
   locationModalVisible,
   categoryModalVisible,
@@ -50,6 +48,7 @@ const InformationEditor = ({
   handleSubmit,
 }: InformationEditorProps) => {
   const formContext = useFormContext();
+  const imagesHook = useDragScroll();
 
   return (
     <div className="flex w-full flex-col">

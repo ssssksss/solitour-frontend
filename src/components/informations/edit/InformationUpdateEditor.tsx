@@ -17,7 +17,6 @@ const InformationUpdateEditor = ({
   const {
     text,
     methods,
-    imagesHook,
     loading,
     locationModalVisible,
     categoryModalVisible,
@@ -37,7 +36,6 @@ const InformationUpdateEditor = ({
     <FormProvider {...methods}>
       <InformationEditor
         text={text}
-        imagesHook={imagesHook}
         loading={loading}
         locationModalVisible={locationModalVisible}
         categoryModalVisible={categoryModalVisible}

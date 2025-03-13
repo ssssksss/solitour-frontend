@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 
-const useOutsideClick = <T extends HTMLElement = HTMLElement>(
+export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   ref: React.RefObject<T | null>,
   callback: (event?: MouseEvent) => void,
 ) => {
@@ -36,5 +38,3 @@ const useOutsideClick = <T extends HTMLElement = HTMLElement>(
     };
   }, [callback, isDragging, ref]);
 };
-
-export default useOutsideClick;

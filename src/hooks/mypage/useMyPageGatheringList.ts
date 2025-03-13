@@ -3,7 +3,7 @@
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import useModalState from "../useModalState";
+import useModalState from "../../shared/lib/hooks/useModalState";
 import { Gathering } from "@/types/GatheringDto";
 import useAuthStore from "@/stores/authStore";
 
