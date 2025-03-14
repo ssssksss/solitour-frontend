@@ -1,8 +1,8 @@
+import { useModalState, useOutsideClick } from "@/shared/lib/hooks";
 import useAuthStore from "@/stores/authStore";
-import useModalState from "../../shared/lib/hooks/useModalState";
+
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
-import useOutsideClick from "../../shared/lib/hooks/useOutsideClick";
 
 export const useUserDropDown = () => {
   const authStore = useAuthStore();

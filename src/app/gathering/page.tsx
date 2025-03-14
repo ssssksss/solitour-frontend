@@ -1,6 +1,6 @@
-import Banner from "@/components/common/Banner";
 import TopList from "@/components/common/TopList";
 import GatheringList from "@/components/gathering/read/GatheringList";
+import { GatheringBanner } from "@/widgets/gatheringBanner";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -27,11 +27,7 @@ export default async function Page() {
   return (
     <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
       <div className="flex w-full flex-col items-center">
-        <Banner
-          content={["<b>직접 내 모임</b>을", "<b>만들어</b>보세요!"]}
-          buttonText="모임 등록하기"
-          category="모임"
-        />
+        <GatheringBanner />
         <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
       </div>
       <div className="flex w-full flex-col items-center">

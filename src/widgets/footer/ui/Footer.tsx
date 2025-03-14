@@ -3,14 +3,14 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="mt-auto flex h-fit w-full items-center justify-center bg-neutral-100 px-4">
+    <footer className="mt-auto flex h-fit w-full items-center justify-center border border-red-500 bg-neutral-100 px-4">
       <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
-        <Link className="relative h-8 w-[5.75rem]" href="/">
+        <Link href="/">
           <Image
             src="/logos/solitour-logo.svg"
             alt="solitour-logo"
-            fill={true}
-            style={{ objectFit: "contain" }}
+            width={92}
+            height={32}
           />
         </Link>
         <div className="text-sm font-medium text-gray1">

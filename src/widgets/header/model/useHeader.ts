@@ -3,9 +3,8 @@
 import useAuthStore from "@/stores/authStore";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import usePreventBodyScroll from "../../../shared/lib/hooks/usePreventBodyScroll";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
-import { useThrottle } from "@/shared/lib/hooks";
+import { usePreventBodyScroll, useThrottle } from "@/shared/lib/hooks";
 
 export const useHeader = () => {
   const pathname = usePathname();
