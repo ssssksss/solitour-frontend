@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="mt-auto flex h-fit w-full items-center justify-center border border-red-500 bg-neutral-100 px-4">
+    <footer className="mt-auto flex h-fit w-full items-center justify-center px-4">
       <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
         <Link href="/">
           <Image
