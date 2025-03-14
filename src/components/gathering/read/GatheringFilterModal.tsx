@@ -203,7 +203,7 @@ const GatheringFilterModal = () => {
   return (
     <div>
       <button
-        className="flex flex-row items-center hover:text-main"
+        className="hover:text-main flex flex-row items-center"
         onClick={() => modalState.openModal()}
       >
         <VscSettings size="1.25rem" />
@@ -213,11 +213,11 @@ const GatheringFilterModal = () => {
         <ModalTemplate className="max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem]">
           <button
             onClick={() => modalState.closeModal()}
-            className="absolute right-[2rem] top-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
+            className="absolute top-[2rem] right-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
             style={{ zIndex: 200 }}
           >
             <MdClose
-              className="bg-red-60 cursor-pointer text-gray2 hover:text-main"
+              className="bg-red-60 text-gray2 hover:text-main cursor-pointer"
               size={"2.5rem"}
               onClick={() => {
                 modalState.closeModal();
@@ -233,7 +233,7 @@ const GatheringFilterModal = () => {
                   <button
                     key={i.id}
                     onClick={() => setLocation(i.id)}
-                    className={`${location == i.id ? "bg-main text-white outline-0" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
+                    className={`${location == i.id ? "bg-main text-white outline-0" : "text-gray1 outline outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
                   >
                     {i.name}
                   </button>
@@ -247,7 +247,7 @@ const GatheringFilterModal = () => {
                   <button
                     key={i[1]}
                     onClick={() => setSex(i[1])}
-                    className={`${sex == i[1] ? "bg-main text-white" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
+                    className={`${sex == i[1] ? "bg-main text-white" : "text-gray1 outline outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
                   >
                     {i[0]}
                   </button>
@@ -269,13 +269,13 @@ const GatheringFilterModal = () => {
                           _endAge: i[1].endAge,
                         })
                       }
-                      className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white outline-0" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
+                      className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white outline-0" : "outline outline-offset-[-1px] outline-[#E9EBED]"} text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-4 py-2 hover:text-white`}
                     >
                       {i[0]}
                     </button>
                   ))}
                   <button
-                    className={`${directInput ? "bg-main text-white outline-0" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
+                    className={`${directInput ? "bg-main text-white outline-0" : "outline outline-offset-[-1px] outline-[#E9EBED]"} text-gray1 hover:bg-main rounded-[4rem] px-4 py-2 hover:text-white`}
                     onClick={() => setDirectInput(true)}
                   >
                     직접 입력
@@ -309,7 +309,7 @@ const GatheringFilterModal = () => {
                       className="w-full text-center text-lg"
                     />
                     <div className="absolute bottom-2 h-[1px] w-[5.125rem] bg-black" />
-                    <div className="absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold text-main">
+                    <div className="text-main absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold">
                       {new Date().getFullYear() - (startAge || 0)} 년생
                     </div>
                   </div>
@@ -346,7 +346,7 @@ const GatheringFilterModal = () => {
                       className="w-full pr-[0.625rem] text-center text-lg"
                     />
                     <div className="absolute bottom-2 h-[1px] w-[5.125rem] bg-black" />
-                    <div className="absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold text-main">
+                    <div className="text-main absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold">
                       {new Date().getFullYear() - (endAge || 0)} 년생
                     </div>
                   </div>
@@ -384,7 +384,7 @@ const GatheringFilterModal = () => {
                     {SELECTED_SCHEDULE_DATA.map((i) => (
                       <button
                         key={i.name}
-                        className="rounded-lg bg-main px-[.5rem] py-[.125rem] text-white"
+                        className="bg-main rounded-lg px-[.5rem] py-[.125rem] text-white"
                         onClick={() => {
                           setCalendarDate([
                             {
@@ -432,7 +432,7 @@ const GatheringFilterModal = () => {
                         setYear(e.getFullYear());
                       }}
                     />
-                    <div className="absolute left-[50%] top-6 translate-x-[-50%] font-semibold">
+                    <div className="absolute top-6 left-[50%] translate-x-[-50%] font-semibold">
                       {year}.{month}
                     </div>
                   </div>
@@ -456,13 +456,13 @@ const GatheringFilterModal = () => {
           <div className="flex w-full justify-center gap-[1rem] pt-[2rem]">
             <button
               onClick={() => initFilterOptionHandler()}
-              className="h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white"
+              className="bg-main h-[3rem] min-w-[8rem] rounded-[4rem] px-[1rem] py-[.5rem] text-white"
             >
               설정 초기화
             </button>
             <button
               onClick={() => submitApplyFilter()}
-              className="h-[3rem] min-w-[8rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white"
+              className="bg-main h-[3rem] min-w-[8rem] rounded-[4rem] px-[1rem] py-[.5rem] text-white"
             >
               적용하기
             </button>

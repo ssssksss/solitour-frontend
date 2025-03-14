@@ -26,18 +26,18 @@ const MyPageUserImage = ({ userImageUrl, userSex }: MyPageUserImageProps) => {
   } = useMyPageUserImage(userImageUrl, userSex);
 
   return (
-    <article className="flex items-center justify-center pb-[5.25rem] pt-[4.25rem]">
+    <article className="flex items-center justify-center pt-[4.25rem] pb-[5.25rem]">
       <div className="group flex flex-col items-center">
         <label
-          className="relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] bg-lightGreen outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]"
-          htmlFor={"imageUpload"}
+          className="bg-lightgreen relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] outline outline-offset-[-1px] outline-[#B8EDD9]"
+          htmlFor="imageUpload"
           onDragEnter={onDragEnter}
           onDragLeave={onDragLeave}
           onDragOver={onDragOver}
           onDrop={onDropOrInputEvent}
         >
           <UserImage userImageAddress={imageUrl} userSex={userSex} size={108} />
-          <div className="absolute bottom-0 right-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]">
+          <div className="absolute right-0 bottom-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]">
             <div className="relative h-[1.25rem] w-[1.25rem]">
               <Image
                 src="/icons/camera-icon.svg"
@@ -47,7 +47,7 @@ const MyPageUserImage = ({ userImageUrl, userSex }: MyPageUserImageProps) => {
             </div>
           </div>
           <button
-            className="invisible absolute right-0 top-0 z-10 flex aspect-square w-[1rem] items-center justify-center rounded-[50%] bg-black group-hover:visible"
+            className="invisible absolute top-0 right-0 z-10 flex aspect-square w-[1rem] items-center justify-center rounded-[50%] bg-black group-hover:visible"
             onClick={handleDeleteClick}
           >
             <Image

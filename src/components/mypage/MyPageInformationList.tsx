@@ -1,9 +1,11 @@
 "use client";
 
-import InformationItemSkeleton from "../../features/information/ui/InformationItemSkeleton";
 import CategoryList from "../common/CategoryList";
 import { useMyPageInformationList } from "@/hooks/mypage/useMyPageInformationList";
-import { InformationItem } from "@/features/information";
+import {
+  InformationItem,
+  InformationItemSkeleton,
+} from "@/features/information";
 import { Pagination } from "@/shared/ui/pagination";
 
 const MyPageInformationList = () => {
@@ -14,7 +16,6 @@ const MyPageInformationList = () => {
     elements,
     totalElements,
     isLoading,
-    pageHandler,
     handleCategoryClick,
   } = useMyPageInformationList();
 
@@ -58,7 +59,6 @@ const MyPageInformationList = () => {
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(totalElements / 6)}
-        pageHandler={pageHandler}
       />
     </div>
   );

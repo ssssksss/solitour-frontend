@@ -53,10 +53,11 @@ const TopList = async ({ title }: Props) => {
     <div className="relative z-1 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow-sm shadow-[#CCECE2] max-[744px]:-mt-24">
       {title === "모임" && (
         <div className="max-[14.375rem] absolute top-0 right-0 -z-5 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]">
+          {/* TODO
           <Lottie
             animationData={LottieFile}
             className="translate-y-[-1rem] object-contain"
-          />
+          /> */}
           <Image
             className="object-contain"
             src="/icons/gathering-people.svg"

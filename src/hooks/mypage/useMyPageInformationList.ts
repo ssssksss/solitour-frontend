@@ -35,15 +35,6 @@ export const useMyPageInformationList = () => {
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const pageHandler = (page: number) => {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    params.set("page", page + "");
-    url.search = params.toString();
-    setCurrentPage(page);
-    window.history.pushState({}, "", url.toString());
-  };
-
   const handleCategoryClick = (value: string) => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -92,7 +83,6 @@ export const useMyPageInformationList = () => {
     elements,
     totalElements,
     isLoading,
-    pageHandler,
     handleCategoryClick,
   };
 };

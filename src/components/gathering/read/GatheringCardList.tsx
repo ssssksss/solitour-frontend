@@ -3,14 +3,14 @@
 import GatheringItem from "../../common/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Gathering } from "@/entities/gathering/model/GatheringDto";
-import GatheringItemSkeleton from "@/features/gathering/ui/GatheringItemSkeleton";
 import { Modal } from "@/components/common/modal/Modal";
 import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
 import { Pagination } from "@/shared/ui/pagination";
+import { GatheringItemSkeleton } from "@/features/gathering";
+import { Gathering } from "@/entities/gathering/model/GatheringDto";
 
 const SkeletonGatheringList = () => {
   return (
@@ -33,14 +33,6 @@ const GatheringCardList = () => {
   const [currentPage, setCurrentPage] = useState(
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
-
-  const pageHandler = (page: number) => {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    params.set("page", page + "");
-    url.search = params.toString();
-    window.history.pushState({}, "", url.toString());
-  };
 
   const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
@@ -125,7 +117,6 @@ const GatheringCardList = () => {
             <Pagination
               currentPage={currentPage}
               totalPages={Math.ceil(totalElements / 12)}
-              pageHandler={pageHandler}
             />
           )}
         </>

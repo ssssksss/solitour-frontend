@@ -1,9 +1,9 @@
 import { LOCATION_ID } from "@/shared/config/location";
 import { InformationListResponseDto } from "@/entities/information/model/informationDto";
 import { cookies } from "next/headers";
-import InformationPagination from "./InformationPagination";
 import { LottieNotFound } from "@/shared/ui/lottie";
-import { InformationItem } from "@/entities/information";
+import { InformationItem } from "@/features/information";
+import { Pagination } from "@/shared/ui/pagination";
 
 async function getInformationList(
   page: number,
@@ -85,10 +85,7 @@ const InformationList = async ({
               />
             ))}
           </div>
-          <InformationPagination
-            currentPage={page}
-            totalPages={data.page.totalPages}
-          />
+          <Pagination currentPage={page} totalPages={data.page.totalPages} />
         </div>
       ) : (
         <div className="flex w-full flex-col items-center pb-12">

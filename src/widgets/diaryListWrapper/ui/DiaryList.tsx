@@ -1,7 +1,7 @@
-import DiaryPagination from "@/components/diary/list/DiaryPagination";
-import DiaryWriteButton from "@/components/diary/list/DiaryWriteButton";
-import { DiaryCard, getDiaryList } from "@/entities/diary";
 import Link from "next/link";
+import { DiaryCard, getDiaryList } from "@/entities/diary";
+import { DiaryWriteLink } from "./DiaryWriteLink";
+import { Pagination } from "@/shared/ui/pagination";
 
 interface DiaryListProps {
   page: number;
@@ -22,16 +22,13 @@ export const DiaryList = async ({ page }: DiaryListProps) => {
         </Link>
       </div>
       <div className="mb-10 grid grid-cols-2 gap-5 max-[744px]:grid-cols-1">
-        {diaryList.content.length < 6 && <DiaryWriteButton />}
+        {diaryList.content.length < 6 && <DiaryWriteLink />}
         {diaryList.content.map((value, index) => (
           <DiaryCard key={index} diary={value} />
         ))}
       </div>
       {diaryList.content.length > 0 && (
-        <DiaryPagination
-          currentPage={page}
-          totalPages={diaryList.page.totalPages}
-        />
+        <Pagination currentPage={page} totalPages={diaryList.page.totalPages} />
       )}
     </div>
   );
