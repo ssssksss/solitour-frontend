@@ -22,8 +22,6 @@ export interface TopGatheringResponseDto {
   title: string;
 }
 
-// types.ts
-
 type UserPostingResponse = {
   id: number;
   name: string;
