@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import CommentList from "@/components/informations/detail/comment/CommentList";
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";

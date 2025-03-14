@@ -1,4 +1,4 @@
-const sanitizeOption = {
+export const SANITIZE_OPTION = {
   allowedTags: [
     "p",
     "span",
@@ -33,6 +33,4 @@ const sanitizeOption = {
     iframe: ["class", "style", "frameborder", "allowfullscreen", "src"],
   },
   allowedSchemes: ["data", "http", "https"],
-};
-
-export default sanitizeOption;
+} as const;

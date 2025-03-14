@@ -1,7 +1,7 @@
 "use client";
 
-import DeleteIcon from "@/shared/ui/icons/DeleteIcon";
-import EditIcon from "@/shared/ui/icons/EditIcon";
+import DeleteIcon from "@/shared/ui/icon/DeleteIcon";
+import EditIcon from "@/shared/ui/icon/EditIcon";
 // 모임이나 정보에서 수정, 삭제를 담고 있는 컴포넌트
 
 import useAuthStore from "@/stores/authStore";

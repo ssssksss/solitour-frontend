@@ -1,11 +1,11 @@
 import React from "react";
 import { HashLoader } from "react-spinners";
 
-interface Props {
+interface HashSpinnerProps {
   loading: boolean;
 }
 
-const HashSpinner = ({ loading }: Props) => {
+export const HashSpinner = ({ loading }: HashSpinnerProps) => {
   if (!loading) {
     return null;
   }
@@ -20,5 +20,3 @@ const HashSpinner = ({ loading }: Props) => {
     </div>
   );
 };
-
-export default HashSpinner;

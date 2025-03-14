@@ -1,6 +1,6 @@
 "use client";
 
-import HashSpinner from "@/components/common/HashSpinner";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import CommentItemSkeleton from "@/components/skeleton/informations/detail/CommentItemSkeleton";
 import CommentPagination from "./CommentPagination";
 import { createContext } from "react";

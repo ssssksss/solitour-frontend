@@ -9,7 +9,7 @@ import useModalState from "@/shared/lib/hooks/useModalState";
 import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
 import { Modal } from "@/components/common/modal/Modal";
 import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
-import Pagination from "@/components/common/Pagination";
+import Pagination from "@/shared/ui/pagination/Pagination";
 import { LottieNotFound } from "@/shared/ui/lottie";
 
 const SkeletonGatheringList = () => {

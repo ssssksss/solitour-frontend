@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import InformationCreateEditor from "@/components/informations/write/InformationCreateEditor";
 import { Metadata } from "next";
 

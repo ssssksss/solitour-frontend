@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryUpdateEditor from "@/components/diary/edit/DiaryUpdateEditor";
 
 import { GetDiaryResponseDto } from "@/types/DiaryDto";

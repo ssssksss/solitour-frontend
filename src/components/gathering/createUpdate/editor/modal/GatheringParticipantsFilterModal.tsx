@@ -1,5 +1,5 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
-import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
+import { GENDER } from "@/entities/user";
 import "@/styles/reactDataRange.css";
 import { IModalComponent } from "@/types/ModalState";
 import Image from "next/image";
@@ -257,7 +257,7 @@ const GatheringParticipantsFilterModal = (props: IModalComponent) => {
             성별 제한
           </div>
           <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-            {Object.entries(SETTING_MODAL_SEX).map((i) => (
+            {Object.entries(GENDER).map((i) => (
               <button
                 key={i[0]}
                 onClick={() => setSex(i[0])}

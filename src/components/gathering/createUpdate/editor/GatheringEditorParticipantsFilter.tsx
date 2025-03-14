@@ -1,10 +1,10 @@
 "use client";
 
 import { Modal } from "@/components/common/modal/Modal";
-import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import { useFormContext } from "react-hook-form";
 import GatheringParticipantsFilterModal from "./modal/GatheringParticipantsFilterModal";
-import useModalState from "@/shared/lib/hooks/useModalState";
+import { useModalState } from "@/shared/lib/hooks";
+import { GENDER } from "@/entities/user";
 
 const GatheringEditorParticipantsFilter = () => {
   const formContext = useFormContext();
@@ -38,7 +38,7 @@ const GatheringEditorParticipantsFilter = () => {
                   <span className={"px-1 text-black"}> | </span>
                 </div>
                 <div className="rounded-full py-1 font-semibold text-black">
-                  {SETTING_MODAL_SEX[formContext.getValues("allowedSex")]}
+                  {GENDER[formContext.getValues("allowedSex")]}
                 </div>
               </div>
             </div>

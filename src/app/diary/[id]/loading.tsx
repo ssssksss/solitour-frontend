@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryViewerSkeleton from "@/components/skeleton/diary/detail/DiaryViewerSkeleton";
 
 export default function Loading() {

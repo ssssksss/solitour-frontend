@@ -1,6 +1,6 @@
 "use client";
 
-import sanitizeOption from "@/constants/common/sanitizeOption";
+import sanitizeOption from "@/shared/config/sanitizeOption";
 import {
   CreateInformationRequestDto,
   InformationRegisterResponseDto,

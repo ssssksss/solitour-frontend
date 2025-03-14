@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import InformationViewerSkeleton from "@/components/skeleton/informations/detail/InformationViewerSkeleton";
 import RecommendationListSkeleton from "@/components/skeleton/informations/detail/RecommendationListSkeleton";
 

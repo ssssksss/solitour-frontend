@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import GatheringViewer from "@/components/gathering/read/detail/GatheringViewer";
 import GatheringRecommendationList from "@/components/gathering/read/GatheringRecommendationList";
 import { cookies } from "next/headers";

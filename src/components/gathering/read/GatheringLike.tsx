@@ -1,7 +1,7 @@
 "use client";
 
 import useAuthStore from "@/stores/authStore";
-import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import Image from "next/image";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import LottieImage from "@/../public/lottie/solitour_gathering_animation.json";
+import LottieFile from "@/../public/lottie/solitour_gathering_animation.json";
 import { TopGatheringResponseDto } from "@/types/GatheringDto";
 import { TopInformationResponseDto } from "@/types/InformationDto";
 import Image from "next/image";
@@ -52,20 +52,16 @@ const TopList = async ({ title }: Props) => {
   return (
     <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow shadow-[#CCECE2] max-[744px]:-mt-24">
       {title === "모임" && (
-        <div
-          className={
-            "-z-5 max-[14.375rem] absolute right-0 top-0 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]"
-          }
-        >
+        <div className="-z-5 max-[14.375rem] absolute right-0 top-0 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]">
           <Lottie
-            animationData={LottieImage}
+            animationData={LottieFile}
             className="translate-y-[-1rem] object-contain"
           />
           <Image
+            className="object-contain"
             src="/icons/gathering-people.svg"
             alt="gathering-people"
             fill={true}
-            style={{ objectFit: "contain" }}
           />
         </div>
       )}

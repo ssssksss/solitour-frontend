@@ -47,7 +47,6 @@ const GatheringCreateEditor = () => {
       xAxis,
       yAxis,
       roadAddressName,
-      // subCategoryId,
       ...requestData
     } = methods.getValues();
     try {
@@ -67,7 +66,6 @@ const GatheringCreateEditor = () => {
             address: roadAddressName,
           },
           allowedSex: allowedSex.toUpperCase(),
-          // gatheringCategoryId: +subCategoryId,
           gatheringCategoryId: gatheringCategoryId,
           zoneCategoryNameParent: convertRegionToTwoLetters(
             roadAddressName.split(" ")[0],

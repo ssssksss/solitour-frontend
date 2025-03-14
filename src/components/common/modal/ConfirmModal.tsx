@@ -1,6 +1,6 @@
 import { IModalComponent } from "@/types/ModalState";
-import HashSpinner from "../HashSpinner";
 import ModalTemplate from "./ModalTemplate";
+import { HashSpinner } from "@/shared/ui/hashSpinner";
 
 interface IConfirmModal extends IModalComponent {
   loading: boolean;

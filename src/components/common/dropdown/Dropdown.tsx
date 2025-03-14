@@ -1,4 +1,4 @@
-import useOutsideClick from "@/shared/lib/hooks/useOutsideClick";
+import { useOutsideClick } from "@/shared/lib/hooks";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -33,9 +33,7 @@ export default function Dropdown<T>({
   const ref = useRef<HTMLDivElement>(null);
   const [isOnRightSide, setIsOnRightSide] = useState(true);
 
-  useOutsideClick(ref, () => {
-    setIsOpen(false);
-  });
+  useOutsideClick(ref, () => setIsOpen(false));
 
   useEffect(() => {
     setSelectedOption(value);
@@ -69,7 +67,7 @@ export default function Dropdown<T>({
         onClick={toggleDropdown}
         className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
       >
-        <div className={"min-w-fit"}>
+        <div className="min-w-fit">
           {options.filter((i) => i.value == selectedOption)[0].name}
         </div>
         {isOpen ? (

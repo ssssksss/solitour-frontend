@@ -1,4 +1,4 @@
-import HashSpinner from "@/components/common/HashSpinner";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import useToastifyStore from "@/stores/toastifyStore";
 import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
 import { useState } from "react";

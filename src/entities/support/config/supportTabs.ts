@@ -1,4 +1,4 @@
-export const SUPPORT_TABS = [
+export const SUPPORT_TABS: { name: string; value: string }[] = [
   { name: "서비스 소개", value: "about" },
   { name: "공지사항", value: "notice" },
   { name: "FAQ", value: "faq" },

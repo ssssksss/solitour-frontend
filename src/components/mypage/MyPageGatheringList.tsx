@@ -5,7 +5,7 @@ import AddUserInformationForm from "../auth/AddUserInformationForm";
 import CategoryList from "../common/CategoryList";
 import GatheringItem from "../common/GatheringItem";
 import { Modal } from "../common/modal/Modal";
-import Pagination from "../common/Pagination";
+import Pagination from "../../shared/ui/pagination/Pagination";
 import GatheringItemSkeleton from "../skeleton/common/GatheringItemSkeleton";
 
 const MyPageGatheringList = () => {

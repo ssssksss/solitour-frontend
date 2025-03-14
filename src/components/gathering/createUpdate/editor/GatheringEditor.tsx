@@ -1,7 +1,7 @@
 "use client";
 
-import Breadcrumbs from "@/components/common/Breadcrumb";
-import HashSpinner from "@/components/common/HashSpinner";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import Image from "next/image";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";

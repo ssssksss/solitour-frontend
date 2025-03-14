@@ -1,22 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
-interface Category {
-  label: string;
-  href: string;
-}
-
 interface BreadcrumbsProps {
-  categories: Category[];
+  categories: { label: string; href: string }[];
 }
 
-const Breadcrumbs: FC<BreadcrumbsProps> = ({ categories }) => {
+export const Breadcrumbs = ({ categories }: BreadcrumbsProps) => {
   return (
     <nav className="flex w-full items-center gap-[.25rem] py-10 text-xs text-gray2">
       <div className="text-gray1">
-        <Link href={"/"}>
+        <Link href="/">
           <Image
             src="/icons/home-gray-icon.svg"
             alt="home-gray-icon"
@@ -26,10 +20,10 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ categories }) => {
         </Link>
       </div>
       {categories.map((i, index) => (
-        <div key={index} className={"flex flex-row items-center gap-[.25rem]"}>
+        <div key={index} className="flex flex-row items-center gap-1">
           <IoIosArrowForward />
           {categories.length == index + 1 ? (
-            <span className="font-semibold text-gray1"> {i.label} </span>
+            <span className="font-semibold text-gray1">{i.label}</span>
           ) : (
             <Link href={i.href}> {i.label} </Link>
           )}
@@ -38,5 +32,3 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ categories }) => {
     </nav>
   );
 };
-
-export default Breadcrumbs;

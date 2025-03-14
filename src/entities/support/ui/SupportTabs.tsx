@@ -1,11 +1,11 @@
-import { SUPPORT_TABS } from "@/constants/support/supportTabs";
 import Link from "next/link";
+import { SUPPORT_TABS } from "../config/supportTabs";
 
-interface SupportHeaderProps {
+interface SupportTabsProps {
   menu: string;
 }
 
-const SupportHeader = ({ menu }: SupportHeaderProps) => {
+export const SupportTabs = ({ menu }: SupportTabsProps) => {
   return (
     <div className="mb-4 flex w-full flex-col items-start py-1">
       <div className="flex w-full flex-col items-start gap-y-4 pt-[2.375rem]">
@@ -32,5 +32,3 @@ const SupportHeader = ({ menu }: SupportHeaderProps) => {
     </div>
   );
 };
-
-export default SupportHeader;

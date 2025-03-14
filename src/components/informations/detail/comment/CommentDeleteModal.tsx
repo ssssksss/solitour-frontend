@@ -1,6 +1,6 @@
 "use client";
 
-import HashSpinner from "@/components/common/HashSpinner";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import { useCommentDeleteModal } from "@/hooks/information/detail/comment/useCommentDeleteModal";
 
 interface CommentDeleteModalProps {

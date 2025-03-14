@@ -13,7 +13,7 @@ import {
   InformationRegisterResponseDto,
   UpdateInformationRequestDto,
 } from "@/types/InformationDto";
-import sanitizeOption from "@/constants/common/sanitizeOption";
+import sanitizeOption from "@/shared/config/sanitizeOption";
 import sanitizeHtml from "sanitize-html";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
 import { useModalBackHandler } from "@/shared/lib/hooks";

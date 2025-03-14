@@ -3,7 +3,7 @@
 import { NoticeType } from "@/types/NoticeDto";
 import { NOTICE_DETAIL_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import { format } from "date-fns";
-import Breadcrumbs from "../../common/Breadcrumb";
+import Breadcrumbs from "../../../shared/ui/breadcrumb/Breadcrumbs";
 
 interface ISupportNoticeDetail {
   data: NoticeType;

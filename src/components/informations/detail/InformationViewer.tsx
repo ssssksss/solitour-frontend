@@ -3,7 +3,7 @@ import Image from "next/image";
 import { TiLocation } from "react-icons/ti";
 import { LuEye } from "react-icons/lu";
 import { InformationDetailDto } from "@/types/InformationDto";
-import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import ButtonList from "./ButtonList";
 import ImageList from "./ImageList";
 import InformationLikeCount from "./InformationLikeCount";

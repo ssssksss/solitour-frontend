@@ -1,6 +1,6 @@
 "use client";
 
-import { FEELING_STATUS } from "@/constants/diary/feelingStatus";
+import { FEELING_STATUS } from "@/entities/diary/config/feelingStatus";
 import Image from "next/image";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";

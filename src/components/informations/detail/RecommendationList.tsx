@@ -1,4 +1,4 @@
-import InformationItem from "@/components/common/InformationItem";
+import InformationItem from "@/entities/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { InformationDetailDto } from "@/types/InformationDto";
 

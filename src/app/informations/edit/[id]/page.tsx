@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import InformationUpdateEditor from "@/components/informations/edit/InformationUpdateEditor";
 import { InformationDetailDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";

@@ -8,7 +8,7 @@ interface PaginationProps {
   pageHandler: (currentPage: number) => void;
 }
 
-const Pagination = ({
+export const Pagination = ({
   currentPage,
   totalPages,
   pageHandler,
@@ -23,18 +23,18 @@ const Pagination = ({
         <button onClick={() => pageHandler(1)}>
           <MdFirstPage
             className="cursor-pointer hover:text-main"
-            size={"1.1rem"}
+            size="1.1rem"
           />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem] opacity-100"> </div>
+        <div className="aspect-square w-[0.875rem]"> </div>
       )}
       {currentPage > 1 ? (
         <button onClick={() => pageHandler(currentPage - 1)}>
           <IoIosArrowBack className="cursor-pointer hover:text-main" />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem] opacity-100"> </div>
+        <div className="aspect-square w-[0.875rem]" />
       )}
       {leftPage > 1 && (
         <div className="flex flex-row items-center gap-3">
@@ -51,7 +51,10 @@ const Pagination = ({
         <button
           key={pageNumber}
           onClick={() => pageHandler(pageNumber)}
-          className={`${pageNumber === currentPage ? "bg-main text-white" : ""} flex h-6 w-6 items-center justify-center rounded-full hover:text-main`}
+          className={[
+            `${pageNumber === currentPage ? "bg-main text-white" : ""}`,
+            "flex h-6 w-6 items-center justify-center rounded-full hover:text-main",
+          ].join("")}
         >
           {pageNumber}
         </button>
@@ -72,20 +75,18 @@ const Pagination = ({
           <IoIosArrowForward className="cursor-pointer hover:text-main" />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem] opacity-100"> </div>
+        <div className="aspect-square w-[0.875rem]"> </div>
       )}
       {currentPage < totalPages ? (
         <button onClick={() => pageHandler(totalPages)}>
           <MdLastPage
             className="cursor-pointer hover:text-main"
-            size={"1.1rem"}
+            size="1.1rem"
           />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem] opacity-100" />
+        <div className="aspect-square w-[0.875rem]" />
       )}
     </div>
   );
 };
-
-export default Pagination;

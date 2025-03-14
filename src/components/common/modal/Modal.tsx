@@ -1,7 +1,6 @@
 "use client";
 
-import useOutsideClick from "@/shared/lib/hooks/useOutsideClick";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
+import { useOutsideClick, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { ModalState } from "@/types/ModalState";
 import React, { useEffect, useRef, useState, type JSX } from "react";
 import { createPortal } from "react-dom";
@@ -16,15 +15,15 @@ export const Modal = ({ children, modalState }: ModalProps) => {
   const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   let flag = modalState.isOpen;
+
   usePreventBodyScroll(modalState.isOpen);
+  useOutsideClick(ref, () => {
+    modalState.closeModal();
+  });
 
   useEffect(() => {
     setDocumentBody(document.body);
   }, []);
-
-  useOutsideClick(ref, () => {
-    modalState.closeModal();
-  });
 
   const handlePopState = () => {
     flag = false;
@@ -74,15 +73,12 @@ export const Modal = ({ children, modalState }: ModalProps) => {
           closeButtonComponent: (
             <button
               onClick={() => modalState.closeModal()}
-              className="absolute right-[2rem] top-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
-              style={{ zIndex: 200 }}
+              className="absolute right-8 top-8 z-[200] h-8 w-8 scale-100 transform transition-transform duration-300"
             >
               <MdClose
                 className="bg-red-60 cursor-pointer text-gray2 hover:text-main"
-                size={"2.5rem"}
-                onClick={() => {
-                  modalState.closeModal();
-                }}
+                size="2.5rem"
+                onClick={() => modalState.closeModal()}
               />
             </button>
           ),
@@ -93,11 +89,8 @@ export const Modal = ({ children, modalState }: ModalProps) => {
   });
 
   return createPortal(
-    <div
-      className="fixed inset-0 flex h-full w-full items-center justify-center"
-      style={{ zIndex: "100" }}
-    >
-      <div className="absolute h-full w-full cursor-pointer bg-black/30"></div>
+    <div className="fixed inset-0 z-[100] flex h-full w-full items-center justify-center">
+      <div className="absolute h-full w-full cursor-pointer bg-black/30" />
       <div
         ref={ref}
         className="-z-1 relative flex h-[calc(100vh-1rem)] w-full flex-col items-center justify-center"
@@ -108,7 +101,6 @@ export const Modal = ({ children, modalState }: ModalProps) => {
         }}
       >
         {childComponent}
-        {/* {children} */}
       </div>
     </div>,
     document.getElementById("modal-root") as HTMLElement,

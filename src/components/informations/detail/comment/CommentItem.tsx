@@ -1,7 +1,7 @@
 "use client";
 
-import HashSpinner from "@/components/common/HashSpinner";
-import ReportIcon from "@/shared/ui/icons/ReportIcon";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
+import ReportIcon from "@/shared/ui/icon/ReportIcon";
 import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import Image from "next/image";
 import CommentDeleteModal from "./CommentDeleteModal";

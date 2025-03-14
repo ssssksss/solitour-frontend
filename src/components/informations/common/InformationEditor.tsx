@@ -6,7 +6,7 @@ import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
-import HashSpinner from "@/components/common/HashSpinner";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import CategoryModal from "./CategoryModal";
 import ImageUploadItem from "./ImageUploadItem";
 import PlaceModal from "./PlaceModal";

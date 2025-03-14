@@ -1,8 +1,8 @@
-import SupportHeader from "@/components/support/SupportHeader";
 import SupportAbout from "@/components/support/about/SupportAbout";
 import SupportFAQList from "@/components/support/faq/SupportFAQList";
 import SupportTerms from "@/components/support/terms/SupportTerms";
 import SupportNoticeList from "@/components/support/notice/SupportNoticeList";
+import { SupportTabs } from "@/entities/support";
 
 export default async function Page({
   searchParams,
@@ -17,7 +17,7 @@ export default async function Page({
 
   return (
     <div className="mb-8 w-full">
-      <SupportHeader menu={menu} />
+      <SupportTabs menu={menu} />
       {menu === "about" && <SupportAbout />}
       {menu === "notice" && <SupportNoticeList />}
       {menu === "faq" && <SupportFAQList />}

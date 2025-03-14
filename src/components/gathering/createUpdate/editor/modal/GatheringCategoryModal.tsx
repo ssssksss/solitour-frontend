@@ -27,12 +27,10 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
 
   return (
     <ModalTemplate
-      className={
-        "h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col"
-      }
+      className={"h-auto w-[calc(100vw-2rem)] max-w-[40rem] flex-col"}
     >
       {props.closeButtonComponent}
-      <div className={"flex flex-col gap-y-1 w-full"}>
+      <div className={"flex w-full flex-col gap-y-1"}>
         <h2 className="w-full text-start text-2xl font-bold text-black">
           카테고리 선택
         </h2>
@@ -56,7 +54,6 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
             "h-[3rem] w-full max-w-[18.625rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
           }
           onClick={() => submitHandler()}
-          // disabled={subCategoryId == 0 && true}
           disabled={mainCategoryId == 0}
         >
           적용하기

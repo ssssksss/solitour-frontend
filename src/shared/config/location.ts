@@ -16,13 +16,9 @@ export const LOCATION = [
   "제주",
   "충남",
   "충북",
-];
+] as const;
 
-type LOCATION_ID_TYPE = {
-  [location: string]: number;
-};
-
-export const LOCATION_ID: LOCATION_ID_TYPE = {
+export const LOCATION_ID: Record<string, number> = {
   서울: 1,
   광주: 2,
   인천: 3,
@@ -40,4 +36,4 @@ export const LOCATION_ID: LOCATION_ID_TYPE = {
   충남: 15,
   전북: 16,
   세종: 245,
-};
+} as const;

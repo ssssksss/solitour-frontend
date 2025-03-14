@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryCreateEditor from "@/components/diary/write/DiaryCreateEditor";
 import { Metadata } from "next";
 

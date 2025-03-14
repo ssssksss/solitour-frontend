@@ -1,8 +1,8 @@
-import { LOCATION_ID } from "@/constants/informations/location";
+import { LOCATION_ID } from "@/shared/config/location";
 import { InformationListResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
 import InformationPagination from "./InformationPagination";
-import InformationItem from "@/components/common/InformationItem";
+import InformationItem from "@/entities/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
 
 async function getInformationList(

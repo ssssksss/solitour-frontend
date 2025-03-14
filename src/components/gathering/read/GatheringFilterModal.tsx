@@ -2,8 +2,8 @@
 
 import { Modal } from "@/components/common/modal/Modal";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
-import { SETTING_MODAL_AGE } from "@/constants/gathering/GatheringConstant";
-import useModalState from "@/shared/lib/hooks/useModalState";
+import { AGE_RANGE } from "@/entities/user";
+import { useModalState } from "@/shared/lib/hooks";
 import "@/styles/reactDataRange.css";
 import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
@@ -259,8 +259,8 @@ const GatheringFilterModal = () => {
                 나이
               </div>
               <div className="relative flex w-full flex-col gap-[1rem]">
-                <div className={"flex flex-wrap gap-x-[1rem] gap-y-[.5rem]"}>
-                  {Object.entries(SETTING_MODAL_AGE).map((i) => (
+                <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
+                  {Object.entries(AGE_RANGE).map((i) => (
                     <button
                       key={i[0]}
                       onClick={() =>

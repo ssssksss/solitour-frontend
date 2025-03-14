@@ -4,7 +4,7 @@ import { differenceInDays, format } from "date-fns";
 import Link from "next/link";
 import SupportSearch from "./SupportSearch";
 import { useSupportNoticeList } from "@/hooks/support/notice/useSupportNoticeList";
-import Pagination from "@/components/common/Pagination";
+import Pagination from "@/shared/ui/pagination/Pagination";
 
 const categoryStyles: { [key: string]: string } = {
   이벤트: "text-green-800",

@@ -1,8 +1,4 @@
-type FEELING_STATUS_TYPE = {
-  [feelingStatus: string]: string;
-};
-
-export const FEELING_STATUS: FEELING_STATUS_TYPE = {
+export const FEELING_STATUS: Record<string, string> = {
   1: "EXCITED",
   2: "NICE",
   3: "SOSO",
@@ -18,4 +14,4 @@ export const FEELING_STATUS: FEELING_STATUS_TYPE = {
   무난: "3",
   슬퍼: "4",
   화나: "5",
-};
+} as const;

@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
-import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { useInformationItem } from "@/hooks/common/useInformationItem";
-import HeartIcon from "../../shared/ui/icons/HeartIcon";
+import { HeartIcon } from "@/shared/ui/icon";
 
 interface InformationItemProps {
   informationId: number;

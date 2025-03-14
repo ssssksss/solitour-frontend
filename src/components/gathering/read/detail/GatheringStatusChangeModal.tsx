@@ -1,6 +1,6 @@
 "use client";
 
-import HashSpinner from "@/components/common/HashSpinner";
+import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";

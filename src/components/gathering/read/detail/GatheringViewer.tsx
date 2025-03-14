@@ -1,19 +1,19 @@
 "use client";
 
 import UserImage from "@/components/auth/UserImage";
-import { SETTING_MODAL_SEX } from "@/constants/gathering/GatheringConstant";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
-import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import GatheringKakaoMap from "../GatheringKakaoMap";
 import GatheringUpdateDeleteButtonComponent from "./GatheringUpdateDeleteButtonComponent";
 import GatheringApplicantList from "./GatheringApplicantList";
-import DeleteModal from "@/components/common/DeleteModal";
 import { useGatheringViewer } from "@/hooks/gathering/useGatheringViewer";
 import GatheringSupportManagement from "./GatheringSupportManagement";
 import GatheringLike from "../GatheringLike";
+import { DeleteModal } from "@/shared/ui/modal";
+import { GENDER } from "@/entities/user";
 
 interface GatheringViewerProps {
   data: GatheringDetailResponseDto;
@@ -29,8 +29,8 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
       {modalState.isOpen && (
         <DeleteModal
           loading={loading}
-          handleDeleteClick={handleDeleteClick}
-          handleCancelClick={() => modalState.closeModal()}
+          onDeleteClick={handleDeleteClick}
+          onCancelClick={() => modalState.closeModal()}
         />
       )}
       {/* 제목 부분 */}
@@ -146,7 +146,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
                 "세 ~ " +
                 (new Date().getFullYear() - data.endAge) +
                 "세, " +
-                SETTING_MODAL_SEX[data.allowedSex] +
+                GENDER[data.allowedSex] +
                 ")"}
             </span>
           </div>

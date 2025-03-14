@@ -3,7 +3,7 @@
 import { MYPAGE_PROFILE_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import Image from "next/image";
 import { UserResponseDto } from "@/types/UserDto";
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import { useMyPageProfile } from "@/hooks/mypage/profile/useMyPageProfile";
 import { Modal } from "@/components/common/modal/Modal";
 import MyPageAccountDeleteModal from "./MyPageAccountDeleteModal";

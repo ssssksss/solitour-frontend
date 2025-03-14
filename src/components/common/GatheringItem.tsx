@@ -1,6 +1,6 @@
 import GatheringBookMark from "@/components/gathering/read/GatheringBookmark";
 import { Gathering } from "@/types/GatheringDto";
-import { convertNumberToShortForm } from "@/utils/convertNumberToShortForm";
+import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";

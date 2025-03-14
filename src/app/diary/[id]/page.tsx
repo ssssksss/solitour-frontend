@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
+import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryViewer from "@/components/diary/detail/DiaryViewer";
 import { GetDiaryResponseDto } from "@/types/DiaryDto";
 import { cookies } from "next/headers";

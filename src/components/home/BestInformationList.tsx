@@ -1,6 +1,6 @@
 import { BestInformationResponseDto } from "@/types/InformationDto";
 import { cookies } from "next/headers";
-import InformationItem from "../common/InformationItem";
+import InformationItem from "../../entities/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
 
 /**
