@@ -5,18 +5,18 @@ import useEditorStore from "@/stores/editorStore";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { InformationUpdateFormSchema } from "@/lib/zod/schema/InformationUpdateFormSchema";
+import { InformationUpdateFormSchema } from "@/features/information/model/InformationUpdateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
+
 import {
   InformationDetailDto,
   InformationRegisterResponseDto,
   UpdateInformationRequestDto,
 } from "@/types/InformationDto";
-import sanitizeOption from "@/shared/config/sanitizeOption";
 import sanitizeHtml from "sanitize-html";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";
-import { useModalBackHandler } from "@/shared/lib/hooks";
+import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
+import { SANITIZE_OPTION } from "@/shared/config";
 
 export const useInformationUpdateEditor = (
   informationId: number,
@@ -224,7 +224,7 @@ export const useInformationUpdateEditor = (
     const data: UpdateInformationRequestDto = {
       title: informationTitle,
       address: informationAddress,
-      content: sanitizeHtml(informationContent, sanitizeOption),
+      content: sanitizeHtml(informationContent, SANITIZE_OPTION),
       tips: tips.join(";"),
       placeModifyRequest: {
         searchId: placeId,

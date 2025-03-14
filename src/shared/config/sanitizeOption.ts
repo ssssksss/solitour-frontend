@@ -33,4 +33,4 @@ export const SANITIZE_OPTION = {
     iframe: ["class", "style", "frameborder", "allowfullscreen", "src"],
   },
   allowedSchemes: ["data", "http", "https"],
-} as const;
+};

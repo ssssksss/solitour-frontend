@@ -1,6 +1,6 @@
 "use client";
 
-import { InformationCommentCreateFormSchema } from "@/lib/zod/schema/InformationCommentCreateFormSchema";
+import { InformationCommentCreateFormSchema } from "@/features/informationComment/model/InformationCommentCreateFormSchema";
 import useAuthStore from "@/stores/authStore";
 import {
   CreateInformationCommentRequestDto,

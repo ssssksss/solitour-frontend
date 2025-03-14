@@ -1,7 +1,7 @@
 "use client";
 
 import { CommentContext } from "@/components/informations/detail/comment/CommentList";
-import { InformationCommentUpdateFormSchema } from "@/lib/zod/schema/InformationCommentUpdateFormSchema";
+import { InformationCommentUpdateFormSchema } from "@/features/informationComment/model/InformationCommentUpdateFormSchema";
 import useAuthStore from "@/stores/authStore";
 import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";

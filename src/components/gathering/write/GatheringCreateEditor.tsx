@@ -1,7 +1,7 @@
 "use client";
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
-import { GatheringCreateFormSchema } from "@/lib/zod/schema/GatheringCreateFormSchema";
+import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import useToastifyStore from "@/stores/toastifyStore";
 import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
 import { fetchWithAuth } from "@/utils/fetchWithAuth";

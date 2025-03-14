@@ -1,6 +1,6 @@
 "use client";
 
-import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
+import { AddUserInformationFormSchema } from "@/entities/user/model/AddUserInformationFormSchema";
 import useAuthStore from "@/stores/authStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";

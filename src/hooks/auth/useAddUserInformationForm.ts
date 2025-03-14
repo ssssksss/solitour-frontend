@@ -1,4 +1,4 @@
-import { AddUserInformationFormSchema } from "@/lib/zod/schema/AddUserInformationFormSchema";
+import { AddUserInformationFormSchema } from "@/entities/user/model/AddUserInformationFormSchema";
 import useAuthStore from "@/stores/authStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";

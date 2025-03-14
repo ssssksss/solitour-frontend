@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DiaryUpdateFormSchema } from "@/lib/zod/schema/DiaryUpdateFormSchema";
+import { DiaryUpdateFormSchema } from "@/features/diary/model/DiaryUpdateFormSchema";
 import parse from "node-html-parser";
 import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
 import sanitizeHtml from "sanitize-html";

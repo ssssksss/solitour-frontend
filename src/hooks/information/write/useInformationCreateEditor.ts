@@ -1,6 +1,5 @@
 "use client";
 
-import sanitizeOption from "@/shared/config/sanitizeOption";
 import {
   CreateInformationRequestDto,
   InformationRegisterResponseDto,
@@ -11,11 +10,11 @@ import sanitizeHtml from "sanitize-html";
 import useAuthStore from "@/stores/authStore";
 import useEditorStore from "@/stores/editorStore";
 import { useForm } from "react-hook-form";
-import { InformationCreateFormSchema } from "@/lib/zod/schema/InformationCreateFormSchema";
+import { InformationCreateFormSchema } from "@/features/information/model/InformationCreateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
-import { useModalBackHandler } from "@/shared/lib/hooks";
+import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
+import { SANITIZE_OPTION } from "@/shared/config";
 
 export const useInformationCreateEditor = () => {
   const { id } = useAuthStore();
@@ -171,7 +170,7 @@ export const useInformationCreateEditor = () => {
     const data: CreateInformationRequestDto = {
       informationTitle: informationTitle,
       informationAddress: informationAddress,
-      informationContent: sanitizeHtml(informationContent, sanitizeOption),
+      informationContent: sanitizeHtml(informationContent, SANITIZE_OPTION),
       informationTips: tips.join(";"),
       placeRegisterRequest: {
         searchId: placeId,
