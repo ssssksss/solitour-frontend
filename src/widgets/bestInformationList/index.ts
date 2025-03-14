@@ -1,1 +1,1 @@
-export { BestInformationList } from "./ui/BestInformationList";
+export { BestInformationListWrapper } from "./ui/BestInformationListWrapper";

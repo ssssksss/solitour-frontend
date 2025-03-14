@@ -1,1 +1,1 @@
-export { NewGatheringList } from "./ui/NewGatheringList";
+export { NewGatheringListWrapper } from "./ui/NewGatheringListWrapper";

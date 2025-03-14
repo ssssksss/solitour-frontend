@@ -34,14 +34,14 @@ export const FloatingButton = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="flex flex-col items-center gap-6 rounded-full bg-lightGreen px-4 py-[1.875rem]">
+              <div className="bg-lightgreen flex flex-col items-center gap-6 rounded-full px-4 py-[1.875rem]">
                 <motion.div
                   initial={{ opacity: 0, y: "0.5rem" }}
                   animate={{ opacity: 1, y: "0rem" }}
                   transition={{ bounce: false, delay: 0.4 }}
                 >
                   <Link
-                    className="flex flex-col items-center text-sm hover:text-main"
+                    className="hover:text-main flex flex-col items-center text-sm"
                     href="/diary/write"
                     onClick={handleWriteButtonClick}
                   >
@@ -55,7 +55,7 @@ export const FloatingButton = () => {
                   transition={{ bounce: false, delay: 0.3 }}
                 >
                   <Link
-                    className="flex flex-col items-center text-sm hover:text-main"
+                    className="hover:text-main flex flex-col items-center text-sm"
                     href="/gathering/write"
                     onClick={(e) => handleGatheringClick(e)}
                   >
@@ -69,7 +69,7 @@ export const FloatingButton = () => {
                   transition={{ bounce: false, delay: 0.2 }}
                 >
                   <Link
-                    className="flex flex-col items-center text-sm hover:text-main"
+                    className="hover:text-main flex flex-col items-center text-sm"
                     href="/informations/write"
                     onClick={handleWriteButtonClick}
                   >
@@ -83,8 +83,8 @@ export const FloatingButton = () => {
         </AnimatePresence>
         <button
           className={[
-            "flex h-12 w-12 flex-row items-center justify-center rounded-full text-white shadow-md transition-all duration-300 hover:scale-105",
             `${visible ? "bg-main" : "bg-black"}`,
+            "flex h-12 w-12 cursor-pointer flex-row items-center justify-center rounded-full text-white shadow-md transition-all duration-300 hover:scale-105",
           ].join(" ")}
           onClick={handleWriteButtonClick}
         >
@@ -107,7 +107,7 @@ export const FloatingButton = () => {
           )}
         </button>
         <button
-          className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
+          className="flex h-12 w-12 cursor-pointer flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
           onClick={handleScrollToTop}
         >
           <IoIosArrowUp size="1.5rem" />

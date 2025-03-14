@@ -1,7 +1,7 @@
-import TabList from "@/components/home/TabList";
-import { BestInformationList } from "@/widgets/bestInformationList";
+import { BestInformationListWrapper } from "@/widgets/bestInformationList";
 import { HomeCarousel } from "@/widgets/homeCarousel";
-import { NewGatheringList } from "@/widgets/newGatheringList";
+import { HomeShortcuts } from "@/widgets/homeShortcuts";
+import { NewGatheringListWrapper } from "@/widgets/newGatheringList";
 
 export default function Page() {
   return (
@@ -10,9 +10,9 @@ export default function Page() {
         <HomeCarousel />
       </div>
       <div className="mt-[32.5rem] max-[1024px]:mt-60" />
-      <TabList />
-      <BestInformationList />
-      <NewGatheringList />
+      <HomeShortcuts />
+      <BestInformationListWrapper />
+      <NewGatheringListWrapper />
     </div>
   );
 }

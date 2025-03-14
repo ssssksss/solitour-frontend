@@ -8,7 +8,7 @@
   --color-gray1: #666666;
   --color-gray2: #a3a3a3;
   --color-gray3: #d9d9d9;
-  --color-light-green: #f2faf7;
+  --color-lightgreen: #f2faf7;
 
   --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
   --background-image-gradient-conic: conic-gradient(
@@ -36,6 +36,7 @@
       transform: translateY(-1rem);
     }
   }
+
   @keyframes cardFlip {
     from {
       transform: rotateY(-90deg);
