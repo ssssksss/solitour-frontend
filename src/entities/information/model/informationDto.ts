@@ -78,7 +78,7 @@ export interface InformationListResponseDto {
 /**
  * 정보 상세 조회 결과 DTO
  */
-export interface InformationDetailDto {
+export interface InformationDetailResponseDto {
   title: string;
   address: string;
   createdDate: Date;
@@ -134,20 +134,4 @@ export interface InformationDetailDto {
 export interface TopInformationResponseDto {
   id: number;
   title: string;
-}
-
-/**
- * Best 여행 정보 조회 결과 DTO
- */
-export interface BestInformationResponseDto {
-  informationId: number; // 정보 아이디
-  title: string; // 제목
-  zoneCategoryParentName: string; // 부모 지역 카테고리 이름
-  zoneCategoryChildName: string; // 자식 지역 카테고리 이름
-  parentCategoryName: string; // 부모 카테고리 이름
-  viewCount: number; // 조회수
-  isBookMark: boolean; // 북마크 했는지 여부
-  isLike: boolean;
-  thumbNailImage: string; // 썸네일 이미지 주소
-  likeCount: number; // 좋아요 수
 }

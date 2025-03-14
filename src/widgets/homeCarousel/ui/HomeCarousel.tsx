@@ -1,10 +1,10 @@
 "use client";
 
-import { useHomeCarousel } from "@/hooks/home/useHomeCarousel";
 import Image from "next/image";
 import Link from "next/link";
+import { useHomeCarousel } from "../model/useHomeCarousel";
 
-const HomeCarousel = () => {
+export const HomeCarousel = () => {
   const { currentIndex, imageList, handleClick } = useHomeCarousel();
 
   return (
@@ -45,5 +45,3 @@ const HomeCarousel = () => {
     </div>
   );
 };
-
-export default HomeCarousel;

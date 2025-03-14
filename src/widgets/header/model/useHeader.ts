@@ -1,16 +1,16 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { usePreventBodyScroll, useThrottle } from "@/shared/lib/hooks";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 
 export const useHeader = () => {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [isTransparent, setIsTransparent] = useState(true);
-  const { id, setUser } = useAuthStore();
+  const { id, setUser } = useUserStore();
 
   const handleScroll = useThrottle(() => {
     if (window.scrollY >= 500) {

@@ -1,11 +1,11 @@
 "use client";
 
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import useModalState from "../../shared/lib/hooks/useModalState";
 import { Gathering } from "@/types/GatheringDto";
-import useAuthStore from "@/stores/authStore";
+import { useModalState } from "@/shared/lib/hooks";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 
 // value 변경하지 말것 api주소와 연결되어있음
 const categories = [
@@ -32,7 +32,7 @@ export const useMyPageGatheringList = () => {
   const router = useRouter();
   const modalState = useModalState();
   const [elements, setElements] = useState<Gathering[]>([]);
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -57,11 +57,11 @@ export const useMyPageGatheringList = () => {
   };
 
   const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
-    if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
+    if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
       e.preventDefault();
       modalState.openModal();
     }
-    if (authStore.id < 1) {
+    if (userStore.id < 1) {
       e.preventDefault();
       router.push("/auth/signin");
     }
@@ -112,7 +112,7 @@ export const useMyPageGatheringList = () => {
     totalElements,
     isLoading,
     modalState,
-    isAccessible: !!authStore.sex && !!authStore.age && authStore.id > 0,
+    isAccessible: !!userStore.sex && !!userStore.age && userStore.id > 0,
     pageHandler,
     handleCategoryClick,
     checkAccessGathering,

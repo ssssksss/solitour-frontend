@@ -1,11 +1,10 @@
+import { useUserStore } from "@/entities/user";
 import { useModalState, useOutsideClick } from "@/shared/lib/hooks";
-import useAuthStore from "@/stores/authStore";
-
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 export const useUserDropDown = () => {
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const modalState = useModalState();
   const router = useRouter();
   const outside = useRef<HTMLDivElement | null>(null);
@@ -19,7 +18,7 @@ export const useUserDropDown = () => {
       throw new Error(response.statusText);
     }
 
-    authStore.initialize();
+    userStore.initialize();
     router.push("/");
     router.refresh();
   };
@@ -28,5 +27,5 @@ export const useUserDropDown = () => {
     modalState.closeModal();
   });
 
-  return { authStore, modalState, outside, inside, handleLogout };
+  return { userStore, modalState, outside, inside, handleLogout };
 };

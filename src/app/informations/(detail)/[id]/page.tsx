@@ -1,6 +1,6 @@
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";
-import { InformationDetailDto } from "@/entities/information/model/informationDto";
+import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 import { cookies } from "next/headers";
 
@@ -20,7 +20,7 @@ async function getInformation(id: number) {
     throw new Error(response.statusText);
   }
 
-  return response.json() as Promise<InformationDetailDto>;
+  return response.json() as Promise<InformationDetailResponseDto>;
 }
 
 interface Props {

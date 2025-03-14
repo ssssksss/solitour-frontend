@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useDragAndDrop } from "../../shared/lib/hooks/useDragAndDrop";
-import useAuthStore from "@/stores/authStore";
 import useToastifyStore from "@/stores/toastifyStore";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
-import { useModalState } from "@/shared/lib/hooks";
+import { useDragAndDrop, useModalState } from "@/shared/lib/hooks";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 
 export const useMyPageUserImage = (
   userImageUrl: string,
@@ -14,7 +13,7 @@ export const useMyPageUserImage = (
   const [imageUrl, setImageUrl] = useState(userImageUrl || "");
   const [imageBase64Data, setImageBase64Data] = useState<string>("");
   const modalState = useModalState();
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const toastifyStore = useToastifyStore();
 
   const imageUpload = (imageDataUrl: string) => {
@@ -36,31 +35,31 @@ export const useMyPageUserImage = (
     }
 
     if (response.ok) {
-      const { ...prevState } = authStore;
+      const { ...prevState } = userStore;
       if (userSex == "male") {
         setImageUrl("/icons/default-male-icon.svg");
-        authStore.setUser({
+        userStore.setUser({
           ...prevState,
           userImage: {
-            ...authStore.userImage,
+            ...userStore.userImage,
             address: "/icons/default-male-icon.svg",
           },
         });
       } else if (userSex == "female") {
         setImageUrl("/icons/default-female-icon.svg");
-        authStore.setUser({
+        userStore.setUser({
           ...prevState,
           userImage: {
-            ...authStore.userImage,
+            ...userStore.userImage,
             address: "/icons/default-female-icon.svg",
           },
         });
       } else if (!userSex) {
         setImageUrl("/icons/default-user-icon.svg");
-        authStore.setUser({
+        userStore.setUser({
           ...prevState,
           userImage: {
-            ...authStore.userImage,
+            ...userStore.userImage,
             address: "/icons/default-user-icon.svg",
           },
         });

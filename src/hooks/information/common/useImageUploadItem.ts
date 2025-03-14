@@ -1,8 +1,8 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 import useEditorStore from "@/stores/editorStore";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useRef } from "react";
 
 export const useImageUploadItem = (imageIndex: number) => {
@@ -10,7 +10,7 @@ export const useImageUploadItem = (imageIndex: number) => {
   const { images, mainImageIndex, setEditor, changeImage, addImage } =
     useEditorStore();
   const editorStore = useEditorStore();
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
 
   const handleUploadItemClick = () => {
     imageRef.current?.click();
@@ -30,7 +30,7 @@ export const useImageUploadItem = (imageIndex: number) => {
       }
 
       const formData = new FormData();
-      formData.append("id", authStore.id.toString());
+      formData.append("id", userStore.id.toString());
       formData.append("image", file);
       formData.append("type", "INFORMATION");
 

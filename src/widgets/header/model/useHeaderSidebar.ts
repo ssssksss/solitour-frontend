@@ -1,11 +1,11 @@
+import { useUserStore } from "@/entities/user";
 import { useThrottle } from "@/shared/lib/hooks";
-import useAuthStore from "@/stores/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const useHeaderSidebar = (onClose: () => void) => {
   const [hoverNum, setHoverNum] = useState(0);
-  const { id, initialize } = useAuthStore();
+  const { id, initialize } = useUserStore();
   const router = useRouter();
 
   const handleLogout = async () => {

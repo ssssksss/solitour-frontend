@@ -1,14 +1,13 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
-import { useModalBackHandler } from "@/shared/lib/hooks";
+import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 
 export const useButtonList = (informationId: number) => {
-  const { id } = useAuthStore();
+  const { id } = useUserStore();
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();

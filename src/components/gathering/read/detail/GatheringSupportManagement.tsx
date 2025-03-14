@@ -4,13 +4,14 @@ import { Modal } from "@/components/common/modal/Modal";
 import GatheringStatusChangeModal from "@/components/gathering/read/detail/GatheringStatusChangeModal";
 import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
 import { useState } from "react";
-import useAuthStore from "@/stores/authStore";
+
 import useGatheringStore from "@/stores/gatheringStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { useParams } from "next/navigation";
-import useModalState from "@/shared/lib/hooks/useModalState";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
+import { useUserStore } from "@/entities/user";
+import { useModalState } from "@/shared/lib/hooks";
 
 interface GatheringSupportManagementProps {
   postUserId: number;
@@ -32,7 +33,7 @@ const GatheringSupportManagement = ({
   allowedGender,
   allowedAgeRange,
 }: GatheringSupportManagementProps) => {
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const gatheringStore = useGatheringStore();
   const toastifyStore = useToastifyStore();
   const params = useParams();
@@ -121,8 +122,7 @@ const GatheringSupportManagement = ({
     });
   };
 
-  // 로그인 작업이 처리되기전에 authStore.id == 0
-  if (authStore.id == 0)
+  if (userStore.id == 0)
     return (
       <div className="flex animate-pulse gap-2 max-[960px]:flex-col min-[960px]:flex-row">
         <div className="h-[3.125rem] w-[7.5rem] rounded-[2.125rem] bg-gray-300" />
@@ -130,7 +130,7 @@ const GatheringSupportManagement = ({
       </div>
     );
 
-  if (postUserId == authStore.id && authStore.id > 0) {
+  if (postUserId == userStore.id && userStore.id > 0) {
     return (
       <div className="flex gap-2 max-[960px]:flex-col min-[960px]:flex-row">
         <Modal modalState={modalState}>
@@ -140,7 +140,7 @@ const GatheringSupportManagement = ({
           <GatheringChattingLinkCheckModal openChattingUrl={openChattingUrl} />
         </Modal>
         <button
-          className="h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3"
+          className="outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px]"
           onClick={() => modalState1.openModal()}
         >
           채팅방 가기
@@ -149,14 +149,14 @@ const GatheringSupportManagement = ({
           onClick={() => {
             isFinish ? reOpenGathering() : modalState.openModal();
           }}
-          className={`h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`}
+          className={`outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`}
         >
           {isFinish ? "모임 마감" : "모임 마감하기"}
         </button>
       </div>
     );
   }
-  if (postUserId != authStore.id && authStore.id > 0) {
+  if (postUserId != userStore.id && userStore.id > 0) {
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
         <Modal modalState={modalState1}>
@@ -176,7 +176,7 @@ const GatheringSupportManagement = ({
         {
           <button
             disabled={gatheringStatus != "CONSENT"}
-            className="h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-gray3 disabled:bg-gray3"
+            className="outline-gray3 disabled:bg-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px]"
             onClick={() => modalState1.openModal()}
           >
             채팅방 열기
@@ -190,7 +190,7 @@ const GatheringSupportManagement = ({
         {gatheringStatus == "WAIT" && (
           <button
             onClick={cancelGathering}
-            className="flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] bg-gray2 text-sm text-white"
+            className="bg-gray2 flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm text-white"
           >
             모임 신청중
           </button>
@@ -198,7 +198,7 @@ const GatheringSupportManagement = ({
         {gatheringStatus == "CONSENT" && (
           <button
             onClick={() => modalState2.openModal()}
-            className="flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] bg-main text-sm text-white outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
+            className="bg-main flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm text-white outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
           >
             모임 승인 완료
           </button>
@@ -211,11 +211,11 @@ const GatheringSupportManagement = ({
                 gatheringStore.currentParticipants ||
               !(
                 allowedGender == "ALL" ||
-                authStore.sex.toUpperCase() == allowedGender
+                userStore.sex.toUpperCase() == allowedGender
               ) ||
               (!(
-                authStore.age <= allowedAgeRange.startAge &&
-                authStore.age >= allowedAgeRange.endAge
+                userStore.age <= allowedAgeRange.startAge &&
+                userStore.age >= allowedAgeRange.endAge
               ) &&
                 "bg-gray3")
             } flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
@@ -224,18 +224,18 @@ const GatheringSupportManagement = ({
                 gatheringStore.currentParticipants ||
               !(
                 allowedGender == "ALL" ||
-                authStore.sex.toUpperCase() == allowedGender
+                userStore.sex.toUpperCase() == allowedGender
               ) ||
               !(
-                authStore.age <= allowedAgeRange.startAge &&
-                authStore.age >= allowedAgeRange.endAge
+                userStore.age <= allowedAgeRange.startAge &&
+                userStore.age >= allowedAgeRange.endAge
               )
             }
           >
             {gatheringStore.personCount == gatheringStore.currentParticipants
               ? "정원 초과"
               : !(allowedGender == "ALL") ||
-                  authStore.sex.toUpperCase() == allowedGender
+                  userStore.sex.toUpperCase() == allowedGender
                 ? "성별 제한"
                 : !allowedAgeRange
                   ? "나이 제한"

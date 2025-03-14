@@ -1,6 +1,6 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
+import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useMemo, useState } from "react";
 
@@ -9,7 +9,7 @@ export const useInformationItem = (
   initialIsBookMark: boolean,
   categoryName?: string,
 ) => {
-  const userId = useAuthStore().id;
+  const userId = useUserStore().id;
   const [isBookMarked, setIsBookMarked] = useState(initialIsBookMark);
   const [loading, setLoading] = useState(false);
   const categoryTagStyle = useMemo(() => {

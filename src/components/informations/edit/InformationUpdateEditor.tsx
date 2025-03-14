@@ -1,13 +1,13 @@
 "use client";
 
 import { useInformationUpdateEditor } from "@/hooks/information/edit/useInformationUpdateEditor";
-import { InformationDetailDto } from "@/entities/information/model/informationDto";
+import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
 import { FormProvider } from "react-hook-form";
 import InformationEditor from "../common/InformationEditor";
 
 interface InformationUpdateEditorProps {
   informationId: number;
-  data: InformationDetailDto;
+  data: InformationDetailResponseDto;
 }
 
 const InformationUpdateEditor = ({

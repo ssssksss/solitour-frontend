@@ -1,7 +1,6 @@
 "use client";
 
-import { AddUserInformationFormSchema } from "@/entities/user/model/AddUserInformationFormSchema";
-import useAuthStore from "@/stores/authStore";
+import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,7 +9,7 @@ import { useForm } from "react-hook-form";
 export const useAuthKakao = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setUser } = useAuthStore();
+  const { setUser } = useUserStore();
   const [loading, setLoading] = useState(true);
   const methods = useForm({
     resolver: zodResolver(AddUserInformationFormSchema),

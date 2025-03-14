@@ -1,5 +1,6 @@
 "use client";
-import useAuthStore from "@/stores/authStore";
+
+import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import Image from "next/image";
 import { useState } from "react";
@@ -10,7 +11,7 @@ interface GatheringBookMarkProps {
 }
 
 const GatheringBookMark = (props: GatheringBookMarkProps) => {
-  const { id: userId } = useAuthStore();
+  const { id: userId } = useUserStore();
   const [isBookMark, setIsBookMark] = useState(props.isBookMark);
   const [loading, setLoading] = useState(false);
 

@@ -3,14 +3,19 @@
 import { useDragScroll } from "@/shared/lib/hooks";
 import Link from "next/link";
 
-interface Props {
+interface ListWrapperProps {
   titles: string[];
   description: string;
   href: string;
   children: React.ReactNode;
 }
 
-const ListTemplate = ({ titles, description, href, children }: Props) => {
+export const ListWrapper = ({
+  titles,
+  description,
+  href,
+  children,
+}: ListWrapperProps) => {
   const scrollHook = useDragScroll();
 
   return (
@@ -25,16 +30,16 @@ const ListTemplate = ({ titles, description, href, children }: Props) => {
               </p>
             </h2>
             <Link
-              className="hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:flex"
+              className="border-gray3 text-gray1 hover:border-main hover:bg-main hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] hover:text-white max-[744px]:flex"
               href={href}
             >
               전체보기
             </Link>
           </div>
-          <p className="text-sm font-medium text-gray1">{description}</p>
+          <p className="text-gray1 text-sm font-medium">{description}</p>
         </div>
         <Link
-          className="flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] border-gray3 text-gray1 hover:border-main hover:bg-main hover:text-white max-[744px]:hidden"
+          className="border-gray3 text-gray1 hover:border-main hover:bg-main flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] hover:text-white max-[744px]:hidden"
           href={href}
         >
           전체보기
@@ -59,5 +64,3 @@ const ListTemplate = ({ titles, description, href, children }: Props) => {
     </div>
   );
 };
-
-export default ListTemplate;

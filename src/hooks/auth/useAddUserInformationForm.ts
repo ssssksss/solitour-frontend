@@ -1,13 +1,12 @@
-import { AddUserInformationFormSchema } from "@/entities/user/model/AddUserInformationFormSchema";
-import useAuthStore from "@/stores/authStore";
+import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 export const useAddUserInformationForm = (props: IModalComponent) => {
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const toastifyStore = useToastifyStore();
   const methods = useForm({
     resolver: zodResolver(AddUserInformationFormSchema),
@@ -45,7 +44,7 @@ export const useAddUserInformationForm = (props: IModalComponent) => {
         type: "success",
         message: "제출 완료",
       });
-      authStore.setUser({
+      userStore.setUser({
         sex: methods.getValues("sex"),
         age: methods.getValues("age"),
       });

@@ -1,23 +1,23 @@
 "use client";
 
-import {
-  InformationCreateRequestDto,
-  InformationRegisterResponseDto,
-} from "@/entities/information/model/informationDto";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useRef, useState } from "react";
 import sanitizeHtml from "sanitize-html";
-import useAuthStore from "@/stores/authStore";
 import useEditorStore from "@/stores/editorStore";
 import { useForm } from "react-hook-form";
-import { InformationCreateFormSchema } from "@/features/information/model/InformationCreateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
+import { useUserStore } from "@/entities/user";
+import { InformationCreateFormSchema } from "@/features/information";
+import {
+  InformationCreateRequestDto,
+  InformationRegisterResponseDto,
+} from "@/entities/information";
+import { fetchWithAuth } from "@/shared/api";
 
 export const useInformationCreateEditor = () => {
-  const { id } = useAuthStore();
+  const { id } = useUserStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
   const inputTagRef = useRef<HTMLInputElement>(null);

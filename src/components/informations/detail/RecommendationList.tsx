@@ -1,9 +1,9 @@
-import InformationItem from "@/entities/information/ui/InformationItem";
+import InformationItem from "@/features/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
-import { InformationDetailDto } from "@/entities/information/model/informationDto";
+import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
 
 interface RecommendationListProps {
-  data: InformationDetailDto;
+  data: InformationDetailResponseDto;
 }
 
 const RecommendationList = ({ data }: RecommendationListProps) => {

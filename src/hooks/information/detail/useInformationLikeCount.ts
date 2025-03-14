@@ -1,8 +1,8 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 import useInformationLikeStore from "@/stores/informationLikeStore";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useState } from "react";
 
 export const useInformationLikeCount = (
@@ -10,7 +10,7 @@ export const useInformationLikeCount = (
   likeCount: number,
   isLike: boolean,
 ) => {
-  const userId = useAuthStore().id;
+  const userId = useUserStore().id;
   const informationLikeStore = useInformationLikeStore();
   const [loading, setLoading] = useState(false);
 

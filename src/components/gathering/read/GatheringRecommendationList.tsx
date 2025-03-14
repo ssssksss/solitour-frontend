@@ -2,15 +2,17 @@
 
 import { GatheringRecommend } from "@/types/GatheringDto";
 import GatheringItem from "../../common/GatheringItem";
-import useAuthStore from "@/stores/authStore";
 import { LottieNotFound } from "@/shared/ui/lottie";
+import { useUserStore } from "@/entities/user";
+
+interface GatheringRecommendationListProps {
+  data: GatheringRecommend[];
+}
 
 const GatheringRecommendationList = ({
   data,
-}: {
-  data: GatheringRecommend[];
-}) => {
-  const authStore = useAuthStore();
+}: GatheringRecommendationListProps) => {
+  const userStore = useUserStore();
 
   return (
     <div className="mt-[4.875rem] flex w-full flex-col">
@@ -29,7 +31,7 @@ const GatheringRecommendationList = ({
                 openChattingUrl: "",
               }}
               isAccessGathering={
-                !!authStore.sex && !!authStore.age && authStore.id > 0
+                !!userStore.sex && !!userStore.age && userStore.id > 0
               }
             />
           ))}

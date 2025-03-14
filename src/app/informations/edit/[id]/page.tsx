@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import InformationUpdateEditor from "@/components/informations/edit/InformationUpdateEditor";
-import { InformationDetailDto } from "@/entities/information/model/informationDto";
+import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
 import { cookies } from "next/headers";
 
 async function getInformation(id: number) {
@@ -21,7 +21,7 @@ async function getInformation(id: number) {
     throw new Error(response.statusText);
   }
 
-  return response.json() as Promise<InformationDetailDto>;
+  return response.json() as Promise<InformationDetailResponseDto>;
 }
 
 interface Props {

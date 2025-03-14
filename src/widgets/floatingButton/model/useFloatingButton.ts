@@ -1,14 +1,14 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useModalState, useOutsideClick } from "@/shared/lib/hooks";
+import { useUserStore } from "@/entities/user";
 
 export const useFloatingButton = () => {
   const [visible, setVisible] = useState(false);
   const outside = useRef<HTMLDivElement>(null);
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const modalState = useModalState();
   const router = useRouter();
 
@@ -18,11 +18,11 @@ export const useFloatingButton = () => {
 
   const handleGatheringClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     handleWriteButtonClick();
-    if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
+    if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
       e.preventDefault();
       modalState.openModal();
     }
-    if (authStore.id < 1) {
+    if (userStore.id < 1) {
       e.preventDefault();
       router.push("/auth/signin");
     }

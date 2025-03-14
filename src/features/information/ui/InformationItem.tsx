@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
-import { useInformationItem } from "@/hooks/common/useInformationItem";
 import { HeartIcon } from "@/shared/ui/icon";
+import { useInformationItem } from "../model/useInformationItem";
 
 interface InformationItemProps {
   informationId: number;
@@ -34,7 +34,7 @@ export const InformationItem = ({
     useInformationItem(informationId, initialIsBookMarked, categoryName);
 
   return (
-    <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 duration-300 max-[744px]:min-w-[19.183125rem]">
+    <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline duration-300 max-[744px]:min-w-[19.183125rem]">
       <Link className="h-[12.6875rem]" href={`/informations/${informationId}`}>
         <Image
           className="-z-10 rounded-[0.875rem]"

@@ -1,4 +1,4 @@
-const InformationItemSkeleton = () => {
+export const InformationItemSkeleton = () => {
   return (
     <div className="outline-gray3 hover:outline-main flex h-[19.6875rem] w-full animate-pulse flex-col justify-between rounded-2xl bg-gray-100 outline duration-300 max-[744px]:min-w-[19.183125rem]">
       <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
@@ -28,5 +28,3 @@ const InformationItemSkeleton = () => {
     </div>
   );
 };
-
-export default InformationItemSkeleton;

@@ -1,9 +1,9 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 import useToastifyStore from "@/stores/toastifyStore";
 import { UserResponseDto } from "@/types/UserDto";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -12,7 +12,7 @@ export const useMyPageAccountDeleteModal = (
   closeModal?: () => void,
 ) => {
   const [userDeleteText, setUserDeleteText] = useState("");
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const toastifyStore = useToastifyStore();
   const router = useRouter();
 
@@ -30,7 +30,7 @@ export const useMyPageAccountDeleteModal = (
     );
 
     if (response.ok) {
-      authStore.initialize();
+      userStore.initialize();
       toastifyStore.setToastify({
         type: "success",
         message: "회원탈퇴에 성공했습니다.",

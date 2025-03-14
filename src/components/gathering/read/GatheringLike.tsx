@@ -1,10 +1,10 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import Image from "next/image";
 import { useState } from "react";
+import { useUserStore } from "@/entities/user";
 
 interface GatheringLikeProps {
   initialLikes: number;
@@ -17,7 +17,7 @@ const GatheringLike = ({
   initialIsLike,
   gatheringId,
 }: GatheringLikeProps) => {
-  const { id: userId } = useAuthStore();
+  const { id: userId } = useUserStore();
   const [isLike, setIsLike] = useState(initialIsLike); // 상태
   const [likes, setLikes] = useState(initialLikes); // 숫자
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ const GatheringLike = ({
     <button
       onClick={(e) => handleClick(e)}
       disabled={loading || userId < 1}
-      className={`${userId < 1 ? "cursor-default" : "cursor-pointer"} hover:size-110 flex flex-row items-center gap-1 text-sm ${loading ? "text-gray-400" : "text-gray-600"} `}
+      className={`${userId < 1 ? "cursor-default" : "cursor-pointer"} flex flex-row items-center gap-1 text-sm hover:size-110 ${loading ? "text-gray-400" : "text-gray-600"} `}
     >
       <div className="relative h-4 w-4 text-white">
         {isLike ? (

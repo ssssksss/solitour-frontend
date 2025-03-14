@@ -1,10 +1,10 @@
 "use client";
 
-import InformationItemSkeleton from "../skeleton/common/InformationItemSkeleton";
-import InformationItem from "../../entities/information/ui/InformationItem";
+import InformationItemSkeleton from "../../features/information/ui/InformationItemSkeleton";
 import CategoryList from "../common/CategoryList";
-import Pagination from "../../shared/ui/pagination/Pagination";
 import { useMyPageInformationList } from "@/hooks/mypage/useMyPageInformationList";
+import { InformationItem } from "@/features/information";
+import { Pagination } from "@/shared/ui/pagination";
 
 const MyPageInformationList = () => {
   const {

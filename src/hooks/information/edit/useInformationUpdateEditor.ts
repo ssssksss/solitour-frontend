@@ -1,15 +1,13 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
 import useEditorStore from "@/stores/editorStore";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { InformationUpdateFormSchema } from "@/features/information/model/InformationUpdateFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
-  InformationDetailDto,
+  InformationDetailResponseDto,
   InformationRegisterResponseDto,
   InformationUpdateRequestDto,
 } from "@/entities/information/model/informationDto";
@@ -17,12 +15,14 @@ import sanitizeHtml from "sanitize-html";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
+import { useUserStore } from "@/entities/user";
+import { InformationUpdateFormSchema } from "@/features/information";
 
 export const useInformationUpdateEditor = (
   informationId: number,
-  data: InformationDetailDto,
+  data: InformationDetailResponseDto,
 ) => {
-  const { id } = useAuthStore();
+  const { id } = useUserStore();
   const editorStore = useEditorStore();
   const initialize = editorStore.initialize;
   const inputTagRef = useRef<HTMLInputElement>(null);

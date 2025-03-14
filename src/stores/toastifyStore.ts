@@ -16,7 +16,7 @@ interface ToastifyStoreActions {
 // 3. 초기 상태 정의
 const initialState: ToastifyStoreState = { type: "success", message: "" };
 
-export type ToastifyStoreType = ToastifyStoreState & ToastifyStoreActions;
+type ToastifyStoreType = ToastifyStoreState & ToastifyStoreActions;
 
 // 4. 상태 및 액션 생성
 const toastifyStore: StateCreator<ToastifyStoreState & ToastifyStoreActions> = (
@@ -27,7 +27,7 @@ const toastifyStore: StateCreator<ToastifyStoreState & ToastifyStoreActions> = (
   setToastify: (data) => set(() => ({ ...data })),
 });
 
-const useToastifyStore = create<ToastifyStoreState & ToastifyStoreActions>()(
+const useToastifyStore = create<ToastifyStoreState & ToastifyStoreActions>(
   process.env.NODE_ENV === "development"
     ? (devtools(toastifyStore) as StateCreator<ToastifyStoreType>)
     : toastifyStore,

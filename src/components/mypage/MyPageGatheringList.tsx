@@ -6,7 +6,7 @@ import CategoryList from "../common/CategoryList";
 import GatheringItem from "../common/GatheringItem";
 import { Modal } from "../common/modal/Modal";
 import Pagination from "../../shared/ui/pagination/Pagination";
-import GatheringItemSkeleton from "../skeleton/common/GatheringItemSkeleton";
+import GatheringItemSkeleton from "../../features/gathering/ui/GatheringItemSkeleton";
 
 const MyPageGatheringList = () => {
   const {

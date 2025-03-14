@@ -1,15 +1,15 @@
 "use client";
 
-import useAuthStore from "@/stores/authStore";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill-new";
 import { ImageResize } from "quill-image-resize-module-ts";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
+import { useUserStore } from "@/entities/user";
+import { fetchWithAuth } from "@/shared/api";
 
 export const useQuillEditor = () => {
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const quillRef = useRef<ReactQuill>(null);
   const [loading, setLoading] = useState(false);
   const formContext = useFormContext();
@@ -21,7 +21,7 @@ export const useQuillEditor = () => {
 
   const uploadImage = async (file: File) => {
     const formData = new FormData();
-    formData.append("id", authStore.id.toString());
+    formData.append("id", userStore.id.toString());
     formData.append("image", file);
     formData.append("type", "DIARY");
 

@@ -4,13 +4,13 @@ import GatheringItem from "../../common/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Gathering } from "@/types/GatheringDto";
-import useAuthStore from "@/stores/authStore";
-import useModalState from "@/shared/lib/hooks/useModalState";
-import GatheringItemSkeleton from "@/components/skeleton/common/GatheringItemSkeleton";
+import GatheringItemSkeleton from "@/features/gathering/ui/GatheringItemSkeleton";
 import { Modal } from "@/components/common/modal/Modal";
 import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
-import Pagination from "@/shared/ui/pagination/Pagination";
 import { LottieNotFound } from "@/shared/ui/lottie";
+import { useUserStore } from "@/entities/user";
+import { useModalState } from "@/shared/lib/hooks";
+import { Pagination } from "@/shared/ui/pagination";
 
 const SkeletonGatheringList = () => {
   return (
@@ -27,7 +27,7 @@ const GatheringCardList = () => {
   const [totalElements, setTotalElements] = useState(1);
   const [elements, setElements] = useState<Gathering[]>([]);
   const [loading, setLoading] = useState(true);
-  const authStore = useAuthStore();
+  const userStore = useUserStore();
   const router = useRouter();
   const modalState = useModalState();
   const [currentPage, setCurrentPage] = useState(
@@ -43,11 +43,11 @@ const GatheringCardList = () => {
   };
 
   const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
-    if (authStore.id > 0 && (!authStore.sex || !authStore.age)) {
+    if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
       e.preventDefault();
       modalState.openModal();
     }
-    if (authStore.id < 1) {
+    if (userStore.id < 1) {
       e.preventDefault();
       router.push("/auth/signin");
     }
@@ -115,7 +115,7 @@ const GatheringCardList = () => {
                   key={i.gatheringId}
                   data={i}
                   isAccessGathering={
-                    !!authStore.sex && !!authStore.age && authStore.id > 0
+                    !!userStore.sex && !!userStore.age && userStore.id > 0
                   }
                 />
               ))}
