@@ -1,5 +1,5 @@
 import InformationItemSkeleton from "../../../../features/information/ui/InformationItemSkeleton";
-import PaginationSkeleton from "../../common/PaginationSkeleton";
+import PaginationSkeleton from "../../../../shared/ui/pagination/PaginationSkeleton";
 
 const InformationListSkeleton = () => {
   return (

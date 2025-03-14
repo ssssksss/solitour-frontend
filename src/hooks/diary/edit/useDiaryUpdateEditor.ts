@@ -1,23 +1,36 @@
 "use client";
 
+import { Diary, FEELING_STATUS } from "@/entities/diary";
+import { DiaryUpdateFormSchema } from "@/features/diary";
+import { fetchWithAuth } from "@/shared/api";
+import { SANITIZE_OPTION } from "@/shared/config";
+import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import parse from "node-html-parser";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DiaryUpdateFormSchema } from "@/features/diary/model/DiaryUpdateFormSchema";
-import parse from "node-html-parser";
-import {
-  GetDiaryResponseDto,
-  UpdateDiaryRequestDto,
-} from "@/entities/diary/model/diary";
 import sanitizeHtml from "sanitize-html";
-import sanitizeOption from "@/shared/config/sanitizeOption";
-import { FEELING_STATUS } from "@/entities/diary/config/feelingStatus";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
-import { useModalBackHandler } from "@/shared/lib/hooks";
 
-export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
+/**
+ * 일기 수정 요청 DTO
+ */
+interface UpdateDiaryRequestDto {
+  title: string;
+  deleteTitleImage: string;
+  saveTitleImage: string;
+  startDatetime: Date;
+  endDatetime: Date;
+  diaryDayRequests: {
+    content: string;
+    feelingStatus: string;
+    deleteImagesUrl: string;
+    saveImagesUrl: string;
+    place: string;
+  }[];
+}
+
+export const useDiaryUpdateEditor = (diary: Diary) => {
   const router = useRouter();
   const [dateRangeModalVisible, setDateRangeModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
@@ -100,7 +113,7 @@ export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
       endDatetime: endDate!,
       diaryDayRequests: [
         {
-          content: sanitizeHtml(contents, sanitizeOption),
+          content: sanitizeHtml(contents, SANITIZE_OPTION),
           feelingStatus: FEELING_STATUS[moodLevels],
           deleteImagesUrl: originalContentUrl
             .filter(
@@ -117,7 +130,7 @@ export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
     setLoading(true);
 
     const response = await fetchWithAuth(
-      `/api/diary/${diaryData.diaryContentResponse.diaryId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/diary/${diary.diaryId}`,
       {
         method: "PUT",
         headers: {
@@ -134,7 +147,7 @@ export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
       throw new Error(response.statusText);
     }
 
-    router.push(`/diary/${diaryData.diaryContentResponse.diaryId}`);
+    router.push(`/diary/${diary.diaryId}`);
     router.refresh();
   };
 
@@ -146,13 +159,12 @@ export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
   useModalBackHandler(addressModalVisible, () => setAddressModalVisible(false));
 
   useEffect(() => {
-    methods.setValue("title", diaryData.diaryContentResponse.title);
+    methods.setValue("title", diary.title);
     methods.setValue(
       "startDate",
       new Date(
         new Date(
-          new Date(diaryData.diaryContentResponse.startDatetime).getTime() +
-            1000 * 60 * 60 * 24,
+          new Date(diary.startDatetime).getTime() + 1000 * 60 * 60 * 24,
         ).toLocaleDateString("ko-KR"),
       ),
     );
@@ -160,36 +172,32 @@ export const useDiaryUpdateEditor = (diaryData: GetDiaryResponseDto) => {
       "endDate",
       new Date(
         new Date(
-          new Date(diaryData.diaryContentResponse.endDatetime).getTime() +
-            1000 * 60 * 60 * 24,
+          new Date(diary.endDatetime).getTime() + 1000 * 60 * 60 * 24,
         ).toLocaleDateString("ko-KR"),
       ),
     );
     methods.setValue(
       "address",
-      diaryData.diaryContentResponse.diaryDayContentResponses
-        .diaryDayContentDetail[0].place,
+      diary.diaryDayContentResponses.diaryDayContentDetail[0].place,
     );
     methods.setValue(
       "moodLevels",
       Number(
         FEELING_STATUS[
-          diaryData.diaryContentResponse.diaryDayContentResponses
-            .diaryDayContentDetail[0].feelingStatus
+          diary.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus
         ],
       ),
     );
     methods.setValue(
       "contents",
-      diaryData.diaryContentResponse.diaryDayContentResponses
-        .diaryDayContentDetail[0].content,
+      diary.diaryDayContentResponses.diaryDayContentDetail[0].content,
     );
 
     methods.trigger();
 
-    setOriginalThumbnailUrl(diaryData.diaryContentResponse.titleImage);
+    setOriginalThumbnailUrl(diary.titleImage);
     setOriginalContentUrl(
-      diaryData.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].diaryDayContentImages.split(
+      diary.diaryDayContentResponses.diaryDayContentDetail[0].diaryDayContentImages.split(
         ",",
       ),
     );

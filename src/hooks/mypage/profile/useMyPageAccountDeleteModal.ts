@@ -3,7 +3,7 @@
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
 import useToastifyStore from "@/stores/toastifyStore";
-import { UserResponseDto } from "@/types/UserDto";
+import { UserResponseDto } from "@/entities/user/model/UserDto";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

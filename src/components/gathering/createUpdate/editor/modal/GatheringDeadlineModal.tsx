@@ -1,6 +1,5 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
-import { IModalComponent } from "@/types/ModalState";
 import {
   add,
   compareAsc,
@@ -11,11 +10,19 @@ import {
   subDays,
 } from "date-fns";
 import { ko } from "date-fns/locale";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Calendar } from "react-date-range";
 import { useFormContext } from "react-hook-form";
 
-const GatheringDeadlineModal = (props: IModalComponent) => {
+interface GatheringDeadlineModalProps {
+  closeModal: () => void;
+  closeButtonComponent?: ReactNode;
+}
+
+const GatheringDeadlineModal = ({
+  closeModal,
+  closeButtonComponent,
+}: GatheringDeadlineModalProps) => {
   const formContext = useFormContext();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -34,7 +41,7 @@ const GatheringDeadlineModal = (props: IModalComponent) => {
     formContext.setValue("deadline", deadline);
     formContext.watch();
     formContext.trigger("deadline");
-    props.closeModal!();
+    closeModal();
   };
 
   // maxDate를 결정하는 함수
@@ -59,11 +66,9 @@ const GatheringDeadlineModal = (props: IModalComponent) => {
 
   return (
     <ModalTemplate
-      className={
-        "max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem]"
-      }
+      className={"max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem]"}
     >
-      {props.closeButtonComponent}
+      {closeButtonComponent}
       <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         모임 마감일 선택
       </h2>
@@ -83,7 +88,7 @@ const GatheringDeadlineModal = (props: IModalComponent) => {
           />
           <div
             className={
-              "absolute left-[50%] top-10 translate-x-[-50%] font-semibold"
+              "absolute top-10 left-[50%] translate-x-[-50%] font-semibold"
             }
           >
             {year}.{month}
@@ -92,7 +97,7 @@ const GatheringDeadlineModal = (props: IModalComponent) => {
       </section>
       <div className={"flex w-full justify-center pt-[1rem]"}>
         <button
-          className="h-[3.375rem] min-w-[18.625rem] rounded-[1.75rem] bg-main px-[3.5rem] py-[1rem] text-white disabled:bg-gray1"
+          className="bg-main disabled:bg-gray1 h-[3.375rem] min-w-[18.625rem] rounded-[1.75rem] px-[3.5rem] py-[1rem] text-white"
           onClick={() => submitHandler()}
           disabled={
             !(

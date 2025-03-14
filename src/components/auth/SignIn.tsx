@@ -1,3 +1,5 @@
+"use client";
+
 import introLottie from "@/../public/lottie/solitour-auth-intro-image.json";
 import Lottie from "lottie-react";
 import Image from "next/image";
@@ -7,7 +9,7 @@ const SignIn = () => {
   return (
     <div className="mb-[8rem] flex w-[19.5rem] flex-col">
       <h1 className="pb-[1rem] text-4xl font-bold">로그인</h1>
-      <p className="h-[2.875rem] max-w-[21rem] font-medium text-gray1">
+      <p className="text-gray1 h-[2.875rem] max-w-[21rem] font-medium">
         SNS로 솔리투어에 로그인하고 더 많은 서비스를 즐겨보세요!
       </p>
       <Lottie animationData={introLottie} />
@@ -23,7 +25,7 @@ const SignIn = () => {
         href="/api/auth/kakao"
       >
         <Image
-          className="absolute left-[1rem] top-[50%] h-4 w-4 translate-y-[-50%]"
+          className="absolute top-[50%] left-[1rem] h-4 w-4 translate-y-[-50%]"
           src="/icons/kakao-icon.svg"
           alt="kakao-icon"
           width={16}

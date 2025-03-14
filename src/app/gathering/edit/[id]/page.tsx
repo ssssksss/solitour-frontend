@@ -1,5 +1,5 @@
 import GatheringUpdateEditor from "@/components/gathering/edit/GatheringUpdateEditor";
-import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { NextResponse } from "next/server";
 
 interface PageProps {
@@ -58,7 +58,7 @@ export default async function Page(props: PageProps) {
   try {
     const gatheringData = await fetchGatheringData(postId);
     return (
-      <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem] pt-[2rem]"}>
+      <div className={"min-h-[calc(100vh-25rem)] w-full pt-[2rem] pb-[2rem]"}>
         <GatheringUpdateEditor gatheringData={gatheringData} />
       </div>
     );

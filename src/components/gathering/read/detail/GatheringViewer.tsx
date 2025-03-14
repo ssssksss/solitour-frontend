@@ -1,7 +1,7 @@
 "use client";
 
 import UserImage from "@/components/auth/UserImage";
-import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -37,7 +37,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
       <article className="w-full px-[.25rem] pb-[2.25rem]">
         {/* 제목, 신청 버튼 */}
         <div className="grid w-full items-start gap-4 max-[960px]:grid-cols-[calc(100%-8.5rem)_8.5rem] min-[960px]:grid-cols-[calc(100%-14.5rem)_14.5rem]">
-          <h1 className="whitespace-pre-wrap break-words text-3xl font-semibold">
+          <h1 className="text-3xl font-semibold break-words whitespace-pre-wrap">
             {data.title}
           </h1>
           <GatheringSupportManagement
@@ -60,20 +60,20 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
               <div className="text-xs font-semibold text-black">
                 {data.userPostingResponse?.nickname}
               </div>
-              <div className="w-fit shrink-0 whitespace-nowrap text-xs text-gray1">
+              <div className="text-gray1 w-fit shrink-0 text-xs whitespace-nowrap">
                 {format(new Date(data.createdAt), "yyyy-MM-dd")}
               </div>
             </div>
           </div>
-          <div className="flex w-full items-end justify-end text-xs font-medium text-gray2">
+          <div className="text-gray2 flex w-full items-end justify-end text-xs font-medium">
             <div className="flex flex-row items-center space-x-3">
-              <div className="mb-[.25rem] flex flex-row items-center gap-2 text-gray2">
+              <div className="text-gray2 mb-[.25rem] flex flex-row items-center gap-2">
                 <GatheringLike
                   initialLikes={data.likeCount}
                   initialIsLike={data.isLike}
                   gatheringId={postId}
                 />
-                <div className="flex items-center gap-1 text-sm text-gray2">
+                <div className="text-gray2 flex items-center gap-1 text-sm">
                   <Image
                     src="/icons/eyes-icon.svg"
                     alt="eyes-icon"
@@ -88,7 +88,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
         </div>
       </article>
       {/* 제한 부분(날짜, 장소, 인원, 시간) */}
-      <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm sm:grid-cols-[320px_auto] min-[800px]:grid-cols-2">
+      <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm min-[800px]:grid-cols-2 sm:grid-cols-[320px_auto]">
         <div className="flex gap-x-3">
           <Image
             src="/icons/gathering-calendar-icon.svg"
@@ -162,7 +162,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
         </div>
       </article>
       {/* 내용 부분 */}
-      <div className={"my-[1rem] flex gap-1 text-gray1"}>
+      <div className={"text-gray1 my-[1rem] flex gap-1"}>
         <Image
           src="/icons/pin-green-icon.svg"
           alt="pin-green-icon"
@@ -177,7 +177,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
           },
         )}
       </div>
-      <div className="mb-[1.25rem] w-full whitespace-pre-wrap break-words pt-[2rem]">
+      <div className="mb-[1.25rem] w-full pt-[2rem] break-words whitespace-pre-wrap">
         {data.content}
       </div>
       {data.tagResponses?.length > 0 && (
@@ -185,7 +185,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
           {data.tagResponses?.map((i) => (
             <div
               key={i.name}
-              className="max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm text-main outline outline-[1px] outline-offset-[-1px] outline-main"
+              className="text-main outline-main max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm outline outline-[1px] outline-offset-[-1px]"
             >
               {"#"}
               {i.name}

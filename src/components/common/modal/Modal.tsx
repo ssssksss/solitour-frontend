@@ -1,10 +1,15 @@
 "use client";
 
 import { useOutsideClick, usePreventBodyScroll } from "@/shared/lib/hooks";
-import { ModalState } from "@/types/ModalState";
 import React, { useEffect, useRef, useState, type JSX } from "react";
 import { createPortal } from "react-dom";
 import { MdClose } from "react-icons/md";
+
+interface ModalState {
+  isOpen: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+}
 
 interface ModalProps extends React.PropsWithChildren {
   className?: React.HTMLProps<HTMLElement>["className"];
@@ -73,10 +78,10 @@ export const Modal = ({ children, modalState }: ModalProps) => {
           closeButtonComponent: (
             <button
               onClick={() => modalState.closeModal()}
-              className="absolute right-8 top-8 z-200 h-8 w-8 scale-100 transform transition-transform duration-300"
+              className="absolute top-8 right-8 z-200 h-8 w-8 scale-100 transform transition-transform duration-300"
             >
               <MdClose
-                className="bg-red-60 cursor-pointer text-gray2 hover:text-main"
+                className="bg-red-60 text-gray2 hover:text-main cursor-pointer"
                 size="2.5rem"
                 onClick={() => modalState.closeModal()}
               />
@@ -93,7 +98,7 @@ export const Modal = ({ children, modalState }: ModalProps) => {
       <div className="absolute h-full w-full cursor-pointer bg-black/30" />
       <div
         ref={ref}
-        className="-z-1 relative flex h-[calc(100vh-1rem)] w-full flex-col items-center justify-center"
+        className="relative -z-1 flex h-[calc(100vh-1rem)] w-full flex-col items-center justify-center"
         onClick={(e) => {
           if (e.target == ref.current) {
             modalState.closeModal();

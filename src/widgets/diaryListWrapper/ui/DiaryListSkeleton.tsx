@@ -1,7 +1,7 @@
-import PaginationSkeleton from "../../common/PaginationSkeleton";
-import DiaryCardSkeleton from "./DiaryCardSkeleton";
+import DiaryCardSkeleton from "@/components/skeleton/diary/list/DiaryCardSkeleton";
+import { PaginationSkeleton } from "@/shared/ui/pagination";
 
-const DiaryListSkeleton = () => {
+export const DiaryListSkeleton = () => {
   return (
     <div className="w-full">
       <h1 className="py-[2.375rem] text-[1.75rem] font-bold">여행 일기</h1>
@@ -17,5 +17,3 @@ const DiaryListSkeleton = () => {
     </div>
   );
 };
-
-export default DiaryListSkeleton;

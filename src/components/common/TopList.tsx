@@ -1,5 +1,5 @@
 import LottieFile from "@/../public/lottie/solitour_gathering_animation.json";
-import { TopGatheringResponseDto } from "@/types/GatheringDto";
+import { TopGatheringResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { TopInformationResponseDto } from "@/entities/information/model/informationDto";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,9 +50,9 @@ const TopList = async ({ title }: Props) => {
       : await getTopGatheringList();
 
   return (
-    <div className="z-1 relative -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow-sm shadow-[#CCECE2] max-[744px]:-mt-24">
+    <div className="relative z-1 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow-sm shadow-[#CCECE2] max-[744px]:-mt-24">
       {title === "모임" && (
-        <div className="-z-5 max-[14.375rem] absolute right-0 top-0 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]">
+        <div className="max-[14.375rem] absolute top-0 right-0 -z-5 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]">
           <Lottie
             animationData={LottieFile}
             className="translate-y-[-1rem] object-contain"
@@ -67,9 +67,9 @@ const TopList = async ({ title }: Props) => {
       )}
       <div className="h-[20rem] w-full max-[1024px]:h-[24rem]">
         <div className="absolute h-full w-full rounded-2xl bg-white px-24 py-16 max-[1024px]:px-8 max-[1024px]:py-12">
-          <h2 className="mb-9 border-b-[0.0625rem] border-gray3 pb-3 text-2xl font-semibold text-black">
+          <h2 className="border-gray3 mb-9 border-b-[0.0625rem] pb-3 text-2xl font-semibold text-black">
             {`${title} 정보 `}
-            <span className="font-bold text-main">Top 5</span>
+            <span className="text-main font-bold">Top 5</span>
           </h2>
           <div className="w-full">
             <ol className="grid grid-cols-2 gap-x-4 gap-y-[1.5rem] max-[1024px]:flex max-[1024px]:flex-col">
@@ -79,9 +79,9 @@ const TopList = async ({ title }: Props) => {
                   className={`flex items-center ${index > 2 ? "col-start-2" : "col-start-1"}`}
                   style={{ gridRowStart: index > 2 ? index - 2 : index + 1 }}
                 >
-                  <p className="w-6 font-bold text-main">{index + 1}.</p>
+                  <p className="text-main w-6 font-bold">{index + 1}.</p>
                   <Link
-                    className="w-96 truncate text-sm font-medium text-gray1 hover:text-main max-[1024px]:w-full"
+                    className="text-gray1 hover:text-main w-96 truncate text-sm font-medium max-[1024px]:w-full"
                     href={`/${title === "여행" ? "informations" : "gathering"}/${value.id}`}
                   >
                     {value.title}

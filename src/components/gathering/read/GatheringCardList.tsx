@@ -3,7 +3,7 @@
 import GatheringItem from "../../common/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Gathering } from "@/types/GatheringDto";
+import { Gathering } from "@/entities/gathering/model/GatheringDto";
 import GatheringItemSkeleton from "@/features/gathering/ui/GatheringItemSkeleton";
 import { Modal } from "@/components/common/modal/Modal";
 import AddUserInformationForm from "@/components/auth/AddUserInformationForm";

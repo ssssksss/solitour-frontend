@@ -4,15 +4,29 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DiaryCreateFormSchema } from "@/features/diary/model/DiaryCreateFormSchema";
 import parse from "node-html-parser";
-import { CreateDiaryRequestDto } from "@/entities/diary/model/diary";
-import sanitizeOption from "@/shared/config/sanitizeOption";
-import { FEELING_STATUS } from "@/entities/diary/config/feelingStatus";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import sanitizeHtml from "sanitize-html";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
-import { useModalBackHandler } from "@/shared/lib/hooks";
+import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
+import { DiaryCreateFormSchema } from "@/features/diary";
+import { FEELING_STATUS } from "@/entities/diary";
+import { SANITIZE_OPTION } from "@/shared/config";
+import { fetchWithAuth } from "@/shared/api";
+
+/**
+ * 일기 작성 요청 DTO
+ */
+interface CreateDiaryRequestDto {
+  title: string;
+  titleImage: string;
+  startDatetime: Date;
+  endDatetime: Date;
+  diaryDayRequests: {
+    content: string;
+    feelingStatus: string;
+    diaryDayContentImages: string;
+    place: string;
+  }[];
+}
 
 export const useDiaryCreateEditor = () => {
   const router = useRouter();
@@ -90,7 +104,7 @@ export const useDiaryCreateEditor = () => {
       endDatetime: endDate!,
       diaryDayRequests: [
         {
-          content: sanitizeHtml(contents, sanitizeOption),
+          content: sanitizeHtml(contents, SANITIZE_OPTION),
           feelingStatus: FEELING_STATUS[moodLevels],
           diaryDayContentImages: contentImagesUrl,
           place: address,
@@ -100,14 +114,16 @@ export const useDiaryCreateEditor = () => {
 
     setLoading(true);
 
-    const response = await fetchWithAuth("/api/diary", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetchWithAuth(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/diary`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(data),
+        cache: "no-store",
       },
-      body: JSON.stringify(data),
-      cache: "no-store",
-    });
+    );
 
     if (!response.ok) {
       alert("일기 작성에 실패하였습니다.");

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
-import { UserResponseDto } from "@/types/UserDto";
+import { UserResponseDto } from "@/entities/user/model/UserDto";
 import useModalState from "@/shared/lib/hooks/useModalState";
 
 export const useMyPageProfile = (userInfo: UserResponseDto) => {

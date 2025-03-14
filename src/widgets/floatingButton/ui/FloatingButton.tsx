@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
-import { Modal } from "../../../components/common/modal/Modal";
-import AddUserInformationForm from "../../../components/auth/AddUserInformationForm";
 import { AnimatePresence, motion } from "motion/react";
 import { useFloatingButton } from "../model/useFloatingButton";
+import { Modal } from "@/components/common/modal/Modal";
+import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
 
 export const FloatingButton = () => {
   const {
@@ -94,7 +94,7 @@ export const FloatingButton = () => {
               animate={{ rotate: "0deg" }}
               transition={{ bounce: false }}
             >
-              <MdClose size={"1.5rem"} />
+              <MdClose size="1.5rem" />
             </motion.div>
           ) : (
             <Image

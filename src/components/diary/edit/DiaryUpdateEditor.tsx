@@ -1,15 +1,15 @@
 "use client";
 
 import DiaryEditor from "@/components/diary/common/DiaryEditor";
+import { Diary } from "@/entities/diary";
 import { useDiaryUpdateEditor } from "@/hooks/diary/edit/useDiaryUpdateEditor";
-import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
 import { FormProvider } from "react-hook-form";
 
 interface DiaryUpdateEditorProps {
-  diaryData: GetDiaryResponseDto;
+  diary: Diary;
 }
 
-const DiaryUpdateEditor = ({ diaryData }: DiaryUpdateEditorProps) => {
+const DiaryUpdateEditor = ({ diary }: DiaryUpdateEditorProps) => {
   const {
     loading,
     methods,
@@ -20,7 +20,7 @@ const DiaryUpdateEditor = ({ diaryData }: DiaryUpdateEditorProps) => {
     openAddressModal,
     closeAddressModal,
     handleSubmit,
-  } = useDiaryUpdateEditor(diaryData);
+  } = useDiaryUpdateEditor(diary);
 
   return (
     <FormProvider {...methods}>

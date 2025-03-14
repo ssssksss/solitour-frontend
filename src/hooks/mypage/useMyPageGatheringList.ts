@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Gathering } from "@/types/GatheringDto";
+import { Gathering } from "@/entities/gathering/model/GatheringDto";
 import { useModalState } from "@/shared/lib/hooks";
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";

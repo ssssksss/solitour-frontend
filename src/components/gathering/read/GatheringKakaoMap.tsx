@@ -1,6 +1,6 @@
 "use client";
 
-import { PlaceResponse } from "@/types/GatheringDto";
+import { PlaceResponse } from "@/entities/gathering/model/GatheringDto";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -85,11 +85,11 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
             }}
           ></div>
 
-          <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-[0.0625rem] px-6 pb-10 pt-12">
+          <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-[0.0625rem] px-6 pt-12 pb-10">
             <div className="text-lg font-bold text-black">
               {placeResponse.name}
             </div>
-            <div className="flex items-center gap-1 text-sm text-gray1">
+            <div className="text-gray1 flex items-center gap-1 text-sm">
               <Image
                 src="/icons/location-icon.svg"
                 alt="location-icon"

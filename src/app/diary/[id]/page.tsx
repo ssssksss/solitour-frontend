@@ -1,35 +1,18 @@
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryViewer from "@/components/diary/detail/DiaryViewer";
-import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
-import { cookies } from "next/headers";
-
-async function getDiary(id: number) {
-  const cookie = (await cookies()).get("access_token");
-  const response = await fetch(`${process.env.BACKEND_URL}/api/diary/${id}`, {
-    method: "GET",
-    headers: {
-      Cookie: `${cookie?.name}=${cookie?.value}`,
-    },
-    next: { revalidate: 60, tags: [`getDiary/${id}`] },
-  });
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<GetDiaryResponseDto>;
-}
+import { getDiary } from "@/entities/diary";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata(props: Props) {
-  const params = await props.params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const diaryId = Number((await params).id);
 
-  const { id } = params;
-
-  const diaryId = Number(id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
     throw Error("Not Found");
   }
@@ -40,15 +23,18 @@ export async function generateMetadata(props: Props) {
   };
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { id } = params;
-  const diaryId = Number(id);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const diaryId = Number((await params).id);
+
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
     throw Error("Not Found");
   }
 
-  const data = await getDiary(diaryId);
+  const diary = (await getDiary(diaryId)).diaryContentResponse;
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -58,7 +44,7 @@ export default async function Page(props: Props) {
           { label: "일기 상세", href: "" },
         ]}
       />
-      <DiaryViewer data={data} />
+      <DiaryViewer data={diary} />
     </div>
   );
 }

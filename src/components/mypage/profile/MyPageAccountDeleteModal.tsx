@@ -2,11 +2,13 @@
 
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { useMyPageAccountDeleteModal } from "@/hooks/mypage/profile/useMyPageAccountDeleteModal";
-import { IModalComponent } from "@/types/ModalState";
-import { UserResponseDto } from "@/types/UserDto";
+import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { ReactNode } from "react";
 
-interface MyPageAccountDeleteModalProps extends IModalComponent {
+interface MyPageAccountDeleteModalProps {
   userInfo: UserResponseDto;
+  closeModal: () => void;
+  closeButtonComponent?: ReactNode;
 }
 
 const MyPageAccountDeleteModal = ({
@@ -31,19 +33,19 @@ const MyPageAccountDeleteModal = ({
         </p>
         <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
       </div>
-      <div className="flex select-none items-end gap-x-[.25rem]">
-        <span className="text-lg text-main">회원탈퇴를 하겠습니다.</span>
+      <div className="flex items-end gap-x-[.25rem] select-none">
+        <span className="text-main text-lg">회원탈퇴를 하겠습니다.</span>
         <span> 라고 입력해주세요. </span>
       </div>
       <input
-        className="w-full rounded-2xl px-4 py-4 outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+        className="w-full rounded-2xl px-4 py-4 outline outline-offset-[-1px] outline-[#E3E3E3]"
         placeholder="텍스트를 입력해주세요."
         onChange={(e) => handleUserDeleteTextChange(e.target.value)}
       />
       <button
         disabled={userDeleteText !== "회원탈퇴를 하겠습니다."}
         onClick={handleDeleteClick}
-        className="h-[3rem] w-full shrink-0 rounded-full bg-main text-white disabled:bg-gray2"
+        className="bg-main disabled:bg-gray2 h-[3rem] w-full shrink-0 rounded-full text-white"
       >
         회원탈퇴
       </button>

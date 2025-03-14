@@ -1,6 +1,6 @@
 "use client";
 
-import { NoticeType } from "@/types/NoticeDto";
+import { Notice } from "@/entities/notice";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ export const useSupportNoticeList = () => {
     searchParams.get("page") ? Number(searchParams.get("page")) : 1,
   );
   const [loading, setLoading] = useState(true);
-  const [noticeList, setNoticeList] = useState<NoticeType[]>([]);
+  const [noticeList, setNoticeList] = useState<Notice[]>([]);
   const [viewedNoticeList, setViewedNoticeList] = useState<number[]>([]);
 
   const getNoticeList = async (page: number) => {

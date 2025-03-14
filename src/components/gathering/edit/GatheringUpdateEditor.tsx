@@ -4,7 +4,7 @@ import GatheringEditor from "@/components/gathering/createUpdate/editor/Gatherin
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import useToastifyStore from "@/stores/toastifyStore";
-import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";

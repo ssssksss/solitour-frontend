@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { UserResponseDto } from "@/types/UserDto";
+import { UserResponseDto } from "@/entities/user/model/UserDto";
 import { useMyPageProfile } from "@/hooks/mypage/profile/useMyPageProfile";
 import { Modal } from "@/components/common/modal/Modal";
 import MyPageAccountDeleteModal from "./MyPageAccountDeleteModal";
@@ -41,11 +41,11 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
           <div className="flex w-full items-center gap-x-[2.375rem]">
             <div className="relative w-[3.5rem] shrink-0">
               <span className="text-lg font-semibold">닉네임</span>
-              <span className="absolute top-[-.5rem] text-lg text-main">*</span>
+              <span className="text-main absolute top-[-.5rem] text-lg">*</span>
             </div>
             <label className="group relative w-full">
               <input
-                className="flex h-[3.25rem] w-full rounded-[28px] pl-[2rem] pr-[5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                className="flex h-[3.25rem] w-full rounded-[28px] pr-[5rem] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
                 type="text"
                 autoComplete="search"
                 name="nickname"
@@ -63,7 +63,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
               <button
                 className={
                   `${nickname === defaultNickname ? "bg-gray-400" : "bg-main"}` +
-                  "absolute right-2 top-1/2 h-[2.4rem] translate-y-[-50%] rounded-[28px] px-3 text-white opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
+                  "absolute top-1/2 right-2 h-[2.4rem] translate-y-[-50%] rounded-[28px] px-3 text-white opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
                 }
                 onClick={handleSubmit}
               >
@@ -72,7 +72,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
             </label>
           </div>
           <div
-            className={`${message ? "justify-between" : "justify-end"} flex w-full pl-[7.75rem] pt-[.75rem] text-sm text-gray1`}
+            className={`${message ? "justify-between" : "justify-end"} text-gray1 flex w-full pt-[.75rem] pl-[7.75rem] text-sm`}
           >
             {message !== "" && (
               <span
@@ -109,7 +109,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
             <div className="flex items-center justify-between">
               <span>{userInfo.provider}</span>
               <div className="flex items-center gap-x-[.875rem]">
-                <span className="font-medium text-gray1">
+                <span className="text-gray1 font-medium">
                   {userInfo.userImage.createdDate}
                 </span>
                 {userInfo.provider === "kakao" && (
@@ -130,7 +130,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
       </div>
       <div className="flex w-full justify-end pt-[3rem] text-[#999999]">
         <button
-          className="hover:font-bold hover:text-main"
+          className="hover:text-main hover:font-bold"
           onClick={modalState.openModal}
         >
           회원탈퇴

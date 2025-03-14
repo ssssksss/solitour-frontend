@@ -1,4 +1,4 @@
-import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
+import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/GatheringDto";
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
 

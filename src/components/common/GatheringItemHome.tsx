@@ -1,5 +1,5 @@
 import GatheringBookMark from "@/components/gathering/read/GatheringBookmark";
-import { GatheringRecommend } from "@/types/GatheringDto";
+import { GatheringRecommend } from "@/entities/gathering/model/GatheringDto";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -26,7 +26,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className="flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 outline-gray3 duration-300 hover:bg-lightGreen hover:outline-main max-[744px]:min-w-[19.183125rem]"
+      className="outline-gray3 hover:bg-lightGreen hover:outline-main flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 duration-300 max-[744px]:min-w-[19.183125rem]"
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
@@ -40,10 +40,10 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
             postId={data.gatheringId}
           />
         </div>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap pb-1 pt-6 text-lg font-bold hover:text-main">
+        <p className="hover:text-main overflow-hidden pt-6 pb-1 text-lg font-bold text-ellipsis whitespace-nowrap">
           {data.title}
         </p>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1">
+        <p className="text-gray1 overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
           {data.nickname}
         </p>
       </div>
@@ -71,7 +71,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
                 height={14}
               />
             </div>
-            <p className="overflow-hidden truncate whitespace-nowrap">
+            <p className="truncate overflow-hidden whitespace-nowrap">
               {data.zoneCategoryParentName === "세종"
                 ? "세종특별자치시"
                 : `${data.zoneCategoryParentName}, ${data.zoneCategoryChildName}`}
@@ -153,7 +153,7 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
                 initialIsLike={data.isLike}
                 gatheringId={data.gatheringId}
               />
-              <div className="flex flex-row items-center gap-1 text-gray2">
+              <div className="text-gray2 flex flex-row items-center gap-1">
                 <Image
                   src="/icons/eyes-icon.svg"
                   alt="eyes-icon"

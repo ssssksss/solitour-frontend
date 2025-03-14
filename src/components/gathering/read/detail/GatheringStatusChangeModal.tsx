@@ -1,21 +1,21 @@
 "use client";
 
-import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import { fetchWithAuth } from "@/shared/api";
+import { HashSpinner } from "@/shared/ui/hashSpinner";
 import useToastifyStore from "@/stores/toastifyStore";
-import { IModalComponent } from "@/types/ModalState";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 
-interface GatheringStatusChangeModalProps extends IModalComponent {
+interface GatheringStatusChangeModalProps {
   isFinish: boolean;
+  closeModal: () => void;
 }
 
 const GatheringStatusChangeModal = ({
   isFinish,
-  ...props
+  closeModal,
 }: GatheringStatusChangeModalProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -40,9 +40,8 @@ const GatheringStatusChangeModal = ({
         message: "모임 마감에 실패했습니다.",
       });
       setLoading(false);
-      props.closeModal!();
+      closeModal();
       return;
-      // throw new Error(response.statusText);
     }
 
     router.replace("/gathering");
@@ -52,14 +51,14 @@ const GatheringStatusChangeModal = ({
   return (
     <ModalTemplate className="max-h-[20rem] w-full max-w-[28rem]">
       <button
-        onClick={props.closeModal}
-        className="absolute right-[2rem] top-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
+        onClick={closeModal}
+        className="absolute top-[2rem] right-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
         style={{ zIndex: 200 }}
       >
         <MdClose
-          className="bg-red-60 cursor-pointer text-gray2 hover:text-main"
-          size={"2.5rem"}
-          onClick={props.closeModal}
+          className="bg-red-60 text-gray2 hover:text-main cursor-pointer"
+          size="2.5rem"
+          onClick={closeModal}
         />
       </button>
       <HashSpinner loading={loading} />
@@ -75,14 +74,14 @@ const GatheringStatusChangeModal = ({
         </div>
         <div className="flex flex-row gap-4">
           <button
-            className="h-10 select-none rounded-full bg-main px-8 text-white hover:scale-105"
+            className="bg-main h-10 rounded-full px-8 text-white select-none hover:scale-105"
             onClick={handleRemoveClick}
           >
             삭제
           </button>
           <button
-            className="h-10 select-none rounded-full bg-black px-8 text-white hover:scale-105"
-            onClick={props.closeModal}
+            className="h-10 rounded-full bg-black px-8 text-white select-none hover:scale-105"
+            onClick={closeModal}
           >
             취소
           </button>

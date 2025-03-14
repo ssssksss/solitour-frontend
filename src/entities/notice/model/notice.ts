@@ -1,4 +1,4 @@
-export interface NoticeType {
+export interface Notice {
   id: number;
   title: string;
   content: string;

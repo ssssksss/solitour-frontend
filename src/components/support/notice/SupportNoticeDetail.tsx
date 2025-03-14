@@ -1,7 +1,7 @@
 "use client";
 
+import { Notice } from "@/entities/notice";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
-import { NoticeType } from "@/types/NoticeDto";
 import { format } from "date-fns";
 
 const NOTICE_DETAIL_BREADCRUMB_PATH = (id: number) => [
@@ -10,11 +10,11 @@ const NOTICE_DETAIL_BREADCRUMB_PATH = (id: number) => [
   { label: `${id}`, href: "" },
 ];
 
-interface ISupportNoticeDetail {
-  data: NoticeType;
+interface SupportNoticeDetailProps {
+  data: Notice;
 }
 
-const SupportNoticeDetail = ({ data }: ISupportNoticeDetail) => {
+const SupportNoticeDetail = ({ data }: SupportNoticeDetailProps) => {
   const categoryStyles: { [key: string]: string } = {
     이벤트: "bg-green-100 text-green-800",
     공지: "bg-blue-100 text-blue-800",
@@ -48,7 +48,7 @@ const SupportNoticeDetail = ({ data }: ISupportNoticeDetail) => {
 
         {/* 본문 내용 */}
         <p
-          className="break-words py-4 font-medium text-black"
+          className="py-4 font-medium break-words text-black"
           dangerouslySetInnerHTML={{ __html: data.content }}
         />
       </div>

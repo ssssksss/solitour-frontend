@@ -1,7 +1,7 @@
-import { BestInformationListWrapper } from "@/widgets/bestInformationList";
+import { BestInformationListWrapper } from "@/widgets/bestInformationListWrapper";
 import { HomeCarousel } from "@/widgets/homeCarousel";
 import { HomeShortcuts } from "@/widgets/homeShortcuts";
-import { NewGatheringListWrapper } from "@/widgets/newGatheringList";
+import { NewGatheringListWrapper } from "@/widgets/newGatheringListWrapper";
 
 export default function Page() {
   return (

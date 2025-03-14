@@ -1,5 +1,5 @@
 import GatheringBookMark from "@/components/gathering/read/GatheringBookmark";
-import { Gathering } from "@/types/GatheringDto";
+import { Gathering } from "@/entities/gathering/model/GatheringDto";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -39,7 +39,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] outline-gray3 duration-300 hover:bg-lightGreen hover:outline-main`}
+      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} outline-gray3 hover:bg-lightGreen hover:outline-main h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] duration-300`}
       onClick={(e) => {
         if (!isAccessGathering) {
           e.preventDefault();
@@ -64,10 +64,10 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
           />
         </div>
         {/* 제목, 유저 닉네임 */}
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap pb-1 pt-6 text-lg font-bold hover:text-main">
+        <p className="hover:text-main overflow-hidden pt-6 pb-1 text-lg font-bold text-ellipsis whitespace-nowrap">
           {data.title}
         </p>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-gray1">
+        <p className="text-gray1 overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
           {data.nickname}
         </p>
       </div>
@@ -106,7 +106,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                   height={16}
                 />
               </div>
-              <p className="overflow-hidden truncate whitespace-nowrap">
+              <p className="truncate overflow-hidden whitespace-nowrap">
                 {data.zoneCategoryParentName === "세종"
                   ? "세종특별자치시"
                   : `${data.zoneCategoryParentName}, ${data.zoneCategoryChildName}`}

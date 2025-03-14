@@ -1,30 +1,30 @@
-import sanitizeOption from "@/shared/config/sanitizeOption";
 import { FEELING_STATUS } from "@/entities/diary/config/feelingStatus";
-import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import sanitizeHtml from "sanitize-html";
 import { motion } from "motion/react";
 import { useDiaryViewer } from "@/hooks/diary/detail/useDiaryViewer";
-import DeleteModal from "@/shared/ui/modal/DeleteModal";
 import { DeleteIcon, EditIcon } from "@/shared/ui/icon";
+import { Diary } from "@/entities/diary";
+import { DeleteModal } from "@/shared/ui/modal";
+import { SANITIZE_OPTION } from "@/shared/config";
 
 interface DiaryViewerProps {
-  data: GetDiaryResponseDto;
+  diary: Diary;
 }
 
-const DiaryViewer = ({ data }: DiaryViewerProps) => {
+const DiaryViewer = ({ diary }: DiaryViewerProps) => {
   const { modalVisible, loading, openModal, closeModal, handleDeleteClick } =
-    useDiaryViewer(data.diaryContentResponse.diaryId);
+    useDiaryViewer(diary.diaryId);
 
   return (
     <div className="flex w-full flex-col items-start">
       {modalVisible && (
         <DeleteModal
           loading={loading}
-          handleDeleteClick={handleDeleteClick}
-          handleCancelClick={closeModal}
+          onDeleteClick={handleDeleteClick}
+          onCancelClick={closeModal}
         />
       )}
       <motion.div
@@ -33,7 +33,7 @@ const DiaryViewer = ({ data }: DiaryViewerProps) => {
         animate={{ opacity: 1 }}
       >
         <Image
-          src={`/icons/mood-icon${FEELING_STATUS[data.diaryContentResponse.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
+          src={`/icons/mood-icon${FEELING_STATUS[diary.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
           style={{ objectFit: "contain" }}
@@ -44,13 +44,12 @@ const DiaryViewer = ({ data }: DiaryViewerProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        {data.diaryContentResponse.title}
+        {diary.title}
       </motion.h1>
-      <div className="mt-6 flex w-full flex-row flex-wrap items-center justify-between gap-x-12 gap-y-4 text-lg text-gray1">
+      <div className="text-gray1 mt-6 flex w-full flex-row flex-wrap items-center justify-between gap-x-12 gap-y-4 text-lg">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {new Date(
-            new Date(data.diaryContentResponse.startDatetime).getTime() +
-              (1000 * 60 * 60 * 24 - 1),
+            new Date(diary.startDatetime).getTime() + (1000 * 60 * 60 * 24 - 1),
           ).toLocaleDateString("ko-KR")}
         </motion.p>
         <motion.div
@@ -59,34 +58,28 @@ const DiaryViewer = ({ data }: DiaryViewerProps) => {
           animate={{ opacity: 1 }}
         >
           <TiLocation className="text-main" size={"1.3rem"} />
-          <p>
-            {
-              data.diaryContentResponse.diaryDayContentResponses
-                .diaryDayContentDetail[0].place
-            }
-          </p>
+          <p>{diary.diaryDayContentResponses.diaryDayContentDetail[0].place}</p>
         </motion.div>
       </div>
       <div
         className="diaryViewerContent mt-16"
         dangerouslySetInnerHTML={{
           __html: sanitizeHtml(
-            data.diaryContentResponse.diaryDayContentResponses
-              .diaryDayContentDetail[0].content,
-            sanitizeOption,
+            diary.diaryDayContentResponses.diaryDayContentDetail[0].content,
+            SANITIZE_OPTION,
           ),
         }}
       />
-      <div className="mb-32 mt-6 flex w-full flex-row items-center justify-end gap-3 text-sm">
+      <div className="mt-6 mb-32 flex w-full flex-row items-center justify-end gap-3 text-sm">
         <Link
-          className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
-          href={`/diary/edit/${data.diaryContentResponse.diaryId}`}
+          className="stroke-gray2 text-gray1 hover:stroke-main hover:text-main flex flex-row items-center gap-1 text-sm"
+          href={`/diary/edit/${diary.diaryId}`}
         >
           <EditIcon />
           수정
         </Link>
         <button
-          className="flex flex-row items-center gap-1 fill-gray2 stroke-gray2 text-sm text-gray1 hover:fill-main hover:stroke-main hover:text-main"
+          className="fill-gray2 stroke-gray2 text-gray1 hover:fill-main hover:stroke-main hover:text-main flex flex-row items-center gap-1 text-sm"
           onClick={() => openModal()}
         >
           <DeleteIcon className="fill-inherit" />

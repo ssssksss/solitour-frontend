@@ -1,36 +1,13 @@
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryUpdateEditor from "@/components/diary/edit/DiaryUpdateEditor";
+import { getDiary } from "@/entities/diary";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 
-import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
-import { cookies } from "next/headers";
-
-async function getDiary(id: number) {
-  const cookie = (await cookies()).get("access_token");
-  const response = await fetch(`${process.env.BACKEND_URL}/api/diary/${id}`, {
-    method: "GET",
-    headers: {
-      Cookie: `${cookie?.name}=${cookie?.value}`,
-    },
-    next: { revalidate: 60, tags: [`getDiary/${id}`] },
-  });
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<GetDiaryResponseDto>;
-}
-
-interface Props {
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<{ id: string }>;
-}
-
-export async function generateMetadata(props: Props) {
-  const params = await props.params;
-
-  const { id } = params;
-
-  const diaryId = Number(id);
+}) {
+  const diaryId = Number((await params).id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
     throw new Error("Not Found");
   }
@@ -41,16 +18,17 @@ export async function generateMetadata(props: Props) {
   };
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { id } = params;
-  const diaryId = Number(id);
-
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const diaryId = Number((await params).id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
     throw new Error("Not Found");
   }
 
-  const data = await getDiary(diaryId);
+  const diary = (await getDiary(diaryId)).diaryContentResponse;
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -60,7 +38,7 @@ export default async function Page(props: Props) {
           { label: "일기 수정하기", href: "" },
         ]}
       />
-      <DiaryUpdateEditor diaryData={data} />
+      <DiaryUpdateEditor diary={diary} />
     </div>
   );
 }

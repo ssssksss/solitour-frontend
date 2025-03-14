@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useModalState from "../../shared/lib/hooks/useModalState";
 import useGatheringStore from "@/stores/gatheringStore";
-import { GatheringDetailResponseDto } from "@/types/GatheringDto";
+import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 
 export const useGatheringViewer = (data: GatheringDetailResponseDto) => {
   const [loading, setLoading] = useState<boolean>(false);

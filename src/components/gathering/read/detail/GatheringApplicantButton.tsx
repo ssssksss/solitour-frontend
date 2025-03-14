@@ -1,6 +1,6 @@
 import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import useToastifyStore from "@/stores/toastifyStore";
-import { gatheringApplicantsResponsesDto } from "@/types/GatheringDto";
+import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/GatheringDto";
 import { useState } from "react";
 interface IGatheringApplicantButton {
   applicant: gatheringApplicantsResponsesDto;
@@ -79,7 +79,7 @@ const GatheringApplicantButton = ({
         ))}
       </article>
       <article
-        className={`flex h-full items-center justify-center gap-x-[.5rem] px-[.5rem] duration-1000 min-[577px]:hidden ${isStatusOpen ? "absolute right-0 bg-gray3/70" : "bg-transparent transition-transform"}`}
+        className={`flex h-full items-center justify-center gap-x-[.5rem] px-[.5rem] duration-1000 min-[577px]:hidden ${isStatusOpen ? "bg-gray3/70 absolute right-0" : "bg-transparent transition-transform"}`}
       >
         {[
           {
@@ -136,8 +136,8 @@ const GatheringApplicantButton = ({
                 className={`relative flex h-full items-center justify-center rounded-[2rem] text-xl ${i.style} focus:border-0`}
               >
                 <div className="relative h-6 w-6">
-                  <span className="absolute left-0 top-1/2 block h-[0.1875rem] w-full -translate-y-1/2 rotate-45 transform bg-current"></span>
-                  <span className="absolute left-0 top-1/2 block h-[0.1875rem] w-full -translate-y-1/2 -rotate-45 transform bg-current"></span>
+                  <span className="absolute top-1/2 left-0 block h-[0.1875rem] w-full -translate-y-1/2 rotate-45 transform bg-current"></span>
+                  <span className="absolute top-1/2 left-0 block h-[0.1875rem] w-full -translate-y-1/2 -rotate-45 transform bg-current"></span>
                 </div>
               </div>
             ) : (

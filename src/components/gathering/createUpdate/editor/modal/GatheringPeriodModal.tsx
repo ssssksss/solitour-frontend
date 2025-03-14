@@ -1,14 +1,21 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { useDebounce } from "@/shared/lib/hooks";
 import "@/styles/reactDataRange.css";
-import { IModalComponent } from "@/types/ModalState";
 import { add, addDays, format, isAfter, isSameDay } from "date-fns";
 import ko from "date-fns/locale/ko";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 import { useFormContext } from "react-hook-form";
 
-const GatheringPeriodModal = (props: IModalComponent) => {
+interface GatheringPeriodModalProps {
+  closeModal: () => void;
+  closeButtonComponent?: ReactNode;
+}
+
+const GatheringPeriodModal = ({
+  closeModal,
+  closeButtonComponent,
+}: GatheringPeriodModalProps) => {
   const formContext = useFormContext();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -62,16 +69,12 @@ const GatheringPeriodModal = (props: IModalComponent) => {
     formContext.watch();
     formContext.trigger("scheduleStartDate");
     formContext.trigger("scheduleEndDate");
-    props.closeModal!();
+    closeModal();
   };
 
   return (
-    <ModalTemplate
-      className={
-        "max-h-[50rem] w-[calc(100vw-1rem)] max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]"
-      }
-    >
-      {props.closeButtonComponent}
+    <ModalTemplate className="max-h-[50rem] w-[calc(100vw-1rem)] max-[799px]:max-w-[25rem] min-[800px]:max-h-[36rem] min-[800px]:w-[49rem]">
+      {closeButtonComponent}
       <h2 className={"mt-[2rem] h-[2rem] text-2xl font-bold text-black"}>
         날짜 선택
       </h2>
@@ -123,14 +126,14 @@ const GatheringPeriodModal = (props: IModalComponent) => {
           />
           <div
             className={
-              "absolute left-[50%] top-6 translate-x-[-50%] font-semibold min-[800px]:left-[25%]"
+              "absolute top-6 left-[50%] translate-x-[-50%] font-semibold min-[800px]:left-[25%]"
             }
           >
             {year}.{month}
           </div>
           <div
             className={
-              "absolute left-[50%] top-[calc(50%+46px)] translate-x-[-50%] font-semibold min-[800px]:left-[75%] min-[800px]:top-6"
+              "absolute top-[calc(50%+46px)] left-[50%] translate-x-[-50%] font-semibold min-[800px]:top-6 min-[800px]:left-[75%]"
             }
           >
             {year + Math.floor((month + 1) / 12)}.{(month % 12) + 1}
@@ -139,7 +142,7 @@ const GatheringPeriodModal = (props: IModalComponent) => {
         <div className={"flex w-full justify-center gap-[1rem]"}>
           <button
             className={
-              "h-[3rem] rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
+              "bg-main disabled:bg-gray1 h-[3rem] rounded-[4rem] px-[1rem] py-[.5rem] text-white"
             }
             onClick={() => submitHandler()}
             disabled={

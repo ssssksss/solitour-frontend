@@ -1,8 +1,7 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import "@/styles/reactDataRange.css";
-import { IModalComponent } from "@/types/ModalState";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 type PlaceElement = {
@@ -55,7 +54,15 @@ type PlaceElement1 = {
   y: string;
 };
 
-const GatheringPlaceModal = (props: IModalComponent) => {
+interface GatheringPlaceModalProps {
+  closeModal: () => void;
+  closeButtonComponent?: ReactNode;
+}
+
+const GatheringPlaceModal = ({
+  closeModal,
+  closeButtonComponent,
+}: GatheringPlaceModalProps) => {
   const [menu, setMenu] = useState("search");
   const [keyword, setKeyword] = useState("");
   const [placeCustomName, setPlaceCustomName] = useState("");
@@ -117,7 +124,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
       "searchId",
       "roadAddressName",
     ]);
-    props.closeModal!();
+    closeModal();
   };
 
   const pickAddress = (element: PlaceElement1) => {
@@ -137,7 +144,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
       "searchId",
       "roadAddressName",
     ]);
-    props.closeModal!();
+    closeModal();
   };
 
   useEffect(() => {
@@ -155,10 +162,10 @@ const GatheringPlaceModal = (props: IModalComponent) => {
     <ModalTemplate
       className={`w-[calc(100vw-1rem)] max-w-[40rem] ${menu == "address" ? "max-h-[874px]" : "max-h-[800px]"}`}
     >
-      {props.closeButtonComponent}
+      {closeButtonComponent}
       <h2
         className={
-          "mb-[1.875rem] mt-[2rem] h-[2rem] text-2xl font-bold text-black"
+          "mt-[2rem] mb-[1.875rem] h-[2rem] text-2xl font-bold text-black"
         }
       >
         장소 선택
@@ -166,7 +173,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
       <section className={"flex w-full flex-col items-center gap-[1.875rem]"}>
         <div className="flex w-full">
           <button
-            className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline outline-[1px] outline-offset-[-1px] outline-black"}`}
+            className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline outline-offset-[-1px] outline-black"}`}
             onClick={() => {
               setMenu("search");
               setResults([]);
@@ -176,7 +183,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
             검색으로 찾기
           </button>
           <button
-            className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "address" ? "bg-main text-white" : "text-black outline outline-[1px] outline-offset-[-1px] outline-black"}`}
+            className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "address" ? "bg-main text-white" : "text-black outline outline-offset-[-1px] outline-black"}`}
             onClick={() => {
               setMenu("address");
               setResults([]);
@@ -191,10 +198,10 @@ const GatheringPlaceModal = (props: IModalComponent) => {
         >
           {menu == "search" && (
             <>
-              <article className="flex h-full w-full flex-col rounded-[1.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
+              <article className="flex h-full w-full flex-col rounded-[1.5rem] outline outline-offset-[-1px] outline-[#E3E3E3]">
                 <label
                   className={
-                    "flex h-[3.25rem] gap-[0.375rem] rounded-[1.5rem_1.5rem_0_1.5rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                    "flex h-[3.25rem] gap-[0.375rem] rounded-[1.5rem_1.5rem_0_1.5rem] px-[1rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
                   }
                 >
                   <Image
@@ -228,7 +235,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                       {results.map((result: PlaceElement, index) => (
                         <li
                           key={index}
-                          className="flex h-[3rem] w-full cursor-pointer flex-col px-[.5rem] py-[.25rem] outline-main hover:rounded-[1rem] hover:outline hover:outline-[2px] hover:outline-offset-[-1px]"
+                          className="outline-main flex h-[3rem] w-full cursor-pointer flex-col px-[.5rem] py-[.25rem] hover:rounded-[1rem] hover:outline hover:outline-offset-[-1px]"
                           onClick={() => pickLocation(result)}
                         >
                           <div className={"flex gap-1"}>
@@ -240,7 +247,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                             />
                             <span> {result.place_name} </span>
                           </div>
-                          <div className={"text-sm text-gray2"}>
+                          <div className={"text-gray2 text-sm"}>
                             {result.address_name}
                           </div>
                         </li>
@@ -258,10 +265,10 @@ const GatheringPlaceModal = (props: IModalComponent) => {
           )}
           {menu == "address" && (
             <>
-              <article className="flex h-full w-full flex-col rounded-[1.5rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]">
+              <article className="flex h-full w-full flex-col rounded-[1.5rem] outline outline-offset-[-1px] outline-[#E3E3E3]">
                 <label
                   className={
-                    "flex h-[3.25rem] gap-[0.375rem] rounded-[1.5rem_1.5rem_0_1.5rem] px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                    "flex h-[3.25rem] gap-[0.375rem] rounded-[1.5rem_1.5rem_0_1.5rem] px-[1rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
                   }
                 >
                   <Image
@@ -292,7 +299,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                     </p>
                   ) : (
                     <>
-                      <li className="grid h-[3rem] w-full grid-cols-[auto_8rem] px-[.5rem] py-[.25rem] outline-main">
+                      <li className="outline-main grid h-[3rem] w-full grid-cols-[auto_8rem] px-[.5rem] py-[.25rem]">
                         <div className={"flex items-center justify-center"}>
                           주소명
                         </div>
@@ -313,7 +320,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                         .map((result: PlaceElement1, index) => (
                           <li
                             key={index}
-                            className="grid h-[3rem] w-full cursor-pointer grid-cols-[auto_8rem] px-[.5rem] py-[.25rem] outline-main hover:rounded-[1rem] hover:outline hover:outline-[2px] hover:outline-offset-[-1px]"
+                            className="outline-main grid h-[3rem] w-full cursor-pointer grid-cols-[auto_8rem] px-[.5rem] py-[.25rem] hover:rounded-[1rem] hover:outline hover:outline-offset-[-1px]"
                             onClick={() => pickAddress(result)}
                           >
                             <div className={"flex items-center gap-1"}>
@@ -327,7 +334,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                             </div>
                             <div
                               className={
-                                "grid grid-cols-[3rem_5rem] text-sm text-gray2"
+                                "text-gray2 grid grid-cols-[3rem_5rem] text-sm"
                               }
                             >
                               <div
@@ -375,12 +382,12 @@ const GatheringPlaceModal = (props: IModalComponent) => {
               placeholder="장소명을 입력하세요"
               onChange={(e) => setPlaceCustomName(e.target.value)}
               className={
-                "h-[3.25rem] w-full rounded-[1rem] bg-transparent px-[1rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                "h-[3.25rem] w-full rounded-[1rem] bg-transparent px-[1rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
               }
             />
             <button
               className={
-                "h-[3rem] w-full rounded-[4rem] bg-main px-[1rem] py-[.5rem] text-white disabled:bg-gray1"
+                "bg-main disabled:bg-gray1 h-[3rem] w-full rounded-[4rem] px-[1rem] py-[.5rem] text-white"
               }
               onClick={() => applyAddressHandler()}
               disabled={

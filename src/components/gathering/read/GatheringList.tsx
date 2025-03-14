@@ -1,5 +1,5 @@
 import GatheringSort from "@/components/gathering/read/GatheringSort";
-import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
+import { GatheringCategoryListType } from "@/entities/gathering/model/GatheringCategoryDto";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import GatheringSearch from "./GatheringSearch";
@@ -18,7 +18,7 @@ const GatheringList = (props: GatheringListProps) => {
       <article className="flex flex-col gap-y-4 min-[960px]:flex-row-reverse min-[960px]:gap-x-6">
         <div className="flex w-full flex-row justify-between gap-x-2 gap-y-5 max-[744px]:flex-col min-[960px]:gap-x-6">
           <GatheringSearch />
-          <div className="flex flex-row items-center justify-between gap-4 text-sm font-medium text-gray1 max-[744px]:w-full">
+          <div className="text-gray1 flex flex-row items-center justify-between gap-4 text-sm font-medium max-[744px]:w-full">
             <div className={"z-10 flex w-[7.5rem] justify-between gap-4"}>
               <GatheringFilterModal />
               <GatheringSort />

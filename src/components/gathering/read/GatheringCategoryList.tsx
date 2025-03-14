@@ -1,6 +1,6 @@
 "use client";
 
-import { GatheringCategoryListType } from "@/types/GatheringCategoryDto";
+import { GatheringCategoryListType } from "@/entities/gathering/model/GatheringCategoryDto";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -48,7 +48,7 @@ const GatheringCategoryList = ({
       <div className="flex flex-wrap items-center gap-1">
         <button
           onClick={() => changeGatheringCategoryHandler(0)}
-          className={`rounded-full px-3 py-[0.375rem] text-sm font-medium hover:scale-105 focus:outline-hidden ${activeGatheringCategoryId == 0 ? "bg-main text-white" : "border-[0.0625rem] border-[#E9EBED] text-gray1"}`}
+          className={`rounded-full px-3 py-[0.375rem] text-sm font-medium hover:scale-105 focus:outline-hidden ${activeGatheringCategoryId == 0 ? "bg-main text-white" : "text-gray1 border-[0.0625rem] border-[#E9EBED]"}`}
         >
           전체
         </button>
@@ -56,7 +56,7 @@ const GatheringCategoryList = ({
           <button
             key={i.id}
             onClick={() => changeGatheringCategoryHandler(i.id)}
-            className={`rounded-full px-3 py-[0.375rem] text-sm font-medium hover:scale-105 focus:outline-hidden ${activeGatheringCategoryId == i.id ? "bg-main text-white" : "border-[0.0625rem] border-[#E9EBED] text-gray1"}`}
+            className={`rounded-full px-3 py-[0.375rem] text-sm font-medium hover:scale-105 focus:outline-hidden ${activeGatheringCategoryId == i.id ? "bg-main text-white" : "text-gray1 border-[0.0625rem] border-[#E9EBED]"}`}
           >
             {i.name}
           </button>
