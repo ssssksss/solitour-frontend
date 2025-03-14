@@ -1,14 +1,15 @@
 import { IModalComponent } from "@/types/ModalState";
-import { getCroppedImg } from "@/utils/getCroppedImg";
 import { useState } from "react";
 import Cropper from "react-easy-crop";
 import ModalTemplate from "../modal/ModalTemplate";
+import { getCroppedImage } from "@/shared/lib/utils";
 
 interface ICropperComponent extends IModalComponent {
   imageBase64Data: string;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
 }
+
 const CropperComponent = ({
   imageBase64Data,
   closeCropModal,
@@ -30,7 +31,7 @@ const CropperComponent = ({
   const showCroppedImage = async () => {
     if (!imageBase64Data || !croppedAreaPixels) return;
 
-    const croppedImage = await getCroppedImg(
+    const croppedImage = await getCroppedImage(
       imageBase64Data,
       croppedAreaPixels,
       rotation,
@@ -40,7 +41,7 @@ const CropperComponent = ({
   };
 
   return (
-    <ModalTemplate className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between ">
+    <ModalTemplate className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between">
       {props.closeButtonComponent}
       <div className={"relative h-[calc(100%-5rem)] w-full"}>
         <Cropper

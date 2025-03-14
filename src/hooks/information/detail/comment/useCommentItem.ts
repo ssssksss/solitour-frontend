@@ -4,7 +4,7 @@ import { CommentContext } from "@/components/informations/detail/comment/Comment
 import { InformationCommentUpdateFormSchema } from "@/features/informationComment/model/InformationCommentUpdateFormSchema";
 import useAuthStore from "@/stores/authStore";
 import { InformationCommentResponseDto } from "@/types/InformationCommentDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { FormEvent, useContext, useState } from "react";
 
 export const useCommentItem = (data: InformationCommentResponseDto) => {

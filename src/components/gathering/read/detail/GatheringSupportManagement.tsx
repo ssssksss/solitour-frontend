@@ -9,7 +9,7 @@ import useGatheringStore from "@/stores/gatheringStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { useParams } from "next/navigation";
 import useModalState from "@/shared/lib/hooks/useModalState";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
 
 interface GatheringSupportManagementProps {

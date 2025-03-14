@@ -1,7 +1,7 @@
 "use client";
 
 import { useInformationUpdateEditor } from "@/hooks/information/edit/useInformationUpdateEditor";
-import { InformationDetailDto } from "@/types/InformationDto";
+import { InformationDetailDto } from "@/entities/information/model/informationDto";
 import { FormProvider } from "react-hook-form";
 import InformationEditor from "../common/InformationEditor";
 

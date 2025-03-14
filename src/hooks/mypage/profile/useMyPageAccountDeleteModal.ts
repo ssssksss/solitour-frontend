@@ -3,7 +3,7 @@
 import useAuthStore from "@/stores/authStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { UserResponseDto } from "@/types/UserDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

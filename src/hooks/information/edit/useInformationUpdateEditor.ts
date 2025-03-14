@@ -11,10 +11,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   InformationDetailDto,
   InformationRegisterResponseDto,
-  UpdateInformationRequestDto,
-} from "@/types/InformationDto";
+  InformationUpdateRequestDto,
+} from "@/entities/information/model/informationDto";
 import sanitizeHtml from "sanitize-html";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 
@@ -221,7 +221,7 @@ export const useInformationUpdateEditor = (
       hashtags,
     } = methods.getValues();
 
-    const data: UpdateInformationRequestDto = {
+    const data: InformationUpdateRequestDto = {
       title: informationTitle,
       address: informationAddress,
       content: sanitizeHtml(informationContent, SANITIZE_OPTION),

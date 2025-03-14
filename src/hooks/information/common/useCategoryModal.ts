@@ -1,13 +1,13 @@
 "use client";
 
-import { CategoryResponseDto } from "@/types/CategoryDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { InformationCategory } from "@/entities/information/model/informationCategoryDto";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export const useCategoryModal = (closeModal: () => void) => {
   const [parentCategory, setParentCategory] = useState(0);
-  const [categories, setCategories] = useState<CategoryResponseDto[]>();
+  const [categories, setCategories] = useState<InformationCategory[]>();
   const formContext = useFormContext();
 
   const setParentCategoryId = (parentCategoryId: number) => {
@@ -45,7 +45,7 @@ export const useCategoryModal = (closeModal: () => void) => {
         throw new Error(response.statusText);
       }
 
-      setCategories(await (response.json() as Promise<CategoryResponseDto[]>));
+      setCategories(await (response.json() as Promise<InformationCategory[]>));
     })();
   }, []);
 

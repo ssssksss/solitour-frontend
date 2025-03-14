@@ -6,11 +6,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DiaryUpdateFormSchema } from "@/features/diary/model/DiaryUpdateFormSchema";
 import parse from "node-html-parser";
-import { GetDiaryResponseDto, UpdateDiaryRequestDto } from "@/types/DiaryDto";
+import {
+  GetDiaryResponseDto,
+  UpdateDiaryRequestDto,
+} from "@/entities/diary/model/diary";
 import sanitizeHtml from "sanitize-html";
 import sanitizeOption from "@/shared/config/sanitizeOption";
 import { FEELING_STATUS } from "@/entities/diary/config/feelingStatus";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
 import { useModalBackHandler } from "@/shared/lib/hooks";
 

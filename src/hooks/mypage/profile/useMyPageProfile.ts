@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { UserResponseDto } from "@/types/UserDto";
 import useModalState from "@/shared/lib/hooks/useModalState";
 

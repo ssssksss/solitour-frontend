@@ -1,8 +1,8 @@
-import { CategoryResponseDto } from "@/types/CategoryDto";
+import { InformationCategory } from "@/entities/information/model/informationCategoryDto";
 import Link from "next/link";
 
 interface Props {
-  categories: CategoryResponseDto[];
+  categories: InformationCategory[];
   parentCategoryId: number;
 }
 

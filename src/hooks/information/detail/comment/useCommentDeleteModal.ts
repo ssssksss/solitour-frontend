@@ -1,7 +1,7 @@
 "use client";
 
 import { CommentContext } from "@/components/informations/detail/comment/CommentList";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useContext, useState } from "react";
 
 export const useCommentDeleteModal = (commentId: number) => {

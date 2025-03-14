@@ -2,7 +2,7 @@
 
 import useAuthStore from "@/stores/authStore";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import Image from "next/image";
 import { useState } from "react";
 

@@ -1,20 +1,7 @@
-import { CategoryResponseDto } from "@/types/CategoryDto";
 import ParentCategoryList from "./ParentCategoryList";
 import ChildCategoryList from "./ChildCategoryList";
 import InformationSearch from "./InformationSearch";
-
-async function getCategoryList() {
-  const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {
-    method: "GET",
-    next: { revalidate: 60, tags: ["getCategoryList"] },
-  });
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<CategoryResponseDto[]>;
-}
+import { getInformationCategoryList } from "@/entities/information";
 
 interface CategoryListProps {
   parentCategoryId: number;
@@ -25,7 +12,7 @@ const CategoryList = async ({
   parentCategoryId,
   childCategoryId,
 }: CategoryListProps) => {
-  const categories = await getCategoryList();
+  const categories = await getInformationCategoryList();
 
   return (
     <div className="mt-6 flex w-full flex-col gap-6">

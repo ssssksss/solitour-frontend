@@ -1,20 +1,17 @@
-// Request 요청 결과 Dto
-interface UserImage {
-  id: number;
-  address: string;
-  createdDate: string;
-}
-
 export interface UserResponseDto {
   id: number;
   userStatus: string;
-  userImage: UserImage;
+  userImage: {
+    id: number;
+    address: string;
+    createdDate: string;
+  };
   nickname: string;
-  age: number;
-  sex: string | null;
+  age: number | null;
+  sex: "male" | "female" | null;
   email: string;
-  provider: string;
   phoneNumber: string | null;
-  createdAt: string;
   isAdmin: boolean;
+  createdAt: Date;
+  provider: string;
 }

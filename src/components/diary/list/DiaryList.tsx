@@ -1,6 +1,6 @@
 import DiaryWriteButton from "./DiaryWriteButton";
 import Link from "next/link";
-import { GetDiaryListResponseDto } from "@/types/DiaryDto";
+import { GetDiaryListResponseDto } from "@/entities/diary/model/diary";
 import { cookies } from "next/headers";
 import DiaryPagination from "./DiaryPagination";
 import DiaryCard from "./DiaryCard";

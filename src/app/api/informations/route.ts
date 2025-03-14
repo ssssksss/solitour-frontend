@@ -1,11 +1,11 @@
-import { CreateInformationRequestDto } from "@/types/InformationDto";
+import { InformationCreateRequestDto } from "@/entities/information/model/informationDto";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 // 정보 글 작성
 export async function POST(request: NextRequest) {
   const cookie = request.cookies.get("access_token");
-  const body: CreateInformationRequestDto = await request.json();
+  const body: InformationCreateRequestDto = await request.json();
 
   // Back-end API 호출
   const response = await fetch(`${process.env.BACKEND_URL}/api/informations`, {

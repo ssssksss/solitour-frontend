@@ -1,7 +1,7 @@
 import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryUpdateEditor from "@/components/diary/edit/DiaryUpdateEditor";
 
-import { GetDiaryResponseDto } from "@/types/DiaryDto";
+import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
 import { cookies } from "next/headers";
 
 async function getDiary(id: number) {

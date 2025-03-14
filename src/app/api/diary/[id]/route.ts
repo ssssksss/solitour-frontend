@@ -1,11 +1,14 @@
-import { UpdateDiaryRequestDto } from "@/types/DiaryDto";
+import { UpdateDiaryRequestDto } from "@/entities/diary/model/diary";
 import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 /**
  * 일기 수정
  */
-export async function PUT(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
   const cookie = request.cookies.get("access_token");
   const body: UpdateDiaryRequestDto = await request.json();
@@ -31,7 +34,10 @@ export async function PUT(request: NextRequest, props: { params: Promise<{ id: s
 /**
  * 일기 삭제
  */
-export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
   const cookie = request.cookies.get("access_token");
   const response = await fetch(

@@ -1,4 +1,4 @@
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 

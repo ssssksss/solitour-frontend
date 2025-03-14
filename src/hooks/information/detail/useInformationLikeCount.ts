@@ -2,7 +2,7 @@
 
 import useAuthStore from "@/stores/authStore";
 import useInformationLikeStore from "@/stores/informationLikeStore";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useState } from "react";
 
 export const useInformationLikeCount = (

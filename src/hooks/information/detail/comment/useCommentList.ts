@@ -6,7 +6,7 @@ import {
   CreateInformationCommentRequestDto,
   InformationCommentListResponseDto,
 } from "@/types/InformationCommentDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";

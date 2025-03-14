@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  CreateInformationRequestDto,
+  InformationCreateRequestDto,
   InformationRegisterResponseDto,
-} from "@/types/InformationDto";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+} from "@/entities/information/model/informationDto";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useRef, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import useAuthStore from "@/stores/authStore";
@@ -167,7 +167,7 @@ export const useInformationCreateEditor = () => {
       hashtags,
     } = methods.getValues();
 
-    const data: CreateInformationRequestDto = {
+    const data: InformationCreateRequestDto = {
       informationTitle: informationTitle,
       informationAddress: informationAddress,
       informationContent: sanitizeHtml(informationContent, SANITIZE_OPTION),

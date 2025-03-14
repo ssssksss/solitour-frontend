@@ -1,9 +1,14 @@
 "use client";
 
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 import { NoticeType } from "@/types/NoticeDto";
-import { NOTICE_DETAIL_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import { format } from "date-fns";
-import Breadcrumbs from "../../../shared/ui/breadcrumb/Breadcrumbs";
+
+const NOTICE_DETAIL_BREADCRUMB_PATH = (id: number) => [
+  { label: "고객지원", href: "/support" },
+  { label: "공지사항", href: "/support?menu=notice" },
+  { label: `${id}`, href: "" },
+];
 
 interface ISupportNoticeDetail {
   data: NoticeType;

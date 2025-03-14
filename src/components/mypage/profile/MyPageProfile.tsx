@@ -1,15 +1,18 @@
 "use client";
 
-import { MYPAGE_PROFILE_BREADCRUMB_PATH } from "@/utils/constant/BreadCrumbDirectory";
 import Image from "next/image";
 import { UserResponseDto } from "@/types/UserDto";
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import { useMyPageProfile } from "@/hooks/mypage/profile/useMyPageProfile";
 import { Modal } from "@/components/common/modal/Modal";
 import MyPageAccountDeleteModal from "./MyPageAccountDeleteModal";
 import MyPageUserImage from "../MyPageUserImage";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 
 const NICKNAME_LENGTH = 30;
+const MYPAGE_PROFILE_BREADCRUMB_PATH = [
+  { label: "마이페이지", href: "/mypage?mainCategory=정보&category=owner" },
+  { label: "프로필 설정", href: "" },
+];
 
 interface MyPageProfileProps {
   userInfo: UserResponseDto;

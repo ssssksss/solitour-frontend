@@ -7,7 +7,7 @@ import useAuthStore from "@/stores/authStore";
 import useGatheringStore from "@/stores/gatheringStore";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 
 interface GatheringApplicantListProps {
   postUserId: number;

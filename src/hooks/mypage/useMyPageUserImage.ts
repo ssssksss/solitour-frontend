@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDragAndDrop } from "../../shared/lib/hooks/useDragAndDrop";
 import useAuthStore from "@/stores/authStore";
 import useToastifyStore from "@/stores/toastifyStore";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalState } from "@/shared/lib/hooks";
 
 export const useMyPageUserImage = (

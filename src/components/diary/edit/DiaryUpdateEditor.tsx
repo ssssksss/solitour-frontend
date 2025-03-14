@@ -2,7 +2,7 @@
 
 import DiaryEditor from "@/components/diary/common/DiaryEditor";
 import { useDiaryUpdateEditor } from "@/hooks/diary/edit/useDiaryUpdateEditor";
-import { GetDiaryResponseDto } from "@/types/DiaryDto";
+import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
 import { FormProvider } from "react-hook-form";
 
 interface DiaryUpdateEditorProps {

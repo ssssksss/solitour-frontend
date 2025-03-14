@@ -1,7 +1,7 @@
 /**
  * 정보 등록 요청 DTO
  */
-export interface CreateInformationRequestDto {
+export interface InformationCreateRequestDto {
   informationTitle: string;
   informationAddress: string;
   informationContent: string;
@@ -24,7 +24,7 @@ export interface CreateInformationRequestDto {
 /**
  * 정보 수정 요청 DTO
  */
-export interface UpdateInformationRequestDto {
+export interface InformationUpdateRequestDto {
   title: string;
   address: string;
   content: string;
@@ -58,7 +58,7 @@ export interface InformationRegisterResponseDto {
  * 정보 목록 조회 결과 DTO
  */
 export interface InformationListResponseDto {
-  content: Array<{
+  content: {
     informationId: number;
     title: string;
     zoneCategoryParentName: string;
@@ -69,7 +69,7 @@ export interface InformationListResponseDto {
     thumbNailImage: string;
     likeCount: number;
     isLike: boolean;
-  }>;
+  }[];
   page: {
     totalPages: number;
   };
@@ -86,7 +86,7 @@ export interface InformationDetailDto {
   content: string;
   tip: string;
   userPostingResponse: { id: number; nickname: string };
-  tagResponses: Array<Readonly<{ name: string }>>;
+  tagResponses: { name: string }[];
   placeResponse: {
     searchId: number;
     name: string;
@@ -110,24 +110,22 @@ export interface InformationDetailDto {
     };
     name: string;
   };
-  imageResponses: Array<Readonly<{ imageStatus: string; address: string }>>;
+  imageResponses: { imageStatus: string; address: string }[];
   likeCount: number;
   userImage: string;
   isLike: boolean;
-  recommendInformation: Array<
-    Readonly<{
-      informationId: number;
-      title: string;
-      zoneCategoryParentName: string;
-      zoneCategoryChildName: string;
-      categoryName: string;
-      viewCount: number;
-      isBookMark: boolean;
-      isLike: boolean;
-      thumbNailImage: string;
-      likeCount: number;
-    }>
-  >;
+  recommendInformation: {
+    informationId: number;
+    title: string;
+    zoneCategoryParentName: string;
+    zoneCategoryChildName: string;
+    categoryName: string;
+    viewCount: number;
+    isBookMark: boolean;
+    isLike: boolean;
+    thumbNailImage: string;
+    likeCount: number;
+  }[];
 }
 
 /**

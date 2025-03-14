@@ -1,6 +1,6 @@
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-export async function getNewAccessToken(
+async function getNewAccessToken(
   refreshToken: RequestCookie,
 ): Promise<string | null> {
   try {
@@ -8,10 +8,7 @@ export async function getNewAccessToken(
       `${process.env.BACKEND_URL}/api/auth/oauth2/token/refresh`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie: `${refreshToken.name}=${refreshToken.value}`,
-        },
+        headers: { Cookie: `${refreshToken.name}=${refreshToken.value}` },
       },
     );
 

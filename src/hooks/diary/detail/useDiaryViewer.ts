@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
 import { useModalBackHandler } from "@/shared/lib/hooks";
 

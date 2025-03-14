@@ -1,6 +1,6 @@
 import InformationItem from "@/entities/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
-import { InformationDetailDto } from "@/types/InformationDto";
+import { InformationDetailDto } from "@/entities/information/model/informationDto";
 
 interface RecommendationListProps {
   data: InformationDetailDto;

@@ -1,5 +1,5 @@
 import { LOCATION_ID } from "@/shared/config/location";
-import { InformationListResponseDto } from "@/types/InformationDto";
+import { InformationListResponseDto } from "@/entities/information/model/informationDto";
 import { cookies } from "next/headers";
 import InformationPagination from "./InformationPagination";
 import InformationItem from "@/entities/information/ui/InformationItem";

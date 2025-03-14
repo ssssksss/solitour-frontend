@@ -1,7 +1,7 @@
 import MyPageHeader from "@/components/mypage/MyPageHeader";
 import MyPageTabMenu from "@/components/mypage/MyPageTabMenu";
 import { UserResponseDto } from "@/types/UserDto";
-import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
+import { fetchWithTokenRefreshSSR } from "@/shared/api/getNewAccessTokenAndRerequest";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 

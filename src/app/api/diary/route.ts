@@ -1,4 +1,4 @@
-import { CreateDiaryRequestDto } from "@/types/DiaryDto";
+import { CreateDiaryRequestDto } from "@/entities/diary/model/diary";
 import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 

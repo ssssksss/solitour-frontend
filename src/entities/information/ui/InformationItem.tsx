@@ -19,7 +19,7 @@ interface InformationItemProps {
   viewCount: number;
 }
 
-const InformationItem = ({
+export const InformationItem = ({
   informationId,
   categoryName,
   initialIsBookMarked,
@@ -117,5 +117,3 @@ const InformationItem = ({
     </div>
   );
 };
-
-export default InformationItem;

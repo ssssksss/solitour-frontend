@@ -4,7 +4,7 @@ import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import useToastifyStore from "@/stores/toastifyStore";
 import { IModalComponent } from "@/types/ModalState";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";

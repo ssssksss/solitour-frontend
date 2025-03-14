@@ -1,7 +1,7 @@
 "use client";
 
 import useAuthStore from "@/stores/authStore";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill-new";

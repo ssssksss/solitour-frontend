@@ -1,12 +1,12 @@
 "use client";
 
-import { CategoryResponseDto } from "@/types/CategoryDto";
+import { InformationCategory } from "@/entities/information/model/informationCategoryDto";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
 interface ChildCategoryListProps {
-  categories: CategoryResponseDto[];
+  categories: InformationCategory[];
   parentCategoryId: number;
   childCategoryId: number;
 }

@@ -2,7 +2,7 @@
 
 import useAuthStore from "@/stores/authStore";
 import useEditorStore from "@/stores/editorStore";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useRef } from "react";
 
 export const useImageUploadItem = (imageIndex: number) => {

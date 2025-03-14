@@ -2,10 +2,10 @@
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
+import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import useToastifyStore from "@/stores/toastifyStore";
 import { GatheringDetailResponseDto } from "@/types/GatheringDto";
-import { convertRegionToTwoLetters } from "@/utils/constant/regionHashMap";
-import { fetchWithAuth } from "@/utils/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
@@ -87,11 +87,12 @@ const GatheringUpdateEditor = ({
           },
           allowedSex: allowedSex.toUpperCase(),
           gatheringCategoryId: gatheringCategoryId,
-          zoneCategoryNameParent: convertRegionToTwoLetters(
+          zoneCategoryNameParent: convertLocationToTwoLetters(
             roadAddressName.split(" ")[0],
           ),
           zoneCategoryNameChild:
-            convertRegionToTwoLetters(roadAddressName.split(" ")[0]) === "세종"
+            convertLocationToTwoLetters(roadAddressName.split(" ")[0]) ===
+            "세종"
               ? "세종"
               : roadAddressName.split(" ")[1],
           tagRegisterRequests:

@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import DiaryViewer from "@/components/diary/detail/DiaryViewer";
-import { GetDiaryResponseDto } from "@/types/DiaryDto";
+import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
 import { cookies } from "next/headers";
 
 async function getDiary(id: number) {

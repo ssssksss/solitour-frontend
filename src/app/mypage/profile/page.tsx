@@ -1,6 +1,6 @@
 import MyPageProfile from "@/components/mypage/profile/MyPageProfile";
 import { UserResponseDto } from "@/types/UserDto";
-import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
+import { fetchWithTokenRefreshSSR } from "@/shared/api/getNewAccessTokenAndRerequest";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 

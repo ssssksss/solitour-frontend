@@ -1,4 +1,4 @@
-import { UpdateInformationRequestDto } from "@/types/InformationDto";
+import { InformationUpdateRequestDto } from "@/entities/information/model/informationDto";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
@@ -13,7 +13,10 @@ import { NextRequest } from "next/server";
  *
  * @param request
  */
-export async function GET(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function GET(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/informations/${params.id}`,
@@ -33,10 +36,13 @@ export async function GET(request: NextRequest, props: { params: Promise<{ id: s
  * @param params
  * @returns
  */
-export async function PUT(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
   const cookie = request.cookies.get("access_token");
-  const body: UpdateInformationRequestDto = await request.json();
+  const body: InformationUpdateRequestDto = await request.json();
 
   // Back-end API 호출
   const response = await fetch(
@@ -61,7 +67,10 @@ export async function PUT(request: NextRequest, props: { params: Promise<{ id: s
 /**
  * 정보 글 삭제
  */
-export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> },
+) {
   const params = await props.params;
   const cookie = request.cookies.get("access_token");
   const response = await fetch(

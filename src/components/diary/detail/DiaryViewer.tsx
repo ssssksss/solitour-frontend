@@ -1,6 +1,6 @@
 import sanitizeOption from "@/shared/config/sanitizeOption";
 import { FEELING_STATUS } from "@/entities/diary/config/feelingStatus";
-import { GetDiaryResponseDto } from "@/types/DiaryDto";
+import { GetDiaryResponseDto } from "@/entities/diary/model/diary";
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";

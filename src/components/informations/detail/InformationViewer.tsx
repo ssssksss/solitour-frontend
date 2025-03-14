@@ -2,7 +2,7 @@ import ItemTag from "../common/ItemTag";
 import Image from "next/image";
 import { TiLocation } from "react-icons/ti";
 import { LuEye } from "react-icons/lu";
-import { InformationDetailDto } from "@/types/InformationDto";
+import { InformationDetailDto } from "@/entities/information/model/informationDto";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import ButtonList from "./ButtonList";
 import ImageList from "./ImageList";

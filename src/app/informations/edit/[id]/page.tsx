@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import InformationUpdateEditor from "@/components/informations/edit/InformationUpdateEditor";
-import { InformationDetailDto } from "@/types/InformationDto";
+import { InformationDetailDto } from "@/entities/information/model/informationDto";
 import { cookies } from "next/headers";
 
 async function getInformation(id: number) {

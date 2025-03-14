@@ -1,6 +1,6 @@
 import LottieFile from "@/../public/lottie/solitour_gathering_animation.json";
 import { TopGatheringResponseDto } from "@/types/GatheringDto";
-import { TopInformationResponseDto } from "@/types/InformationDto";
+import { TopInformationResponseDto } from "@/entities/information/model/informationDto";
 import Image from "next/image";
 import Link from "next/link";
 import Lottie from "lottie-react";
