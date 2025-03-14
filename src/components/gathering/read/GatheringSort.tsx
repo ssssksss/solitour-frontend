@@ -42,7 +42,7 @@ const GatheringSort = () => {
 
   if (loading) {
     return (
-      <div className="relative flex h-[2rem] w-[3rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
+      <div className="relative flex h-[2rem] w-[3rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
   }
 

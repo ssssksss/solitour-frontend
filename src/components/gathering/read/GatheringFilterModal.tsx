@@ -196,7 +196,7 @@ const GatheringFilterModal = () => {
 
   if (loading) {
     return (
-      <div className="relative flex h-[2rem] w-[3.5rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
+      <div className="relative flex h-[2rem] w-[3.5rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
   }
 
@@ -269,7 +269,7 @@ const GatheringFilterModal = () => {
                           _endAge: i[1].endAge,
                         })
                       }
-                      className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white outline-0" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex flex-shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
+                      className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white outline-0" : "outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex shrink-0 items-center rounded-[4rem] px-4 py-2 text-gray1 hover:bg-main hover:text-white`}
                     >
                       {i[0]}
                     </button>

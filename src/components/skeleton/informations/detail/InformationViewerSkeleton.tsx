@@ -6,7 +6,7 @@ const InformationViewerSkeleton = () => {
           <div className="h-10 w-96 bg-gray-100" />
           <div className="flex flex-row items-end justify-between py-4">
             <div className="flex flex-row items-center gap-2">
-              <div className="h-12 w-12 rounded-full bg-gray-100 shadow" />
+              <div className="h-12 w-12 rounded-full bg-gray-100 shadow-sm" />
               <div className="space-y-1">
                 <p className="h-4 w-8 bg-gray-100" />
                 <p className="h-4 w-20 bg-gray-100" />
@@ -40,7 +40,7 @@ const InformationViewerSkeleton = () => {
             <div className="h-10 w-96 bg-gray-100" />
             <div className="flex flex-row items-end justify-between py-4">
               <div className="flex flex-row items-center gap-2">
-                <div className="h-12 w-12 rounded-full bg-gray-100 shadow" />
+                <div className="h-12 w-12 rounded-full bg-gray-100 shadow-sm" />
                 <div className="space-y-1">
                   <p className="h-4 w-8 bg-gray-100" />
                   <p className="h-4 w-20 bg-gray-100" />

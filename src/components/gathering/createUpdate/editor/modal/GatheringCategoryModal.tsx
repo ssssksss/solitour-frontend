@@ -41,7 +41,7 @@ const GatheringCategoryModal = (props: IGatheringCategoryModalProps) => {
               onClick={() => {
                 setMainCategoryId(i.id);
               }}
-              className={`${mainCategoryId == i.id ? "bg-main text-white outline-none" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-4 py-2`}
+              className={`${mainCategoryId == i.id ? "bg-main text-white outline-hidden" : "text-gray1 outline outline-[1px] outline-offset-[-1px] outline-[#E9EBED]"} flex h-[2.25rem] items-center rounded-[4rem] px-4 py-2`}
             >
               {i.name}
             </button>

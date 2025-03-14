@@ -24,9 +24,9 @@ const categoryStyle: { [key: string]: string } = {
 };
 
 const statusStyle: { [key: string]: string } = {
-  WAIT: "outline-none text-white bg-gray2",
-  CONSENT: "outline-none text-white bg-main",
-  REFUSE: "outline-none text-white bg-[#EE4C4A]",
+  WAIT: "outline-hidden text-white bg-gray2",
+  CONSENT: "outline-hidden text-white bg-main",
+  REFUSE: "outline-hidden text-white bg-[#EE4C4A]",
 };
 
 const status: { [key: string]: string } = {

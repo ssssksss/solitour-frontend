@@ -39,7 +39,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
       <div className="mt-4 flex flex-col gap-y-[2.375rem]">
         <article>
           <div className="flex w-full items-center gap-x-[2.375rem]">
-            <div className="relative w-[3.5rem] flex-shrink-0">
+            <div className="relative w-[3.5rem] shrink-0">
               <span className="text-lg font-semibold">닉네임</span>
               <span className="absolute top-[-.5rem] text-lg text-main">*</span>
             </div>
@@ -90,7 +90,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
         </article>
         <article>
           <div className="flex w-full items-center gap-x-[2.375rem]">
-            <div className="relative w-[3.5rem] flex-shrink-0">
+            <div className="relative w-[3.5rem] shrink-0">
               <span className="text-lg font-semibold">이메일</span>
             </div>
             <input

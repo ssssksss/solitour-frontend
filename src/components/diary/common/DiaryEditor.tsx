@@ -56,7 +56,7 @@ const DiaryEditor = ({
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-none`}
+          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-hidden`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("title")}
@@ -78,7 +78,7 @@ const DiaryEditor = ({
             날짜<span className="text-main">*</span>
           </h2>
           <button
-            className={`${formContext.getValues("startDate") ? "text-black" : "text-gray2"} ${formContext.formState.errors.startDate ? "border-red-500" : "border-gray3 hover:border-main"} h-[3.3125rem] w-[21.75rem] flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm`}
+            className={`${formContext.getValues("startDate") ? "text-black" : "text-gray2"} ${formContext.formState.errors.startDate ? "border-red-500" : "border-gray3 hover:border-main"} h-[3.3125rem] w-[21.75rem] grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm`}
             type="button"
             onClick={() => openDateRangeModal()}
           >
@@ -111,12 +111,12 @@ const DiaryEditor = ({
             </p>
           )}
         </div>
-        <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
+        <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-[0.625rem] max-[1024px]:w-full">
           <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
             주소<span className="text-main">*</span>
           </h2>
           <button
-            className={`${formContext.getValues("address") === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-none`}
+            className={`${formContext.getValues("address") === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-hidden`}
             type="button"
             onClick={() => openAddressModal()}
           >

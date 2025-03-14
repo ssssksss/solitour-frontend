@@ -54,7 +54,7 @@ const SupportFAQList = () => {
               .map((faq, index) => (
                 <div
                   key={index}
-                  className="ml-[5.0625rem] rounded-lg border border-gray-200 p-4 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg"
+                  className="ml-[5.0625rem] rounded-lg border border-gray-200 p-4 shadow-xs transition-shadow duration-300 ease-in-out hover:shadow-lg"
                 >
                   <h3 className="mb-2 text-lg font-semibold">{faq.question}</h3>
                   <p>{faq.answer}</p>

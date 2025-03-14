@@ -73,7 +73,7 @@ export const Modal = ({ children, modalState }: ModalProps) => {
           closeButtonComponent: (
             <button
               onClick={() => modalState.closeModal()}
-              className="absolute right-8 top-8 z-[200] h-8 w-8 scale-100 transform transition-transform duration-300"
+              className="absolute right-8 top-8 z-200 h-8 w-8 scale-100 transform transition-transform duration-300"
             >
               <MdClose
                 className="bg-red-60 cursor-pointer text-gray2 hover:text-main"
@@ -89,7 +89,7 @@ export const Modal = ({ children, modalState }: ModalProps) => {
   });
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] flex h-full w-full items-center justify-center">
+    <div className="fixed inset-0 z-100 flex h-full w-full items-center justify-center">
       <div className="absolute h-full w-full cursor-pointer bg-black/30" />
       <div
         ref={ref}

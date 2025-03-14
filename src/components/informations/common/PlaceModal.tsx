@@ -61,7 +61,7 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
             <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
             <div className="flex h-80 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-hidden hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="off"
                 name="location"
@@ -96,7 +96,7 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
               className={`${canTypePlaceName ? "h-fit" : "h-80 border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]"} flex flex-col rounded-3xl`}
             >
               <input
-                className={`${canTypePlaceName ? "bg-gray-100/25" : ""} h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full`}
+                className={`${canTypePlaceName ? "bg-gray-100/25" : ""} h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-hidden hover:border-main focus:border-main max-[480px]:w-full`}
                 type="text"
                 autoComplete="off"
                 {...formContext.register("informationAddress")}
@@ -126,7 +126,7 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
               className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
             >
               <input
-                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-none hover:border-main focus:border-main max-[480px]:w-full"
+                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-hidden hover:border-main focus:border-main max-[480px]:w-full"
                 type="text"
                 autoComplete="off"
                 name="location"

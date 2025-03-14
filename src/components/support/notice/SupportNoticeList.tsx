@@ -29,7 +29,7 @@ const SupportNoticeList = () => {
       {Array.from({ length: 10 }).map((_, index) => (
         <div
           key={index}
-          className="flex animate-pulse flex-col gap-y-2 rounded-lg border border-gray-200 bg-gray-100 p-4 shadow-sm"
+          className="flex animate-pulse flex-col gap-y-2 rounded-lg border border-gray-200 bg-gray-100 p-4 shadow-xs"
         >
           <div className="mb-2 h-4 w-24 rounded-lg bg-gray-300"></div>
           <div className="mb-2 h-6 w-48 rounded-lg bg-gray-300"></div>
@@ -53,7 +53,7 @@ const SupportNoticeList = () => {
             <Link
               href={`/support/notice/${notice.id}`}
               key={notice.id}
-              className="relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:shadow"
+              className="relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:shadow-sm"
               onClick={() => handleNoticeClick(notice.id)}
             >
               {
@@ -71,7 +71,7 @@ const SupportNoticeList = () => {
               </div>
               <div className="grid w-full grid-cols-[3.5rem_auto] items-center gap-x-4 pr-2">
                 <div
-                  className={`${categoryStyles[notice.categoryName]} flex-shrink-0`}
+                  className={`${categoryStyles[notice.categoryName]} shrink-0`}
                 >
                   {`[${notice.categoryName}]`}
                 </div>

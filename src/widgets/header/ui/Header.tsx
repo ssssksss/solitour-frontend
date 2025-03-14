@@ -22,7 +22,7 @@ export const Header = () => {
       <HeaderSidebar visible={visible} onClose={handleCloseButton} />
       <div
         className={[
-          "fixed right-0 top-0 z-40 flex w-full justify-center shadow",
+          "fixed top-0 z-40 flex w-full justify-center shadow",
           `${isTransparent ? "bg-white/30 backdrop-blur-md" : "bg-white"}`,
         ].join(" ")}
       >

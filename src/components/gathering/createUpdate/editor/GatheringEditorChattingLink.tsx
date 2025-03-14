@@ -6,8 +6,8 @@ const GatheringEditorChattingLink = () => {
   const formContext = useFormContext();
 
   return (
-    <div className="relative flex w-full flex-shrink-0 items-center gap-[0.625rem]">
-      <div className={"relative w-[2.75rem] flex-shrink-0"}>
+    <div className="relative flex w-full shrink-0 items-center gap-[0.625rem]">
+      <div className={"relative w-[2.75rem] shrink-0"}>
         <span className={"text-lg font-semibold"}>링크</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>

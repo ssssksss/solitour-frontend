@@ -69,7 +69,7 @@ const InformationEditor = ({
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-none`}
+          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-hidden`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("informationTitle")}
@@ -87,12 +87,12 @@ const InformationEditor = ({
         )}
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
-        <div className="relative flex h-[3.3125rem] flex-grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
+        <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
           <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
             장소<span className="text-main">*</span>
           </h2>
           <button
-            className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full flex-grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm font-medium outline-none`}
+            className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm font-medium outline-hidden`}
             type="button"
             onClick={openLocationModal}
           >
@@ -107,7 +107,7 @@ const InformationEditor = ({
           )}
         </div>
         <button
-          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] flex-grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold`}
+          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold`}
           type="button"
           onClick={openCategoryModal}
         >
@@ -148,7 +148,7 @@ const InformationEditor = ({
         사진 최대 용량은 10MB입니다.
       </p>
       <textarea
-        className="mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-none hover:border-main focus:border-main"
+        className="mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-hidden hover:border-main focus:border-main"
         {...formContext.register("informationContent")}
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         onChange={(e) => {
@@ -166,7 +166,7 @@ const InformationEditor = ({
         </h2>
         <div className="relative flex w-full flex-col gap-2">
           <input
-            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100/25" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-none hover:border-b-[0.0625rem]`}
+            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100/25" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-hidden hover:border-b-[0.0625rem]`}
             placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             disabled={formContext.getValues("hashtags").length >= 10}
             onKeyUp={handleHashTagChange}
@@ -246,10 +246,10 @@ const InformationEditor = ({
         <h2 className="w-36 pt-3 text-lg font-bold text-black">
           생생한 혼플 TIP<span className="text-main">*</span>
         </h2>
-        <div className="relative flex flex-grow flex-col gap-4 max-[744px]:w-full">
+        <div className="relative flex grow flex-col gap-4 max-[744px]:w-full">
           {formContext.getValues("tips").map((tip: string, index: number) => (
             <div key={index} className="relative w-full">
-              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border-[0.0625rem] bg-gray-100/25 pl-5 pr-14 text-sm outline-none">
+              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border-[0.0625rem] bg-gray-100/25 pl-5 pr-14 text-sm outline-hidden">
                 {tip}
               </div>
               <MdClose
@@ -267,7 +267,7 @@ const InformationEditor = ({
           {formContext.getValues("tips").length < 5 && (
             <div className="relative w-full">
               <input
-                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 pr-14 text-sm outline-none`}
+                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 pr-14 text-sm outline-hidden`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
                 onKeyUp={handleTipChange}
@@ -307,7 +307,7 @@ const InformationEditor = ({
       </div>
       <div className="flex flex-col items-end">
         <button
-          className={`${editorStore.imageLoading ? "cursor-not-allowed bg-gray1" : "bg-main hover:scale-105"} mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow`}
+          className={`${editorStore.imageLoading ? "cursor-not-allowed bg-gray1" : "bg-main hover:scale-105"} mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow-sm`}
           type="submit"
           onClick={() => handleSubmit()}
           disabled={loading || editorStore.imageLoading}

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="mt-auto flex h-fit w-full items-center justify-center px-4">
+    <footer className="mt-auto flex h-fit w-full items-center justify-center bg-neutral-100 px-4">
       <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
         <Link href="/">
           <Image
@@ -13,7 +13,7 @@ export const Footer = () => {
             height={32}
           />
         </Link>
-        <div className="text-sm font-medium text-gray1">
+        <div className="text-gray1 text-sm font-medium">
           <p>솔리투어는 혼자 여행에 유용한 정보와 모임을 제공합니다.</p>
           <p>
             일상 속의 휴식이 필요한 사람, 나를 위한 시간이 필요한 사람, 새로운
@@ -29,7 +29,7 @@ export const Footer = () => {
             둘러보기
           </Link>
         </div>
-        <div className="flex flex-row items-center justify-between pt-8 text-gray1 max-[744px]:flex-col-reverse max-[744px]:gap-4">
+        <div className="text-gray1 flex flex-row items-center justify-between pt-8 max-[744px]:flex-col-reverse max-[744px]:gap-4">
           <p className="text-xs font-medium">
             Copyright Solitour. All rights reserved
           </p>

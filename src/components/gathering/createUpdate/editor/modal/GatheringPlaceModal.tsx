@@ -209,7 +209,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="장소나 건물명을 입력해주세요"
                     className={
-                      "h-[3rem] w-full bg-transparent focus:outline-none"
+                      "h-[3rem] w-full bg-transparent focus:outline-hidden"
                     }
                   />
                 </label>
@@ -276,7 +276,7 @@ const GatheringPlaceModal = (props: IModalComponent) => {
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="도로명을 입력해주세요. ex) 올림픽로, 수목원길"
                     className={
-                      "h-[3rem] w-full bg-transparent focus:outline-none"
+                      "h-[3rem] w-full bg-transparent focus:outline-hidden"
                     }
                   />
                 </label>

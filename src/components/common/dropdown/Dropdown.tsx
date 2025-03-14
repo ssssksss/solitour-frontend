@@ -60,12 +60,12 @@ export default function Dropdown<T>({
 
   return (
     <div
-      className={`relative flex ${dropdownContainerStyle?.h || ""} h-full flex-shrink-0 items-center ${dropdownContainerStyle?.w || ""} text-left`}
+      className={`relative flex ${dropdownContainerStyle?.h || ""} h-full shrink-0 items-center ${dropdownContainerStyle?.w || ""} text-left`}
       ref={ref}
     >
       <button
         onClick={toggleDropdown}
-        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} text-sm font-medium text-gray-700 hover:text-main focus:outline-none`}
+        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} text-sm font-medium text-gray-700 hover:text-main focus:outline-hidden`}
       >
         <div className="min-w-fit">
           {options.filter((i) => i.value == selectedOption)[0].name}
@@ -91,7 +91,7 @@ export default function Dropdown<T>({
       {isOpen &&
         (isOnRightSide ? (
           <div
-            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
+            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow-sm transition duration-200 ease-out`}
             style={{
               transform: dropdownOptionStyle?.transformX,
             }}
@@ -114,7 +114,7 @@ export default function Dropdown<T>({
           </div>
         ) : (
           <div
-            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow transition duration-200 ease-out`}
+            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow-sm transition duration-200 ease-out`}
           >
             {options.map((i) => (
               <button

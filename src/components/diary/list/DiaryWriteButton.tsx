@@ -12,7 +12,7 @@ const DiaryWriteButton = () => {
       transition={{ duration: 0.5, ease: "linear" }}
     >
       <Link
-        className="flex aspect-[3/4] w-full flex-col items-center justify-center rounded-2xl border-[0.0625rem] border-gray3 bg-[#FBFBFB] hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem]"
+        className="flex aspect-3/4 w-full flex-col items-center justify-center rounded-2xl border-[0.0625rem] border-gray3 bg-[#FBFBFB] hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem]"
         href="/diary/write"
       >
         <motion.div

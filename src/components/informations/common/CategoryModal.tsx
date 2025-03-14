@@ -76,7 +76,7 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
             className={`${parentCategory === 0 || categoryId === 0 ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
           >
             <button
-              className="h-[2.625rem] w-[9.5rem] rounded-full bg-main font-medium text-white shadow hover:scale-105"
+              className="h-[2.625rem] w-[9.5rem] rounded-full bg-main font-medium text-white shadow-sm hover:scale-105"
               type="button"
               onClick={handleSaveClick}
             >

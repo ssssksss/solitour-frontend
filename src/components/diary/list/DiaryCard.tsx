@@ -32,7 +32,7 @@ const DiaryCard = ({ diaryData }: Props) => {
   if (isFlipped) {
     return (
       <div
-        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} aspect-[3/4] w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] border-gray3 px-9 py-9 hover:border-main hover:bg-lightGreen max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
+        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} border-gray3 hover:border-main hover:bg-lightGreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
         onClick={() => {
           if (flag) {
             handleFlip();
@@ -46,7 +46,7 @@ const DiaryCard = ({ diaryData }: Props) => {
           transition={{ delay: 0.3 }}
         >
           <TiLocation className="text-main" size={"1.3rem"} />
-          <p className="text-lg text-gray1">
+          <p className="text-gray1 text-lg">
             {diaryData.diaryDayContentResponses.diaryDayContentDetail[0].place}
           </p>
         </motion.div>
@@ -71,7 +71,7 @@ const DiaryCard = ({ diaryData }: Props) => {
             transition={{ delay: 0.5 }}
           >
             <Link
-              className="w-full text-2xl font-bold hover:text-main"
+              className="hover:text-main w-full text-2xl font-bold"
               href={`/diary/${diaryData.diaryId}`}
               onClick={(e) => {
                 e.stopPropagation();
@@ -81,7 +81,7 @@ const DiaryCard = ({ diaryData }: Props) => {
             </Link>
           </motion.div>
           <motion.p
-            className="mt-3 text-lg text-gray1 max-[1024px]:mt-2 max-[744px]:mt-1"
+            className="text-gray1 mt-3 text-lg max-[1024px]:mt-2 max-[744px]:mt-1"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -111,7 +111,7 @@ const DiaryCard = ({ diaryData }: Props) => {
   // 앞면
   return (
     <motion.button
-      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} relative aspect-[3/4] w-full rounded-2xl border-[0.0625rem] border-gray3 hover:border-main max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
+      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border-[0.0625rem] max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
       onClick={() => {
         if (!flag) {
           handleFlip();
@@ -132,7 +132,7 @@ const DiaryCard = ({ diaryData }: Props) => {
         fill={true}
         style={{ objectFit: "cover" }}
       />
-      <div className="absolute bottom-0 h-[11.5rem] w-full rounded-b-2xl bg-gradient-to-b from-black/0 to-black/50" />
+      <div className="absolute bottom-0 h-[11.5rem] w-full rounded-b-2xl bg-linear-to-b from-black/0 to-black/50" />
       <motion.div
         className="absolute bottom-9 left-9 flex flex-col items-start gap-1 pr-9 text-white"
         initial={{ opacity: 0 }}
@@ -140,7 +140,7 @@ const DiaryCard = ({ diaryData }: Props) => {
         transition={{ delay: 0.3 }}
       >
         <Link
-          className="text-start text-2xl font-bold hover:text-main"
+          className="hover:text-main text-start text-2xl font-bold"
           href={`/diary/${diaryData.diaryId}`}
           onClick={(e) => e.stopPropagation()}
         >

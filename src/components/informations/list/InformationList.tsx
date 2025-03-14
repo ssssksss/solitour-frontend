@@ -2,8 +2,8 @@ import { LOCATION_ID } from "@/shared/config/location";
 import { InformationListResponseDto } from "@/entities/information/model/informationDto";
 import { cookies } from "next/headers";
 import InformationPagination from "./InformationPagination";
-import InformationItem from "@/entities/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
+import { InformationItem } from "@/entities/information";
 
 async function getInformationList(
   page: number,

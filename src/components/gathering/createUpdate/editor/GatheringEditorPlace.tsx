@@ -11,7 +11,7 @@ const GatheringEditorPlace = () => {
 
   return (
     <div className="flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
-      <div className="relative w-[2.625rem] flex-shrink-0">
+      <div className="relative w-[2.625rem] shrink-0">
         <span className="text-lg font-semibold">장소</span>
         <span className="absolute top-[-.5rem] text-lg text-main">*</span>
       </div>

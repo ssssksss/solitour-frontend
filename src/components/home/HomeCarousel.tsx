@@ -34,7 +34,7 @@ const HomeCarousel = () => {
             <button
               key={index}
               className={
-                "flex-grow border-b-4" +
+                "grow border-b-4" +
                 ` ${index === currentIndex ? "border-b-white" : "border-b-white/50"}`
               }
               onClick={() => handleClick(index)}

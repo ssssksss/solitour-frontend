@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="flex flex-col items-center justify-center gap-6 py-20">
-      <div className="relative aspect-[75/46] w-[23.4375rem] max-[744px]:w-80">
+      <div className="relative aspect-75/46 w-[23.4375rem] max-[744px]:w-80">
         <Image
           src="/logos/404-logo.svg"
           alt="404-logo"

@@ -20,7 +20,7 @@ const GatheringContent = ({
     <>
       <article className={"flex flex-col gap-[2rem]"}>
         <div className={"flex w-full items-center gap-x-[2rem]"}>
-          <div className={"relative w-[7rem] flex-shrink-0"}>
+          <div className={"relative w-[7rem] shrink-0"}>
             <span className={"w-[3.5rem] text-lg font-semibold"}>제목</span>
             <span className="absolute top-[-.5rem] text-lg text-main">*</span>
           </div>
@@ -54,7 +54,7 @@ const GatheringContent = ({
       </article>
       <article className={"flex flex-col gap-[2rem]"}>
         <div className={"flex w-full items-center gap-x-[2rem]"}>
-          <div className={"relative w-[7rem] flex-shrink-0"}>
+          <div className={"relative w-[7rem] shrink-0"}>
             <span className={"w-[3.5rem] text-lg font-semibold"}>해시태그</span>
           </div>
           <input

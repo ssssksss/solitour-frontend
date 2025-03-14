@@ -28,14 +28,14 @@ const SupportSearch = ({ loading }: Props) => {
 
   if (loading)
     return (
-      <div className="relative flex h-[2.75rem] w-[21.4375rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
+      <div className="relative flex h-[2.75rem] w-[21.4375rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
 
   return (
     <div className="flex max-w-[21.4375rem] flex-row items-center gap-4">
-      <div className="relative z-[1] flex flex-row items-center max-[744px]:w-full">
+      <div className="relative z-1 flex flex-row items-center max-[744px]:w-full">
         <input
-          className="h-[2.75rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[1.125rem] text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
+          className="h-[2.75rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[1.125rem] text-sm outline-hidden placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
           type="text"
           autoComplete="search"
           placeholder="검색하기"

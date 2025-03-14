@@ -43,7 +43,7 @@ const MyPageAccountDeleteModal = ({
       <button
         disabled={userDeleteText !== "회원탈퇴를 하겠습니다."}
         onClick={handleDeleteClick}
-        className="h-[3rem] w-full flex-shrink-0 rounded-full bg-main text-white disabled:bg-gray2"
+        className="h-[3rem] w-full shrink-0 rounded-full bg-main text-white disabled:bg-gray2"
       >
         회원탈퇴
       </button>

@@ -32,7 +32,7 @@ const InformationSearch = () => {
     <div className="flex flex-row items-center gap-4 max-[1024px]:w-full max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start">
       {modalVisible && <InformationFilterModal closeModal={closeModal} />}
       <form
-        className="relative z-[1] flex flex-row items-center bg-white max-[1024px]:flex-1 max-[744px]:w-full"
+        className="relative z-1 flex flex-row items-center bg-white max-[1024px]:flex-1 max-[744px]:w-full"
         action={handleSearchClick}
       >
         <button
@@ -47,7 +47,7 @@ const InformationSearch = () => {
           <IoIosArrowDown className="mt-1" />
         </button>
         <div
-          className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow`}
+          className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow-sm`}
           onClick={() => setSearchDropdownVisible(false)}
         >
           <button
@@ -67,7 +67,7 @@ const InformationSearch = () => {
         </div>
         <p className="absolute left-[4.6875rem] top-2 text-gray3">|</p>
         <input
-          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-none placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
+          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-hidden placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
           type="text"
           placeholder="검색하기"
           value={searchValue}
@@ -105,7 +105,7 @@ const InformationSearch = () => {
             <IoIosArrowDown />
           </button>
           <div
-            className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow`}
+            className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow-sm`}
             onClick={() => setOrderDropdownVisible(false)}
           >
             <Link

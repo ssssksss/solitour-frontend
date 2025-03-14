@@ -34,7 +34,7 @@ export const InformationItem = ({
     useInformationItem(informationId, initialIsBookMarked, categoryName);
 
   return (
-    <div className="relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 outline-gray3 duration-300 hover:outline-main max-[744px]:min-w-[19.183125rem]">
+    <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline outline-1 duration-300 max-[744px]:min-w-[19.183125rem]">
       <Link className="h-[12.6875rem]" href={`/informations/${informationId}`}>
         <Image
           className="-z-10 rounded-[0.875rem]"
@@ -78,13 +78,13 @@ export const InformationItem = ({
       </Link>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4">
         <Link
-          className="truncate-vertical-information-title p-1 font-bold hover:text-main"
+          className="truncate-vertical-information-title hover:text-main p-1 font-bold"
           href={`/informations/${informationId}`}
         >
           {title}
         </Link>
         <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center gap-1 text-gray1">
+          <div className="text-gray1 flex flex-row items-center gap-1">
             <TiLocation />
             <p className="text-xs font-medium">
               {address.slice(0, 2) === "세종" ? "세종특별자치시" : address}
@@ -95,14 +95,14 @@ export const InformationItem = ({
               className={[
                 isLike
                   ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]"
-                  : "fill-none stroke-gray2 text-gray2",
+                  : "stroke-gray2 text-gray2 fill-none",
                 "flex flex-row items-center gap-[0.3125rem] text-xs",
               ].join(" ")}
             >
               <HeartIcon className="fill-inherit stroke-inherit" />
               <p>{convertNumberToShortForm(likeCount)}</p>
             </div>
-            <div className="flex flex-row items-center gap-1 text-gray2">
+            <div className="text-gray2 flex flex-row items-center gap-1">
               <Image
                 src="/icons/eyes-icon.svg"
                 alt="eyes-icon.svg"

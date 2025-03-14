@@ -150,7 +150,7 @@ const GatheringTimeModal = (props: IModalComponent) => {
         <div className={"flex w-full justify-center"}>
           <button
             className={
-              "h-[3.375rem] w-full max-w-[18.625rem] flex-shrink-0 rounded-[1.75rem] bg-main text-white disabled:bg-gray1"
+              "h-[3.375rem] w-full max-w-[18.625rem] shrink-0 rounded-[1.75rem] bg-main text-white disabled:bg-gray1"
             }
             onClick={() => submitHandler()}
           >

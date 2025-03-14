@@ -60,7 +60,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
               <div className="text-xs font-semibold text-black">
                 {data.userPostingResponse?.nickname}
               </div>
-              <div className="w-fit flex-shrink-0 whitespace-nowrap text-xs text-gray1">
+              <div className="w-fit shrink-0 whitespace-nowrap text-xs text-gray1">
                 {format(new Date(data.createdAt), "yyyy-MM-dd")}
               </div>
             </div>

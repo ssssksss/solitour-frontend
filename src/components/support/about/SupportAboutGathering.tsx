@@ -53,7 +53,7 @@ const SupportAboutGathering = () => {
           viewport={{ once: true }}
         >
           <Link
-            className="flex h-full w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#E7FCE0] to-[#C3E9FF] duration-300 hover:scale-105"
+            className="flex h-full w-full items-center justify-center rounded-2xl bg-linear-to-br from-[#E7FCE0] to-[#C3E9FF] duration-300 hover:scale-105"
             href="/gathering"
           >
             <div className="relative h-[7.8125rem] w-[7.8125rem]">

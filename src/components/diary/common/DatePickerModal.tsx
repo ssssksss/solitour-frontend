@@ -38,7 +38,7 @@ const DatePickerModal = ({ closeModal }: DatePickerModalProps) => {
           />
           <div className="absolute left-[50%] top-10 translate-x-[-50%] font-semibold">
             <input
-              className="w-32 outline-none"
+              className="w-32 outline-hidden"
               type="month"
               onChange={(e) => {
                 if (e.target.valueAsDate) {

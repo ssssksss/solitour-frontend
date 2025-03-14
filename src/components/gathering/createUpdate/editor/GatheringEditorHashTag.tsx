@@ -59,7 +59,7 @@ const GatheringEditorHashTag = () => {
   return (
     <article className="flex w-full flex-col gap-[2rem]">
       <div className="flex w-full items-center gap-x-[0.625rem] max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3">
-        <div className="relative w-[2.75rem] flex-shrink-0 text-lg font-semibold">
+        <div className="relative w-[2.75rem] shrink-0 text-lg font-semibold">
           태그
         </div>
         <div className="relative w-full">

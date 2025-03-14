@@ -19,7 +19,7 @@ const DiaryViewerSkeleton = () => {
       <div className="mt-16 flex w-full flex-col gap-2">
         <div className="h-6 w-72 bg-gray-100" />
         <div className="h-6 max-w-[39rem] bg-gray-100" />
-        <div className="my-[2.375rem] aspect-[5/2] w-full rounded-2xl bg-gray-100" />
+        <div className="my-[2.375rem] aspect-5/2 w-full rounded-2xl bg-gray-100" />
         <div className="h-6 w-full bg-gray-100" />
         <div className="h-6 w-20 bg-gray-100" />
         <div className="my-[2.375rem] flex flex-row items-center gap-5 max-[1024px]:flex-col">

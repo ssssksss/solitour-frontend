@@ -64,7 +64,7 @@ const AddUserInformationForm = (props: IModalComponent) => {
             onChange={handleInputChange}
             placeholder="YYYY"
             maxLength={4}
-            className="mt-3 flex h-10 w-full items-center justify-center rounded-[1.5rem] bg-transparent bg-white py-[0.375rem] text-center text-main outline-none outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#F0F0F0] focus:outline-main"
+            className="mt-3 flex h-10 w-full items-center justify-center rounded-[1.5rem] bg-transparent bg-white py-[0.375rem] text-center text-main outline-hidden outline outline-[0.0625rem] outline-offset-[-0.0625rem] outline-[#F0F0F0] focus:outline-main"
           />
         </article>
       </div>

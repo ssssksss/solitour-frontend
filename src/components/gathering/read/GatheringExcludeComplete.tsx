@@ -28,13 +28,13 @@ const GatheringExcludeComplete = () => {
 
   if (loading) {
     return (
-      <div className="relative flex h-[2rem] w-[4rem] flex-shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
+      <div className="relative flex h-[2rem] w-[4rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
     );
   }
 
   return (
     <button
-      className="flex flex-shrink-0 items-center gap-1 text-sm font-medium text-black"
+      className="flex shrink-0 items-center gap-1 text-sm font-medium text-black"
       onClick={checkExcludeCompleteGatheringHandler}
     >
       {isExclude ? (

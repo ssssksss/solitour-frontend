@@ -96,7 +96,7 @@ const AddUserInformationInitForm = ({
                 onChange={handleInputChange}
                 placeholder="YYYY"
                 maxLength={4}
-                className="h-[3rem] w-full bg-transparent py-2 text-center outline-none"
+                className="h-[3rem] w-full bg-transparent py-2 text-center outline-hidden"
               />
             </div>
           </article>
