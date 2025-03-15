@@ -1,10 +1,10 @@
 "use client";
 
 import LottieAirplane from "@/../public/lottie/loading-airplane.json";
-import AddUserInformationInitForm from "./AddUserInformationInitForm";
-import { useAuthKakao } from "@/hooks/auth/useAuthKakao";
 import { FormProvider } from "react-hook-form";
 import Lottie from "lottie-react";
+import AddUserInformationInitForm from "@/components/auth/AddUserInformationInitForm";
+import { useAuthKakao } from "../model/useAuthKakao";
 
 const AuthLoading = () => {
   const {
@@ -18,7 +18,7 @@ const AuthLoading = () => {
   return (
     <div>
       {loading ? (
-        <div className="fixed left-0 top-0 z-50 flex h-screen w-screen flex-col items-center justify-center bg-white">
+        <div className="fixed top-0 left-0 z-50 flex h-screen w-screen flex-col items-center justify-center bg-white">
           <div className="relative h-[15.3125rem] w-[17.1875rem]">
             <Lottie
               animationData={LottieAirplane}

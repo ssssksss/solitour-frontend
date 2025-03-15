@@ -1,8 +1,8 @@
 "use client";
 
-import HeartIcon from "@/shared/ui/icon/HeartIcon";
 import { useInformationLikeCount } from "@/hooks/information/detail/useInformationLikeCount";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
+import { HeartIcon } from "@/shared/ui/icon";
 
 interface InformationLikeCountProps {
   informationId: number;
@@ -20,7 +20,7 @@ const InformationLikeCount = ({
 
   if (!clickable) {
     return (
-      <div className="flex flex-row items-center gap-1 stroke-gray2 text-xs text-gray2">
+      <div className="stroke-gray2 text-gray2 flex flex-row items-center gap-1 text-xs">
         <HeartIcon className="stroke-inherit" />
         <p>{convertNumberToShortForm(likeCount)}</p>
       </div>
@@ -29,7 +29,7 @@ const InformationLikeCount = ({
 
   return (
     <button
-      className={`${isLike ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]" : "fill-none stroke-gray2 text-gray2 hover:fill-[#F85E5E] hover:stroke-[#F85E5E]"} flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]`}
+      className={`${isLike ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]" : "stroke-gray2 text-gray2 fill-none hover:fill-[#F85E5E] hover:stroke-[#F85E5E]"} flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]`}
       type="button"
       onClick={handleLikeClick}
     >

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { usePreventBodyScroll, useThrottle } from "@/shared/lib/hooks";
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
+import { getUserInfo } from "@/entities/user/api/userInfo";
 
 export const useHeader = () => {
   const pathname = usePathname();
@@ -46,20 +47,15 @@ export const useHeader = () => {
     // 자동 로그인
     (async () => {
       try {
-        const res = await fetchWithAuth("/api/auth/user");
-        if (res.status === 200) {
-          const data = await res.json();
-          // 유저 상태가 '대기'인 경우는 쿠키를 제거하기 위해 로그아웃 처리
-          if (data.userStatus === "대기") {
-            await fetchWithAuth("/api/auth/logout", { method: "POST" });
-            setUser({ id: -1 });
-          } else {
-            setUser(data);
-          }
-          return;
+        const userInfo = await getUserInfo();
+        if (userInfo.userStatus === "대기") {
+          await fetchWithAuth("/api/auth/logout", { method: "POST" });
+          setUser({ id: -1 });
+        } else {
+          setUser(userInfo);
         }
-        setUser({ id: -1 });
-      } catch {
+      } catch (error) {
+        await fetchWithAuth("/api/auth/logout", { method: "POST" });
         setUser({ id: -1 });
       }
     })();

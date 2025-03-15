@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import usePreventBodyScroll from "@/shared/lib/hooks/usePreventBodyScroll";
-import { useDragScroll, useModalBackHandler } from "@/shared/lib/hooks";
+import {
+  useDragScroll,
+  useModalBackHandler,
+  usePreventBodyScroll,
+} from "@/shared/lib/hooks";
 
 export const useImageList = (
   images: Array<Readonly<{ imageStatus: string; address: string }>>,

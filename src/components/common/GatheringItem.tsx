@@ -39,7 +39,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} outline-gray3 hover:bg-lightGreen hover:outline-main h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-2 outline-offset-[-2px] duration-300`}
+      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} outline-gray3 hover:bg-lightGreen hover:outline-main h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-offset-[-2px] duration-300`}
       onClick={(e) => {
         if (!isAccessGathering) {
           e.preventDefault();
@@ -50,7 +50,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
         {/* 상태와 북마크 */}
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
+            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-offset-[-1px] ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
           >
             <span>
               {data.gatheringStatus

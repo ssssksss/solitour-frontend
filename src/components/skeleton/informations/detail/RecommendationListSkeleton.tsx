@@ -1,4 +1,4 @@
-import InformationItemSkeleton from "../../../../features/information/ui/InformationItemSkeleton";
+import { InformationItemSkeleton } from "@/features/information";
 
 const RecommendationListSkeleton = () => {
   return (

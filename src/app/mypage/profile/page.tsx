@@ -1,5 +1,5 @@
 import MyPageProfile from "@/components/mypage/profile/MyPageProfile";
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import { fetchWithTokenRefreshSSR } from "@/shared/api/getNewAccessTokenAndRerequest";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 async function getUserInfo() {
-  const response = fetchWithTokenRefreshSSR<UserResponseDto>({
+  const response = fetchWithTokenRefreshSSR<User>({
     accessToken: (await cookies()).get("access_token"),
     refreshToken: (await cookies()).get("refresh_token"),
     url: `${process.env.BACKEND_URL}/api/users/info`,

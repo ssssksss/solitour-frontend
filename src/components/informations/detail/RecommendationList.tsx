@@ -1,6 +1,6 @@
-import InformationItem from "@/features/information/ui/InformationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
+import { InformationItem } from "@/features/information";
 
 interface RecommendationListProps {
   data: InformationDetailResponseDto;

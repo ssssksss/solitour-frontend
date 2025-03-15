@@ -2,11 +2,11 @@
 
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { useMyPageAccountDeleteModal } from "@/hooks/mypage/profile/useMyPageAccountDeleteModal";
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import { ReactNode } from "react";
 
 interface MyPageAccountDeleteModalProps {
-  userInfo: UserResponseDto;
+  userInfo: User;
   closeModal: () => void;
   closeButtonComponent?: ReactNode;
 }

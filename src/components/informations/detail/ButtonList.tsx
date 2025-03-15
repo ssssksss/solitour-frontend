@@ -1,9 +1,8 @@
 "use client";
 
-import DeleteModal from "@/shared/ui/modal/DeleteModal";
-import DeleteIcon from "@/shared/ui/icon/DeleteIcon";
-import EditIcon from "@/shared/ui/icon/EditIcon";
 import { useButtonList } from "@/hooks/information/detail/useButtonList";
+import { DeleteIcon, EditIcon } from "@/shared/ui/icon";
+import { DeleteModal } from "@/shared/ui/modal";
 import Link from "next/link";
 
 interface ButtonListProps {
@@ -24,22 +23,22 @@ const ButtonList = ({ userId, informationId }: ButtonListProps) => {
       {modalVisible && (
         <DeleteModal
           loading={loading}
-          handleDeleteClick={handleDeleteClick}
-          handleCancelClick={() => {
+          onDeleteClick={handleDeleteClick}
+          onCancelClick={() => {
             window.history.back();
             setModalVisible(false);
           }}
         />
       )}
       <Link
-        className="flex flex-row items-center gap-1 stroke-gray2 text-sm text-gray1 hover:stroke-main hover:text-main"
+        className="stroke-gray2 text-gray1 hover:stroke-main hover:text-main flex flex-row items-center gap-1 text-sm"
         href={`/informations/edit/${informationId}`}
       >
         <EditIcon />
         수정
       </Link>
       <button
-        className="flex flex-row items-center gap-1 fill-gray2 stroke-gray2 text-sm text-gray1 hover:fill-main hover:stroke-main hover:text-main"
+        className="fill-gray2 stroke-gray2 text-gray1 hover:fill-main hover:stroke-main hover:text-main flex flex-row items-center gap-1 text-sm"
         onClick={() => setModalVisible(true)}
       >
         <DeleteIcon className="fill-inherit" />

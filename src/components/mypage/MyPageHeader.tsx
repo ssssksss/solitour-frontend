@@ -1,9 +1,9 @@
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import Link from "next/link";
 import UserImage from "../auth/UserImage";
 
 interface MyPageHeaderProps {
-  userInfo: UserResponseDto;
+  userInfo: User;
 }
 
 const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
@@ -12,7 +12,7 @@ const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
       <h1 className="text-3xl font-bold">마이페이지</h1>
       <article className="flex flex-col gap-[2.125rem] pt-[4.875rem] pb-[2.375rem]">
         <div className="flex flex-row items-center gap-[1.875rem]">
-          <div className="bg-lightGreen relative aspect-square w-[6.75rem] rounded-[50%] outline outline-[1px] outline-offset-[-1px] outline-[#B8EDD9]">
+          <div className="bg-lightGreen relative aspect-square w-[6.75rem] rounded-[50%] outline outline-offset-[-1px] outline-[#B8EDD9]">
             <UserImage
               userImageAddress={userInfo.userImage?.address}
               size={108}

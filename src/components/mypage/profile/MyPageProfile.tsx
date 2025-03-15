@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import { useMyPageProfile } from "@/hooks/mypage/profile/useMyPageProfile";
 import { Modal } from "@/components/common/modal/Modal";
 import MyPageAccountDeleteModal from "./MyPageAccountDeleteModal";
@@ -15,7 +15,7 @@ const MYPAGE_PROFILE_BREADCRUMB_PATH = [
 ];
 
 interface MyPageProfileProps {
-  userInfo: UserResponseDto;
+  userInfo: User;
 }
 
 const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
@@ -45,7 +45,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
             </div>
             <label className="group relative w-full">
               <input
-                className="flex h-[3.25rem] w-full rounded-[28px] pr-[5rem] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+                className="flex h-[3.25rem] w-full rounded-[28px] pr-[5rem] pl-[2rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
                 type="text"
                 autoComplete="search"
                 name="nickname"
@@ -96,7 +96,7 @@ const MyPageProfile = ({ userInfo }: MyPageProfileProps) => {
             <input
               disabled={true}
               placeholder="이메일을 입력해주세요"
-              className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"
+              className="h-[3.25rem] w-full rounded-[28px] pl-[2rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
               defaultValue={userInfo.email}
             />
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
+import { getUserInfo } from "@/entities/user/api/userInfo";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,18 +23,6 @@ export const useAuthKakao = () => {
     },
     mode: "onChange",
   });
-
-  // 액세스 토큰을 이용해서 사용자 정보 조회
-  const getUserInfo = async () => {
-    const userDataResponse = await fetch("/api/auth/user");
-    if (userDataResponse.status == 200) {
-      const userData = await userDataResponse.json();
-      setUser(userData);
-      router.push("/");
-    } else {
-      throw new Error("Failed to fetch user data");
-    }
-  };
 
   const handleSubmit = async (isAgree: boolean) => {
     setLoading(true);
@@ -68,7 +57,15 @@ export const useAuthKakao = () => {
         throw new Error("Failed to login");
       }
 
-      await getUserInfo();
+      // TODO
+      const userDataResponse = await fetch("/api/auth/user");
+      if (userDataResponse.status == 200) {
+        const userData = await userDataResponse.json();
+        setUser(userData);
+        router.push("/");
+      } else {
+        throw new Error("Failed to fetch user data");
+      }
     } catch (error) {
       router.push("/auth/signin");
     }
@@ -111,7 +108,9 @@ export const useAuthKakao = () => {
           return;
         }
 
-        await getUserInfo();
+        const userInfo = await getUserInfo();
+        setUser(userInfo);
+        router.push("/");
       } catch (error) {
         router.push("/auth/signin");
       }

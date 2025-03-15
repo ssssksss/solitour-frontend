@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import useModalState from "@/shared/lib/hooks/useModalState";
 
-export const useMyPageProfile = (userInfo: UserResponseDto) => {
+export const useMyPageProfile = (userInfo: User) => {
   const [nickname, setNickname] = useState(userInfo.nickname);
   const [defaultNickname, setDefaultNickname] = useState(userInfo.nickname);
   const [message, setMessage] = useState("");

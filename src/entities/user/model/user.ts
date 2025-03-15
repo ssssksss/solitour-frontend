@@ -1,4 +1,4 @@
-export interface UserResponseDto {
+export interface User {
   id: number;
   userStatus: string;
   userImage: {

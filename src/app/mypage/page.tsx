@@ -1,6 +1,6 @@
 import MyPageHeader from "@/components/mypage/MyPageHeader";
 import MyPageTabMenu from "@/components/mypage/MyPageTabMenu";
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import { fetchWithTokenRefreshSSR } from "@/shared/api/getNewAccessTokenAndRerequest";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 async function getUserInfo() {
   const accessToken = (await cookies()).get("access_token");
   const refreshToken = (await cookies()).get("refresh_token");
-  const response = await fetchWithTokenRefreshSSR<UserResponseDto>({
+  const response = await fetchWithTokenRefreshSSR<User>({
     url: `${process.env.BACKEND_URL}/api/users/info`,
     accessToken: accessToken,
     refreshToken: refreshToken,

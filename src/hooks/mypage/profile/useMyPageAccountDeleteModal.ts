@@ -3,12 +3,12 @@
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
 import useToastifyStore from "@/stores/toastifyStore";
-import { UserResponseDto } from "@/entities/user/model/UserDto";
+import { User } from "@/entities/user/model/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const useMyPageAccountDeleteModal = (
-  userInfo: UserResponseDto,
+  userInfo: User,
   closeModal?: () => void,
 ) => {
   const [userDeleteText, setUserDeleteText] = useState("");

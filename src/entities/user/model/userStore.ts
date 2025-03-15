@@ -1,21 +1,39 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-// 1. 상태 인터페이스 정의
-interface UserState {
-  age: number; // 연도
-  email: string;
-  id: number;
-  isAdmin: boolean;
-  nickname: string;
-  phoneNumber: string;
-  sex: string; // "male, female"
+/*
+id: number;
+  userStatus: string;
   userImage: {
     id: number;
     address: string;
-    createdDate: string; // "2024-07-12",
+    createdDate: string;
   };
-  userStatus: string; // "활성화" | "휴먼" | "삭제" | "관리자" | "";
+  nickname: string;
+  age: number | null;
+  sex: "male" | "female" | null;
+  email: string;
+  phoneNumber: string | null;
+  isAdmin: boolean;
+  createdAt: Date;
+  provider: string;
+*/
+
+// 1. 상태 인터페이스 정의
+interface UserState {
+  id: number;
+  userStatus: string;
+  userImage: {
+    id: number;
+    address: string;
+    createdDate: string;
+  };
+  nickname: string;
+  age: number | null;
+  sex: "male" | "female" | null;
+  email: string;
+  phoneNumber: string | null;
+  isAdmin: boolean;
 }
 
 // 2. 액션 인터페이스 정의
@@ -28,17 +46,17 @@ interface UserAction {
 const initialState: UserState = {
   id: 0,
   userStatus: "",
-  nickname: "",
-  age: 0,
-  sex: "",
-  email: "",
-  phoneNumber: "",
-  isAdmin: false,
   userImage: {
     id: 0,
     address: "",
     createdDate: "",
   },
+  nickname: "",
+  age: 0,
+  sex: null,
+  email: "",
+  phoneNumber: "",
+  isAdmin: false,
 };
 
 type UserStoreType = UserState & UserAction;
