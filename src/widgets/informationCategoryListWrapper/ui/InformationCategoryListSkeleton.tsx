@@ -1,4 +1,4 @@
-const CategoryListSkeleton = () => {
+export const InformationCategoryListSkeleton = () => {
   return (
     <div className="mt-6 flex w-full animate-pulse flex-col gap-6">
       <div className="mt-[5.5rem] flex w-full flex-row items-center justify-between border-b-[0.0625rem] pb-2">
@@ -27,5 +27,3 @@ const CategoryListSkeleton = () => {
     </div>
   );
 };
-
-export default CategoryListSkeleton;

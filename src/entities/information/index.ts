@@ -4,6 +4,7 @@ export { getInformationList } from "./api/informationList";
 
 export { INFORMATION_CATEGORY } from "./config/informationCategory";
 
+export type { InformationCategory } from "./model/informationCategory";
 export type {
   InformationCreateRequestDto,
   InformationUpdateRequestDto,

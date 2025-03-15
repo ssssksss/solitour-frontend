@@ -1,12 +1,4 @@
-interface InformationCategory {
-  id: number;
-  name: string;
-  childrenCategories: {
-    id: number;
-    parentCategory: { id: number; parentCategory: null; name: string };
-    name: string;
-  }[];
-}
+import { InformationCategory } from "../model/informationCategory";
 
 export async function getInformationCategoryList() {
   const response = await fetch(`${process.env.BACKEND_URL}/api/categories`, {

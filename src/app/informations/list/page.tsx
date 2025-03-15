@@ -1,6 +1,4 @@
-import CategoryList from "@/components/informations/list/CategoryList";
-import CategoryListSkeleton from "@/components/skeleton/informations/list/CategoryListSkeleton";
-import { Suspense } from "react";
+import { InformationCategoryListWrapper } from "@/widgets/informationCategoryListWrapper";
 import { InformationListWrapper } from "@/widgets/informationListWrapper";
 
 export default async function Page({
@@ -27,12 +25,10 @@ export default async function Page({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <Suspense fallback={<CategoryListSkeleton />}>
-        <CategoryList
-          parentCategoryId={parentCategoryId}
-          childCategoryId={childCategoryId}
-        />
-      </Suspense>
+      <InformationCategoryListWrapper
+        parentCategoryId={parentCategoryId}
+        childCategoryId={childCategoryId}
+      />
       <InformationListWrapper
         page={page}
         parentCategoryId={parentCategoryId}
