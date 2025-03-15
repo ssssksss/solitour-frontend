@@ -1,7 +1,11 @@
 "use client";
 
-import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
-import { getUserInfo } from "@/entities/user/api/userInfo";
+import {
+  AddUserInformationFormSchema,
+  getUserInfo,
+  signIn,
+  useUserStore,
+} from "@/entities/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -87,21 +91,7 @@ export const useAuthKakao = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          `/api/auth/kakao/getToken?code=${searchParams.get("code")}`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            cache: "no-store",
-            credentials: "include",
-          },
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to login");
-        }
-
-        const data = await response.json();
+        const data = await signIn(searchParams.get("code")!);
 
         if (data === "PENDING") {
           setLoading(false);

@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/informations/edit") ||
     pathname.startsWith("/gathering/write") ||
     pathname.startsWith("/gathering/edit") ||
-    pathname.startsWith("/diary") ||
+    // pathname.startsWith("/diary") ||
     pathname.startsWith("/mypage") ||
     pathname.startsWith("/support/qna/write") ||
     pathname.startsWith("/support/qna/detail")
@@ -21,13 +21,8 @@ export async function middleware(request: NextRequest) {
         `${process.env.BACKEND_URL}/api/auth/oauth2/token/refresh`,
         {
           method: "POST",
-          headers: {
-            Cookie: `${refreshToken.name}=${refreshToken.value}`,
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
+          headers: { Cookie: `${refreshToken.name}=${refreshToken.value}` },
           cache: "no-store",
-          credentials: "include",
         },
       );
 
@@ -61,35 +56,6 @@ export async function middleware(request: NextRequest) {
     }
     if (menu && !validMenus.includes(menu)) {
       return NextResponse.redirect(new URL("/404", request.url));
-    }
-  }
-
-  // 홈 화면인 경우
-  const accessToken = request.cookies.get("access_token");
-  const refreshToken = request.cookies.get("refresh_token");
-  if (!accessToken && refreshToken) {
-    const backendResponse = await fetch(
-      `${process.env.BACKEND_URL}/api/auth/oauth2/token/refresh`,
-      {
-        method: "POST",
-        headers: {
-          Cookie: `${refreshToken.name}=${refreshToken.value}`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        cache: "no-store",
-        credentials: "include",
-      },
-    );
-
-    if (backendResponse.status === 200) {
-      const accessToken = backendResponse.headers.get("set-cookie");
-      const response = NextResponse.next();
-
-      if (accessToken) {
-        response.headers.set("set-cookie", accessToken);
-      }
-      return response;
     }
   }
 

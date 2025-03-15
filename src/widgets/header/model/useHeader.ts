@@ -3,9 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePreventBodyScroll, useThrottle } from "@/shared/lib/hooks";
-import { useUserStore } from "@/entities/user";
+import { getUserInfo, useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import { getUserInfo } from "@/entities/user/api/userInfo";
 
 export const useHeader = () => {
   const pathname = usePathname();

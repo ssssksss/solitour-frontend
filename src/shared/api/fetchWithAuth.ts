@@ -1,3 +1,5 @@
+import { getNewAccessToken } from "./getNewAccessToken";
+
 export async function fetchWithAuth(
   input: string | URL | globalThis.Request,
   init?: RequestInit,
@@ -5,15 +7,16 @@ export async function fetchWithAuth(
   const response = await fetch(input, init);
 
   if (response.status === 401) {
-    await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/oauth2/token/refresh`,
-      {
-        method: "POST",
-        credentials: "include",
-      },
-    );
+    const accessToken = await getNewAccessToken();
 
-    return await fetch(input, init);
+    if (!accessToken) {
+      return response;
+    }
+
+    return await fetch(input, {
+      ...init,
+      headers: { Cookie: `access_token=${accessToken}` },
+    });
   }
 
   return response;

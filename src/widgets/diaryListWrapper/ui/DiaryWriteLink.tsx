@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 export const DiaryWriteLink = () => {
   return (

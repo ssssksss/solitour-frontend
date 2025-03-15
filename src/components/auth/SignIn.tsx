@@ -3,7 +3,6 @@
 import introLottie from "@/../public/lottie/solitour-auth-intro-image.json";
 import Lottie from "lottie-react";
 import Image from "next/image";
-import Link from "next/link";
 
 const SignIn = () => {
   return (
@@ -20,7 +19,7 @@ const SignIn = () => {
         width={176}
         height={110}
       />
-      <Link
+      <a
         className="relative flex h-[2.875rem] w-full items-center justify-center rounded-3xl bg-[#FEE500] hover:scale-105"
         href="/api/auth/kakao"
       >
@@ -34,7 +33,7 @@ const SignIn = () => {
         <span className="text-sm font-semibold text-black">
           카카오로 로그인
         </span>
-      </Link>
+      </a>
     </div>
   );
 };
