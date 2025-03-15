@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { MdClose } from "react-icons/md";
@@ -16,7 +18,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
     <AnimatePresence>
       {visible && (
         <motion.aside
-          className="fixed left-0 top-0 z-50 flex h-[200%] w-full flex-row justify-end bg-black/25"
+          className="fixed top-0 left-0 z-50 flex h-[200%] w-full flex-row justify-end bg-black/25"
           initial={{ y: "-35.5rem", opacity: 0 }}
           animate={{ y: "0rem", opacity: 1 }}
           exit={{ y: "-35.5rem", opacity: 0 }}
@@ -26,14 +28,14 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
           <nav className="flex h-fit max-h-[calc(100vh-1rem)] w-[20.375rem] flex-col gap-4 overflow-y-scroll rounded-b-lg bg-white p-4 pb-6">
             <div className="flex h-10 w-full items-center justify-end">
               <MdClose
-                className="cursor-pointer text-gray2 hover:text-main"
+                className="text-gray2 hover:text-main cursor-pointer"
                 size="2.5rem"
                 onClick={onClose}
               />
             </div>
             <div className="flex flex-col text-xl">
               <Link
-                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                 href="/"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(1)}
@@ -60,7 +62,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
                 <p className="pl-[0.125rem]">홈</p>
               </Link>
               <Link
-                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                 href="/informations/list?page=1&parentCategoryId=1"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(2)}
@@ -87,7 +89,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
                 <p>여행 정보</p>
               </Link>
               <Link
-                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                 href="/gathering"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(3)}
@@ -114,7 +116,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
                 <p>모임 정보</p>
               </Link>
               <Link
-                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                 href="/diary/list?page=1"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(4)}
@@ -141,7 +143,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
                 <p>여행일기</p>
               </Link>
               <Link
-                className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                 href="/support?menu=about"
                 onClick={onClose}
                 onMouseEnter={() => setHoverNum(5)}
@@ -170,7 +172,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
               {Number(id) > 0 ? (
                 <div className="flex flex-col">
                   <Link
-                    className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                    className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                     href="/mypage?mainCategory=정보&category=owner"
                     onClick={onClose}
                     onMouseEnter={() => setHoverNum(6)}
@@ -197,7 +199,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
                     <p>마이페이지</p>
                   </Link>
                   <button
-                    className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                    className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                     onClick={handleLogout}
                     onMouseEnter={() => setHoverNum(7)}
                     onMouseLeave={() => setHoverNum(0)}
@@ -225,7 +227,7 @@ export const HeaderSidebar = ({ visible, onClose }: HeaderSidebarProps) => {
                 </div>
               ) : (
                 <Link
-                  className="flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem] hover:text-main"
+                  className="hover:text-main flex h-[5rem] flex-row items-center gap-4 pl-[3.75rem]"
                   href="/auth/signin"
                   onClick={onClose}
                   onMouseEnter={() => setHoverNum(7)}

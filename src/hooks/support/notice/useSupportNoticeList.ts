@@ -21,16 +21,6 @@ export const useSupportNoticeList = () => {
     setLoading(false);
   };
 
-  const pageHandler = (page: number) => {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    params.set("page", page + "");
-    url.search = params.toString();
-    setCurrentPage(page);
-    getNoticeList(page);
-    window.history.pushState({}, "", url.toString());
-  };
-
   const handleNoticeClick = (id: number) => {
     const viewedNotices = JSON.parse(
       localStorage.getItem("viewedNotices") || "[]",
@@ -55,7 +45,6 @@ export const useSupportNoticeList = () => {
     totalNotices: noticeList.length,
     viewedNoticeList,
     currentPage,
-    pageHandler,
     handleNoticeClick,
   };
 };

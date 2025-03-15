@@ -2,10 +2,6 @@ import DiaryViewer from "@/components/diary/detail/DiaryViewer";
 import { getDiary } from "@/entities/diary";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
-
 export async function generateMetadata({
   params,
 }: {
@@ -44,7 +40,7 @@ export default async function Page({
           { label: "일기 상세", href: "" },
         ]}
       />
-      <DiaryViewer data={diary} />
+      <DiaryViewer diary={diary} />
     </div>
   );
 }

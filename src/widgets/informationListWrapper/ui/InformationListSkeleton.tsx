@@ -1,7 +1,7 @@
 import { InformationItemSkeleton } from "@/features/information";
 import { PaginationSkeleton } from "@/shared/ui/pagination";
 
-const InformationListSkeleton = () => {
+export const InformationListSkeleton = () => {
   return (
     <div className="flex w-full flex-col">
       <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
@@ -13,5 +13,3 @@ const InformationListSkeleton = () => {
     </div>
   );
 };
-
-export default InformationListSkeleton;

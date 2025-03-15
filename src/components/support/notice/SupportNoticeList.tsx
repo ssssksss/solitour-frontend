@@ -4,7 +4,7 @@ import { differenceInDays, format } from "date-fns";
 import Link from "next/link";
 import SupportSearch from "./SupportSearch";
 import { useSupportNoticeList } from "@/hooks/support/notice/useSupportNoticeList";
-import Pagination from "@/shared/ui/pagination/Pagination";
+import { Pagination } from "@/shared/ui/pagination";
 
 const categoryStyles: { [key: string]: string } = {
   이벤트: "text-green-800",
@@ -20,7 +20,6 @@ const SupportNoticeList = () => {
     totalNotices,
     viewedNoticeList,
     currentPage,
-    pageHandler,
     handleNoticeClick,
   } = useSupportNoticeList();
 
@@ -53,14 +52,14 @@ const SupportNoticeList = () => {
             <Link
               href={`/support/notice/${notice.id}`}
               key={notice.id}
-              className="relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 border-b-gray3 hover:shadow-sm"
+              className="border-b-gray3 relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 hover:shadow-sm"
               onClick={() => handleNoticeClick(notice.id)}
             >
               {
                 differenceInDays(new Date(), new Date(notice.createdAt)) < 2 &&
                   /* eslint-disable indent */
                   !viewedNoticeList.includes(notice.id) && (
-                    <div className="absolute right-2 top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
+                    <div className="absolute top-2 right-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
                       New
                     </div>
                   )
@@ -75,11 +74,11 @@ const SupportNoticeList = () => {
                 >
                   {`[${notice.categoryName}]`}
                 </div>
-                <div className="block overflow-hidden truncate whitespace-nowrap text-lg font-semibold">
+                <div className="block truncate overflow-hidden text-lg font-semibold whitespace-nowrap">
                   {notice.title}
                 </div>
               </div>
-              <p className="pr-5 text-sm text-gray2">
+              <p className="text-gray2 pr-5 text-sm">
                 {format(new Date(notice.createdAt), "yyyy.MM.dd")}
               </p>
             </Link>
@@ -89,7 +88,6 @@ const SupportNoticeList = () => {
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(totalNotices / 10)}
-        pageHandler={pageHandler}
       />
     </div>
   );

@@ -55,27 +55,6 @@ export interface InformationRegisterResponseDto {
 }
 
 /**
- * 정보 목록 조회 결과 DTO
- */
-export interface InformationListResponseDto {
-  content: {
-    informationId: number;
-    title: string;
-    zoneCategoryParentName: string;
-    zoneCategoryChildName: string;
-    categoryName: string;
-    viewCount: number;
-    isBookMark: boolean;
-    thumbNailImage: string;
-    likeCount: number;
-    isLike: boolean;
-  }[];
-  page: {
-    totalPages: number;
-  };
-}
-
-/**
  * 정보 상세 조회 결과 DTO
  */
 export interface InformationDetailResponseDto {

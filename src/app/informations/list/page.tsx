@@ -1,26 +1,26 @@
 import CategoryList from "@/components/informations/list/CategoryList";
-import InformationList from "@/components/informations/list/InformationList";
 import CategoryListSkeleton from "@/components/skeleton/informations/list/CategoryListSkeleton";
-import InformationListSkeleton from "@/components/skeleton/informations/list/InformationListSkeleton";
 import { Suspense } from "react";
+import { InformationListWrapper } from "@/widgets/informationListWrapper";
 
-interface Props {
+export default async function Page({
+  searchParams,
+}: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
-}
+}) {
+  const params = await searchParams;
 
-export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
-  const page = Number(searchParams["page"]);
+  const page = Number(params["page"]);
   if (page <= 0 || !Number.isSafeInteger(page)) {
     throw new Error("Invalid Page Number");
   }
 
-  const parentCategoryId = Number(searchParams["parentCategoryId"]);
+  const parentCategoryId = Number(params["parentCategoryId"]);
   if (parentCategoryId <= 0 || !Number.isSafeInteger(parentCategoryId)) {
     throw new Error("Invalid ParentCategoryId");
   }
 
-  const childCategoryId = Number(searchParams["childCategoryId"] || 0);
+  const childCategoryId = Number(params["childCategoryId"] || 0);
   if (childCategoryId < 0 || !Number.isSafeInteger(childCategoryId)) {
     throw new Error("Invalid ChildCategoryId");
   }
@@ -33,17 +33,15 @@ export default async function Page(props: Props) {
           childCategoryId={childCategoryId}
         />
       </Suspense>
-      <Suspense fallback={<InformationListSkeleton />}>
-        <InformationList
-          page={page}
-          parentCategoryId={parentCategoryId}
-          childCategoryId={childCategoryId}
-          place={searchParams["place"]}
-          order={searchParams["order"]}
-          tagName={searchParams["tagName"]}
-          search={searchParams["search"]}
-        />
-      </Suspense>
+      <InformationListWrapper
+        page={page}
+        parentCategoryId={parentCategoryId}
+        childCategoryId={childCategoryId}
+        place={params["place"]}
+        order={params["order"]}
+        tagName={params["tagName"]}
+        search={params["search"]}
+      />
     </div>
   );
 }
