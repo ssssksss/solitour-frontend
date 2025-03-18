@@ -20,7 +20,5 @@ export async function getNewAccessToken() {
   );
 
   const accessToken = response.headers.get("set-cookie")!.slice(13);
-  cookieStore.set("access_token", accessToken);
-
   return accessToken;
 }
