@@ -1,39 +1,21 @@
 import InformationViewer from "@/components/informations/detail/InformationViewer";
 import RecommendationList from "@/components/informations/detail/RecommendationList";
-import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
+import { getInformation } from "@/entities/information";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
-import { cookies } from "next/headers";
-
-async function getInformation(id: number) {
-  const accessToken = (await cookies()).get("access_token");
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${id}`,
-    {
-      method: "GET",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
-      next: { revalidate: 60, tags: [`getInformation/${id}`] },
-    },
-  );
-
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<InformationDetailResponseDto>;
-}
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata(props: Props) {
-  const params = await props.params;
-  const { id } = params;
-  const informationId = Number(id);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const informationId = Number((await params).id);
 
-  if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
-    throw Error("Not Found");
+  if (informationId < 1 || !Number.isSafeInteger(informationId)) {
+    throw new Error("Not Found");
   }
 
   return {
@@ -42,13 +24,15 @@ export async function generateMetadata(props: Props) {
   };
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { id } = params;
-  const informationId = Number(id);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const informationId = Number((await params).id);
 
   if (informationId < 1 || !Number.isSafeInteger(informationId)) {
-    throw Error("Not Found");
+    throw new Error("Not Found");
   }
 
   const data = await getInformation(informationId);
@@ -65,7 +49,7 @@ export default async function Page(props: Props) {
         ]}
       />
       <InformationViewer informationId={informationId} data={data} />
-      <RecommendationList data={data} />
+      <RecommendationList recommendationList={data.recommendInformation} />
     </div>
   );
 }

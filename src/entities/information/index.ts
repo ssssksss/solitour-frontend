@@ -1,6 +1,12 @@
 export { getBestInformationList } from "./api/bestInformationList";
+export {
+  type RecommendationInformation,
+  type InformationDetailResponse,
+  getInformation,
+} from "./api/information";
 export { getInformationCategoryList } from "./api/informationCategory";
 export { getInformationList } from "./api/informationList";
+export { getTopInformationTitleList } from "./api/topInformationTitleList";
 
 export { INFORMATION_CATEGORY } from "./config/informationCategory";
 
@@ -9,6 +15,4 @@ export type {
   InformationCreateRequestDto,
   InformationUpdateRequestDto,
   InformationRegisterResponseDto,
-  InformationDetailResponseDto,
-  TopInformationResponseDto,
 } from "./model/informationDto";

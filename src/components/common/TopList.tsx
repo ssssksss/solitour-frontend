@@ -1,29 +1,12 @@
 import LottieFile from "@/../public/lottie/solitour_gathering_animation.json";
-import { TopGatheringResponseDto } from "@/entities/gathering/model/GatheringDto";
-import { TopInformationResponseDto } from "@/entities/information/model/informationDto";
 import Image from "next/image";
 import Link from "next/link";
 import Lottie from "lottie-react";
+import { TopGatheringResponseDto } from "@/entities/gathering/model/GatheringDto";
+import { getTopInformationTitleList } from "@/entities/information";
 
 interface Props {
   title: "여행" | "모임";
-}
-
-async function getTopInformationList() {
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/ranks`,
-    {
-      method: "GET",
-      next: { revalidate: 60, tags: ["getTopInformationList"] },
-    },
-  );
-
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<TopInformationResponseDto[]>;
 }
 
 async function getTopGatheringList() {
@@ -46,18 +29,17 @@ async function getTopGatheringList() {
 const TopList = async ({ title }: Props) => {
   const data =
     title === "여행"
-      ? await getTopInformationList()
+      ? await getTopInformationTitleList()
       : await getTopGatheringList();
 
   return (
     <div className="relative z-1 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl shadow-sm shadow-[#CCECE2] max-[744px]:-mt-24">
       {title === "모임" && (
         <div className="max-[14.375rem] absolute top-0 right-0 -z-5 flex aspect-auto translate-y-[-75%] items-center justify-center max-[744px]:w-full min-[744px]:right-[.5rem] min-[1024px]:right-[5.25rem]">
-          {/* TODO
           <Lottie
             animationData={LottieFile}
             className="translate-y-[-1rem] object-contain"
-          /> */}
+          />
           <Image
             className="object-contain"
             src="/icons/gathering-people.svg"

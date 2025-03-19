@@ -3,9 +3,9 @@
 import useToastifyStore from "@/stores/toastifyStore";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useModalState from "../../shared/lib/hooks/useModalState";
 import useGatheringStore from "@/stores/gatheringStore";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
+import { useModalState } from "@/shared/lib/hooks";
 
 export const useGatheringViewer = (data: GatheringDetailResponseDto) => {
   const [loading, setLoading] = useState<boolean>(false);

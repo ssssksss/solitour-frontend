@@ -1,8 +1,8 @@
-interface Props {
-  title: "여행" | "모임";
+interface TopTitleListSkeletonProps {
+  title: string;
 }
 
-const TopListSkeleton = ({ title }: Props) => {
+export const TopTitleListSkeleton = ({ title }: TopTitleListSkeletonProps) => {
   return (
     <div className="z-10 -mt-28 flex h-fit w-full flex-col justify-center rounded-2xl bg-white px-24 py-16 shadow-sm shadow-[#CCECE2] max-[1024px]:px-8 max-[1024px]:py-12 max-[744px]:-mt-24">
       <h2 className="border-gray3 mb-9 border-b-[0.0625rem] pb-3 text-2xl font-semibold text-black">
@@ -26,5 +26,3 @@ const TopListSkeleton = ({ title }: Props) => {
     </div>
   );
 };
-
-export default TopListSkeleton;

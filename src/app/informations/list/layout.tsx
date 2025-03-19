@@ -1,8 +1,6 @@
-import TopList from "@/components/common/TopList";
-import TopListSkeleton from "@/components/skeleton/common/TopListSkeleton";
 import { InformationBanner } from "@/widgets/informationBanner";
+import { TopInformationTitleListWrapper } from "@/widgets/topInformationTitleListWrapper";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "정보",
@@ -18,9 +16,7 @@ export default function Layout({
     <div className="flex w-full flex-col items-center">
       <InformationBanner />
       <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
-      <Suspense fallback={<TopListSkeleton title="여행" />}>
-        <TopList title="여행" />
-      </Suspense>
+      <TopInformationTitleListWrapper />
       {children}
     </div>
   );

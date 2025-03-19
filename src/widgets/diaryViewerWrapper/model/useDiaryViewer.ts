@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { useState } from "react";
 import { deleteDiary } from "@/entities/diary";

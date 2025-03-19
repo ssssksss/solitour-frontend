@@ -1,4 +1,4 @@
-import DiaryCardSkeleton from "@/components/skeleton/diary/list/DiaryCardSkeleton";
+import { DiaryCardSkeleton } from "@/entities/diary";
 import { PaginationSkeleton } from "@/shared/ui/pagination";
 
 export const DiaryListSkeleton = () => {

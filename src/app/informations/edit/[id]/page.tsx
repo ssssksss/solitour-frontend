@@ -1,28 +1,6 @@
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import InformationUpdateEditor from "@/components/informations/edit/InformationUpdateEditor";
-import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
-import { cookies } from "next/headers";
-
-async function getInformation(id: number) {
-  const cookie = (await cookies()).get("access_token");
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-      next: { revalidate: 60, tags: [`getInformation/${id}`] },
-    },
-  );
-
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<InformationDetailResponseDto>;
-}
+import { getInformation } from "@/entities/information";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 
 interface Props {
   params: Promise<{ id: string }>;
