@@ -1,5 +1,4 @@
 import GatheringSort from "@/components/gathering/read/GatheringSort";
-import { GatheringCategoryListType } from "@/entities/gathering/model/GatheringCategoryDto";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import GatheringSearch from "./GatheringSearch";
@@ -7,9 +6,10 @@ import GatheringExcludeComplete from "./GatheringExcludeComplete";
 import GatheringCategoryList from "./GatheringCategoryList";
 import GatheringCardList from "./GatheringCardList";
 import GatheringFilterModal from "./GatheringFilterModal";
+import { GatheringCategory } from "@/entities/gathering";
 
 interface GatheringListProps {
-  gatheringCategoryList: GatheringCategoryListType;
+  gatheringCategoryList: GatheringCategory[];
 }
 
 const GatheringList = (props: GatheringListProps) => {

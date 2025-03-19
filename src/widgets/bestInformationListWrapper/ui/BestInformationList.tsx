@@ -1,5 +1,5 @@
 import { getBestInformationList } from "@/entities/information";
-import { InformationItem } from "@/features/information";
+import { InformationItem } from "@/features/informationItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
 
 export const BestInformationList = async () => {

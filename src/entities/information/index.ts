@@ -4,7 +4,7 @@ export {
   type InformationDetailResponse,
   getInformation,
 } from "./api/information";
-export { getInformationCategoryList } from "./api/informationCategory";
+export { getInformationCategoryList } from "./api/informationCategoryList";
 export { getInformationList } from "./api/informationList";
 export { getTopInformationTitleList } from "./api/topInformationTitleList";
 

@@ -21,9 +21,9 @@ export const DiaryCreateEditor = () => {
     <FormProvider {...methods}>
       <DiaryEditor
         text="등록"
-        datePickerModal={dateRangeModalVisible}
-        addressModal={addressModalVisible}
         loading={loading}
+        datePickerModalVisible={dateRangeModalVisible}
+        addressModalVisible={addressModalVisible}
         openDateRangeModal={openDateRangeModal}
         closeDateRangeModal={closeDateRangeModal}
         openAddressModal={openAddressModal}

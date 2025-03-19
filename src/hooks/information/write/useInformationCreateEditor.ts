@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
-import { InformationCreateFormSchema } from "@/features/information";
+import { InformationCreateFormSchema } from "@/features/informationItem";
 import {
   InformationCreateRequestDto,
   InformationRegisterResponseDto,

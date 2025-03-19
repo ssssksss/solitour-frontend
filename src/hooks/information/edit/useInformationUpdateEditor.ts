@@ -16,7 +16,7 @@ import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
-import { InformationUpdateFormSchema } from "@/features/information";
+import { InformationUpdateFormSchema } from "@/features/informationItem";
 
 export const useInformationUpdateEditor = (
   informationId: number,

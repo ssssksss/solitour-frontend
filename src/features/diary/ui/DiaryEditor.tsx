@@ -16,8 +16,8 @@ const QuillEditor = dynamic(
 
 interface DiaryEditorProps {
   text: string;
-  datePickerModal: boolean;
-  addressModal: boolean;
+  datePickerModalVisible: boolean;
+  addressModalVisible: boolean;
   loading: boolean;
   openDateRangeModal: () => void;
   closeDateRangeModal: () => void;
@@ -28,9 +28,9 @@ interface DiaryEditorProps {
 
 export const DiaryEditor = ({
   text,
-  datePickerModal,
-  addressModal,
   loading,
+  datePickerModalVisible,
+  addressModalVisible,
   openDateRangeModal,
   closeDateRangeModal,
   openAddressModal,
@@ -41,8 +41,10 @@ export const DiaryEditor = ({
 
   return (
     <div className="flex w-full flex-col">
-      {datePickerModal && <DatePickerModal closeModal={closeDateRangeModal} />}
-      {addressModal && <AddressModal closeModal={closeAddressModal} />}
+      {datePickerModalVisible && (
+        <DatePickerModal closeModal={closeDateRangeModal} />
+      )}
+      {addressModalVisible && <AddressModal closeModal={closeAddressModal} />}
       <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`일기 ${text}하기`}

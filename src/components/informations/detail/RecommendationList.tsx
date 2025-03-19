@@ -1,5 +1,5 @@
 import { LottieNotFound } from "@/shared/ui/lottie";
-import { InformationItem } from "@/features/information";
+import { InformationItem } from "@/features/informationItem";
 import { RecommendationInformation } from "@/entities/information";
 
 interface RecommendationListProps {

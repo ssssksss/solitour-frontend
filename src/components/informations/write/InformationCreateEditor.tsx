@@ -2,7 +2,7 @@
 
 import { useInformationCreateEditor } from "@/hooks/information/write/useInformationCreateEditor";
 import { FormProvider } from "react-hook-form";
-import InformationEditor from "../common/InformationEditor";
+import InformationEditor from "../../../features/informationEditor/ui/InformationEditor";
 
 const InformationCreateEditor = () => {
   const {

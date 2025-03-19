@@ -2,7 +2,7 @@
 
 import { useInformationUpdateEditor } from "@/hooks/information/edit/useInformationUpdateEditor";
 import { FormProvider } from "react-hook-form";
-import InformationEditor from "../common/InformationEditor";
+import InformationEditor from "../../../features/informationEditor/ui/InformationEditor";
 import { InformationDetailResponse } from "@/entities/information";
 
 interface InformationUpdateEditorProps {

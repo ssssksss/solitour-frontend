@@ -1,11 +1,11 @@
 "use client";
 
-import { GatheringCategoryListType } from "@/entities/gathering/model/GatheringCategoryDto";
+import { GatheringCategory } from "@/entities/gathering";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface GatheringCategoryListProps {
-  gatheringCategoryList: GatheringCategoryListType;
+  gatheringCategoryList: GatheringCategory[];
 }
 
 const GatheringCategoryList = ({

@@ -26,9 +26,9 @@ export const DiaryUpdateEditor = ({ diary }: DiaryUpdateEditorProps) => {
     <FormProvider {...methods}>
       <DiaryEditor
         text="수정"
-        datePickerModal={dateRangeModalVisible}
-        addressModal={addressModalVisible}
         loading={loading}
+        datePickerModalVisible={dateRangeModalVisible}
+        addressModalVisible={addressModalVisible}
         openDateRangeModal={openDateRangeModal}
         closeDateRangeModal={closeDateRangeModal}
         openAddressModal={openAddressModal}

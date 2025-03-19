@@ -1,6 +1,6 @@
 "use client";
 
-import ItemTag from "@/components/informations/common/ItemTag";
+import { Hashtag } from "@/shared/ui/hashtag";
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -57,15 +57,15 @@ const GatheringEditorHashTag = () => {
   };
 
   return (
-    <article className="flex w-full flex-col gap-[2rem]">
-      <div className="flex w-full items-center gap-x-[0.625rem] max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3">
+    <article className="flex w-full flex-col gap-8">
+      <div className="flex w-full items-center gap-x-2.5 max-[360px]:flex-col max-[360px]:items-start max-[360px]:gap-y-3">
         <div className="relative w-[2.75rem] shrink-0 text-lg font-semibold">
           태그
         </div>
         <div className="relative w-full">
           <input
             placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
-            className="h-[3.25rem] w-full rounded-[3rem] px-[1rem] pr-[3rem] outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]" // 오른쪽 padding 추가
+            className="h-[3.25rem] w-full rounded-[3rem] px-[1rem] pr-[3rem] outline -outline-offset-1 outline-[#E3E3E3]" // 오른쪽 padding 추가
             onKeyUp={onChangeHashTagHandler}
             disabled={tags.length > 9}
             maxLength={15}
@@ -77,21 +77,21 @@ const GatheringEditorHashTag = () => {
             ref={inputTagRef}
           />
           {tags.length > 9 && (
-            <div className="b-0 absolute pl-4 text-sm text-red-600">
+            <div className="absolute pl-4 text-sm text-red-500">
               해시태그는 최대 10개입니다.
             </div>
           )}
         </div>
       </div>
       <div className="flex min-h-8 flex-row flex-wrap items-center gap-1">
-        {tags.map((i) => (
-          <ItemTag
-            key={i}
-            tag={i}
+        {tags.map((tag) => (
+          <Hashtag
+            key={tag}
+            tagName={tag}
             borderColor="border-main"
             textColor="text-main"
             removable={true}
-            onClick={() => deleteTagHandler(i)}
+            onClick={() => deleteTagHandler(tag)}
             cursorPointer={true}
           />
         ))}

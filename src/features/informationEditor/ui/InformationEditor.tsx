@@ -1,18 +1,18 @@
 "use client";
 
 import { IoIosArrowDown } from "react-icons/io";
-import ItemTag from "./ItemTag";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
-import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
-import CategoryModal from "./CategoryModal";
-import ImageUploadItem from "./ImageUploadItem";
-import PlaceModal from "./PlaceModal";
+import CategoryModal from "../../../components/informations/common/CategoryModal";
+import ImageUploadItem from "../../../components/informations/common/ImageUploadItem";
+import PlaceModal from "../../../components/informations/common/PlaceModal";
 import { useFormContext } from "react-hook-form";
 import { useEditorStoreType } from "@/stores/editorStore";
 import { useDragScroll } from "@/shared/lib/hooks";
+import { HashSpinner } from "@/shared/ui/hashSpinner";
+import { Hashtag } from "@/shared/ui/hashtag";
 
 interface InformationEditorProps {
   text: string;
@@ -31,7 +31,7 @@ interface InformationEditorProps {
   handleSubmit: () => void;
 }
 
-const InformationEditor = ({
+export const InformationEditor = ({
   text,
   loading,
   locationModalVisible,
@@ -60,12 +60,12 @@ const InformationEditor = ({
       <h1 className="text-[1.75rem] font-bold text-black">
         {`정보 ${text}하기`}
       </h1>
-      <p className="mt-6 font-medium text-gray1">
+      <p className="text-gray1 mt-6 font-medium">
         혼자 여행할 때 <span className="text-main">유용한 정보</span>를 다른
         솔리들과 공유해보세요!
       </p>
       <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-[0.625rem]">
-        <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
+        <h2 className="w-[2.625rem] text-lg font-semibold text-nowrap text-black">
           제목<span className="text-main">*</span>
         </h2>
         <input
@@ -88,7 +88,7 @@ const InformationEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
         <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
-          <h2 className="w-[2.625rem] text-nowrap text-lg font-semibold text-black">
+          <h2 className="w-[2.625rem] text-lg font-semibold text-nowrap text-black">
             장소<span className="text-main">*</span>
           </h2>
           <button
@@ -128,7 +128,7 @@ const InformationEditor = ({
         </button>
       </div>
       <div
-        className="mb-2 mt-10 flex flex-row items-center gap-4 overflow-x-auto"
+        className="mt-10 mb-2 flex flex-row items-center gap-4 overflow-x-auto"
         ref={imagesHook.listRef}
         onMouseDown={imagesHook.onDragStart}
         onMouseMove={imagesHook.onDragMove}
@@ -144,11 +144,11 @@ const InformationEditor = ({
           </div>
         ))}
       </div>
-      <p className="text-sm font-medium text-gray1">
+      <p className="text-gray1 text-sm font-medium">
         사진 최대 용량은 10MB입니다.
       </p>
       <textarea
-        className="mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-hidden hover:border-main focus:border-main"
+        className="hover:border-main focus:border-main mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-hidden"
         {...formContext.register("informationContent")}
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         onChange={(e) => {
@@ -157,11 +157,11 @@ const InformationEditor = ({
         }}
         maxLength={500}
       />
-      <p className="pt-3 text-end text-sm font-medium text-gray1">
+      <p className="text-gray1 pt-3 text-end text-sm font-medium">
         {formContext.getValues("informationContent").length}/500
       </p>
       <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
-        <h2 className="flex w-44 flex-row items-center text-nowrap pt-3 text-lg font-bold text-black">
+        <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-nowrap text-black">
           해시태그<span className="text-main">*</span>
         </h2>
         <div className="relative flex w-full flex-col gap-2">
@@ -199,9 +199,9 @@ const InformationEditor = ({
               {formContext
                 .getValues("hashtags")
                 .map((hashtag: string, index: number) => (
-                  <ItemTag
+                  <Hashtag
                     key={index}
-                    tag={hashtag}
+                    tagName={hashtag}
                     borderColor="border-main"
                     textColor="text-main"
                     cursorPointer={true}
@@ -220,7 +220,7 @@ const InformationEditor = ({
                 ))}
             </div>
             <button
-              className="h-9 text-sm font-medium text-gray1 hover:text-main"
+              className="text-gray1 hover:text-main h-9 text-sm font-medium"
               type="button"
               onClick={() => {
                 const hashtag = inputTagRef.current?.value ?? "";
@@ -249,11 +249,11 @@ const InformationEditor = ({
         <div className="relative flex grow flex-col gap-4 max-[744px]:w-full">
           {formContext.getValues("tips").map((tip: string, index: number) => (
             <div key={index} className="relative w-full">
-              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border-[0.0625rem] bg-gray-100/25 pl-5 pr-14 text-sm outline-hidden">
+              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border-[0.0625rem] bg-gray-100/25 pr-14 pl-5 text-sm outline-hidden">
                 {tip}
               </div>
               <MdClose
-                className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
+                className="text-main absolute top-[0.625rem] right-[0.875rem] cursor-pointer rounded-full bg-gray-100 p-2 hover:scale-110"
                 size="2rem"
                 onClick={() => {
                   const tips: string[] = formContext.getValues("tips");
@@ -267,7 +267,7 @@ const InformationEditor = ({
           {formContext.getValues("tips").length < 5 && (
             <div className="relative w-full">
               <input
-                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pl-5 pr-14 text-sm outline-hidden`}
+                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pr-14 pl-5 text-sm outline-hidden`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
                 onKeyUp={handleTipChange}
@@ -280,7 +280,7 @@ const InformationEditor = ({
                 ref={inputTipRef}
               />
               <FaCheck
-                className="absolute right-[0.875rem] top-[0.625rem] cursor-pointer rounded-full bg-gray-100 p-2 text-main hover:scale-110"
+                className="text-main absolute top-[0.625rem] right-[0.875rem] cursor-pointer rounded-full bg-gray-100 p-2 hover:scale-110"
                 size="2rem"
                 onClick={() => {
                   if (
@@ -307,7 +307,7 @@ const InformationEditor = ({
       </div>
       <div className="flex flex-col items-end">
         <button
-          className={`${editorStore.imageLoading ? "cursor-not-allowed bg-gray1" : "bg-main hover:scale-105"} mb-20 mt-10 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow-sm`}
+          className={`${editorStore.imageLoading ? "bg-gray1 cursor-not-allowed" : "bg-main hover:scale-105"} mt-10 mb-20 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow-sm`}
           type="submit"
           onClick={() => handleSubmit()}
           disabled={loading || editorStore.imageLoading}
@@ -331,5 +331,3 @@ const InformationEditor = ({
     </div>
   );
 };
-
-export default InformationEditor;

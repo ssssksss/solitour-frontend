@@ -1,5 +1,3 @@
-export interface GatheringRequestDto {}
-
 export interface GatheringResponseDto {
   id: number;
   category: string;
@@ -15,11 +13,6 @@ export interface GatheringResponseDto {
   likes: number;
   views: number;
   isLike: boolean;
-}
-
-export interface TopGatheringResponseDto {
-  id: number;
-  title: string;
 }
 
 type UserPostingResponse = {

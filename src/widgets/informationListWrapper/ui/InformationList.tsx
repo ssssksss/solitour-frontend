@@ -1,7 +1,7 @@
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { Pagination } from "@/shared/ui/pagination";
 import { getInformationList } from "@/entities/information";
-import { InformationItem } from "@/features/information";
+import { InformationItem } from "@/features/informationItem";
 
 interface InformationListProps {
   page: number;

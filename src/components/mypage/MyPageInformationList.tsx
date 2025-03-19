@@ -5,7 +5,7 @@ import { useMyPageInformationList } from "@/hooks/mypage/useMyPageInformationLis
 import {
   InformationItem,
   InformationItemSkeleton,
-} from "@/features/information";
+} from "@/features/informationItem";
 import { Pagination } from "@/shared/ui/pagination";
 
 const MyPageInformationList = () => {

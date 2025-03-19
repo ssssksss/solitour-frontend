@@ -1,17 +1,17 @@
-import ItemTag from "../common/ItemTag";
 import Image from "next/image";
 import { TiLocation } from "react-icons/ti";
 import { LuEye } from "react-icons/lu";
-import { InformationDetailResponseDto } from "@/entities/information/model/informationDto";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import ButtonList from "./ButtonList";
 import ImageList from "./ImageList";
 import InformationLikeCount from "./InformationLikeCount";
 import KakaoMapLink from "./KakaoMapLink";
+import { InformationDetailResponse } from "@/entities/information";
+import { Hashtag } from "@/shared/ui/hashtag";
 
 interface InformationViewerProps {
   informationId: number;
-  data: InformationDetailResponseDto;
+  data: InformationDetailResponse;
 }
 
 const InformationViewer = ({ informationId, data }: InformationViewerProps) => {
@@ -101,9 +101,9 @@ const InformationViewer = ({ informationId, data }: InformationViewerProps) => {
           </p>
           <div className="flex flex-row flex-wrap items-center gap-1 pb-8">
             {data.tagResponses.map((tag, index) => (
-              <ItemTag
+              <Hashtag
                 key={index}
-                tag={tag.name}
+                tagName={tag.name}
                 borderColor="border-main"
                 textColor="text-main"
               />

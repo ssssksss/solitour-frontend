@@ -1,4 +1,4 @@
-import { InformationItemSkeleton } from "@/features/information";
+import { InformationItemSkeleton } from "@/features/informationItem";
 import { PaginationSkeleton } from "@/shared/ui/pagination";
 
 export const InformationListSkeleton = () => {
