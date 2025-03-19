@@ -1,6 +1,5 @@
-import DiaryViewer from "@/components/diary/detail/DiaryViewer";
-import { getDiary } from "@/entities/diary";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { DiaryViewerWrapper } from "@/widgets/diaryViewerWrapper";
 
 export async function generateMetadata({
   params,
@@ -30,8 +29,6 @@ export default async function Page({
     throw Error("Not Found");
   }
 
-  const diary = (await getDiary(diaryId)).diaryContentResponse;
-
   return (
     <div className="flex w-full flex-col items-center">
       <Breadcrumbs
@@ -40,7 +37,7 @@ export default async function Page({
           { label: "일기 상세", href: "" },
         ]}
       />
-      <DiaryViewer diary={diary} />
+      <DiaryViewerWrapper diaryId={diaryId} />
     </div>
   );
 }

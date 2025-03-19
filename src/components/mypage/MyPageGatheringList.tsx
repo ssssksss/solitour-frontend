@@ -1,12 +1,12 @@
 "use client";
 
 import { useMyPageGatheringList } from "@/hooks/mypage/useMyPageGatheringList";
-import AddUserInformationForm from "../auth/AddUserInformationForm";
 import CategoryList from "../common/CategoryList";
 import GatheringItem from "../common/GatheringItem";
 import { Modal } from "../common/modal/Modal";
-import Pagination from "../../shared/ui/pagination/Pagination";
-import GatheringItemSkeleton from "../../features/gathering/ui/GatheringItemSkeleton";
+import { GatheringItemSkeleton } from "@/features/gathering";
+import { Pagination } from "@/shared/ui/pagination";
+import { AddUserInformationForm } from "@/features/auth";
 
 const MyPageGatheringList = () => {
   const {
@@ -18,7 +18,6 @@ const MyPageGatheringList = () => {
     isLoading,
     modalState,
     isAccessible,
-    pageHandler,
     handleCategoryClick,
     checkAccessGathering,
   } = useMyPageGatheringList();
@@ -56,7 +55,6 @@ const MyPageGatheringList = () => {
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(totalElements / 6)}
-        pageHandler={pageHandler}
       />
     </div>
   );

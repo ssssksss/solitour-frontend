@@ -1,6 +1,6 @@
-import DiaryUpdateEditor from "@/components/diary/edit/DiaryUpdateEditor";
 import { getDiary } from "@/entities/diary";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { DiaryUpdateEditor } from "@/widgets/diaryUpdateEditor";
 
 export async function generateMetadata({
   params,

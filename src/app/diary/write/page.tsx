@@ -1,5 +1,7 @@
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
-import DiaryCreateEditor from "@/components/diary/write/DiaryCreateEditor";
+"use client";
+
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { DiaryCreateEditor } from "@/widgets/diaryCreateEditor";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

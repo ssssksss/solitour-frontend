@@ -1,15 +1,41 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { Diary } from "../model/diary";
+import { DiaryInfo } from "../model/diary";
+import { revalidateTag } from "next/cache";
+import { fetchWithAuth } from "@/shared/api";
 
-export interface DiaryInfo {
-  diaryContentResponse: Diary;
+export interface DiaryCreateRequest {
+  title: string;
+  titleImage: string;
+  startDatetime: Date;
+  endDatetime: Date;
+  diaryDayRequests: {
+    content: string;
+    feelingStatus: string;
+    diaryDayContentImages: string;
+    place: string;
+  }[];
+}
+
+export interface DiaryUpdateRequest {
+  title: string;
+  deleteTitleImage: string;
+  saveTitleImage: string;
+  startDatetime: Date;
+  endDatetime: Date;
+  diaryDayRequests: {
+    content: string;
+    feelingStatus: string;
+    deleteImagesUrl: string;
+    saveImagesUrl: string;
+    place: string;
+  }[];
 }
 
 export async function getDiary(diaryId: number) {
   const accessToken = (await cookies()).get("access_token");
-  const response = await fetch(
+  const response = await fetchWithAuth(
     `${process.env.BACKEND_URL}/api/diary/${diaryId}`,
     {
       method: "GET",
@@ -23,4 +49,70 @@ export async function getDiary(diaryId: number) {
   }
 
   return response.json() as Promise<DiaryInfo>;
+}
+
+export async function createDiary(data: DiaryCreateRequest) {
+  const accessToken = (await cookies()).get("access_token");
+  const response = await fetchWithAuth(`${process.env.BACKEND_URL}/api/diary`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `${accessToken?.name}=${accessToken?.value}`,
+    },
+    body: JSON.stringify(data),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create data.");
+  }
+
+  revalidateTag("diaryList");
+  return response;
+}
+
+export async function updateDiary(diaryId: number, data: DiaryUpdateRequest) {
+  const accessToken = (await cookies()).get("access_token");
+  const response = await fetchWithAuth(
+    `${process.env.BACKEND_URL}/api/diary/${diaryId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update data.");
+  }
+
+  revalidateTag("diaryList");
+  revalidateTag(`diary/${diaryId}`);
+  return response;
+}
+
+export async function deleteDiary(diaryId: number) {
+  const accessToken = (await cookies()).get("access_token");
+  const response = await fetchWithAuth(
+    `${process.env.BACKEND_URL}/api/diary/${diaryId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to delete data.");
+  }
+
+  revalidateTag("diaryList");
+  revalidateTag(`diary/${diaryId}`);
+  return response;
 }

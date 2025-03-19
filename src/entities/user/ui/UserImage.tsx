@@ -11,7 +11,7 @@ export const UserImage = ({
   size,
   addressStyle = "rounded-[50%] border-[0.03125rem] border-[#B8EDD9] bg-lightgreen",
 }: UserImageProps) => {
-  return userImageAddress ? (
+  return (
     <Image
       className={addressStyle}
       src={userImageAddress}
@@ -19,7 +19,5 @@ export const UserImage = ({
       width={size}
       height={size}
     />
-  ) : (
-    <div>null</div>
   );
 };

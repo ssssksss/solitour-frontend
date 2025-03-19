@@ -1,5 +1,6 @@
 "use server";
 
+import { fetchWithAuth } from "@/shared/api";
 import { cookies } from "next/headers";
 
 interface GatheringInfo {
@@ -25,7 +26,7 @@ interface GatheringInfo {
 
 export async function getNewGatheringList() {
   const accessToken = (await cookies()).get("access_token");
-  const response = await fetch(
+  const response = await fetchWithAuth(
     `${process.env.BACKEND_URL}/api/gatherings/home`,
     {
       method: "GET",

@@ -1,5 +1,6 @@
 "use server";
 
+import { fetchWithAuth } from "@/shared/api";
 import { LOCATION_ID } from "@/shared/config";
 import { cookies } from "next/headers";
 
@@ -31,7 +32,7 @@ export async function getInformationList(
   search?: string,
 ) {
   const accessToken = (await cookies()).get("access_token");
-  const response = await fetch(
+  const response = await fetchWithAuth(
     [
       `${process.env.BACKEND_URL}`,
       "/api/informations",

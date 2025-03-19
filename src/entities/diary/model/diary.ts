@@ -13,3 +13,7 @@ export interface Diary {
     }[];
   };
 }
+
+export interface DiaryInfo {
+  diaryContentResponse: Diary;
+}

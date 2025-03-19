@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineMenu } from "react-icons/md";
 import { HeaderSidebar } from "./HeaderSidebar";
-import UserDropDown from "@/components/auth/UserDropDown";
 import { useHeader } from "../model/useHeader";
+import { UserDropDown } from "./UserDropDown";
 
 export const Header = () => {
   const {
@@ -43,7 +43,7 @@ export const Header = () => {
               <ul className="flex h-full items-center">
                 <li>
                   <Link
-                    className={`${pathname === "/" ? "font-bold" : "font-medium"} flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3`}
+                    className={`${pathname === "/" ? "font-bold" : "font-medium"} hover:text-main flex h-full w-full items-center justify-center px-5 text-sm text-black max-[1024px]:px-3`}
                     href="/"
                   >
                     홈
@@ -73,7 +73,7 @@ export const Header = () => {
                     <Link
                       className={[
                         `${pathname.includes(path) ? "font-bold" : "font-medium"}`,
-                        "flex h-full w-full items-center justify-center px-5 text-sm text-black hover:text-main max-[1024px]:px-3",
+                        "hover:text-main flex h-full w-full items-center justify-center px-5 text-sm text-black max-[1024px]:px-3",
                       ].join(" ")}
                       href={href}
                       prefetch={prefetch}
@@ -86,21 +86,21 @@ export const Header = () => {
             </nav>
           </div>
           <MdOutlineMenu
-            className="absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer hover:text-main max-[744px]:flex"
+            className="hover:text-main absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer max-[744px]:flex"
             size="1.5rem"
             onClick={handleMenuClick}
           />
           <div className="absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden">
             {id == 0 ? (
               <>
-                <div className="relative aspect-square w-[1.875rem] animate-pulseAuth rounded-[50%] shadow" />
-                <div className="h-[1.875rem] w-[4rem] animate-pulseAuth" />
+                <div className="animate-pulse-auth relative aspect-square w-[1.875rem] rounded-[50%] shadow" />
+                <div className="animate-pulse-auth h-[1.875rem] w-[4rem]" />
               </>
             ) : id > 0 ? (
               <UserDropDown />
             ) : (
               <Link
-                className="ml-10 font-semibold text-black hover:text-main"
+                className="hover:text-main ml-10 font-semibold text-black"
                 href="/auth/signin"
               >
                 로그인

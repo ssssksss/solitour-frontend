@@ -6,7 +6,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { AnimatePresence, motion } from "motion/react";
 import { Modal } from "@/components/common/modal/Modal";
-import AddUserInformationForm from "@/components/auth/AddUserInformationForm";
+import AddUserInformationForm from "@/features/auth/ui/AddUserInformationForm";
 import { useFloatingButton } from "../model/useFloatingButton";
 
 export const FloatingButton = () => {

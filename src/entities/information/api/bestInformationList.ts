@@ -1,5 +1,6 @@
 "use server";
 
+import { fetchWithAuth } from "@/shared/api";
 import { cookies } from "next/headers";
 
 interface BestInformationInfo {
@@ -20,7 +21,7 @@ interface BestInformationInfo {
  */
 export async function getBestInformationList() {
   const accessToken = (await cookies()).get("access_token");
-  const response = await fetch(
+  const response = await fetchWithAuth(
     `${process.env.BACKEND_URL}/api/informations/main-page`,
     {
       method: "GET",

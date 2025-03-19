@@ -1,2 +1,2 @@
-export { DiaryCreateFormSchema } from "./model/DiaryCreateFormSchema";
-export { DiaryUpdateFormSchema } from "./model/DiaryUpdateFormSchema";
+export { DiaryFormSchema } from "./model/DiaryFormSchema";
+export { DiaryEditor } from "./ui/DiaryEditor";
