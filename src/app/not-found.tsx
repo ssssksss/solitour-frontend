@@ -23,7 +23,7 @@ export default function NotFound() {
         <p>앗..요청하신 페이지를</p>
         <p>찾을 수 없습니다.</p>
       </div>
-      <div className="flex flex-col items-center text-gray1">
+      <div className="text-gray1 flex flex-col items-center">
         <p>존재하지 않는 주소를 입력하셨거나,</p>
         <div className="flex flex-row flex-wrap items-center justify-center gap-x-1 max-[480px]:flex-col">
           <p>{"요청하신 페이지의 주소가 변경, "}</p>
@@ -32,7 +32,7 @@ export default function NotFound() {
       </div>
       <div className="flex flex-row items-center gap-[0.625rem]">
         <Link
-          className="flex h-[2.625rem] w-[6.625rem] flex-row items-center justify-center rounded-full border-[0.0625rem] border-gray3 hover:scale-105"
+          className="border-gray3 flex h-[2.625rem] w-[6.625rem] flex-row items-center justify-center rounded-full border hover:scale-105"
           href="/"
         >
           홈으로

@@ -39,7 +39,7 @@ interface UserState {
 // 2. 액션 인터페이스 정의
 interface UserAction {
   initialize: () => void;
-  setUser: (data: Partial<UserState>) => void;
+  setUserState: (data: Partial<UserState>) => void;
 }
 
 // 3. 초기 상태 정의
@@ -65,7 +65,7 @@ type UserStoreType = UserState & UserAction;
 const userStore: StateCreator<UserStoreType> = (set) => ({
   ...initialState,
   initialize: () => set({ ...initialState, id: -1 }),
-  setUser: (data) => set(() => ({ ...data })),
+  setUserState: (data) => set(() => ({ ...data })),
 });
 
 export const useUserStore = create<UserStoreType>(

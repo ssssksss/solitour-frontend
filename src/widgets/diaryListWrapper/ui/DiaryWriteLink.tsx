@@ -10,7 +10,7 @@ export const DiaryWriteLink = () => {
       transition={{ duration: 0.5, ease: "linear" }}
     >
       <Link
-        className="border-gray3 hover:border-main flex aspect-3/4 w-full flex-col items-center justify-center rounded-2xl border-[0.0625rem] bg-[#FBFBFB] max-[744px]:aspect-auto max-[744px]:h-[29rem]"
+        className="border-gray3 hover:border-main flex aspect-3/4 w-full flex-col items-center justify-center rounded-2xl border bg-[#FBFBFB] max-[744px]:aspect-auto max-[744px]:h-[29rem]"
         href="/diary/write"
       >
         <motion.div

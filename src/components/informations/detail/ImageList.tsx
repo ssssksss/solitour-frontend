@@ -33,7 +33,7 @@ const ImageList = ({ images }: ImageListProps) => {
       )}
       <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
         <Image
-          className="cursor-pointer rounded-2xl border-[0.0625rem] hover:border-main"
+          className="hover:border-main cursor-pointer rounded-2xl border"
           src={mainImageUrl}
           alt="mainImage"
           fill={true}
@@ -58,7 +58,7 @@ const ImageList = ({ images }: ImageListProps) => {
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative min-h-[6.6875rem] min-w-[6.6875rem] rounded-lg border-[0.0625rem]"
+            className="relative min-h-[6.6875rem] min-w-[6.6875rem] rounded-lg border"
             onClick={() => setMainImageUrl(image.address)}
             onTouchEnd={() => setMainImageUrl(image.address)}
           >

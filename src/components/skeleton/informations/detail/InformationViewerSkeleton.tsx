@@ -13,11 +13,11 @@ const InformationViewerSkeleton = () => {
               </div>
             </div>
             <div className="flex flex-row items-center gap-3">
-              <div className="flex flex-row items-center gap-1 text-gray2">
+              <div className="text-gray2 flex flex-row items-center gap-1">
                 <div className="h-4 w-4 bg-gray-100" />
                 <div className="h-4 w-7 bg-gray-100" />
               </div>
-              <div className="flex flex-row items-center gap-1 text-gray2">
+              <div className="text-gray2 flex flex-row items-center gap-1">
                 <div className="h-4 w-4 bg-gray-100" />
                 <div className="h-4 w-7 bg-gray-100" />
               </div>
@@ -47,11 +47,11 @@ const InformationViewerSkeleton = () => {
                 </div>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <div className="flex flex-row items-center gap-1 text-gray2">
+                <div className="text-gray2 flex flex-row items-center gap-1">
                   <div className="h-4 w-4 bg-gray-100" />
                   <div className="h-4 w-7 bg-gray-100" />
                 </div>
-                <div className="flex flex-row items-center gap-1 text-gray2">
+                <div className="text-gray2 flex flex-row items-center gap-1">
                   <div className="h-4 w-4 bg-gray-100" />
                   <div className="h-4 w-7 bg-gray-100" />
                 </div>
@@ -74,7 +74,7 @@ const InformationViewerSkeleton = () => {
             <div className="h-6 w-16 rounded-full bg-gray-100" />
             <div className="h-6 w-16 rounded-full bg-gray-100" />
           </div>
-          <div className="flex flex-col gap-3 border-y-2 border-gray3 px-6 py-4">
+          <div className="border-gray3 flex flex-col gap-3 border-y-2 px-6 py-4">
             <div className="h-6 w-32 bg-gray-100" />
             {[1, 2, 3].map((value) => (
               <div
@@ -86,9 +86,9 @@ const InformationViewerSkeleton = () => {
         </div>
       </div>
       <div className="mt-20 flex h-48 flex-col">
-        <div className="h-48 w-full rounded-2xl border-[0.0625rem] bg-gray-100" />
+        <div className="h-48 w-full rounded-2xl border bg-gray-100" />
       </div>
-      <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pb-10 pt-12">
+      <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pt-12 pb-10">
         <div className="h-8 w-40 bg-gray-100" />
         <div className="flex flex-row items-start gap-1">
           <div className="h-5 w-5 bg-gray-100" />

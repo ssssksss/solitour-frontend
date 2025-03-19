@@ -20,7 +20,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
   if (isFlipped) {
     return (
       <div
-        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} border-gray3 hover:border-main hover:bg-lightGreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border-[0.0625rem] px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
+        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} border-gray3 hover:border-main hover:bg-lightGreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
         onClick={() => {
           if (flag) {
             handleFlip();
@@ -98,7 +98,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
   // 앞면
   return (
     <motion.button
-      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border-[0.0625rem] max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
+      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
       onClick={() => {
         if (!flag) {
           handleFlip();

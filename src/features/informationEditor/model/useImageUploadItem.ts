@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import useEditorStore from "@/stores/editorStore";
+import useEditorStore from "@/features/informationEditor/model/informationEditorStore";
 import { useRef } from "react";
 
 export const useImageUploadItem = (imageIndex: number) => {

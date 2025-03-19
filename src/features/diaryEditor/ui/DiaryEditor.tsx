@@ -58,7 +58,7 @@ export const DiaryEditor = ({
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent pl-5 text-sm outline-hidden`}
+          className={`${formContext.formState.errors.title ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border bg-transparent pl-5 text-sm outline-hidden`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("title")}
@@ -80,7 +80,7 @@ export const DiaryEditor = ({
             날짜<span className="text-main">*</span>
           </h2>
           <button
-            className={`${formContext.getValues("startDate") ? "text-black" : "text-gray2"} ${formContext.formState.errors.startDate ? "border-red-500" : "border-gray3 hover:border-main"} h-[3.3125rem] w-[21.75rem] grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm`}
+            className={`${formContext.getValues("startDate") ? "text-black" : "text-gray2"} ${formContext.formState.errors.startDate ? "border-red-500" : "border-gray3 hover:border-main"} h-[3.3125rem] w-[21.75rem] grow rounded-full border bg-transparent pl-5 text-start text-sm`}
             type="button"
             onClick={() => openDateRangeModal()}
           >
@@ -118,7 +118,7 @@ export const DiaryEditor = ({
             주소<span className="text-main">*</span>
           </h2>
           <button
-            className={`${formContext.getValues("address") === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm outline-hidden`}
+            className={`${formContext.getValues("address") === "" ? "text-gray2" : "text-black"} ${formContext.formState.errors.address ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border bg-transparent pl-5 text-start text-sm outline-hidden`}
             type="button"
             onClick={() => openAddressModal()}
           >
@@ -134,7 +134,7 @@ export const DiaryEditor = ({
         </div>
       </div>
       <div
-        className={`${formContext.formState.errors.moodLevels ? "border-red-500" : "border-gray3"} relative mt-10 flex flex-col gap-5 rounded-2xl border-[0.0625rem] pt-6 pb-[0.875rem]`}
+        className={`${formContext.formState.errors.moodLevels ? "border-red-500" : "border-gray3"} relative mt-10 flex flex-col gap-5 rounded-2xl border pt-6 pb-[0.875rem]`}
       >
         <h2 className="pl-6 text-lg font-semibold text-black">
           하루 기분은 어땠나요?

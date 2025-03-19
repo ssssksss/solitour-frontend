@@ -1,11 +1,11 @@
 "use client";
 
-import { InformationCategory } from "@/entities/information/model/informationCategoryDto";
+import { InformationCategory } from "@/entities/information";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-export const useCategoryModal = (closeModal: () => void) => {
+export const useInformationCategoryModal = (closeModal: () => void) => {
   const [parentCategory, setParentCategory] = useState(0);
   const [categories, setCategories] = useState<InformationCategory[]>();
   const formContext = useFormContext();

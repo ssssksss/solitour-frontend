@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 export const useAuthKakao = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setUser } = useUserStore();
+  const { setUserState: setUser } = useUserStore();
   const [loading, setLoading] = useState(true);
   const methods = useForm({
     resolver: zodResolver(AddUserInformationFormSchema),

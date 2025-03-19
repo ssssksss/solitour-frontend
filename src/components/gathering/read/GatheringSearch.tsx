@@ -78,7 +78,7 @@ const GatheringSearch = () => {
   return (
     <div className="flex flex-row items-center gap-4 max-[1024px]:justify-between max-[744px]:w-full max-[744px]:flex-col max-[744px]:items-start">
       <div className="relative z-20 flex flex-row items-center max-[744px]:w-full">
-        <div className="absolute left-0 top-0 flex h-full flex-row items-center text-sm text-gray1 hover:text-main">
+        <div className="text-gray1 hover:text-main absolute top-0 left-0 flex h-full flex-row items-center text-sm">
           <Dropdown
             options={OPTIONS}
             dropdownHandler={dropDownHandler}
@@ -96,9 +96,9 @@ const GatheringSearch = () => {
             }}
           />
         </div>
-        <p className="absolute left-[4.6875rem] top-2 text-gray3">|</p>
+        <p className="text-gray3 absolute top-2 left-[4.6875rem]">|</p>
         <input
-          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-hidden placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
+          className="border-gray3 placeholder:text-gray2 h-[2.75rem] w-[21.4375rem] rounded-full border bg-white pr-12 pl-[5.8125rem] text-sm outline-hidden placeholder:font-medium max-[1024px]:w-full"
           type="text"
           autoComplete="search"
           placeholder="검색하기"
@@ -112,7 +112,7 @@ const GatheringSearch = () => {
           }}
         />
         <button
-          className="absolute right-[0.375rem] top-[0.3125rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full bg-lightGreen hover:scale-110"
+          className="bg-lightGreen absolute top-[0.3125rem] right-[0.375rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full hover:scale-110"
           onClick={() => searchHandler()}
         >
           <Image

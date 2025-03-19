@@ -48,7 +48,7 @@ export const InformationItem = ({
             <p
               className={[
                 categoryTagStyle,
-                "w-fit rounded-full border-[0.0625rem] px-4 py-[0.375rem] text-xs font-semibold",
+                "w-fit rounded-full border px-4 py-[0.375rem] text-xs font-semibold",
               ].join(" ")}
             >
               {categoryName}

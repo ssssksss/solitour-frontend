@@ -33,7 +33,7 @@ export const AddressModal = ({ closeModal }: AddressModalProps) => {
         <div className="flex flex-col gap-8 px-5">
           <div className="flex flex-col gap-2">
             <h3 className="text-lg font-medium text-black">장소 선택</h3>
-            <div className="flex h-11 flex-row items-center border-[0.0625rem] text-sm">
+            <div className="flex h-11 flex-row items-center border text-sm">
               <button
                 className={`h-11 flex-[50%] ${!flag ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
@@ -55,7 +55,7 @@ export const AddressModal = ({ closeModal }: AddressModalProps) => {
               <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
               <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
                 <input
-                  className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
+                  className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
                   type="text"
                   autoComplete="off"
                   name="location"
@@ -89,7 +89,7 @@ export const AddressModal = ({ closeModal }: AddressModalProps) => {
               </h3>
               <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
                 <input
-                  className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
+                  className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
                   type="text"
                   autoComplete="off"
                   placeholder="도로명주소를 입력하세요. (Ex. 용산구 청파로)"

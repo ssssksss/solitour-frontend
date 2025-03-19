@@ -4,7 +4,7 @@ import { useDebounce } from "@/shared/lib/hooks";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-export const usePlaceModal = (closeModal: () => void) => {
+export const useInformationPlaceModal = (closeModal: () => void) => {
   const formContext = useFormContext();
   const [isCustom, setIsCustom] = useState(false);
 

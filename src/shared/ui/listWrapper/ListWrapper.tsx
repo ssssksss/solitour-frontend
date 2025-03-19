@@ -30,7 +30,7 @@ export const ListWrapper = ({
               </p>
             </h2>
             <Link
-              className="border-gray3 text-gray1 hover:border-main hover:bg-main hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] hover:text-white max-[744px]:flex"
+              className="border-gray3 text-gray1 hover:border-main hover:bg-main hidden h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border hover:text-white max-[744px]:flex"
               href={href}
             >
               전체보기
@@ -39,7 +39,7 @@ export const ListWrapper = ({
           <p className="text-gray1 text-sm font-medium">{description}</p>
         </div>
         <Link
-          className="border-gray3 text-gray1 hover:border-main hover:bg-main flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border-[0.0625rem] hover:text-white max-[744px]:hidden"
+          className="border-gray3 text-gray1 hover:border-main hover:bg-main flex h-[2.3125rem] w-[5.8125rem] items-center justify-center rounded-full border hover:text-white max-[744px]:hidden"
           href={href}
         >
           전체보기

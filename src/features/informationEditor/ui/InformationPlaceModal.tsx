@@ -1,14 +1,16 @@
 "use client";
 
-import { usePlaceModal } from "@/hooks/information/common/usePlaceModal";
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
+import { useInformationPlaceModal } from "../model/useInformationPlaceModal";
 
-interface PlaceModalProps {
+interface InformationPlaceModalProps {
   closeModal: () => void;
 }
 
-const PlaceModal = ({ closeModal }: PlaceModalProps) => {
+export const InformationPlaceModal = ({
+  closeModal,
+}: InformationPlaceModalProps) => {
   const {
     formContext,
     placeInfos,
@@ -23,22 +25,22 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
     handlePlaceChange,
     handleAddressChange,
     handleCustomPlaceNameChange,
-  } = usePlaceModal(closeModal);
+  } = useInformationPlaceModal(closeModal);
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
+    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit max-h-[calc(100%_-_48px)] w-[39.75rem] flex-col overflow-y-scroll rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)]">
         <div className="flex flex-row items-center justify-end">
           <MdClose
-            className="cursor-pointer text-gray2 hover:text-main"
-            size={"2.5rem"}
+            className="text-gray2 hover:text-main cursor-pointer"
+            size="2.5rem"
             onClick={handlePlaceReset}
           />
         </div>
         <div className="flex flex-col gap-8 px-5">
           <div className="flex flex-col gap-2">
             <h3 className="text-lg font-medium text-black">장소 선택</h3>
-            <div className="flex h-11 flex-row items-center border-[0.0625rem] text-sm">
+            <div className="flex h-11 flex-row items-center border text-sm">
               <button
                 className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
                 type="button"
@@ -59,9 +61,9 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
             className={`${isCustom ? "hidden" : ""} flex w-full flex-col gap-2`}
           >
             <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
-            <div className="flex h-80 flex-col rounded-3xl border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]">
+            <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
               <input
-                className="h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-hidden hover:border-main focus:border-main max-[480px]:w-full"
+                className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
                 type="text"
                 autoComplete="off"
                 name="location"
@@ -80,7 +82,7 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
                       <TiLocation />
                       {placeInfo.place_name}
                     </div>
-                    <span className="text-xs text-gray1">
+                    <span className="text-gray1 text-xs">
                       {placeInfo.address_name}
                     </span>
                   </button>
@@ -93,10 +95,10 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
           >
             <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
             <div
-              className={`${canTypePlaceName ? "h-fit" : "h-80 border-b-[0.0625rem] border-l-[0.0625rem] border-r-[0.0625rem]"} flex flex-col rounded-3xl`}
+              className={`${canTypePlaceName ? "h-fit" : "h-80 border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]"} flex flex-col rounded-3xl`}
             >
               <input
-                className={`${canTypePlaceName ? "bg-gray-100/25" : ""} h-[3.3125rem] rounded-[21px] border-[0.0625rem] bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-hidden hover:border-main focus:border-main max-[480px]:w-full`}
+                className={`${canTypePlaceName ? "bg-gray-100/25" : ""} bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full`}
                 type="text"
                 autoComplete="off"
                 {...formContext.register("informationAddress")}
@@ -126,7 +128,7 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
               className={`${canTypePlaceName ? "" : "hidden"} flex flex-row items-center justify-between gap-2`}
             >
               <input
-                className="h-[3.3125rem] w-96 rounded-[21px] border-[0.0625rem] bg-transparent bg-search-icon bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pl-10 pr-6 text-sm outline-hidden hover:border-main focus:border-main max-[480px]:w-full"
+                className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] w-96 rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
                 type="text"
                 autoComplete="off"
                 name="location"
@@ -134,7 +136,7 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
                 onChange={(e) => handleCustomPlaceNameChange(e.target.value)}
               />
               <button
-                className={`h-[3.3125rem] w-40 rounded-full bg-main text-[0.9375rem] text-white hover:scale-105 ${canRegister ? "" : "hidden"}`}
+                className={`bg-main h-[3.3125rem] w-40 rounded-full text-[0.9375rem] text-white hover:scale-105 ${canRegister ? "" : "hidden"}`}
                 type="button"
                 onClick={() => closeModal()}
               >
@@ -147,5 +149,3 @@ const PlaceModal = ({ closeModal }: PlaceModalProps) => {
     </div>
   );
 };
-
-export default PlaceModal;

@@ -1,13 +1,15 @@
 "use client";
 
-import { useCategoryModal } from "@/hooks/information/common/useCategoryModal";
 import { MdClose } from "react-icons/md";
+import { useInformationCategoryModal } from "../model/useInformationCategoryModal";
 
-interface CategoryModalProps {
+interface InformationCategoryModalProps {
   closeModal: () => void;
 }
 
-const CategoryModal = ({ closeModal }: CategoryModalProps) => {
+export const InformationCategoryModal = ({
+  closeModal,
+}: InformationCategoryModalProps) => {
   const {
     categories,
     parentCategory,
@@ -16,16 +18,16 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
     setCategory,
     handleCancelClick,
     handleSaveClick,
-  } = useCategoryModal(closeModal);
+  } = useInformationCategoryModal(closeModal);
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
+    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
       <div className="flex h-fit w-[31.25rem] max-w-[calc(100%_-_48px)] flex-col gap-8 rounded-xl bg-white p-8">
         <div className="flex flex-col gap-1">
           <div className="flex flex-row items-center justify-between">
             <h3 className="text-lg font-medium text-black">카테고리 선택</h3>
             <MdClose
-              className="cursor-pointer text-gray2 hover:text-main"
+              className="text-gray2 hover:text-main cursor-pointer"
               size="2.5rem"
               onClick={handleCancelClick}
             />
@@ -36,7 +38,7 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
                 key={index}
                 className={
                   `${parentCategory === category.id ? "border-main bg-main font-black text-white" : "text-gray1"} ` +
-                  "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
+                  "rounded-full border border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                 }
                 type="button"
                 onClick={() => setParentCategoryId(category.id)}
@@ -58,7 +60,7 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
                   key={index}
                   className={
                     `${categoryId === category.id ? "border-main bg-main text-white" : "text-gray1"} ` +
-                    "rounded-full border-[0.0625rem] border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
+                    "rounded-full border border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
                   }
                   type="button"
                   onClick={() =>
@@ -76,7 +78,7 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
             className={`${parentCategory === 0 || categoryId === 0 ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
           >
             <button
-              className="h-[2.625rem] w-[9.5rem] rounded-full bg-main font-medium text-white shadow-sm hover:scale-105"
+              className="bg-main h-[2.625rem] w-[9.5rem] rounded-full font-medium text-white shadow-sm hover:scale-105"
               type="button"
               onClick={handleSaveClick}
             >
@@ -88,5 +90,3 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
     </div>
   );
 };
-
-export default CategoryModal;

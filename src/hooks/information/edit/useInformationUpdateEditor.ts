@@ -1,13 +1,11 @@
 "use client";
 
-import useEditorStore from "@/stores/editorStore";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
-  InformationDetailResponseDto,
   InformationRegisterResponseDto,
   InformationUpdateRequestDto,
 } from "@/entities/information/model/informationDto";
@@ -16,15 +14,17 @@ import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
-import { InformationUpdateFormSchema } from "@/features/informationItem";
+import { InformationDetailResponse } from "@/entities/information";
+import { useInformationEditorStore } from "@/features/informationEditor/model/informationEditorStore";
+import { InformationUpdateFormSchema } from "@/features/informationEditor";
 
 export const useInformationUpdateEditor = (
   informationId: number,
-  data: InformationDetailResponseDto,
+  data: InformationDetailResponse,
 ) => {
   const { id } = useUserStore();
-  const editorStore = useEditorStore();
-  const initialize = editorStore.initialize;
+  const { imageList, mainImageIndex, initialize, setInformationEditorState } =
+    useInformationEditorStore();
   const inputTagRef = useRef<HTMLInputElement>(null);
   const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -140,14 +140,14 @@ export const useInformationUpdateEditor = (
   };
 
   const handleSubmit = async () => {
-    if (editorStore.images.filter((image) => image !== "").length === 0) {
+    if (imageList.filter((image) => image !== "").length === 0) {
       alert("최소 한 장의 사진을 추가해 주세요.");
       return;
     }
 
-    const thumbnailUrl = editorStore.images[editorStore.mainImageIndex];
-    const contentUrl = editorStore.images.filter(
-      (url, index) => index !== editorStore.mainImageIndex && url !== "",
+    const thumbnailUrl = imageList[mainImageIndex];
+    const contentUrl = imageList.filter(
+      (imageUrl, index) => index !== mainImageIndex && imageUrl !== "",
     );
 
     // 썸네일 이미지가 변경되지 않은 경우
@@ -319,8 +319,8 @@ export const useInformationUpdateEditor = (
     methods.setValue("tips", data.tip.split(";"));
     methods.trigger();
 
-    editorStore.setEditor({
-      images: [...data.imageResponses.map((value) => value.address), ""],
+    setInformationEditorState({
+      imageList: [...data.imageResponses.map((value) => value.address), ""],
       mainImageIndex: data.imageResponses.findIndex(
         (value) => value.imageStatus === "썸네일",
       ),
@@ -350,7 +350,6 @@ export const useInformationUpdateEditor = (
     categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    editorStore,
     openLocationModal,
     closeLocationModal,
     openCategoryModal,

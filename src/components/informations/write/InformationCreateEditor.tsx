@@ -1,8 +1,8 @@
 "use client";
 
+import { InformationEditor } from "@/features/informationEditor";
 import { useInformationCreateEditor } from "@/hooks/information/write/useInformationCreateEditor";
 import { FormProvider } from "react-hook-form";
-import InformationEditor from "../../../features/informationEditor/ui/InformationEditor";
 
 const InformationCreateEditor = () => {
   const {
@@ -13,7 +13,6 @@ const InformationCreateEditor = () => {
     categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    editorStore,
     openLocationModal,
     closeLocationModal,
     openCategoryModal,
@@ -32,7 +31,6 @@ const InformationCreateEditor = () => {
         categoryModalVisible={categoryModalVisible}
         inputTagRef={inputTagRef}
         inputTipRef={inputTipRef}
-        editorStore={editorStore}
         openLocationModal={openLocationModal}
         closeLocationModal={closeLocationModal}
         openCategoryModal={openCategoryModal}

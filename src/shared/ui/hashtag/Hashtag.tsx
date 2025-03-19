@@ -23,7 +23,7 @@ export const Hashtag = ({
     <div
       className={[
         `${borderColor} ${cursorPointer ? "cursor-pointer" : ""} ${hover}`,
-        "flex flex-row items-center gap-1 rounded-2xl border-[0.0625rem] px-2 py-1 text-sm font-medium text-nowrap",
+        "flex flex-row items-center gap-1 rounded-2xl border px-2 py-1 text-sm font-medium text-nowrap",
       ].join(" ")}
       onClick={onClick}
     >

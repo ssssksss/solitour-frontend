@@ -6,7 +6,7 @@ import {
   FEELING_STATUS,
   updateDiary,
 } from "@/entities/diary";
-import { DiaryFormSchema } from "@/features/diary";
+import { DiaryFormSchema } from "@/features/diaryEditor";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";

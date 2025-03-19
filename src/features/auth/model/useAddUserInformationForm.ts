@@ -49,7 +49,7 @@ export const useAddUserInformationForm = (closeModal?: () => void) => {
         type: "success",
         message: "제출 완료",
       });
-      userStore.setUser({
+      userStore.setUserState({
         sex: methods.getValues("sex"),
         age: methods.getValues("age"),
       });

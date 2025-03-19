@@ -2,24 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import sanitizeHtml from "sanitize-html";
-import useEditorStore from "@/stores/editorStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
-import { InformationCreateFormSchema } from "@/features/informationItem";
 import {
   InformationCreateRequestDto,
   InformationRegisterResponseDto,
 } from "@/entities/information";
 import { fetchWithAuth } from "@/shared/api";
+import { useInformationEditorStore } from "@/features/informationEditor/model/informationEditorStore";
+import { InformationCreateFormSchema } from "@/features/informationEditor";
 
 export const useInformationCreateEditor = () => {
   const { id } = useUserStore();
-  const editorStore = useEditorStore();
-  const initialize = editorStore.initialize;
+  const { imageList, mainImageIndex, initialize } = useInformationEditorStore();
   const inputTagRef = useRef<HTMLInputElement>(null);
   const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -127,19 +126,16 @@ export const useInformationCreateEditor = () => {
   };
 
   const handleSubmit = async () => {
-    if (editorStore.images.filter((image) => image !== "").length === 0) {
+    if (imageList.filter((image) => image !== "").length === 0) {
       alert("최소 한 장의 사진을 추가해 주세요.");
       return;
     }
 
-    methods.setValue(
-      "thumbnailImageUrl",
-      editorStore.images[editorStore.mainImageIndex],
-    );
+    methods.setValue("thumbnailImageUrl", imageList[mainImageIndex]);
     methods.setValue(
       "contentImagesUrl",
-      editorStore.images.filter(
-        (url, index) => index !== editorStore.mainImageIndex && url !== "",
+      imageList.filter(
+        (imageUrl, index) => index !== mainImageIndex && imageUrl !== "",
       ),
     );
 
@@ -244,7 +240,6 @@ export const useInformationCreateEditor = () => {
     categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    editorStore,
     openLocationModal,
     closeLocationModal,
     openCategoryModal,

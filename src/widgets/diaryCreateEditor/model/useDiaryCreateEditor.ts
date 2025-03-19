@@ -13,7 +13,7 @@ import {
   FEELING_STATUS,
 } from "@/entities/diary";
 import { SANITIZE_OPTION } from "@/shared/config";
-import { DiaryFormSchema } from "@/features/diary";
+import { DiaryFormSchema } from "@/features/diaryEditor";
 
 export const useDiaryCreateEditor = () => {
   const router = useRouter();

@@ -5,14 +5,14 @@ import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import React from "react";
-import CategoryModal from "../../../components/informations/common/CategoryModal";
-import ImageUploadItem from "../../../components/informations/common/ImageUploadItem";
-import PlaceModal from "../../../components/informations/common/PlaceModal";
 import { useFormContext } from "react-hook-form";
-import { useEditorStoreType } from "@/stores/editorStore";
 import { useDragScroll } from "@/shared/lib/hooks";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { Hashtag } from "@/shared/ui/hashtag";
+import { InformationCategoryModal } from "./InformationCategoryModal";
+import { InformationPlaceModal } from "./InformationPlaceModal";
+import { InformationImageUploadItem } from "./InformationImageUploadItem";
+import { useInformationEditorStore } from "../model/informationEditorStore";
 
 interface InformationEditorProps {
   text: string;
@@ -21,7 +21,6 @@ interface InformationEditorProps {
   categoryModalVisible: boolean;
   inputTagRef: React.RefObject<HTMLInputElement | null>;
   inputTipRef: React.RefObject<HTMLInputElement | null>;
-  editorStore: useEditorStoreType;
   openLocationModal: () => void;
   closeLocationModal: () => void;
   openCategoryModal: () => void;
@@ -38,7 +37,6 @@ export const InformationEditor = ({
   categoryModalVisible,
   inputTagRef,
   inputTipRef,
-  editorStore,
   openLocationModal,
   closeLocationModal,
   openCategoryModal,
@@ -48,13 +46,24 @@ export const InformationEditor = ({
   handleSubmit,
 }: InformationEditorProps) => {
   const formContext = useFormContext();
-  const imagesHook = useDragScroll();
+  const {
+    listRef,
+    onDragStart,
+    onDragMove,
+    onDragEnd,
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd,
+  } = useDragScroll();
+  const { imageLoading, imageList: images } = useInformationEditorStore();
 
   return (
     <div className="flex w-full flex-col">
-      {locationModalVisible && <PlaceModal closeModal={closeLocationModal} />}
+      {locationModalVisible && (
+        <InformationPlaceModal closeModal={closeLocationModal} />
+      )}
       {categoryModalVisible && (
-        <CategoryModal closeModal={closeCategoryModal} />
+        <InformationCategoryModal closeModal={closeCategoryModal} />
       )}
       <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
@@ -69,7 +78,7 @@ export const InformationEditor = ({
           제목<span className="text-main">*</span>
         </h2>
         <input
-          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border-[0.0625rem] bg-transparent px-5 text-sm font-medium outline-hidden`}
+          className={`${formContext.formState.errors.informationTitle ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-full w-full rounded-full border bg-transparent px-5 text-sm font-medium outline-hidden`}
           type="text"
           placeholder="제목을 입력하세요. (최대 50자)"
           {...formContext.register("informationTitle")}
@@ -92,7 +101,7 @@ export const InformationEditor = ({
             장소<span className="text-main">*</span>
           </h2>
           <button
-            className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border-[0.0625rem] bg-transparent pl-5 text-start text-sm font-medium outline-hidden`}
+            className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border bg-transparent pl-5 text-start text-sm font-medium outline-hidden`}
             type="button"
             onClick={openLocationModal}
           >
@@ -107,7 +116,7 @@ export const InformationEditor = ({
           )}
         </div>
         <button
-          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] grow flex-row items-center justify-between gap-1 rounded-full border-[0.0625rem] px-7 py-3 text-lg font-semibold`}
+          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] grow flex-row items-center justify-between gap-1 rounded-full border px-7 py-3 text-lg font-semibold`}
           type="button"
           onClick={openCategoryModal}
         >
@@ -129,18 +138,18 @@ export const InformationEditor = ({
       </div>
       <div
         className="mt-10 mb-2 flex flex-row items-center gap-4 overflow-x-auto"
-        ref={imagesHook.listRef}
-        onMouseDown={imagesHook.onDragStart}
-        onMouseMove={imagesHook.onDragMove}
-        onMouseUp={imagesHook.onDragEnd}
-        onMouseLeave={imagesHook.onDragEnd}
-        onTouchStart={imagesHook.onTouchStart}
-        onTouchMove={imagesHook.onTouchMove}
-        onTouchEnd={imagesHook.onTouchEnd}
+        ref={listRef}
+        onMouseDown={onDragStart}
+        onMouseMove={onDragMove}
+        onMouseUp={onDragEnd}
+        onMouseLeave={onDragEnd}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       >
-        {editorStore.images.map((_, index) => (
+        {images.map((_, index) => (
           <div key={index}>
-            <ImageUploadItem imageIndex={index} />
+            <InformationImageUploadItem imageIndex={index} />
           </div>
         ))}
       </div>
@@ -148,7 +157,7 @@ export const InformationEditor = ({
         사진 최대 용량은 10MB입니다.
       </p>
       <textarea
-        className="hover:border-main focus:border-main mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border-[0.0625rem] p-4 outline-hidden"
+        className="hover:border-main focus:border-main mt-[2.5rem] min-h-[21.875rem] resize-none rounded-2xl border p-4 outline-hidden"
         {...formContext.register("informationContent")}
         placeholder="장소 방문은 어땠나요? 장소 정보 및 나의 경험을 작성해 다른 솔리들에게 도움을 주세요."
         onChange={(e) => {
@@ -166,7 +175,7 @@ export const InformationEditor = ({
         </h2>
         <div className="relative flex w-full flex-col gap-2">
           <input
-            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100/25" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] py-2 pl-5 text-sm font-medium outline-hidden hover:border-b-[0.0625rem]`}
+            className={`${formContext.getValues("hashtags").length >= 10 ? "bg-gray-100/25" : "bg-transparent"} ${formContext.formState.errors.hashtags ? "border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border py-2 pl-5 text-sm font-medium outline-hidden hover:border-b-[0.0625rem]`}
             placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
             disabled={formContext.getValues("hashtags").length >= 10}
             onKeyUp={handleHashTagChange}
@@ -249,7 +258,7 @@ export const InformationEditor = ({
         <div className="relative flex grow flex-col gap-4 max-[744px]:w-full">
           {formContext.getValues("tips").map((tip: string, index: number) => (
             <div key={index} className="relative w-full">
-              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border-[0.0625rem] bg-gray-100/25 pr-14 pl-5 text-sm outline-hidden">
+              <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border bg-gray-100/25 pr-14 pl-5 text-sm outline-hidden">
                 {tip}
               </div>
               <MdClose
@@ -267,7 +276,7 @@ export const InformationEditor = ({
           {formContext.getValues("tips").length < 5 && (
             <div className="relative w-full">
               <input
-                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border-[0.0625rem] pr-14 pl-5 text-sm outline-hidden`}
+                className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border pr-14 pl-5 text-sm outline-hidden`}
                 type="text"
                 placeholder="나만의 혼플 팁을 알려주세요."
                 onKeyUp={handleTipChange}
@@ -307,10 +316,10 @@ export const InformationEditor = ({
       </div>
       <div className="flex flex-col items-end">
         <button
-          className={`${editorStore.imageLoading ? "bg-gray1 cursor-not-allowed" : "bg-main hover:scale-105"} mt-10 mb-20 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow-sm`}
+          className={`${imageLoading ? "bg-gray1 cursor-not-allowed" : "bg-main hover:scale-105"} mt-10 mb-20 flex h-[2.625rem] w-[9.5rem] items-center justify-center rounded-full font-medium text-white shadow-sm`}
           type="submit"
           onClick={() => handleSubmit()}
-          disabled={loading || editorStore.imageLoading}
+          disabled={loading || imageLoading}
         >
           {loading ? (
             <div className="flex flex-row items-center gap-3">

@@ -2,8 +2,8 @@
 
 import { useInformationUpdateEditor } from "@/hooks/information/edit/useInformationUpdateEditor";
 import { FormProvider } from "react-hook-form";
-import InformationEditor from "../../../features/informationEditor/ui/InformationEditor";
 import { InformationDetailResponse } from "@/entities/information";
+import { InformationEditor } from "@/features/informationEditor";
 
 interface InformationUpdateEditorProps {
   informationId: number;
@@ -22,7 +22,6 @@ const InformationUpdateEditor = ({
     categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    editorStore,
     openLocationModal,
     closeLocationModal,
     openCategoryModal,
@@ -41,7 +40,6 @@ const InformationUpdateEditor = ({
         categoryModalVisible={categoryModalVisible}
         inputTagRef={inputTagRef}
         inputTipRef={inputTipRef}
-        editorStore={editorStore}
         openLocationModal={openLocationModal}
         closeLocationModal={closeLocationModal}
         openCategoryModal={openCategoryModal}

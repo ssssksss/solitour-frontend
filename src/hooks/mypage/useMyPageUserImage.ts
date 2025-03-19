@@ -38,7 +38,7 @@ export const useMyPageUserImage = (
       const { ...prevState } = userStore;
       if (userSex == "male") {
         setImageUrl("/icons/default-male-icon.svg");
-        userStore.setUser({
+        userStore.setUserState({
           ...prevState,
           userImage: {
             ...userStore.userImage,
@@ -47,7 +47,7 @@ export const useMyPageUserImage = (
         });
       } else if (userSex == "female") {
         setImageUrl("/icons/default-female-icon.svg");
-        userStore.setUser({
+        userStore.setUserState({
           ...prevState,
           userImage: {
             ...userStore.userImage,
@@ -56,7 +56,7 @@ export const useMyPageUserImage = (
         });
       } else if (!userSex) {
         setImageUrl("/icons/default-user-icon.svg");
-        userStore.setUser({
+        userStore.setUserState({
           ...prevState,
           userImage: {
             ...userStore.userImage,

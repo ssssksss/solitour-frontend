@@ -10,7 +10,7 @@ export const useHeader = () => {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [isTransparent, setIsTransparent] = useState(true);
-  const { id, setUser } = useUserStore();
+  const { id, setUserState: setUser } = useUserStore();
 
   const handleScroll = useThrottle(() => {
     if (window.scrollY >= 500) {

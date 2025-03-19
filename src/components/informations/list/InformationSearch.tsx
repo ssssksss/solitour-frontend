@@ -36,7 +36,7 @@ const InformationSearch = () => {
         action={handleSearchClick}
       >
         <button
-          className="absolute left-0 top-0 flex h-[2.75rem] flex-row items-center gap-2 pl-[1.125rem] text-sm text-gray1 hover:text-main"
+          className="text-gray1 hover:text-main absolute top-0 left-0 flex h-[2.75rem] flex-row items-center gap-2 pl-[1.125rem] text-sm"
           type="button"
           onClick={() => {
             setOrderDropdownVisible(false);
@@ -47,34 +47,34 @@ const InformationSearch = () => {
           <IoIosArrowDown className="mt-1" />
         </button>
         <div
-          className={`${!searchDropdownVisible && "hidden"} absolute left-0 top-[0.5625rem] -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] text-gray1 shadow-sm`}
+          className={`${!searchDropdownVisible && "hidden"} text-gray1 absolute top-[0.5625rem] left-0 -z-10 flex w-[4.8125rem] flex-col items-center gap-1 rounded-xl bg-white/95 pt-[2.1875rem] shadow-sm`}
           onClick={() => setSearchDropdownVisible(false)}
         >
           <button
-            className={`${searchMethod === "제목" && "text-main"} h-[3.75rem] w-[4.6875rem] hover:text-main`}
+            className={`${searchMethod === "제목" && "text-main"} hover:text-main h-[3.75rem] w-[4.6875rem]`}
             type="button"
             onClick={() => handleSearchMethodChange("제목")}
           >
             제목
           </button>
           <button
-            className={`${searchMethod === "태그" && "text-main"} h-[3.75rem] w-[4.6875rem] hover:text-main`}
+            className={`${searchMethod === "태그" && "text-main"} hover:text-main h-[3.75rem] w-[4.6875rem]`}
             type="button"
             onClick={() => handleSearchMethodChange("태그")}
           >
             태그
           </button>
         </div>
-        <p className="absolute left-[4.6875rem] top-2 text-gray3">|</p>
+        <p className="text-gray3 absolute top-2 left-[4.6875rem]">|</p>
         <input
-          className="h-[2.75rem] w-[21.4375rem] rounded-full border-[0.0625rem] border-gray3 bg-white pl-[5.8125rem] pr-12 text-sm outline-hidden placeholder:font-medium placeholder:text-gray2 max-[1024px]:w-full"
+          className="border-gray3 placeholder:text-gray2 h-[2.75rem] w-[21.4375rem] rounded-full border bg-white pr-12 pl-[5.8125rem] text-sm outline-hidden placeholder:font-medium max-[1024px]:w-full"
           type="text"
           placeholder="검색하기"
           value={searchValue}
           onChange={(e) => handleSearchValueChange(e.target.value)}
         />
         <button
-          className="absolute right-[0.375rem] top-[0.3125rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full bg-lightGreen hover:scale-110"
+          className="bg-lightGreen absolute top-[0.3125rem] right-[0.375rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full hover:scale-110"
           type="submit"
         >
           <Image
@@ -87,7 +87,7 @@ const InformationSearch = () => {
       </form>
       <div className="flex flex-row items-center gap-4 text-sm font-medium">
         <button
-          className={`${place === "" ? "text-gray1" : "text-main"} flex flex-row items-center hover:text-main`}
+          className={`${place === "" ? "text-gray1" : "text-main"} hover:text-main flex flex-row items-center`}
           onClick={openModal}
         >
           <VscSettings size={"1.25rem"} />
@@ -95,7 +95,7 @@ const InformationSearch = () => {
         </button>
         <div className="relative">
           <button
-            className="flex flex-row items-center text-gray1 hover:text-main"
+            className="text-gray1 hover:text-main flex flex-row items-center"
             onClick={() => {
               setSearchDropdownVisible(false);
               setOrderDropdownVisible(true);
@@ -105,25 +105,25 @@ const InformationSearch = () => {
             <IoIosArrowDown />
           </button>
           <div
-            className={`${!orderDropdownVisible && "hidden"} absolute -left-[4.5rem] top-7 z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 text-gray1 shadow-sm`}
+            className={`${!orderDropdownVisible && "hidden"} text-gray1 absolute top-7 -left-[4.5rem] z-10 flex w-[8.625rem] flex-col items-center gap-1 rounded-xl bg-white/95 shadow-sm`}
             onClick={() => setOrderDropdownVisible(false)}
           >
             <Link
-              className={`${order === "latest" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
+              className={`${order === "latest" && "text-main"} hover:text-main flex h-16 w-full items-center justify-center`}
               href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=latest${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               최신순
             </Link>
             <Link
-              className={`${order === "likes" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
+              className={`${order === "likes" && "text-main"} hover:text-main flex h-16 w-full items-center justify-center`}
               href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=likes${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
               좋아요순
             </Link>
             <Link
-              className={`${order === "views" && "text-main"} flex h-16 w-full items-center justify-center hover:text-main`}
+              className={`${order === "views" && "text-main"} hover:text-main flex h-16 w-full items-center justify-center`}
               href={`${pathname}?page=1&parentCategoryId=${parentCategoryId}${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}${place !== "" ? `&place=${place}` : ""}&order=views${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`}
               scroll={false}
             >
