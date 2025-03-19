@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import UserImage from "../auth/UserImage";
 import CropperComponent from "../common/cropper/CropperComponent";
 import { Modal } from "../common/modal/Modal";
 import { useMyPageUserImage } from "@/hooks/mypage/useMyPageUserImage";
+import { UserImage } from "@/entities/user";
 
 interface MyPageUserImageProps {
   userImageUrl: string;
@@ -36,7 +36,7 @@ const MyPageUserImage = ({ userImageUrl, userSex }: MyPageUserImageProps) => {
           onDragOver={onDragOver}
           onDrop={onDropOrInputEvent}
         >
-          <UserImage userImageAddress={imageUrl} userSex={userSex} size={108} />
+          <UserImage userImageAddress={imageUrl} size={108} />
           <div className="absolute right-0 bottom-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]">
             <div className="relative h-[1.25rem] w-[1.25rem]">
               <Image

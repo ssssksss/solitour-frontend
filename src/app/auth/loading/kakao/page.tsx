@@ -1,4 +1,4 @@
-import AuthLoading from "@/features/auth/ui/AuthLoading";
+import { AuthLoading } from "@/features/auth";
 import { Suspense } from "react";
 
 export default function Page() {

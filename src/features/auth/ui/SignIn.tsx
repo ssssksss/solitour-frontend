@@ -4,7 +4,7 @@ import introLottie from "@/../public/lottie/solitour-auth-intro-image.json";
 import Lottie from "lottie-react";
 import Image from "next/image";
 
-const SignIn = () => {
+export const SignIn = () => {
   return (
     <div className="mb-[8rem] flex w-[19.5rem] flex-col">
       <h1 className="pb-[1rem] text-4xl font-bold">로그인</h1>
@@ -37,5 +37,3 @@ const SignIn = () => {
     </div>
   );
 };
-
-export default SignIn;

@@ -1,3 +1,7 @@
+"use server";
+
+import { cookies } from "next/headers";
+
 interface GatheringInfo {
   gatheringId: number;
   title: string;
@@ -20,14 +24,19 @@ interface GatheringInfo {
 }
 
 export async function getNewGatheringList() {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/gatherings/home`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data.");
+  }
 
   return response.json() as Promise<GatheringInfo[]>;
 }

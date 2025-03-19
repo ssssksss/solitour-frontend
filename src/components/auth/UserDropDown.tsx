@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import UserImage from "./UserImage";
 import { AnimatePresence, motion } from "motion/react";
 import { useUserDropDown } from "@/hooks/auth/useUserDropDown";
+import { UserImage } from "@/entities/user";
 
 const UserDropDown = () => {
   const { userStore, modalState, outside, inside, handleLogout } =
@@ -33,11 +33,7 @@ const UserDropDown = () => {
       }}
       ref={outside}
     >
-      <UserImage
-        userImageAddress={`${userStore.userImage.address}`}
-        userSex={`${userStore.sex}`}
-        size={30}
-      />
+      <UserImage userImageAddress={userStore.userImage.address} size={30} />
       <span className="overflow-hidden font-bold text-ellipsis whitespace-nowrap">
         {userStore.nickname}
       </span>

@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import AddUserInformationInitForm from "@/components/auth/AddUserInformationInitForm";
 import { useAuthKakao } from "../model/useAuthKakao";
 
-const AuthLoading = () => {
+export const AuthLoading = () => {
   const {
     loading,
     methods,
@@ -39,5 +39,3 @@ const AuthLoading = () => {
     </div>
   );
 };
-
-export default AuthLoading;

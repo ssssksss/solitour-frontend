@@ -24,7 +24,7 @@ export const useMyPageUserImage = (
   const handleDeleteClick = async () => {
     const response = await fetchWithAuth("/api/auth/user-image", {
       method: "DELETE",
-      "Content-Type": "application/json",
+      headers: { "Content-Type": "application/json" },
     });
 
     if (!response.ok) {

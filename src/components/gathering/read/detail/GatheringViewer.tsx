@@ -1,6 +1,5 @@
 "use client";
 
-import UserImage from "@/components/auth/UserImage";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
@@ -13,7 +12,7 @@ import { useGatheringViewer } from "@/hooks/gathering/useGatheringViewer";
 import GatheringSupportManagement from "./GatheringSupportManagement";
 import GatheringLike from "../GatheringLike";
 import { DeleteModal } from "@/shared/ui/modal";
-import { GENDER } from "@/entities/user";
+import { GENDER, UserImage } from "@/entities/user";
 
 interface GatheringViewerProps {
   data: GatheringDetailResponseDto;
@@ -54,7 +53,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
         </div>
         {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
         <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
-          <div className={"flex items-center gap-x-3"}>
+          <div className="flex items-center gap-x-3">
             <UserImage userImageAddress={data.userImage} size={52} />
             <div className="flex flex-col gap-y-[0.125rem]">
               <div className="text-xs font-semibold text-black">
@@ -185,7 +184,7 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
           {data.tagResponses?.map((i) => (
             <div
               key={i.name}
-              className="text-main outline-main max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm outline outline-[1px] outline-offset-[-1px]"
+              className="text-main outline-main max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm outline outline-offset-[-1px]"
             >
               {"#"}
               {i.name}

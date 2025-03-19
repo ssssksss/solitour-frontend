@@ -1,6 +1,6 @@
+import { UserImage } from "@/entities/user";
 import { User } from "@/entities/user/model/user";
 import Link from "next/link";
-import UserImage from "../auth/UserImage";
 
 interface MyPageHeaderProps {
   userInfo: User;
@@ -14,7 +14,7 @@ const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
         <div className="flex flex-row items-center gap-[1.875rem]">
           <div className="bg-lightGreen relative aspect-square w-[6.75rem] rounded-[50%] outline outline-offset-[-1px] outline-[#B8EDD9]">
             <UserImage
-              userImageAddress={userInfo.userImage?.address}
+              userImageAddress={userInfo.userImage.address}
               size={108}
             />
           </div>

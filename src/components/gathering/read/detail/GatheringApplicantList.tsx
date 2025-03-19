@@ -1,13 +1,12 @@
 "use client";
 
-import UserImage from "@/components/auth/UserImage";
 import Image from "next/image";
 import GatheringApplicantButton from "./GatheringApplicantButton";
 import useGatheringStore from "@/stores/gatheringStore";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
-import { useUserStore } from "@/entities/user";
+import { UserImage, useUserStore } from "@/entities/user";
 
 interface GatheringApplicantListProps {
   postUserId: number;

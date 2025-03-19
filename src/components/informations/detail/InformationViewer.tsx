@@ -63,7 +63,7 @@ const InformationViewer = ({ informationId, data }: InformationViewerProps) => {
               <div className="flex h-[3.375rem] flex-row items-center gap-3">
                 <Image
                   className="bg-lightGreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
-                  src={`${data.userImage}`}
+                  src={data.userImage}
                   alt="userImage"
                   width={54}
                   height={54}

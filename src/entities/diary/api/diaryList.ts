@@ -11,7 +11,6 @@ interface DiaryList {
 
 export async function getDiaryList(page: number) {
   const accessToken = (await cookies()).get("access_token");
-  console.log(accessToken);
   const response = await fetchWithAuth(
     `${process.env.BACKEND_URL}/api/diary?page=${page}`,
     {

@@ -1,4 +1,7 @@
+"use server";
+
 import { LOCATION_ID } from "@/shared/config";
+import { cookies } from "next/headers";
 
 export interface InformationList {
   content: {
@@ -27,6 +30,7 @@ export async function getInformationList(
   tagName?: string,
   search?: string,
 ) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetch(
     [
       `${process.env.BACKEND_URL}`,
@@ -42,10 +46,14 @@ export async function getInformationList(
     ].join(""),
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data.");
+  }
 
   return response.json() as Promise<InformationList>;
 }
