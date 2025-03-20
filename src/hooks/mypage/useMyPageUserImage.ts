@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import useToastifyStore from "@/stores/toastifyStore";
 import { useDragAndDrop, useModalState } from "@/shared/lib/hooks";
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 
 export const useMyPageUserImage = (
   userImageUrl: string,
@@ -28,7 +28,7 @@ export const useMyPageUserImage = (
     });
 
     if (!response.ok) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "success",
         message: "이미지 삭제 실패",
       });

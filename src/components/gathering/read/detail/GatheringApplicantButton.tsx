@@ -1,8 +1,9 @@
-import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
-import useToastifyStore from "@/stores/toastifyStore";
 import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/GatheringDto";
+import { HashSpinner } from "@/shared/ui/hashSpinner";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 import { useState } from "react";
-interface IGatheringApplicantButton {
+
+interface GatheringApplicationButtonProps {
   applicant: gatheringApplicantsResponsesDto;
   isFullParticipants: boolean;
   updateGatheringApplicantStatusHandler: (
@@ -10,11 +11,12 @@ interface IGatheringApplicantButton {
     userId: number,
   ) => void;
 }
+
 const GatheringApplicantButton = ({
   applicant,
   isFullParticipants,
   updateGatheringApplicantStatusHandler,
-}: IGatheringApplicantButton) => {
+}: GatheringApplicationButtonProps) => {
   const [isStatusOpen, setIsStatusOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const toastifyStore = useToastifyStore();
@@ -55,11 +57,11 @@ const GatheringApplicantButton = ({
         ].map((i, index) => (
           <button
             key={i.status + index}
-            className={`aspect-square h-[3.25rem] rounded-[2rem] py-2 max-[576px]:h-[2.75rem] min-[800px]:w-full ${i.hoverStyle} ${applicant.gatheringStatus === i.status ? i.style : "bg-white outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3]"}`}
+            className={`aspect-square h-[3.25rem] rounded-[2rem] py-2 max-[576px]:h-[2.75rem] min-[800px]:w-full ${i.hoverStyle} ${applicant.gatheringStatus === i.status ? i.style : "bg-white outline outline-offset-[-1px] outline-[#E3E3E3]"}`}
             disabled={applicant.gatheringStatus === i.status}
             onClick={async () => {
               if (isFullParticipants && i.status == "CONSENT") {
-                toastifyStore.setToastify({
+                toastifyStore.setToastifyState({
                   type: "warning",
                   message: "정원이 가득찼습니다.",
                 });
@@ -106,7 +108,7 @@ const GatheringApplicantButton = ({
             className={`aspect-square h-[3.25rem] rounded-[2rem] max-[576px]:h-[2.75rem] min-[800px]:w-full ${
               applicant.gatheringStatus == i.status
                 ? `${i.style} order-3`
-                : `bg-white outline outline-[1px] outline-offset-[-1px] outline-[#E3E3E3] ${i.hoverStyle} ${isStatusOpen ? "" : "max-[576px]:hidden"}`
+                : `bg-white outline outline-offset-[-1px] outline-[#E3E3E3] ${i.hoverStyle} ${isStatusOpen ? "" : "max-[576px]:hidden"}`
             }`}
             onClick={async () => {
               // 모바일 너비에서 버튼이 1개라 여러 버튼을 보여주는 함수
@@ -115,7 +117,7 @@ const GatheringApplicantButton = ({
                 return;
               }
               if (isFullParticipants && i.status == "CONSENT") {
-                toastifyStore.setToastify({
+                toastifyStore.setToastifyState({
                   type: "warning",
                   message: "정원이 가득찼습니다.",
                 });

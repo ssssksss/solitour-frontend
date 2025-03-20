@@ -1,11 +1,11 @@
 "use client";
 
-import useToastifyStore from "@/stores/toastifyStore";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useGatheringStore from "@/stores/gatheringStore";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { useModalState } from "@/shared/lib/hooks";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 
 export const useGatheringViewer = (data: GatheringDetailResponseDto) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export const useGatheringViewer = (data: GatheringDetailResponseDto) => {
     });
 
     if (!response.ok) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "error",
         message: "모임 삭제에 실패했습니다.",
       });

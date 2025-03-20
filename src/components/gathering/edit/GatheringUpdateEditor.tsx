@@ -3,7 +3,6 @@
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
-import useToastifyStore from "@/stores/toastifyStore";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +10,7 @@ import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 
 interface GatheringUpdateEditorProps {
   gatheringData: GatheringDetailResponseDto;
@@ -102,7 +102,7 @@ const GatheringUpdateEditor = ({
 
       if (!response.ok) {
         setLoading(false);
-        toastifyStore.setToastify({
+        toastifyStore.setToastifyState({
           type: "error",
           message: "모임 수정 중에 에러가 발생했습니다.",
         });

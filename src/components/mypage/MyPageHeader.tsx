@@ -1,5 +1,5 @@
 import { UserImage } from "@/entities/user";
-import { User } from "@/entities/user/model/user";
+import { User } from "@/entities/user";
 import Link from "next/link";
 
 interface MyPageHeaderProps {

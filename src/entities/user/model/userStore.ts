@@ -1,24 +1,6 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-/*
-id: number;
-  userStatus: string;
-  userImage: {
-    id: number;
-    address: string;
-    createdDate: string;
-  };
-  nickname: string;
-  age: number | null;
-  sex: "male" | "female" | null;
-  email: string;
-  phoneNumber: string | null;
-  isAdmin: boolean;
-  createdAt: Date;
-  provider: string;
-*/
-
 // 1. 상태 인터페이스 정의
 interface UserState {
   id: number;

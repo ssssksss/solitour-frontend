@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { User } from "@/entities/user/model/user";
+import { User } from "@/entities/user";
 import { useMyPageProfile } from "@/hooks/mypage/profile/useMyPageProfile";
 import { Modal } from "@/components/common/modal/Modal";
 import MyPageAccountDeleteModal from "./MyPageAccountDeleteModal";

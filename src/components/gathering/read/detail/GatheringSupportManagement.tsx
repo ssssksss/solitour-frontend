@@ -4,14 +4,13 @@ import { Modal } from "@/components/common/modal/Modal";
 import GatheringStatusChangeModal from "@/components/gathering/read/detail/GatheringStatusChangeModal";
 import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
 import { useState } from "react";
-
 import useGatheringStore from "@/stores/gatheringStore";
-import useToastifyStore from "@/stores/toastifyStore";
 import { useParams } from "next/navigation";
 import { fetchWithAuth } from "@/shared/api";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
 import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 
 interface GatheringSupportManagementProps {
   postUserId: number;
@@ -56,13 +55,13 @@ const GatheringSupportManagement = ({
 
     if (response.ok) {
       setGatheringStatus("WAIT");
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "success",
         message: "모임을 신청했습니다.",
       });
     }
     if (!response.ok) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "error",
         message: "모임을 신청에 실패했습니다.",
       });
@@ -81,13 +80,13 @@ const GatheringSupportManagement = ({
           currentParticipants: gatheringStore.currentParticipants - 1,
         });
       }
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "warning",
         message: "모임을 취소했습니다.",
       });
     }
     if (!res.ok) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "error",
         message: "모임을 취소에 실패했습니다.",
       });
@@ -105,7 +104,7 @@ const GatheringSupportManagement = ({
     );
 
     if (!response.ok) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "error",
         message: "모임 활성화를 실패하였습니다.",
       });
@@ -116,7 +115,7 @@ const GatheringSupportManagement = ({
     gatheringStore.setGathering({
       isFinish: false,
     });
-    toastifyStore.setToastify({
+    toastifyStore.setToastifyState({
       type: "success",
       message: "모임이 활성화 되었습니다.",
     });
@@ -140,7 +139,7 @@ const GatheringSupportManagement = ({
           <GatheringChattingLinkCheckModal openChattingUrl={openChattingUrl} />
         </Modal>
         <button
-          className="outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px]"
+          className="outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline -outline-offset-1"
           onClick={() => modalState1.openModal()}
         >
           채팅방 가기
@@ -149,7 +148,7 @@ const GatheringSupportManagement = ({
           onClick={() => {
             isFinish ? reOpenGathering() : modalState.openModal();
           }}
-          className={`outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`}
+          className={`outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline -outline-offset-1 ${isFinish ? "bg-[#EE4C4A] text-white" : ""}`}
         >
           {isFinish ? "모임 마감" : "모임 마감하기"}
         </button>
@@ -176,7 +175,7 @@ const GatheringSupportManagement = ({
         {
           <button
             disabled={gatheringStatus != "CONSENT"}
-            className="outline-gray3 disabled:bg-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px]"
+            className="outline-gray3 disabled:bg-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline -outline-offset-1"
             onClick={() => modalState1.openModal()}
           >
             채팅방 열기
@@ -198,7 +197,7 @@ const GatheringSupportManagement = ({
         {gatheringStatus == "CONSENT" && (
           <button
             onClick={() => modalState2.openModal()}
-            className="bg-main flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm text-white outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]"
+            className="bg-main flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm text-white outline -outline-offset-1 outline-[#D9D9D9]"
           >
             모임 승인 완료
           </button>
@@ -211,22 +210,24 @@ const GatheringSupportManagement = ({
                 gatheringStore.currentParticipants ||
               !(
                 allowedGender == "ALL" ||
-                userStore.sex.toUpperCase() == allowedGender
+                userStore?.sex?.toUpperCase() == allowedGender
               ) ||
               (!(
+                userStore.age !== null &&
                 userStore.age <= allowedAgeRange.startAge &&
                 userStore.age >= allowedAgeRange.endAge
               ) &&
                 "bg-gray3")
-            } flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline outline-[1px] outline-offset-[-1px] outline-[#D9D9D9]`}
+            } flex h-[3.125rem] w-[7.5rem] items-center justify-center rounded-[2.125rem] text-sm outline -outline-offset-1 outline-[#D9D9D9]`}
             disabled={
               gatheringStore.personCount ==
                 gatheringStore.currentParticipants ||
               !(
                 allowedGender == "ALL" ||
-                userStore.sex.toUpperCase() == allowedGender
+                userStore.sex?.toUpperCase() == allowedGender
               ) ||
               !(
+                userStore.age !== null &&
                 userStore.age <= allowedAgeRange.startAge &&
                 userStore.age >= allowedAgeRange.endAge
               )
@@ -235,7 +236,7 @@ const GatheringSupportManagement = ({
             {gatheringStore.personCount == gatheringStore.currentParticipants
               ? "정원 초과"
               : !(allowedGender == "ALL") ||
-                  userStore.sex.toUpperCase() == allowedGender
+                  userStore.sex?.toUpperCase() == allowedGender
                 ? "성별 제한"
                 : !allowedAgeRange
                   ? "나이 제한"

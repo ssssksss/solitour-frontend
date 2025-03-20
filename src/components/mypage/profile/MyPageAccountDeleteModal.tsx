@@ -2,7 +2,7 @@
 
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { useMyPageAccountDeleteModal } from "@/hooks/mypage/profile/useMyPageAccountDeleteModal";
-import { User } from "@/entities/user/model/user";
+import { User } from "@/entities/user";
 import { ReactNode } from "react";
 
 interface MyPageAccountDeleteModalProps {

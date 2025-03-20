@@ -1,6 +1,6 @@
 import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import useToastifyStore from "@/stores/toastifyStore";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -45,7 +45,7 @@ export const useAddUserInformationForm = (closeModal?: () => void) => {
     });
 
     if (response.status == 204) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "success",
         message: "제출 완료",
       });

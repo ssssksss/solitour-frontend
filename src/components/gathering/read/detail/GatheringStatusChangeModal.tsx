@@ -3,7 +3,7 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { fetchWithAuth } from "@/shared/api";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
-import useToastifyStore from "@/stores/toastifyStore";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
@@ -35,7 +35,7 @@ const GatheringStatusChangeModal = ({
     );
 
     if (!response.ok) {
-      toastifyStore.setToastify({
+      toastifyStore.setToastifyState({
         type: "error",
         message: "모임 마감에 실패했습니다.",
       });

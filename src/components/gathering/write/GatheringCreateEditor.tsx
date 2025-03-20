@@ -1,14 +1,14 @@
 "use client";
 
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
-import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
-import useToastifyStore from "@/stores/toastifyStore";
 import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useToastifyStore } from "@/shared/model/toastifyStore";
+import { GatheringCreateFormSchema } from "@/features/gathering";
 
 const GatheringCreateEditor = () => {
   const router = useRouter();
@@ -82,7 +82,7 @@ const GatheringCreateEditor = () => {
 
       if (!response.ok) {
         setLoading(false);
-        toastifyStore.setToastify({
+        toastifyStore.setToastifyState({
           type: "error",
           message: "모임 생성 중에 에러가 발생했습니다.",
         });
