@@ -1,6 +1,4 @@
 import GatheringSort from "@/components/gathering/read/GatheringSort";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 import GatheringSearch from "./GatheringSearch";
 import GatheringExcludeComplete from "./GatheringExcludeComplete";
 import GatheringCategoryList from "./GatheringCategoryList";

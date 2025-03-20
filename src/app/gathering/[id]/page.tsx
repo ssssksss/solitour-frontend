@@ -1,6 +1,6 @@
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
 import GatheringViewer from "@/components/gathering/read/detail/GatheringViewer";
 import GatheringRecommendationList from "@/components/gathering/read/GatheringRecommendationList";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";

@@ -1,6 +1,5 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { GENDER } from "@/entities/user";
-import "@/styles/reactDataRange.css";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import { useFormContext } from "react-hook-form";

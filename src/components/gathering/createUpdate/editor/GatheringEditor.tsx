@@ -1,10 +1,6 @@
 "use client";
 
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
-import HashSpinner from "@/shared/ui/hashSpinner/HashSpinner";
 import Image from "next/image";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 import { useFormContext } from "react-hook-form";
 import GatheringEditorChattingLink from "./GatheringEditorChattingLink";
 import GatheringEditorContent from "./GatheringEditorContent";
@@ -16,6 +12,8 @@ import GatheringEditorPeriod from "./GatheringEditorPeriod";
 import GatheringEditorTime from "./GatheringEditorTime";
 import GatheringEditorCategory from "./GatheringEditorCategory";
 import GatheringEditorHashTag from "./GatheringEditorHashTag";
+import { HashSpinner } from "@/shared/ui/hashSpinner";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 
 interface IGatheringEditorEditProps {
   isEdit: true;
@@ -70,7 +68,7 @@ const GatheringEditor = (props: GatheringEditorProps) => {
         <GatheringEditorHashTag />
         <div className="flex w-full justify-end">
           <button
-            className={`flex h-[3rem] w-[9.5rem] flex-row items-center justify-center rounded-[2rem] px-[1rem] py-[.5rem] text-white disabled:bg-gray1 ${!formContext.formState.isValid ? "bg-gray1" : "bg-main hover:scale-105"}`}
+            className={`disabled:bg-gray1 flex h-[3rem] w-[9.5rem] flex-row items-center justify-center rounded-[2rem] px-[1rem] py-[.5rem] text-white ${!formContext.formState.isValid ? "bg-gray1" : "bg-main hover:scale-105"}`}
             onClick={() => {
               if (!formContext.formState.isValid) {
                 formContext.trigger();

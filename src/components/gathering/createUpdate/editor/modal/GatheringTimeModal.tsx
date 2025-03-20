@@ -1,5 +1,4 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
-import "@/styles/reactDataRange.css";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";

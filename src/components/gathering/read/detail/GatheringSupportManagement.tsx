@@ -4,7 +4,7 @@ import { Modal } from "@/components/common/modal/Modal";
 import GatheringStatusChangeModal from "@/components/gathering/read/detail/GatheringStatusChangeModal";
 import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
 import { useState } from "react";
-import useGatheringStore from "@/stores/gatheringStore";
+import useGatheringStore from "@/entities/gathering/model/gatheringStore";
 import { useParams } from "next/navigation";
 import { fetchWithAuth } from "@/shared/api";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";

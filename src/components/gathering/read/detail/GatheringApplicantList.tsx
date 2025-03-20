@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import GatheringApplicantButton from "./GatheringApplicantButton";
-import useGatheringStore from "@/stores/gatheringStore";
+import useGatheringStore from "@/entities/gathering/model/gatheringStore";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { fetchWithAuth } from "@/shared/api";

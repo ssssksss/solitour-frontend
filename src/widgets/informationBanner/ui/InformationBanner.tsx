@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import * as motion from "motion/react-client";
 
 export const InformationBanner = () => {
   return (
@@ -22,14 +23,18 @@ export const InformationBanner = () => {
             정보 등록하기
           </Link>
         </div>
-        <div className="relative flex h-[13.5rem] w-[24.875rem] animate-bannerImage items-center justify-end max-[1024px]:mt-8 max-[1024px]:h-[10.6875rem] max-[744px]:justify-center">
+        <motion.div
+          className="relative flex h-[13.5rem] w-[24.875rem] items-center justify-end max-[1024px]:mt-8 max-[1024px]:h-[10.6875rem] max-[744px]:justify-center"
+          animate={{ y: ["-1rem", "0.75rem", "-1rem"] }}
+          transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
+        >
           <Image
             className="object-contain"
             src="/images/information-chat.webp"
             alt="information-chat"
             fill={true}
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

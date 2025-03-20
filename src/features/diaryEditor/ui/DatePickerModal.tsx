@@ -1,6 +1,3 @@
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import "@/styles/reactDataRange.css";
 import { MdClose } from "react-icons/md";
 import { Calendar } from "react-date-range";
 import { ko } from "date-fns/locale";

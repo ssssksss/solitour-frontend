@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useGatheringStore from "@/stores/gatheringStore";
+import useGatheringStore from "@/entities/gathering/model/gatheringStore";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
 import { useModalState } from "@/shared/lib/hooks";
 import { useToastifyStore } from "@/shared/model/toastifyStore";

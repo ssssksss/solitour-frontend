@@ -4,5 +4,5 @@ export const ORDER_LIST: {
 }[] = [
   { title: "최신순", href: "latest" },
   { title: "좋아요순", href: "likes" },
-  { title: "최신순", href: "views" },
+  { title: "조회순", href: "views" },
 ] as const;

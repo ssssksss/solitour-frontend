@@ -1,3 +1,8 @@
+"use client";
+
+import LottieImage from "@/../public/lottie/solitour_gathering_animation.json";
+import Lottie from "lottie-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const GatheringBanner = () => {
@@ -20,6 +25,19 @@ export const GatheringBanner = () => {
           >
             모임 등록하기
           </Link>
+        </div>
+        <div className="flex aspect-auto items-center justify-center">
+          <Lottie
+            className="mt-10 max-[744px]:absolute max-[744px]:top-60 max-[744px]:mt-0"
+            animationData={LottieImage}
+          />
+          <Image
+            className="absolute bottom-16 max-lg:bottom-12"
+            src="/icons/gathering-people.svg"
+            alt="gathering-people"
+            width={423}
+            height={282}
+          />
         </div>
       </div>
     </div>

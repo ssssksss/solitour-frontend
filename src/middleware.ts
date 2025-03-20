@@ -26,8 +26,6 @@ export async function middleware(request: NextRequest) {
     } else {
       return NextResponse.redirect(new URL("/auth/signin", request.url));
     }
-  } else if (!accessToken && !refreshToken) {
-    return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
   // 로그인한 상태에서 로그인 페이지에 접근하려는 경우 홈으로 이동

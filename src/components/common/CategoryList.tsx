@@ -1,19 +1,19 @@
-interface ICategoryList<T> {
+interface CategoryListProps<T> {
   categories: {
     name: string;
     value: T;
   }[];
-  onClickHandler: (value: T) => void;
   activeCategory: T;
+  onClick: (value: T) => void;
 }
 
 const CategoryList = <T extends string | number>({
   categories,
-  onClickHandler,
   activeCategory,
-}: ICategoryList<T>) => {
+  onClick,
+}: CategoryListProps<T>) => {
   const onClickMenu = (value: T) => {
-    onClickHandler(value);
+    onClick(value);
   };
 
   return (

@@ -1,6 +1,6 @@
-import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/GatheringDto";
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { gatheringApplicantsResponsesDto } from "./GatheringDto";
 
 // 1. 상태 인터페이스 정의
 interface GatheringState {
@@ -12,7 +12,7 @@ interface GatheringState {
 }
 
 // 2. 액션 인터페이스 정의
-interface GatheringActions {
+interface GatheringAction {
   initialize: () => void;
   setGathering: (data: Partial<GatheringState>) => void;
 }
@@ -26,10 +26,10 @@ const initialState: GatheringState = {
   deadline: null,
 };
 
+type GatheringStoreType = GatheringState & GatheringAction;
+
 // 4. 상태 및 액션 생성
-const gatheringStore: StateCreator<GatheringState & GatheringActions> = (
-  set,
-) => ({
+const gatheringStore: StateCreator<GatheringStoreType> = (set) => ({
   ...initialState,
   initialize: () =>
     set({
@@ -43,12 +43,10 @@ const gatheringStore: StateCreator<GatheringState & GatheringActions> = (
     })),
 });
 
-const useGatheringStore = create<GatheringState & GatheringActions>()<any>(
+const useGatheringStore = create<GatheringStoreType>(
   process.env.NODE_ENV === "development"
-    ? devtools(gatheringStore)
+    ? (devtools(gatheringStore) as StateCreator<GatheringStoreType>)
     : gatheringStore,
 );
-
-export type useGatheringStoreType = GatheringState & GatheringActions;
 
 export default useGatheringStore;

@@ -29,8 +29,8 @@ const MyPageGatheringList = () => {
       </Modal>
       <CategoryList
         categories={categories}
-        onClickHandler={handleCategoryClick}
         activeCategory={activeCategory}
+        onClick={handleCategoryClick}
       />
       <div
         onClick={(e) => checkAccessGathering(e)}

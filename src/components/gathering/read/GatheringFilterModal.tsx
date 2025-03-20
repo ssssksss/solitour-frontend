@@ -4,7 +4,6 @@ import { Modal } from "@/components/common/modal/Modal";
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { AGE_RANGE } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
-import "@/styles/reactDataRange.css";
 import { add, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import Image from "next/image";

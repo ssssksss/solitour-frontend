@@ -1,5 +1,4 @@
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
-import "@/styles/reactDataRange.css";
 import {
   add,
   compareAsc,

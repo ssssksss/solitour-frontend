@@ -23,8 +23,8 @@ const MyPageInformationList = () => {
     <div className="w-full">
       <CategoryList
         categories={categories}
-        onClickHandler={handleCategoryClick}
         activeCategory={activeCategory}
+        onClick={handleCategoryClick}
       />
       <div className="flex w-full flex-col">
         <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">

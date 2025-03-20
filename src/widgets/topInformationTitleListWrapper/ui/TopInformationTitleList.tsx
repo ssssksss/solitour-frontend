@@ -5,10 +5,12 @@ export const TopInformationTitleList = async () => {
   const topInformationTitleList = await getTopInformationTitleList();
 
   return (
-    <TopTitleList
-      title="여행"
-      href="informations"
-      topTitleList={topInformationTitleList}
-    />
+    <div className="-mt-28 w-full max-[1024px]:-mt-24">
+      <TopTitleList
+        title="여행"
+        href="informations"
+        topTitleList={topInformationTitleList}
+      />
+    </div>
   );
 };
