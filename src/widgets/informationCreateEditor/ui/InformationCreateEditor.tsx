@@ -1,12 +1,11 @@
 "use client";
 
 import { InformationEditor } from "@/features/informationEditor";
-import { useInformationCreateEditor } from "@/hooks/information/write/useInformationCreateEditor";
 import { FormProvider } from "react-hook-form";
+import { useInformationCreateEditor } from "../model/useInformationCreateEditor";
 
-const InformationCreateEditor = () => {
+export const InformationCreateEditor = () => {
   const {
-    text,
     methods,
     loading,
     locationModalVisible,
@@ -25,7 +24,7 @@ const InformationCreateEditor = () => {
   return (
     <FormProvider {...methods}>
       <InformationEditor
-        text={text}
+        text="등록"
         loading={loading}
         locationModalVisible={locationModalVisible}
         categoryModalVisible={categoryModalVisible}
@@ -42,5 +41,3 @@ const InformationCreateEditor = () => {
     </FormProvider>
   );
 };
-
-export default InformationCreateEditor;

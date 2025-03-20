@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

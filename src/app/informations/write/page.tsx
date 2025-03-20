@@ -1,5 +1,5 @@
-import Breadcrumbs from "@/shared/ui/breadcrumb/Breadcrumbs";
-import InformationCreateEditor from "@/components/informations/write/InformationCreateEditor";
+import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { InformationCreateEditor } from "@/widgets/informationCreateEditor";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

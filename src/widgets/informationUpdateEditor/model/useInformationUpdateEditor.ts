@@ -4,19 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import {
-  InformationRegisterResponseDto,
-  InformationUpdateRequestDto,
-} from "@/entities/information/model/informationDto";
 import sanitizeHtml from "sanitize-html";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
-import { InformationDetailResponse } from "@/entities/information";
-import { useInformationEditorStore } from "@/features/informationEditor/model/informationEditorStore";
-import { InformationUpdateFormSchema } from "@/features/informationEditor";
+import {
+  InformationDetailResponse,
+  InformationRegisterResponseDto,
+  InformationUpdateRequestDto,
+} from "@/entities/information";
+import {
+  InformationUpdateFormSchema,
+  useInformationEditorStore,
+} from "@/features/informationEditor";
+import { fetchWithAuth } from "@/shared/api";
 
 export const useInformationUpdateEditor = (
   informationId: number,
@@ -343,7 +344,6 @@ export const useInformationUpdateEditor = (
   }, [initialize]);
 
   return {
-    text: "수정",
     methods,
     loading,
     locationModalVisible,

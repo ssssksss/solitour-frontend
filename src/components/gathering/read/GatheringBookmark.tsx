@@ -1,7 +1,7 @@
 "use client";
 
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import Image from "next/image";
 import { useState } from "react";
 

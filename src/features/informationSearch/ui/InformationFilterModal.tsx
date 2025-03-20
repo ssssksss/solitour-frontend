@@ -1,14 +1,14 @@
 "use client";
 
-import { LOCATION } from "@/shared/config/location";
-import { useInformationFilterModal } from "@/hooks/information/list/useInformationFilterModal";
 import { MdClose } from "react-icons/md";
+import { useInformationFilterModal } from "../model/useInformationFilterModal";
+import { LOCATION } from "@/shared/config";
 
 interface InformationFilterModalProps {
   closeModal: () => void;
 }
 
-const InformationFilterModal = ({
+export const InformationFilterModal = ({
   closeModal,
 }: InformationFilterModalProps) => {
   const { place, setPlace, handleClick } =
@@ -20,7 +20,7 @@ const InformationFilterModal = ({
         <div className="flex flex-row items-center justify-end">
           <MdClose
             className="text-gray2 hover:text-main cursor-pointer"
-            size={"2.5rem"}
+            size="2.5rem"
             onClick={() => {
               window.history.back();
               closeModal();
@@ -31,16 +31,22 @@ const InformationFilterModal = ({
           <h3 className="text-lg font-bold text-black">지역별</h3>
           <div className="text-gray1 flex flex-wrap items-start gap-2 font-medium">
             <button
-              className={`${place === null ? "border-main bg-main text-white" : ""} hover:border-main hover:bg-main rounded-full border border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 hover:text-white`}
+              className={[
+                place === null ? "border-main bg-main text-white" : "",
+                "hover:border-main hover:bg-main rounded-full border border-[#E9EBED] px-3 py-1.5 text-sm font-medium hover:scale-105 hover:text-white",
+              ].join(" ")}
               type="button"
               onClick={() => setPlace(null)}
             >
               전체
             </button>
-            {LOCATION.map((location, i) => (
+            {LOCATION.map((location) => (
               <button
-                key={i}
-                className={`${location === place ? "border-main bg-main text-white" : ""} hover:border-main hover:bg-main rounded-full border border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105 hover:text-white`}
+                key={location}
+                className={[
+                  location === place ? "border-main bg-main text-white" : "",
+                  "hover:border-main hover:bg-main rounded-full border border-[#E9EBED] px-3 py-1.5 text-sm font-medium hover:scale-105 hover:text-white",
+                ].join(" ")}
                 type="button"
                 onClick={() => setPlace(location)}
               >
@@ -48,17 +54,17 @@ const InformationFilterModal = ({
               </button>
             ))}
           </div>
-          <button
-            className={`${place === "" ? "hidden" : ""} bg-main h-11 w-full rounded-full text-[0.9375rem] text-white hover:scale-105`}
-            type="button"
-            onClick={handleClick}
-          >
-            필터 적용하기
-          </button>
+          {place !== "" && (
+            <button
+              className="bg-main h-11 w-full rounded-full text-[0.9375rem] text-white hover:scale-105"
+              type="button"
+              onClick={handleClick}
+            >
+              필터 적용하기
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
-export default InformationFilterModal;

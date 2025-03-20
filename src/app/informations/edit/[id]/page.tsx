@@ -1,15 +1,13 @@
-import InformationUpdateEditor from "@/components/informations/edit/InformationUpdateEditor";
 import { getInformation } from "@/entities/information";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { InformationUpdateEditor } from "@/widgets/informationUpdateEditor";
 
-interface Props {
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<{ id: string }>;
-}
-
-export async function generateMetadata(props: Props) {
-  const params = await props.params;
-  const { id } = params;
-  const informationId = Number(id);
+}) {
+  const informationId = Number((await params).id);
 
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw new Error("Not Found");
@@ -21,10 +19,12 @@ export async function generateMetadata(props: Props) {
   };
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { id } = params;
-  const informationId = Number(id);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const informationId = Number((await params).id);
 
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
     throw Error("Not Found");

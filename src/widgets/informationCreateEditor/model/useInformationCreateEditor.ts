@@ -13,8 +13,10 @@ import {
   InformationRegisterResponseDto,
 } from "@/entities/information";
 import { fetchWithAuth } from "@/shared/api";
-import { useInformationEditorStore } from "@/features/informationEditor/model/informationEditorStore";
-import { InformationCreateFormSchema } from "@/features/informationEditor";
+import {
+  InformationCreateFormSchema,
+  useInformationEditorStore,
+} from "@/features/informationEditor";
 
 export const useInformationCreateEditor = () => {
   const { id } = useUserStore();
@@ -221,7 +223,7 @@ export const useInformationCreateEditor = () => {
   }, [id, router]);
 
   useEffect(() => {
-    // 아래 코드는 tips이 제대로 입력되지 않는 목적의 코드입니다.
+    // 아래 코드는 tips이 제대로 입력되지 않는 문제 방지 목적의 코드입니다.
     // 해당 코드가 없는 경우 한글 입력 시 한 글자만 입력되는 오류가 발생합니다.
     methods.setValue("tips", []);
     methods.watch();
@@ -233,7 +235,6 @@ export const useInformationCreateEditor = () => {
   }, []);
 
   return {
-    text: "등록",
     methods,
     loading,
     locationModalVisible,

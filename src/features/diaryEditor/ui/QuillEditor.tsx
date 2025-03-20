@@ -1,7 +1,7 @@
 "use client";
 
 import "react-quill-new/dist/quill.snow.css";
-import "@/styles/quillEditor.css";
+import "./quillEditor.css";
 import ReactQuill from "react-quill-new";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { useQuillEditor } from "../model/useQuillEditor";

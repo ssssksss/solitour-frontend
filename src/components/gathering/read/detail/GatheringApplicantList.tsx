@@ -5,7 +5,7 @@ import GatheringApplicantButton from "./GatheringApplicantButton";
 import useGatheringStore from "@/stores/gatheringStore";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import { UserImage, useUserStore } from "@/entities/user";
 
 interface GatheringApplicantListProps {

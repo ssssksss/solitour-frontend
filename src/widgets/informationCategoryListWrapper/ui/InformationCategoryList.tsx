@@ -1,7 +1,7 @@
-import InformationSearch from "../../../components/informations/list/InformationSearch";
 import { getInformationCategoryList } from "@/entities/information";
 import { InformationParentCategoryList } from "./InformationParentCategoryList";
 import { InformationChildCategoryList } from "./InformationChildCategoryList";
+import { InformationSearch } from "@/features/informationSearch";
 
 interface InformationCategoryListProps {
   parentCategoryId: number;

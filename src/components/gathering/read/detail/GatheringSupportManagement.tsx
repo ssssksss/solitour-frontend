@@ -8,7 +8,7 @@ import { useState } from "react";
 import useGatheringStore from "@/stores/gatheringStore";
 import useToastifyStore from "@/stores/toastifyStore";
 import { useParams } from "next/navigation";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
 import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";

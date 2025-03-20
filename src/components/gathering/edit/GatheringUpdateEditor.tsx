@@ -5,7 +5,7 @@ import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringC
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import useToastifyStore from "@/stores/toastifyStore";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";

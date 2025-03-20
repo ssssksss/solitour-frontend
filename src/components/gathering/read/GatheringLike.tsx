@@ -1,7 +1,7 @@
 "use client";
 
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import Image from "next/image";
 import { useState } from "react";
 import { useUserStore } from "@/entities/user";

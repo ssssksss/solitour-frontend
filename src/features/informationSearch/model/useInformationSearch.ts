@@ -7,16 +7,18 @@ import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 export const useInformationSearch = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [orderDropdownVisible, setOrderDropdownVisible] = useState(false);
-  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const parentCategoryId = searchParams.get("parentCategoryId")!;
-  const childCategoryId = searchParams.get("childCategoryId");
   const place = searchParams.get("place") ?? "";
   const order = searchParams.get("order") ?? "latest";
   const [searchValue, setSearchValue] = useState("");
   const [searchMethod, setSearchMethod] = useState<"제목" | "태그">("제목");
   const [searchDropdownVisible, setSearchDropdownVisible] = useState(false);
   const router = useRouter();
+
+  const handleSearchMethodChange = (value: "제목" | "태그") => {
+    setSearchValue("");
+    setSearchMethod(value);
+  };
 
   const handleSearchValueChange = (value: string) => {
     if (searchMethod === "제목") {
@@ -32,30 +34,31 @@ export const useInformationSearch = () => {
       return;
     }
 
-    router.push(
-      [
-        `${pathname}?page=1`,
-        `&parentCategoryId=${parentCategoryId}`,
-        `${childCategoryId !== null ? `&childCategoryId=${childCategoryId}` : ""}`,
-        `${place !== "" ? `&place=${place}` : ""}`,
-        `&order=${order}`,
-        `${searchValue !== "" ? `${searchMethod === "제목" ? "&search" : "&tagName"}=${searchValue}` : ""}`,
-      ].join(""),
-    );
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", "1");
+    url.searchParams.delete("search");
+    url.searchParams.delete("tagName");
+
+    if (searchValue !== "") {
+      url.searchParams.set(
+        searchMethod === "제목" ? "search" : "tagName",
+        searchValue,
+      );
+    }
+
+    router.push(url.href, { scroll: false });
   };
 
-  const handleSearchMethodChange = (value: "제목" | "태그") => {
-    setSearchValue("");
-    setSearchMethod(value);
+  const handleOrderClick = (order: "latest" | "likes" | "views") => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("order", order);
+    router.push(url.href, { scroll: false });
   };
 
   usePreventBodyScroll(modalVisible);
   useModalBackHandler(modalVisible, () => setModalVisible(false));
 
   return {
-    pathname,
-    parentCategoryId,
-    childCategoryId,
     place,
     order,
     searchMethod,
@@ -67,8 +70,9 @@ export const useInformationSearch = () => {
     closeModal: () => setModalVisible(false),
     setOrderDropdownVisible,
     setSearchDropdownVisible,
+    handleSearchMethodChange,
     handleSearchValueChange,
     handleSearchClick,
-    handleSearchMethodChange,
+    handleOrderClick,
   };
 };

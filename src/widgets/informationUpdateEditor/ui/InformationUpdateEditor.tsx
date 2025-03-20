@@ -1,21 +1,20 @@
 "use client";
 
-import { useInformationUpdateEditor } from "@/hooks/information/edit/useInformationUpdateEditor";
 import { FormProvider } from "react-hook-form";
 import { InformationDetailResponse } from "@/entities/information";
 import { InformationEditor } from "@/features/informationEditor";
+import { useInformationUpdateEditor } from "../model/useInformationUpdateEditor";
 
 interface InformationUpdateEditorProps {
   informationId: number;
   data: InformationDetailResponse;
 }
 
-const InformationUpdateEditor = ({
+export const InformationUpdateEditor = ({
   informationId,
   data,
 }: InformationUpdateEditorProps) => {
   const {
-    text,
     methods,
     loading,
     locationModalVisible,
@@ -34,7 +33,7 @@ const InformationUpdateEditor = ({
   return (
     <FormProvider {...methods}>
       <InformationEditor
-        text={text}
+        text="수정"
         loading={loading}
         locationModalVisible={locationModalVisible}
         categoryModalVisible={categoryModalVisible}
@@ -51,5 +50,3 @@ const InformationUpdateEditor = ({
     </FormProvider>
   );
 };
-
-export default InformationUpdateEditor;

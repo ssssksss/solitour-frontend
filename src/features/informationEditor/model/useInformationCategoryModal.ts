@@ -1,7 +1,7 @@
 "use client";
 
 import { InformationCategory } from "@/entities/information";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 

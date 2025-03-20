@@ -1,5 +1,5 @@
 import ReactToastifyComponent from "@/components/common/ReactToastifyComponent";
-import "@/styles/globals.css";
+import "./globals.css";
 import { FloatingButton } from "@/widgets/floatingButton";
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";

@@ -4,7 +4,7 @@ import GatheringEditor from "@/components/gathering/createUpdate/editor/Gatherin
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import useToastifyStore from "@/stores/toastifyStore";
-import { fetchWithAuth } from "@/shared/api/fetchWithAuth";
+import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
