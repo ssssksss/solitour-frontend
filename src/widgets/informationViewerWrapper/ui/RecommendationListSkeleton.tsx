@@ -1,6 +1,6 @@
 import { InformationItemSkeleton } from "@/features/informationItem";
 
-const RecommendationListSkeleton = () => {
+export const RecommendationListSkeleton = () => {
   return (
     <div className="my-20 w-full">
       <h2 className="text-2xl font-bold text-black">추천 정보</h2>
@@ -12,5 +12,3 @@ const RecommendationListSkeleton = () => {
     </div>
   );
 };
-
-export default RecommendationListSkeleton;

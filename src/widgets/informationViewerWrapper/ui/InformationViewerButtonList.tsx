@@ -1,18 +1,21 @@
 "use client";
 
-import { useButtonList } from "@/hooks/information/detail/useButtonList";
-import { DeleteIcon, EditIcon } from "@/shared/ui/icon";
-import { DeleteModal } from "@/shared/ui/modal";
 import Link from "next/link";
+import { DeleteModal } from "@/shared/ui/modal";
+import { useInformationViewerButtonList } from "../model/useInformationViewerButtonList";
+import { DeleteIcon, EditIcon } from "@/shared/ui/icon";
 
-interface ButtonListProps {
+interface InformationViewerButtonListProps {
   userId: number;
   informationId: number;
 }
 
-const ButtonList = ({ userId, informationId }: ButtonListProps) => {
+export const InformationViewerButtonList = ({
+  userId,
+  informationId,
+}: InformationViewerButtonListProps) => {
   const { id, modalVisible, loading, setModalVisible, handleDeleteClick } =
-    useButtonList(informationId);
+    useInformationViewerButtonList(informationId);
 
   if (userId !== id) {
     return null;
@@ -47,5 +50,3 @@ const ButtonList = ({ userId, informationId }: ButtonListProps) => {
     </div>
   );
 };
-
-export default ButtonList;

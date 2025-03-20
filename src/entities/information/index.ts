@@ -3,6 +3,7 @@ export {
   type RecommendationInformation,
   type InformationDetailResponse,
   getInformation,
+  deleteInformation,
 } from "./api/information";
 export { getInformationCategoryList } from "./api/informationCategoryList";
 export { getInformationList } from "./api/informationList";

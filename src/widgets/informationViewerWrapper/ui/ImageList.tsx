@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useImageList } from "@/hooks/information/detail/useImageList";
-import ImageViewer from "./ImageViewer";
+import { useImageList } from "../model/useImageList";
+import { ImageViewer } from "./ImageViewer";
 
 interface ImageListProps {
-  images: Array<Readonly<{ imageStatus: string; address: string }>>;
+  imageList: { imageStatus: string; address: string }[];
 }
 
-const ImageList = ({ images }: ImageListProps) => {
+export const ImageList = ({ imageList }: ImageListProps) => {
   const {
     scrollHook,
     mainImageUrl,
@@ -16,7 +16,7 @@ const ImageList = ({ images }: ImageListProps) => {
     setMainImageUrl,
     openViewer,
     closeViewer,
-  } = useImageList(images);
+  } = useImageList(imageList);
 
   return (
     <div>
@@ -24,7 +24,7 @@ const ImageList = ({ images }: ImageListProps) => {
         <ImageViewer
           imageUrls={[
             mainImageUrl,
-            ...images
+            ...imageList
               .filter((image) => image.address !== mainImageUrl)
               .map((image) => image.address),
           ]}
@@ -33,16 +33,15 @@ const ImageList = ({ images }: ImageListProps) => {
       )}
       <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
         <Image
-          className="hover:border-main cursor-pointer rounded-2xl border"
+          className="hover:border-main cursor-pointer rounded-2xl border object-cover"
           src={mainImageUrl}
           alt="mainImage"
           fill={true}
-          style={{ objectFit: "cover" }}
           onClick={() => openViewer()}
         />
       </div>
       <div
-        className="flex flex-row items-center gap-[0.875rem] overflow-x-auto pt-[0.875rem]"
+        className="flex flex-row items-center gap-3.5 overflow-x-auto pt-3.5"
         ref={scrollHook.listRef}
         onMouseDown={(e) => {
           e.preventDefault();
@@ -55,7 +54,7 @@ const ImageList = ({ images }: ImageListProps) => {
         onTouchMove={scrollHook.onTouchMove}
         onTouchEnd={scrollHook.onTouchEnd}
       >
-        {images.map((image, index) => (
+        {imageList.map((image, index) => (
           <div
             key={index}
             className="relative min-h-[6.6875rem] min-w-[6.6875rem] rounded-lg border"
@@ -63,11 +62,10 @@ const ImageList = ({ images }: ImageListProps) => {
             onTouchEnd={() => setMainImageUrl(image.address)}
           >
             <Image
-              className="cursor-pointer rounded-[0.4375rem]"
+              className="cursor-pointer rounded-[0.4375rem] object-cover"
               src={image.address}
               alt="subImage"
               fill={true}
-              style={{ objectFit: "cover" }}
             />
           </div>
         ))}
@@ -75,5 +73,3 @@ const ImageList = ({ images }: ImageListProps) => {
     </div>
   );
 };
-
-export default ImageList;

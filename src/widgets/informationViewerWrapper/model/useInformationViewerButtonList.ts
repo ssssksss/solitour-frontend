@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
+import { deleteInformation } from "@/entities/information";
 
-export const useButtonList = (informationId: number) => {
+export const useInformationViewerButtonList = (informationId: number) => {
   const { id } = useUserStore();
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -15,10 +15,7 @@ export const useButtonList = (informationId: number) => {
   const handleDeleteClick = async () => {
     setLoading(true);
 
-    const response = await fetchWithAuth(`/api/informations/${informationId}`, {
-      method: "DELETE",
-      cache: "no-store",
-    });
+    const response = await deleteInformation(informationId);
 
     if (!response.ok) {
       alert("정보 삭제에 실패하였습니다.");

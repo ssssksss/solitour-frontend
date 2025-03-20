@@ -1,8 +1,8 @@
 "use client";
 
-import { useInformationLikeCount } from "@/hooks/information/detail/useInformationLikeCount";
-import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { HeartIcon } from "@/shared/ui/icon";
+import { useInformationLikeCount } from "../model/useInformationLikeCount";
+import { convertNumberToShortForm } from "@/shared/lib/utils";
 
 interface InformationLikeCountProps {
   informationId: number;
@@ -10,7 +10,7 @@ interface InformationLikeCountProps {
   initialIsLike: boolean;
 }
 
-const InformationLikeCount = ({
+export const InformationLikeCount = ({
   informationId,
   initialLikeCount,
   initialIsLike,
@@ -38,5 +38,3 @@ const InformationLikeCount = ({
     </button>
   );
 };
-
-export default InformationLikeCount;

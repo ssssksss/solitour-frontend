@@ -1,11 +1,5 @@
-import InformationViewer from "@/components/informations/detail/InformationViewer";
-import RecommendationList from "@/components/informations/detail/RecommendationList";
-import { getInformation } from "@/entities/information";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
-
-interface Props {
-  params: Promise<{ id: string }>;
-}
+import { InformationViewerWrapper } from "@/widgets/informationViewerWrapper";
 
 export async function generateMetadata({
   params,
@@ -35,8 +29,6 @@ export default async function Page({
     throw new Error("Not Found");
   }
 
-  const data = await getInformation(informationId);
-
   return (
     <div className="flex w-full flex-col items-center">
       <Breadcrumbs
@@ -48,8 +40,7 @@ export default async function Page({
           { label: "정보 상세", href: "" },
         ]}
       />
-      <InformationViewer informationId={informationId} data={data} />
-      <RecommendationList recommendationList={data.recommendInformation} />
+      <InformationViewerWrapper informationId={informationId} />
     </div>
   );
 }

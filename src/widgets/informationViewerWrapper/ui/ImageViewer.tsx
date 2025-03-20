@@ -1,24 +1,24 @@
 "use client";
 
-import { useImageViewer } from "@/hooks/information/detail/useImageViewer";
 import { AnimatePresence, motion } from "motion/react";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import { useImageViewer } from "../model/useImageViewer";
 
 interface ImageViewerProps {
   imageUrls: string[];
   closeViewer: () => void;
 }
 
-const ImageViewer = ({ imageUrls, closeViewer }: ImageViewerProps) => {
+export const ImageViewer = ({ imageUrls, closeViewer }: ImageViewerProps) => {
   const { index, direction, length, variants, setIndex } =
     useImageViewer(imageUrls);
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/25 text-white">
+    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/25 text-white">
       <div className="relative flex h-[calc(100%_-_48px)] w-[calc(100%_-_48px)] flex-col gap-3 rounded-2xl bg-gray-900 p-6">
-        <div className="absolute right-5 top-4 cursor-pointer self-end rounded-md hover:text-main">
-          <MdClose size={"2rem"} onClick={() => closeViewer()} />
+        <div className="hover:text-main absolute top-4 right-5 cursor-pointer self-end rounded-md">
+          <MdClose size="2rem" onClick={() => closeViewer()} />
         </div>
         <div className="mt-8 flex h-full w-full flex-row items-center">
           <FaCaretLeft
@@ -67,5 +67,3 @@ const ImageViewer = ({ imageUrls, closeViewer }: ImageViewerProps) => {
     </div>
   );
 };
-
-export default ImageViewer;

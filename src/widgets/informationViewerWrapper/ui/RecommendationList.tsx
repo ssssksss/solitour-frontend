@@ -6,7 +6,7 @@ interface RecommendationListProps {
   recommendationList: RecommendationInformation[];
 }
 
-const RecommendationList = ({
+export const RecommendationList = ({
   recommendationList,
 }: RecommendationListProps) => {
   return (
@@ -37,5 +37,3 @@ const RecommendationList = ({
     </div>
   );
 };
-
-export default RecommendationList;

@@ -2,8 +2,8 @@
 
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import useInformationLikeStore from "@/stores/informationLikeStore";
 import { useEffect, useState } from "react";
+import useInformationLikeStore from "./informationLikeStore";
 
 export const useInformationLikeCount = (
   informationId: number,

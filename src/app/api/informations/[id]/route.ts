@@ -63,28 +63,3 @@ export async function PUT(
   revalidatePath("/informations", "layout");
   return response;
 }
-
-/**
- * 정보 글 삭제
- */
-export async function DELETE(
-  request: NextRequest,
-  props: { params: Promise<{ id: string }> },
-) {
-  const params = await props.params;
-  const cookie = request.cookies.get("access_token");
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${params.id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-      cache: "no-store",
-    },
-  );
-
-  revalidateTag("getBestInformationList");
-  revalidatePath("/informations", "layout");
-  return response;
-}
