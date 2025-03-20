@@ -1,10 +1,10 @@
 import React from "react";
-import SupportAboutBanner from "./SupportAboutBanner";
-import SupportAboutInformation from "./SupportAboutInformation";
-import SupportAboutGathering from "./SupportAboutGathering";
-import SupportAboutDiary from "./SupportAboutDiary";
+import { SupportAboutBanner } from "./SupportAboutBanner";
+import { SupportAboutInformation } from "./SupportAboutInformation";
+import { SupportAboutGathering } from "./SupportAboutGathering";
+import { SupportAboutDiary } from "./SupportAboutDiary";
 
-const SupportAbout = () => {
+export const SupportAbout = () => {
   return (
     <div className="mt-10 flex w-full flex-col">
       <SupportAboutBanner />
@@ -18,5 +18,3 @@ const SupportAbout = () => {
     </div>
   );
 };
-
-export default SupportAbout;

@@ -29,7 +29,12 @@ export const InformationLikeCount = ({
 
   return (
     <button
-      className={`${isLike ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]" : "stroke-gray2 text-gray2 fill-none hover:fill-[#F85E5E] hover:stroke-[#F85E5E]"} flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]`}
+      className={[
+        isLike
+          ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]"
+          : "stroke-gray2 text-gray2 fill-none hover:fill-[#F85E5E] hover:stroke-[#F85E5E]",
+        "flex flex-row items-center gap-[0.3125rem] text-xs hover:text-[#F85E5E]",
+      ].join(" ")}
       type="button"
       onClick={handleLikeClick}
     >

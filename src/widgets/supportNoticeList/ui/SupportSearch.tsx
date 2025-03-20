@@ -8,7 +8,7 @@ interface Props {
   loading: boolean;
 }
 
-const SupportSearch = ({ loading }: Props) => {
+export const SupportSearch = ({ loading }: Props) => {
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState<string>(
     searchParams.get("search") || searchParams.get("tagName") || "",
@@ -63,5 +63,3 @@ const SupportSearch = ({ loading }: Props) => {
     </div>
   );
 };
-
-export default SupportSearch;

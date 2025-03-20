@@ -2,7 +2,7 @@ import * as motion from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 
-const SupportAboutGathering = () => {
+export const SupportAboutGathering = () => {
   return (
     <motion.div
       className="absolute left-0 mt-[66.75rem] flex h-[31.75rem] w-full items-center justify-center bg-[#F9FAFB] py-12 max-[1024px]:px-[3.375rem] max-[744px]:px-6"
@@ -70,5 +70,3 @@ const SupportAboutGathering = () => {
     </motion.div>
   );
 };
-
-export default SupportAboutGathering;

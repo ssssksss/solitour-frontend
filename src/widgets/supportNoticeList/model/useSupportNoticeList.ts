@@ -13,14 +13,6 @@ export const useSupportNoticeList = () => {
   const [noticeList, setNoticeList] = useState<Notice[]>([]);
   const [viewedNoticeList, setViewedNoticeList] = useState<number[]>([]);
 
-  const getNoticeList = async (page: number) => {
-    setLoading(true);
-    const response = await fetch(`/api/support/notice?page=${page}`);
-    const data = await response.json();
-    setNoticeList(data.content);
-    setLoading(false);
-  };
-
   const handleNoticeClick = (id: number) => {
     const viewedNotices = JSON.parse(
       localStorage.getItem("viewedNotices") || "[]",
@@ -32,7 +24,16 @@ export const useSupportNoticeList = () => {
   };
 
   useEffect(() => {
-    getNoticeList(currentPage);
+    (async () => {
+      setLoading(true);
+      const response = await fetch(
+        `/api/support/notice?page=${searchParams.get("page") ? Number(searchParams.get("page")) : 1}`,
+      );
+      const data = await response.json();
+      setNoticeList(data.content);
+      setLoading(false);
+    })();
+
     setViewedNoticeList(
       JSON.parse(localStorage.getItem("viewedNotices") || "[]"),
     );

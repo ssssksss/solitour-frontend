@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const SupportTerms = () => {
+export const SupportTerms = () => {
   useEffect(() => {
     // 페이지가 로드된 후 URL의 해시를 감지
     const hash = window.location.hash;
@@ -28,8 +28,8 @@ const SupportTerms = () => {
 
   return (
     <section>
-      <article className="mb-20 mt-10 flex w-full flex-col gap-10">
-        <h2 className="text-3xl font-bold text-main" id={"terms-of-service"}>
+      <article className="mt-10 mb-20 flex w-full flex-col gap-10">
+        <h2 className="text-main text-3xl font-bold" id="terms-of-service">
           이용약관
         </h2>
         <div className="flex flex-col gap-5">
@@ -360,7 +360,7 @@ const SupportTerms = () => {
         </div>
       </article>
       <article>
-        <h1 className="mb-10 text-3xl font-bold text-main" id="privacy-policy">
+        <h1 className="text-main mb-10 text-3xl font-bold" id="privacy-policy">
           개인정보 처리방침
         </h1>
         <div className="space-y-8">
@@ -476,5 +476,3 @@ const SupportTerms = () => {
     </section>
   );
 };
-
-export default SupportTerms;

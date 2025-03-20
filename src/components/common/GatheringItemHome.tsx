@@ -26,12 +26,12 @@ const GatheringItemHome = ({ data }: IGatheringItemHome) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
-      className="outline-gray3 hover:bg-lightGreen hover:outline-main flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline outline-2 duration-300 max-[744px]:min-w-[19.183125rem]"
+      className="outline-gray3 hover:bg-lightGreen hover:outline-main flex h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-6 text-black outline duration-300 max-[744px]:min-w-[19.183125rem]"
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-[1px] outline-offset-[-1px] ${categoryStyle[data.gatheringCategoryName]}`}
+            className={`flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline -outline-offset-1 ${categoryStyle[data.gatheringCategoryName]}`}
           >
             <span>{data.gatheringCategoryName}</span>
           </p>

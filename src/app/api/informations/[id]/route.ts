@@ -1,5 +1,3 @@
-import { InformationUpdateRequestDto } from "@/entities/information/model/informationDto";
-import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 /**
@@ -26,40 +24,5 @@ export async function GET(
     },
   );
 
-  return response;
-}
-
-/**
- * 정보 글 수정
- *
- * @param request
- * @param params
- * @returns
- */
-export async function PUT(
-  request: NextRequest,
-  props: { params: Promise<{ id: string }> },
-) {
-  const params = await props.params;
-  const cookie = request.cookies.get("access_token");
-  const body: InformationUpdateRequestDto = await request.json();
-
-  // Back-end API 호출
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${params.id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-      body: JSON.stringify(body),
-      cache: "no-store",
-    },
-  );
-
-  // Revalidate the cache
-  revalidateTag("getBestInformationList");
-  revalidatePath("/informations", "layout");
   return response;
 }

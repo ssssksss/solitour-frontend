@@ -9,10 +9,9 @@ import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
 import {
-  InformationCreateRequestDto,
-  InformationRegisterResponseDto,
+  createInformation,
+  InformationCreateRequest,
 } from "@/entities/information";
-import { fetchWithAuth } from "@/shared/api";
 import {
   InformationCreateFormSchema,
   useInformationEditorStore,
@@ -165,7 +164,7 @@ export const useInformationCreateEditor = () => {
       hashtags,
     } = methods.getValues();
 
-    const data: InformationCreateRequestDto = {
+    const data: InformationCreateRequest = {
       informationTitle: informationTitle,
       informationAddress: informationAddress,
       informationContent: sanitizeHtml(informationContent, SANITIZE_OPTION),
@@ -187,12 +186,7 @@ export const useInformationCreateEditor = () => {
 
     setLoading(true);
 
-    const response = await fetchWithAuth("/api/informations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-      cache: "no-store",
-    });
+    const response = await createInformation(data);
 
     if (!response.ok) {
       alert("정보 등록에 실패하였습니다.");
@@ -200,7 +194,8 @@ export const useInformationCreateEditor = () => {
       throw new Error(response.statusText);
     }
 
-    const result: InformationRegisterResponseDto = await response.json();
+    const result: { id: number } = await response.json();
+
     router.push(`/informations/${result.id}`);
     router.refresh();
   };

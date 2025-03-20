@@ -2,9 +2,9 @@
 
 import { differenceInDays, format } from "date-fns";
 import Link from "next/link";
-import SupportSearch from "./SupportSearch";
-import { useSupportNoticeList } from "@/hooks/support/notice/useSupportNoticeList";
 import { Pagination } from "@/shared/ui/pagination";
+import { SupportSearch } from "./SupportSearch";
+import { useSupportNoticeList } from "../model/useSupportNoticeList";
 
 const categoryStyles: { [key: string]: string } = {
   이벤트: "text-green-800",
@@ -13,7 +13,7 @@ const categoryStyles: { [key: string]: string } = {
   기타: "text-gray-800",
 } as const;
 
-const SupportNoticeList = () => {
+export const SupportNoticeList = () => {
   const {
     loading,
     noticeList,
@@ -92,5 +92,3 @@ const SupportNoticeList = () => {
     </div>
   );
 };
-
-export default SupportNoticeList;

@@ -10,14 +10,13 @@ import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
 import {
   InformationDetailResponse,
-  InformationRegisterResponseDto,
-  InformationUpdateRequestDto,
+  InformationUpdateRequest,
+  updateInformation,
 } from "@/entities/information";
 import {
   InformationUpdateFormSchema,
   useInformationEditorStore,
 } from "@/features/informationEditor";
-import { fetchWithAuth } from "@/shared/api";
 
 export const useInformationUpdateEditor = (
   informationId: number,
@@ -222,7 +221,7 @@ export const useInformationUpdateEditor = (
       hashtags,
     } = methods.getValues();
 
-    const data: InformationUpdateRequestDto = {
+    const data: InformationUpdateRequest = {
       title: informationTitle,
       address: informationAddress,
       content: sanitizeHtml(informationContent, SANITIZE_OPTION),
@@ -256,14 +255,7 @@ export const useInformationUpdateEditor = (
 
     setLoading(true);
 
-    const response = await fetchWithAuth(`/api/informations/${informationId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-      cache: "no-store",
-    });
+    const response = await updateInformation(informationId, data);
 
     if (!response.ok) {
       alert("정보 수정에 실패하였습니다.");
@@ -271,7 +263,7 @@ export const useInformationUpdateEditor = (
       throw new Error(response.statusText);
     }
 
-    const result: InformationRegisterResponseDto = await response.json();
+    const result: { id: number } = await response.json();
     router.push(`/informations/${result.id}`);
     router.refresh();
   };

@@ -1,7 +1,7 @@
 import * as motion from "motion/react-client";
 import Image from "next/image";
 
-const SupportAboutBanner = () => {
+export const SupportAboutBanner = () => {
   return (
     <motion.div
       className="bg-lightgreen absolute left-0 flex h-[35rem] w-full items-center justify-center overflow-hidden"
@@ -80,5 +80,3 @@ const SupportAboutBanner = () => {
     </motion.div>
   );
 };
-
-export default SupportAboutBanner;
