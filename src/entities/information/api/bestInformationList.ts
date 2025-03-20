@@ -26,7 +26,7 @@ export async function getBestInformationList() {
     {
       method: "GET",
       headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
-      next: { revalidate: 60, tags: ["bestInformationList"] },
+      cache: "no-store",
     },
   );
 

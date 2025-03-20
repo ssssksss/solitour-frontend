@@ -8,7 +8,7 @@ export async function getGatheringCategoryList() {
     `${process.env.BACKEND_URL}/api/categories/gathering`,
     {
       method: "GET",
-      next: { revalidate: 60, tags: ["gatheringCategoryList"] },
+      next: { revalidate: 60 * 10, tags: ["gatheringCategoryList"] },
     },
   );
 

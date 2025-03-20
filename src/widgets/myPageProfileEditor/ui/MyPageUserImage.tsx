@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import CropperComponent from "../common/cropper/CropperComponent";
-import { Modal } from "../common/modal/Modal";
+import CropperComponent from "./CropperComponent";
+import { Modal } from "../../../components/common/modal/Modal";
 import { useMyPageUserImage } from "@/hooks/mypage/useMyPageUserImage";
 import { UserImage } from "@/entities/user";
 
@@ -11,7 +11,10 @@ interface MyPageUserImageProps {
   userSex: string | null;
 }
 
-const MyPageUserImage = ({ userImageUrl, userSex }: MyPageUserImageProps) => {
+export const MyPageUserImage = ({
+  userImageUrl,
+  userSex,
+}: MyPageUserImageProps) => {
   const {
     imageUrl,
     imageBase64Data,
@@ -76,4 +79,3 @@ const MyPageUserImage = ({ userImageUrl, userSex }: MyPageUserImageProps) => {
     </article>
   );
 };
-export default MyPageUserImage;

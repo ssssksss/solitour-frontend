@@ -12,7 +12,7 @@ export async function getTopInformationTitleList() {
     `${process.env.BACKEND_URL}/api/informations/ranks`,
     {
       method: "GET",
-      next: { revalidate: 60, tags: ["topInformationTitleList"] },
+      next: { revalidate: 60 * 10, tags: ["topInformationTitleList"] },
     },
   );
 

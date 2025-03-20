@@ -1,20 +1,20 @@
 "use client";
 
 import ModalTemplate from "@/components/common/modal/ModalTemplate";
-import { useMyPageAccountDeleteModal } from "@/hooks/mypage/profile/useMyPageAccountDeleteModal";
 import { User } from "@/entities/user";
 import { ReactNode } from "react";
+import { useMyPageAccountDeleteModal } from "../model/useMyPageAccountDeleteModal";
 
 interface MyPageAccountDeleteModalProps {
   userInfo: User;
-  closeModal: () => void;
   closeButtonComponent?: ReactNode;
+  closeModal: () => void;
 }
 
-const MyPageAccountDeleteModal = ({
+export const MyPageAccountDeleteModal = ({
   userInfo,
-  closeModal,
   closeButtonComponent,
+  closeModal,
 }: MyPageAccountDeleteModalProps) => {
   const { userDeleteText, handleUserDeleteTextChange, handleDeleteClick } =
     useMyPageAccountDeleteModal(userInfo, closeModal);
@@ -31,7 +31,7 @@ const MyPageAccountDeleteModal = ({
           2. 정보 게시글은 삭제되지 않지만 사용자와 관련된 내용은 전부 비공개
           처리되고 이후에는 수정이나 삭제는 불가능해집니다.
         </p>
-        <p>3. 필요한 정보는 회원탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
+        <p>3. 필요한 정보는 회원 탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
       </div>
       <div className="flex items-end gap-x-[.25rem] select-none">
         <span className="text-main text-lg">회원탈퇴를 하겠습니다.</span>
@@ -43,13 +43,12 @@ const MyPageAccountDeleteModal = ({
         onChange={(e) => handleUserDeleteTextChange(e.target.value)}
       />
       <button
-        disabled={userDeleteText !== "회원탈퇴를 하겠습니다."}
-        onClick={handleDeleteClick}
         className="bg-main disabled:bg-gray2 h-[3rem] w-full shrink-0 rounded-full text-white"
+        disabled={userDeleteText !== "회원 탈퇴를 하겠습니다."}
+        onClick={handleDeleteClick}
       >
-        회원탈퇴
+        회원 탈퇴
       </button>
     </ModalTemplate>
   );
 };
-export default MyPageAccountDeleteModal;

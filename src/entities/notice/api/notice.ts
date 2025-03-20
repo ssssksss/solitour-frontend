@@ -11,7 +11,7 @@ export async function getNotice(noticeId: number) {
     {
       method: "GET",
       headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
-      next: { revalidate: 3600, tags: ["notice", noticeId.toString()] },
+      next: { revalidate: 60 * 60, tags: ["notice", noticeId.toString()] },
     },
   );
 

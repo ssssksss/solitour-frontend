@@ -40,7 +40,7 @@ export async function getDiary(diaryId: number) {
     {
       method: "GET",
       headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
-      next: { revalidate: 60, tags: [`diary/${diaryId}`] },
+      next: { revalidate: 60 * 10, tags: [`diary/${diaryId}`] },
     },
   );
 
@@ -67,7 +67,6 @@ export async function createDiary(data: DiaryCreateRequest) {
     throw new Error("Failed to create data.");
   }
 
-  revalidateTag("diaryList");
   return response;
 }
 
@@ -90,7 +89,6 @@ export async function updateDiary(diaryId: number, data: DiaryUpdateRequest) {
     throw new Error("Failed to update data.");
   }
 
-  revalidateTag("diaryList");
   revalidateTag(`diary/${diaryId}`);
   return response;
 }
@@ -112,7 +110,6 @@ export async function deleteDiary(diaryId: number) {
     throw new Error("Failed to delete data.");
   }
 
-  revalidateTag("diaryList");
   revalidateTag(`diary/${diaryId}`);
   return response;
 }

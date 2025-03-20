@@ -1,6 +1,9 @@
 "use client";
 
-import { InformationCategory } from "@/entities/information";
+import {
+  getInformationCategoryList,
+  InformationCategory,
+} from "@/entities/information";
 import { fetchWithAuth } from "@/shared/api";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -36,16 +39,8 @@ export const useInformationCategoryModal = (closeModal: () => void) => {
 
   useEffect(() => {
     (async function () {
-      const response = await fetchWithAuth("/api/categories", {
-        method: "GET",
-        next: { revalidate: 60, tags: ["getCategoryList"] },
-      });
-
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-
-      setCategories(await (response.json() as Promise<InformationCategory[]>));
+      const informationCategoryList = await getInformationCategoryList();
+      setCategories(informationCategoryList);
     })();
   }, []);
 

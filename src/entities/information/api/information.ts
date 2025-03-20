@@ -106,7 +106,7 @@ export async function getInformation(informationId: number) {
     {
       method: "GET",
       headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
-      next: { revalidate: 60, tags: [`information/${informationId}`] },
+      cache: "no-store",
     },
   );
 
@@ -136,7 +136,6 @@ export async function createInformation(data: InformationCreateRequest) {
     throw new Error("Failed to create data");
   }
 
-  revalidateTag("bestInformationList");
   revalidatePath("/informations", "layout");
   return response;
 }
@@ -159,7 +158,6 @@ export async function updateInformation(
     },
   );
 
-  revalidateTag("bestInformationList");
   revalidatePath("/informations", "layout");
   return response;
 }
@@ -179,7 +177,6 @@ export async function deleteInformation(informationId: number) {
     throw new Error("Failed to delete data");
   }
 
-  revalidateTag("bestInformationList");
   revalidatePath("/informations", "layout");
   return response;
 }

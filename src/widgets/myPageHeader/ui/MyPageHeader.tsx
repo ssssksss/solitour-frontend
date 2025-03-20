@@ -1,18 +1,15 @@
-import { UserImage } from "@/entities/user";
-import { User } from "@/entities/user";
+import { getUserInfo, UserImage } from "@/entities/user";
 import Link from "next/link";
 
-interface MyPageHeaderProps {
-  userInfo: User;
-}
+export const MyPageHeader = async () => {
+  const userInfo = await getUserInfo();
 
-const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
   return (
     <div className="flex w-full max-w-[60rem] flex-col pt-[2.5rem]">
       <h1 className="text-3xl font-bold">마이페이지</h1>
       <article className="flex flex-col gap-[2.125rem] pt-[4.875rem] pb-[2.375rem]">
         <div className="flex flex-row items-center gap-[1.875rem]">
-          <div className="bg-lightGreen relative aspect-square w-[6.75rem] rounded-[50%] outline outline-offset-[-1px] outline-[#B8EDD9]">
+          <div className="bg-lightgreen relative aspect-square w-[6.75rem] rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]">
             <UserImage
               userImageAddress={userInfo.userImage.address}
               size={108}
@@ -35,5 +32,3 @@ const MyPageHeader = ({ userInfo }: MyPageHeaderProps) => {
     </div>
   );
 };
-
-export default MyPageHeader;

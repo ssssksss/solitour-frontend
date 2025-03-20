@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import Cropper from "react-easy-crop";
-import ModalTemplate from "../modal/ModalTemplate";
+import ModalTemplate from "../../../components/common/modal/ModalTemplate";
 import { getCroppedImage } from "@/shared/lib/utils";
 
 interface CropperComponentProps {

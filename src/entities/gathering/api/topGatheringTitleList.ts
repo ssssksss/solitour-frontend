@@ -12,7 +12,7 @@ export async function getTopGatheringTitleList() {
     `${process.env.BACKEND_URL}/api/gatherings/ranks`,
     {
       method: "GET",
-      next: { revalidate: 60, tags: ["topGatheringTitleList"] },
+      next: { revalidate: 60 * 10, tags: ["topGatheringTitleList"] },
     },
   );
 

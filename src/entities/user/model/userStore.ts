@@ -16,6 +16,8 @@ interface UserState {
   email: string;
   phoneNumber: string | null;
   isAdmin: boolean;
+  createdAt: Date | null;
+  provider: string;
 }
 
 // 2. 액션 인터페이스 정의
@@ -39,6 +41,8 @@ const initialState: UserState = {
   email: "",
   phoneNumber: "",
   isAdmin: false,
+  createdAt: null,
+  provider: "",
 };
 
 type UserStoreType = UserState & UserAction;

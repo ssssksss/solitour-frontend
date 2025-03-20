@@ -8,7 +8,7 @@ export async function getInformationCategoryList() {
     `${process.env.BACKEND_URL}/api/categories`,
     {
       method: "GET",
-      next: { revalidate: 60, tags: ["informationCategoryList"] },
+      next: { revalidate: 60 * 10, tags: ["informationCategoryList"] },
     },
   );
 
