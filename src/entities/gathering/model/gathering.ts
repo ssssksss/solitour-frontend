@@ -100,7 +100,6 @@ export interface GatheringDetailResponseDto {
 }
 
 // 모임 리스트 조회
-
 export interface Gathering {
   gatheringId: number;
   title: string;

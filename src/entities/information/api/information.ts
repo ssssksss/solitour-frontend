@@ -1,7 +1,7 @@
 "use server";
 
 import { fetchWithAuth } from "@/shared/api";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export interface RecommendationInformation {

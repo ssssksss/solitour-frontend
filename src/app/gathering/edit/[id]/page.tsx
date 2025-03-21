@@ -1,5 +1,5 @@
 import GatheringUpdateEditor from "@/components/gathering/edit/GatheringUpdateEditor";
-import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
+import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
 import { NextResponse } from "next/server";
 
 interface PageProps {

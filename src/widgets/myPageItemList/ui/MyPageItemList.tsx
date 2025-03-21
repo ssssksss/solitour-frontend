@@ -1,10 +1,10 @@
 "use client";
 
-import MyPageInformationList from "./MyPageInformationList";
-import MyPageGatheringList from "./MyPageGatheringList";
-import { useMyPageTabMenu } from "../model/useMyPageTabMenu";
+import { useMyPageItemList } from "../model/useMyPageItemList";
+import { MyPageGatheringList } from "./MyPageGatheringList";
+import { MyPageInformationList } from "./MyPageInformationList";
 
-const tabs = [
+const tabList = [
   {
     label: "정보",
     active: { name: "mainCategory", value: "정보" },
@@ -20,16 +20,19 @@ const tabs = [
 ];
 
 interface MyPageItemListProps {
-  defaultActive: number;
+  defaultActiveIndex: number;
 }
 
-export const MyPageItemList = ({ defaultActive }: MyPageItemListProps) => {
-  const { activeIndex, handleTabClick } = useMyPageTabMenu(tabs, defaultActive);
+export const MyPageItemList = ({ defaultActiveIndex }: MyPageItemListProps) => {
+  const { activeIndex, handleTabClick } = useMyPageItemList(
+    tabList,
+    defaultActiveIndex,
+  );
 
   return (
     <div>
       <div className="flex w-full gap-[1.625rem] border-b border-gray-200">
-        {tabs.map((tab, index) => (
+        {tabList.map((tab, index) => (
           <button
             key={tab.label}
             className={[
@@ -43,18 +46,15 @@ export const MyPageItemList = ({ defaultActive }: MyPageItemListProps) => {
             {tab.label}
             <div
               className={[
-                `${activeIndex == index ? "bg-main h-0.5" : "opacity-0"}`,
+                `${activeIndex === index ? "bg-main h-0.5" : "opacity-0"}`,
                 "absolute bottom-[-1.5px] w-full",
               ].join(" ")}
             />
           </button>
         ))}
       </div>
-      <div
-        key={activeIndex}
-        className="transform whitespace-nowrap transition-all duration-300 ease-in-out"
-      >
-        {tabs[activeIndex].content}
+      <div className="transform whitespace-nowrap transition-all duration-300 ease-in-out">
+        {tabList[activeIndex].content}
       </div>
     </div>
   );

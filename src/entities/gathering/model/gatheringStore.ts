@@ -1,6 +1,6 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { gatheringApplicantsResponsesDto } from "./GatheringDto";
+import { gatheringApplicantsResponsesDto } from "./gathering";
 
 // 1. 상태 인터페이스 정의
 interface GatheringState {

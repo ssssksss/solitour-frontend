@@ -1,66 +1,47 @@
 "use client";
 
-import { fetchWithAuth } from "@/shared/api";
+import { getMyPageInformationList, Information } from "@/entities/information";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
-interface Information {
-  informationId: number;
-  title: string;
-  zoneCategoryParentName: string;
-  zoneCategoryChildName: string;
-  viewCount: number;
-  isBookMark: boolean;
-  thumbNailImage: string;
-  likeCount: number;
-}
 
 export const useMyPageInformationList = () => {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("page")) || 1,
+  );
   const [elements, setElements] = useState<Information[]>([]);
   const [totalElements, setTotalElements] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleCategoryClick = (value: string) => {
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    params.delete("page");
-    params.set("category", value);
-    url.search = params.toString();
-    window.history.pushState({}, "", url.toString());
+    url.searchParams.delete("page");
+    url.searchParams.set("category", value);
+    window.history.pushState(null, "", url.toString());
     setActiveCategory(value);
     setCurrentPage(1);
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    const category = params.get("category") || "";
-    setActiveCategory(category);
+    const category = searchParams.get("category");
 
-    if (searchParams.get("category") != category) {
-      setIsLoading(false);
+    if (!category) {
       return;
     }
 
+    setLoading(true);
+    setActiveCategory(category);
+
     (async () => {
-      const res = await fetchWithAuth(
-        `/api/mypage/information?category=${category}&page=${currentPage - 1}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          cache: "no-store",
-        },
+      const myPageInformationList = await getMyPageInformationList(
+        category,
+        currentPage,
       );
-      const data = await res.json();
-      setElements(data.content);
-      setTotalElements(data.page.totalElements);
-      setIsLoading(false);
+
+      setElements(myPageInformationList.content);
+      setTotalElements(myPageInformationList.page.totalElements);
+      setLoading(false);
     })();
   }, [searchParams, currentPage]);
 
@@ -69,7 +50,7 @@ export const useMyPageInformationList = () => {
     currentPage,
     elements,
     totalElements,
-    isLoading,
+    loading,
     handleCategoryClick,
   };
 };

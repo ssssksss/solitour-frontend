@@ -2,10 +2,9 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Gathering } from "@/entities/gathering/model/GatheringDto";
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
 import { useModal } from "@/shared/lib/hooks";
+import { Gathering, getMyPageGatheringList } from "@/entities/gathering";
 
 export const useMyPageGatheringList = () => {
   const searchParams = useSearchParams();
@@ -13,20 +12,18 @@ export const useMyPageGatheringList = () => {
   const [currentPage, setCurrentPage] = useState(
     Number(searchParams.get("page")) || 1,
   );
-  const router = useRouter();
-  const modalState = useModal();
   const [elements, setElements] = useState<Gathering[]>([]);
-  const userStore = useUserStore();
   const [totalElements, setTotalElements] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const userStore = useUserStore();
+  const router = useRouter();
+  const { isOpen, openModal, closeModal } = useModal();
 
   const handleCategoryClick = (value: string) => {
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    params.delete("page");
-    params.set("category", value);
-    url.search = params.toString();
-    window.history.pushState({}, "", url.toString());
+    url.searchParams.delete("page");
+    url.searchParams.set("category", value);
+    window.history.pushState(null, "", url.toString());
     setActiveCategory(value);
     setCurrentPage(1);
   };
@@ -34,8 +31,9 @@ export const useMyPageGatheringList = () => {
   const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
       e.preventDefault();
-      modalState.openModal();
+      openModal();
     }
+
     if (userStore.id < 1) {
       e.preventDefault();
       router.push("/auth/signin");
@@ -43,39 +41,24 @@ export const useMyPageGatheringList = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    const category = params.get("category") || "";
-    setActiveCategory(category);
+    const category = searchParams.get("category");
 
-    if (searchParams.get("category") != category) {
-      setIsLoading(false);
+    if (!category) {
       return;
     }
+
+    setLoading(true);
+    setActiveCategory(category);
+
     (async () => {
-      const res = await fetchWithAuth(
-        `/api/mypage/gathering?category=${category}&page=${currentPage - 1}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          cache: "no-store",
-        },
+      const myPageGatheringList = await getMyPageGatheringList(
+        category,
+        currentPage,
       );
 
-      if (!res.ok) {
-        setElements([]);
-        setTotalElements(0);
-        setIsLoading(false);
-        return;
-      }
-
-      const data = await res.json();
-      setElements(data.content);
-      setTotalElements(data.page.totalElements);
-      setIsLoading(false);
+      setElements(myPageGatheringList.content);
+      setTotalElements(myPageGatheringList.page.totalElements);
+      setLoading(false);
     })();
   }, [searchParams, currentPage]);
 
@@ -84,10 +67,11 @@ export const useMyPageGatheringList = () => {
     currentPage,
     elements,
     totalElements,
-    isLoading,
-    modalState,
+    loading,
+    isOpen,
     isAccessible: !!userStore.sex && !!userStore.age && userStore.id > 0,
     handleCategoryClick,
     checkAccessGathering,
+    closeModal,
   };
 };

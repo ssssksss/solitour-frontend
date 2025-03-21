@@ -1,6 +1,6 @@
 "use client";
 
-import { PlaceResponse } from "@/entities/gathering/model/GatheringDto";
+import { PlaceResponse } from "@/entities/gathering/model/gathering";
 import Image from "next/image";
 import { useEffect } from "react";
 

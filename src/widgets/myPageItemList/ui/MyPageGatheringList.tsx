@@ -1,43 +1,44 @@
 "use client";
 
-import { useMyPageGatheringList } from "@/widgets/myPageItemList/model/useMyPageGatheringList";
-import MyPageCategoryList from "./MyPageCategoryList";
 import GatheringItem from "../../../components/common/GatheringItem";
 import { GatheringItemSkeleton } from "@/features/gathering";
 import { Pagination } from "@/shared/ui/pagination";
 import { AddUserInformationForm } from "@/features/auth";
 import { Modal } from "@/shared/ui/modal";
 import { GATHERING_CATEGORY_LIST } from "../config/gatheringCategoryList";
+import { MyPageCategoryList } from "./MyPageCategoryList";
+import { useMyPageGatheringList } from "../model/useMyPageGatheringList";
 
-const MyPageGatheringList = () => {
+export const MyPageGatheringList = () => {
   const {
     activeCategory,
     currentPage,
     elements,
     totalElements,
-    isLoading,
-    modalState,
+    loading,
+    isOpen,
     isAccessible,
     handleCategoryClick,
     checkAccessGathering,
+    closeModal,
   } = useMyPageGatheringList();
 
   return (
     <div className="w-full">
-      <Modal isOpen={modalState.isOpen} closeModal={modalState.closeModal}>
-        <AddUserInformationForm closeModal={modalState.closeModal} />
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <AddUserInformationForm closeModal={closeModal} />
       </Modal>
       <MyPageCategoryList
-        categories={GATHERING_CATEGORY_LIST}
+        categoryList={GATHERING_CATEGORY_LIST}
         activeCategory={activeCategory}
         onClick={handleCategoryClick}
       />
       <div
-        onClick={(e) => checkAccessGathering(e)}
         className="my-6 grid w-full justify-items-center gap-x-3 gap-y-3 min-[744px]:grid-cols-2"
+        onClick={(e) => checkAccessGathering(e)}
       >
         {
-          isLoading
+          loading
             ? /* eslint-disable indent */
               Array.from({ length: 6 }).map((_, index) => (
                 <GatheringItemSkeleton key={index} />
@@ -59,5 +60,3 @@ const MyPageGatheringList = () => {
     </div>
   );
 };
-
-export default MyPageGatheringList;

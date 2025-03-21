@@ -1,4 +1,4 @@
-import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/GatheringDto";
+import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/gathering";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { useToastifyStore } from "@/shared/model/toastifyStore";
 import { useState } from "react";

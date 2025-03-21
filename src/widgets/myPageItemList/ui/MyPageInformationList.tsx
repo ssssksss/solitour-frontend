@@ -9,13 +9,13 @@ import { useMyPageInformationList } from "../model/useMyPageInformationList";
 import { INFORMATION_CATEGORY_LIST } from "../config/informationCategoryList";
 import { MyPageCategoryList } from "./MyPageCategoryList";
 
-const MyPageInformationList = () => {
+export const MyPageInformationList = () => {
   const {
     activeCategory,
     currentPage,
     elements,
     totalElements,
-    isLoading,
+    loading,
     handleCategoryClick,
   } = useMyPageInformationList();
 
@@ -29,7 +29,7 @@ const MyPageInformationList = () => {
       <div className="flex w-full flex-col">
         <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
           {
-            isLoading
+            loading
               ? /* eslint-disable indent */
                 Array.from({ length: 6 }).map((_, index) => (
                   <InformationItemSkeleton key={index} />
@@ -63,5 +63,3 @@ const MyPageInformationList = () => {
     </div>
   );
 };
-
-export default MyPageInformationList;

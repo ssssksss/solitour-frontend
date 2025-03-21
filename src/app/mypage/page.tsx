@@ -14,14 +14,17 @@ export default async function Page({
 }) {
   const { mainCategory, category } = await searchParams;
 
-  if (mainCategory === undefined || category === undefined) {
+  if (
+    (mainCategory !== "정보" && mainCategory !== "모임") ||
+    category === undefined
+  ) {
     throw new Error("Not Found");
   }
 
   return (
     <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
       <MyPageHeader />
-      <MyPageItemList defaultActive={mainCategory === "정보" ? 0 : 1} />
+      <MyPageItemList defaultActiveIndex={mainCategory === "정보" ? 0 : 1} />
     </main>
   );
 }

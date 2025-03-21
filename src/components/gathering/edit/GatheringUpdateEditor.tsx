@@ -3,7 +3,7 @@
 import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
-import { GatheringDetailResponseDto } from "@/entities/gathering/model/GatheringDto";
+import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
 import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";

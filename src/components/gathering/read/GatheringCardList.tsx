@@ -9,7 +9,7 @@ import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
 import { Pagination } from "@/shared/ui/pagination";
 import { GatheringItemSkeleton } from "@/features/gathering";
-import { Gathering } from "@/entities/gathering/model/GatheringDto";
+import { Gathering } from "@/entities/gathering/model/gathering";
 import { AddUserInformationForm } from "@/features/auth";
 
 const SkeletonGatheringList = () => {

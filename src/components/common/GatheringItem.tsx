@@ -1,5 +1,5 @@
 import GatheringBookMark from "@/components/gathering/read/GatheringBookmark";
-import { Gathering } from "@/entities/gathering/model/GatheringDto";
+import { Gathering } from "@/entities/gathering/model/gathering";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";

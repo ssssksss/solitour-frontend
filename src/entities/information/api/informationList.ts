@@ -3,24 +3,7 @@
 import { fetchWithAuth } from "@/shared/api";
 import { LOCATION_ID } from "@/shared/config";
 import { cookies } from "next/headers";
-
-export interface InformationList {
-  content: {
-    informationId: number;
-    title: string;
-    zoneCategoryParentName: string;
-    zoneCategoryChildName: string;
-    categoryName: string;
-    viewCount: number;
-    isBookMark: boolean;
-    thumbNailImage: string;
-    likeCount: number;
-    isLike: boolean;
-  }[];
-  page: {
-    totalPages: number;
-  };
-}
+import { InformationList } from "../model/informationList";
 
 export async function getInformationList(
   page: number,
