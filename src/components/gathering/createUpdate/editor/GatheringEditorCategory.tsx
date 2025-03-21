@@ -3,8 +3,8 @@
 import { Modal } from "@/shared/ui/modal/Modal";
 import { useFormContext } from "react-hook-form";
 import GatheringCategoryModal from "./modal/GatheringCategoryModal";
-import useModalState from "@/shared/lib/hooks/useModal";
 import { useEffect, useState } from "react";
+import { useModal } from "@/shared/lib/hooks";
 
 interface ICategory {
   id: number;
@@ -14,7 +14,7 @@ interface ICategory {
 
 const GatheringEditorCategory = () => {
   const formContext = useFormContext();
-  const modalState = useModalState();
+  const modalState = useModal();
   const [categoryList, setCategoryList] = useState<ICategory[]>([]);
 
   useEffect(() => {

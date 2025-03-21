@@ -1,16 +1,16 @@
 "use client";
 
-import { useMyPageGatheringList } from "@/hooks/mypage/useMyPageGatheringList";
-import CategoryList from "../common/CategoryList";
-import GatheringItem from "../common/GatheringItem";
-import { Modal } from "../../shared/ui/modal/Modal";
+import { useMyPageGatheringList } from "@/widgets/myPageItemList/model/useMyPageGatheringList";
+import MyPageCategoryList from "./MyPageCategoryList";
+import GatheringItem from "../../../components/common/GatheringItem";
 import { GatheringItemSkeleton } from "@/features/gathering";
 import { Pagination } from "@/shared/ui/pagination";
 import { AddUserInformationForm } from "@/features/auth";
+import { Modal } from "@/shared/ui/modal";
+import { GATHERING_CATEGORY_LIST } from "../config/gatheringCategoryList";
 
 const MyPageGatheringList = () => {
   const {
-    categories,
     activeCategory,
     currentPage,
     elements,
@@ -24,11 +24,11 @@ const MyPageGatheringList = () => {
 
   return (
     <div className="w-full">
-      <Modal modalState={modalState}>
-        <AddUserInformationForm />
+      <Modal isOpen={modalState.isOpen} closeModal={modalState.closeModal}>
+        <AddUserInformationForm closeModal={modalState.closeModal} />
       </Modal>
-      <CategoryList
-        categories={categories}
+      <MyPageCategoryList
+        categories={GATHERING_CATEGORY_LIST}
         activeCategory={activeCategory}
         onClick={handleCategoryClick}
       />

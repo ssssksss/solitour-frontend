@@ -16,7 +16,6 @@ export async function getUserInfo() {
   );
 
   if (!response.ok) {
-    console.log("ERROR");
     throw new Error("Failed to fetch data.");
   }
 

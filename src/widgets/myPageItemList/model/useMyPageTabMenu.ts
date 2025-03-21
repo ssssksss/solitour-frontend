@@ -7,18 +7,18 @@ export const useMyPageTabMenu = (
   tabs: {
     label: string;
     content: React.ReactNode;
-    href?: string;
+    href: string;
     active: { name: string; value: string };
   }[],
   defaultActive: number,
 ) => {
-  const [activeIndex, setActiveIndex] = useState(defaultActive || 0);
+  const [activeIndex, setActiveIndex] = useState(defaultActive);
   const searchparams = useSearchParams();
 
   const handleTabClick = (index: number) => {
     setActiveIndex(index);
-    if (tabs[index]?.href) {
-      window.history.pushState({}, "", tabs[index]?.href);
+    if (tabs[index].href) {
+      window.history.pushState({}, "", tabs[index].href);
     }
   };
 

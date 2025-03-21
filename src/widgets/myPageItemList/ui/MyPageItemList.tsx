@@ -1,8 +1,8 @@
 "use client";
 
-import { useMyPageTabMenu } from "@/hooks/mypage/useMyPageTabMenu";
 import MyPageInformationList from "./MyPageInformationList";
 import MyPageGatheringList from "./MyPageGatheringList";
+import { useMyPageTabMenu } from "../model/useMyPageTabMenu";
 
 const tabs = [
   {
@@ -19,30 +19,33 @@ const tabs = [
   },
 ];
 
-interface MyPageTabMenuProps {
+interface MyPageItemListProps {
   defaultActive: number;
 }
 
-const MyPageTabMenu = ({ defaultActive }: MyPageTabMenuProps) => {
+export const MyPageItemList = ({ defaultActive }: MyPageItemListProps) => {
   const { activeIndex, handleTabClick } = useMyPageTabMenu(tabs, defaultActive);
 
   return (
-    <div className="flex flex-col justify-end">
-      <div className="flex w-full gap-[1.625rem] border-b-[1px] border-gray-200">
+    <div>
+      <div className="flex w-full gap-[1.625rem] border-b border-gray-200">
         {tabs.map((tab, index) => (
           <button
             key={tab.label}
             className={[
               activeIndex === index
-                ? "font-bold text-[#00B488]"
-                : "font-medium text-[#666]",
-              "relative h-[2rem] w-[4rem] text-center",
+                ? "text-main font-bold"
+                : "text-gray1 font-medium",
+              "relative h-8 w-16 text-center",
             ].join(" ")}
             onClick={() => handleTabClick(index)}
           >
             {tab.label}
             <div
-              className={`absolute bottom-[-1.5px] w-full ${activeIndex == index ? "h-0.5 bg-[#00B488]" : "opacity-0"}`}
+              className={[
+                `${activeIndex == index ? "bg-main h-0.5" : "opacity-0"}`,
+                "absolute bottom-[-1.5px] w-full",
+              ].join(" ")}
             />
           </button>
         ))}
@@ -56,5 +59,3 @@ const MyPageTabMenu = ({ defaultActive }: MyPageTabMenuProps) => {
     </div>
   );
 };
-
-export default MyPageTabMenu;

@@ -3,25 +3,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Gathering } from "@/entities/gathering/model/GatheringDto";
-import { useModalState } from "@/shared/lib/hooks";
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-
-// value 변경하지 말것 api주소와 연결되어있음
-const categories = [
-  {
-    name: "내가 만든 모임",
-    value: "host",
-  },
-  {
-    name: "내가 신청한 모임",
-    value: "applicant",
-  },
-  {
-    name: "북마크",
-    value: "bookmark",
-  },
-];
+import { useModal } from "@/shared/lib/hooks";
 
 export const useMyPageGatheringList = () => {
   const searchParams = useSearchParams();
@@ -30,7 +14,7 @@ export const useMyPageGatheringList = () => {
     Number(searchParams.get("page")) || 1,
   );
   const router = useRouter();
-  const modalState = useModalState();
+  const modalState = useModal();
   const [elements, setElements] = useState<Gathering[]>([]);
   const userStore = useUserStore();
   const [totalElements, setTotalElements] = useState(0);
@@ -96,7 +80,6 @@ export const useMyPageGatheringList = () => {
   }, [searchParams, currentPage]);
 
   return {
-    categories,
     activeCategory,
     currentPage,
     elements,

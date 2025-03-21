@@ -1,5 +1,5 @@
-import MyPageTabMenu from "@/components/mypage/MyPageTabMenu";
 import { MyPageHeader } from "@/widgets/myPageHeader";
+import { MyPageItemList } from "@/widgets/myPageItemList";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default async function Page({
   return (
     <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
       <MyPageHeader />
-      <MyPageTabMenu defaultActive={mainCategory === "정보" ? 0 : 1} />
+      <MyPageItemList defaultActive={mainCategory === "정보" ? 0 : 1} />
     </main>
   );
 }

@@ -1,16 +1,16 @@
 "use client";
 
-import CategoryList from "../common/CategoryList";
-import { useMyPageInformationList } from "@/hooks/mypage/useMyPageInformationList";
 import {
   InformationItem,
   InformationItemSkeleton,
 } from "@/features/informationItem";
 import { Pagination } from "@/shared/ui/pagination";
+import { useMyPageInformationList } from "../model/useMyPageInformationList";
+import { INFORMATION_CATEGORY_LIST } from "../config/informationCategoryList";
+import { MyPageCategoryList } from "./MyPageCategoryList";
 
 const MyPageInformationList = () => {
   const {
-    categories,
     activeCategory,
     currentPage,
     elements,
@@ -21,8 +21,8 @@ const MyPageInformationList = () => {
 
   return (
     <div className="w-full">
-      <CategoryList
-        categories={categories}
+      <MyPageCategoryList
+        categoryList={INFORMATION_CATEGORY_LIST}
         activeCategory={activeCategory}
         onClick={handleCategoryClick}
       />

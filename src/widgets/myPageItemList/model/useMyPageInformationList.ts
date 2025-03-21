@@ -15,18 +15,6 @@ interface Information {
   likeCount: number;
 }
 
-// value 변경하지 말것 api주소와 연결되어있음
-const categories = [
-  {
-    name: "내 게시물",
-    value: "owner",
-  },
-  {
-    name: "북마크",
-    value: "bookmark",
-  },
-];
-
 export const useMyPageInformationList = () => {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("");
@@ -77,7 +65,6 @@ export const useMyPageInformationList = () => {
   }, [searchParams, currentPage]);
 
   return {
-    categories,
     activeCategory,
     currentPage,
     elements,

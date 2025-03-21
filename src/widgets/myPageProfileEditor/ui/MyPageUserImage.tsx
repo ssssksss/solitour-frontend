@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import CropperComponent from "./CropperComponent";
-import { Modal } from "../../../shared/ui/modal/Modal";
-import { useMyPageUserImage } from "@/hooks/mypage/useMyPageUserImage";
 import { UserImage } from "@/entities/user";
+import { useMyPageUserImage } from "../model/useMyPageUserImage";
+import { Modal } from "@/shared/ui/modal";
 
 interface MyPageUserImageProps {
   userImageUrl: string;
