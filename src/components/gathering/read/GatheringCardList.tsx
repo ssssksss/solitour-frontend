@@ -3,7 +3,7 @@
 import GatheringItem from "../../common/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Modal } from "@/components/common/modal/Modal";
+import { Modal } from "@/shared/ui/modal/Modal";
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";

@@ -28,9 +28,9 @@ export const MyPageNicknameEditor = ({
         </div>
         <label className="group relative w-full">
           <input
-            className="flex h-[3.25rem] w-full rounded-[28px] pr-20 pl-8 outline -outline-offset-1 outline-[#E3E3E3]"
+            className="flex h-13 w-full rounded-[28px] pr-20 pl-8 outline -outline-offset-1 outline-[#E3E3E3]"
             type="text"
-            autoComplete="search"
+            autoComplete="off"
             name="nickname"
             placeholder="닉네임을 입력해주세요"
             minLength={1}

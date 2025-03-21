@@ -1,4 +1,4 @@
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
 import { useDebounce } from "@/shared/lib/hooks";
 import { add, addDays, format, isAfter, isSameDay } from "date-fns";
 import ko from "date-fns/locale/ko";

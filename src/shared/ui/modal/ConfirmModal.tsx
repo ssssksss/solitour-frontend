@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import ModalTemplate from "./ModalTemplate";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
+import { ModalTemplate } from "./ModalTemplate";
 
 interface ConfirmModalProps {
   loading: boolean;
@@ -11,7 +11,7 @@ interface ConfirmModalProps {
   closeButtonComponent?: ReactNode;
 }
 
-const ConfirmModal = ({
+export const ConfirmModal = ({
   loading = false,
   mainMessage,
   subMessage,
@@ -50,5 +50,3 @@ const ConfirmModal = ({
     </ModalTemplate>
   );
 };
-
-export default ConfirmModal;

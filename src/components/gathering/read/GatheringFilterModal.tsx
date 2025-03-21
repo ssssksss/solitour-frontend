@@ -1,7 +1,7 @@
 "use client";
 
-import { Modal } from "@/components/common/modal/Modal";
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import { Modal } from "@/shared/ui/modal/Modal";
+import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
 import { AGE_RANGE } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
 import { add, format } from "date-fns";

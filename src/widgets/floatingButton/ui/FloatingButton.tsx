@@ -5,7 +5,7 @@ import Link from "next/link";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { AnimatePresence, motion } from "motion/react";
-import { Modal } from "@/components/common/modal/Modal";
+import { Modal } from "@/shared/ui/modal/Modal";
 import { useFloatingButton } from "../model/useFloatingButton";
 import { AddUserInformationForm } from "@/features/auth";
 

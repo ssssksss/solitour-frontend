@@ -33,6 +33,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  if (pathname.startsWith("/mypage") && !accessToken) {
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
+  }
+
   if (pathname.startsWith("/support")) {
     const validMenus = ["about", "notice", "faq", "terms"];
     const url = new URL(request.url);

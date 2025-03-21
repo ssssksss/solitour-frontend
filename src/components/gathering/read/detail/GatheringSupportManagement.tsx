@@ -1,13 +1,13 @@
 "use client";
 
-import { Modal } from "@/components/common/modal/Modal";
+import { Modal } from "@/shared/ui/modal/Modal";
 import GatheringStatusChangeModal from "@/components/gathering/read/detail/GatheringStatusChangeModal";
 import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
 import { useState } from "react";
 import useGatheringStore from "@/entities/gathering/model/gatheringStore";
 import { useParams } from "next/navigation";
 import { fetchWithAuth } from "@/shared/api";
-import ConfirmModal from "@/components/common/modal/ConfirmModal";
+import ConfirmModal from "@/shared/ui/modal/ConfirmModal";
 import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
 import { useToastifyStore } from "@/shared/model/toastifyStore";

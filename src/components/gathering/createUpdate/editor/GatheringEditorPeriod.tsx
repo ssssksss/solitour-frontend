@@ -1,6 +1,6 @@
 "use client";
 
-import { Modal } from "@/components/common/modal/Modal";
+import { Modal } from "@/shared/ui/modal/Modal";
 import { format } from "date-fns";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
@@ -15,7 +15,7 @@ const GatheringEditorPeriod = () => {
     <div className="flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
       <div className="relative w-[2.625rem] shrink-0">
         <span className="text-lg font-semibold">날짜</span>
-        <span className="absolute top-[-.5rem] text-lg text-main">*</span>
+        <span className="text-main absolute top-[-.5rem] text-lg">*</span>
       </div>
       <div className="relative w-full">
         <button

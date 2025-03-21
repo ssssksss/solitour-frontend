@@ -1,6 +1,6 @@
 "use client";
 
-import { Modal } from "@/components/common/modal/Modal";
+import { Modal } from "@/shared/ui/modal/Modal";
 import { useFormContext } from "react-hook-form";
 import GatheringCategoryModal from "./modal/GatheringCategoryModal";
 import useModalState from "@/shared/lib/hooks/useModalState";
@@ -37,7 +37,7 @@ const GatheringEditorCategory = () => {
           onClick={modalState.openModal}
           className={[
             `${formContext.formState.errors.gatheringCategoryId ? "outline-red-500" : "outline-[#E3E3E3]"}`,
-            "flex h-[3.25rem] w-full items-center whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px]",
+            "flex h-[3.25rem] w-full items-center rounded-[3rem] pl-[1.75rem] whitespace-nowrap outline outline-[1px] outline-offset-[-1px]",
           ].join(" ")}
         >
           <div className="flex h-full w-full items-center justify-start text-lg font-semibold">
@@ -50,7 +50,7 @@ const GatheringEditorCategory = () => {
             ) : (
               <div className="relative text-lg font-semibold">
                 카테고리 선택
-                <span className="absolute top-[-.5rem] text-lg text-main">
+                <span className="text-main absolute top-[-.5rem] text-lg">
                   *
                 </span>
               </div>

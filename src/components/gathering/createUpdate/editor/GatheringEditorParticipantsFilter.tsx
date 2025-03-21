@@ -1,6 +1,6 @@
 "use client";
 
-import { Modal } from "@/components/common/modal/Modal";
+import { Modal } from "@/shared/ui/modal/Modal";
 import { useFormContext } from "react-hook-form";
 import GatheringParticipantsFilterModal from "./modal/GatheringParticipantsFilterModal";
 import { useModalState } from "@/shared/lib/hooks";
@@ -15,7 +15,7 @@ const GatheringEditorParticipantsFilter = () => {
       <div className="relative w-full">
         <button
           onClick={modalState.openModal}
-          className={`flex h-[3.25rem] w-full items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-[3rem] pl-[1.75rem] outline outline-[1px] outline-offset-[-1px] ${
+          className={`flex h-[3.25rem] w-full items-center overflow-hidden rounded-[3rem] pl-[1.75rem] text-ellipsis whitespace-nowrap outline outline-[1px] outline-offset-[-1px] ${
             formContext.formState.errors.allowedSex
               ? "outline-red-500"
               : "outline-[#E3E3E3]"
@@ -46,7 +46,7 @@ const GatheringEditorParticipantsFilter = () => {
             <div className="relative flex h-full w-full items-center justify-start">
               <div className="relative text-lg font-semibold">
                 참여자 선택
-                <span className="absolute top-[-.5rem] text-lg text-main">
+                <span className="text-main absolute top-[-.5rem] text-lg">
                   *
                 </span>
               </div>

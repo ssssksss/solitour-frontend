@@ -11,11 +11,11 @@ export const usePreventBodyScroll = (dependency: boolean) => {
     if (!dependency) return;
 
     const body = document.getElementsByTagName("body")[0];
-    const scrollBarWidth =
+    const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
 
     body.style.overflow = "hidden";
-    body.style.paddingRight = `${scrollBarWidth}px`;
+    body.style.paddingRight = `${scrollbarWidth}px`;
 
     return () => {
       body.style.overflow = "auto";

@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { useAddUserInformationForm } from "../model/useAddUserInformationForm";
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import { ModalTemplate } from "@/shared/ui/modal";
 
 export interface AddUserInformationFormProps {
   closeModal?: () => void;

@@ -1,14 +1,14 @@
 "use client";
 
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
 import { User } from "@/entities/user";
 import { ReactNode } from "react";
 import { useMyPageAccountDeleteModal } from "../model/useMyPageAccountDeleteModal";
+import { ModalTemplate } from "@/shared/ui/modal";
 
 interface MyPageAccountDeleteModalProps {
   userInfo: User;
   closeButtonComponent?: ReactNode;
-  closeModal: () => void;
+  closeModal?: () => void;
 }
 
 export const MyPageAccountDeleteModal = ({
@@ -20,9 +20,9 @@ export const MyPageAccountDeleteModal = ({
     useMyPageAccountDeleteModal(userInfo, closeModal);
 
   return (
-    <ModalTemplate className="max-h-[24rem] w-[calc(100vw-1rem)] max-w-[40rem] flex-col gap-y-[1rem] px-[4rem]">
+    <ModalTemplate className="max-h-96 w-[calc(100vw-1rem)] max-w-160 flex-col gap-y-4 px-16">
       {closeButtonComponent}
-      <div className="flex flex-col gap-y-[.5rem]">
+      <div className="flex flex-col gap-y-2">
         <p>
           1. 회원 탈퇴 후에는 복구가 불가능하며, 현재 진행 중인 모임 서비스나
           여행일기 서비스 이용 내역이 있을 경우, 관련 정보도 함께 삭제됩니다.
@@ -33,17 +33,17 @@ export const MyPageAccountDeleteModal = ({
         </p>
         <p>3. 필요한 정보는 회원 탈퇴하기전에 따로 보관해주시기 바랍니다.</p>
       </div>
-      <div className="flex items-end gap-x-[.25rem] select-none">
-        <span className="text-main text-lg">회원탈퇴를 하겠습니다.</span>
-        <span> 라고 입력해주세요. </span>
+      <div className="flex items-end gap-x-1 select-none">
+        <span className="text-main text-lg">회원 탈퇴를 하겠습니다.</span>
+        <span>라고 입력해주세요.</span>
       </div>
       <input
-        className="w-full rounded-2xl px-4 py-4 outline outline-offset-[-1px] outline-[#E3E3E3]"
+        className="w-full rounded-2xl px-4 py-4 outline -outline-offset-1 outline-[#E3E3E3]"
         placeholder="텍스트를 입력해주세요."
         onChange={(e) => handleUserDeleteTextChange(e.target.value)}
       />
       <button
-        className="bg-main disabled:bg-gray2 h-[3rem] w-full shrink-0 rounded-full text-white"
+        className="bg-main disabled:bg-gray2 h-12 w-full shrink-0 rounded-full text-white"
         disabled={userDeleteText !== "회원 탈퇴를 하겠습니다."}
         onClick={handleDeleteClick}
       >

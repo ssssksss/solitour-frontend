@@ -23,7 +23,7 @@ export const MyPageHeader = async () => {
           </div>
         </div>
         <Link
-          className="flex h-[3.625rem] w-full items-center justify-center rounded-xl bg-[#F7F7F7] text-black hover:scale-105"
+          className="flex h-[3.625rem] w-full items-center justify-center rounded-xl bg-[#F7F7F7] text-black duration-500 hover:scale-105"
           href="/mypage/profile"
         >
           프로필 수정

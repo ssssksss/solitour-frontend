@@ -1,4 +1,4 @@
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
 import { ReactNode, useState } from "react";
 import { useFormContext } from "react-hook-form";
 

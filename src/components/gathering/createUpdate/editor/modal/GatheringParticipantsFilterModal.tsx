@@ -1,4 +1,4 @@
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
 import { GENDER } from "@/entities/user";
 import Image from "next/image";
 import { ReactNode, useState } from "react";

@@ -3,7 +3,7 @@
 import { useMyPageGatheringList } from "@/hooks/mypage/useMyPageGatheringList";
 import CategoryList from "../common/CategoryList";
 import GatheringItem from "../common/GatheringItem";
-import { Modal } from "../common/modal/Modal";
+import { Modal } from "../../shared/ui/modal/Modal";
 import { GatheringItemSkeleton } from "@/features/gathering";
 import { Pagination } from "@/shared/ui/pagination";
 import { AddUserInformationForm } from "@/features/auth";

@@ -1,4 +1,4 @@
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";

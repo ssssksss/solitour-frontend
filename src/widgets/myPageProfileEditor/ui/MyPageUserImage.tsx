@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import CropperComponent from "./CropperComponent";
-import { Modal } from "../../../components/common/modal/Modal";
+import { Modal } from "../../../shared/ui/modal/Modal";
 import { useMyPageUserImage } from "@/hooks/mypage/useMyPageUserImage";
 import { UserImage } from "@/entities/user";
 

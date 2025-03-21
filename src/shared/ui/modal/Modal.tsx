@@ -17,18 +17,8 @@ interface ModalProps extends React.PropsWithChildren {
 }
 
 export const Modal = ({ children, modalState }: ModalProps) => {
-  const [documentBody, setDocumentBody] = useState<HTMLElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   let flag = modalState.isOpen;
-
-  usePreventBodyScroll(modalState.isOpen);
-  useOutsideClick(ref, () => {
-    modalState.closeModal();
-  });
-
-  useEffect(() => {
-    setDocumentBody(document.body);
-  }, []);
 
   const handlePopState = () => {
     flag = false;
@@ -44,6 +34,11 @@ export const Modal = ({ children, modalState }: ModalProps) => {
       //   localStorage.setItem("isModal", "true");
     }
   };
+
+  usePreventBodyScroll(modalState.isOpen);
+  useOutsideClick(ref, () => {
+    modalState.closeModal();
+  });
 
   useEffect(() => {
     if (modalState.isOpen) {
@@ -62,8 +57,6 @@ export const Modal = ({ children, modalState }: ModalProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalState.isOpen]);
 
-  if (!documentBody || !modalState.isOpen) return null;
-
   const childrenArray = React.Children.toArray(children);
   const childComponent = childrenArray.map((child, index) => {
     if (index === 0 && React.isValidElement(child)) {
@@ -81,7 +74,7 @@ export const Modal = ({ children, modalState }: ModalProps) => {
               className="absolute top-8 right-8 z-200 h-8 w-8 scale-100 transform transition-transform duration-300"
             >
               <MdClose
-                className="bg-red-60 text-gray2 hover:text-main cursor-pointer"
+                className="text-gray2 hover:text-main cursor-pointer"
                 size="2.5rem"
                 onClick={() => modalState.closeModal()}
               />
@@ -93,21 +86,22 @@ export const Modal = ({ children, modalState }: ModalProps) => {
     return child;
   });
 
+  if (!modalState.isOpen) {
+    return null;
+  }
+
   return createPortal(
-    <div className="fixed inset-0 z-100 flex h-full w-full items-center justify-center">
-      <div className="absolute h-full w-full cursor-pointer bg-black/30" />
-      <div
-        ref={ref}
-        className="relative -z-1 flex h-[calc(100vh-1rem)] w-full flex-col items-center justify-center"
-        onClick={(e) => {
-          if (e.target == ref.current) {
-            modalState.closeModal();
-          }
-        }}
-      >
-        {childComponent}
-      </div>
+    <div
+      className="fixed top-0 left-0 z-100 flex h-full w-full items-center justify-center bg-black/30"
+      ref={ref}
+      onClick={(e) => {
+        if (e.target === ref.current) {
+          modalState.closeModal();
+        }
+      }}
+    >
+      {childComponent}
     </div>,
-    document.getElementById("modal-root") as HTMLElement,
+    document.getElementById("modal-root")!,
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import ModalTemplate from "@/components/common/modal/ModalTemplate";
+import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
 import { fetchWithAuth } from "@/shared/api";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { useToastifyStore } from "@/shared/model/toastifyStore";
