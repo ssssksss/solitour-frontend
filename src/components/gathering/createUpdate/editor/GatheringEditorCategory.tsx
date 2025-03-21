@@ -3,7 +3,7 @@
 import { Modal } from "@/shared/ui/modal/Modal";
 import { useFormContext } from "react-hook-form";
 import GatheringCategoryModal from "./modal/GatheringCategoryModal";
-import useModalState from "@/shared/lib/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModal";
 import { useEffect, useState } from "react";
 
 interface ICategory {

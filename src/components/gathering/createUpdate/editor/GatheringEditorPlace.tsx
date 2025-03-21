@@ -3,7 +3,7 @@
 import { Modal } from "@/shared/ui/modal/Modal";
 import { useFormContext } from "react-hook-form";
 import GatheringPlaceModal from "./modal/GatheringPlaceModal";
-import useModalState from "@/shared/lib/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModal";
 
 const GatheringEditorPlace = () => {
   const formContext = useFormContext();

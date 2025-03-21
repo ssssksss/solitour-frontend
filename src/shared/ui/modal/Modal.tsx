@@ -1,92 +1,29 @@
 "use client";
 
-import { useOutsideClick, usePreventBodyScroll } from "@/shared/lib/hooks";
-import React, { useEffect, useRef, useState, type JSX } from "react";
+import {
+  useModalBackHandler,
+  useOutsideClick,
+  usePreventBodyScroll,
+} from "@/shared/lib/hooks";
+import React, { useRef } from "react";
 import { createPortal } from "react-dom";
-import { MdClose } from "react-icons/md";
 
-interface ModalState {
+interface ModalProps {
+  children: React.ReactNode;
   isOpen: boolean;
-  openModal: () => void;
   closeModal: () => void;
 }
 
-interface ModalProps extends React.PropsWithChildren {
-  className?: React.HTMLProps<HTMLElement>["className"];
-  modalState: ModalState;
-}
-
-export const Modal = ({ children, modalState }: ModalProps) => {
+export const Modal = ({ children, isOpen, closeModal }: ModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  let flag = modalState.isOpen;
 
-  const handlePopState = () => {
-    flag = false;
-    if (modalState.isOpen) {
-      modalState.closeModal();
-    }
-  };
-
-  const handleBeforeUnload = () => {
-    // 모달창이 열린 상태로 새로고침을 하게되면 나중에 헤더에서 뒤로가기를 실행하는 용도로 사용
-    if (modalState.isOpen) {
-      window.history.back();
-      //   localStorage.setItem("isModal", "true");
-    }
-  };
-
-  usePreventBodyScroll(modalState.isOpen);
+  useModalBackHandler(isOpen, closeModal);
+  usePreventBodyScroll(isOpen);
   useOutsideClick(ref, () => {
-    modalState.closeModal();
+    closeModal();
   });
 
-  useEffect(() => {
-    if (modalState.isOpen) {
-      history.pushState({ isModal: true }, "");
-      window.addEventListener("popstate", handlePopState);
-      window.addEventListener("beforeunload", handleBeforeUnload);
-    }
-
-    return () => {
-      if (flag) {
-        window.history.back();
-      }
-      window.removeEventListener("popstate", handlePopState);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalState.isOpen]);
-
-  const childrenArray = React.Children.toArray(children);
-  const childComponent = childrenArray.map((child, index) => {
-    if (index === 0 && React.isValidElement(child)) {
-      // child의 props를 변경하려면 React.cloneElement 사용
-      return React.cloneElement(
-        child as React.ReactElement<{
-          closeModal: () => void;
-          closeButtonComponent: JSX.Element;
-        }>,
-        {
-          closeModal: modalState.closeModal,
-          closeButtonComponent: (
-            <button
-              onClick={() => modalState.closeModal()}
-              className="absolute top-8 right-8 z-200 h-8 w-8 scale-100 transform transition-transform duration-300"
-            >
-              <MdClose
-                className="text-gray2 hover:text-main cursor-pointer"
-                size="2.5rem"
-                onClick={() => modalState.closeModal()}
-              />
-            </button>
-          ),
-        },
-      );
-    }
-    return child;
-  });
-
-  if (!modalState.isOpen) {
+  if (!isOpen) {
     return null;
   }
 
@@ -96,11 +33,11 @@ export const Modal = ({ children, modalState }: ModalProps) => {
       ref={ref}
       onClick={(e) => {
         if (e.target === ref.current) {
-          modalState.closeModal();
+          closeModal();
         }
       }}
     >
-      {childComponent}
+      {children}
     </div>,
     document.getElementById("modal-root")!,
   );

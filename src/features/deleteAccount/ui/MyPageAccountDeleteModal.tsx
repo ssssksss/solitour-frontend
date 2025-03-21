@@ -1,27 +1,26 @@
 "use client";
 
 import { User } from "@/entities/user";
-import { ReactNode } from "react";
 import { useMyPageAccountDeleteModal } from "../model/useMyPageAccountDeleteModal";
 import { ModalTemplate } from "@/shared/ui/modal";
 
 interface MyPageAccountDeleteModalProps {
   userInfo: User;
-  closeButtonComponent?: ReactNode;
-  closeModal?: () => void;
+  closeModal: () => void;
 }
 
 export const MyPageAccountDeleteModal = ({
   userInfo,
-  closeButtonComponent,
   closeModal,
 }: MyPageAccountDeleteModalProps) => {
   const { userDeleteText, handleUserDeleteTextChange, handleDeleteClick } =
     useMyPageAccountDeleteModal(userInfo, closeModal);
 
   return (
-    <ModalTemplate className="max-h-96 w-[calc(100vw-1rem)] max-w-160 flex-col gap-y-4 px-16">
-      {closeButtonComponent}
+    <ModalTemplate
+      className="max-h-96 max-w-160 flex-col gap-y-4 px-16"
+      closeModal={closeModal}
+    >
       <div className="flex flex-col gap-y-2">
         <p>
           1. 회원 탈퇴 후에는 복구가 불가능하며, 현재 진행 중인 모임 서비스나

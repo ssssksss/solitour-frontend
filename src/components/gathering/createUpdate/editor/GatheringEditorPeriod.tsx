@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import GatheringPeriodModal from "./modal/GatheringPeriodModal";
-import useModalState from "@/shared/lib/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModal";
 
 const GatheringEditorPeriod = () => {
   const formContext = useFormContext();

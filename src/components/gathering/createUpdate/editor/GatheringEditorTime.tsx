@@ -4,7 +4,7 @@ import { Modal } from "@/shared/ui/modal/Modal";
 import { format } from "date-fns";
 import { useFormContext } from "react-hook-form";
 import GatheringTimeModal from "./modal/GatheringTimeModal";
-import useModalState from "@/shared/lib/hooks/useModalState";
+import useModalState from "@/shared/lib/hooks/useModal";
 
 const GatheringEditorTime = () => {
   const formContext = useFormContext();

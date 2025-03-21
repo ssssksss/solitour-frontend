@@ -5,9 +5,9 @@ import Link from "next/link";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { AnimatePresence, motion } from "motion/react";
-import { Modal } from "@/shared/ui/modal/Modal";
 import { useFloatingButton } from "../model/useFloatingButton";
 import { AddUserInformationForm } from "@/features/auth";
+import { Modal } from "@/shared/ui/modal";
 
 export const FloatingButton = () => {
   const {
@@ -21,8 +21,8 @@ export const FloatingButton = () => {
 
   return (
     <div>
-      <Modal modalState={modalState}>
-        <AddUserInformationForm />
+      <Modal isOpen={modalState.isOpen} closeModal={modalState.closeModal}>
+        <AddUserInformationForm closeModal={modalState.closeModal} />
       </Modal>
       <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 translate-x-[-100%] flex-col items-center gap-3">
         <AnimatePresence>
