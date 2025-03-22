@@ -1,4 +1,4 @@
-import GatheringBookMark from "@/components/gathering/read/GatheringBookmark";
+import GatheringBookmark from "@/components/gathering/read/GatheringBookmark";
 import { Gathering } from "@/entities/gathering/model/gathering";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GatheringLike from "../gathering/read/GatheringLike";
 
-interface IGatheringItem {
+interface GatheringItemProps {
   data: Gathering;
   isAccessGathering: boolean;
 }
@@ -35,7 +35,7 @@ const status: { [key: string]: string } = {
   REFUSE: "거절",
 };
 
-const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
+const GatheringItem = ({ data, isAccessGathering }: GatheringItemProps) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
@@ -58,8 +58,8 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                 : data.gatheringCategoryName}
             </span>
           </p>
-          <GatheringBookMark
-            isBookMark={data.isBookMark}
+          <GatheringBookmark
+            initialIsBookmarked={data.isBookMark}
             postId={data.gatheringId}
           />
         </div>
@@ -113,11 +113,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
               </p>
             </article>
           </div>
-          <div
-            className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse"
-            }
-          >
+          <div className="gap-2.5 text-sm font-semibold max-[432px]:flex max-[432px]:flex-col-reverse min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse">
             <article className="flex h-[1.25rem] w-full flex-row items-center gap-2">
               <div className={"flex min-w-fit gap-2"}>
                 <div className={"relative flex items-center"}>
@@ -130,7 +126,11 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
                   />
                 </div>
                 <p
-                  className={`${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
+                  className={
+                    data.nowPersonCount === data.personCount
+                      ? "text-[#ff0000]"
+                      : ""
+                  }
                 >
                   <span
                     className={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
@@ -152,7 +152,7 @@ const GatheringItem = ({ data, isAccessGathering }: IGatheringItem) => {
               </p>
             </article>
             <article
-              className="flex h-[1.25rem] items-center gap-2"
+              className="flex h-5 items-center gap-2"
               style={{ lineHeight: "100%" }}
             >
               <div className={"relative"}>

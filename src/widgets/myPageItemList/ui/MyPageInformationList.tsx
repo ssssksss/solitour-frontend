@@ -39,7 +39,7 @@ export const MyPageInformationList = () => {
                     key={value.informationId}
                     informationId={value.informationId}
                     categoryName={value.zoneCategoryParentName}
-                    initialIsBookMarked={value.isBookMark}
+                    initialIsBookmarked={value.isBookMark}
                     isLike={false}
                     title={value.title}
                     image={value.thumbNailImage}

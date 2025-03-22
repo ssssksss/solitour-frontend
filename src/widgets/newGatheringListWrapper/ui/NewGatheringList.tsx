@@ -1,6 +1,6 @@
-import GatheringItemHome from "@/components/common/GatheringItemHome";
 import { getNewGatheringList } from "@/entities/gathering";
 import { LottieNotFound } from "@/shared/ui/lottie";
+import { NewGatheringItem } from "./NewGatheringItem";
 
 export const NewGatheringList = async () => {
   const newGatheringList = await getNewGatheringList();
@@ -16,7 +16,7 @@ export const NewGatheringList = async () => {
   return (
     <div className="mt-6 grid w-full grid-cols-3 items-center gap-4 p-1 max-[1024px]:grid-cols-2 max-[744px]:flex max-[744px]:w-fit">
       {newGatheringList.map((data) => (
-        <GatheringItemHome key={data.gatheringId} data={data} />
+        <NewGatheringItem key={data.gatheringId} data={data} />
       ))}
     </div>
   );

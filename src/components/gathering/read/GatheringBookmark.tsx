@@ -1,18 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import Image from "next/image";
 import { useState } from "react";
 
 interface GatheringBookMarkProps {
-  isBookMark: boolean;
+  initialIsBookmarked: boolean;
   postId: number;
 }
 
-const GatheringBookMark = (props: GatheringBookMarkProps) => {
+const GatheringBookmark = ({
+  initialIsBookmarked,
+  postId,
+}: GatheringBookMarkProps) => {
   const { id: userId } = useUserStore();
-  const [isBookMark, setIsBookMark] = useState(props.isBookMark);
+  const [isBookMark, setIsBookMark] = useState(initialIsBookmarked);
   const [loading, setLoading] = useState(false);
 
   const handleClick = async (e: React.MouseEvent) => {
@@ -25,7 +28,7 @@ const GatheringBookMark = (props: GatheringBookMarkProps) => {
 
     try {
       const response = await fetchWithAuth(
-        `/api/bookmark/gathering?gatheringId=${props.postId}`,
+        `/api/bookmark/gathering?gatheringId=${postId}`,
         {
           method: isBookMark ? "DELETE" : "POST",
           headers: { "Content-Type": "application/json" },
@@ -49,13 +52,13 @@ const GatheringBookMark = (props: GatheringBookMarkProps) => {
       disabled={loading}
     >
       <Image
+        className="object-contain"
         src={`/icons/bookmark-${isBookMark ? "active-" : ""}icon.svg`}
         alt="bookmark-icon"
         fill={true}
-        style={{ objectFit: "contain" }}
       />
     </button>
   );
 };
 
-export default GatheringBookMark;
+export default GatheringBookmark;

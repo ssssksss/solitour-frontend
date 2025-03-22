@@ -20,7 +20,7 @@ export const BestInformationList = async () => {
           key={value.informationId}
           informationId={value.informationId}
           categoryName={value.parentCategoryName}
-          initialIsBookMarked={value.isBookMark}
+          initialIsBookmarked={value.isBookMark}
           isLike={value.isLike}
           title={value.title}
           image={value.thumbNailImage}

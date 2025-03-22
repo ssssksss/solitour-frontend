@@ -1,16 +1,15 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { HeartIcon } from "@/shared/ui/icon";
-import { useInformationItem } from "../model/useInformationItem";
+import { InformationBookmark } from "./InformationBookmark";
+import { CATEGORY_TAG_STYLE } from "../config/categoryTagStyle";
 
 interface InformationItemProps {
   informationId: number;
   categoryName?: string;
-  initialIsBookMarked: boolean;
+  initialIsBookmarked: boolean;
   isLike: boolean;
   title: string;
   image: string;
@@ -22,7 +21,7 @@ interface InformationItemProps {
 export const InformationItem = ({
   informationId,
   categoryName,
-  initialIsBookMarked,
+  initialIsBookmarked,
   isLike,
   title,
   image,
@@ -30,9 +29,6 @@ export const InformationItem = ({
   likeCount,
   viewCount,
 }: InformationItemProps) => {
-  const { userId, isBookMarked, categoryTagStyle, handleBookMarkClick } =
-    useInformationItem(informationId, initialIsBookMarked, categoryName);
-
   return (
     <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline duration-300 max-[744px]:min-w-[19.183125rem]">
       <Link className="h-[12.6875rem]" href={`/informations/${informationId}`}>
@@ -44,10 +40,10 @@ export const InformationItem = ({
           style={{ objectFit: "cover" }}
         />
         <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
-          {categoryTagStyle !== "" ? (
+          {categoryName !== undefined ? (
             <p
               className={[
-                categoryTagStyle,
+                CATEGORY_TAG_STYLE[categoryName],
                 "w-fit rounded-full border px-4 py-[0.375rem] text-xs font-semibold",
               ].join(" ")}
             >
@@ -56,24 +52,10 @@ export const InformationItem = ({
           ) : (
             <div />
           )}
-          {userId > 0 && (
-            <button
-              className="relative h-7 w-5 cursor-pointer text-white hover:scale-110"
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleBookMarkClick();
-              }}
-            >
-              <Image
-                src={`/icons/bookmark-${isBookMarked ? "active-" : ""}icon.svg`}
-                alt="bookmark-icon"
-                fill={true}
-                style={{ objectFit: "contain" }}
-              />
-            </button>
-          )}
+          <InformationBookmark
+            informationId={informationId}
+            initialIsBookmarked={initialIsBookmarked}
+          />
         </div>
       </Link>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4">
