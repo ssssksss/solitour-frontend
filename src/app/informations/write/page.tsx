@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { InformationCreateEditor } from "@/widgets/informationCreateEditor";
 import { Metadata } from "next";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex w-full flex-col items-center">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           {
             label: "정보",

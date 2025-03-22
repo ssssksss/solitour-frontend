@@ -1,6 +1,6 @@
 import { getUserInfo } from "@/entities/user";
 import { MyPageProfileEditor } from "@/widgets/myPageProfileEditor";
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default async function Page() {
 
   return (
     <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col px-2 pb-10">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           {
             label: "마이페이지",

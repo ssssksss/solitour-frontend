@@ -15,7 +15,7 @@ import { InformationImageUploadItem } from "./InformationImageUploadItem";
 import { useInformationEditorStore } from "../model/informationEditorStore";
 
 interface InformationEditorProps {
-  text: string;
+  text: "등록" | "수정";
   loading: boolean;
   locationModalVisible: boolean;
   categoryModalVisible: boolean;
@@ -55,7 +55,7 @@ export const InformationEditor = ({
     onTouchMove,
     onTouchEnd,
   } = useDragScroll();
-  const { imageLoading, imageList: images } = useInformationEditorStore();
+  const { imageLoading, imageList } = useInformationEditorStore();
 
   return (
     <div className="flex w-full flex-col">
@@ -147,7 +147,7 @@ export const InformationEditor = ({
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {images.map((_, index) => (
+        {imageList.map((_, index) => (
           <div key={index}>
             <InformationImageUploadItem imageIndex={index} />
           </div>
@@ -330,7 +330,7 @@ export const InformationEditor = ({
                 width={20}
                 height={20}
               />
-              <p>등록 중...</p>
+              <p>{`${text} 중...`}</p>
             </div>
           ) : (
             <p>{`정보 ${text}하기`}</p>

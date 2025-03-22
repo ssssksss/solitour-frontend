@@ -1,4 +1,5 @@
 import GatheringCreateEditor from "@/components/gathering/write/GatheringCreateEditor";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,8 +9,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem]"}>
+    <main className={"min-h-[calc(100vh-25rem)] w-full pb-[2rem]"}>
+      <Breadcrumb
+        categories={[
+          { label: "모임", href: "/gathering" },
+          { label: "모임 등록하기", href: "" },
+        ]}
+      />
       <GatheringCreateEditor />
-    </div>
+    </main>
   );
 }

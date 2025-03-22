@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { InformationViewerWrapper } from "@/widgets/informationViewerWrapper";
 
 export async function generateMetadata({
@@ -31,7 +31,7 @@ export default async function Page({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           {
             label: "정보",

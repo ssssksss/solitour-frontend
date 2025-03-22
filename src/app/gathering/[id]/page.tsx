@@ -1,6 +1,6 @@
-import GatheringViewer from "@/widgets/gatheringViewerWrapper/ui/GatheringViewer";
 import GatheringRecommendationList from "@/components/gathering/read/GatheringRecommendationList";
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
+import { GatheringViewer } from "@/widgets/gatheringViewer";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
@@ -120,7 +120,7 @@ export default async function Page(props: PageProps) {
 
   return (
     <div className="m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           { label: "모임", href: "/gathering" },
           { label: "모임 상세", href: "" },

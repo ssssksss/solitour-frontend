@@ -1,5 +1,5 @@
 import { getInformation } from "@/entities/information";
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { InformationUpdateEditor } from "@/widgets/informationUpdateEditor";
 
 export async function generateMetadata({
@@ -34,7 +34,7 @@ export default async function Page({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           {
             label: "정보",

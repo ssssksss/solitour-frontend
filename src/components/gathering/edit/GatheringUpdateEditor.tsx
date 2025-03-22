@@ -1,6 +1,6 @@
 "use client";
 
-import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
+import GatheringEditor from "@/features/gatheringEditor/ui/GatheringEditor";
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useToastifyStore } from "@/shared/model/toastifyStore";
+import { useToastifyStore } from "@/shared/model";
 
 interface GatheringUpdateEditorProps {
   gatheringData: GatheringDetailResponseDto;

@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { SupportNoticeViewerWrapper } from "@/widgets/supportNoticeViewerWrapper";
 import { Metadata } from "next";
 
@@ -20,7 +20,7 @@ export default async function Page({
 
   return (
     <div className="flex w-full flex-col">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           { label: "고객지원", href: "/support" },
           { label: "공지사항", href: "/support?menu=notice" },

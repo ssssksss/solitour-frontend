@@ -1,6 +1,6 @@
 import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import { useToastifyStore } from "@/shared/model/toastifyStore";
+import { useToastifyStore } from "@/shared/model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 

@@ -1,6 +1,5 @@
 "use client";
 
-import GatheringItem from "../../../widgets/gatheringItem/ui/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Modal } from "@/shared/ui/modal/Modal";
@@ -8,9 +7,9 @@ import { LottieNotFound } from "@/shared/ui/lottie";
 import { useUserStore } from "@/entities/user";
 import { useModalState } from "@/shared/lib/hooks";
 import { Pagination } from "@/shared/ui/pagination";
-import { GatheringItemSkeleton } from "@/features/gathering";
 import { Gathering } from "@/entities/gathering/model/gathering";
 import { AddUserInformationForm } from "@/features/auth";
+import { GatheringItem, GatheringItemSkeleton } from "@/widgets/gatheringItem";
 
 const SkeletonGatheringList = () => {
   return (

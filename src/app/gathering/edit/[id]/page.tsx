@@ -1,5 +1,6 @@
 import GatheringUpdateEditor from "@/components/gathering/edit/GatheringUpdateEditor";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { NextResponse } from "next/server";
 
 interface PageProps {
@@ -57,8 +58,15 @@ export default async function Page(props: PageProps) {
 
   try {
     const gatheringData = await fetchGatheringData(postId);
+
     return (
       <div className={"min-h-[calc(100vh-25rem)] w-full pt-[2rem] pb-[2rem]"}>
+        <Breadcrumb
+          categories={[
+            { label: "모임", href: "/gathering" },
+            { label: "모임 수정하기", href: "" },
+          ]}
+        />
         <GatheringUpdateEditor gatheringData={gatheringData} />
       </div>
     );

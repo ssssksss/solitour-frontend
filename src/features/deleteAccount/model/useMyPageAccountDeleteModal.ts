@@ -2,7 +2,7 @@
 
 import { User, useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import { useToastifyStore } from "@/shared/model/toastifyStore";
+import { useToastifyStore } from "@/shared/model";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

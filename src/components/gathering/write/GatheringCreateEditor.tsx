@@ -1,14 +1,14 @@
 "use client";
 
-import GatheringEditor from "@/components/gathering/createUpdate/editor/GatheringEditor";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useToastifyStore } from "@/shared/model/toastifyStore";
+import { useToastifyStore } from "@/shared/model";
 import { GatheringCreateFormSchema } from "@/features/gathering";
+import { GatheringEditor } from "@/features/gatheringEditor";
 
 const GatheringCreateEditor = () => {
   const router = useRouter();

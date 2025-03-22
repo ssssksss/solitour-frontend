@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 
-interface BreadcrumbsProps {
+interface BreadcrumbProps {
   categories: { label: string; href: string }[];
 }
 
-export const Breadcrumbs = ({ categories }: BreadcrumbsProps) => {
+export const Breadcrumb = ({ categories }: BreadcrumbProps) => {
   return (
-    <nav className="flex w-full items-center gap-[.25rem] py-10 text-xs text-gray2">
+    <nav className="text-gray2 flex w-full items-center gap-[.25rem] py-10 text-xs">
       <div className="text-gray1">
         <Link href="/">
           <Image
@@ -23,7 +23,7 @@ export const Breadcrumbs = ({ categories }: BreadcrumbsProps) => {
         <div key={index} className="flex flex-row items-center gap-1">
           <IoIosArrowForward />
           {categories.length == index + 1 ? (
-            <span className="font-semibold text-gray1">{i.label}</span>
+            <span className="text-gray1 font-semibold">{i.label}</span>
           ) : (
             <Link href={i.href}> {i.label} </Link>
           )}

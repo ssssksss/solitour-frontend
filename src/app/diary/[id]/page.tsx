@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/shared/ui/breadcrumb";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { DiaryViewerWrapper } from "@/widgets/diaryViewerWrapper";
 
 export async function generateMetadata({
@@ -31,7 +31,7 @@ export default async function Page({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <Breadcrumbs
+      <Breadcrumb
         categories={[
           { label: "여행 일기", href: "/diary/list?page=1" },
           { label: "일기 상세", href: "" },
