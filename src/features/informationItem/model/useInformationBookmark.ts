@@ -1,8 +1,8 @@
 "use client";
 
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
 import { useState } from "react";
+import { createBookmark, deleteBookmark } from "../api/bookmark";
 
 export const useInformationBookmark = (
   informationId: number,
@@ -14,48 +14,21 @@ export const useInformationBookmark = (
 
   const handleBookmarkClick = async () => {
     setLoading(true);
-    const data = new URLSearchParams();
-    data.append("infoId", informationId.toString());
+    const beforeIsBookmarked = isBookmarked;
 
-    if (isBookmarked) {
-      setIsBookmarked(false);
-
-      const response = await fetchWithAuth("/api/bookmark/information", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: data.toString(),
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        setIsBookmarked(true);
-        setLoading(false);
-        alert("북마크 취소에 실패하였습니다.");
-        throw new Error(response.statusText);
-      }
-    } else {
-      setIsBookmarked(true);
-
-      const response = await fetchWithAuth("/api/bookmark/information", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: data.toString(),
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
+    try {
+      if (isBookmarked) {
         setIsBookmarked(false);
-        setLoading(false);
-        alert("북마크 등록에 실패하였습니다.");
-        throw new Error(response.statusText);
+        await deleteBookmark(informationId);
+      } else {
+        setIsBookmarked(true);
+        await createBookmark(informationId);
       }
+    } catch (error) {
+      setIsBookmarked(beforeIsBookmarked);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return { userId, loading, isBookmarked, handleBookmarkClick };
