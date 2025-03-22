@@ -1,11 +1,11 @@
-import GatheringBookmark from "@/features/gatheringBookmark/ui/GatheringBookmark";
-import { Gathering } from "@/entities/gathering/model/gathering";
-import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
-import GatheringLike from "../gathering/read/GatheringLike";
+import GatheringLike from "../../../components/gathering/read/GatheringLike";
+import { GatheringBookmark } from "@/features/gatheringBookmark";
+import { Gathering } from "@/entities/gathering";
+import { convertNumberToShortForm } from "@/shared/lib/utils";
 
 interface GatheringItemProps {
   data: Gathering;
@@ -35,7 +35,10 @@ const status: { [key: string]: string } = {
   REFUSE: "거절",
 };
 
-const GatheringItem = ({ data, isAccessGathering }: GatheringItemProps) => {
+export const GatheringItem = ({
+  data,
+  isAccessGathering,
+}: GatheringItemProps) => {
   return (
     <Link
       href={`/gathering/${data.gatheringId}`}
@@ -59,8 +62,8 @@ const GatheringItem = ({ data, isAccessGathering }: GatheringItemProps) => {
             </span>
           </p>
           <GatheringBookmark
+            gatheringId={data.gatheringId}
             initialIsBookmarked={data.isBookMark}
-            postId={data.gatheringId}
           />
         </div>
         {/* 제목, 유저 닉네임 */}
@@ -231,5 +234,3 @@ const GatheringItem = ({ data, isAccessGathering }: GatheringItemProps) => {
     </Link>
   );
 };
-
-export default GatheringItem;

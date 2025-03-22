@@ -9,11 +9,6 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-const categories = [
-  { label: "모임", href: "/gathering" },
-  { label: "모임 상세", href: "" },
-];
-
 async function getNewAccessToken(refreshToken: string): Promise<string | null> {
   try {
     const response = await fetch(
@@ -125,8 +120,12 @@ export default async function Page(props: PageProps) {
 
   return (
     <div className="m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]">
-      {/* 제일 상단 */}
-      <Breadcrumbs categories={categories} />
+      <Breadcrumbs
+        categories={[
+          { label: "모임", href: "/gathering" },
+          { label: "모임 상세", href: "" },
+        ]}
+      />
       <GatheringViewer postId={postId} data={data} />
       <GatheringRecommendationList data={data.gatheringRecommend} />
     </div>

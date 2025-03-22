@@ -1,7 +1,7 @@
 "use client";
 
 import { GatheringRecommend } from "@/entities/gathering/model/gathering";
-import GatheringItem from "../../common/GatheringItem";
+import GatheringItem from "../../../widgets/gatheringItem/ui/GatheringItem";
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { useUserStore } from "@/entities/user";
 

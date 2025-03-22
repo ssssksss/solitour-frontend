@@ -1,13 +1,12 @@
 "use client";
 
-import GatheringItem from "../../../components/common/GatheringItem";
-import { GatheringItemSkeleton } from "@/features/gathering";
 import { Pagination } from "@/shared/ui/pagination";
 import { AddUserInformationForm } from "@/features/auth";
 import { Modal } from "@/shared/ui/modal";
 import { GATHERING_CATEGORY_LIST } from "../config/gatheringCategoryList";
 import { MyPageCategoryList } from "./MyPageCategoryList";
 import { useMyPageGatheringList } from "../model/useMyPageGatheringList";
+import { GatheringItem, GatheringItemSkeleton } from "@/widgets/gatheringItem";
 
 export const MyPageGatheringList = () => {
   const {

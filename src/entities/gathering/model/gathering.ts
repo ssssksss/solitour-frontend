@@ -59,7 +59,6 @@ export type GatheringRecommend = {
 };
 
 // 모임 상세 페이지 타입
-
 export interface gatheringApplicantsResponsesDto {
   userGatheringResponse: {
     id: number;

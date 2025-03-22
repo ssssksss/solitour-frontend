@@ -1,6 +1,6 @@
 "use client";
 
-import GatheringItem from "../../common/GatheringItem";
+import GatheringItem from "../../../widgets/gatheringItem/ui/GatheringItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Modal } from "@/shared/ui/modal/Modal";

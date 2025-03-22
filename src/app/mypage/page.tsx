@@ -1,5 +1,4 @@
-import { MyPageHeader } from "@/widgets/myPageHeader";
-import { MyPageItemList } from "@/widgets/myPageItemList";
+import { MyPagePage } from "@/views/mypage/index";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,10 +20,5 @@ export default async function Page({
     throw new Error("Not Found");
   }
 
-  return (
-    <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
-      <MyPageHeader />
-      <MyPageItemList defaultActiveIndex={mainCategory === "정보" ? 0 : 1} />
-    </main>
-  );
+  return <MyPagePage mainCategory={mainCategory} />;
 }

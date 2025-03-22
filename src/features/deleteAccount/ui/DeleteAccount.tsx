@@ -1,8 +1,8 @@
 "use client";
 
-import { useModalState } from "@/shared/lib/hooks";
 import { MyPageAccountDeleteModal } from "./MyPageAccountDeleteModal";
 import { User } from "@/entities/user";
+import { useModal } from "@/shared/lib/hooks";
 import { Modal } from "@/shared/ui/modal";
 
 interface DeleteAccountProps {
@@ -10,7 +10,7 @@ interface DeleteAccountProps {
 }
 
 export const DeleteAccount = ({ userInfo }: DeleteAccountProps) => {
-  const { isOpen, openModal, closeModal } = useModalState();
+  const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <div>
