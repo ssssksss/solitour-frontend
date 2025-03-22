@@ -3,9 +3,9 @@ import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
-import GatheringLike from "../../../components/gathering/read/GatheringLike";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
 import { GatheringBookmark } from "@/features/gatheringBookmark";
+import { GatheringLike } from "@/features/gatheringLike";
 
 interface GatheringItemHomeProps {
   data: GatheringRecommend;
@@ -159,9 +159,9 @@ export const NewGatheringItem = ({ data }: GatheringItemHomeProps) => {
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center gap-3">
               <GatheringLike
-                initialLikes={data.likeCount}
-                initialIsLike={data.isLike}
                 gatheringId={data.gatheringId}
+                initialLikeCount={data.likeCount}
+                initialIsLike={data.isLike}
               />
               <div className="text-gray2 flex flex-row items-center gap-1">
                 <Image

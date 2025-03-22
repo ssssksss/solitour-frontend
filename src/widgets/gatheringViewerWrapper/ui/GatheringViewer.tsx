@@ -1,37 +1,29 @@
 "use client";
 
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
-import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
-import GatheringKakaoMap from "../GatheringKakaoMap";
-import GatheringUpdateDeleteButtonComponent from "./GatheringUpdateDeleteButtonComponent";
-import GatheringApplicantList from "./GatheringApplicantList";
-import { useGatheringViewer } from "@/hooks/gathering/useGatheringViewer";
-import GatheringSupportManagement from "./GatheringSupportManagement";
-import GatheringLike from "../GatheringLike";
-import { DeleteModal } from "@/shared/ui/modal";
+import GatheringKakaoMap from "../../../components/gathering/read/GatheringKakaoMap";
+
 import { GENDER, UserImage } from "@/entities/user";
+import { useGatheringViewer } from "../model/useGatheringViewer";
+import { GatheringViewerButtonList } from "./GatheringViewerButtonList";
+import { convertNumberToShortForm } from "@/shared/lib/utils";
+import { GatheringSupportManagement } from "./GatheringSupportManagement";
+import { GatheringApplicantList } from "./GatheringApplicantList";
+import { GatheringLike } from "@/features/gatheringLike";
 
 interface GatheringViewerProps {
   data: GatheringDetailResponseDto;
-  postId: number;
+  gatheringId: number;
 }
 
-const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
-  const { loading, modalState, currentParticipants, handleDeleteClick } =
-    useGatheringViewer(data);
+const GatheringViewer = ({ data, gatheringId }: GatheringViewerProps) => {
+  const { currentParticipants } = useGatheringViewer(data);
 
   return (
     <div className={"flex w-full max-w-[60rem] flex-col"}>
-      {modalState.isOpen && (
-        <DeleteModal
-          loading={loading}
-          onDeleteClick={handleDeleteClick}
-          onCancelClick={() => modalState.closeModal()}
-        />
-      )}
       {/* 제목 부분 */}
       <article className="w-full px-[.25rem] pb-[2.25rem]">
         {/* 제목, 신청 버튼 */}
@@ -68,9 +60,9 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
             <div className="flex flex-row items-center space-x-3">
               <div className="text-gray2 mb-[.25rem] flex flex-row items-center gap-2">
                 <GatheringLike
-                  initialLikes={data.likeCount}
+                  gatheringId={gatheringId}
+                  initialLikeCount={data.likeCount}
                   initialIsLike={data.isLike}
-                  gatheringId={postId}
                 />
                 <div className="text-gray2 flex items-center gap-1 text-sm">
                   <Image
@@ -195,12 +187,12 @@ const GatheringViewer = ({ data, postId }: GatheringViewerProps) => {
       {/* 지도 부분 */}
       <GatheringKakaoMap {...data.placeResponse} />
       <GatheringApplicantList postUserId={data.userPostingResponse.id} />
-      <GatheringUpdateDeleteButtonComponent
+      <GatheringViewerButtonList
         userId={data.userPostingResponse.id}
-        updateHref={`/gathering/edit/${postId}`}
-        deleteHandler={() => modalState.openModal()}
+        gatheringId={gatheringId}
       />
     </div>
   );
 };
+
 export default GatheringViewer;

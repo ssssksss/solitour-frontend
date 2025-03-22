@@ -2,14 +2,14 @@
 
 import { Modal } from "@/shared/ui/modal/Modal";
 import GatheringStatusChangeModal from "@/components/gathering/read/detail/GatheringStatusChangeModal";
-import GatheringChattingLinkCheckModal from "./GatheringChattingLinkCheckModal";
+import GatheringChattingLinkCheckModal from "../../../components/gathering/read/detail/GatheringChattingLinkCheckModal";
 import { useState } from "react";
-import useGatheringStore from "@/entities/gathering/model/gatheringStore";
 import { useParams } from "next/navigation";
 import { fetchWithAuth } from "@/shared/api";
-import ConfirmModal from "@/shared/ui/modal/ConfirmModal";
 import { useUserStore } from "@/entities/user";
-import { useModalState } from "@/shared/lib/hooks";
+import { useModal } from "@/shared/lib/hooks";
+import { ConfirmModal } from "@/shared/ui/modal";
+import { useGatheringStore } from "../model/gatheringStore";
 import { useToastifyStore } from "@/shared/model/toastifyStore";
 
 interface GatheringSupportManagementProps {
@@ -24,7 +24,7 @@ interface GatheringSupportManagementProps {
   };
 }
 
-const GatheringSupportManagement = ({
+export const GatheringSupportManagement = ({
   postUserId,
   initialGatheringStatus,
   initialIsFinished,
@@ -40,9 +40,9 @@ const GatheringSupportManagement = ({
     initialGatheringStatus,
   );
   const [isFinish, setIsFinish] = useState(initialIsFinished);
-  const modalState = useModalState();
-  const modalState1 = useModalState();
-  const modalState2 = useModalState();
+  const modalState = useModal();
+  const modalState1 = useModal();
+  const modalState2 = useModal();
 
   // 모임 신청하기
   const applyGathering = async () => {
@@ -132,11 +132,17 @@ const GatheringSupportManagement = ({
   if (postUserId == userStore.id && userStore.id > 0) {
     return (
       <div className="flex gap-2 max-[960px]:flex-col min-[960px]:flex-row">
-        <Modal modalState={modalState}>
-          <GatheringStatusChangeModal isFinish={isFinish} />
+        <Modal isOpen={modalState.isOpen} closeModal={modalState.closeModal}>
+          <GatheringStatusChangeModal
+            isFinish={isFinish}
+            closeModal={modalState.closeModal}
+          />
         </Modal>
-        <Modal modalState={modalState1}>
-          <GatheringChattingLinkCheckModal openChattingUrl={openChattingUrl} />
+        <Modal isOpen={modalState1.isOpen} closeModal={modalState1.closeModal}>
+          <GatheringChattingLinkCheckModal
+            openChattingUrl={openChattingUrl}
+            closeModal={modalState1.closeModal}
+          />
         </Modal>
         <button
           className="outline-gray3 h-[3.125rem] w-[7.5rem] rounded-[2.125rem] text-sm outline -outline-offset-1"
@@ -158,10 +164,13 @@ const GatheringSupportManagement = ({
   if (postUserId != userStore.id && userStore.id > 0) {
     return (
       <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
-        <Modal modalState={modalState1}>
-          <GatheringChattingLinkCheckModal openChattingUrl={openChattingUrl} />
+        <Modal isOpen={modalState1.isOpen} closeModal={modalState1.closeModal}>
+          <GatheringChattingLinkCheckModal
+            openChattingUrl={openChattingUrl}
+            closeModal={modalState1.closeModal}
+          />
         </Modal>
-        <Modal modalState={modalState2}>
+        <Modal isOpen={modalState2.isOpen} closeModal={modalState2.closeModal}>
           <ConfirmModal
             onConfirmClick={() => {
               cancelGathering();
@@ -248,4 +257,3 @@ const GatheringSupportManagement = ({
   }
   return <></>;
 };
-export default GatheringSupportManagement;

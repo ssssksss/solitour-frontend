@@ -1,18 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import GatheringApplicantButton from "./GatheringApplicantButton";
-import useGatheringStore from "@/entities/gathering/model/gatheringStore";
+import GatheringApplicantButton from "../../../components/gathering/read/detail/GatheringApplicantButton";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { fetchWithAuth } from "@/shared/api";
 import { UserImage, useUserStore } from "@/entities/user";
+import { useGatheringStore } from "../model/gatheringStore";
 
 interface GatheringApplicantListProps {
   postUserId: number;
 }
 
-const GatheringApplicantList = ({
+export const GatheringApplicantList = ({
   postUserId,
 }: GatheringApplicantListProps) => {
   const userStore = useUserStore();
@@ -73,7 +73,12 @@ const GatheringApplicantList = ({
   return (
     <div className="mt-[3.625rem] flex h-auto w-full flex-col rounded-[1rem] text-sm outline outline-offset-[-1px] outline-[#E3E3E3]">
       <div
-        className={`border-b-gray3 grid h-[4.5rem] w-full border-b-[1px] py-1 font-bold ${isFinish ? "grid-cols-[80px_auto_40px_40px] min-[577px]:grid-cols-[80px_auto_80px_80px] min-[800px]:grid-cols-[120px_auto_120px_120px]" : "max-[576px]:grid-cols-[80px_auto_40px_40px_60px] min-[577px]:grid-cols-[80px_auto_40px_40px_200px] min-[800px]:grid-cols-[80px_260px_80px_80px_auto]"}`}
+        className={[
+          isFinish
+            ? "grid-cols-[80px_auto_40px_40px] min-[577px]:grid-cols-[80px_auto_80px_80px] min-[800px]:grid-cols-[120px_auto_120px_120px]"
+            : "max-[576px]:grid-cols-[80px_auto_40px_40px_60px] min-[577px]:grid-cols-[80px_auto_40px_40px_200px] min-[800px]:grid-cols-[80px_260px_80px_80px_auto]",
+          "border-b-gray3 grid h-18 w-full border-b py-1 font-bold",
+        ].join(" ")}
       >
         <div className="flex flex-col items-center justify-center max-[600px]:text-xs">
           <span>프로필</span>
@@ -87,11 +92,11 @@ const GatheringApplicantList = ({
             className="relative flex items-center justify-center"
             onClick={() => setIsSortOpen(!isSortOpen)}
           >
-            <div className={"flex gap-x-2"}>
+            <div className="flex gap-x-2">
               상태
               <Image
                 src="/icons/dropdown-down-arrow.svg"
-                className="translate-y-[0.125rem]"
+                className="translate-y-0.5"
                 alt="dropdown-down-arrow"
                 width={12}
                 height={6}
@@ -177,5 +182,3 @@ const GatheringApplicantList = ({
     </div>
   );
 };
-
-export default GatheringApplicantList;

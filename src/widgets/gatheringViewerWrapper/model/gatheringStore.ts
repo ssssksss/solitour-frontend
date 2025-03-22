@@ -1,6 +1,6 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { gatheringApplicantsResponsesDto } from "./gathering";
+import { gatheringApplicantsResponsesDto } from "../../../entities/gathering/model/gathering";
 
 // 1. 상태 인터페이스 정의
 interface GatheringState {
@@ -43,10 +43,8 @@ const gatheringStore: StateCreator<GatheringStoreType> = (set) => ({
     })),
 });
 
-const useGatheringStore = create<GatheringStoreType>(
+export const useGatheringStore = create<GatheringStoreType>(
   process.env.NODE_ENV === "development"
     ? (devtools(gatheringStore) as StateCreator<GatheringStoreType>)
     : gatheringStore,
 );
-
-export default useGatheringStore;

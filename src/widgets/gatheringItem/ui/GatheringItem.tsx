@@ -2,10 +2,10 @@ import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
-import GatheringLike from "../../../components/gathering/read/GatheringLike";
 import { GatheringBookmark } from "@/features/gatheringBookmark";
 import { Gathering } from "@/entities/gathering";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
+import { GatheringLike } from "@/features/gatheringLike";
 
 interface GatheringItemProps {
   data: Gathering;
@@ -209,9 +209,9 @@ export const GatheringItem = ({
                   </div>
                 ) : (
                   <GatheringLike
-                    initialLikes={data.likeCount}
-                    initialIsLike={data.isLike}
                     gatheringId={data.gatheringId}
+                    initialLikeCount={data.likeCount}
+                    initialIsLike={data.isLike}
                   />
                 )
                 /* eslint-enable indent */

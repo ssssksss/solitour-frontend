@@ -1,4 +1,4 @@
-import GatheringViewer from "@/components/gathering/read/detail/GatheringViewer";
+import GatheringViewer from "@/widgets/gatheringViewerWrapper/ui/GatheringViewer";
 import GatheringRecommendationList from "@/components/gathering/read/GatheringRecommendationList";
 import { Breadcrumbs } from "@/shared/ui/breadcrumb";
 import { cookies } from "next/headers";
@@ -126,7 +126,7 @@ export default async function Page(props: PageProps) {
           { label: "모임 상세", href: "" },
         ]}
       />
-      <GatheringViewer postId={postId} data={data} />
+      <GatheringViewer gatheringId={postId} data={data} />
       <GatheringRecommendationList data={data.gatheringRecommend} />
     </div>
   );

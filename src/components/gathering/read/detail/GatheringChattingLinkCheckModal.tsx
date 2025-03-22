@@ -1,18 +1,19 @@
-import ModalTemplate from "@/shared/ui/modal/ModalTemplate";
-import { ReactNode } from "react";
+import { ModalTemplate } from "@/shared/ui/modal";
 
 interface GatheringChattingLinkCheckModalProps {
   openChattingUrl: string;
-  closeButtonComponent: ReactNode;
+  closeModal: () => void;
 }
 
 const GatheringChattingLinkCheckModal = ({
   openChattingUrl,
-  closeButtonComponent,
+  closeModal,
 }: GatheringChattingLinkCheckModalProps) => {
   return (
-    <ModalTemplate className="max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem]">
-      {closeButtonComponent}
+    <ModalTemplate
+      className="max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem]"
+      closeModal={closeModal}
+    >
       <article className="flex w-full flex-col">
         <h3 className="text-lg font-medium text-gray-900">링크 확인</h3>
         <p className="mt-2 text-sm text-gray-500">이 링크를 확인해보세요 ⚠️</p>
