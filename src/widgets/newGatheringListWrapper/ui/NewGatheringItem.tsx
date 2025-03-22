@@ -1,4 +1,3 @@
-import GatheringBookmark from "@/components/gathering/read/GatheringBookmark";
 import { GatheringRecommend } from "@/entities/gathering/model/gathering";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -6,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GatheringLike from "../../../components/gathering/read/GatheringLike";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
+import { GatheringBookmark } from "@/features/gatheringBookmark";
 
 interface GatheringItemHomeProps {
   data: GatheringRecommend;
@@ -39,8 +39,8 @@ export const NewGatheringItem = ({ data }: GatheringItemHomeProps) => {
             <span>{data.gatheringCategoryName}</span>
           </p>
           <GatheringBookmark
+            gatheringId={data.gatheringId}
             initialIsBookmarked={data.isBookMark}
-            postId={data.gatheringId}
           />
         </div>
         <p className="hover:text-main truncate pt-6 pb-1 text-lg font-bold">

@@ -1,19 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useInformationBookmark } from "../model/useInformationBookmark";
+import { useGatheringBookmark } from "../model/useGatheringBookmark";
 
-interface InformationBookmarkProps {
-  informationId: number;
+interface GatheringBookmarkProps {
+  gatheringId: number;
   initialIsBookmarked: boolean;
 }
 
-export const InformationBookmark = ({
-  informationId,
+export const GatheringBookmark = ({
+  gatheringId,
   initialIsBookmarked,
-}: InformationBookmarkProps) => {
+}: GatheringBookmarkProps) => {
   const { userId, loading, isBookmarked, handleBookmarkClick } =
-    useInformationBookmark(informationId, initialIsBookmarked);
+    useGatheringBookmark(gatheringId, initialIsBookmarked);
 
   if (userId <= 0) {
     return null;
@@ -21,20 +21,19 @@ export const InformationBookmark = ({
 
   return (
     <button
-      className="relative h-7 w-5 cursor-pointer text-white hover:scale-110"
-      type="button"
-      disabled={loading}
+      className="relative h-7 w-5 cursor-pointer hover:scale-105"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
         handleBookmarkClick();
       }}
+      disabled={loading}
     >
       <Image
+        className="object-contain"
         src={`/icons/bookmark-${isBookmarked ? "active-" : ""}icon.svg`}
         alt="bookmark-icon"
         fill={true}
-        style={{ objectFit: "contain" }}
       />
     </button>
   );

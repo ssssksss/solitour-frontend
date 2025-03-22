@@ -1,4 +1,4 @@
-import GatheringBookmark from "@/components/gathering/read/GatheringBookmark";
+import GatheringBookmark from "@/features/gatheringBookmark/ui/GatheringBookmark";
 import { Gathering } from "@/entities/gathering/model/gathering";
 import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { format } from "date-fns";

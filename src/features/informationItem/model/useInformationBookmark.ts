@@ -13,10 +13,6 @@ export const useInformationBookmark = (
   const [loading, setLoading] = useState(false);
 
   const handleBookmarkClick = async () => {
-    if (loading) {
-      return;
-    }
-
     setLoading(true);
     const data = new URLSearchParams();
     data.append("infoId", informationId.toString());
@@ -62,5 +58,5 @@ export const useInformationBookmark = (
     setLoading(false);
   };
 
-  return { userId, isBookmarked, handleBookmarkClick };
+  return { userId, loading, isBookmarked, handleBookmarkClick };
 };
