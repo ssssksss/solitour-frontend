@@ -6,7 +6,9 @@ import { Modal } from "@/shared/ui/modal";
 import { GATHERING_CATEGORY_LIST } from "../config/gatheringCategoryList";
 import { MyPageCategoryList } from "./MyPageCategoryList";
 import { useMyPageGatheringList } from "../model/useMyPageGatheringList";
-import { GatheringItem, GatheringItemSkeleton } from "@/widgets/gatheringItem";
+import { GatheringItem, GatheringItemSkeleton } from "@/entities/gathering";
+import { GatheringBookmark } from "@/features/gatheringBookmark";
+import { GatheringLike } from "@/features/gatheringLike";
 
 export const MyPageGatheringList = () => {
   const {
@@ -45,8 +47,21 @@ export const MyPageGatheringList = () => {
             : elements.map((item) => (
                 <GatheringItem
                   key={item.gatheringId}
-                  data={item}
+                  gathering={item}
                   isAccessGathering={isAccessible}
+                  gatheringBookmarkComponent={
+                    <GatheringBookmark
+                      gatheringId={item.gatheringId}
+                      initialIsBookmarked={item.isBookMark}
+                    />
+                  }
+                  gatheringLikeComponent={
+                    <GatheringLike
+                      gatheringId={item.gatheringId}
+                      initialLikeCount={item.likeCount}
+                      initialIsLike={item.isLike}
+                    />
+                  }
                 />
               ))
           /* eslint-enable indent */

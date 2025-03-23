@@ -1,15 +1,16 @@
-import { format } from "date-fns";
-import { ko } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
-import { GatheringBookmark } from "@/features/gatheringBookmark";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
 import { Gathering } from "@/entities/gathering";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
-import { GatheringLike } from "@/features/gatheringLike";
+import React from "react";
 
 interface GatheringItemProps {
-  data: Gathering;
+  gathering: Gathering;
   isAccessGathering: boolean;
+  gatheringBookmarkComponent: React.ReactNode;
+  gatheringLikeComponent: React.ReactNode;
 }
 
 const SEX: { [key: string]: string } = {
@@ -36,13 +37,15 @@ const status: { [key: string]: string } = {
 };
 
 export const GatheringItem = ({
-  data,
+  gathering,
   isAccessGathering,
+  gatheringBookmarkComponent,
+  gatheringLikeComponent,
 }: GatheringItemProps) => {
   return (
     <Link
-      href={`/gathering/${data.gatheringId}`}
-      className={`flex w-full ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} outline-gray3 hover:bg-lightGreen hover:outline-main h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-offset-[-2px] duration-300`}
+      href={`/gathering/${gathering.gatheringId}`}
+      className={`flex w-full ${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : "text-black"} outline-gray3 hover:bg-lightGreen hover:outline-main h-full max-h-[19.6875rem] flex-col gap-[1.25rem] rounded-2xl border-0 p-5 outline outline-offset-[-2px] duration-300`}
       onClick={(e) => {
         if (!isAccessGathering) {
           e.preventDefault();
@@ -53,49 +56,42 @@ export const GatheringItem = ({
         {/* 상태와 북마크 */}
         <div className="flex flex-row items-center justify-between">
           <p
-            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-offset-[-1px] ${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-gray2 text-white" : data.gatheringStatus ? statusStyle[data.gatheringStatus] : categoryStyle[data.gatheringCategoryName]}`}
+            className={`relative flex h-[2rem] w-fit items-center rounded-full px-4 py-[0.375rem] text-xs font-semibold outline outline-offset-[-1px] ${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "bg-gray2 text-white" : gathering.gatheringStatus ? statusStyle[gathering.gatheringStatus] : categoryStyle[gathering.gatheringCategoryName]}`}
           >
             <span>
-              {data.gatheringStatus
-                ? status[data.gatheringStatus]
-                : data.gatheringCategoryName}
+              {gathering.gatheringStatus
+                ? status[gathering.gatheringStatus]
+                : gathering.gatheringCategoryName}
             </span>
           </p>
-          <GatheringBookmark
-            gatheringId={data.gatheringId}
-            initialIsBookmarked={data.isBookMark}
-          />
+          {gatheringBookmarkComponent}
         </div>
         {/* 제목, 유저 닉네임 */}
         <p className="hover:text-main overflow-hidden pt-6 pb-1 text-lg font-bold text-ellipsis whitespace-nowrap">
-          {data.title}
+          {gathering.title}
         </p>
         <p className="text-gray1 overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
-          {data.nickname}
+          {gathering.nickname}
         </p>
       </div>
       {/* 마감일 포함 영역 */}
       <div className="flex w-full flex-col gap-[0.625rem]">
         {/* 4개 영역(기간, 장소, 시간, 인원) */}
         <div className="flex flex-col gap-[0.625rem]">
-          <div
-            className={
-              "gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse"
-            }
-          >
+          <div className="gap-[0.625rem] text-sm font-semibold max-[432px]:flex max-[432px]:flex-col min-[432px]:grid min-[432px]:grid-cols-[auto_7rem] min-[744px]:flex min-[744px]:grid-cols-1 min-[744px]:flex-col-reverse">
             <article className="flex flex-row items-center gap-2">
               {/* 모임 기간 */}
               <Image
-                src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/gathering-calendar-gray-icon.svg" : "/icons/gathering-calendar-icon.svg"}`}
+                src={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/gathering-calendar-gray-icon.svg" : "/icons/gathering-calendar-icon.svg"}`}
                 alt="gathering-calendar-icon"
                 width={16}
                 height={16}
               />
-              {format(new Date(data.scheduleStartDate), "yyyy.MM.dd")}
-              {format(new Date(data.scheduleStartDate), "yyyyMMdd") !=
-                format(new Date(data.scheduleEndDate), "yyyyMMdd") && (
+              {format(new Date(gathering.scheduleStartDate), "yyyy.MM.dd")}
+              {format(new Date(gathering.scheduleStartDate), "yyyyMMdd") !=
+                format(new Date(gathering.scheduleEndDate), "yyyyMMdd") && (
                 <span>
-                  {format(new Date(data.scheduleEndDate), "- yyyy.MM.dd")}
+                  {format(new Date(gathering.scheduleEndDate), "- yyyy.MM.dd")}
                 </span>
               )}
             </article>
@@ -103,16 +99,16 @@ export const GatheringItem = ({
               {/* 모임 장소 */}
               <div className={"flex items-center"}>
                 <Image
-                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/location-gray-icon.svg" : "/icons/location-icon.svg"}`}
+                  src={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/location-gray-icon.svg" : "/icons/location-icon.svg"}`}
                   alt="location-icon"
                   width={16}
                   height={16}
                 />
               </div>
               <p className="truncate overflow-hidden whitespace-nowrap">
-                {data.zoneCategoryParentName === "세종"
+                {gathering.zoneCategoryParentName === "세종"
                   ? "세종특별자치시"
-                  : `${data.zoneCategoryParentName}, ${data.zoneCategoryChildName}`}
+                  : `${gathering.zoneCategoryParentName}, ${gathering.zoneCategoryChildName}`}
               </p>
             </article>
           </div>
@@ -122,7 +118,7 @@ export const GatheringItem = ({
                 <div className={"relative flex items-center"}>
                   {/* 모임 인원 */}
                   <Image
-                    src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/people-gray-icon.svg" : "/icons/people-icon.svg"}`}
+                    src={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/people-gray-icon.svg" : "/icons/people-icon.svg"}`}
                     alt="people-icon"
                     width={16}
                     height={16}
@@ -130,27 +126,27 @@ export const GatheringItem = ({
                 </div>
                 <p
                   className={
-                    data.nowPersonCount === data.personCount
+                    gathering.nowPersonCount === gathering.personCount
                       ? "text-[#ff0000]"
                       : ""
                   }
                 >
                   <span
-                    className={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"} ${data.nowPersonCount == data.personCount && "text-[#ff0000]"}`}
+                    className={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "text-gray2" : gathering.nowPersonCount / gathering.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"} ${gathering.nowPersonCount == gathering.personCount && "text-[#ff0000]"}`}
                   >
-                    {data.nowPersonCount}
+                    {gathering.nowPersonCount}
                   </span>
                   {"/"}
-                  {data.personCount}
+                  {gathering.personCount}
                 </p>
               </div>
               <p>
                 {"(" +
-                  (new Date().getFullYear() - data.startAge) +
+                  (new Date().getFullYear() - gathering.startAge) +
                   "세 ~ " +
-                  (new Date().getFullYear() - data.endAge) +
+                  (new Date().getFullYear() - gathering.endAge) +
                   "세, " +
-                  SEX[data.allowedSex] +
+                  SEX[gathering.allowedSex] +
                   ")"}
               </p>
             </article>
@@ -161,7 +157,7 @@ export const GatheringItem = ({
               <div className={"relative"}>
                 {/* 모임 시간 */}
                 <Image
-                  src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/clock-gray-icon.svg" : "/icons/clock-icon.svg"}`}
+                  src={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/clock-gray-icon.svg" : "/icons/clock-icon.svg"}`}
                   alt="clock-icon"
                   width={16}
                   height={16}
@@ -169,7 +165,7 @@ export const GatheringItem = ({
                 />
               </div>
               <span className="flex h-full items-center text-sm">
-                {format(new Date(data.scheduleStartDate), "hh:mm")}
+                {format(new Date(gathering.scheduleStartDate), "hh:mm")}
               </span>
             </article>
           </div>
@@ -178,7 +174,7 @@ export const GatheringItem = ({
         <div className="flex flex-row items-center justify-between pt-[0.4375rem]">
           <div className="flex flex-row items-center gap-1">
             <Image
-              src={`${data.isFinish || format(new Date(data.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/pin-gray-icon.svg" : "/icons/pin-green-icon.svg"}`}
+              src={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/pin-gray-icon.svg" : "/icons/pin-green-icon.svg"}`}
               alt="pin-icon"
               width={16}
               height={16}
@@ -186,7 +182,7 @@ export const GatheringItem = ({
 
             <p className="text-sm">
               마감일:
-              {format(new Date(data.deadline), "yy.MM.dd(EE)", {
+              {format(new Date(gathering.deadline), "yy.MM.dd(EE)", {
                 locale: ko,
               })}
             </p>
@@ -195,8 +191,8 @@ export const GatheringItem = ({
             <div className="flex items-center gap-3">
               {
                 /* eslint-disable indent */
-                data.isFinish ||
-                format(new Date(data.deadline), "yyyyMMdd") <
+                gathering.isFinish ||
+                format(new Date(gathering.deadline), "yyyyMMdd") <
                   format(new Date(), "yyyyMMdd") ? (
                   <div className="flex items-center gap-1 text-sm">
                     <Image
@@ -205,14 +201,10 @@ export const GatheringItem = ({
                       width={16}
                       height={16}
                     />
-                    {convertNumberToShortForm(data.likeCount)}
+                    {convertNumberToShortForm(gathering.likeCount)}
                   </div>
                 ) : (
-                  <GatheringLike
-                    gatheringId={data.gatheringId}
-                    initialLikeCount={data.likeCount}
-                    initialIsLike={data.isLike}
-                  />
+                  gatheringLikeComponent
                 )
                 /* eslint-enable indent */
               }
@@ -224,7 +216,7 @@ export const GatheringItem = ({
                   height={16}
                 />
                 <p className="text-sm">
-                  {convertNumberToShortForm(data.viewCount)}
+                  {convertNumberToShortForm(gathering.viewCount)}
                 </p>
               </div>
             </div>

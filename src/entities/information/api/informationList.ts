@@ -20,7 +20,7 @@ export async function getInformationList(
       `${process.env.BACKEND_URL}`,
       "/api/informations",
       `${tagName !== undefined ? "/tag/search" : ""}`,
-      `?page=${page}`,
+      `?page=${page - 1}`,
       `&parentCategoryId=${parentCategoryId}`,
       `${childCategoryId > 0 ? `&childCategoryId=${childCategoryId}` : ""}`,
       `${place !== undefined ? `&zoneCategoryId=${LOCATION_ID[place]}` : ""}`,

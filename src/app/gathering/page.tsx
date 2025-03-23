@@ -1,5 +1,4 @@
-import GatheringList from "@/components/gathering/read/GatheringList";
-import { getGatheringCategoryList } from "@/entities/gathering";
+import { GatheringTemp } from "@/components/gathering/read/GatheringTemp";
 import { GatheringBanner } from "@/widgets/gatheringBanner";
 import { TopGatheringTitleListWrapper } from "@/widgets/topGatheringTitleListWrapper";
 import { Metadata } from "next";
@@ -10,8 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const gatheringCategoryList = await getGatheringCategoryList();
-
   return (
     <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
       <div className="flex w-full flex-col items-center">
@@ -21,7 +18,7 @@ export default async function Page() {
       <div className="flex w-full flex-col items-center">
         <TopGatheringTitleListWrapper />
       </div>
-      <GatheringList gatheringCategoryList={gatheringCategoryList} />
+      <GatheringTemp />
     </div>
   );
 }

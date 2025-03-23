@@ -23,7 +23,7 @@ export const InformationList = async ({
   search,
 }: InformationListProps) => {
   const informationList = await getInformationList(
-    page - 1,
+    page,
     parentCategoryId,
     childCategoryId,
     place,

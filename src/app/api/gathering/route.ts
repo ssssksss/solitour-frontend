@@ -48,28 +48,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// 모임 검색 조회
-export async function GET(request: NextRequest) {
-  const url = new URL(request.url);
-  const params = new URLSearchParams(url.search);
-  const access_cookie = request.cookies.get("access_token");
-
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/gatherings${params.get("tagName") ? "/tag/search" : ""}` +
-      url.search,
-    {
-      method: "GET",
-      headers: {
-        Cookie: `${access_cookie?.name}=${access_cookie?.value}`,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    },
-  );
-
-  return response;
-}
-
 // 모임 제거
 export async function DELETE(request: NextRequest) {
   const url = new URL(request.url);
