@@ -1,15 +1,17 @@
 "use client";
 
-import { GatheringRecommend } from "@/entities/gathering/model/gathering";
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { useUserStore } from "@/entities/user";
-import { GatheringItem } from "@/widgets/gatheringItem";
+import { GatheringBookmark } from "@/features/gatheringBookmark";
+import { GatheringLike } from "@/features/gatheringLike";
+import { GatheringItem } from "@/entities/gathering";
+import { GatheringRecommend } from "@/entities/gathering/model/gathering";
 
 interface GatheringRecommendationListProps {
   data: GatheringRecommend[];
 }
 
-const GatheringRecommendationList = ({
+export const GatheringRecommendationList = ({
   data,
 }: GatheringRecommendationListProps) => {
   const userStore = useUserStore();
@@ -33,6 +35,19 @@ const GatheringRecommendationList = ({
               isAccessGathering={
                 !!userStore.sex && !!userStore.age && userStore.id > 0
               }
+              gatheringBookmarkComponent={
+                <GatheringBookmark
+                  gatheringId={gathering.gatheringId}
+                  initialIsBookmarked={gathering.isBookMark}
+                />
+              }
+              gatheringLikeComponent={
+                <GatheringLike
+                  gatheringId={gathering.gatheringId}
+                  initialLikeCount={gathering.likeCount}
+                  initialIsLike={gathering.isLike}
+                />
+              }
             />
           ))}
         </div>
@@ -40,5 +55,3 @@ const GatheringRecommendationList = ({
     </div>
   );
 };
-
-export default GatheringRecommendationList;

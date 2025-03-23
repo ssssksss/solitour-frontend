@@ -19,6 +19,7 @@ export const LOCATION = [
 ] as const;
 
 export const LOCATION_ID: Record<string, number> = {
+  전체: 0,
   서울: 1,
   광주: 2,
   인천: 3,

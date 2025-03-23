@@ -1,4 +1,4 @@
-import { GatheringItemSkeleton } from "@/features/gathering";
+import { GatheringItemSkeleton } from "@/entities/gathering";
 
 export const NewGatheringListSkeleton = () => {
   return (

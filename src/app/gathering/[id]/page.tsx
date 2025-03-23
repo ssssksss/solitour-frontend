@@ -1,4 +1,3 @@
-import GatheringRecommendationList from "@/components/gathering/read/GatheringRecommendationList";
 import { getGathering } from "@/entities/gathering";
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { GatheringViewer } from "@/widgets/gatheringViewer";
@@ -41,7 +40,6 @@ export default async function Page({
         ]}
       />
       <GatheringViewer gatheringId={gatheringId} data={data} />
-      <GatheringRecommendationList data={data.gatheringRecommend} />
     </div>
   );
 }

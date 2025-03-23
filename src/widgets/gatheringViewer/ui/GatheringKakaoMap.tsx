@@ -1,15 +1,28 @@
 "use client";
 
-import { PlaceResponse } from "@/entities/gathering/model/gathering";
 import Image from "next/image";
 import { useEffect } from "react";
 
-const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
-  useEffect(() => {
-    if (!placeResponse.name) return;
+interface GatheringKakaoMapProps {
+  searchId: string;
+  name: string;
+  xaxis: number;
+  yaxis: number;
+  address: string;
+}
 
-    const lat = Number(placeResponse.yaxis);
-    const lng = Number(placeResponse.xaxis);
+export const GatheringKakaoMap = ({
+  searchId,
+  name,
+  xaxis,
+  yaxis,
+  address,
+}: GatheringKakaoMapProps) => {
+  useEffect(() => {
+    if (!name) return;
+
+    const lat = Number(yaxis);
+    const lng = Number(xaxis);
 
     const initializeMap = () => {
       const container = document.getElementById("map");
@@ -52,17 +65,17 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
     };
 
     window.kakao.maps.load(initializeMap);
-  }, [placeResponse]);
+  }, [name, xaxis, yaxis]);
 
   return (
     <div className={"flex h-[21.125rem] w-full flex-col text-black"}>
-      {placeResponse.name && (
+      {name && (
         <a
           className="relative flex h-full cursor-pointer flex-col items-center justify-center rounded-2xl border"
           href={
-            placeResponse.searchId
-              ? `https://map.kakao.com/link/map/${placeResponse.searchId}`
-              : `http://map.kakao.com/link/map/${placeResponse.name},${placeResponse.yaxis},${placeResponse.xaxis}`
+            searchId
+              ? `https://map.kakao.com/link/map/${searchId}`
+              : `http://map.kakao.com/link/map/${name},${yaxis},${xaxis}`
           }
           target="_blank"
         >
@@ -70,7 +83,7 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
             id="map"
             style={{ width: "calc(100%)", height: "calc(100% - 6rem)" }}
             className={"rounded-t-2xl border-b-[0.0625rem]"}
-          ></div>
+          />
 
           {/* 투명한 오버레이 div 추가 */}
           <div
@@ -83,12 +96,10 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
               cursor: "pointer",
               zIndex: 10, // 지도가 아닌 투명한 div가 마우스 이벤트를 받도록 함
             }}
-          ></div>
+          />
 
           <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border px-6 pt-12 pb-10">
-            <div className="text-lg font-bold text-black">
-              {placeResponse.name}
-            </div>
+            <div className="text-lg font-bold text-black">{name}</div>
             <div className="text-gray1 flex items-center gap-1 text-sm">
               <Image
                 src="/icons/location-icon.svg"
@@ -96,7 +107,7 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
                 width={14}
                 height={14}
               />
-              <span>{placeResponse.address}</span>
+              <span>{address}</span>
             </div>
           </div>
         </a>
@@ -104,5 +115,3 @@ const GatheringKakaoMap = (placeResponse: PlaceResponse) => {
     </div>
   );
 };
-
-export default GatheringKakaoMap;

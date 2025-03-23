@@ -21,14 +21,6 @@ type UserPostingResponse = {
   nickname: string;
 };
 
-export type PlaceResponse = {
-  searchId: string;
-  name: string;
-  xaxis: number;
-  yaxis: number;
-  address: string;
-};
-
 type ZoneCategoryResponse = {
   parentZoneCategory: {
     parentZoneCategory: null | ZoneCategoryResponse;
@@ -85,7 +77,13 @@ export interface GatheringDetailResponseDto {
   endAge: number;
   tagResponses: { name: string }[];
   userPostingResponse: UserPostingResponse;
-  placeResponse: PlaceResponse;
+  placeResponse: {
+    searchId: string;
+    name: string;
+    xaxis: number;
+    yaxis: number;
+    address: string;
+  };
   zoneCategoryResponse: ZoneCategoryResponse;
   likeCount: number;
   nowPersonCount: number;

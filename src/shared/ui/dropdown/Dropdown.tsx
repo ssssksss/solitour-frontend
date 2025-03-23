@@ -2,9 +2,8 @@ import { useOutsideClick } from "@/shared/lib/hooks";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-interface IDropdown<T> {
+interface DropdownProps<T> {
   options: { value: T; name: string }[];
-  dropdownHandler: (value: T) => void;
   defaultValue: T;
   value: T;
   dropdownContainerStyle?: {
@@ -18,26 +17,21 @@ interface IDropdown<T> {
     z?: string;
     transformX?: string;
   };
+  dropdownHandler: (value: T) => void;
 }
 
-export default function Dropdown<T>({
+export const Dropdown = <T,>({
   options,
-  dropdownHandler,
   defaultValue,
   value,
   dropdownContainerStyle,
   dropdownOptionStyle,
-}: IDropdown<T>) {
+  dropdownHandler,
+}: DropdownProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<T>(defaultValue);
   const ref = useRef<HTMLDivElement>(null);
   const [isOnRightSide, setIsOnRightSide] = useState(true);
-
-  useOutsideClick(ref, () => setIsOpen(false));
-
-  useEffect(() => {
-    setSelectedOption(value);
-  }, [value]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -58,6 +52,12 @@ export default function Dropdown<T>({
     setIsOpen(false);
   };
 
+  useOutsideClick(ref, () => setIsOpen(false));
+
+  useEffect(() => {
+    setSelectedOption(value);
+  }, [value]);
+
   return (
     <div
       className={`relative flex ${dropdownContainerStyle?.h || ""} h-full shrink-0 items-center ${dropdownContainerStyle?.w || ""} text-left`}
@@ -65,7 +65,7 @@ export default function Dropdown<T>({
     >
       <button
         onClick={toggleDropdown}
-        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} text-sm font-medium text-gray-700 hover:text-main focus:outline-hidden`}
+        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} hover:text-main text-sm font-medium text-gray-700 focus:outline-hidden`}
       >
         <div className="min-w-fit">
           {options.filter((i) => i.value == selectedOption)[0].name}
@@ -91,7 +91,7 @@ export default function Dropdown<T>({
       {isOpen &&
         (isOnRightSide ? (
           <div
-            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow-sm transition duration-200 ease-out`}
+            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} text-gray1 flex-col items-center gap-1 bg-white/95 shadow-sm transition duration-200 ease-out`}
             style={{
               transform: dropdownOptionStyle?.transformX,
             }}
@@ -103,8 +103,8 @@ export default function Dropdown<T>({
                   dropdownHandler(i.value);
                   handleOptionClick(i.value);
                 }}
-                className={`flex h-16 w-full items-center justify-center hover:text-main ${
-                  selectedOption === i.value ? "bg-white text-main" : ""
+                className={`hover:text-main flex h-16 w-full items-center justify-center ${
+                  selectedOption === i.value ? "text-main bg-white" : ""
                 }`}
                 role="menuitem"
               >
@@ -114,7 +114,7 @@ export default function Dropdown<T>({
           </div>
         ) : (
           <div
-            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} flex-col items-center gap-1 bg-white/95 text-gray1 shadow-sm transition duration-200 ease-out`}
+            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} text-gray1 flex-col items-center gap-1 bg-white/95 shadow-sm transition duration-200 ease-out`}
           >
             {options.map((i) => (
               <button
@@ -123,8 +123,8 @@ export default function Dropdown<T>({
                   dropdownHandler(i.value);
                   handleOptionClick(i.value);
                 }}
-                className={`flex h-16 w-full items-center justify-center hover:text-main ${
-                  selectedOption === i.value ? "bg-white text-main" : ""
+                className={`hover:text-main flex h-16 w-full items-center justify-center ${
+                  selectedOption === i.value ? "text-main bg-white" : ""
                 }`}
                 role="menuitem"
               >
@@ -135,4 +135,4 @@ export default function Dropdown<T>({
         ))}
     </div>
   );
-}
+};
