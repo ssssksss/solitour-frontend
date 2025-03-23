@@ -3,10 +3,10 @@ import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 
 interface BreadcrumbProps {
-  categories: { label: string; href: string }[];
+  categoryList: { label: string; href: string }[];
 }
 
-export const Breadcrumb = ({ categories }: BreadcrumbProps) => {
+export const Breadcrumb = ({ categoryList: categories }: BreadcrumbProps) => {
   return (
     <nav className="text-gray2 flex w-full items-center gap-[.25rem] py-10 text-xs">
       <div className="text-gray1">

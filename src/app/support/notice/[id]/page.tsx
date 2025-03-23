@@ -21,7 +21,7 @@ export default async function Page({
   return (
     <div className="flex w-full flex-col">
       <Breadcrumb
-        categories={[
+        categoryList={[
           { label: "고객지원", href: "/support" },
           { label: "공지사항", href: "/support?menu=notice" },
           { label: noticeId.toString(), href: "" },

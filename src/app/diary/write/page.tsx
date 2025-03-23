@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <div className="flex w-full flex-col items-center">
       <Breadcrumb
-        categories={[
+        categoryList={[
           { label: "여행 일기", href: "/diary/list?page=1" },
           { label: "일기 등록하기", href: "" },
         ]}

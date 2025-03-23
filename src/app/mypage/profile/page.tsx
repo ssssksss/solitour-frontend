@@ -14,7 +14,7 @@ export default async function Page() {
   return (
     <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col px-2 pb-10">
       <Breadcrumb
-        categories={[
+        categoryList={[
           {
             label: "마이페이지",
             href: "/mypage?mainCategory=정보&category=owner",

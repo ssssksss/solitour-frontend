@@ -10,9 +10,9 @@ import { useToastifyStore } from "@/shared/model";
 import { GatheringCreateFormSchema } from "@/features/gathering";
 import { GatheringEditor } from "@/features/gatheringEditor";
 
-const GatheringCreateEditor = () => {
+export const GatheringCreateEditor = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const toastifyStore = useToastifyStore();
   const methods = useForm({
     resolver: zodResolver(GatheringCreateFormSchema),
@@ -37,7 +37,7 @@ const GatheringCreateEditor = () => {
     },
   });
 
-  const createGatheringHandler = async () => {
+  const handleSubmit = async () => {
     const {
       gatheringCategoryId,
       allowedSex,
@@ -99,11 +99,10 @@ const GatheringCreateEditor = () => {
   return (
     <FormProvider {...methods}>
       <GatheringEditor
-        createGatheringHandler={createGatheringHandler}
+        text="등록"
         loading={loading}
+        handleSubmit={handleSubmit}
       />
     </FormProvider>
   );
 };
-
-export default GatheringCreateEditor;

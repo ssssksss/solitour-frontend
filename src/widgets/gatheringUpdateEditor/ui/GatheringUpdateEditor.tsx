@@ -1,6 +1,5 @@
 "use client";
 
-import GatheringEditor from "@/features/gatheringEditor/ui/GatheringEditor";
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
@@ -11,12 +10,13 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useToastifyStore } from "@/shared/model";
+import { GatheringEditor } from "@/features/gatheringEditor";
 
 interface GatheringUpdateEditorProps {
   gatheringData: GatheringDetailResponseDto;
 }
 
-const GatheringUpdateEditor = ({
+export const GatheringUpdateEditor = ({
   gatheringData,
 }: GatheringUpdateEditorProps) => {
   const router = useRouter();
@@ -55,7 +55,7 @@ const GatheringUpdateEditor = ({
   });
   const params = useParams();
 
-  const updateGatheringHandler = async () => {
+  const handleSubmit = async () => {
     const { id } = params;
     const {
       gatheringCategoryId,
@@ -126,12 +126,10 @@ const GatheringUpdateEditor = ({
   return (
     <FormProvider {...methods}>
       <GatheringEditor
-        updateGatheringHandler={updateGatheringHandler}
-        isEdit={true}
+        text="수정"
         loading={loading}
+        handleSubmit={handleSubmit}
       />
     </FormProvider>
   );
 };
-
-export default GatheringUpdateEditor;

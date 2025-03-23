@@ -35,7 +35,7 @@ export default async function Page({
   return (
     <div className="flex w-full flex-col items-center">
       <Breadcrumb
-        categories={[
+        categoryList={[
           {
             label: "정보",
             href: "/informations/list?page=1&parentCategoryId=1",

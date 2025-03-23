@@ -1,3 +1,4 @@
+export { getGathering } from "./api/gathering";
 export { getGatheringCategoryList } from "./api/gatheringCategoryList";
 export { getMyPageGatheringList } from "./api/myPageGatheringList";
 export { getNewGatheringList } from "./api/newGatheringList";
