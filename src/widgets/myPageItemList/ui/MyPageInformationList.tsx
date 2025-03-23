@@ -1,13 +1,14 @@
 "use client";
 
-import {
-  InformationItem,
-  InformationItemSkeleton,
-} from "@/features/informationItem";
 import { Pagination } from "@/shared/ui/pagination";
 import { useMyPageInformationList } from "../model/useMyPageInformationList";
 import { INFORMATION_CATEGORY_LIST } from "../config/informationCategoryList";
 import { MyPageCategoryList } from "./MyPageCategoryList";
+import {
+  InformationItem,
+  InformationItemSkeleton,
+} from "@/entities/information";
+import { InformationBookmark } from "@/features/informationBookmark";
 
 export const MyPageInformationList = () => {
   const {
@@ -39,7 +40,6 @@ export const MyPageInformationList = () => {
                     key={value.informationId}
                     informationId={value.informationId}
                     categoryName={value.zoneCategoryParentName}
-                    initialIsBookmarked={value.isBookMark}
                     isLike={false}
                     title={value.title}
                     image={value.thumbNailImage}
@@ -50,7 +50,12 @@ export const MyPageInformationList = () => {
                     }
                     likeCount={value.likeCount}
                     viewCount={value.viewCount}
-                  />
+                  >
+                    <InformationBookmark
+                      informationId={value.informationId}
+                      initialIsBookmarked={value.isBookMark}
+                    />
+                  </InformationItem>
                 ))
             /* eslint-enable indent */
           }

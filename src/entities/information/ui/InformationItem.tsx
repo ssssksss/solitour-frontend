@@ -1,33 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TiLocation } from "react-icons/ti";
-import { convertNumberToShortForm } from "@/shared/lib/utils/convertNumberToShortForm";
 import { HeartIcon } from "@/shared/ui/icon";
-import { InformationBookmark } from "./InformationBookmark";
 import { CATEGORY_TAG_STYLE } from "../config/categoryTagStyle";
+import { convertNumberToShortForm } from "@/shared/lib/utils";
 
 interface InformationItemProps {
   informationId: number;
   categoryName?: string;
-  initialIsBookmarked: boolean;
   isLike: boolean;
   title: string;
   image: string;
   address: string;
   likeCount: number;
   viewCount: number;
+  children: React.ReactNode;
 }
 
 export const InformationItem = ({
   informationId,
   categoryName,
-  initialIsBookmarked,
   isLike,
   title,
   image,
   address,
   likeCount,
   viewCount,
+  children,
 }: InformationItemProps) => {
   return (
     <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline duration-300 max-[744px]:min-w-[19.183125rem]">
@@ -52,10 +51,7 @@ export const InformationItem = ({
           ) : (
             <div />
           )}
-          <InformationBookmark
-            informationId={informationId}
-            initialIsBookmarked={initialIsBookmarked}
-          />
+          {children}
         </div>
       </Link>
       <div className="flex h-28 flex-col justify-between rounded-b-xl bg-white px-5 py-4">

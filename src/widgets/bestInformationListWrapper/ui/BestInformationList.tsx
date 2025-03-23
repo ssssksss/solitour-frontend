@@ -1,5 +1,8 @@
-import { getBestInformationList } from "@/entities/information";
-import { InformationItem } from "@/features/informationItem";
+import {
+  getBestInformationList,
+  InformationItem,
+} from "@/entities/information";
+import { InformationBookmark } from "@/features/informationBookmark";
 import { LottieNotFound } from "@/shared/ui/lottie";
 
 export const BestInformationList = async () => {
@@ -20,14 +23,18 @@ export const BestInformationList = async () => {
           key={value.informationId}
           informationId={value.informationId}
           categoryName={value.parentCategoryName}
-          initialIsBookmarked={value.isBookMark}
           isLike={value.isLike}
           title={value.title}
           image={value.thumbNailImage}
           address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}
           likeCount={value.likeCount}
           viewCount={value.viewCount}
-        />
+        >
+          <InformationBookmark
+            informationId={value.informationId}
+            initialIsBookmarked={value.isBookMark}
+          />
+        </InformationItem>
       ))}
     </div>
   );

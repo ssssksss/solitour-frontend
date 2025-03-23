@@ -1,6 +1,9 @@
 import { LottieNotFound } from "@/shared/ui/lottie";
-import { InformationItem } from "@/features/informationItem";
-import { RecommendationInformation } from "@/entities/information";
+import {
+  InformationItem,
+  RecommendationInformation,
+} from "@/entities/information";
+import { InformationBookmark } from "@/features/informationBookmark";
 
 interface RecommendationListProps {
   recommendationList: RecommendationInformation[];
@@ -23,14 +26,18 @@ export const RecommendationList = ({
               key={value.informationId}
               informationId={value.informationId}
               categoryName={value.categoryName}
-              initialIsBookmarked={value.isBookMark}
               isLike={value.isLike}
               title={value.title}
               image={value.thumbNailImage}
               address={`${value.zoneCategoryParentName}, ${value.zoneCategoryChildName}`}
               likeCount={value.likeCount}
               viewCount={value.viewCount}
-            />
+            >
+              <InformationBookmark
+                informationId={value.informationId}
+                initialIsBookmarked={value.isBookMark}
+              />
+            </InformationItem>
           ))}
         </div>
       )}

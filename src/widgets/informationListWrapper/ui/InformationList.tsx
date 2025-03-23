@@ -1,7 +1,7 @@
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { Pagination } from "@/shared/ui/pagination";
-import { getInformationList } from "@/entities/information";
-import { InformationItem } from "@/features/informationItem";
+import { getInformationList, InformationItem } from "@/entities/information";
+import { InformationBookmark } from "@/features/informationBookmark";
 
 interface InformationListProps {
   page: number;
@@ -42,7 +42,6 @@ export const InformationList = async ({
                 key={value.informationId}
                 informationId={value.informationId}
                 categoryName={value.categoryName}
-                initialIsBookmarked={value.isBookMark}
                 isLike={value.isLike}
                 title={value.title}
                 image={value.thumbNailImage}
@@ -53,7 +52,12 @@ export const InformationList = async ({
                 }
                 likeCount={value.likeCount}
                 viewCount={value.viewCount}
-              />
+              >
+                <InformationBookmark
+                  informationId={value.informationId}
+                  initialIsBookmarked={value.isBookMark}
+                />
+              </InformationItem>
             ))}
           </div>
           <Pagination
