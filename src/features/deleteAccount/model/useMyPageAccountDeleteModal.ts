@@ -5,10 +5,11 @@ import { fetchWithAuth } from "@/shared/api";
 import { useToastifyStore } from "@/shared/model";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { deleteAccount } from "../api/account";
 
 export const useMyPageAccountDeleteModal = (
   userInfo: User,
-  closeModal?: () => void,
+  closeModal: () => void,
 ) => {
   const [userDeleteText, setUserDeleteText] = useState("");
   const userStore = useUserStore();
@@ -20,23 +21,20 @@ export const useMyPageAccountDeleteModal = (
   };
 
   const handleDeleteClick = async () => {
-    const response = await fetchWithAuth(
-      `/api/auth/user?type=${userInfo.provider}`,
-      { method: "DELETE" },
-    );
+    try {
+      await deleteAccount(userInfo.provider);
 
-    if (response.ok) {
       userStore.initialize();
       toastifyStore.setToastifyState({
         type: "success",
-        message: "회원탈퇴에 성공했습니다.",
+        message: "회원 탈퇴에 성공했습니다.",
       });
-      closeModal && closeModal();
+      closeModal();
       setTimeout(() => router.replace("/"), 300);
-    } else {
+    } catch (error) {
       toastifyStore.setToastifyState({
         type: "error",
-        message: "회원탈퇴에 실패했습니다.",
+        message: "회원 탈퇴에 실패했습니다.",
       });
     }
   };

@@ -2,7 +2,7 @@
 
 import { fetchWithAuth } from "@/shared/api";
 import { cookies } from "next/headers";
-import { GatheringDetailResponseDto } from "../model/gathering";
+import { GatheringDetail } from "../model/gathering";
 
 export async function getGathering(gatheringId: number) {
   const accessToken = (await cookies()).get("access_token");
@@ -19,5 +19,5 @@ export async function getGathering(gatheringId: number) {
     throw new Error("Failed to fetch data.");
   }
 
-  return response.json() as Promise<GatheringDetailResponseDto>;
+  return response.json() as Promise<GatheringDetail>;
 }

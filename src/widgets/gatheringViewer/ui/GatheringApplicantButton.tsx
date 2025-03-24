@@ -1,15 +1,15 @@
-import { gatheringApplicantsResponsesDto } from "@/entities/gathering/model/gathering";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { useToastifyStore } from "@/shared/model";
 import { useState } from "react";
+import { gatheringApplicantsResponse } from "@/entities/gathering";
 
 interface GatheringApplicationButtonProps {
-  applicant: gatheringApplicantsResponsesDto;
+  applicant: gatheringApplicantsResponse;
   isFullParticipants: boolean;
   updateGatheringApplicantStatusHandler: (
     status: "WAIT" | "CONSENT" | "REFUSE",
     userId: number,
-  ) => void;
+  ) => Promise<void>;
 }
 
 export const GatheringApplicantButton = ({
@@ -29,12 +29,8 @@ export const GatheringApplicantButton = ({
   }
 
   return (
-    <div className={"h-full w-full"}>
-      <article
-        className={
-          "flex h-full items-center justify-center gap-x-[.5rem] px-[.5rem] max-[576px]:hidden"
-        }
-      >
+    <div className="h-full w-full">
+      <article className="flex h-full items-center justify-center gap-x-[.5rem] px-[.5rem] max-[576px]:hidden">
         {[
           {
             status: "CONSENT",

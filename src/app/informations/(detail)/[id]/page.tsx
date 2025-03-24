@@ -1,5 +1,6 @@
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { InformationViewerWrapper } from "@/widgets/informationViewerWrapper";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -7,9 +8,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const informationId = Number((await params).id);
-
   if (informationId < 1 || !Number.isSafeInteger(informationId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return {
@@ -24,9 +24,8 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const informationId = Number((await params).id);
-
   if (informationId < 1 || !Number.isSafeInteger(informationId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return (

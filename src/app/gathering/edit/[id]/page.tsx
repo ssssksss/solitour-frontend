@@ -39,7 +39,7 @@ export default async function Page({
           { label: "모임 수정하기", href: "" },
         ]}
       />
-      <GatheringUpdateEditor gatheringData={data} />
+      <GatheringUpdateEditor gatheringDetail={data} />
     </div>
   );
 }

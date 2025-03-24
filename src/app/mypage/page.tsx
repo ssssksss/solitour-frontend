@@ -1,6 +1,7 @@
 import { MyPageHeader } from "@/widgets/myPageHeader";
 import { MyPageItemList } from "@/widgets/myPageItemList";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "마이페이지",
@@ -18,11 +19,11 @@ export default async function Page({
     (mainCategory !== "정보" && mainCategory !== "모임") ||
     category === undefined
   ) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
+    <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-10">
       <MyPageHeader />
       <MyPageItemList defaultActiveIndex={mainCategory === "정보" ? 0 : 1} />
     </main>

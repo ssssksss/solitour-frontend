@@ -14,4 +14,4 @@ export const CATEGORY_TAG_STYLE: Record<string, string> = {
   관광지: "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
   전시: "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
   "편집/소품샵": "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
-};
+} as const;

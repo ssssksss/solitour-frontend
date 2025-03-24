@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]">
+    <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-10">
       <div className="flex w-full flex-col items-center">
         <GatheringBanner />
         <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
@@ -23,12 +23,12 @@ export default async function Page() {
       <div className="flex w-full flex-col items-center">
         <TopGatheringTitleListWrapper />
       </div>
-      <div className="flex w-full min-w-[19.1875rem] flex-col pt-[5.5rem]">
+      <div className="flex w-full min-w-[19.1875rem] flex-col pt-22">
         <article className="flex flex-col gap-y-4 min-[960px]:flex-row-reverse min-[960px]:gap-x-6">
           <div className="flex w-full flex-row justify-between gap-x-2 gap-y-5 max-[744px]:flex-col min-[960px]:gap-x-6">
             <GatheringSearch />
             <div className="text-gray1 flex flex-row items-center justify-between gap-4 text-sm font-medium max-[744px]:w-full">
-              <div className="z-10 flex w-[7.5rem] justify-between gap-4">
+              <div className="z-10 flex w-30 justify-between gap-4">
                 <GatheringFilter />
                 <GatheringSort />
               </div>

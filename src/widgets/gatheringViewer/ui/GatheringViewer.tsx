@@ -1,6 +1,5 @@
 "use client";
 
-import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
@@ -13,17 +12,18 @@ import { GatheringApplicantList } from "./GatheringApplicantList";
 import { GatheringLike } from "@/features/gatheringLike";
 import { GatheringKakaoMap } from "./GatheringKakaoMap";
 import { GatheringRecommendationList } from "./GatheringRecommendationList";
+import { GatheringDetail } from "@/entities/gathering";
 
 interface GatheringViewerProps {
-  data: GatheringDetailResponseDto;
+  gatheringDetail: GatheringDetail;
   gatheringId: number;
 }
 
 export const GatheringViewer = ({
-  data,
+  gatheringDetail,
   gatheringId,
 }: GatheringViewerProps) => {
-  const { currentParticipants } = useGatheringViewer(data);
+  const { currentParticipants } = useGatheringViewer(gatheringDetail);
 
   return (
     <div className="w-full">
@@ -33,30 +33,33 @@ export const GatheringViewer = ({
           {/* 제목, 신청 버튼 */}
           <div className="grid w-full items-start gap-4 max-[960px]:grid-cols-[calc(100%-8.5rem)_8.5rem] min-[960px]:grid-cols-[calc(100%-14.5rem)_14.5rem]">
             <h1 className="text-3xl font-semibold break-words whitespace-pre-wrap">
-              {data.title}
+              {gatheringDetail.title}
             </h1>
             <GatheringSupportManagement
-              postUserId={data.userPostingResponse.id}
-              initialGatheringStatus={data.gatheringStatus}
-              initialIsFinished={data.isFinish}
-              openChattingUrl={data.openChattingUrl}
-              allowedGender={data.allowedSex}
+              postUserId={gatheringDetail.userPostingResponse.id}
+              initialGatheringStatus={gatheringDetail.gatheringStatus}
+              initialIsFinished={gatheringDetail.isFinish}
+              openChattingUrl={gatheringDetail.openChattingUrl}
+              allowedGender={gatheringDetail.allowedSex}
               allowedAgeRange={{
-                startAge: data.startAge,
-                endAge: data.endAge,
+                startAge: gatheringDetail.startAge,
+                endAge: gatheringDetail.endAge,
               }}
             />
           </div>
           {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
           <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
             <div className="flex items-center gap-x-3">
-              <UserImage userImageAddress={data.userImage} size={52} />
+              <UserImage
+                userImageAddress={gatheringDetail.userImage}
+                size={52}
+              />
               <div className="flex flex-col gap-y-[0.125rem]">
                 <div className="text-xs font-semibold text-black">
-                  {data.userPostingResponse?.nickname}
+                  {gatheringDetail.userPostingResponse?.nickname}
                 </div>
                 <div className="text-gray1 w-fit shrink-0 text-xs whitespace-nowrap">
-                  {format(new Date(data.createdAt), "yyyy-MM-dd")}
+                  {format(new Date(gatheringDetail.createdAt), "yyyy-MM-dd")}
                 </div>
               </div>
             </div>
@@ -65,8 +68,8 @@ export const GatheringViewer = ({
                 <div className="text-gray2 mb-[.25rem] flex flex-row items-center gap-2">
                   <GatheringLike
                     gatheringId={gatheringId}
-                    initialLikeCount={data.likeCount}
-                    initialIsLike={data.isLike}
+                    initialLikeCount={gatheringDetail.likeCount}
+                    initialIsLike={gatheringDetail.isLike}
                   />
                   <div className="text-gray2 flex items-center gap-1 text-sm">
                     <Image
@@ -75,7 +78,7 @@ export const GatheringViewer = ({
                       width={16}
                       height={16}
                     />
-                    <p>{convertNumberToShortForm(data.viewCount)}</p>
+                    <p>{convertNumberToShortForm(gatheringDetail.viewCount)}</p>
                   </div>
                 </div>
               </div>
@@ -93,13 +96,13 @@ export const GatheringViewer = ({
             />
             <div>
               {format(
-                new Date(data.scheduleStartDate),
+                new Date(gatheringDetail.scheduleStartDate),
                 "yyyy.MM.dd HH:mm (EE) ~ ",
                 { locale: ko },
               )}
-              {data.scheduleEndDate &&
+              {gatheringDetail.scheduleEndDate &&
                 format(
-                  new Date(data.scheduleEndDate),
+                  new Date(gatheringDetail.scheduleEndDate),
                   "yyyy.MM.dd HH:mm (EE)",
                   {
                     locale: ko,
@@ -115,9 +118,10 @@ export const GatheringViewer = ({
               height={14}
             />
             <div>
-              {data.zoneCategoryResponse.parentZoneCategory?.name == "세종"
+              {gatheringDetail.zoneCategoryResponse.parentZoneCategory?.name ==
+              "세종"
                 ? "세종특별자치시"
-                : `${data.zoneCategoryResponse.parentZoneCategory?.name}, ${data.zoneCategoryResponse.name}
+                : `${gatheringDetail.zoneCategoryResponse.parentZoneCategory?.name}, ${gatheringDetail.zoneCategoryResponse.name}
             `}
             </div>
           </div>
@@ -130,22 +134,22 @@ export const GatheringViewer = ({
             />
             <div>
               <span
-                className={`${data.personCount == currentParticipants && "text-[#ff0000]"}`}
+                className={`${gatheringDetail.personCount == currentParticipants && "text-[#ff0000]"}`}
               >
                 <span
-                  className={`${data.personCount == currentParticipants ? "text-[#ff0000]" : data.nowPersonCount / data.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"}`}
+                  className={`${gatheringDetail.personCount == currentParticipants ? "text-[#ff0000]" : gatheringDetail.nowPersonCount / gatheringDetail.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"}`}
                 >
-                  {currentParticipants || data.nowPersonCount}
+                  {currentParticipants || gatheringDetail.nowPersonCount}
                 </span>
-                {" /"} {data.personCount}
+                {" /"} {gatheringDetail.personCount}
               </span>
               <span className="text-gray2">
                 {" (" +
-                  (new Date().getFullYear() - data.startAge) +
+                  (new Date().getFullYear() - gatheringDetail.startAge) +
                   "세 ~ " +
-                  (new Date().getFullYear() - data.endAge) +
+                  (new Date().getFullYear() - gatheringDetail.endAge) +
                   "세, " +
-                  GENDER[data.allowedSex] +
+                  GENDER[gatheringDetail.allowedSex] +
                   ")"}
               </span>
             </div>
@@ -157,7 +161,13 @@ export const GatheringViewer = ({
               width={14}
               height={14}
             />
-            <div> {format(new Date(data.scheduleStartDate), "HH:mm")} </div>
+            <div>
+              {" "}
+              {format(
+                new Date(gatheringDetail.scheduleStartDate),
+                "HH:mm",
+              )}{" "}
+            </div>
           </div>
         </article>
         {/* 내용 부분 */}
@@ -169,7 +179,7 @@ export const GatheringViewer = ({
             height={14}
           />
           {format(
-            new Date(data.deadline),
+            new Date(gatheringDetail.deadline),
             "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
             {
               locale: ko,
@@ -177,11 +187,11 @@ export const GatheringViewer = ({
           )}
         </div>
         <div className="mb-[1.25rem] w-full pt-[2rem] break-words whitespace-pre-wrap">
-          {data.content}
+          {gatheringDetail.content}
         </div>
-        {data.tagResponses?.length > 0 && (
+        {gatheringDetail.tagResponses?.length > 0 && (
           <div className={"mb-[2.625rem] flex flex-wrap gap-[.25rem]"}>
-            {data.tagResponses?.map((i) => (
+            {gatheringDetail.tagResponses?.map((i) => (
               <div
                 key={i.name}
                 className="text-main outline-main max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm outline outline-offset-[-1px]"
@@ -193,14 +203,16 @@ export const GatheringViewer = ({
           </div>
         )}
         {/* 지도 부분 */}
-        <GatheringKakaoMap {...data.placeResponse} />
-        <GatheringApplicantList postUserId={data.userPostingResponse.id} />
+        <GatheringKakaoMap {...gatheringDetail.placeResponse} />
+        <GatheringApplicantList
+          postUserId={gatheringDetail.userPostingResponse.id}
+        />
         <GatheringViewerButtonList
-          userId={data.userPostingResponse.id}
+          userId={gatheringDetail.userPostingResponse.id}
           gatheringId={gatheringId}
         />
       </div>
-      <GatheringRecommendationList data={data.gatheringRecommend} />
+      <GatheringRecommendationList data={gatheringDetail.gatheringRecommend} />
     </div>
   );
 };

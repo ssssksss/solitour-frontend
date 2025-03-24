@@ -1,4 +1,4 @@
-export interface GatheringRecommend {
+export interface Gathering {
   gatheringId: number;
   title: string;
   zoneCategoryParentName: string;
@@ -8,19 +8,21 @@ export interface GatheringRecommend {
   likeCount: number;
   gatheringCategoryName: string;
   nickname: string;
-  scheduleStartDate: string;
-  scheduleEndDate: string;
-  deadline: string;
-  allowedSex: string;
+  scheduleStartDate: string; // ISO 8601 format
+  scheduleEndDate: string; // ISO 8601 format
+  deadline: string; // ISO 8601 format
+  allowedSex: string | ("ALL" | "MALE" | "FEMALE");
   startAge: number;
   endAge: number;
   personCount: number;
   nowPersonCount: number;
   isLike: boolean;
+  gatheringStatus?: "CONSENT" | "REFUSE" | "WAIT";
+  isFinish?: boolean;
+  openChattingUrl: string;
 }
 
-// 모임 상세 페이지 타입
-export interface gatheringApplicantsResponsesDto {
+export interface gatheringApplicantsResponse {
   userGatheringResponse: {
     id: number;
     profileUrl: string;
@@ -31,7 +33,7 @@ export interface gatheringApplicantsResponsesDto {
   gatheringStatus: "WAIT" | "CONSENT" | "REFUSE";
 }
 
-export interface GatheringDetailResponseDto {
+export interface GatheringDetail {
   title: string;
   content: string;
   personCount: number;
@@ -66,36 +68,11 @@ export interface GatheringDetailResponseDto {
   };
   likeCount: number;
   nowPersonCount: number;
-  gatheringApplicantsResponses: gatheringApplicantsResponsesDto[];
-  gatheringRecommend: GatheringRecommend[];
+  gatheringApplicantsResponses: gatheringApplicantsResponse[];
+  gatheringRecommend: Gathering[];
   isLike: boolean;
   gatheringCategoryResponse: { id: number; name: string };
   gatheringStatus: string;
   openChattingUrl: string;
   userImage: string;
-}
-
-// 모임 리스트 조회
-export interface Gathering {
-  gatheringId: number;
-  title: string;
-  zoneCategoryParentName: string;
-  zoneCategoryChildName: string;
-  viewCount: number;
-  isBookMark: boolean;
-  likeCount: number;
-  gatheringCategoryName: string;
-  nickname: string;
-  scheduleStartDate: string; // ISO 8601 format
-  scheduleEndDate: string; // ISO 8601 format
-  deadline: string; // ISO 8601 format
-  allowedSex: string | ("ALL" | "MALE" | "FEMALE");
-  startAge: number;
-  endAge: number;
-  personCount: number;
-  nowPersonCount: number;
-  isLike: boolean;
-  gatheringStatus?: "CONSENT" | "REFUSE" | "WAIT";
-  isFinish?: boolean;
-  openChattingUrl: string;
 }

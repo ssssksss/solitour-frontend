@@ -1,10 +1,11 @@
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { SupportNoticeViewerWrapper } from "@/widgets/supportNoticeViewerWrapper";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "공지사항 상세조회",
-  description: "공지사항 상세조회",
+  description: "공지사항 상세조회 페이지",
 };
 
 export default async function Page({
@@ -13,9 +14,8 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const noticeId = Number((await params).id);
-
   if (noticeId <= 0 || !Number.isSafeInteger(noticeId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return (

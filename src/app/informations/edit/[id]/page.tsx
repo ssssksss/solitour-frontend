@@ -1,6 +1,7 @@
 import { getInformation } from "@/entities/information";
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { InformationUpdateEditor } from "@/widgets/informationUpdateEditor";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -8,9 +9,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const informationId = Number((await params).id);
-
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return {
@@ -25,9 +25,8 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const informationId = Number((await params).id);
-
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
-    throw Error("Not Found");
+    notFound();
   }
 
   const data = await getInformation(informationId);

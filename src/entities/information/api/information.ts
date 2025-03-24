@@ -3,19 +3,7 @@
 import { fetchWithAuth } from "@/shared/api";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-
-export interface RecommendationInformation {
-  informationId: number;
-  title: string;
-  zoneCategoryParentName: string;
-  zoneCategoryChildName: string;
-  categoryName: string;
-  viewCount: number;
-  isBookMark: boolean;
-  isLike: boolean;
-  thumbNailImage: string;
-  likeCount: number;
-}
+import { Information } from "../model/information";
 
 export interface InformationDetailResponse {
   title: string;
@@ -53,7 +41,7 @@ export interface InformationDetailResponse {
   likeCount: number;
   userImage: string;
   isLike: boolean;
-  recommendInformation: RecommendationInformation[];
+  recommendInformation: Information[];
 }
 
 export interface InformationCreateRequest {

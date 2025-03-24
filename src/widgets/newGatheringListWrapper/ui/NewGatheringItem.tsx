@@ -5,10 +5,10 @@ import Link from "next/link";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
 import { GatheringBookmark } from "@/features/gatheringBookmark";
 import { GatheringLike } from "@/features/gatheringLike";
-import { GatheringRecommend } from "@/entities/gathering";
+import { Gathering } from "@/entities/gathering";
 
 interface GatheringItemHomeProps {
-  data: GatheringRecommend;
+  data: Gathering;
 }
 
 const SEX: { [key: string]: string } = {

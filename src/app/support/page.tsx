@@ -3,6 +3,12 @@ import { SupportAbout } from "@/widgets/supportAbout";
 import { SupportTerms } from "@/widgets/supportTerms";
 import { SupportFAQList } from "@/widgets/supportFAQList";
 import { SupportNoticeList } from "@/widgets/supportNoticeList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "고객지원",
+  description: "Solitour 고객지원 페이지",
+};
 
 export default async function Page({
   searchParams,

@@ -25,7 +25,7 @@ export const MyPageProfileEditor = ({ userInfo }: MyPageProfileProps) => {
           createdDate={userInfo.userImage.createdDate}
         />
       </article>
-      <DeleteAccount />
+      <DeleteAccount userInfo={userInfo} />
     </div>
   );
 };

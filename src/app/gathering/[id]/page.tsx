@@ -29,7 +29,7 @@ export default async function Page({
     notFound();
   }
 
-  const data = await getGathering(gatheringId);
+  const gatheringDetail = await getGathering(gatheringId);
 
   return (
     <div className="m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]">
@@ -39,7 +39,10 @@ export default async function Page({
           { label: "모임 상세", href: "" },
         ]}
       />
-      <GatheringViewer gatheringId={gatheringId} data={data} />
+      <GatheringViewer
+        gatheringId={gatheringId}
+        gatheringDetail={gatheringDetail}
+      />
     </div>
   );
 }

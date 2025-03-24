@@ -8,7 +8,11 @@ export { getMyPageGatheringList } from "./api/myPageGatheringList";
 export { getNewGatheringList } from "./api/newGatheringList";
 export { getTopGatheringTitleList } from "./api/topGatheringTitleList";
 
-export type { GatheringRecommend, Gathering } from "./model/gathering";
+export type {
+  Gathering,
+  gatheringApplicantsResponse,
+  GatheringDetail,
+} from "./model/gathering";
 
 export { GatheringItem } from "./ui/GatheringItem";
 export { GatheringItemSkeleton } from "./ui/GatheringItemSkeleton";

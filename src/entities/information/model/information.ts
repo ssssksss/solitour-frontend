@@ -6,7 +6,7 @@ export interface Information {
   categoryName: string;
   viewCount: number;
   isBookMark: boolean;
+  isLike: boolean;
   thumbNailImage: string;
   likeCount: number;
-  isLike: boolean;
 }

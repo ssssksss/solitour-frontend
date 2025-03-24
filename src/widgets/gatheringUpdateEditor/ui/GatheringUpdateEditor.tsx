@@ -2,7 +2,6 @@
 
 import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
-import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
 import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -11,13 +10,14 @@ import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useToastifyStore } from "@/shared/model";
 import { GatheringEditor } from "@/features/gatheringEditor";
+import { GatheringDetail } from "@/entities/gathering";
 
 interface GatheringUpdateEditorProps {
-  gatheringData: GatheringDetailResponseDto;
+  gatheringDetail: GatheringDetail;
 }
 
 export const GatheringUpdateEditor = ({
-  gatheringData,
+  gatheringDetail,
 }: GatheringUpdateEditorProps) => {
   const router = useRouter();
   const toastifyStore = useToastifyStore();
@@ -25,32 +25,32 @@ export const GatheringUpdateEditor = ({
   const methods = useForm({
     resolver: zodResolver(GatheringCreateFormSchema),
     defaultValues: {
-      title: gatheringData.title,
-      content: gatheringData.content,
-      startAge: gatheringData.startAge,
-      endAge: gatheringData.endAge,
-      allowedSex: gatheringData.allowedSex,
-      personCount: gatheringData.personCount,
-      placeName: gatheringData.placeResponse.name,
-      xAxis: gatheringData.placeResponse.xaxis,
-      yAxis: gatheringData.placeResponse.yaxis,
-      roadAddressName: gatheringData.placeResponse.address,
-      deadline: format(new Date(gatheringData.deadline), "yyyy-MM-dd HH:mm"),
+      title: gatheringDetail.title,
+      content: gatheringDetail.content,
+      startAge: gatheringDetail.startAge,
+      endAge: gatheringDetail.endAge,
+      allowedSex: gatheringDetail.allowedSex,
+      personCount: gatheringDetail.personCount,
+      placeName: gatheringDetail.placeResponse.name,
+      xAxis: gatheringDetail.placeResponse.xaxis,
+      yAxis: gatheringDetail.placeResponse.yaxis,
+      roadAddressName: gatheringDetail.placeResponse.address,
+      deadline: format(new Date(gatheringDetail.deadline), "yyyy-MM-dd HH:mm"),
       scheduleStartDate: format(
-        new Date(gatheringData.scheduleStartDate),
+        new Date(gatheringDetail.scheduleStartDate),
         "yyyy-MM-dd HH:mm",
       ),
       scheduleEndDate: format(
-        new Date(gatheringData.scheduleEndDate),
+        new Date(gatheringDetail.scheduleEndDate),
         "yyyy-MM-dd HH:mm",
       ),
       hashtags:
-        gatheringData.tagResponses.length > 0
-          ? gatheringData.tagResponses.map((i: { name: string }) => i.name)
+        gatheringDetail.tagResponses.length > 0
+          ? gatheringDetail.tagResponses.map((i: { name: string }) => i.name)
           : [],
-      searchId: gatheringData.placeResponse.searchId || 0,
-      gatheringCategoryId: gatheringData.gatheringCategoryResponse.id,
-      openChattingUrl: gatheringData.openChattingUrl,
+      searchId: gatheringDetail.placeResponse.searchId || 0,
+      gatheringCategoryId: gatheringDetail.gatheringCategoryResponse.id,
+      openChattingUrl: gatheringDetail.openChattingUrl,
     },
   });
   const params = useParams();

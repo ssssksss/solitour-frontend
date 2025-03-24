@@ -1,8 +1,8 @@
 export const InformationItemSkeleton = () => {
   return (
     <div className="outline-gray3 hover:outline-main flex h-[19.6875rem] w-full animate-pulse flex-col justify-between rounded-2xl bg-gray-100 outline duration-300 max-[744px]:min-w-[19.183125rem]">
-      <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
-        <div className="h-8 w-12 rounded-full border bg-gray-200 px-4 py-[0.375rem] shadow-sm" />
+      <div className="flex flex-row items-center justify-between px-5 pt-5">
+        <div className="h-8 w-12 rounded-full border bg-gray-200 px-4 py-1.5 shadow-sm" />
         <div className="h-8 w-8 bg-gray-200" />
       </div>
       <div className="flex h-28 flex-col justify-between bg-white px-5 py-4">

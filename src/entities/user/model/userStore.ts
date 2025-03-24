@@ -1,24 +1,9 @@
 import { StateCreator, create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { User } from "./user";
 
 // 1. 상태 인터페이스 정의
-interface UserState {
-  id: number;
-  userStatus: string;
-  userImage: {
-    id: number;
-    address: string;
-    createdDate: string;
-  };
-  nickname: string;
-  age: number | null;
-  sex: "male" | "female" | null;
-  email: string;
-  phoneNumber: string | null;
-  isAdmin: boolean;
-  createdAt: Date | null;
-  provider: string;
-}
+interface UserState extends User {}
 
 // 2. 액션 인터페이스 정의
 interface UserAction {

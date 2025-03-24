@@ -199,11 +199,11 @@ export const SupportTerms = () => {
           </ol>
         </div>
         <div className="flex flex-col gap-5">
-          <h3 className="text-xl font-bold">제7조 - 회원탈퇴 및 자격 상실</h3>
+          <h3 className="text-xl font-bold">제7조 - 회원 탈퇴 및 자격 상실</h3>
           <ol className="flex list-decimal flex-col gap-1 pl-5">
             <li>
               회원은 언제든지 본인의 의사에 따라 탈퇴를 요청할 수 있으며,
-              Solitour는 즉시 회원탈퇴를 처리합니다.
+              Solitour는 즉시 회원 탈퇴를 처리합니다.
             </li>
             <li>
               Solitour는 회원이 다음 각 호의 사유에 해당하는 경우, 회원자격을

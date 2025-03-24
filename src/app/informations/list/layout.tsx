@@ -15,7 +15,7 @@ export default function Layout({
   return (
     <div className="flex w-full flex-col items-center">
       <InformationBanner />
-      <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
+      <div className="mt-105 max-[744px]:mt-124" />
       <TopInformationTitleListWrapper />
       {children}
     </div>

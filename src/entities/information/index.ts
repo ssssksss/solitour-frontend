@@ -1,6 +1,5 @@
 export { getBestInformationList } from "./api/bestInformationList";
 export {
-  type RecommendationInformation,
   type InformationDetailResponse,
   type InformationCreateRequest,
   type InformationUpdateRequest,

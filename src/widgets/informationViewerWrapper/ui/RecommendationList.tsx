@@ -1,12 +1,9 @@
 import { LottieNotFound } from "@/shared/ui/lottie";
-import {
-  InformationItem,
-  RecommendationInformation,
-} from "@/entities/information";
+import { Information, InformationItem } from "@/entities/information";
 import { InformationBookmark } from "@/features/informationBookmark";
 
 interface RecommendationListProps {
-  recommendationList: RecommendationInformation[];
+  recommendationList: Information[];
 }
 
 export const RecommendationList = ({

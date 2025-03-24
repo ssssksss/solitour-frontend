@@ -4,10 +4,10 @@ import { LottieNotFound } from "@/shared/ui/lottie";
 import { useUserStore } from "@/entities/user";
 import { GatheringBookmark } from "@/features/gatheringBookmark";
 import { GatheringLike } from "@/features/gatheringLike";
-import { GatheringItem, GatheringRecommend } from "@/entities/gathering";
+import { Gathering, GatheringItem } from "@/entities/gathering";
 
 interface GatheringRecommendationListProps {
-  data: GatheringRecommend[];
+  data: Gathering[];
 }
 
 export const GatheringRecommendationList = ({

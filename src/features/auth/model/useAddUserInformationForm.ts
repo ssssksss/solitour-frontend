@@ -1,10 +1,11 @@
-import { AddUserInformationFormSchema, useUserStore } from "@/entities/user";
+import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
 import { useToastifyStore } from "@/shared/model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { AddUserInformationFormSchema } from "./AddUserInformationFormSchema";
 
-export const useAddUserInformationForm = (closeModal?: () => void) => {
+export const useAddUserInformationForm = (closeModal: () => void) => {
   const userStore = useUserStore();
   const toastifyStore = useToastifyStore();
   const methods = useForm<{
@@ -53,7 +54,7 @@ export const useAddUserInformationForm = (closeModal?: () => void) => {
         sex: methods.getValues("sex"),
         age: methods.getValues("age"),
       });
-      closeModal!();
+      closeModal();
     }
   };
 

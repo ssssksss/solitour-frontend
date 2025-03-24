@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { GatheringDetailResponseDto } from "@/entities/gathering/model/gathering";
 import { useGatheringStore } from "./gatheringStore";
+import { GatheringDetail } from "@/entities/gathering";
 
-export const useGatheringViewer = (data: GatheringDetailResponseDto) => {
+export const useGatheringViewer = (data: GatheringDetail) => {
   const gatheringStore = useGatheringStore();
 
   useEffect(() => {
