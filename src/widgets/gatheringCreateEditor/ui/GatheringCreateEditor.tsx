@@ -7,15 +7,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useToastifyStore } from "@/shared/model";
-import { GatheringCreateFormSchema } from "@/features/gathering";
-import { GatheringEditor } from "@/features/gatheringEditor";
+import {
+  GatheringEditor,
+  GatheringFormSchema,
+} from "@/features/gatheringEditor";
 
 export const GatheringCreateEditor = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const toastifyStore = useToastifyStore();
   const methods = useForm({
-    resolver: zodResolver(GatheringCreateFormSchema),
+    resolver: zodResolver(GatheringFormSchema),
     defaultValues: {
       title: "",
       content: "",

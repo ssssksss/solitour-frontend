@@ -1,8 +1,8 @@
 "use client";
 
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
 import { useState } from "react";
+import { createGatheringLike, deleteGatheringLike } from "../api/gatheringLike";
 
 export const useGatheringLike = (
   gatheringId: number,
@@ -10,38 +10,32 @@ export const useGatheringLike = (
   initialIsLike: boolean,
 ) => {
   const { id: userId } = useUserStore();
-  const [isLike, setIsLike] = useState(initialIsLike); // 상태
-  const [likeCount, setLikeCount] = useState(initialLikeCount); // 숫자
+  const [isLike, setIsLike] = useState(initialIsLike);
+  const [likeCount, setLikeCount] = useState(initialLikeCount);
   const [loading, setLoading] = useState(false);
 
   const handleLikeClick = async () => {
-    if (loading) {
-      return;
-    }
-
     setLoading(true);
-    const newIsLike = !isLike;
-    const newLikes = newIsLike ? likeCount + 1 : likeCount - 1;
-
-    setIsLike(newIsLike);
-    setLikeCount(newLikes);
+    const beforeLikeCount = likeCount;
+    const beforeIsLike = isLike;
 
     try {
-      const response = await fetchWithAuth(
-        `/api/gathering/like?id=${gatheringId}`,
-        { method: isLike ? "DELETE" : "POST" },
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      if (isLike) {
+        setLikeCount(likeCount - 1);
+        setIsLike(false);
+        await deleteGatheringLike(gatheringId);
+      } else {
+        setLikeCount(likeCount + 1);
+        setIsLike(true);
+        await createGatheringLike(gatheringId);
       }
     } catch (error) {
-      setIsLike(isLike);
-      setLikeCount(likeCount);
+      setLikeCount(beforeLikeCount);
+      setIsLike(beforeIsLike);
     } finally {
       setLoading(false);
     }
   };
 
-  return { clickable: userId > 0, likeCount, isLike, handleLikeClick };
+  return { loading, clickable: userId > 0, likeCount, isLike, handleLikeClick };
 };

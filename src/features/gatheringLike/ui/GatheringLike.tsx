@@ -15,11 +15,8 @@ export const GatheringLike = ({
   initialLikeCount,
   initialIsLike,
 }: GatheringLikeProps) => {
-  const { clickable, likeCount, isLike, handleLikeClick } = useGatheringLike(
-    gatheringId,
-    initialLikeCount,
-    initialIsLike,
-  );
+  const { loading, clickable, likeCount, isLike, handleLikeClick } =
+    useGatheringLike(gatheringId, initialLikeCount, initialIsLike);
 
   if (!clickable) {
     return (
@@ -40,36 +37,10 @@ export const GatheringLike = ({
       ].join(" ")}
       type="button"
       onClick={handleLikeClick}
+      disabled={loading}
     >
       <HeartIcon className="fill-inherit stroke-inherit" />
       <p>{convertNumberToShortForm(likeCount)}</p>
     </button>
   );
-
-  // return (
-  //   <button
-  //     onClick={(e) => handleClick(e)}
-  //     disabled={loading || userId < 1}
-  //     className={`${userId < 1 ? "cursor-default" : "cursor-pointer"} flex flex-row items-center gap-1 text-sm hover:size-110 ${loading ? "text-gray-400" : "text-gray-600"} `}
-  //   >
-  //     <div className="relative h-4 w-4 text-white">
-  //       {isLike ? (
-  //         <Image
-  //           src="/icons/heart-active-icon.svg"
-  //           alt="heart-active-icon"
-  //           fill={true}
-  //           style={{ objectFit: "contain" }}
-  //         />
-  //       ) : (
-  //         <Image
-  //           src="/icons/heart-empty-icon.svg"
-  //           alt="heart-empty-icon"
-  //           fill={true}
-  //           style={{ objectFit: "contain" }}
-  //         />
-  //       )}
-  //     </div>
-  //     {convertNumberToShortForm(likeCount)}
-  //   </button>
-  // );
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import { GatheringCreateFormSchema } from "@/features/gathering/model/GatheringCreateFormSchema";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import { fetchWithAuth } from "@/shared/api";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +8,10 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useToastifyStore } from "@/shared/model";
-import { GatheringEditor } from "@/features/gatheringEditor";
+import {
+  GatheringEditor,
+  GatheringFormSchema,
+} from "@/features/gatheringEditor";
 import { GatheringDetail } from "@/entities/gathering";
 
 interface GatheringUpdateEditorProps {
@@ -23,7 +25,7 @@ export const GatheringUpdateEditor = ({
   const toastifyStore = useToastifyStore();
   const [loading, setLoading] = useState<boolean>(false);
   const methods = useForm({
-    resolver: zodResolver(GatheringCreateFormSchema),
+    resolver: zodResolver(GatheringFormSchema),
     defaultValues: {
       title: gatheringDetail.title,
       content: gatheringDetail.content,

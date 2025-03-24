@@ -8,10 +8,10 @@ export const useGatheringFilter = (closeModal: () => void) => {
   const searchParams = useSearchParams();
   const [location, setLocation] = useState(searchParams.get("location") || 0);
   const [sex, setSex] = useState(searchParams.get("allowedSex") || "ALL");
-  const [startAge, setStartAge] = useState<number | undefined>(
+  const [startAge, setStartAge] = useState(
     searchParams.get("startAge") ? Number(searchParams.get("startAge")) : 20,
   );
-  const [endAge, setEndAge] = useState<number | undefined>(
+  const [endAge, setEndAge] = useState(
     searchParams.get("endAge") ? Number(searchParams.get("endAge")) : 59,
   );
   const [isFilterSchedule, setIsFilterSchedule] = useState(

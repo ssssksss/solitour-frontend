@@ -15,7 +15,7 @@ const QuillEditor = dynamic(
 );
 
 interface DiaryEditorProps {
-  text: string;
+  text: "등록" | "수정";
   datePickerModalVisible: boolean;
   addressModalVisible: boolean;
   loading: boolean;

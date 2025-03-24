@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const GatheringCreateFormSchema = z
+export const GatheringFormSchema = z
   .object({
     gatheringCategoryId: z.number().min(1, { message: "카테고리가 없습니다." }),
     deadline: z
