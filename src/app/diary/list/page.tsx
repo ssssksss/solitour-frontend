@@ -12,7 +12,6 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const page = Number((await searchParams).page);
-
   if (page <= 0 || !Number.isSafeInteger(page)) {
     throw new Error("Invalid Page Number");
   }

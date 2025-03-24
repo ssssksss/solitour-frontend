@@ -1,35 +1,4 @@
-export interface GatheringResponseDto {
-  id: number;
-  category: string;
-  bookmark: boolean;
-  title: string;
-  username: string;
-  date: Date;
-  location: string;
-  time: string;
-  current: number;
-  total: number;
-  qualification: string;
-  likes: number;
-  views: number;
-  isLike: boolean;
-}
-
-type UserPostingResponse = {
-  id: number;
-  name: string;
-  nickname: string;
-};
-
-type ZoneCategoryResponse = {
-  parentZoneCategory: {
-    parentZoneCategory: null | ZoneCategoryResponse;
-    name: string;
-  } | null;
-  name: string;
-};
-
-export type GatheringRecommend = {
+export interface GatheringRecommend {
   gatheringId: number;
   title: string;
   zoneCategoryParentName: string;
@@ -48,7 +17,7 @@ export type GatheringRecommend = {
   personCount: number;
   nowPersonCount: number;
   isLike: boolean;
-};
+}
 
 // 모임 상세 페이지 타입
 export interface gatheringApplicantsResponsesDto {
@@ -76,7 +45,11 @@ export interface GatheringDetailResponseDto {
   startAge: number;
   endAge: number;
   tagResponses: { name: string }[];
-  userPostingResponse: UserPostingResponse;
+  userPostingResponse: {
+    id: number;
+    name: string;
+    nickname: string;
+  };
   placeResponse: {
     searchId: string;
     name: string;
@@ -84,7 +57,13 @@ export interface GatheringDetailResponseDto {
     yaxis: number;
     address: string;
   };
-  zoneCategoryResponse: ZoneCategoryResponse;
+  zoneCategoryResponse: {
+    parentZoneCategory: {
+      parentZoneCategory: null;
+      name: string;
+    } | null;
+    name: string;
+  };
   likeCount: number;
   nowPersonCount: number;
   gatheringApplicantsResponses: gatheringApplicantsResponsesDto[];
@@ -119,33 +98,4 @@ export interface Gathering {
   gatheringStatus?: "CONSENT" | "REFUSE" | "WAIT";
   isFinish?: boolean;
   openChattingUrl: string;
-}
-
-interface Sort {
-  empty: boolean;
-  unsorted: boolean;
-  sorted: boolean;
-}
-
-interface Pageable {
-  pageNumber: number;
-  pageSize: number;
-  sort: Sort;
-  offset: number;
-  paged: boolean;
-  unpaged: boolean;
-}
-
-export interface GatheringsResponse {
-  totalPages: number;
-  totalElements: number;
-  size: number;
-  content: Gathering[];
-  number: number;
-  sort: Sort;
-  first: boolean;
-  last: boolean;
-  numberOfElements: number;
-  pageable: Pageable;
-  empty: boolean;
 }

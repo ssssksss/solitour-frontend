@@ -20,7 +20,10 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
   if (isFlipped) {
     return (
       <div
-        className={`${flag ? "animate-cardFlip" : "animate-cardFlip2"} border-gray3 hover:border-main hover:bg-lightGreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-[29rem]`}
+        className={[
+          flag ? "animate-card-flip" : "animate-card-flip2",
+          "border-gray3 hover:border-main hover:bg-lightgreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-[29rem]",
+        ].join(" ")}
         onClick={() => {
           if (flag) {
             handleFlip();
@@ -33,7 +36,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <TiLocation className="text-main" size={"1.3rem"} />
+          <TiLocation className="text-main" size="1.3rem" />
           <p className="text-gray1 text-lg">
             {diary.diaryDayContentResponses.diaryDayContentDetail[0].place}
           </p>
@@ -46,10 +49,10 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
             transition={{ delay: 0.4 }}
           >
             <Image
+              className="object-contain"
               src={`/icons/mood-icon${FEELING_STATUS[diary.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
               alt="mood-icon"
               fill={true}
-              style={{ objectFit: "contain" }}
             />
           </motion.div>
           <motion.div
@@ -98,7 +101,10 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
   // 앞면
   return (
     <motion.button
-      className={`${flag ? "animate-cardFlip2" : "animate-cardFlip"} border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full`}
+      className={[
+        flag ? "animate-card-flip2" : "animate-card-flip",
+        "border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full",
+      ].join(" ")}
       onClick={() => {
         if (!flag) {
           handleFlip();
@@ -109,7 +115,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
       transition={{ duration: 0.5, ease: "linear" }}
     >
       <Image
-        className="-z-10 rounded-[0.9375rem]"
+        className="-z-10 rounded-[0.9375rem] object-cover"
         src={
           diary.titleImage !== ""
             ? diary.titleImage
@@ -117,7 +123,6 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
         }
         alt="season-image"
         fill={true}
-        style={{ objectFit: "cover" }}
       />
       <div className="absolute bottom-0 h-[11.5rem] w-full rounded-b-2xl bg-linear-to-b from-black/0 to-black/50" />
       <motion.div

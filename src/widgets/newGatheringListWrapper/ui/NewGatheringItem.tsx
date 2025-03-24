@@ -1,4 +1,3 @@
-import { GatheringRecommend } from "@/entities/gathering/model/gathering";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import Image from "next/image";
@@ -6,6 +5,7 @@ import Link from "next/link";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
 import { GatheringBookmark } from "@/features/gatheringBookmark";
 import { GatheringLike } from "@/features/gatheringLike";
+import { GatheringRecommend } from "@/entities/gathering";
 
 interface GatheringItemHomeProps {
   data: GatheringRecommend;

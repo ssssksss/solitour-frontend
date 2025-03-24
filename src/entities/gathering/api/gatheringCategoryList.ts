@@ -1,7 +1,16 @@
 "use server";
 
 import { fetchWithAuth } from "@/shared/api";
-import { GatheringCategory } from "../model/gatheringCategory";
+
+export interface GatheringCategory {
+  id: number;
+  name: string;
+  childrenCategories: {
+    id: number;
+    parentCategory: { id: number; parentCategory: null; name: string };
+    name: string;
+  }[];
+}
 
 export async function getGatheringCategoryList() {
   const response = await fetchWithAuth(

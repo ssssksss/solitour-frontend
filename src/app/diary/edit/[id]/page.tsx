@@ -1,6 +1,7 @@
 import { getDiary } from "@/entities/diary";
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { DiaryUpdateEditor } from "@/widgets/diaryUpdateEditor";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -9,7 +10,7 @@ export async function generateMetadata({
 }) {
   const diaryId = Number((await params).id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return {
@@ -25,7 +26,7 @@ export default async function Page({
 }) {
   const diaryId = Number((await params).id);
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   const diary = (await getDiary(diaryId)).diaryContentResponse;

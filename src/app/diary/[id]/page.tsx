@@ -1,5 +1,6 @@
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { DiaryViewerWrapper } from "@/widgets/diaryViewerWrapper";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -7,9 +8,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const diaryId = Number((await params).id);
-
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
-    throw Error("Not Found");
+    notFound();
   }
 
   return {
@@ -24,9 +24,8 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const diaryId = Number((await params).id);
-
   if (diaryId <= 0 || !Number.isSafeInteger(diaryId)) {
-    throw Error("Not Found");
+    notFound();
   }
 
   return (
