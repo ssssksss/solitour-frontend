@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  useModalBackHandler,
-  useOutsideClick,
-  usePreventBodyScroll,
-} from "@/shared/lib/hooks";
+import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import React, { useRef } from "react";
 import { createPortal } from "react-dom";
 
@@ -19,9 +15,6 @@ export const Modal = ({ children, isOpen, closeModal }: ModalProps) => {
 
   useModalBackHandler(isOpen, closeModal);
   usePreventBodyScroll(isOpen);
-  useOutsideClick(ref, () => {
-    closeModal();
-  });
 
   if (!isOpen) {
     return null;
@@ -33,6 +26,7 @@ export const Modal = ({ children, isOpen, closeModal }: ModalProps) => {
       ref={ref}
       onClick={(e) => {
         if (e.target === ref.current) {
+          window.history.back();
           closeModal();
         }
       }}

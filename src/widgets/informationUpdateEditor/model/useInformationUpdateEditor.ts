@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import sanitizeHtml from "sanitize-html";
-import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { useUserStore } from "@/entities/user";
 import {
@@ -31,7 +30,6 @@ export const useInformationUpdateEditor = (
   const [loading, setLoading] = useState(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
-  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
   const methods = useForm<{
     userId: number;
@@ -78,16 +76,6 @@ export const useInformationUpdateEditor = (
     },
     mode: "onChange",
   });
-
-  const openCategoryModal = () => {
-    methods.setValue("categoryId", 0);
-    setCategoryModalVisible(true);
-  };
-
-  const closeCategoryModal = () => {
-    window.history.back();
-    setCategoryModalVisible(false);
-  };
 
   const handleHashTagChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -250,11 +238,6 @@ export const useInformationUpdateEditor = (
     router.refresh();
   };
 
-  usePreventBodyScroll(categoryModalVisible);
-  useModalBackHandler(categoryModalVisible, () =>
-    setCategoryModalVisible(false),
-  );
-
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.
   // 로그아웃 시 로그인 페이지로 이동.
   useEffect(() => {
@@ -316,11 +299,8 @@ export const useInformationUpdateEditor = (
   return {
     methods,
     loading,
-    categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    openCategoryModal,
-    closeCategoryModal,
     handleHashTagChange,
     handleTipChange,
     handleSubmit,

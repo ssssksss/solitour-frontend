@@ -6,8 +6,8 @@ import { useModal } from "@/shared/lib/hooks";
 import { useFormContext } from "react-hook-form";
 
 export const InformationEditorPlace = () => {
-  const { isOpen, openModal, closeModal } = useModal();
   const formContext = useFormContext();
+  const { isOpen, openModal, closeModal } = useModal();
 
   const openPlaceModal = () => {
     formContext.setValue("province", "");

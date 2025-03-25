@@ -1,6 +1,5 @@
 "use client";
 
-import { IoIosArrowDown } from "react-icons/io";
 import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
@@ -9,19 +8,16 @@ import { useFormContext } from "react-hook-form";
 import { useDragScroll } from "@/shared/lib/hooks";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { Hashtag } from "@/shared/ui/hashtag";
-import { InformationCategoryModal } from "./InformationCategoryModal";
 import { InformationImageUploadItem } from "./InformationImageUploadItem";
 import { useInformationEditorStore } from "../model/informationEditorStore";
 import { InformationEditorPlace } from "./InformationEditorPlace";
+import { InformationEditorCategoryList } from "./InformationEditorCategoryList";
 
 interface InformationEditorProps {
   text: "등록" | "수정";
   loading: boolean;
-  categoryModalVisible: boolean;
   inputTagRef: React.RefObject<HTMLInputElement | null>;
   inputTipRef: React.RefObject<HTMLInputElement | null>;
-  openCategoryModal: () => void;
-  closeCategoryModal: () => void;
   handleHashTagChange: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   handleTipChange: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;
@@ -30,11 +26,8 @@ interface InformationEditorProps {
 export const InformationEditor = ({
   text,
   loading,
-  categoryModalVisible,
   inputTagRef,
   inputTipRef,
-  openCategoryModal,
-  closeCategoryModal,
   handleHashTagChange,
   handleTipChange,
   handleSubmit,
@@ -53,9 +46,6 @@ export const InformationEditor = ({
 
   return (
     <div className="flex w-full flex-col">
-      {categoryModalVisible && (
-        <InformationCategoryModal closeModal={closeCategoryModal} />
-      )}
       <HashSpinner loading={loading} />
       <h1 className="text-[1.75rem] font-bold text-black">
         {`정보 ${text}하기`}
@@ -88,26 +78,7 @@ export const InformationEditor = ({
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
         <InformationEditorPlace />
-        <button
-          className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] grow flex-row items-center justify-between gap-1 rounded-full border px-7 py-3 text-lg font-semibold`}
-          type="button"
-          onClick={openCategoryModal}
-        >
-          {formContext.getValues("categoryId") !== 0 ? (
-            formContext.getValues("categoryName")
-          ) : (
-            <p className="flex flex-row items-center">
-              {"카테고리 선택"}
-              <span className="text-main">*</span>
-            </p>
-          )}
-          <IoIosArrowDown />
-          {formContext.formState.errors.categoryId && (
-            <p className="absolute -bottom-6 left-4 mt-1 text-xs font-medium text-red-500">
-              {formContext.formState.errors.categoryId.message as String}
-            </p>
-          )}
-        </button>
+        <InformationEditorCategoryList />
       </div>
       <div
         className="mt-10 mb-2 flex flex-row items-center gap-4 overflow-x-auto"

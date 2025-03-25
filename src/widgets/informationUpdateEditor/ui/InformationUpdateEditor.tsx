@@ -17,11 +17,8 @@ export const InformationUpdateEditor = ({
   const {
     methods,
     loading,
-    categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    openCategoryModal,
-    closeCategoryModal,
     handleHashTagChange,
     handleTipChange,
     handleSubmit,
@@ -32,11 +29,8 @@ export const InformationUpdateEditor = ({
       <InformationEditor
         text="수정"
         loading={loading}
-        categoryModalVisible={categoryModalVisible}
         inputTagRef={inputTagRef}
         inputTipRef={inputTipRef}
-        openCategoryModal={openCategoryModal}
-        closeCategoryModal={closeCategoryModal}
         handleHashTagChange={handleHashTagChange}
         handleTipChange={handleTipChange}
         handleSubmit={handleSubmit}
