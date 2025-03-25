@@ -13,10 +13,12 @@ import {
 } from "@/entities/diary";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { DiaryFormSchema } from "@/features/diaryEditor";
+import { useToastifyStore } from "@/shared/model";
 
 export const useDiaryCreateEditor = () => {
-  const router = useRouter();
+  const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const methods = useForm<{
     title: string;
     startDate: Date | null;
@@ -80,17 +82,16 @@ export const useDiaryCreateEditor = () => {
 
     setLoading(true);
 
-    const response = await createDiary(data);
-
-    if (!response.ok) {
-      alert("일기 작성에 실패하였습니다.");
+    try {
+      const response = await createDiary(data);
+      const diaryId = await response.text();
+      router.push(`/diary/${diaryId}`);
+      router.refresh();
+    } catch (error) {
+      setToastifyState({ type: "error", message: "일기 작성에 실패했습니다." });
+    } finally {
       setLoading(false);
-      throw new Error(response.statusText);
     }
-
-    const diaryId = await response.text();
-    router.push(`/diary/${diaryId}`);
-    router.refresh();
   };
 
   return { loading, methods, handleSubmit };

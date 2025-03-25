@@ -3,6 +3,7 @@
 import { useUserStore } from "@/entities/user";
 import { useState } from "react";
 import { createGatheringLike, deleteGatheringLike } from "../api/gatheringLike";
+import { useToastifyStore } from "@/shared/model";
 
 export const useGatheringLike = (
   gatheringId: number,
@@ -10,6 +11,7 @@ export const useGatheringLike = (
   initialIsLike: boolean,
 ) => {
   const { id: userId } = useUserStore();
+  const { setToastifyState } = useToastifyStore();
   const [isLike, setIsLike] = useState(initialIsLike);
   const [likeCount, setLikeCount] = useState(initialLikeCount);
   const [loading, setLoading] = useState(false);
@@ -32,6 +34,10 @@ export const useGatheringLike = (
     } catch (error) {
       setLikeCount(beforeLikeCount);
       setIsLike(beforeIsLike);
+      setToastifyState({
+        type: "error",
+        message: "좋아요 업데이트에 실패했습니다.",
+      });
     } finally {
       setLoading(false);
     }

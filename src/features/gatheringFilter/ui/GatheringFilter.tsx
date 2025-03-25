@@ -12,7 +12,7 @@ export const GatheringFilter = () => {
     <div>
       <button
         className="hover:text-main flex flex-row items-center"
-        onClick={() => openModal()}
+        onClick={openModal}
       >
         <VscSettings size="1.25rem" />
         <div>필터</div>

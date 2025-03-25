@@ -4,7 +4,7 @@ import { useDebounce } from "@/shared/lib/hooks";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-export const useAddressModal = (closeModal: () => void) => {
+export const useDiaryAddressModal = (closeModal: () => void) => {
   const formContext = useFormContext();
   const [flag, setFlag] = useState(true);
 

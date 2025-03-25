@@ -1,7 +1,7 @@
 "use client";
 
 import { HeartIcon } from "@/shared/ui/icon";
-import { useInformationLikeCount } from "../model/useInformationLikeCount";
+import { useInformationLike } from "../model/useInformationLike";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
 
 interface InformationLikeProps {
@@ -15,8 +15,8 @@ export const InformationLike = ({
   initialLikeCount,
   initialIsLike,
 }: InformationLikeProps) => {
-  const { clickable, likeCount, isLike, handleLikeClick } =
-    useInformationLikeCount(informationId, initialLikeCount, initialIsLike);
+  const { loading, clickable, likeCount, isLike, handleLikeClick } =
+    useInformationLike(informationId, initialLikeCount, initialIsLike);
 
   if (!clickable) {
     return (
@@ -37,6 +37,7 @@ export const InformationLike = ({
       ].join(" ")}
       type="button"
       onClick={handleLikeClick}
+      disabled={loading}
     >
       <HeartIcon className="fill-inherit stroke-inherit" />
       <p>{convertNumberToShortForm(likeCount)}</p>

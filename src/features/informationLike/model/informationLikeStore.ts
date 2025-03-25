@@ -4,19 +4,19 @@ import { devtools } from "zustand/middleware";
 // 상태 인터페이스 정의
 interface InformationLikeState {
   likeCount: number;
-  isLiked: boolean;
+  isLike: boolean;
 }
 
 // 액션 인터페이스 정의
 interface InformationLikeActions {
   initialize: () => void;
-  setInformationLike: (data: Partial<InformationLikeState>) => void;
+  setInformationLikeState: (data: Partial<InformationLikeState>) => void;
 }
 
 // 초기 상태 정의
 const initialState: InformationLikeState = {
   likeCount: 0,
-  isLiked: false,
+  isLike: false,
 };
 
 // 상태 및 액션 생성
@@ -25,7 +25,7 @@ const InformationLikeStore: StateCreator<
 > = (set) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
-  setInformationLike: (data: Partial<InformationLikeState>) =>
+  setInformationLikeState: (data: Partial<InformationLikeState>) =>
     set(() => ({ ...data })),
 });
 

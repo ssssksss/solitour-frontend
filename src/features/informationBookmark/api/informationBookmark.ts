@@ -3,7 +3,7 @@
 import { fetchWithAuth } from "@/shared/api";
 import { cookies } from "next/headers";
 
-export async function createBookmark(informationId: number) {
+export async function createInformationBookmark(informationId: number) {
   const accessToken = (await cookies()).get("access_token");
   const data = new URLSearchParams();
   data.append("infoId", informationId.toString());
@@ -26,7 +26,7 @@ export async function createBookmark(informationId: number) {
   }
 }
 
-export async function deleteBookmark(informationId: number) {
+export async function deleteInformationBookmark(informationId: number) {
   const accessToken = (await cookies()).get("access_token");
   const data = new URLSearchParams();
   data.append("infoId", informationId.toString());
@@ -34,7 +34,7 @@ export async function deleteBookmark(informationId: number) {
   const response = await fetchWithAuth(
     `${process.env.BACKEND_URL}/api/bookmark/information`,
     {
-      method: "POST",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Cookie: `${accessToken?.name}=${accessToken?.value}`,
@@ -45,6 +45,6 @@ export async function deleteBookmark(informationId: number) {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to create data.");
+    throw new Error("Failed to delete data.");
   }
 }

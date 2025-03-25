@@ -77,7 +77,6 @@ export const GatheringFilterModal = ({
   closeModal,
 }: GatheringFilterModalProps) => {
   const {
-    loading,
     location,
     sex,
     startAge,
@@ -101,21 +100,15 @@ export const GatheringFilterModal = ({
     handleSubmit,
   } = useGatheringFilterModal(closeModal);
 
-  if (loading) {
-    return (
-      <div className="relative flex h-[2rem] w-[3.5rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
-    );
-  }
-
   return (
     <ModalTemplate
       className="max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem]"
       closeModal={closeModal}
     >
-      <h2 className="h-[2rem] text-2xl font-bold text-black">조건 선택</h2>
+      <h2 className="h-8 text-2xl font-bold text-black">조건 선택</h2>
       <div className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
         <div className="flex flex-col gap-y-[1rem]">
-          <div className="h-[2rem] font-bold text-black">지역</div>
+          <div className="h-8 font-bold text-black">지역</div>
           <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
             {regions.map((i) => (
               <button
@@ -129,7 +122,7 @@ export const GatheringFilterModal = ({
           </div>
         </div>
         <div className="flex flex-col gap-y-[1rem]">
-          <div className="h-[2rem] font-bold text-black">성별</div>
+          <div className="h-8 font-bold text-black">성별</div>
           <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
             {SEX.map((i) => (
               <button
@@ -143,7 +136,7 @@ export const GatheringFilterModal = ({
           </div>
         </div>
         <article className="flex w-full flex-col gap-y-[1rem]">
-          <div className="h-[2rem] text-start font-bold text-black">나이</div>
+          <div className="h-8 text-start font-bold text-black">나이</div>
           <div className="relative flex w-full flex-col gap-[1rem]">
             <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
               {Object.entries(AGE_RANGE).map((i) => (
@@ -240,7 +233,7 @@ export const GatheringFilterModal = ({
           </div>
         </article>
         <div className="flex flex-col items-center gap-[.5rem] pt-[2rem]">
-          <div className="flex h-[2rem] w-full items-center justify-between gap-4 font-bold text-black">
+          <div className="flex h-8 w-full items-center justify-between gap-4 font-bold text-black">
             <span>일정</span>
             <button
               className="flex gap-1 text-sm font-medium text-black"

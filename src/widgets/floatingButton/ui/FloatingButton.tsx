@@ -35,7 +35,7 @@ export const FloatingButton = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="bg-lightgreen flex flex-col items-center gap-6 rounded-full px-4 py-[1.875rem]">
+              <div className="bg-lightgreen flex flex-col items-center gap-6 rounded-full px-4 py-7.5">
                 <motion.div
                   initial={{ opacity: 0, y: "0.5rem" }}
                   animate={{ opacity: 1, y: "0rem" }}

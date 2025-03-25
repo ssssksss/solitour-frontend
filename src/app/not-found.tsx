@@ -32,7 +32,7 @@ export default function NotFound() {
       </div>
       <div className="flex flex-row items-center gap-[0.625rem]">
         <Link
-          className="border-gray3 flex h-[2.625rem] w-[6.625rem] flex-row items-center justify-center rounded-full border hover:scale-105"
+          className="border-gray3 flex h-10.5 w-[6.625rem] flex-row items-center justify-center rounded-full border hover:scale-105"
           href="/"
         >
           홈으로

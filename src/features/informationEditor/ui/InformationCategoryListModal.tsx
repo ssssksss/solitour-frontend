@@ -74,7 +74,7 @@ export const InformationCategoryListModal = ({
           className={`${parentCategory === 0 || categoryId === 0 ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
         >
           <button
-            className="bg-main h-[2.625rem] w-[9.5rem] rounded-full font-medium text-white shadow-sm hover:scale-105"
+            className="bg-main h-10.5 w-[9.5rem] rounded-full font-medium text-white shadow-sm hover:scale-105"
             type="button"
             onClick={handleSaveClick}
           >

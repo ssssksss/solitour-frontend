@@ -7,7 +7,7 @@ export const BackButton = () => {
 
   return (
     <button
-      className="h-[2.625rem] w-[9.4375rem] rounded-full bg-main text-white hover:scale-105"
+      className="bg-main h-10.5 w-[9.4375rem] rounded-full text-white hover:scale-105"
       type="button"
       onClick={() => router.back()}
     >

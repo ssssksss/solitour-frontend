@@ -2,7 +2,7 @@
 
 import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
-import { useAddressModal } from "../model/useAddressModal";
+import { useDiaryAddressModal } from "../model/useDiaryAddressModal";
 import { ModalTemplate } from "@/shared/ui/modal";
 
 interface DiaryAddressModalProps {
@@ -19,7 +19,7 @@ export const DiaryAddressModal = ({ closeModal }: DiaryAddressModalProps) => {
     handleAddressSearch,
     handleAddressReset,
     handleAddressChange,
-  } = useAddressModal(closeModal);
+  } = useDiaryAddressModal(closeModal);
 
   return (
     <ModalTemplate

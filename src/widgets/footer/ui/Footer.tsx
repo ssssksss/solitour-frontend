@@ -4,7 +4,7 @@ import Link from "next/link";
 export const Footer = () => {
   return (
     <footer className="mt-auto flex h-fit w-full items-center justify-center bg-neutral-100 px-4">
-      <div className="flex w-[60rem] flex-col gap-4 px-4 py-8">
+      <div className="flex w-240 flex-col gap-4 px-4 py-8">
         <Link href="/">
           <Image
             src="/logos/solitour-logo.svg"
@@ -23,7 +23,7 @@ export const Footer = () => {
         </div>
         <div className="flex flex-row items-center justify-between">
           <Link
-            className="flex h-[2.625rem] w-[7.5rem] items-center justify-center rounded-3xl bg-black text-sm font-medium text-white hover:scale-105"
+            className="flex h-10.5 w-30 items-center justify-center rounded-3xl bg-black text-sm font-medium text-white hover:scale-105"
             href="/informations/list?page=1&parentCategoryId=1"
           >
             둘러보기

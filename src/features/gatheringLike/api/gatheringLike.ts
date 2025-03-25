@@ -45,6 +45,6 @@ export async function deleteGatheringLike(gatheringId: number) {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to create data.");
+    throw new Error("Failed to delete data.");
   }
 }

@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { createBookmark, deleteBookmark } from "../api/gatheringBookmark";
+import {
+  createGatheringBookmark,
+  deleteGatheringBookmark,
+} from "../api/gatheringBookmark";
+import { useToastifyStore } from "@/shared/model";
 
 export const useGatheringBookmark = (
   gatheringId: number,
   initialIsBookmarked: boolean,
 ) => {
+  const { setToastifyState } = useToastifyStore();
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
   const [loading, setLoading] = useState(false);
 
@@ -17,13 +22,17 @@ export const useGatheringBookmark = (
     try {
       if (isBookmarked) {
         setIsBookmarked(false);
-        await deleteBookmark(gatheringId);
+        await deleteGatheringBookmark(gatheringId);
       } else {
         setIsBookmarked(true);
-        await createBookmark(gatheringId);
+        await createGatheringBookmark(gatheringId);
       }
     } catch (error) {
       setIsBookmarked(beforeIsBookmarked);
+      setToastifyState({
+        type: "error",
+        message: "북마크 업데이트에 실패했습니다.",
+      });
     } finally {
       setLoading(false);
     }

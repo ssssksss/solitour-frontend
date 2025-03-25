@@ -31,7 +31,6 @@ export const useGatheringFilterModal = (closeModal: () => void) => {
     },
   ]);
   const [directInput, setDirectInput] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   const handleAgeChange = ({
     _startAge,
@@ -119,12 +118,7 @@ export const useGatheringFilterModal = (closeModal: () => void) => {
     ]);
   }, [searchParams]);
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
   return {
-    loading,
     location,
     sex,
     startAge,

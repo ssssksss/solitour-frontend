@@ -3,13 +3,13 @@
 import { fetchWithAuth } from "@/shared/api";
 import { cookies } from "next/headers";
 
-export async function createGatheringBookmark(gatheringId: number) {
+export async function createInformationLike(informationId: number) {
   const accessToken = (await cookies()).get("access_token");
   const data = new URLSearchParams();
-  data.append("gatheringId", gatheringId.toString());
+  data.append("infoId", informationId.toString());
 
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/bookmark/gathering`,
+    `${process.env.BACKEND_URL}/api/information/great`,
     {
       method: "POST",
       headers: {
@@ -26,13 +26,13 @@ export async function createGatheringBookmark(gatheringId: number) {
   }
 }
 
-export async function deleteGatheringBookmark(gatheringId: number) {
+export async function deleteInformationLike(informationId: number) {
   const accessToken = (await cookies()).get("access_token");
   const data = new URLSearchParams();
-  data.append("gatheringId", gatheringId.toString());
+  data.append("infoId", informationId.toString());
 
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/bookmark/gathering`,
+    `${process.env.BACKEND_URL}/api/information/great`,
     {
       method: "DELETE",
       headers: {

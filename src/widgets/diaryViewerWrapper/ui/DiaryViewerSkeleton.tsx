@@ -8,7 +8,7 @@ export const DiaryViewerSkeleton = () => {
         ))}
       </div>
       <div className="mt-[5.5rem] h-20 w-16 bg-gray-100" />
-      <div className="mt-12 h-[2.625rem] w-[12.25rem] bg-gray-100" />
+      <div className="mt-12 h-10.5 w-[12.25rem] bg-gray-100" />
       <div className="mt-6 flex w-full flex-row items-center justify-between">
         <div className="h-7 w-[5.625rem] bg-gray-100" />
         <div className="flex flex-row items-center gap-2">
