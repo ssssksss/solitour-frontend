@@ -24,7 +24,7 @@ export const InformationEditorHashtag = () => {
   };
 
   return (
-    <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
+    <div className="flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
       <h2 className="flex w-44 flex-row items-center pt-3 text-lg font-bold text-nowrap text-black">
         해시태그<span className="text-main">*</span>
       </h2>

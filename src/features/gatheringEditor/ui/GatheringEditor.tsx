@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { GatheringEditorPeriod } from "./GatheringEditorPeriod";
@@ -13,6 +12,7 @@ import { GatheringEditorTitle } from "./GatheringEditorTitle";
 import { GatheringEditorContent } from "./GatheringEditorContent";
 import { GatheringEditorCategoryList } from "./GatheringEditorCategoryList";
 import { GatheringEditorChattingLink } from "./GatheringEditorChattingLink";
+import { SubmitButton } from "@/shared/ui/button";
 
 interface GatheringEditorProps {
   text: "등록" | "수정";
@@ -50,33 +50,18 @@ export const GatheringEditor = ({
         <GatheringEditorContent />
         <GatheringEditorChattingLink />
         <GatheringEditorHashtag />
-        <div className="flex w-full justify-end">
-          <button
-            className={`disabled:bg-gray1 flex h-[3rem] w-[9.5rem] flex-row items-center justify-center rounded-[2rem] px-[1rem] py-[.5rem] text-white ${!formContext.formState.isValid ? "bg-gray1" : "bg-main hover:scale-105"}`}
-            onClick={() => {
-              if (!formContext.formState.isValid) {
-                formContext.trigger();
-                return;
-              }
-              handleSubmit();
-            }}
-          >
-            {loading ? (
-              <div className="flex flex-row items-center gap-3">
-                <Image
-                  className="animate-spin"
-                  src="/images/loading.webp"
-                  alt="loading"
-                  width={20}
-                  height={20}
-                />
-                {`${text} 중...`}
-              </div>
-            ) : (
-              <p>{`${text}하기`}</p>
-            )}
-          </button>
-        </div>
+        <SubmitButton
+          text={text}
+          onClick={() => {
+            if (!formContext.formState.isValid) {
+              formContext.trigger();
+              return;
+            }
+            handleSubmit();
+          }}
+          disabled={loading}
+          loading={loading}
+        />
       </section>
     </div>
   );

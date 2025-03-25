@@ -5,6 +5,7 @@ import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { QuillEditorSkeleton } from "./QuillEditorSkeleton";
 import { AddressModal } from "./AddressModal";
 import { DatePickerModal } from "./DatePickerModal";
+import { SubmitButton } from "@/shared/ui/button";
 
 const QuillEditor = dynamic(
   () => import("./QuillEditor").then((mod) => mod.QuillEditor),
@@ -168,27 +169,13 @@ export const DiaryEditor = ({
         )}
       </div>
       <QuillEditor />
-      <button
-        className="bg-main mt-10 mb-[5.3125rem] flex h-[2.625rem] w-[9.5rem] items-center justify-center self-end rounded-full text-[0.9375rem] text-white hover:scale-105"
-        type="submit"
+      <SubmitButton
+        text={text}
+        className="mt-10"
         onClick={onSubmit}
         disabled={loading}
-      >
-        {loading ? (
-          <div className="flex flex-row items-center gap-3">
-            <Image
-              className="animate-spin"
-              src="/images/loading.webp"
-              alt="loading"
-              width={20}
-              height={20}
-            />
-            <p>{`${text} 중...`}</p>
-          </div>
-        ) : (
-          <p>{`${text}하기`}</p>
-        )}
-      </button>
+        loading={loading}
+      />
     </div>
   );
 };

@@ -6,7 +6,7 @@ export const InformationEditorTitle = () => {
   const formContext = useFormContext();
 
   return (
-    <div className="relative mt-[4.6875rem] flex h-[3.3125rem] flex-row items-center gap-2.5">
+    <div className="relative flex h-[3.3125rem] flex-row items-center gap-2.5">
       <h2 className="w-10.5 text-lg font-semibold text-nowrap text-black">
         제목<span className="text-main">*</span>
       </h2>

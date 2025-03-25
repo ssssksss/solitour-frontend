@@ -25,7 +25,7 @@ export const InformationEditorTip = () => {
   };
 
   return (
-    <div className="mt-10 flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
+    <div className="flex flex-row items-start gap-7 max-[744px]:flex-col max-[744px]:items-start max-[744px]:gap-2">
       <h2 className="w-36 pt-3 text-lg font-bold text-black">
         생생한 혼플 TIP<span className="text-main">*</span>
       </h2>
