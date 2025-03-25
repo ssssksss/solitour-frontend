@@ -12,7 +12,7 @@ export const InformationCreateEditor = () => {
       <InformationEditor
         text="등록"
         loading={loading}
-        handleSubmit={handleSubmit}
+        onSubmit={handleSubmit}
       />
     </FormProvider>
   );

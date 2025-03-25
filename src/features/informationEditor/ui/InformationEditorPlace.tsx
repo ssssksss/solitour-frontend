@@ -26,7 +26,7 @@ export const InformationEditorPlace = () => {
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <InformationPlaceModal closeModal={closeModal} />
       </Modal>
-      <h2 className="w-[2.625rem] text-lg font-semibold text-nowrap text-black">
+      <h2 className="w-10.5 text-lg font-semibold text-nowrap text-black">
         장소<span className="text-main">*</span>
       </h2>
       <button

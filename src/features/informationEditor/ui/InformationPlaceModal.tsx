@@ -51,7 +51,7 @@ export const InformationPlaceModal = ({
           </button>
         </div>
       </div>
-      {!isCustom && (
+      {!isCustom ? (
         <div className="flex w-full flex-col gap-2">
           <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
           <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
@@ -83,8 +83,7 @@ export const InformationPlaceModal = ({
             </div>
           </div>
         </div>
-      )}
-      {isCustom && (
+      ) : (
         <div className="flex w-full flex-col gap-2">
           <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
           <div

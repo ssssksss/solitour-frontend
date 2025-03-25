@@ -24,7 +24,7 @@ export const InformationUpdateEditor = ({
       <InformationEditor
         text="수정"
         loading={loading}
-        handleSubmit={handleSubmit}
+        onSubmit={handleSubmit}
       />
     </FormProvider>
   );

@@ -1,12 +1,11 @@
 "use client";
 
+import parse from "node-html-parser";
+import sanitizeHtml from "sanitize-html";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import parse from "node-html-parser";
-import sanitizeHtml from "sanitize-html";
-import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 import {
   createDiary,
   DiaryCreateRequest,
@@ -17,8 +16,6 @@ import { DiaryFormSchema } from "@/features/diaryEditor";
 
 export const useDiaryCreateEditor = () => {
   const router = useRouter();
-  const [dateRangeModalVisible, setDateRangeModalVisible] = useState(false);
-  const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const methods = useForm<{
     title: string;
@@ -41,24 +38,6 @@ export const useDiaryCreateEditor = () => {
     },
     mode: "onChange",
   });
-
-  const openDateRangeModal = () => {
-    setDateRangeModalVisible(true);
-  };
-
-  const closeDateRangeModal = () => {
-    window.history.back();
-    setDateRangeModalVisible(false);
-  };
-
-  const openAddressModal = () => {
-    setAddressModalVisible(true);
-  };
-
-  const closeAddressModal = () => {
-    window.history.back();
-    setAddressModalVisible(false);
-  };
 
   const handleSubmit = async () => {
     const imageUrl =
@@ -114,22 +93,5 @@ export const useDiaryCreateEditor = () => {
     router.refresh();
   };
 
-  usePreventBodyScroll(dateRangeModalVisible);
-  usePreventBodyScroll(addressModalVisible);
-  useModalBackHandler(dateRangeModalVisible, () =>
-    setDateRangeModalVisible(false),
-  );
-  useModalBackHandler(addressModalVisible, () => setAddressModalVisible(false));
-
-  return {
-    loading,
-    methods,
-    dateRangeModalVisible,
-    addressModalVisible,
-    openDateRangeModal,
-    closeDateRangeModal,
-    openAddressModal,
-    closeAddressModal,
-    handleSubmit,
-  };
+  return { loading, methods, handleSubmit };
 };

@@ -10,31 +10,11 @@ interface DiaryUpdateEditorProps {
 }
 
 export const DiaryUpdateEditor = ({ diary }: DiaryUpdateEditorProps) => {
-  const {
-    loading,
-    methods,
-    dateRangeModalVisible,
-    addressModalVisible,
-    openDateRangeModal,
-    closeDateRangeModal,
-    openAddressModal,
-    closeAddressModal,
-    handleSubmit,
-  } = useDiaryUpdateEditor(diary);
+  const { loading, methods, handleSubmit } = useDiaryUpdateEditor(diary);
 
   return (
     <FormProvider {...methods}>
-      <DiaryEditor
-        text="수정"
-        loading={loading}
-        datePickerModalVisible={dateRangeModalVisible}
-        addressModalVisible={addressModalVisible}
-        openDateRangeModal={openDateRangeModal}
-        closeDateRangeModal={closeDateRangeModal}
-        openAddressModal={openAddressModal}
-        closeAddressModal={closeAddressModal}
-        onSubmit={handleSubmit}
-      />
+      <DiaryEditor text="수정" loading={loading} onSubmit={handleSubmit} />
     </FormProvider>
   );
 };

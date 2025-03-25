@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-import { useDragScroll } from "@/shared/lib/hooks";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
-import { InformationImageUploadItem } from "./InformationImageUploadItem";
 import { useInformationEditorStore } from "../model/informationEditorStore";
 import { InformationEditorPlace } from "./InformationEditorPlace";
 import { InformationEditorCategoryList } from "./InformationEditorCategoryList";
@@ -12,28 +10,20 @@ import { InformationEditorContent } from "./InformationEditorContent";
 import { InformationEditorHashtag } from "./InformationEditorHashtag";
 import { InformationEditorTip } from "./InformationEditorTip";
 import { SubmitButton } from "@/shared/ui/button";
+import { InformationEditorImageList } from "./InformationEditorImageList";
 
 interface InformationEditorProps {
   text: "등록" | "수정";
   loading: boolean;
-  handleSubmit: () => void;
+  onSubmit: () => void;
 }
 
 export const InformationEditor = ({
   text,
   loading,
-  handleSubmit,
+  onSubmit,
 }: InformationEditorProps) => {
-  const {
-    listRef,
-    onDragStart,
-    onDragMove,
-    onDragEnd,
-    onTouchStart,
-    onTouchMove,
-    onTouchEnd,
-  } = useDragScroll();
-  const { imageLoading, imageList } = useInformationEditorStore();
+  const { imageLoading } = useInformationEditorStore();
 
   return (
     <div className="flex w-full flex-col gap-10">
@@ -50,28 +40,7 @@ export const InformationEditor = ({
         <InformationEditorPlace />
         <InformationEditorCategoryList />
       </div>
-      <div className="flex flex-col">
-        <div
-          className="mb-2 flex flex-row items-center gap-4 overflow-x-auto"
-          ref={listRef}
-          onMouseDown={onDragStart}
-          onMouseMove={onDragMove}
-          onMouseUp={onDragEnd}
-          onMouseLeave={onDragEnd}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
-          {imageList.map((_, index) => (
-            <div key={index}>
-              <InformationImageUploadItem imageIndex={index} />
-            </div>
-          ))}
-        </div>
-        <p className="text-gray1 text-sm font-medium">
-          사진 최대 용량은 10MB입니다.
-        </p>
-      </div>
+      <InformationEditorImageList />
       <InformationEditorContent />
       <InformationEditorHashtag />
       <InformationEditorTip />
@@ -80,7 +49,7 @@ export const InformationEditor = ({
         className={
           imageLoading ? "bg-gray1 cursor-not-allowed hover:scale-100" : ""
         }
-        onClick={handleSubmit}
+        onClick={onSubmit}
         disabled={loading || imageLoading}
         loading={loading}
       />
