@@ -1,14 +1,12 @@
 "use client";
 
-import { useUserStore } from "@/entities/user";
 import { useState } from "react";
-import { createBookmark, deleteBookmark } from "../api/bookmark";
+import { createBookmark, deleteBookmark } from "../api/gatheringBookmark";
 
 export const useGatheringBookmark = (
   gatheringId: number,
   initialIsBookmarked: boolean,
 ) => {
-  const { id: userId } = useUserStore();
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
   const [loading, setLoading] = useState(false);
 
@@ -31,5 +29,5 @@ export const useGatheringBookmark = (
     }
   };
 
-  return { userId, loading, isBookmarked, handleBookmarkClick };
+  return { loading, isBookmarked, handleBookmarkClick };
 };

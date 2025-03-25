@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useInformationBookmark } from "../model/useInformationBookmark";
+import { useUserStore } from "@/entities/user";
 
 interface InformationBookmarkProps {
   informationId: number;
@@ -12,8 +13,11 @@ export const InformationBookmark = ({
   informationId,
   initialIsBookmarked,
 }: InformationBookmarkProps) => {
-  const { userId, loading, isBookmarked, handleBookmarkClick } =
-    useInformationBookmark(informationId, initialIsBookmarked);
+  const { id: userId } = useUserStore();
+  const { loading, isBookmarked, handleBookmarkClick } = useInformationBookmark(
+    informationId,
+    initialIsBookmarked,
+  );
 
   if (userId <= 0) {
     return null;
@@ -23,18 +27,18 @@ export const InformationBookmark = ({
     <button
       className="relative h-7 w-5 cursor-pointer text-white hover:scale-110"
       type="button"
-      disabled={loading}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
         handleBookmarkClick();
       }}
+      disabled={loading}
     >
       <Image
+        className="object-contain"
         src={`/icons/bookmark-${isBookmarked ? "active-" : ""}icon.svg`}
         alt="bookmark-icon"
         fill={true}
-        style={{ objectFit: "contain" }}
       />
     </button>
   );

@@ -5,11 +5,18 @@ import { cookies } from "next/headers";
 
 export async function createBookmark(gatheringId: number) {
   const accessToken = (await cookies()).get("access_token");
+  const data = new URLSearchParams();
+  data.append("gatheringId", gatheringId.toString());
+
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/bookmark/gathering?gatheringId=${gatheringId}`,
+    `${process.env.BACKEND_URL}/api/bookmark/gathering`,
     {
       method: "POST",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
+      body: data.toString(),
       cache: "no-store",
     },
   );
@@ -21,11 +28,18 @@ export async function createBookmark(gatheringId: number) {
 
 export async function deleteBookmark(gatheringId: number) {
   const accessToken = (await cookies()).get("access_token");
+  const data = new URLSearchParams();
+  data.append("gatheringId", gatheringId.toString());
+
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/bookmark/gathering?gatheringId=${gatheringId}`,
+    `${process.env.BACKEND_URL}/api/bookmark/gathering`,
     {
       method: "DELETE",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
+      body: data.toString(),
       cache: "no-store",
     },
   );

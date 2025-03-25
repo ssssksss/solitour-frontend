@@ -19,13 +19,7 @@ const OPTIONS = [
 ];
 
 export const GatheringSort = () => {
-  const { loading, sort, handleSortClick } = useGatheringSort();
-
-  if (loading) {
-    return (
-      <div className="relative flex h-[2rem] w-[3rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left"></div>
-    );
-  }
+  const { sort, handleSortClick } = useGatheringSort();
 
   return (
     <Dropdown

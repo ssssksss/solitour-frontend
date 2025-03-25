@@ -2,14 +2,19 @@
 
 import { useUserStore } from "@/entities/user";
 import { fetchWithAuth } from "@/shared/api";
-import useEditorStore from "@/features/informationEditor/model/informationEditorStore";
 import { useRef } from "react";
+import { useInformationEditorStore } from "./informationEditorStore";
 
 export const useImageUploadItem = (imageIndex: number) => {
   const imageRef = useRef<HTMLInputElement>(null);
-  const { images, mainImageIndex, setEditor, changeImage, addImage } =
-    useEditorStore();
-  const editorStore = useEditorStore();
+  const {
+    imageLoading,
+    imageList,
+    mainImageIndex,
+    setInformationEditorState,
+    changeImage,
+    addImage,
+  } = useInformationEditorStore();
   const userStore = useUserStore();
 
   const handleUploadItemClick = () => {
@@ -34,7 +39,7 @@ export const useImageUploadItem = (imageIndex: number) => {
       formData.append("image", file);
       formData.append("type", "INFORMATION");
 
-      editorStore.setEditor({ imageLoading: true });
+      setInformationEditorState({ imageLoading: true });
 
       const response = await fetchWithAuth("/api/image/upload", {
         method: "POST",
@@ -42,7 +47,7 @@ export const useImageUploadItem = (imageIndex: number) => {
         cache: "no-store",
       });
 
-      editorStore.setEditor({ imageLoading: false });
+      setInformationEditorState({ imageLoading: false });
 
       if (!response.ok) {
         alert("이미지 처리 중 오류가 발생하였습니다.");
@@ -56,29 +61,30 @@ export const useImageUploadItem = (imageIndex: number) => {
   };
 
   const handleRemove = (index: number) => {
-    if (editorStore.imageLoading) {
+    if (imageLoading) {
       return;
     }
 
-    setEditor({
-      images: editorStore.images.filter((_, i) => index !== i),
+    setInformationEditorState({
+      imageList: imageList.filter((_, i) => index !== i),
     });
 
     if (index < mainImageIndex) {
-      setEditor({ mainImageIndex: mainImageIndex - 1 });
+      setInformationEditorState({ mainImageIndex: mainImageIndex - 1 });
     } else if (index === mainImageIndex) {
-      setEditor({ mainImageIndex: 0 });
+      setInformationEditorState({ mainImageIndex: 0 });
     }
   };
 
   return {
-    image: images[imageIndex],
+    image: imageList[imageIndex],
     mainImageIndex,
     imageRef,
-    loading: editorStore.imageLoading,
+    loading: imageLoading,
     handleUploadItemClick,
     handleImageUpload,
-    setMainImageIndex: (value: number) => setEditor({ mainImageIndex: value }),
+    setMainImageIndex: (value: number) =>
+      setInformationEditorState({ mainImageIndex: value }),
     handleRemove,
   };
 };

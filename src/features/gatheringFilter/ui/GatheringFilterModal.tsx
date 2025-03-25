@@ -7,7 +7,7 @@ import { ko } from "date-fns/locale";
 import Image from "next/image";
 import "rc-slider/assets/index.css";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
-import { useGatheringFilter } from "../model/useGatheringFilter";
+import { useGatheringFilterModal } from "../model/useGatheringFilterModal";
 
 const regions = [
   { id: 0, name: "전체" },
@@ -99,7 +99,7 @@ export const GatheringFilterModal = ({
     handleAgeChange,
     handleInitButtonClick,
     handleSubmit,
-  } = useGatheringFilter(closeModal);
+  } = useGatheringFilterModal(closeModal);
 
   if (loading) {
     return (
@@ -189,7 +189,7 @@ export const GatheringFilterModal = ({
                       // ? 최소 나이값보다 작은가?
                       if (num < 20) num = 20;
                     }
-                    setStartAge(num || undefined);
+                    setStartAge(num);
                   }}
                   value={startAge || undefined}
                   className="w-full text-center text-lg"
@@ -222,7 +222,7 @@ export const GatheringFilterModal = ({
                         num = 59;
                       }
                     }
-                    setEndAge(num || undefined);
+                    setEndAge(num);
                   }}
                   onInput={(e: React.FormEvent<HTMLInputElement>) => {
                     const input = e.target as HTMLInputElement;

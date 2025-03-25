@@ -1,15 +1,9 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useModalBackHandler, usePreventBodyScroll } from "@/shared/lib/hooks";
 
 export const useInformationSearch = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [orderDropdownVisible, setOrderDropdownVisible] = useState(false);
-  const searchParams = useSearchParams();
-  const place = searchParams.get("place") ?? "";
-  const order = searchParams.get("order") ?? "latest";
   const [searchValue, setSearchValue] = useState("");
   const [searchMethod, setSearchMethod] = useState<"제목" | "태그">("제목");
   const [searchDropdownVisible, setSearchDropdownVisible] = useState(false);
@@ -55,20 +49,10 @@ export const useInformationSearch = () => {
     router.push(url.href, { scroll: false });
   };
 
-  usePreventBodyScroll(modalVisible);
-  useModalBackHandler(modalVisible, () => setModalVisible(false));
-
   return {
-    place,
-    order,
     searchMethod,
     searchValue,
-    modalVisible,
-    orderDropdownVisible,
     searchDropdownVisible,
-    openModal: () => setModalVisible(true),
-    closeModal: () => setModalVisible(false),
-    setOrderDropdownVisible,
     setSearchDropdownVisible,
     handleSearchMethodChange,
     handleSearchValueChange,

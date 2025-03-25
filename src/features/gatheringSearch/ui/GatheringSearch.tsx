@@ -4,26 +4,19 @@ import Image from "next/image";
 import { useGatheringSearch } from "../model/useGatheringSearch";
 import { Dropdown } from "@/shared/ui/dropdown";
 
-const OPTIONS = [
+const OPTIONS: { value: "제목" | "태그"; name: string }[] = [
   { value: "제목", name: "제목" },
   { value: "태그", name: "태그" },
 ];
 
 export const GatheringSearch = () => {
   const {
-    loading,
     searchValue,
     dropdownValue,
     setSearchValue,
-    dropDownHandler,
+    dropdownHandler,
     handleSearchClick,
   } = useGatheringSearch();
-
-  if (loading) {
-    return (
-      <div className="relative flex h-[2.75rem] w-[21.4375rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
-    );
-  }
 
   return (
     <div className="flex flex-row items-center gap-4 max-[1024px]:justify-between max-[744px]:w-full max-[744px]:flex-col max-[744px]:items-start">
@@ -31,7 +24,7 @@ export const GatheringSearch = () => {
         <div className="text-gray1 hover:text-main absolute top-0 left-0 flex h-full flex-row items-center text-sm">
           <Dropdown
             options={OPTIONS}
-            dropdownHandler={dropDownHandler}
+            dropdownHandler={dropdownHandler}
             value={dropdownValue}
             defaultValue={dropdownValue}
             dropdownContainerStyle={{

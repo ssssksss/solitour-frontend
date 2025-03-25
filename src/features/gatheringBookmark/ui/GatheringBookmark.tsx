@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useGatheringBookmark } from "../model/useGatheringBookmark";
+import { useUserStore } from "@/entities/user";
 
 interface GatheringBookmarkProps {
   gatheringId: number;
@@ -12,8 +13,11 @@ export const GatheringBookmark = ({
   gatheringId,
   initialIsBookmarked,
 }: GatheringBookmarkProps) => {
-  const { userId, loading, isBookmarked, handleBookmarkClick } =
-    useGatheringBookmark(gatheringId, initialIsBookmarked);
+  const { id: userId } = useUserStore();
+  const { loading, isBookmarked, handleBookmarkClick } = useGatheringBookmark(
+    gatheringId,
+    initialIsBookmarked,
+  );
 
   if (userId <= 0) {
     return null;

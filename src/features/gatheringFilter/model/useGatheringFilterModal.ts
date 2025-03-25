@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const useGatheringFilter = (closeModal: () => void) => {
+export const useGatheringFilterModal = (closeModal: () => void) => {
   const searchParams = useSearchParams();
   const [location, setLocation] = useState(searchParams.get("location") || 0);
   const [sex, setSex] = useState(searchParams.get("allowedSex") || "ALL");
