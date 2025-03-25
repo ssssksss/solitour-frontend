@@ -13,7 +13,8 @@ export const FloatingButton = () => {
   const {
     outside,
     visible,
-    modalState,
+    isOpen,
+    closeModal,
     handleScrollToTop,
     handleWriteButtonClick,
     handleGatheringClick,
@@ -21,8 +22,8 @@ export const FloatingButton = () => {
 
   return (
     <div>
-      <Modal isOpen={modalState.isOpen} closeModal={modalState.closeModal}>
-        <AddUserInformationForm closeModal={modalState.closeModal} />
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <AddUserInformationForm closeModal={closeModal} />
       </Modal>
       <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 translate-x-[-100%] flex-col items-center gap-3">
         <AnimatePresence>
@@ -83,8 +84,8 @@ export const FloatingButton = () => {
         </AnimatePresence>
         <button
           className={[
-            `${visible ? "bg-main" : "bg-black"}`,
-            "flex h-12 w-12 cursor-pointer flex-row items-center justify-center rounded-full text-white shadow-md transition-all duration-300 hover:scale-105",
+            visible ? "bg-main" : "bg-black",
+            "flex h-12 w-12 flex-row items-center justify-center rounded-full text-white shadow-md transition-all duration-300 hover:scale-105",
           ].join(" ")}
           onClick={handleWriteButtonClick}
         >
@@ -107,7 +108,7 @@ export const FloatingButton = () => {
           )}
         </button>
         <button
-          className="flex h-12 w-12 cursor-pointer flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
+          className="flex h-12 w-12 flex-row items-center justify-center rounded-full bg-black text-white shadow-md hover:scale-105"
           onClick={handleScrollToTop}
         >
           <IoIosArrowUp size="1.5rem" />

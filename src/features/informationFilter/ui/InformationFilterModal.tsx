@@ -15,10 +15,7 @@ export const InformationFilterModal = ({
     useInformationFilterModal(closeModal);
 
   return (
-    <ModalTemplate
-      className="flex h-fit max-h-[calc(100%_-_48px)] w-80 max-w-[calc(100%_-_48px)] flex-col overflow-y-auto rounded-xl bg-white p-6"
-      closeModal={closeModal}
-    >
+    <ModalTemplate className="w-80 p-6" closeModal={closeModal}>
       <div className="flex flex-col gap-4 px-5 pb-2">
         <h3 className="text-lg font-bold text-black">지역별</h3>
         <div className="text-gray1 flex flex-wrap items-start gap-2 font-medium">

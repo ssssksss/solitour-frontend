@@ -1,8 +1,8 @@
 "use client";
 
-import { MdClose } from "react-icons/md";
 import { TiLocation } from "react-icons/ti";
 import { useInformationPlaceModal } from "../model/useInformationPlaceModal";
+import { ModalTemplate } from "@/shared/ui/modal";
 
 interface InformationPlaceModalProps {
   closeModal: () => void;
@@ -28,38 +28,32 @@ export const InformationPlaceModal = ({
   } = useInformationPlaceModal(closeModal);
 
   return (
-    <div className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black/25">
-      <div className="flex h-fit max-h-[calc(100%_-_48px)] w-[39.75rem] flex-col overflow-y-scroll rounded-xl bg-white p-6 max-[744px]:w-[calc(100%_-_48px)]">
-        <div className="flex flex-row items-center justify-end">
-          <MdClose
-            className="text-gray2 hover:text-main cursor-pointer"
-            size="2.5rem"
-            onClick={handlePlaceReset}
-          />
-        </div>
-        <div className="flex flex-col gap-8 px-5">
-          <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-medium text-black">장소 선택</h3>
-            <div className="flex h-11 flex-row items-center border text-sm">
-              <button
-                className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
-                type="button"
-                onClick={() => setIsCustom(false)}
-              >
-                검색으로 찾기
-              </button>
-              <button
-                className={`h-11 flex-[50%] ${isCustom ? "bg-main text-white" : "text-gray1"}`}
-                type="button"
-                onClick={() => setIsCustom(true)}
-              >
-                직접 장소 입력하기
-              </button>
-            </div>
+    <ModalTemplate
+      className="w-[39.75rem] p-6 max-[744px]:w-[calc(100%_-_48px)]"
+      closeModal={closeModal}
+    >
+      <div className="flex w-full flex-col gap-8 px-5">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-lg font-medium text-black">장소 선택</h3>
+          <div className="flex h-11 flex-row items-center border text-sm">
+            <button
+              className={`h-11 flex-[50%] ${isCustom ? "text-gray1" : "bg-main text-white"}`}
+              type="button"
+              onClick={() => setIsCustom(false)}
+            >
+              검색으로 찾기
+            </button>
+            <button
+              className={`h-11 flex-[50%] ${isCustom ? "bg-main text-white" : "text-gray1"}`}
+              type="button"
+              onClick={() => setIsCustom(true)}
+            >
+              직접 장소 입력하기
+            </button>
           </div>
-          <div
-            className={`${isCustom ? "hidden" : ""} flex w-full flex-col gap-2`}
-          >
+        </div>
+        {!isCustom && (
+          <div className="flex w-full flex-col gap-2">
             <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
             <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
               <input
@@ -74,7 +68,7 @@ export const InformationPlaceModal = ({
                 {placeInfos?.map((placeInfo, index) => (
                   <button
                     key={index}
-                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    className="flex w-full flex-col items-start gap-1 hover:bg-gray-100"
                     type="button"
                     onClick={() => handlePlaceChange(placeInfo)}
                   >
@@ -90,9 +84,9 @@ export const InformationPlaceModal = ({
               </div>
             </div>
           </div>
-          <div
-            className={`${isCustom ? "" : "hidden"} flex w-full flex-col gap-2`}
-          >
+        )}
+        {isCustom && (
+          <div className="flex w-full flex-col gap-2">
             <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
             <div
               className={`${canTypePlaceName ? "h-fit" : "h-80 border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]"} flex flex-col rounded-3xl`}
@@ -144,8 +138,8 @@ export const InformationPlaceModal = ({
               </button>
             </div>
           </div>
-        </div>
+        )}
       </div>
-    </div>
+    </ModalTemplate>
   );
 };

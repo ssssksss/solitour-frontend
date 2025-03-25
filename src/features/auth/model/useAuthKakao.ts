@@ -1,15 +1,11 @@
 "use client";
 
-import {
-  AddUserInformationFormSchema,
-  getUserInfo,
-  signIn,
-  useUserStore,
-} from "@/entities/user";
+import { getUserInfo, signIn, useUserStore } from "@/entities/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AddUserInformationFormSchema } from "./AddUserInformationFormSchema";
 
 export const useAuthKakao = () => {
   const router = useRouter();

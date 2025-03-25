@@ -25,7 +25,7 @@ export const InformationBookmark = ({
 
   return (
     <button
-      className="relative h-7 w-5 cursor-pointer text-white hover:scale-110"
+      className="relative h-7 w-5 text-white hover:scale-110"
       type="button"
       onClick={(e) => {
         e.preventDefault();

@@ -24,7 +24,7 @@ export const InformationFilter = () => {
         onClick={openModal}
       >
         <VscSettings size="1.25rem" />
-        <p className="text-nowrap">{!place ? "지역별" : place}</p>
+        <p className="text-sm text-nowrap">{!place ? "지역별" : place}</p>
       </button>
     </div>
   );

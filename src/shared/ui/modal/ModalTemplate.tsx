@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import { MdClose } from "react-icons/md";
 
@@ -16,13 +18,16 @@ export const ModalTemplate = ({
     <section
       className={[
         `${className}`,
-        "scrollbar-hide relative flex max-h-[calc(100vh-1rem)] w-full flex-col items-center overflow-y-scroll rounded-2xl bg-white px-11 pt-16 pb-8",
+        "scrollbar-hide relative flex max-h-[calc(100vh-1rem)] flex-col items-center overflow-y-scroll rounded-2xl bg-white pt-16",
       ].join(" ")}
     >
       <MdClose
         className="text-gray2 hover:text-main absolute top-6 right-6 cursor-pointer"
         size="2rem"
-        onClick={() => closeModal()}
+        onClick={() => {
+          window.history.back();
+          closeModal();
+        }}
       />
       {children}
     </section>

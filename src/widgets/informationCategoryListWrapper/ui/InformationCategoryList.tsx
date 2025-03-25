@@ -29,8 +29,8 @@ export const InformationCategoryList = async ({
           childCategoryId={childCategoryId}
         />
         <div className="flex flex-row items-center gap-4 max-[1024px]:w-full max-[1024px]:justify-between max-[744px]:flex-col max-[744px]:items-start">
-          <InformationFilter />
           <InformationSearch />
+          <InformationFilter />
           <InformationSort />
         </div>
       </div>

@@ -8,12 +8,9 @@ export const InformationCreateEditor = () => {
   const {
     methods,
     loading,
-    locationModalVisible,
     categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    openLocationModal,
-    closeLocationModal,
     openCategoryModal,
     closeCategoryModal,
     handleHashTagChange,
@@ -26,12 +23,9 @@ export const InformationCreateEditor = () => {
       <InformationEditor
         text="등록"
         loading={loading}
-        locationModalVisible={locationModalVisible}
         categoryModalVisible={categoryModalVisible}
         inputTagRef={inputTagRef}
         inputTipRef={inputTipRef}
-        openLocationModal={openLocationModal}
-        closeLocationModal={closeLocationModal}
         openCategoryModal={openCategoryModal}
         closeCategoryModal={closeCategoryModal}
         handleHashTagChange={handleHashTagChange}

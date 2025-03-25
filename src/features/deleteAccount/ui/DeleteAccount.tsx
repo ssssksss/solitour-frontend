@@ -15,10 +15,7 @@ export const DeleteAccount = ({ userInfo }: DeleteAccountProps) => {
   return (
     <div>
       <div className="text-gray2 flex w-full justify-end pt-12">
-        <button
-          className="hover:text-main cursor-pointer hover:font-bold"
-          onClick={openModal}
-        >
+        <button className="hover:text-main hover:font-bold" onClick={openModal}>
           회원 탈퇴
         </button>
       </div>

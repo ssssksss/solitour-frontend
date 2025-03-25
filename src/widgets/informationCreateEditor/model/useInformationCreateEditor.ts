@@ -24,7 +24,6 @@ export const useInformationCreateEditor = () => {
   const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [locationModalVisible, setLocationModalVisible] = useState(false);
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
   const methods = useForm<{
@@ -66,23 +65,6 @@ export const useInformationCreateEditor = () => {
     },
     mode: "onChange",
   });
-
-  const openLocationModal = () => {
-    methods.setValue("province", "");
-    methods.setValue("city", "");
-    methods.setValue("informationAddress", "");
-    methods.setValue("placeId", "");
-    methods.setValue("placeXAxis", "");
-    methods.setValue("placeYAxis", "");
-    methods.setValue("placeName", "");
-    methods.watch();
-    setLocationModalVisible(true);
-  };
-
-  const closeLocationModal = () => {
-    window.history.back();
-    setLocationModalVisible(false);
-  };
 
   const openCategoryModal = () => {
     methods.setValue("categoryId", 0);
@@ -200,11 +182,7 @@ export const useInformationCreateEditor = () => {
     router.refresh();
   };
 
-  usePreventBodyScroll(locationModalVisible);
   usePreventBodyScroll(categoryModalVisible);
-  useModalBackHandler(locationModalVisible, () =>
-    setLocationModalVisible(false),
-  );
   useModalBackHandler(categoryModalVisible, () =>
     setCategoryModalVisible(false),
   );
@@ -232,12 +210,9 @@ export const useInformationCreateEditor = () => {
   return {
     methods,
     loading,
-    locationModalVisible,
     categoryModalVisible,
     inputTagRef,
     inputTipRef,
-    openLocationModal,
-    closeLocationModal,
     openCategoryModal,
     closeCategoryModal,
     handleHashTagChange,

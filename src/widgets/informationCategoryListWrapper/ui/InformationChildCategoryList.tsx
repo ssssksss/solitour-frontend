@@ -20,8 +20,10 @@ export const InformationChildCategoryList = ({
     <div className="flex flex-wrap items-center gap-1">
       <button
         className={[
-          `${childCategoryId === 0 ? "border-main bg-main text-white" : "text-gray1"}`,
-          "cursor-pointer rounded-full border border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105",
+          childCategoryId === 0
+            ? "border-main bg-main text-white"
+            : "text-gray1",
+          "rounded-full border border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105",
         ].join(" ")}
         onClick={() => handleChildCategoryClick(0)}
       >

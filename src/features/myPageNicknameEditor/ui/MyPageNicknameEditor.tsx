@@ -45,7 +45,7 @@ export const MyPageNicknameEditor = ({
           />
           <button
             className={[
-              `${nickname === defaultNickname ? "bg-gray-400" : "bg-main cursor-pointer hover:scale-105"}`,
+              `${nickname === defaultNickname ? "bg-gray-400" : "bg-main hover:scale-105"}`,
               "absolute top-1/2 right-2 h-[2.4rem] -translate-y-1/2 rounded-[28px] px-3 text-white opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100",
             ].join(" ")}
             type="button"

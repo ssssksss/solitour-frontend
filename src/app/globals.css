@@ -15,7 +15,7 @@
     from 180deg at 50% 50%,
     var(--tw-gradient-stops)
   );
-  --background-image-search-icon: url("/common/search-icon.png");
+  --background-image-search-icon: url("/icons/search-icon.svg");
 
   --animate-banner-image: bannerImage 1.8s ease-in-out infinite;
   --animate-card-flip: cardFlip 0.5s linear;
@@ -164,6 +164,10 @@
       )
       rgb(var(--background-start-rgb));
   }
+}
+
+button {
+  cursor: pointer;
 }
 
 /* width */

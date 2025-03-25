@@ -25,7 +25,7 @@ export const GatheringBookmark = ({
 
   return (
     <button
-      className="relative h-7 w-5 cursor-pointer hover:scale-105"
+      className="relative h-7 w-5 hover:scale-105"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();

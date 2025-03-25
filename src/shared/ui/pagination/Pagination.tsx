@@ -36,7 +36,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
       )}
       {currentPage > 1 ? (
         <button onClick={() => pageHandler(currentPage - 1)}>
-          <IoIosArrowBack className="hover:text-main cursor-pointer" />
+          <IoIosArrowBack className="hover:text-main" />
         </button>
       ) : (
         <div className="aspect-square w-[0.875rem]" />
@@ -57,7 +57,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
           key={pageNumber}
           className={[
             `${pageNumber === currentPage ? "bg-main text-white" : ""}`,
-            "hover:text-main flex h-6 w-6 cursor-pointer items-center justify-center rounded-full",
+            "hover:text-main flex h-6 w-6 items-center justify-center rounded-full",
           ].join(" ")}
           onClick={() => pageHandler(pageNumber)}
         >
@@ -77,7 +77,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
       )}
       {currentPage < totalPages ? (
         <button onClick={() => pageHandler(currentPage + 1)}>
-          <IoIosArrowForward className="hover:text-main cursor-pointer" />
+          <IoIosArrowForward className="hover:text-main" />
         </button>
       ) : (
         <div className="aspect-square w-[0.875rem]"> </div>

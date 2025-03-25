@@ -10,19 +10,16 @@ import { useDragScroll } from "@/shared/lib/hooks";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { Hashtag } from "@/shared/ui/hashtag";
 import { InformationCategoryModal } from "./InformationCategoryModal";
-import { InformationPlaceModal } from "./InformationPlaceModal";
 import { InformationImageUploadItem } from "./InformationImageUploadItem";
 import { useInformationEditorStore } from "../model/informationEditorStore";
+import { InformationEditorPlace } from "./InformationEditorPlace";
 
 interface InformationEditorProps {
   text: "등록" | "수정";
   loading: boolean;
-  locationModalVisible: boolean;
   categoryModalVisible: boolean;
   inputTagRef: React.RefObject<HTMLInputElement | null>;
   inputTipRef: React.RefObject<HTMLInputElement | null>;
-  openLocationModal: () => void;
-  closeLocationModal: () => void;
   openCategoryModal: () => void;
   closeCategoryModal: () => void;
   handleHashTagChange: (e: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -33,12 +30,9 @@ interface InformationEditorProps {
 export const InformationEditor = ({
   text,
   loading,
-  locationModalVisible,
   categoryModalVisible,
   inputTagRef,
   inputTipRef,
-  openLocationModal,
-  closeLocationModal,
   openCategoryModal,
   closeCategoryModal,
   handleHashTagChange,
@@ -59,9 +53,6 @@ export const InformationEditor = ({
 
   return (
     <div className="flex w-full flex-col">
-      {locationModalVisible && (
-        <InformationPlaceModal closeModal={closeLocationModal} />
-      )}
       {categoryModalVisible && (
         <InformationCategoryModal closeModal={closeCategoryModal} />
       )}
@@ -96,25 +87,7 @@ export const InformationEditor = ({
         )}
       </div>
       <div className="mt-10 flex flex-row items-center gap-40 max-[1024px]:gap-10 max-[744px]:flex-col max-[744px]:items-start">
-        <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
-          <h2 className="w-[2.625rem] text-lg font-semibold text-nowrap text-black">
-            장소<span className="text-main">*</span>
-          </h2>
-          <button
-            className={`${formContext.getValues("placeName") !== "" ? "text-black" : "text-gray2"} ${formContext.formState.errors.placeName ? "border-red-500" : "border-gray3 hover:border-main"} h-full grow rounded-full border bg-transparent pl-5 text-start text-sm font-medium outline-hidden`}
-            type="button"
-            onClick={openLocationModal}
-          >
-            {formContext.getValues("placeName") !== ""
-              ? formContext.getValues("placeName")
-              : "장소명을 입력하세요."}
-          </button>
-          {formContext.formState.errors.placeName && (
-            <p className="absolute -bottom-6 left-16 mt-1 text-xs text-red-500">
-              {formContext.formState.errors.placeName.message as String}
-            </p>
-          )}
-        </div>
+        <InformationEditorPlace />
         <button
           className={`${formContext.formState.errors.categoryId ? "border-red-500" : "border-gray3 hover:border-main"} relative flex h-[3.3125rem] grow flex-row items-center justify-between gap-1 rounded-full border px-7 py-3 text-lg font-semibold`}
           type="button"

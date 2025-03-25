@@ -2,15 +2,15 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useModalState, useOutsideClick } from "@/shared/lib/hooks";
+import { useModal, useOutsideClick } from "@/shared/lib/hooks";
 import { useUserStore } from "@/entities/user";
 
 export const useFloatingButton = () => {
   const [visible, setVisible] = useState(false);
   const outside = useRef<HTMLDivElement>(null);
   const userStore = useUserStore();
-  const modalState = useModalState();
   const router = useRouter();
+  const { isOpen, openModal, closeModal } = useModal();
 
   const handleWriteButtonClick = () => {
     setVisible(!visible);
@@ -20,7 +20,7 @@ export const useFloatingButton = () => {
     handleWriteButtonClick();
     if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
       e.preventDefault();
-      modalState.openModal();
+      openModal();
     }
     if (userStore.id < 1) {
       e.preventDefault();
@@ -39,7 +39,8 @@ export const useFloatingButton = () => {
   return {
     outside,
     visible,
-    modalState,
+    isOpen,
+    closeModal,
     handleScrollToTop,
     handleWriteButtonClick,
     handleGatheringClick,
