@@ -16,7 +16,7 @@ export const InformationEditorCategoryList = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex grow">
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <InformationCategoryListModal closeModal={closeModal} />
       </Modal>
@@ -33,8 +33,8 @@ export const InformationEditorCategoryList = () => {
         {formContext.getValues("categoryId") !== 0 ? (
           formContext.getValues("categoryName")
         ) : (
-          <p className="flex flex-row items-center">
-            {"카테고리 선택"}
+          <p>
+            카테고리 선택
             <span className="text-main">*</span>
           </p>
         )}

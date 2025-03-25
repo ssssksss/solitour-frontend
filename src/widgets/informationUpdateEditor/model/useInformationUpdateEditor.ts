@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,10 +12,8 @@ import {
   InformationUpdateRequest,
   updateInformation,
 } from "@/entities/information";
-import {
-  InformationUpdateFormSchema,
-  useInformationEditorStore,
-} from "@/features/informationEditor";
+import { useInformationEditorStore } from "@/features/informationEditor";
+import { InformationUpdateFormSchema } from "./InformationUpdateFormSchema";
 
 export const useInformationUpdateEditor = (
   informationId: number,
@@ -24,8 +22,6 @@ export const useInformationUpdateEditor = (
   const { id } = useUserStore();
   const { imageList, mainImageIndex, initialize, setInformationEditorState } =
     useInformationEditorStore();
-  const inputTagRef = useRef<HTMLInputElement>(null);
-  const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
@@ -76,38 +72,6 @@ export const useInformationUpdateEditor = (
     },
     mode: "onChange",
   });
-
-  const handleHashTagChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      const hashtag = inputTagRef.current?.value.trim() ?? "";
-      if (hashtag.length < 2) {
-        return;
-      }
-
-      const hashtags = methods.getValues("hashtags");
-      if (!hashtags.includes(hashtag)) {
-        hashtags.push(hashtag);
-      }
-      methods.setValue("hashtags", hashtags);
-      methods.trigger("hashtags");
-      (inputTagRef.current as HTMLInputElement).value = "";
-    }
-  };
-
-  const handleTipChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      const tip = inputTipRef.current?.value.trim() ?? "";
-      if (tip === "") {
-        return;
-      }
-
-      const tips = methods.getValues("tips");
-      tips.push(tip);
-      methods.setValue("tips", tips);
-      methods.trigger("tips");
-      (inputTipRef.current as HTMLInputElement).value = "";
-    }
-  };
 
   const handleSubmit = async () => {
     if (imageList.filter((image) => image !== "").length === 0) {
@@ -299,10 +263,6 @@ export const useInformationUpdateEditor = (
   return {
     methods,
     loading,
-    inputTagRef,
-    inputTipRef,
-    handleHashTagChange,
-    handleTipChange,
     handleSubmit,
   };
 };

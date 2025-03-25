@@ -73,7 +73,7 @@ export const GatheringEditor = ({
                 {`${text} 중...`}
               </div>
             ) : (
-              <p>{`모임 ${text}하기`}</p>
+              <p>{`${text}하기`}</p>
             )}
           </button>
         </div>

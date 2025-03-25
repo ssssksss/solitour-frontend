@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,16 +11,12 @@ import {
   createInformation,
   InformationCreateRequest,
 } from "@/entities/information";
-import {
-  InformationCreateFormSchema,
-  useInformationEditorStore,
-} from "@/features/informationEditor";
+import { useInformationEditorStore } from "@/features/informationEditor";
+import { InformationCreateFormSchema } from "./InformationCreateFormSchema";
 
 export const useInformationCreateEditor = () => {
   const { id } = useUserStore();
   const { imageList, mainImageIndex, initialize } = useInformationEditorStore();
-  const inputTagRef = useRef<HTMLInputElement>(null);
-  const inputTipRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -63,38 +59,6 @@ export const useInformationCreateEditor = () => {
     },
     mode: "onChange",
   });
-
-  const handleHashTagChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      const hashtag = inputTagRef.current?.value.trim() ?? "";
-      if (hashtag.length < 2) {
-        return;
-      }
-
-      const hashtags = methods.getValues("hashtags");
-      if (!hashtags.includes(hashtag)) {
-        hashtags.push(hashtag);
-      }
-      methods.setValue("hashtags", hashtags);
-      methods.trigger("hashtags");
-      (inputTagRef.current as HTMLInputElement).value = "";
-    }
-  };
-
-  const handleTipChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      const tip = inputTipRef.current?.value.trim() ?? "";
-      if (tip === "") {
-        return;
-      }
-
-      const tips = methods.getValues("tips");
-      tips.push(tip);
-      methods.setValue("tips", tips);
-      methods.trigger("tips");
-      (inputTipRef.current as HTMLInputElement).value = "";
-    }
-  };
 
   const handleSubmit = async () => {
     if (imageList.filter((image) => image !== "").length === 0) {
@@ -193,10 +157,6 @@ export const useInformationCreateEditor = () => {
   return {
     methods,
     loading,
-    inputTagRef,
-    inputTipRef,
-    handleHashTagChange,
-    handleTipChange,
     handleSubmit,
   };
 };

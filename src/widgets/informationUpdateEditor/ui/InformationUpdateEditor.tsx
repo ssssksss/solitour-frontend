@@ -14,25 +14,16 @@ export const InformationUpdateEditor = ({
   informationId,
   data,
 }: InformationUpdateEditorProps) => {
-  const {
-    methods,
-    loading,
-    inputTagRef,
-    inputTipRef,
-    handleHashTagChange,
-    handleTipChange,
-    handleSubmit,
-  } = useInformationUpdateEditor(informationId, data);
+  const { methods, loading, handleSubmit } = useInformationUpdateEditor(
+    informationId,
+    data,
+  );
 
   return (
     <FormProvider {...methods}>
       <InformationEditor
         text="수정"
         loading={loading}
-        inputTagRef={inputTagRef}
-        inputTipRef={inputTipRef}
-        handleHashTagChange={handleHashTagChange}
-        handleTipChange={handleTipChange}
         handleSubmit={handleSubmit}
       />
     </FormProvider>

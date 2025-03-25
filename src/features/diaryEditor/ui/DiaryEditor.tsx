@@ -186,7 +186,7 @@ export const DiaryEditor = ({
             <p>{`${text} 중...`}</p>
           </div>
         ) : (
-          <p>{`일기 ${text}하기`}</p>
+          <p>{`${text}하기`}</p>
         )}
       </button>
     </div>

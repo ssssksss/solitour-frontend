@@ -22,7 +22,7 @@ export const InformationEditorPlace = () => {
   };
 
   return (
-    <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-[0.625rem] max-[744px]:w-full">
+    <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-2.5 max-[744px]:w-full">
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <InformationPlaceModal closeModal={closeModal} />
       </Modal>
