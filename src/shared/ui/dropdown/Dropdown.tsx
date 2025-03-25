@@ -60,33 +60,32 @@ export const Dropdown = <T,>({
 
   return (
     <div
-      className={`relative flex ${dropdownContainerStyle?.h || ""} h-full shrink-0 items-center ${dropdownContainerStyle?.w || ""} text-left`}
+      className={[
+        dropdownContainerStyle?.w,
+        dropdownContainerStyle?.h,
+        "relative flex h-full shrink-0 items-center text-left",
+      ].join(" ")}
       ref={ref}
     >
       <button
+        className={[
+          dropdownContainerStyle?.style,
+          "hover:text-main inline-flex items-center gap-x-2 text-sm font-medium text-gray-700 focus:outline-hidden",
+        ].join(" ")}
         onClick={toggleDropdown}
-        className={`inline-flex items-center gap-x-2 ${dropdownContainerStyle?.style || ""} hover:text-main text-sm font-medium text-gray-700 focus:outline-hidden`}
       >
         <div className="min-w-fit">
           {options.filter((i) => i.value == selectedOption)[0].name}
         </div>
-        {isOpen ? (
-          <Image
-            src="/icons/dropdown-down-arrow.svg"
-            className="translate-y-[50%] rotate-180"
-            alt="dropdown-down-arrow"
-            width={8}
-            height={4}
-          />
-        ) : (
-          <Image
-            src="/icons/dropdown-down-arrow.svg"
-            className="translate-y-[25%]"
-            alt="dropdown-down-arrow"
-            width={8}
-            height={4}
-          />
-        )}
+        <Image
+          className={
+            isOpen ? "translate-y-[50%] rotate-180" : "translate-y-1/4"
+          }
+          src="/icons/dropdown-down-arrow.svg"
+          alt="dropdown-down-arrow"
+          width={8}
+          height={4}
+        />
       </button>
       {isOpen &&
         (isOnRightSide ? (

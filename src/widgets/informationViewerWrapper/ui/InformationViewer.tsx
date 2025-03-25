@@ -8,7 +8,7 @@ import { RecommendationList } from "./RecommendationList";
 import { KakaoMapLink } from "./KakaoMapLink";
 import { InformationViewerButtonList } from "./InformationViewerButtonList";
 import { ImageList } from "./ImageList";
-import { InformationLikeCount } from "./InformationLikeCount";
+import { InformationLike } from "@/features/informationLike";
 
 interface InformationViewerProps {
   informationId: number;
@@ -44,7 +44,7 @@ export const InformationViewer = async ({
                 </div>
               </div>
               <div className="flex flex-row items-center gap-3">
-                <InformationLikeCount
+                <InformationLike
                   informationId={informationId}
                   initialLikeCount={data.likeCount}
                   initialIsLike={data.isLike}
@@ -83,7 +83,7 @@ export const InformationViewer = async ({
                   </div>
                 </div>
                 <div className="flex flex-row items-center gap-3">
-                  <InformationLikeCount
+                  <InformationLike
                     informationId={informationId}
                     initialLikeCount={data.likeCount}
                     initialIsLike={data.isLike}

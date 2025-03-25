@@ -4,17 +4,17 @@ import { HeartIcon } from "@/shared/ui/icon";
 import { useInformationLikeCount } from "../model/useInformationLikeCount";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
 
-interface InformationLikeCountProps {
+interface InformationLikeProps {
   informationId: number;
   initialLikeCount: number;
   initialIsLike: boolean;
 }
 
-export const InformationLikeCount = ({
+export const InformationLike = ({
   informationId,
   initialLikeCount,
   initialIsLike,
-}: InformationLikeCountProps) => {
+}: InformationLikeProps) => {
   const { clickable, likeCount, isLike, handleLikeClick } =
     useInformationLikeCount(informationId, initialLikeCount, initialIsLike);
 
