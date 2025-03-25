@@ -1,9 +1,10 @@
 "use client";
 
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
+import { uploadImage } from "@/shared/api";
 import { useRef } from "react";
 import { useInformationEditorStore } from "./informationEditorStore";
+import { useToastifyStore } from "@/shared/model";
 
 export const useImageUploadItem = (imageIndex: number) => {
   const imageRef = useRef<HTMLInputElement>(null);
@@ -15,7 +16,7 @@ export const useImageUploadItem = (imageIndex: number) => {
     changeImage,
     addImage,
   } = useInformationEditorStore();
-  const userStore = useUserStore();
+  const { setToastifyState } = useToastifyStore();
 
   const handleUploadItemClick = () => {
     imageRef.current?.click();
@@ -30,33 +31,26 @@ export const useImageUploadItem = (imageIndex: number) => {
       const file = imageRef.current.files[0];
 
       if (file.size > 10485760) {
-        alert("사진 용량이 10MB를 초과합니다.");
+        setToastifyState({
+          type: "warning",
+          message: "사진 용량이 10MB를 초과합니다.",
+        });
         return;
       }
 
-      const formData = new FormData();
-      formData.append("id", userStore.id.toString());
-      formData.append("image", file);
-      formData.append("type", "INFORMATION");
-
-      setInformationEditorState({ imageLoading: true });
-
-      const response = await fetchWithAuth("/api/image/upload", {
-        method: "POST",
-        body: formData,
-        cache: "no-store",
-      });
-
-      setInformationEditorState({ imageLoading: false });
-
-      if (!response.ok) {
-        alert("이미지 처리 중 오류가 발생하였습니다.");
-        throw new Error(response.statusText);
+      try {
+        setInformationEditorState({ imageLoading: true });
+        const response = await uploadImage(file, "INFORMATION");
+        changeImage(imageIndex, response.fileUrl);
+        addImage();
+      } catch (error) {
+        setToastifyState({
+          type: "error",
+          message: "이미지 업로드에 실패했습니다.",
+        });
+      } finally {
+        setInformationEditorState({ imageLoading: false });
       }
-
-      const result: { fileUrl: string } = await response.json();
-      changeImage(imageIndex, result.fileUrl);
-      addImage();
     }
   };
 

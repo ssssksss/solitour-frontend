@@ -5,62 +5,55 @@ import { useFormContext } from "react-hook-form";
 import ReactQuill, { Quill } from "react-quill-new";
 import { ImageResize } from "quill-image-resize-module-ts";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
-import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
+import { uploadImage } from "@/shared/api";
+import { useToastifyStore } from "@/shared/model";
 
 export const useQuillEditor = () => {
-  const userStore = useUserStore();
   const quillRef = useRef<ReactQuill>(null);
-  const [loading, setLoading] = useState(false);
   const formContext = useFormContext();
+  const { setToastifyState } = useToastifyStore();
+  const [loading, setLoading] = useState(false);
 
   const handleContentChange = (value: string) => {
     formContext.setValue("contents", value);
     formContext.trigger("contents");
   };
 
-  const uploadImage = async (file: File) => {
-    const formData = new FormData();
-    formData.append("id", userStore.id.toString());
-    formData.append("image", file);
-    formData.append("type", "DIARY");
+  const handleImageUpload = async (file: File) => {
+    try {
+      setLoading(true);
+      const response = await uploadImage(file, "DIARY");
 
-    setLoading(true);
+      const Image: any = Quill.import("formats/image");
+      Image.sanitize = (url: string) => url;
 
-    const response = await fetchWithAuth("/api/image/upload", {
-      method: "POST",
-      body: formData,
-      cache: "no-store",
-    });
+      const editor = quillRef.current!.getEditor();
+      const range = editor.getSelection();
 
-    setLoading(false);
+      if (range) {
+        editor.insertEmbed(range.index, "image", response.fileUrl);
+        editor.setSelection(range.index + 1, 1);
 
-    if (!response.ok) {
-      alert("이미지 처리 중 오류가 발생하였습니다.");
-      throw new Error(response.statusText);
-    }
-
-    const result: { fileUrl: string } = await response.json();
-    const url = result.fileUrl;
-
-    const Image: any = Quill.import("formats/image");
-    Image.sanitize = (url: string) => url;
-
-    const editor = quillRef.current!.getEditor();
-    const range = editor.getSelection();
-
-    if (range) {
-      editor.insertEmbed(range.index, "image", url);
-      editor.setSelection(range.index + 1, 1);
-
-      // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout을 사용합니다.
-      setTimeout(() => {
-        const imageElement = document.querySelector(`img[src="${url}"]`);
-        if (imageElement) {
-          (imageElement as HTMLElement).style.borderRadius = "1rem";
-          handleContentChange(quillRef.current!.getEditorContents().toString());
-        }
-      }, 100);
+        // 이미지가 DOM에 추가된 후 이미지에 스타일을 적용하기 위해 setTimeout을 사용합니다.
+        setTimeout(() => {
+          const imageElement = document.querySelector(
+            `img[src="${response.fileUrl}"]`,
+          );
+          if (imageElement) {
+            (imageElement as HTMLElement).style.borderRadius = "1rem";
+            handleContentChange(
+              quillRef.current!.getEditorContents().toString(),
+            );
+          }
+        }, 100);
+      }
+    } catch (error) {
+      setToastifyState({
+        type: "error",
+        message: "이미지 업로드에 실패했습니다.",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,7 +70,7 @@ export const useQuillEditor = () => {
     input.addEventListener("change", () => {
       if (input.files && quillRef.current) {
         const file = input.files[0];
-        uploadImage(file);
+        handleImageUpload(file);
       }
     });
   };
@@ -101,7 +94,7 @@ export const useQuillEditor = () => {
   ) => {
     const file = imageData.toFile();
     if (file && quillRef.current) {
-      uploadImage(file);
+      handleImageUpload(file);
     }
   };
 
