@@ -1,12 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export const useInformationFilterModal = (closeModal: () => void) => {
   const searchParams = useSearchParams();
   const [place, setPlace] = useState<string | null>(searchParams.get("place"));
-  const router = useRouter();
 
   const handleClick = () => {
     const url = new URL(window.location.href);
@@ -18,7 +17,7 @@ export const useInformationFilterModal = (closeModal: () => void) => {
       url.searchParams.delete("place");
     }
 
-    router.push(url.href, { scroll: false });
+    window.history.pushState(null, "", url.toString());
     closeModal();
   };
 
