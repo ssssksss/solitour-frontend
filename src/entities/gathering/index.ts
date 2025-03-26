@@ -1,4 +1,8 @@
-export { getGathering } from "./api/gathering";
+export {
+  type GatheringCreateRequest,
+  getGathering,
+  createGathering,
+} from "./api/gathering";
 export {
   type GatheringCategory,
   getGatheringCategoryList,
