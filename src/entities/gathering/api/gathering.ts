@@ -28,6 +28,30 @@ export interface GatheringCreateRequest {
   tagRegisterRequests: { name: string }[];
 }
 
+export interface GatheringUpdateRequest {
+  title: string;
+  content: string;
+  startAge: number;
+  endAge: number;
+  personCount: number;
+  deadline: string;
+  scheduleStartDate: string;
+  scheduleEndDate: string;
+  openChattingUrl: string;
+  placeModifyRequest: {
+    searchId: string;
+    name: string;
+    xAxis: number;
+    yAxis: number;
+    address: string;
+  };
+  allowedSex: string;
+  gatheringCategoryId: number;
+  zoneCategoryNameParent: string;
+  zoneCategoryNameChild: string;
+  tagRegisterRequests: { name: string }[];
+}
+
 export async function getGathering(gatheringId: number) {
   const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
@@ -66,4 +90,27 @@ export async function createGathering(data: GatheringCreateRequest) {
   }
 
   return response.json() as Promise<{ data: { id: number } }>;
+}
+
+export async function updateGathering(
+  gatheringId: number,
+  data: GatheringUpdateRequest,
+) {
+  const accessToken = (await cookies()).get("access_token");
+  const response = await fetchWithAuth(
+    `${process.env.BACKEND_URL}/api/gatherings/${gatheringId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update data.");
+  }
 }

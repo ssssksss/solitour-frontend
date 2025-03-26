@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 export const useGatheringCreateEditor = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const toastifyStore = useToastifyStore();
+  const { setToastifyState } = useToastifyStore();
   const methods = useForm({
     resolver: zodResolver(GatheringFormSchema),
     defaultValues: {
@@ -77,7 +77,7 @@ export const useGatheringCreateEditor = () => {
       const result = await createGathering(data);
       router.replace(`/gathering/${result.data.id}`);
     } catch (error) {
-      toastifyStore.setToastifyState({
+      setToastifyState({
         type: "error",
         message: "모임 생성 중에 에러가 발생했습니다.",
       });

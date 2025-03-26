@@ -32,7 +32,7 @@ export const useGatheringList = () => {
   useEffect(() => {
     (async () => {
       const url = new URL(window.location.href);
-      const page = Number(url.searchParams.get("page"));
+      const page = Number(searchParams.get("page"));
 
       if (page < 1 || !Number.isSafeInteger(page)) {
         return;

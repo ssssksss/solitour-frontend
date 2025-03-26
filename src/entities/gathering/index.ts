@@ -1,7 +1,9 @@
 export {
   type GatheringCreateRequest,
+  type GatheringUpdateRequest,
   getGathering,
   createGathering,
+  updateGathering,
 } from "./api/gathering";
 export {
   type GatheringCategory,
