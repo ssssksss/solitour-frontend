@@ -1,26 +1,31 @@
-import { getInformationCategoryList } from "@/entities/information";
+"use client";
+
+import { InformationCategory } from "@/entities/information";
 import { InformationParentCategoryList } from "./InformationParentCategoryList";
 import { InformationChildCategoryList } from "./InformationChildCategoryList";
 import { InformationSearch } from "@/features/informationSearch";
 import { InformationFilter } from "@/features/informationFilter";
 import { InformationSort } from "@/features/informationSort";
+import { use } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface InformationCategoryListProps {
-  parentCategoryId: number;
-  childCategoryId: number;
+  informationCategoryListPromise: Promise<InformationCategory[]>;
 }
 
-export const InformationCategoryList = async ({
-  parentCategoryId,
-  childCategoryId,
+export const InformationCategoryList = ({
+  informationCategoryListPromise,
 }: InformationCategoryListProps) => {
-  const informationCategoryList = await getInformationCategoryList();
+  const informationCategoryList = use(informationCategoryListPromise);
+  const searchParams = useSearchParams();
+  const parentCategoryId = Number(searchParams.get("parentCategoryId") ?? 0);
+  const childCategoryId = Number(searchParams.get("childCategoryId") ?? 0);
 
   return (
     <div className="mt-6 flex w-full flex-col gap-6">
       <InformationParentCategoryList
         informationCategoryList={informationCategoryList}
-        parentCategoryId={parentCategoryId}
+        parentCategoryId={Number(searchParams.get("parentCategoryId") ?? 0)}
       />
       <div className="flex flex-row items-center justify-between max-[1024px]:flex-col-reverse max-[1024px]:items-start max-[1024px]:space-y-6 max-[1024px]:space-y-reverse">
         <InformationChildCategoryList

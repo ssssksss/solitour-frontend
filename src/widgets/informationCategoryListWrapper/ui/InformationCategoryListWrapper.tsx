@@ -1,21 +1,15 @@
 import { Suspense } from "react";
 import { InformationCategoryList } from "./InformationCategoryList";
 import { InformationCategoryListSkeleton } from "./InformationCategoryListSkeleton";
+import { getInformationCategoryList } from "@/entities/information";
 
-interface InformationCategoryListWrapperProps {
-  parentCategoryId: number;
-  childCategoryId: number;
-}
+export const InformationCategoryListWrapper = () => {
+  const informationCategoryListPromise = getInformationCategoryList();
 
-export const InformationCategoryListWrapper = ({
-  parentCategoryId,
-  childCategoryId,
-}: InformationCategoryListWrapperProps) => {
   return (
     <Suspense fallback={<InformationCategoryListSkeleton />}>
       <InformationCategoryList
-        parentCategoryId={parentCategoryId}
-        childCategoryId={childCategoryId}
+        informationCategoryListPromise={informationCategoryListPromise}
       />
     </Suspense>
   );

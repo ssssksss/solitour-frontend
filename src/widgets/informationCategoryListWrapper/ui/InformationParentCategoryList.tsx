@@ -1,5 +1,7 @@
+"use client";
+
 import { InformationCategory } from "@/entities/information";
-import Link from "next/link";
+import { useInformationParentCategoryList } from "../model/useInformationParentCategoryList";
 
 interface InformationParentCategoryListProps {
   informationCategoryList: InformationCategory[];
@@ -10,24 +12,25 @@ export const InformationParentCategoryList = ({
   informationCategoryList,
   parentCategoryId,
 }: InformationParentCategoryListProps) => {
+  const { handleParentCategoryClick } = useInformationParentCategoryList();
+
   return (
-    <div className="mt-[5.5rem] flex w-full flex-row items-center justify-between border-b-[0.0625rem]">
+    <div className="mt-22 flex w-full flex-row items-center justify-between border-b">
       <nav className="w-fit">
         <ul className="flex flex-row items-center gap-9">
           {informationCategoryList.map((informationCategory) => (
-            <Link
+            <button
               key={informationCategory.id}
               className={[
                 informationCategory.id === parentCategoryId
                   ? "border-main text-main border-b-2 font-bold"
                   : "text-gray1",
-                "hover:text-main pb-[0.375rem]",
+                "hover:text-main pb-1.5",
               ].join(" ")}
-              href={`/informations/list?page=1&parentCategoryId=${informationCategory.id}`}
-              scroll={false}
+              onClick={() => handleParentCategoryClick(informationCategory.id)}
             >
               {informationCategory.name}
-            </Link>
+            </button>
           ))}
         </ul>
       </nav>
