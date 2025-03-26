@@ -5,10 +5,10 @@ export const MyPageHeader = async () => {
   const userInfo = await getUserInfo();
 
   return (
-    <div className="flex w-full max-w-[60rem] flex-col pt-[2.5rem]">
+    <div className="flex w-full max-w-240 flex-col pt-10">
       <h1 className="text-3xl font-bold">마이페이지</h1>
-      <article className="flex flex-col gap-[2.125rem] pt-[4.875rem] pb-[2.375rem]">
-        <div className="flex flex-row items-center gap-[1.875rem]">
+      <article className="flex flex-col gap-8.5 pt-[4.875rem] pb-[2.375rem]">
+        <div className="flex flex-row items-center gap-7.5">
           <div className="bg-lightgreen relative aspect-square w-[6.75rem] rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]">
             <UserImage
               userImageAddress={userInfo.userImage.address}

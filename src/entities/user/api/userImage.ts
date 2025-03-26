@@ -2,22 +2,19 @@
 
 import { fetchWithAuth } from "@/shared/api";
 import { cookies } from "next/headers";
-import { InformationList } from "../model/informationList";
 
-export async function getInformationList(urlSearch: string) {
+export async function deleteUserImage() {
   const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/informations${urlSearch}`,
+    `${process.env.BACKEND_URL}/api/users/profile`,
     {
-      method: "GET",
+      method: "DELETE",
       headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch data.");
+    throw new Error("Failed to delete data.");
   }
-
-  return response.json() as Promise<InformationList>;
 }

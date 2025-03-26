@@ -5,10 +5,10 @@ import { getInformation } from "@/entities/information";
 import { Hashtag } from "@/shared/ui/hashtag";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
 import { RecommendationList } from "./RecommendationList";
-import { KakaoMapLink } from "./KakaoMapLink";
 import { InformationViewerButtonList } from "./InformationViewerButtonList";
 import { ImageList } from "./ImageList";
 import { InformationLike } from "@/features/informationLike";
+import { KakaoMapLink } from "@/shared/ui/kakaoMapLink";
 
 interface InformationViewerProps {
   informationId: number;

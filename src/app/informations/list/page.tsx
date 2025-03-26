@@ -1,5 +1,5 @@
 import { InformationCategoryListWrapper } from "@/widgets/informationCategoryListWrapper";
-import { InformationListWrapper } from "@/widgets/informationListWrapper";
+import { InformationList } from "@/widgets/informationList";
 
 export default async function Page({
   searchParams,
@@ -7,10 +7,6 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const params = await searchParams;
-  const page = Number(params["page"]);
-  if (page <= 0 || !Number.isSafeInteger(page)) {
-    throw new Error("Invalid Page Number");
-  }
 
   const parentCategoryId = Number(params["parentCategoryId"]);
   if (parentCategoryId <= 0 || !Number.isSafeInteger(parentCategoryId)) {
@@ -28,15 +24,7 @@ export default async function Page({
         parentCategoryId={parentCategoryId}
         childCategoryId={childCategoryId}
       />
-      <InformationListWrapper
-        page={page}
-        parentCategoryId={parentCategoryId}
-        childCategoryId={childCategoryId}
-        place={params["place"]}
-        order={params["order"]}
-        tagName={params["tagName"]}
-        search={params["search"]}
-      />
+      <InformationList />
     </div>
   );
 }

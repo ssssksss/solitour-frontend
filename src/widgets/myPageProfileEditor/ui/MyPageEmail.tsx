@@ -10,7 +10,7 @@ export const MyPageEmail = ({ email }: MyPageEmailProps) => {
           <span className="text-lg font-semibold">이메일</span>
         </div>
         <input
-          className="h-[3.25rem] w-full rounded-[28px] bg-gray-100 pl-[2rem] outline -outline-offset-1 outline-[#E3E3E3]"
+          className="h-13 w-full rounded-[28px] bg-gray-100 pl-8 outline -outline-offset-1 outline-[#E3E3E3]"
           placeholder="이메일을 입력해주세요"
           disabled={true}
           defaultValue={email}

@@ -1,7 +1,7 @@
 "use client";
 
+import { useKakaoMapLink } from "@/shared/model";
 import { TiLocation } from "react-icons/ti";
-import { useKakaoMapLink } from "../model/useKakaoMapLink";
 
 interface KakaoMapLinkProps {
   placeName: string; // 장소명

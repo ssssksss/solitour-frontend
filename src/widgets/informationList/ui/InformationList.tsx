@@ -1,40 +1,22 @@
+"use client";
+
 import { LottieNotFound } from "@/shared/ui/lottie";
 import { Pagination } from "@/shared/ui/pagination";
-import { getInformationList, InformationItem } from "@/entities/information";
+import { InformationItem } from "@/entities/information";
 import { InformationBookmark } from "@/features/informationBookmark";
+import { useInformationList } from "../model/useInformationList";
+import { InformationListSkeleton } from "./InformationListSkeleton";
 
-interface InformationListProps {
-  page: number;
-  parentCategoryId: number;
-  childCategoryId: number;
-  place?: string;
-  order?: string;
-  tagName?: string;
-  search?: string;
-}
+export const InformationList = () => {
+  const { loading, currentPage, informationList } = useInformationList();
 
-export const InformationList = async ({
-  page,
-  parentCategoryId,
-  childCategoryId,
-  place,
-  order,
-  tagName,
-  search,
-}: InformationListProps) => {
-  const informationList = await getInformationList(
-    page,
-    parentCategoryId,
-    childCategoryId,
-    place,
-    order,
-    tagName,
-    search,
-  );
+  if (loading) {
+    return <InformationListSkeleton />;
+  }
 
   return (
     <div className="flex w-full flex-col">
-      {informationList.content.length > 0 ? (
+      {informationList && informationList.content.length > 0 ? (
         <div className="mt-6 flex flex-col">
           <div className="grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
             {informationList.content.map((value) => (
@@ -61,7 +43,7 @@ export const InformationList = async ({
             ))}
           </div>
           <Pagination
-            currentPage={page}
+            currentPage={currentPage}
             totalPages={informationList.page.totalPages}
           />
         </div>

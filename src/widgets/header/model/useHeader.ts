@@ -31,11 +31,6 @@ export const useHeader = () => {
   usePreventBodyScroll(visible);
 
   useEffect(() => {
-    // 모달창이 열린 상태로 새로고침을 하게되는 경우 히스토리 스택을 제거하기 위해서 뒤로가기 실행
-    if (localStorage.getItem("isModal")) {
-      history.back();
-      localStorage.removeItem("isModal");
-    }
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);

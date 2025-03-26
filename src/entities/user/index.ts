@@ -1,4 +1,5 @@
 export { signIn } from "./api/signIn";
+export { deleteUserImage } from "./api/userImage";
 export { getUserInfo } from "./api/userInfo";
 
 export { AGE_RANGE } from "./config/ageRange";

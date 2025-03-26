@@ -8,13 +8,13 @@ export const SupportAbout = () => {
   return (
     <div className="mt-10 flex w-full flex-col">
       <SupportAboutBanner />
-      <div className="h-[35rem]" />
+      <div className="h-140" />
       <SupportAboutInformation />
-      <div className="h-[31.75rem]" />
+      <div className="h-127" />
       <SupportAboutGathering />
-      <div className="h-[31.75rem]" />
+      <div className="h-127" />
       <SupportAboutDiary />
-      <div className="h-[31.75rem]" />
+      <div className="h-127" />
     </div>
   );
 };

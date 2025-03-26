@@ -18,7 +18,7 @@ export const MyPageUserImage = ({
   const {
     imageUrl,
     imageBase64Data,
-    modalState,
+    isOpen,
     onDragEnter,
     onDragLeave,
     onDragOver,
@@ -69,7 +69,7 @@ export const MyPageUserImage = ({
           />
         </label>
       </div>
-      <Modal modalState={modalState}>
+      <Modal isOpen={isOpen} closeModal={closeCropModal}>
         <CropperComponent
           imageBase64Data={imageBase64Data}
           closeCropModal={closeCropModal}

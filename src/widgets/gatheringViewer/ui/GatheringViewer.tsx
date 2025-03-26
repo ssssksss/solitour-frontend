@@ -10,9 +10,9 @@ import { convertNumberToShortForm } from "@/shared/lib/utils";
 import { GatheringSupportManagement } from "./GatheringSupportManagement";
 import { GatheringApplicantList } from "./GatheringApplicantList";
 import { GatheringLike } from "@/features/gatheringLike";
-import { GatheringKakaoMap } from "./GatheringKakaoMap";
 import { GatheringRecommendationList } from "./GatheringRecommendationList";
 import { GatheringDetail } from "@/entities/gathering";
+import { KakaoMapLink } from "@/shared/ui/kakaoMapLink";
 
 interface GatheringViewerProps {
   gatheringDetail: GatheringDetail;
@@ -203,7 +203,13 @@ export const GatheringViewer = ({
           </div>
         )}
         {/* 지도 부분 */}
-        <GatheringKakaoMap {...gatheringDetail.placeResponse} />
+        <KakaoMapLink
+          placeName={gatheringDetail.placeResponse.name}
+          placeAddress={gatheringDetail.placeResponse.address}
+          placeId={Number(gatheringDetail.placeResponse.searchId)}
+          placeYAxis={gatheringDetail.placeResponse.yaxis}
+          placeXAxis={gatheringDetail.placeResponse.xaxis}
+        />
         <GatheringApplicantList
           postUserId={gatheringDetail.userPostingResponse.id}
         />
