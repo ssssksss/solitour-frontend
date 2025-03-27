@@ -7,10 +7,11 @@ import { ImageResize } from "quill-image-resize-module-ts";
 import ImageDropAndPaste, { ImageData } from "quill-image-drop-and-paste";
 import { uploadImage } from "@/shared/api";
 import { useToastifyStore } from "@/shared/model";
+import { DiaryForm } from "./diaryForm";
 
 export const useQuillEditor = () => {
   const quillRef = useRef<ReactQuill>(null);
-  const formContext = useFormContext();
+  const formContext = useFormContext<DiaryForm>();
   const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
 
@@ -145,6 +146,5 @@ export const useQuillEditor = () => {
     loading,
     quillRef,
     modules,
-    content: formContext.getValues("content"),
   };
 };

@@ -1,9 +1,10 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { DiaryForm } from "../model/diaryForm";
 
 export const DiaryEditorTitle = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<DiaryForm>();
 
   return (
     <div className="relative flex h-[3.3125rem] flex-row items-center gap-2.5">

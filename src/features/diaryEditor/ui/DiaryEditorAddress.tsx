@@ -4,9 +4,10 @@ import { useModal } from "@/shared/lib/hooks";
 import { useFormContext } from "react-hook-form";
 import { DiaryAddressModal } from "./DiaryAddressModal";
 import { Modal } from "@/shared/ui/modal";
+import { DiaryForm } from "../model/diaryForm";
 
 export const DiaryEditorAddress = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<DiaryForm>();
   const { isOpen, openModal, closeModal } = useModal();
 
   return (

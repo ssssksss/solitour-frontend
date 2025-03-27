@@ -12,22 +12,14 @@ import {
   FEELING_STATUS,
 } from "@/entities/diary";
 import { SANITIZE_OPTION } from "@/shared/config";
-import { DiaryFormSchema } from "@/features/diaryEditor";
+import { DiaryForm, DiaryFormSchema } from "@/features/diaryEditor";
 import { useToastifyStore } from "@/shared/model";
 
 export const useDiaryCreateEditor = () => {
   const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const methods = useForm<{
-    title: string;
-    startDate: Date | null;
-    endDate: Date | null;
-    address: string;
-    image: string;
-    moodLevels: number;
-    contents: string;
-  }>({
+  const methods = useForm<DiaryForm>({
     resolver: zodResolver(DiaryFormSchema),
     defaultValues: {
       title: "",

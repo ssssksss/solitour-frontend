@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
+import { DiaryForm } from "../model/diaryForm";
 
 export const DiaryEditorMoodLevel = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<DiaryForm>();
 
   return (
     <div

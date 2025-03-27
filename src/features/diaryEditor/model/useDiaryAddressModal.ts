@@ -3,9 +3,10 @@
 import { useDebounce } from "@/shared/lib/hooks";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { DiaryForm } from "./diaryForm";
 
 export const useDiaryAddressModal = (closeModal: () => void) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<DiaryForm>();
   const [flag, setFlag] = useState(true);
 
   // 장소 검색 객체 (place search)

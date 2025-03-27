@@ -5,9 +5,10 @@ import { Modal } from "@/shared/ui/modal";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import { DiaryDateModal } from "./DiaryDateModal";
+import { DiaryForm } from "../model/diaryForm";
 
 export const DiaryEditorDate = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<DiaryForm>();
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
@@ -34,7 +35,7 @@ export const DiaryEditorDate = () => {
           formContext.getValues("startDate") !== null &&
           formContext.getValues("endDate") !== null ? (
             <p>
-              {formContext.getValues("startDate").toLocaleDateString("ko-KR")}
+              {formContext.getValues("startDate")?.toLocaleDateString("ko-KR")}
             </p>
           ) : (
             <div className="flex flex-row items-center gap-2">

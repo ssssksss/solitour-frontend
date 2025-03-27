@@ -8,7 +8,7 @@ import {
   FEELING_STATUS,
   updateDiary,
 } from "@/entities/diary";
-import { DiaryFormSchema } from "@/features/diaryEditor";
+import { DiaryForm, DiaryFormSchema } from "@/features/diaryEditor";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -22,15 +22,7 @@ export const useDiaryUpdateEditor = (diary: Diary) => {
   const [loading, setLoading] = useState(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
-  const methods = useForm<{
-    title: string;
-    startDate: Date | null;
-    endDate: Date | null;
-    address: string;
-    image: string;
-    moodLevels: number;
-    contents: string;
-  }>({
+  const methods = useForm<DiaryForm>({
     resolver: zodResolver(DiaryFormSchema),
     defaultValues: {
       title: "",
