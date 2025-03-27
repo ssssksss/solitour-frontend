@@ -17,8 +17,8 @@ export const ModalTemplate = ({
   return (
     <section
       className={[
-        `${className}`,
         "scrollbar-hide relative flex max-h-[calc(100vh-1rem)] flex-col items-center overflow-y-scroll rounded-2xl bg-white pt-16",
+        `${className}`,
       ].join(" ")}
     >
       <MdClose

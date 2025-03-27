@@ -26,7 +26,7 @@ export const DiaryAddressModal = ({ closeModal }: DiaryAddressModalProps) => {
       className="h-fit max-h-[calc(100%_-_48px)] w-[39.75rem] p-6 max-[744px]:w-[calc(100%_-_48px)]"
       closeModal={handleAddressReset}
     >
-      <div className="flex flex-col gap-8 px-5">
+      <div className="flex w-full flex-col gap-8 px-5">
         <div className="flex flex-col gap-2">
           <h3 className="text-lg font-medium text-black">장소 선택</h3>
           <div className="flex h-11 flex-row items-center border text-sm">
@@ -49,7 +49,7 @@ export const DiaryAddressModal = ({ closeModal }: DiaryAddressModalProps) => {
         {flag ? (
           <div className="flex w-full flex-col gap-2">
             <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
-            <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
+            <div className="flex h-80 flex-col rounded-3xl border-r border-b border-l">
               <input
                 className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
                 type="text"
@@ -62,7 +62,7 @@ export const DiaryAddressModal = ({ closeModal }: DiaryAddressModalProps) => {
                 {placeInfos?.map((placeInfo, index) => (
                   <button
                     key={index}
-                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    className="flex w-full flex-col items-start gap-1 hover:bg-gray-100"
                     type="button"
                     onClick={() => handleAddressChange(placeInfo)}
                   >
@@ -81,7 +81,7 @@ export const DiaryAddressModal = ({ closeModal }: DiaryAddressModalProps) => {
         ) : (
           <div className="flex w-full flex-col gap-2">
             <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
-            <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
+            <div className="flex h-80 flex-col rounded-3xl border-r border-b border-l">
               <input
                 className="bg-search-icon hover:border-main focus:border-main h-[3.3125rem] rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
                 type="text"

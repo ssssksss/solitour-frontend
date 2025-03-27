@@ -28,9 +28,9 @@ export const Dropdown = <T,>({
   dropdownOptionStyle,
   dropdownHandler,
 }: DropdownProps<T>) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<T>(defaultValue);
-  const ref = useRef<HTMLDivElement>(null);
   const [isOnRightSide, setIsOnRightSide] = useState(true);
 
   const toggleDropdown = () => {
@@ -90,21 +90,25 @@ export const Dropdown = <T,>({
       {isOpen &&
         (isOnRightSide ? (
           <div
-            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} text-gray1 flex-col items-center gap-1 bg-white/95 shadow-sm transition duration-200 ease-out`}
-            style={{
-              transform: dropdownOptionStyle?.transformX,
-            }}
+            className={[
+              dropdownOptionStyle?.z || "",
+              dropdownOptionStyle?.w || "",
+              dropdownOptionStyle?.style || "",
+              "text-gray1 absolute top-0 flex flex-col items-center gap-1 bg-white/95 shadow-sm transition duration-200 ease-out",
+            ].join(" ")}
+            style={{ transform: dropdownOptionStyle?.transformX }}
           >
             {options.map((i) => (
               <button
                 key={i.name}
+                className={[
+                  selectedOption === i.value ? "text-main bg-white" : "",
+                  "hover:text-main flex h-16 w-full items-center justify-center",
+                ].join(" ")}
                 onClick={() => {
                   dropdownHandler(i.value);
                   handleOptionClick(i.value);
                 }}
-                className={`hover:text-main flex h-16 w-full items-center justify-center ${
-                  selectedOption === i.value ? "text-main bg-white" : ""
-                }`}
                 role="menuitem"
               >
                 {i.name}
@@ -113,18 +117,24 @@ export const Dropdown = <T,>({
           </div>
         ) : (
           <div
-            className={`absolute top-0 ${dropdownOptionStyle?.z || ""} ${dropdownOptionStyle?.w || ""} flex ${dropdownOptionStyle?.style || ""} text-gray1 flex-col items-center gap-1 bg-white/95 shadow-sm transition duration-200 ease-out`}
+            className={[
+              dropdownOptionStyle?.z || "",
+              dropdownOptionStyle?.w || "",
+              dropdownOptionStyle?.style || "",
+              "text-gray1 absolute top-0 flex flex-col items-center gap-1 bg-white/95 shadow-sm transition duration-200 ease-out",
+            ].join(" ")}
           >
             {options.map((i) => (
               <button
                 key={i.name}
+                className={[
+                  selectedOption === i.value ? "text-main bg-white" : "",
+                  "hover:text-main flex h-16 w-full items-center justify-center",
+                ].join(" ")}
                 onClick={() => {
                   dropdownHandler(i.value);
                   handleOptionClick(i.value);
                 }}
-                className={`hover:text-main flex h-16 w-full items-center justify-center ${
-                  selectedOption === i.value ? "text-main bg-white" : ""
-                }`}
                 role="menuitem"
               >
                 {i.name}

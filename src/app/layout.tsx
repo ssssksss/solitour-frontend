@@ -1,7 +1,7 @@
 import "./globals.css";
+import "./reactDateRange.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import "./reactDateRange.css";
 import { ToastifyComponent } from "@/shared/ui/toast";
 import { FloatingButton } from "@/widgets/floatingButton";
 import { Footer } from "@/widgets/footer";

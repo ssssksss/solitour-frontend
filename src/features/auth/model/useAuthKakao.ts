@@ -57,12 +57,12 @@ export const useAuthKakao = () => {
         throw new Error("Failed to login");
       }
 
-      // TODO
       const userDataResponse = await fetch("/api/auth/user");
       if (userDataResponse.status == 200) {
         const userData = await userDataResponse.json();
         setUser(userData);
         router.push("/");
+        router.refresh();
       } else {
         throw new Error("Failed to fetch user data");
       }
@@ -97,6 +97,7 @@ export const useAuthKakao = () => {
         const userInfo = await getUserInfo();
         setUser(userInfo);
         router.push("/");
+        router.refresh();
       } catch (error) {
         router.push("/auth/signin");
       }

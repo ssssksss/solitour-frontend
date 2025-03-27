@@ -6,11 +6,12 @@ import { TiLocation } from "react-icons/ti";
 import sanitizeHtml from "sanitize-html";
 import { motion } from "motion/react";
 import { DeleteIcon, EditIcon } from "@/shared/ui/icon";
-import { DeleteModal } from "@/shared/ui/modal";
+import { DeleteModal, Modal } from "@/shared/ui/modal";
 import { SANITIZE_OPTION } from "@/shared/config";
 import { DiaryInfo, FEELING_STATUS } from "@/entities/diary";
 import { use } from "react";
 import { useDiaryViewer } from "../model/useDiaryViewer";
+import { useModal } from "@/shared/lib/hooks";
 
 interface DiaryViewerProps {
   diaryInfoPromise: Promise<DiaryInfo>;
@@ -20,18 +21,18 @@ export const DiaryViewer = ({
   diaryInfoPromise: diaryPromise,
 }: DiaryViewerProps) => {
   const diary = use(diaryPromise).diaryContentResponse;
-  const { modalVisible, loading, openModal, closeModal, handleDeleteClick } =
-    useDiaryViewer(diary.diaryId);
+  const { loading, handleDeleteClick } = useDiaryViewer(diary.diaryId);
+  const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <div className="flex w-full flex-col items-start">
-      {modalVisible && (
+      <Modal isOpen={isOpen} closeModal={closeModal}>
         <DeleteModal
           loading={loading}
           onDeleteClick={handleDeleteClick}
           onCancelClick={closeModal}
         />
-      )}
+      </Modal>
       <motion.div
         className="relative mt-[5.5rem] h-20 w-16"
         initial={{ opacity: 0 }}
