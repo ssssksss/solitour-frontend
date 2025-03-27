@@ -83,8 +83,7 @@ export const useDiaryCreateEditor = () => {
     setLoading(true);
 
     try {
-      const response = await createDiary(data);
-      const diaryId = await response.text();
+      const diaryId = await createDiary(data);
       router.push(`/diary/${diaryId}`);
       router.refresh();
     } catch (error) {

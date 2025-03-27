@@ -14,9 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useToastifyStore } from "@/shared/model";
 
 export const useDiaryUpdateEditor = (diary: Diary) => {
   const router = useRouter();
+  const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
@@ -92,18 +94,15 @@ export const useDiaryUpdateEditor = (diary: Diary) => {
       ],
     };
 
-    setLoading(true);
-
-    const response = await updateDiary(diary.diaryId, data);
-
-    if (!response.ok) {
-      alert("일기 수정에 실패하였습니다.");
+    try {
+      setLoading(true);
+      await updateDiary(diary.diaryId, data);
+      router.replace(`/diary/${diary.diaryId}`);
+    } catch (error) {
+      setToastifyState({ type: "error", message: "일기 수정에 실패했습니다." });
+    } finally {
       setLoading(false);
-      throw new Error(response.statusText);
     }
-
-    router.push(`/diary/${diary.diaryId}`);
-    router.refresh();
   };
 
   useEffect(() => {

@@ -14,11 +14,6 @@ export const useQuillEditor = () => {
   const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
 
-  const handleContentChange = (value: string) => {
-    formContext.setValue("contents", value);
-    formContext.trigger("contents");
-  };
-
   const handleImageUpload = async (file: File) => {
     try {
       setLoading(true);
@@ -41,7 +36,8 @@ export const useQuillEditor = () => {
           );
           if (imageElement) {
             (imageElement as HTMLElement).style.borderRadius = "1rem";
-            handleContentChange(
+            formContext.setValue(
+              "contents",
               quillRef.current!.getEditorContents().toString(),
             );
           }
@@ -137,7 +133,10 @@ export const useQuillEditor = () => {
         .forEach((img) => {
           img.style.borderRadius = "1rem";
         });
-      handleContentChange(quillRef.current!.getEditorContents().toString());
+      formContext.setValue(
+        "contents",
+        quillRef.current!.getEditorContents().toString(),
+      );
     }, 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -147,6 +146,5 @@ export const useQuillEditor = () => {
     quillRef,
     modules,
     content: formContext.getValues("content"),
-    handleContentChange,
   };
 };

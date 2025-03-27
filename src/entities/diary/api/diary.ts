@@ -67,7 +67,7 @@ export async function createDiary(data: DiaryCreateRequest) {
     throw new Error("Failed to create data.");
   }
 
-  return response;
+  return response.text();
 }
 
 export async function updateDiary(diaryId: number, data: DiaryUpdateRequest) {
@@ -90,7 +90,6 @@ export async function updateDiary(diaryId: number, data: DiaryUpdateRequest) {
   }
 
   revalidateTag(`diary/${diaryId}`);
-  return response;
 }
 
 export async function deleteDiary(diaryId: number) {
@@ -111,5 +110,4 @@ export async function deleteDiary(diaryId: number) {
   }
 
   revalidateTag(`diary/${diaryId}`);
-  return response;
 }

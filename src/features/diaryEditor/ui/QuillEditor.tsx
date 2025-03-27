@@ -5,10 +5,11 @@ import "./quillEditor.css";
 import ReactQuill from "react-quill-new";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
 import { useQuillEditor } from "../model/useQuillEditor";
+import { useFormContext } from "react-hook-form";
 
 export const QuillEditor = () => {
-  const { loading, quillRef, modules, content, handleContentChange } =
-    useQuillEditor();
+  const formContext = useFormContext();
+  const { loading, quillRef, modules, content } = useQuillEditor();
 
   return (
     <div className="relative flex flex-col">
@@ -18,8 +19,8 @@ export const QuillEditor = () => {
         ref={quillRef}
         theme="snow"
         placeholder="여행은 어땠나요? 자유롭게 기록하고 싶은 것들을 작성해보세요."
-        onChange={handleContentChange}
-        value={content}
+        onChange={(value) => formContext.setValue("contents", value)}
+        defaultValue={content}
         modules={modules}
       />
     </div>
