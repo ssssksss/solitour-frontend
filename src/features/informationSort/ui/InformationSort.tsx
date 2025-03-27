@@ -34,6 +34,7 @@ export const InformationSort = () => {
       dropdownOptionStyle={{
         w: "w-[8rem]",
         style: "mt-[2rem] rounded-xl",
+        z: "z-20",
         transformX: "translateX(calc(3.5rem - 100%))",
       }}
     />

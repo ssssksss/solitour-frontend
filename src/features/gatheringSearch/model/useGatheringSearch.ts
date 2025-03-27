@@ -12,6 +12,11 @@ export const useGatheringSearch = () => {
     searchParams.get("tagName") !== null ? "태그" : "제목",
   );
 
+  const dropdownHandler = (value: "제목" | "태그") => {
+    setSearchValue("");
+    setDropdownValue(value);
+  };
+
   const handleSearchClick = () => {
     const url = new URL(window.location.href);
     url.searchParams.delete("page");
@@ -26,11 +31,6 @@ export const useGatheringSearch = () => {
     }
 
     window.history.pushState(null, "", url.toString());
-  };
-
-  const dropdownHandler = (value: "제목" | "태그") => {
-    setSearchValue("");
-    setDropdownValue(value);
   };
 
   useEffect(() => {

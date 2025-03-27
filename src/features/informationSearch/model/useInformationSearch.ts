@@ -5,7 +5,6 @@ import { useState } from "react";
 export const useInformationSearch = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchMethod, setSearchMethod] = useState<"제목" | "태그">("제목");
-  const [searchDropdownVisible, setSearchDropdownVisible] = useState(false);
 
   const handleSearchMethodChange = (value: "제목" | "태그") => {
     setSearchValue("");
@@ -41,20 +40,11 @@ export const useInformationSearch = () => {
     window.history.pushState(null, "", url.toString());
   };
 
-  const handleOrderClick = (order: "latest" | "likes" | "views") => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("order", order);
-    window.history.pushState(null, "", url.toString());
-  };
-
   return {
     searchMethod,
     searchValue,
-    searchDropdownVisible,
-    setSearchDropdownVisible,
     handleSearchMethodChange,
     handleSearchValueChange,
     handleSearchClick,
-    handleOrderClick,
   };
 };

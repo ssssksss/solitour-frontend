@@ -39,7 +39,7 @@ export const GatheringSearch = () => {
             }}
           />
         </div>
-        <p className="text-gray3 absolute top-2 left-[4.6875rem]">|</p>
+        <p className="text-gray3 absolute top-2 left-[4.6875rem] text-lg">|</p>
         <input
           className="border-gray3 placeholder:text-gray2 h-[2.75rem] w-[21.4375rem] rounded-full border bg-white pr-12 pl-[5.8125rem] text-sm outline-hidden placeholder:font-medium max-[1024px]:w-full"
           type="text"
