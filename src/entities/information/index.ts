@@ -9,7 +9,10 @@ export {
   deleteInformation,
 } from "./api/information";
 export { getInformationCategoryList } from "./api/informationCategoryList";
-export { getInformationList } from "./api/informationList";
+export {
+  getInformationList,
+  getInformationListByTagName,
+} from "./api/informationList";
 export { getMyPageInformationList } from "./api/myPageInformationList";
 export { getTopInformationTitleList } from "./api/topInformationTitleList";
 

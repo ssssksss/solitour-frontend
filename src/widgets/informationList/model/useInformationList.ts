@@ -1,6 +1,10 @@
 "use client";
 
-import { getInformationList, InformationList } from "@/entities/information";
+import {
+  getInformationList,
+  getInformationListByTagName,
+  InformationList,
+} from "@/entities/information";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -25,8 +29,14 @@ export const useInformationList = () => {
 
         const url = new URL(window.location.href);
         url.searchParams.set("page", (page - 1).toString());
-        const data = await getInformationList(url.search);
-        setInformationList(data);
+
+        if (searchParams.get("tagName")) {
+          const data = await getInformationListByTagName(url.search);
+          setInformationList(data);
+        } else {
+          const data = await getInformationList(url.search);
+          setInformationList(data);
+        }
       } catch (error) {
         setInformationList(null);
       } finally {
