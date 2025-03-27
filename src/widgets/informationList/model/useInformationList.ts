@@ -24,6 +24,7 @@ export const useInformationList = () => {
         setCurrentPage(page);
 
         const url = new URL(window.location.href);
+        url.searchParams.set("page", (page - 1).toString());
         const data = await getInformationList(url.search);
         setInformationList(data);
       } catch (error) {

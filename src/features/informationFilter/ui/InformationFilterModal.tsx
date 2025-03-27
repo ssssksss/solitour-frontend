@@ -1,7 +1,7 @@
 "use client";
 
 import { useInformationFilterModal } from "../model/useInformationFilterModal";
-import { LOCATION } from "@/shared/config";
+import { LOCATION, LOCATION_ID, LOCATION_NAME } from "@/shared/config";
 import { ModalTemplate } from "@/shared/ui/modal";
 
 interface InformationFilterModalProps {
@@ -11,7 +11,7 @@ interface InformationFilterModalProps {
 export const InformationFilterModal = ({
   closeModal,
 }: InformationFilterModalProps) => {
-  const { place, setPlace, handleClick } =
+  const { zoneCategoryId, setZoneCategoryId, handleClick } =
     useInformationFilterModal(closeModal);
 
   return (
@@ -21,11 +21,11 @@ export const InformationFilterModal = ({
         <div className="text-gray1 flex flex-wrap items-start gap-2 font-medium">
           <button
             className={[
-              place === null ? "border-main bg-main text-white" : "",
+              zoneCategoryId === 0 ? "border-main bg-main text-white" : "",
               "hover:border-main hover:bg-main rounded-full border border-[#E9EBED] px-3 py-1.5 text-sm font-medium hover:scale-105 hover:text-white",
             ].join(" ")}
             type="button"
-            onClick={() => setPlace(null)}
+            onClick={() => setZoneCategoryId(0)}
           >
             전체
           </button>
@@ -33,25 +33,25 @@ export const InformationFilterModal = ({
             <button
               key={location}
               className={[
-                location === place ? "border-main bg-main text-white" : "",
+                location === LOCATION_NAME[zoneCategoryId]
+                  ? "border-main bg-main text-white"
+                  : "",
                 "hover:border-main hover:bg-main rounded-full border border-[#E9EBED] px-3 py-1.5 text-sm font-medium hover:scale-105 hover:text-white",
               ].join(" ")}
               type="button"
-              onClick={() => setPlace(location)}
+              onClick={() => setZoneCategoryId(LOCATION_ID[location])}
             >
               {location}
             </button>
           ))}
         </div>
-        {place !== "" && (
-          <button
-            className="bg-main h-11 w-full rounded-full text-[0.9375rem] text-white hover:scale-105"
-            type="button"
-            onClick={handleClick}
-          >
-            필터 적용하기
-          </button>
-        )}
+        <button
+          className="bg-main h-11 w-full rounded-full text-[0.9375rem] text-white hover:scale-105"
+          type="button"
+          onClick={handleClick}
+        >
+          필터 적용하기
+        </button>
       </div>
     </ModalTemplate>
   );

@@ -91,11 +91,11 @@ export const Header = () => {
             size="1.5rem"
             onClick={handleMenuClick}
           />
-          <div className="absolute left-[calc(100vw-24px)] flex h-[2.25rem] w-[8rem] translate-x-[-100%] items-center gap-2 rounded-lg p-[.5rem] text-sm max-[744px]:hidden">
+          <div className="absolute left-[calc(100vw-24px)] flex h-9 w-32 translate-x-[-100%] items-center gap-2 rounded-lg p-2 text-sm max-[744px]:hidden">
             {id == 0 ? (
               <>
-                <div className="animate-pulse-auth relative aspect-square w-[1.875rem] rounded-[50%] shadow" />
-                <div className="animate-pulse-auth h-[1.875rem] w-[4rem]" />
+                <div className="animate-pulse-auth relative aspect-square w-7.5 rounded-[50%] shadow" />
+                <div className="animate-pulse-auth h-7.5 w-16" />
               </>
             ) : id > 0 ? (
               <UserDropDown />

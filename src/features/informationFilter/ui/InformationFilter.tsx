@@ -5,11 +5,12 @@ import { InformationFilterModal } from "./InformationFilterModal";
 import { Modal } from "@/shared/ui/modal";
 import { VscSettings } from "react-icons/vsc";
 import { useSearchParams } from "next/navigation";
+import { LOCATION_NAME } from "@/shared/config";
 
 export const InformationFilter = () => {
   const { isOpen, openModal, closeModal } = useModal();
   const searchParams = useSearchParams();
-  const place = searchParams.get("place");
+  const zoneCategoryId = Number(searchParams.get("zoneCategoryId") ?? 0);
 
   return (
     <div>
@@ -18,13 +19,15 @@ export const InformationFilter = () => {
       </Modal>
       <button
         className={[
-          !place ? "text-gray1" : "text-main",
+          zoneCategoryId === 0 ? "text-gray1" : "text-main",
           "hover:text-main flex flex-row items-center",
         ].join(" ")}
         onClick={openModal}
       >
         <VscSettings size="1.25rem" />
-        <p className="text-sm text-nowrap">{!place ? "지역별" : place}</p>
+        <p className="text-sm text-nowrap">
+          {zoneCategoryId === 0 ? "지역별" : LOCATION_NAME[zoneCategoryId]}
+        </p>
       </button>
     </div>
   );

@@ -28,7 +28,7 @@ export const InformationViewer = async ({
             <div className="flex flex-row items-end justify-between py-4">
               <div className="flex flex-row items-center gap-3">
                 <Image
-                  className="bg-lightGreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
+                  className="bg-lightgreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
                   src={data.userImage}
                   alt="userImage"
                   width={54}
@@ -39,7 +39,7 @@ export const InformationViewer = async ({
                     {data.userPostingResponse.nickname}
                   </p>
                   <p className="text-gray1 text-xs">
-                    {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}
+                    {new Date(data.createdDate).toLocaleDateString("ko-KR")}
                   </p>
                 </div>
               </div>
@@ -67,7 +67,7 @@ export const InformationViewer = async ({
               <div className="flex flex-row items-end justify-between py-4">
                 <div className="flex h-[3.375rem] flex-row items-center gap-3">
                   <Image
-                    className="bg-lightGreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
+                    className="bg-lightgreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
                     src={data.userImage}
                     alt="userImage"
                     width={54}
@@ -78,7 +78,7 @@ export const InformationViewer = async ({
                       {data.userPostingResponse.nickname}
                     </p>
                     <p className="text-gray1 text-xs">
-                      {`${new Date(data.createdDate).toLocaleDateString("ko-KR")}`}
+                      {new Date(data.createdDate).toLocaleDateString("ko-KR")}
                     </p>
                   </div>
                 </div>

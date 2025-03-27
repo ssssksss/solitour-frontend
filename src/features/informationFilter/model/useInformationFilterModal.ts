@@ -5,21 +5,23 @@ import { useState } from "react";
 
 export const useInformationFilterModal = (closeModal: () => void) => {
   const searchParams = useSearchParams();
-  const [place, setPlace] = useState<string | null>(searchParams.get("place"));
+  const [zoneCategoryId, setZoneCategoryId] = useState(
+    Number(searchParams.get("zoneCategoryId") ?? 0),
+  );
 
   const handleClick = () => {
     const url = new URL(window.location.href);
     url.searchParams.set("page", "1");
 
-    if (place) {
-      url.searchParams.set("place", place);
+    if (zoneCategoryId !== 0) {
+      url.searchParams.set("zoneCategoryId", zoneCategoryId.toString());
     } else {
-      url.searchParams.delete("place");
+      url.searchParams.delete("zoneCategoryId");
     }
 
     window.history.pushState(null, "", url.toString());
     closeModal();
   };
 
-  return { place, setPlace, handleClick };
+  return { zoneCategoryId, setZoneCategoryId, handleClick };
 };

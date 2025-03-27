@@ -39,6 +39,27 @@ export const LOCATION_ID: Record<string, number> = {
   세종: 245,
 } as const;
 
+export const LOCATION_NAME: Record<number, string> = {
+  0: "전체",
+  1: "서울",
+  2: "광주",
+  3: "인천",
+  4: "대전",
+  5: "대구",
+  6: "전남",
+  7: "경북",
+  8: "경남",
+  9: "부산",
+  10: "울산",
+  11: "제주",
+  12: "경기",
+  13: "강원",
+  14: "충북",
+  15: "충남",
+  16: "전북",
+  245: "세종",
+} as const;
+
 export const LOCATION_MAP: Record<string, string> = {
   서울특별시: "서울",
   부산광역시: "부산",
