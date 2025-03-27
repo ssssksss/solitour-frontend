@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useModal } from "@/shared/lib/hooks";
 import { GatheringCategoryListModal } from "./GatheringCategoryListModal";
+import { GatheringForm } from "../model/gatheringForm";
 
 interface GatheringEditorCategoryListProps {
   id: number;
@@ -13,7 +14,7 @@ interface GatheringEditorCategoryListProps {
 }
 
 export const GatheringEditorCategoryList = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [categoryList, setCategoryList] = useState<
     GatheringEditorCategoryListProps[]
   >([]);

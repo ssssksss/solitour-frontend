@@ -13,8 +13,8 @@ export const GatheringBanner = () => {
           {["<b>직접 내 모임</b>을", "<b>만들어</b>보세요!"].map(
             (str, index) => (
               <div
-                className="text-2xl max-[1024px]:text-xl"
                 key={index}
+                className="text-2xl max-[1024px]:text-xl"
                 dangerouslySetInnerHTML={{ __html: str }}
               />
             ),

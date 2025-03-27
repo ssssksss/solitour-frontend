@@ -92,7 +92,7 @@ export const GatheringPeriodModal = ({
                 isAfter(new Date(calendarDate[0].startDate), new Date()) &&
                 isAfter(
                   new Date(calendarDate[0].startDate),
-                  formContext.getValues("deadline") || new Date(),
+                  new Date(formContext.getValues("deadline")),
                 )
               )
             }

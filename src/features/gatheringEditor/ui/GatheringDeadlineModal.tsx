@@ -14,6 +14,7 @@ import { ko } from "date-fns/locale";
 import { useState } from "react";
 import { Calendar } from "react-date-range";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 interface GatheringDeadlineModalProps {
   closeModal: () => void;
@@ -22,7 +23,7 @@ interface GatheringDeadlineModalProps {
 export const GatheringDeadlineModal = ({
   closeModal,
 }: GatheringDeadlineModalProps) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [deadlineDate, setDeadlineDate] = useState<Date>(

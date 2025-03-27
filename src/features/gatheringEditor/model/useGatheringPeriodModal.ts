@@ -4,9 +4,10 @@ import { useThrottle } from "@/shared/lib/hooks";
 import { addDays, format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "./gatheringForm";
 
 export const useGatheringPeriodModal = (closeModal: () => void) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

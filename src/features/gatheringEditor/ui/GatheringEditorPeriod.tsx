@@ -6,9 +6,10 @@ import { useFormContext } from "react-hook-form";
 import { Modal } from "@/shared/ui/modal";
 import { useModal } from "@/shared/lib/hooks";
 import { GatheringPeriodModal } from "./GatheringPeriodModal";
+import { GatheringForm } from "../model/gatheringForm";
 
 export const GatheringEditorPeriod = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const { isOpen, openModal, closeModal } = useModal();
 
   return (

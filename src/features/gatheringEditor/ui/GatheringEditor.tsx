@@ -13,6 +13,7 @@ import { GatheringEditorContent } from "./GatheringEditorContent";
 import { GatheringEditorCategoryList } from "./GatheringEditorCategoryList";
 import { GatheringEditorChattingLink } from "./GatheringEditorChattingLink";
 import { SubmitButton } from "@/shared/ui/button";
+import { GatheringForm } from "../model/gatheringForm";
 
 interface GatheringEditorProps {
   text: "등록" | "수정";
@@ -25,7 +26,7 @@ export const GatheringEditor = ({
   loading,
   handleSubmit,
 }: GatheringEditorProps) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
 
   return (
     <div className="flex w-full max-w-[60rem] flex-col">

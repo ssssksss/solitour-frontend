@@ -5,9 +5,10 @@ import { format } from "date-fns";
 import { useFormContext } from "react-hook-form";
 import { useModal } from "@/shared/lib/hooks";
 import { GatheringTimeModal } from "./GatheringTimeModal";
+import { GatheringForm } from "../model/gatheringForm";
 
 export const GatheringEditorTime = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const { isOpen, openModal, closeModal } = useModal();
 
   return (

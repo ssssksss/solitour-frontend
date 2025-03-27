@@ -1,7 +1,7 @@
 "use client";
 
 import { createGathering, GatheringCreateRequest } from "@/entities/gathering";
-import { GatheringFormSchema } from "@/features/gatheringEditor";
+import { GatheringForm, GatheringFormSchema } from "@/features/gatheringEditor";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import { useToastifyStore } from "@/shared/model";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ export const useGatheringCreateEditor = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { setToastifyState } = useToastifyStore();
-  const methods = useForm({
+  const methods = useForm<GatheringForm>({
     resolver: zodResolver(GatheringFormSchema),
     defaultValues: {
       title: "",
@@ -23,8 +23,8 @@ export const useGatheringCreateEditor = () => {
       allowedSex: "",
       personCount: 0,
       placeName: "",
-      xAxis: "",
-      yAxis: "",
+      xAxis: 0,
+      yAxis: 0,
       roadAddressName: "",
       deadline: "",
       scheduleStartDate: "",

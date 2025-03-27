@@ -3,6 +3,7 @@
 import { ModalTemplate } from "@/shared/ui/modal";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 interface GatheringCategoryListModalProps {
   categoryList: {
@@ -17,7 +18,7 @@ export const GatheringCategoryListModal = ({
   categoryList,
   closeModal,
 }: GatheringCategoryListModalProps) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [mainCategoryId, setMainCategoryId] = useState(
     formContext.getValues("gatheringCategoryId") || 0,
   );

@@ -22,8 +22,5 @@ export const useDiaryViewer = (diaryId: number) => {
     }
   };
 
-  return {
-    loading,
-    handleDeleteClick,
-  };
+  return { loading, handleDeleteClick };
 };

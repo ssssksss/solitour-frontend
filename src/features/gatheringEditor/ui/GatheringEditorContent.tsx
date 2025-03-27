@@ -1,9 +1,10 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 export const GatheringEditorContent = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
 
   return (
     <article className="flex w-full flex-col">

@@ -1,9 +1,10 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 export const GatheringEditorTitle = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
 
   return (
     <div className="relative flex w-full shrink-0 items-center gap-x-2.5 gap-y-3 max-[400px]:flex-col max-[400px]:items-start">

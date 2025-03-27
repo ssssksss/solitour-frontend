@@ -3,9 +3,10 @@
 import { format } from "date-fns";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "./gatheringForm";
 
 export const useGatheringTimeModal = (closeModal: () => void) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [startDatetime, setStartDatetime] = useState({
     hour: formContext.getValues("scheduleStartDate")
       ? +format(new Date(formContext.getValues("scheduleStartDate")), "HH")

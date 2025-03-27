@@ -5,7 +5,7 @@ import {
   GatheringUpdateRequest,
   updateGathering,
 } from "@/entities/gathering";
-import { GatheringFormSchema } from "@/features/gatheringEditor";
+import { GatheringForm, GatheringFormSchema } from "@/features/gatheringEditor";
 import { convertLocationToTwoLetters } from "@/shared/lib/utils";
 import { useToastifyStore } from "@/shared/model";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,7 +18,7 @@ export const useGatheringUpdateEditor = (gatheringDetail: GatheringDetail) => {
   const router = useRouter();
   const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
-  const methods = useForm({
+  const methods = useForm<GatheringForm>({
     resolver: zodResolver(GatheringFormSchema),
     defaultValues: {
       title: gatheringDetail.title,

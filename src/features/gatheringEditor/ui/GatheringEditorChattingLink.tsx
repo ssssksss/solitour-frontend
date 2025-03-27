@@ -1,9 +1,10 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 export const GatheringEditorChattingLink = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
 
   return (
     <div className="relative flex w-full shrink-0 items-center gap-[0.625rem]">

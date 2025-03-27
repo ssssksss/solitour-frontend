@@ -5,6 +5,7 @@ import { ModalTemplate } from "@/shared/ui/modal";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 const SETTING_MODAL_AGE = {
   전체: {
@@ -36,7 +37,7 @@ interface GatheringParticipantsFilterModalProps {
 export const GatheringParticipantsFilterModal = ({
   closeModal,
 }: GatheringParticipantsFilterModalProps) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [peopleCount, setPeopleCount] = useState(
     formContext.getValues("personCount") || 5,
   );

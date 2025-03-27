@@ -4,6 +4,7 @@ import { ModalTemplate } from "@/shared/ui/modal";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "../model/gatheringForm";
 
 type PlaceElement = {
   address_name: string;
@@ -68,7 +69,7 @@ export const GatheringPlaceModal = ({
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [placeData, setPlaceData] = useState<PlaceElement1>();
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
 
   const handleSearch = async (keyword: string) => {
     setLoading(true);
@@ -134,7 +135,7 @@ export const GatheringPlaceModal = ({
     formContext.setValue("placeName", placeCustomName);
     formContext.setValue("xAxis", Number(placeData?.x));
     formContext.setValue("yAxis", Number(placeData?.y));
-    formContext.setValue("roadAddressName", placeData?.address_name);
+    formContext.setValue("roadAddressName", placeData?.address_name ?? "");
     formContext.setValue("searchId", "");
     formContext.trigger([
       "placeName",
@@ -171,7 +172,7 @@ export const GatheringPlaceModal = ({
       <section className="flex w-full flex-col items-center gap-[1.875rem]">
         <div className="flex w-full">
           <button
-            className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline outline-offset-[-1px] outline-black"}`}
+            className={`h-[3rem] w-full px-4 py-[.5rem] ${menu == "search" ? "bg-main text-white" : "text-black outline -outline-offset-1 outline-black"}`}
             onClick={() => {
               setMenu("search");
               setResults([]);
@@ -181,7 +182,7 @@ export const GatheringPlaceModal = ({
             검색으로 찾기
           </button>
           <button
-            className={`h-[3rem] w-full px-[1rem] py-[.5rem] ${menu == "address" ? "bg-main text-white" : "text-black outline outline-offset-[-1px] outline-black"}`}
+            className={`h-[3rem] w-full px-4 py-[.5rem] ${menu == "address" ? "bg-main text-white" : "text-black outline -outline-offset-1 outline-black"}`}
             onClick={() => {
               setMenu("address");
               setResults([]);
@@ -196,12 +197,8 @@ export const GatheringPlaceModal = ({
         >
           {menu == "search" && (
             <>
-              <article className="flex h-full w-full flex-col rounded-[1.5rem] outline outline-offset-[-1px] outline-[#E3E3E3]">
-                <label
-                  className={
-                    "flex h-[3.25rem] gap-[0.375rem] rounded-[1.5rem_1.5rem_0_1.5rem] px-[1rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
-                  }
-                >
+              <article className="flex h-full w-full flex-col rounded-3xl outline -outline-offset-1 outline-[#E3E3E3]">
+                <label className="flex h-13 gap-1.5 rounded-[1.5rem_1.5rem_0_1.5rem] px-4 outline -outline-offset-1 outline-[#E3E3E3]">
                   <Image
                     src="/icons/search-icon.svg"
                     alt={"search-icon"}
@@ -219,7 +216,7 @@ export const GatheringPlaceModal = ({
                   />
                 </label>
 
-                <ul className="flex h-full flex-col gap-[.5rem] overflow-scroll px-[.5rem] py-[1rem]">
+                <ul className="flex h-full flex-col gap-2 overflow-scroll px-2 py-4">
                   {loading ? (
                     <p
                       className={
@@ -233,7 +230,7 @@ export const GatheringPlaceModal = ({
                       {results.map((result: PlaceElement, index) => (
                         <li
                           key={index}
-                          className="outline-main flex h-[3rem] w-full cursor-pointer flex-col px-[.5rem] py-[.25rem] hover:rounded-[1rem] hover:outline hover:outline-offset-[-1px]"
+                          className="outline-main flex h-[3rem] w-full cursor-pointer flex-col px-2 py-1 hover:rounded-[1rem] hover:outline hover:-outline-offset-1"
                           onClick={() => pickLocation(result)}
                         >
                           <div className={"flex gap-1"}>
@@ -263,12 +260,8 @@ export const GatheringPlaceModal = ({
           )}
           {menu == "address" && (
             <>
-              <article className="flex h-full w-full flex-col rounded-[1.5rem] outline outline-offset-[-1px] outline-[#E3E3E3]">
-                <label
-                  className={
-                    "flex h-[3.25rem] gap-[0.375rem] rounded-[1.5rem_1.5rem_0_1.5rem] px-[1rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
-                  }
-                >
+              <article className="flex h-full w-full flex-col rounded-3xl outline -outline-offset-1 outline-[#E3E3E3]">
+                <label className="flex h-13 gap-1.5 rounded-[1.5rem_1.5rem_0_1.5rem] px-4 outline -outline-offset-1 outline-[#E3E3E3]">
                   <Image
                     src="/icons/search-icon.svg"
                     alt={"search-icon"}
@@ -285,27 +278,22 @@ export const GatheringPlaceModal = ({
                     }
                   />
                 </label>
-
-                <ul className="flex h-full flex-col gap-[.5rem] overflow-scroll px-[.5rem] py-[1rem]">
+                <ul className="flex h-full flex-col gap-2 overflow-scroll px-2 py-4">
                   {loading ? (
-                    <p
-                      className={
-                        "flex h-full w-full items-center justify-center"
-                      }
-                    >
+                    <p className="flex h-full w-full items-center justify-center">
                       Loading...
                     </p>
                   ) : (
                     <>
-                      <li className="outline-main grid h-[3rem] w-full grid-cols-[auto_8rem] px-[.5rem] py-[.25rem]">
-                        <div className={"flex items-center justify-center"}>
+                      <li className="outline-main grid h-[3rem] w-full grid-cols-[auto_8rem] px-2 py-1">
+                        <div className="flex items-center justify-center">
                           주소명
                         </div>
-                        <div className={"grid grid-cols-[3rem_5rem]"}>
-                          <div className={"flex items-center justify-center"}>
+                        <div className="grid grid-cols-[3rem_5rem]">
+                          <div className="flex items-center justify-center">
                             구분1
                           </div>
-                          <div className={"flex items-center justify-center"}>
+                          <div className="flex items-center justify-center">
                             구분2
                           </div>
                         </div>
@@ -318,7 +306,7 @@ export const GatheringPlaceModal = ({
                         .map((result: PlaceElement1, index) => (
                           <li
                             key={index}
-                            className="outline-main grid h-[3rem] w-full cursor-pointer grid-cols-[auto_8rem] px-[.5rem] py-[.25rem] hover:rounded-[1rem] hover:outline hover:outline-offset-[-1px]"
+                            className="outline-main grid h-[3rem] w-full cursor-pointer grid-cols-[auto_8rem] px-2 py-1 hover:rounded-[1rem] hover:outline hover:-outline-offset-1"
                             onClick={() => pickAddress(result)}
                           >
                             <div className={"flex items-center gap-1"}>
@@ -330,19 +318,11 @@ export const GatheringPlaceModal = ({
                               />
                               <div> {result.address_name} </div>
                             </div>
-                            <div
-                              className={
-                                "text-gray2 grid grid-cols-[3rem_5rem] text-sm"
-                              }
-                            >
-                              <div
-                                className={"flex items-center justify-center"}
-                              >
+                            <div className="text-gray2 grid grid-cols-[3rem_5rem] text-sm">
+                              <div className="flex items-center justify-center">
                                 {result?.road_address?.region_1depth_name}
                               </div>
-                              <div
-                                className={"flex items-center justify-center"}
-                              >
+                              <div className="flex items-center justify-center">
                                 {result?.road_address?.region_2depth_name}
                               </div>
                             </div>
@@ -352,7 +332,7 @@ export const GatheringPlaceModal = ({
                         (i: { road_address: { address_name: string } }) =>
                           i?.road_address?.address_name != undefined,
                       ).length == 0 && (
-                        <div className={"flex justify-center py-[2rem]"}>
+                        <div className="flex justify-center py-[2rem]">
                           결과가 없습니다.
                         </div>
                       )}
@@ -364,14 +344,10 @@ export const GatheringPlaceModal = ({
           )}
         </div>
         {menu == "address" && (
-          <div className={"flex w-full flex-col gap-[1rem]"}>
-            <h3
-              className={"flex items-center gap-[1rem] font-medium text-black"}
-            >
-              <span className={"text-lg font-bold text-black"}>
-                장소명 입력
-              </span>
-              <span className={"text-gray1"}>
+          <div className="flex w-full flex-col gap-[1rem]">
+            <h3 className="flex items-center gap-[1rem] font-medium text-black">
+              <span className="text-lg font-bold text-black">장소명 입력</span>
+              <span className="text-gray1">
                 {placeData?.road_address.address_name}
               </span>
             </h3>
@@ -379,14 +355,10 @@ export const GatheringPlaceModal = ({
               type="text"
               placeholder="장소명을 입력하세요"
               onChange={(e) => setPlaceCustomName(e.target.value)}
-              className={
-                "h-[3.25rem] w-full rounded-[1rem] bg-transparent px-[1rem] outline outline-offset-[-1px] outline-[#E3E3E3]"
-              }
+              className="h-13 w-full rounded-[1rem] bg-transparent px-4 outline -outline-offset-1 outline-[#E3E3E3]"
             />
             <button
-              className={
-                "bg-main disabled:bg-gray1 h-[3rem] w-full rounded-[4rem] px-[1rem] py-[.5rem] text-white"
-              }
+              className="bg-main disabled:bg-gray1 h-[3rem] w-full rounded-[4rem] px-4 py-[.5rem] text-white"
               onClick={() => applyAddressHandler()}
               disabled={
                 placeCustomName == "" ||

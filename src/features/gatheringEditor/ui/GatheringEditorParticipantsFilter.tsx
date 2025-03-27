@@ -5,9 +5,10 @@ import { useFormContext } from "react-hook-form";
 import { GENDER } from "@/entities/user";
 import { useModal } from "@/shared/lib/hooks";
 import { GatheringParticipantsFilterModal } from "./GatheringParticipantsFilterModal";
+import { GatheringForm } from "../model/gatheringForm";
 
 export const GatheringEditorParticipantsFilter = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const { isOpen, openModal, closeModal } = useModal();
 
   return (

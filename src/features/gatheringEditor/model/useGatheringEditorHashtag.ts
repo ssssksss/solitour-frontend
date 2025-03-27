@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { GatheringForm } from "./gatheringForm";
 
 export const useGatheringEditorHashtag = () => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [tagList, setTagList] = useState<string[]>(
     formContext.getValues("hashtags") ? formContext.getValues("hashtags") : [],
   );
