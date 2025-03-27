@@ -1,5 +1,4 @@
 import { fetchWithAuth } from "@/shared/api";
-import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 

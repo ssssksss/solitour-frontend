@@ -6,10 +6,11 @@ import { MdOutlineMenu } from "react-icons/md";
 import { HeaderSidebar } from "./HeaderSidebar";
 import { useHeader } from "../model/useHeader";
 import { UserDropDown } from "./UserDropDown";
+import { useUserStore } from "@/entities/user";
 
 export const Header = () => {
+  const { id } = useUserStore();
   const {
-    id,
     pathname,
     visible,
     isTransparent,

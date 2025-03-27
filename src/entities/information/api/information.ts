@@ -125,7 +125,7 @@ export async function createInformation(data: InformationCreateRequest) {
   }
 
   revalidatePath("/informations", "layout");
-  return response;
+  return response.json() as Promise<{ id: number }>;
 }
 
 export async function updateInformation(

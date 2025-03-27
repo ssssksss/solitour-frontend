@@ -31,7 +31,7 @@ export const GatheringApplicantList = ({
     status: "WAIT" | "CONSENT" | "REFUSE",
     userId: number,
   ) => {
-    const res = await fetchWithAuth("/api/gathering/apply", {
+    const response = await fetchWithAuth("/api/gathering/apply", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export const GatheringApplicantList = ({
       }),
     });
 
-    if (res.ok) {
+    if (response.ok) {
       let _prevStatus = "";
       const temp = gatheringApplicantsResponses.map((i) => {
         if (i.userGatheringResponse.id == userId) {

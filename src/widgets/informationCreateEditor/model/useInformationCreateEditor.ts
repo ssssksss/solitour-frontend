@@ -13,9 +13,11 @@ import {
 } from "@/entities/information";
 import { useInformationEditorStore } from "@/features/informationEditor";
 import { InformationCreateFormSchema } from "./InformationCreateFormSchema";
+import { useToastifyStore } from "@/shared/model";
 
 export const useInformationCreateEditor = () => {
   const { id } = useUserStore();
+  const { setToastifyState } = useToastifyStore();
   const { imageList, mainImageIndex, initialize } = useInformationEditorStore();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -118,20 +120,15 @@ export const useInformationCreateEditor = () => {
       tagRegisterRequests: hashtags.map((tag) => ({ name: tag })),
     };
 
-    setLoading(true);
-
-    const response = await createInformation(data);
-
-    if (!response.ok) {
-      alert("정보 등록에 실패하였습니다.");
+    try {
+      setLoading(true);
+      const response = await createInformation(data);
+      router.replace(`/informations/${response.id}`);
+    } catch (error) {
+      setToastifyState({ type: "error", message: "정보 등록에 실패했습니다." });
+    } finally {
       setLoading(false);
-      throw new Error(response.statusText);
     }
-
-    const result: { id: number } = await response.json();
-
-    router.push(`/informations/${result.id}`);
-    router.refresh();
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.

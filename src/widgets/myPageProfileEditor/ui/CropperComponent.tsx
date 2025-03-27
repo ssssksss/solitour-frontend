@@ -7,14 +7,12 @@ interface CropperComponentProps {
   imageBase64Data: string;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
-  closeButtonComponent?: ReactNode;
 }
 
 const CropperComponent = ({
   imageBase64Data,
   closeCropModal,
   onChangeImageUrl,
-  ...props
 }: CropperComponentProps) => {
   const [crop, setCrop] = useState<{ x: number; y: number }>({
     x: 0,
@@ -41,8 +39,10 @@ const CropperComponent = ({
   };
 
   return (
-    <ModalTemplate className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between">
-      {props.closeButtonComponent}
+    <ModalTemplate
+      className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between"
+      closeModal={closeCropModal}
+    >
       <div className={"relative h-[calc(100%-5rem)] w-full"}>
         <Cropper
           image={imageBase64Data}

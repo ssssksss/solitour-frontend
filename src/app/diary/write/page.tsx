@@ -1,5 +1,3 @@
-"use client";
-
 import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { DiaryCreateEditor } from "@/widgets/diaryCreateEditor";
 import { Metadata } from "next";

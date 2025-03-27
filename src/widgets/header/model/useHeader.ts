@@ -10,7 +10,7 @@ export const useHeader = () => {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [isTransparent, setIsTransparent] = useState(true);
-  const { id, setUserState: setUser } = useUserStore();
+  const { setUserState } = useUserStore();
 
   const handleScroll = useThrottle(() => {
     if (window.scrollY >= 500) {
@@ -44,20 +44,19 @@ export const useHeader = () => {
         const userInfo = await getUserInfo();
         if (userInfo.userStatus === "대기") {
           await fetchWithAuth("/api/auth/logout", { method: "POST" });
-          setUser({ id: -1 });
+          setUserState({ id: -1 });
         } else {
-          setUser(userInfo);
+          setUserState(userInfo);
         }
       } catch (error) {
         await fetchWithAuth("/api/auth/logout", { method: "POST" });
-        setUser({ id: -1 });
+        setUserState({ id: -1 });
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
-    id,
     pathname,
     visible,
     isTransparent,
