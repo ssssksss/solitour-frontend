@@ -6,11 +6,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AddUserInformationFormSchema } from "./AddUserInformationFormSchema";
+import {
+  agree,
+  AgreeRequestData,
+  disagree,
+  DisagreeRequestData,
+} from "../api/userPersonalInfo";
 
 export const useAuthKakao = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setUserState: setUser } = useUserStore();
+  const { setUserState } = useUserStore();
   const [loading, setLoading] = useState(true);
   const methods = useForm({
     resolver: zodResolver(AddUserInformationFormSchema),
@@ -25,47 +31,30 @@ export const useAuthKakao = () => {
   });
 
   const handleSubmit = async (isAgree: boolean) => {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    /* eslint-disable indent */
-    const requestData = isAgree
-      ? {
+      if (isAgree) {
+        const requestData: AgreeRequestData = {
           name: methods.getValues("name"),
           age: methods.getValues("age"),
           sex: methods.getValues("sex"),
           termConditionAgreement: methods.getValues("isCheckTerm"),
           privacyPolicyAgreement: methods.getValues("isCheckPrivacy"),
-        }
-      : {
+        };
+        await agree(requestData);
+      } else {
+        const requestData: DisagreeRequestData = {
           termConditionAgreement: methods.getValues("isCheckTerm"),
           privacyPolicyAgreement: methods.getValues("isCheckPrivacy"),
         };
-    /* eslint-enable indent */
-
-    try {
-      const response = await fetch(
-        isAgree ? "/api/auth/user/info/agree" : "/api/auth/user/info/disagree",
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestData),
-          cache: "no-store",
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to login");
+        await disagree(requestData);
       }
 
-      const userDataResponse = await fetch("/api/auth/user");
-      if (userDataResponse.status == 200) {
-        const userData = await userDataResponse.json();
-        setUser(userData);
-        router.push("/");
-        router.refresh();
-      } else {
-        throw new Error("Failed to fetch user data");
-      }
+      const userInfo = await getUserInfo();
+      setUserState(userInfo);
+      router.push("/");
+      router.refresh();
     } catch (error) {
       router.push("/auth/signin");
     }
@@ -95,7 +84,7 @@ export const useAuthKakao = () => {
         }
 
         const userInfo = await getUserInfo();
-        setUser(userInfo);
+        setUserState(userInfo);
         router.push("/");
         router.refresh();
       } catch (error) {

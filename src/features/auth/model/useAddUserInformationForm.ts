@@ -1,13 +1,13 @@
 import { useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
 import { useToastifyStore } from "@/shared/model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { AddUserInformationFormSchema } from "./AddUserInformationFormSchema";
+import { agree, AgreeRequestData } from "../api/userPersonalInfo";
 
 export const useAddUserInformationForm = (closeModal: () => void) => {
   const userStore = useUserStore();
-  const toastifyStore = useToastifyStore();
+  const { setToastifyState } = useToastifyStore();
   const methods = useForm<{
     name: string;
     age: number;
@@ -34,19 +34,18 @@ export const useAddUserInformationForm = (closeModal: () => void) => {
   };
 
   const handleSubmit = async () => {
-    const response = await fetchWithAuth("/api/auth/user/info/agree", {
-      method: "PUT",
-      body: JSON.stringify({
-        sex: methods.getValues("sex"),
+    try {
+      const requestData: AgreeRequestData = {
         name: methods.getValues("name"),
         age: methods.getValues("age"),
+        sex: methods.getValues("sex")!,
         termConditionAgreement: true,
         privacyPolicyAgreement: true,
-      }),
-    });
+      };
 
-    if (response.status == 204) {
-      toastifyStore.setToastifyState({
+      await agree(requestData);
+
+      setToastifyState({
         type: "success",
         message: "제출 완료",
       });
@@ -55,6 +54,11 @@ export const useAddUserInformationForm = (closeModal: () => void) => {
         age: methods.getValues("age"),
       });
       closeModal();
+    } catch (error) {
+      setToastifyState({
+        type: "error",
+        message: "오류가 발생했습니다. 잠시 후에 다시 시도해 주세요.",
+      });
     }
   };
 
