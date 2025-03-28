@@ -8,7 +8,7 @@ export const useGatheringViewer = (data: GatheringDetail) => {
   const gatheringStore = useGatheringStore();
 
   useEffect(() => {
-    gatheringStore.setGathering({
+    gatheringStore.setGatheringState({
       currentParticipants: data.nowPersonCount,
       gatheringApplicantsResponses: data.gatheringApplicantsResponses,
       isFinish: data.isFinish,

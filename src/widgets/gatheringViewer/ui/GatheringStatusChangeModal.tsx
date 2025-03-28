@@ -1,12 +1,9 @@
 "use client";
 
-import { fetchWithAuth } from "@/shared/api";
 import { HashSpinner } from "@/shared/ui/hashSpinner";
-import { useToastifyStore } from "@/shared/model";
-import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { ModalTemplate } from "@/shared/ui/modal";
+import { useGatheringStatusChangeModal } from "../model/useGatheringStatusChangeModal";
 
 interface GatheringStatusChangeModalProps {
   isFinish: boolean;
@@ -17,36 +14,10 @@ export const GatheringStatusChangeModal = ({
   isFinish,
   closeModal,
 }: GatheringStatusChangeModalProps) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
-  const params = useParams();
-  const toastifyStore = useToastifyStore();
-
-  const handleRemoveClick = async () => {
-    setLoading(true);
-
-    // 모임 제거
-    const response = await fetchWithAuth(
-      `/api/gathering/finish?isFinish=${isFinish}&id=${params.id}`,
-      {
-        method: "PUT",
-        cache: "no-store",
-      },
-    );
-
-    if (!response.ok) {
-      toastifyStore.setToastifyState({
-        type: "error",
-        message: "모임 마감에 실패했습니다.",
-      });
-      setLoading(false);
-      closeModal();
-      return;
-    }
-
-    router.replace("/gathering");
-    router.refresh();
-  };
+  const { loading, handleRemoveClick } = useGatheringStatusChangeModal(
+    isFinish,
+    closeModal,
+  );
 
   return (
     <ModalTemplate

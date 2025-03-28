@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-import { fetchWithAuth } from "@/shared/api";
 import { UserImage, useUserStore } from "@/entities/user";
-import { useGatheringStore } from "../model/gatheringStore";
 import { GatheringApplicantButton } from "./GatheringApplicantButton";
+import { useGatheringApplicantList } from "../model/useGatheringApplicantList";
+import { useGatheringStore } from "../model/gatheringStore";
 
 interface GatheringApplicantListProps {
   postUserId: number;
@@ -21,50 +19,14 @@ export const GatheringApplicantList = ({
     gatheringApplicantsResponses,
     currentParticipants,
     personCount,
-    setGathering,
   } = useGatheringStore();
-  const params = useParams();
-  const [sort, setSort] = useState("");
-  const [isSortOpen, setIsSortOpen] = useState(false);
-
-  const updateGatheringApplicantStatusHandler = async (
-    status: "WAIT" | "CONSENT" | "REFUSE",
-    userId: number,
-  ) => {
-    const response = await fetchWithAuth("/api/gathering/apply", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: userId,
-        gatheringStatus: status,
-        applyId: params.id,
-      }),
-    });
-
-    if (response.ok) {
-      let _prevStatus = "";
-      const temp = gatheringApplicantsResponses.map((i) => {
-        if (i.userGatheringResponse.id == userId) {
-          _prevStatus = i.gatheringStatus;
-          i.gatheringStatus = status;
-        }
-        return i;
-      });
-      setGathering({
-        gatheringApplicantsResponses: temp,
-        currentParticipants:
-          currentParticipants +
-          (_prevStatus == "CONSENT" ? -1 : status == "CONSENT" ? +1 : 0),
-      });
-    }
-  };
-
-  const sortHandler = (value: string) => {
-    setSort(value);
-    setIsSortOpen(false);
-  };
+  const {
+    sort,
+    isSortOpen,
+    setIsSortOpen,
+    handleGatheringApplicantStatus,
+    handleSortButtonClick,
+  } = useGatheringApplicantList();
 
   if (postUserId !== userStore.id || !gatheringApplicantsResponses) {
     return null;
@@ -115,10 +77,10 @@ export const GatheringApplicantList = ({
                     className={"hover:bg-gray3 hover:text-main h-[2rem]"}
                   >
                     <button
-                      className={"h-full w-full"}
+                      className="h-full w-full"
                       onClick={(e) => {
                         e.preventDefault();
-                        sortHandler(option.value);
+                        handleSortButtonClick(option.value);
                       }}
                     >
                       {option.label}
@@ -171,7 +133,7 @@ export const GatheringApplicantList = ({
                     applicant={applicant}
                     isFullParticipants={currentParticipants === personCount}
                     updateGatheringApplicantStatusHandler={
-                      updateGatheringApplicantStatusHandler
+                      handleGatheringApplicantStatus
                     }
                   />
                 )}

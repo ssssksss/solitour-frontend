@@ -14,7 +14,7 @@ interface GatheringState {
 // 2. 액션 인터페이스 정의
 interface GatheringAction {
   initialize: () => void;
-  setGathering: (data: Partial<GatheringState>) => void;
+  setGatheringState: (data: Partial<GatheringState>) => void;
 }
 
 // 3. 초기 상태 정의
@@ -37,7 +37,7 @@ const gatheringStore: StateCreator<GatheringStoreType> = (set) => ({
       currentParticipants: 0,
       gatheringApplicantsResponses: [],
     }),
-  setGathering: (data) =>
+  setGatheringState: (data) =>
     set(() => ({
       ...data,
     })),
