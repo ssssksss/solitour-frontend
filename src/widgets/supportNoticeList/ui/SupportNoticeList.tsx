@@ -3,8 +3,8 @@
 import { differenceInDays, format } from "date-fns";
 import Link from "next/link";
 import { Pagination } from "@/shared/ui/pagination";
-import { SupportSearch } from "./SupportSearch";
 import { useSupportNoticeList } from "../model/useSupportNoticeList";
+import { NoticeSearch } from "@/features/noticeSearch";
 
 const categoryStyles: { [key: string]: string } = {
   이벤트: "text-green-800",
@@ -45,7 +45,7 @@ export const SupportNoticeList = () => {
           <span className={"font-sm flex gap-x-1 font-bold text-black"}>
             총 {totalNotices}건
           </span>
-          <SupportSearch loading={loading} />
+          <NoticeSearch loading={loading} />
         </div>
         <div className={"w-full border-t-[1px] border-t-black"}>
           {noticeList.map((notice, index) => (
