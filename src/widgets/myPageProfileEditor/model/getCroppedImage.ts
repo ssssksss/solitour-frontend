@@ -1,3 +1,5 @@
+import { updateUserImage } from "@/entities/user";
+
 const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
@@ -70,12 +72,7 @@ export async function getCroppedImage(
         });
 
         try {
-          const formData = new FormData();
-          formData.append("userProfile", file);
-          await fetch("/api/mypage/user-image", {
-            method: "PUT",
-            body: formData,
-          }).then(() => {});
+          await updateUserImage(file);
           resolve(URL.createObjectURL(file));
         } catch (error) {
           console.error("Image upload failed", error);

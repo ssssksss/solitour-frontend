@@ -1,8 +1,4 @@
-"use server";
-
 import { fetchWithAuth } from "@/shared/api";
-import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import { Information } from "../model/information";
 
 export interface InformationDetailResponse {
@@ -88,12 +84,11 @@ export interface InformationUpdateRequest {
 }
 
 export async function getInformation(informationId: number) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/informations/${informationId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/${informationId}`,
     {
       method: "GET",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      credentials: "include",
       cache: "no-store",
     },
   );
@@ -106,16 +101,13 @@ export async function getInformation(informationId: number) {
 }
 
 export async function createInformation(data: InformationCreateRequest) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/informations`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `${accessToken?.name}=${accessToken?.value}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      credentials: "include",
       cache: "no-store",
     },
   );
@@ -124,7 +116,6 @@ export async function createInformation(data: InformationCreateRequest) {
     throw new Error("Failed to create data");
   }
 
-  revalidatePath("/informations", "layout");
   return response.json() as Promise<{ id: number }>;
 }
 
@@ -132,31 +123,28 @@ export async function updateInformation(
   informationId: number,
   data: InformationUpdateRequest,
 ) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/informations/${informationId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/${informationId}`,
     {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `${accessToken?.name}=${accessToken?.value}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      credentials: "include",
       cache: "no-store",
     },
   );
 
-  revalidatePath("/informations", "layout");
-  return response;
+  if (!response.ok) {
+    throw new Error("Failed to update data.");
+  }
 }
 
 export async function deleteInformation(informationId: number) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/informations/${informationId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/${informationId}`,
     {
       method: "DELETE",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      credentials: "include",
       cache: "no-store",
     },
   );
@@ -164,7 +152,4 @@ export async function deleteInformation(informationId: number) {
   if (!response.ok) {
     throw new Error("Failed to delete data");
   }
-
-  revalidatePath("/informations", "layout");
-  return response;
 }

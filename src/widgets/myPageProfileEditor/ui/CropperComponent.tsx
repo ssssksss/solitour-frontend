@@ -1,7 +1,9 @@
-import { ReactNode, useState } from "react";
+"use client";
+
+import { useState } from "react";
 import Cropper from "react-easy-crop";
-import { getCroppedImage } from "@/shared/lib/utils";
 import { ModalTemplate } from "@/shared/ui/modal";
+import { getCroppedImage } from "../model/getCroppedImage";
 
 interface CropperComponentProps {
   imageBase64Data: string;
@@ -43,7 +45,7 @@ const CropperComponent = ({
       className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between"
       closeModal={closeCropModal}
     >
-      <div className={"relative h-[calc(100%-5rem)] w-full"}>
+      <div className="relative h-[calc(100%-5rem)] w-full">
         <Cropper
           image={imageBase64Data}
           crop={crop}
@@ -60,8 +62,8 @@ const CropperComponent = ({
       </div>
       <div className="flex w-full">
         <button
+          className="bg-main h-16 w-full rounded-lg text-white shadow-md"
           onClick={showCroppedImage}
-          className="bg-main h-[4rem] w-full rounded-lg text-white shadow-md"
         >
           편집 완료
         </button>

@@ -41,7 +41,7 @@ export const MyPageUserImage = ({
         >
           <UserImage userImageAddress={imageUrl} size={108} />
           <div className="absolute right-0 bottom-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]">
-            <div className="relative h-[1.25rem] w-[1.25rem]">
+            <div className="relative h-5 w-5">
               <Image
                 src="/icons/camera-icon.svg"
                 alt="camera-icon"
@@ -50,7 +50,7 @@ export const MyPageUserImage = ({
             </div>
           </div>
           <button
-            className="invisible absolute top-0 right-0 z-10 flex aspect-square w-[1rem] items-center justify-center rounded-[50%] bg-black group-hover:visible"
+            className="invisible absolute top-0 right-0 z-10 flex aspect-square w-4 items-center justify-center rounded-[50%] bg-black group-hover:visible"
             onClick={handleDeleteClick}
           >
             <Image

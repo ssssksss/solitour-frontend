@@ -5,10 +5,7 @@ import { useUserStore } from "@/entities/user";
 import { useModal } from "@/shared/lib/hooks";
 import { DeleteIcon, EditIcon } from "@/shared/ui/icon";
 import { DeleteModal, Modal } from "@/shared/ui/modal";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useToastifyStore } from "@/shared/model";
-import { deleteGathering } from "@/entities/gathering";
+import { useGatheringViewerButtonList } from "../model/useGatheringViewerButtonList";
 
 interface GatheringViewerButtonListProps {
   userId: number;
@@ -20,26 +17,9 @@ export const GatheringViewerButtonList = ({
   gatheringId,
 }: GatheringViewerButtonListProps) => {
   const { id } = useUserStore();
-  const { setToastifyState } = useToastifyStore();
-  const [loading, setLoading] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
-  const router = useRouter();
-
-  const handleDeleteClick = async () => {
-    try {
-      setLoading(true);
-      await deleteGathering(gatheringId);
-      router.replace("/gathering");
-    } catch (error) {
-      setToastifyState({
-        type: "error",
-        message: "모임 삭제에 실패했습니다.",
-      });
-    } finally {
-      setLoading(false);
-      closeModal();
-    }
-  };
+  const { loading, handleDeleteClick } =
+    useGatheringViewerButtonList(gatheringId);
 
   if (userId !== id) {
     return null;
@@ -51,10 +31,7 @@ export const GatheringViewerButtonList = ({
         <DeleteModal
           loading={loading}
           onDeleteClick={handleDeleteClick}
-          onCancelClick={() => {
-            window.history.back();
-            closeModal();
-          }}
+          onCancelClick={closeModal}
         />
       </Modal>
       <Link
