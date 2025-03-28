@@ -8,6 +8,7 @@ import { DeleteModal, Modal } from "@/shared/ui/modal";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useToastifyStore } from "@/shared/model";
+import { deleteGathering } from "@/entities/gathering";
 
 interface GatheringViewerButtonListProps {
   userId: number;
@@ -18,35 +19,29 @@ export const GatheringViewerButtonList = ({
   userId,
   gatheringId,
 }: GatheringViewerButtonListProps) => {
-  const userStore = useUserStore();
-  const toastifyStore = useToastifyStore();
+  const { id } = useUserStore();
+  const { setToastifyState } = useToastifyStore();
   const [loading, setLoading] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
   const router = useRouter();
 
   const handleDeleteClick = async () => {
-    setLoading(true);
-
-    const response = await fetch(`/api/gathering?id=${gatheringId}`, {
-      method: "DELETE",
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      toastifyStore.setToastifyState({
+    try {
+      setLoading(true);
+      await deleteGathering(gatheringId);
+      router.replace("/gathering");
+    } catch (error) {
+      setToastifyState({
         type: "error",
         message: "모임 삭제에 실패했습니다.",
       });
+    } finally {
       setLoading(false);
       closeModal();
-      return;
     }
-
-    router.replace("/gathering");
-    router.refresh();
   };
 
-  if (userId !== userStore.id) {
+  if (userId !== id) {
     return null;
   }
 

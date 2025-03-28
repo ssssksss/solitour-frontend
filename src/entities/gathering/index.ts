@@ -4,6 +4,7 @@ export {
   getGathering,
   createGathering,
   updateGathering,
+  deleteGathering,
 } from "./api/gathering";
 export {
   type GatheringCategory,

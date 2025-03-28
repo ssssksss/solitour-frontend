@@ -1,7 +1,4 @@
-"use server";
-
 import { fetchWithAuth } from "@/shared/api";
-import { cookies } from "next/headers";
 import { GatheringDetail } from "../model/gathering";
 
 export interface GatheringCreateRequest {
@@ -53,12 +50,11 @@ export interface GatheringUpdateRequest {
 }
 
 export async function getGathering(gatheringId: number) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/gatherings/${gatheringId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/${gatheringId}`,
     {
       method: "GET",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      credentials: "include",
       cache: "no-store",
     },
   );
@@ -71,16 +67,13 @@ export async function getGathering(gatheringId: number) {
 }
 
 export async function createGathering(data: GatheringCreateRequest) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/gatherings`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `${accessToken?.name}=${accessToken?.value}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      credentials: "include",
       cache: "no-store",
     },
   );
@@ -96,21 +89,33 @@ export async function updateGathering(
   gatheringId: number,
   data: GatheringUpdateRequest,
 ) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/gatherings/${gatheringId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/${gatheringId}`,
     {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `${accessToken?.name}=${accessToken?.value}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      credentials: "include",
       cache: "no-store",
     },
   );
 
   if (!response.ok) {
     throw new Error("Failed to update data.");
+  }
+}
+
+export async function deleteGathering(gatheringId: number) {
+  const response = await fetchWithAuth(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/${gatheringId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to delete data.");
   }
 }
