@@ -1,7 +1,4 @@
-"use server";
-
 import { fetchWithAuth } from "@/shared/api";
-import { cookies } from "next/headers";
 
 interface BestInformationInfo {
   informationId: number;
@@ -20,12 +17,11 @@ interface BestInformationInfo {
  * 좋아요 순으로 3개월 이내에 만들어진 정보 6개를 조회합니다.
  */
 export async function getBestInformationList() {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/informations/main-page`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/main-page`,
     {
       method: "GET",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      credentials: "include",
       cache: "no-store",
     },
   );

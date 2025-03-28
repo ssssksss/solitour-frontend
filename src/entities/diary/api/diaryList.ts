@@ -1,6 +1,3 @@
-"use server";
-
-import { cookies } from "next/headers";
 import { Diary } from "../model/diary";
 import { fetchWithAuth } from "@/shared/api";
 
@@ -10,12 +7,11 @@ interface DiaryList {
 }
 
 export async function getDiaryList(page: number) {
-  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.BACKEND_URL}/api/diary?page=${page}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/diary?page=${page}`,
     {
       method: "GET",
-      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+      credentials: "include",
       cache: "no-store",
     },
   );
