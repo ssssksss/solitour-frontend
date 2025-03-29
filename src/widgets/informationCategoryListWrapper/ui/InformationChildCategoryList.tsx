@@ -23,7 +23,7 @@ export const InformationChildCategoryList = ({
           childCategoryId === 0
             ? "border-main bg-main text-white"
             : "text-gray1",
-          "rounded-full border border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105",
+          "rounded-full border border-[#E9EBED] px-3 py-1.5 text-sm font-medium hover:scale-105",
         ].join(" ")}
         onClick={() => handleChildCategoryClick(0)}
       >
@@ -35,8 +35,10 @@ export const InformationChildCategoryList = ({
           <button
             key={childCategory.id}
             className={[
-              `${childCategory.id === childCategoryId ? "border-main bg-main text-white" : "text-gray1"}`,
-              "cursor-pointer rounded-full border border-[#E9EBED] px-3 py-[0.375rem] text-sm font-medium hover:scale-105",
+              childCategory.id === childCategoryId
+                ? "border-main bg-main text-white"
+                : "text-gray1",
+              "cursor-pointer rounded-full border border-[#E9EBED] px-3 py-1.5 text-sm font-medium hover:scale-105",
             ].join(" ")}
             onClick={() => handleChildCategoryClick(childCategory.id)}
           >

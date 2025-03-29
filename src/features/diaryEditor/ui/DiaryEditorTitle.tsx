@@ -7,8 +7,8 @@ export const DiaryEditorTitle = () => {
   const formContext = useFormContext<DiaryForm>();
 
   return (
-    <div className="relative flex h-[3.3125rem] flex-row items-center gap-2.5">
-      <h2 className="w-[2.625rem] text-lg font-semibold text-nowrap text-black">
+    <div className="relative flex h-13.25 flex-row items-center gap-2.5">
+      <h2 className="w-10.5 text-lg font-semibold text-nowrap text-black">
         제목<span className="text-main">*</span>
       </h2>
       <input

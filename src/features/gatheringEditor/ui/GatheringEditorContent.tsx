@@ -31,7 +31,11 @@ export const GatheringEditorContent = () => {
             </span>
           )}
           <span
-            className={`${formContext.getValues("content").length >= 500 && "text-red-600"}`}
+            className={
+              formContext.getValues("content").length >= 500
+                ? "text-red-600"
+                : ""
+            }
           >
             {formContext.getValues("content").length} / 500
           </span>

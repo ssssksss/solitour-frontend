@@ -26,10 +26,10 @@ export const AddUserInformationForm = ({
           <h3 className="text-lg font-bold text-black">이름</h3>
           <input
             className="text-main focus:outline-main mt-3 h-10 w-full rounded-3xl bg-white px-3 text-center outline -outline-offset-1 outline-[#f0f0f0]"
+            {...methods.register("name")}
             type="text"
             placeholder="이름을 입력해주세요"
             maxLength={10}
-            {...methods.register("name")}
           />
         </article>
         <article className="flex flex-col">

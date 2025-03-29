@@ -11,7 +11,7 @@ export const DiaryEditorAddress = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
-    <div className="relative flex h-[3.3125rem] grow flex-row items-center gap-2.5 max-[1024px]:w-full">
+    <div className="relative flex h-13.25 grow flex-row items-center gap-2.5 max-[1024px]:w-full">
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <DiaryAddressModal closeModal={closeModal} />
       </Modal>

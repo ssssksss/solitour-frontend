@@ -32,7 +32,7 @@ export const MyPageUserImage = ({
     <article className="flex items-center justify-center pt-[4.25rem] pb-[5.25rem]">
       <div className="group flex flex-col items-center">
         <label
-          className="bg-lightgreen relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] outline outline-offset-[-1px] outline-[#B8EDD9]"
+          className="bg-lightgreen relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]"
           htmlFor="imageUpload"
           onDragEnter={onDragEnter}
           onDragLeave={onDragLeave}

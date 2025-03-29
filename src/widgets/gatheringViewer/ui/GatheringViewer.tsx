@@ -29,7 +29,7 @@ export const GatheringViewer = ({
     <div className="w-full">
       <div className="flex w-full max-w-[60rem] flex-col">
         {/* 제목 부분 */}
-        <article className="w-full px-[.25rem] pb-[2.25rem]">
+        <article className="w-full px-1 pb-9">
           {/* 제목, 신청 버튼 */}
           <div className="grid w-full items-start gap-4 max-[960px]:grid-cols-[calc(100%-8.5rem)_8.5rem] min-[960px]:grid-cols-[calc(100%-14.5rem)_14.5rem]">
             <h1 className="text-3xl font-semibold break-words whitespace-pre-wrap">
@@ -65,7 +65,7 @@ export const GatheringViewer = ({
             </div>
             <div className="text-gray2 flex w-full items-end justify-end text-xs font-medium">
               <div className="flex flex-row items-center space-x-3">
-                <div className="text-gray2 mb-[.25rem] flex flex-row items-center gap-2">
+                <div className="text-gray2 mb-1 flex flex-row items-center gap-2">
                   <GatheringLike
                     gatheringId={gatheringId}
                     initialLikeCount={gatheringDetail.likeCount}
@@ -86,7 +86,7 @@ export const GatheringViewer = ({
           </div>
         </article>
         {/* 제한 부분(날짜, 장소, 인원, 시간) */}
-        <article className="grid grid-cols-1 gap-y-[1rem] border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm min-[800px]:grid-cols-2 sm:grid-cols-[320px_auto]">
+        <article className="grid grid-cols-1 gap-y-4 border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm min-[800px]:grid-cols-2 sm:grid-cols-[320px_auto]">
           <div className="flex gap-x-3">
             <Image
               src="/icons/gathering-calendar-icon.svg"
@@ -134,10 +134,22 @@ export const GatheringViewer = ({
             />
             <div>
               <span
-                className={`${gatheringDetail.personCount == currentParticipants && "text-[#ff0000]"}`}
+                className={
+                  gatheringDetail.personCount == currentParticipants
+                    ? "text-[#ff0000]"
+                    : ""
+                }
               >
                 <span
-                  className={`${gatheringDetail.personCount == currentParticipants ? "text-[#ff0000]" : gatheringDetail.nowPersonCount / gatheringDetail.personCount > 0.5 ? "text-[#FC9F3A]" : "text-main"}`}
+                  className={
+                    gatheringDetail.personCount == currentParticipants
+                      ? "text-[#ff0000]"
+                      : gatheringDetail.nowPersonCount /
+                            gatheringDetail.personCount >
+                          0.5
+                        ? "text-[#FC9F3A]"
+                        : "text-main"
+                  }
                 >
                   {currentParticipants || gatheringDetail.nowPersonCount}
                 </span>
@@ -171,7 +183,7 @@ export const GatheringViewer = ({
           </div>
         </article>
         {/* 내용 부분 */}
-        <div className={"text-gray1 my-[1rem] flex gap-1"}>
+        <div className="text-gray1 my-[1rem] flex gap-1">
           <Image
             src="/icons/pin-green-icon.svg"
             alt="pin-green-icon"
@@ -186,15 +198,15 @@ export const GatheringViewer = ({
             },
           )}
         </div>
-        <div className="mb-[1.25rem] w-full pt-[2rem] break-words whitespace-pre-wrap">
+        <div className="mb-5 w-full pt-8 break-words whitespace-pre-wrap">
           {gatheringDetail.content}
         </div>
         {gatheringDetail.tagResponses?.length > 0 && (
-          <div className={"mb-[2.625rem] flex flex-wrap gap-[.25rem]"}>
+          <div className="mb-10.5 flex flex-wrap gap-1">
             {gatheringDetail.tagResponses?.map((i) => (
               <div
                 key={i.name}
-                className="text-main outline-main max-w-max rounded-2xl px-[.5rem] py-[.25rem] text-sm outline outline-offset-[-1px]"
+                className="text-main outline-main max-w-max rounded-2xl px-2 py-1 text-sm outline -outline-offset-1"
               >
                 {"#"}
                 {i.name}

@@ -6,7 +6,7 @@ import { AddUserInformationFormSchema } from "./AddUserInformationFormSchema";
 import { agree, AgreeRequestData } from "../api/userPersonalInfo";
 
 export const useAddUserInformationForm = (closeModal: () => void) => {
-  const userStore = useUserStore();
+  const { setUserState } = useUserStore();
   const { setToastifyState } = useToastifyStore();
   const methods = useForm<{
     name: string;
@@ -49,7 +49,7 @@ export const useAddUserInformationForm = (closeModal: () => void) => {
         type: "success",
         message: "제출 완료",
       });
-      userStore.setUserState({
+      setUserState({
         sex: methods.getValues("sex"),
         age: methods.getValues("age"),
       });

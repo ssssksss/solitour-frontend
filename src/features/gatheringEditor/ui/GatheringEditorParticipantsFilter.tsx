@@ -28,7 +28,7 @@ export const GatheringEditorParticipantsFilter = () => {
               <div className="flex">
                 <div className="rounded-full py-1 font-semibold text-black">
                   {formContext.getValues("personCount")}명{" "}
-                  <span className={"px-1 text-black"}> | </span>
+                  <span className="px-1 text-black"> | </span>
                 </div>
               </div>
               <div className="flex">
@@ -37,7 +37,7 @@ export const GatheringEditorParticipantsFilter = () => {
                   세<span>~</span>
                   {new Date().getFullYear() -
                     formContext.getValues("endAge")}세{" "}
-                  <span className={"px-1 text-black"}> | </span>
+                  <span className="px-1 text-black"> | </span>
                 </div>
                 <div className="rounded-full py-1 font-semibold text-black">
                   {GENDER[formContext.getValues("allowedSex")]}

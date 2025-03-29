@@ -48,7 +48,7 @@ export const InformationImageUploadItem = ({
           fill={true}
         />
         {imageIndex === mainImageIndex && (
-          <p className="bg-main z-10 mb-6 rounded-full px-3 py-[0.375rem] text-sm font-semibold text-white">
+          <p className="bg-main z-10 mb-6 rounded-full px-3 py-1.5 text-sm font-semibold text-white">
             대표 이미지
           </p>
         )}
@@ -72,7 +72,7 @@ export const InformationImageUploadItem = ({
   return (
     <label
       className={[
-        `${imageIndex >= 12 ? "hidden" : ""}`,
+        imageIndex >= 12 ? "hidden" : "",
         "hover:border-main focus:border-main flex h-[9.375rem] w-40 cursor-pointer flex-col items-center justify-center rounded-xl border",
       ].join(" ")}
       htmlFor="file"

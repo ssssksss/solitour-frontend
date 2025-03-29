@@ -38,7 +38,7 @@ export const GatheringEditor = ({
           여행을 다채롭게 경험해보세요!
         </p>
       </div>
-      <section className="flex w-full max-w-full flex-wrap gap-x-[3.5rem] gap-y-[2.375rem] pt-[3rem]">
+      <section className="flex w-full max-w-full flex-wrap gap-x-[3.5rem] gap-y-[2.375rem] pt-12">
         <GatheringEditorTitle />
         <div className="grid w-full gap-x-[1.875rem] gap-y-[2.375rem] max-[576px]:grid-cols-1 min-[576px]:grid-cols-2 min-[960px]:grid-cols-3">
           <GatheringEditorPeriod />

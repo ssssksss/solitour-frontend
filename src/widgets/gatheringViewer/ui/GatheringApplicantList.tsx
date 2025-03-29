@@ -33,7 +33,7 @@ export const GatheringApplicantList = ({
   }
 
   return (
-    <div className="mt-[3.625rem] flex h-auto w-full flex-col rounded-[1rem] text-sm outline outline-offset-[-1px] outline-[#E3E3E3]">
+    <div className="mt-[3.625rem] flex h-auto w-full flex-col rounded-[1rem] text-sm outline -outline-offset-1 outline-[#E3E3E3]">
       <div
         className={[
           isFinish
@@ -65,7 +65,7 @@ export const GatheringApplicantList = ({
               />
             </div>
             {isSortOpen && (
-              <ul className="absolute bottom-[-8.25rem] z-10 flex w-full flex-col bg-white outline outline-offset-[-1px] outline-[#E3E3E3]">
+              <ul className="absolute -bottom-33 z-10 flex w-full flex-col bg-white outline -outline-offset-1 outline-[#E3E3E3]">
                 {[
                   { label: "전체", value: "" },
                   { label: "승인", value: "CONSENT" },
@@ -74,7 +74,7 @@ export const GatheringApplicantList = ({
                 ].map((option, index) => (
                   <li
                     key={index}
-                    className={"hover:bg-gray3 hover:text-main h-[2rem]"}
+                    className="hover:bg-gray3 hover:text-main h-8"
                   >
                     <button
                       className="h-full w-full"
@@ -122,7 +122,8 @@ export const GatheringApplicantList = ({
                 </div>
                 <div className="flex h-full flex-col items-center justify-center py-4">
                   <span>
-                    {`${new Date().getFullYear() - applicant.userGatheringResponse.age}`}
+                    {new Date().getFullYear() -
+                      applicant.userGatheringResponse.age}
                   </span>
                 </div>
                 <div className="flex h-full items-center justify-center py-4">

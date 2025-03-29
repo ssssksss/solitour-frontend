@@ -42,7 +42,7 @@ export const GatheringTimeModal = ({ closeModal }: GatheringTimeModalProps) => {
               <article className="relative flex h-11 w-[6.375rem] gap-1.5 max-[440px]:w-full">
                 <select
                   name="hour"
-                  className="w-[5.125rem] cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline -outline-offset-1 outline-[#E3E3E3] max-[440px]:w-full"
+                  className="w-20.5 cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline -outline-offset-1 outline-[#E3E3E3] max-[440px]:w-full"
                   onChange={(e) =>
                     setStartDatetime((prev) => ({
                       ...prev,
@@ -71,7 +71,7 @@ export const GatheringTimeModal = ({ closeModal }: GatheringTimeModalProps) => {
               <article className="relative flex h-11 w-[6.375rem] gap-1.5 max-[440px]:w-full">
                 <select
                   name="minute"
-                  className="w-[5.125rem] cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline -outline-offset-1 outline-[#E3E3E3] max-[440px]:w-full"
+                  className="w-20.5 cursor-pointer appearance-none rounded-[4rem] pl-[1.3125rem] outline -outline-offset-1 outline-[#E3E3E3] max-[440px]:w-full"
                   onChange={(e) =>
                     setStartDatetime((prev) => ({
                       ...prev,
@@ -102,14 +102,14 @@ export const GatheringTimeModal = ({ closeModal }: GatheringTimeModalProps) => {
                     height={4}
                   />
                 </div>
-                <div className={"flex items-center"}> 분 </div>
+                <div className="flex items-center">분</div>
               </article>
             </div>
           </div>
         </div>
         <div className="flex w-full justify-center">
           <button
-            className="bg-main disabled:bg-gray1 h-[3.375rem] w-full max-w-[18.625rem] shrink-0 rounded-[1.75rem] text-white"
+            className="bg-main disabled:bg-gray1 h-13.5 w-full max-w-[18.625rem] shrink-0 rounded-[1.75rem] text-white"
             onClick={() => handleSubmit()}
           >
             적용하기

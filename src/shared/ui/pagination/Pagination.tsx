@@ -56,7 +56,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
         <button
           key={pageNumber}
           className={[
-            `${pageNumber === currentPage ? "bg-main text-white" : ""}`,
+            pageNumber === currentPage ? "bg-main text-white" : "",
             "hover:text-main flex h-6 w-6 items-center justify-center rounded-full",
           ].join(" ")}
           onClick={() => pageHandler(pageNumber)}

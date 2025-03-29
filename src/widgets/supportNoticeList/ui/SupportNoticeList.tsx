@@ -41,13 +41,13 @@ export const SupportNoticeList = () => {
   return (
     <div>
       <div className="flex w-full flex-col pt-6">
-        <div className={"flex h-[2.75rem] items-center justify-between pb-5"}>
-          <span className={"font-sm flex gap-x-1 font-bold text-black"}>
+        <div className="flex h-[2.75rem] items-center justify-between pb-5">
+          <span className="font-sm flex gap-x-1 font-bold text-black">
             총 {totalNotices}건
           </span>
           <NoticeSearch loading={loading} />
         </div>
-        <div className={"w-full border-t-[1px] border-t-black"}>
+        <div className="w-full border-t-[1px] border-t-black">
           {noticeList.map((notice, index) => (
             <Link
               href={`/support/notice/${notice.id}`}
@@ -65,12 +65,15 @@ export const SupportNoticeList = () => {
                   )
                 /* eslint-enable indent */
               }
-              <div className={"flex pl-[1.25rem] font-bold"}>
+              <div className="flex pl-5 font-bold">
                 {((currentPage || 1) - 1) * 10 + index + 1}
               </div>
               <div className="grid w-full grid-cols-[3.5rem_auto] items-center gap-x-4 pr-2">
                 <div
-                  className={`${categoryStyles[notice.categoryName]} shrink-0`}
+                  className={[
+                    categoryStyles[notice.categoryName],
+                    "shrink-0",
+                  ].join(" ")}
                 >
                   {`[${notice.categoryName}]`}
                 </div>

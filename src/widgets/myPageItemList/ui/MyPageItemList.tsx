@@ -31,7 +31,7 @@ export const MyPageItemList = ({ defaultActiveIndex }: MyPageItemListProps) => {
 
   return (
     <div>
-      <div className="flex w-full gap-[1.625rem] border-b border-gray-200">
+      <div className="flex w-full gap-6.5 border-b border-gray-200">
         {tabList.map((tab, index) => (
           <button
             key={tab.label}
@@ -46,8 +46,8 @@ export const MyPageItemList = ({ defaultActiveIndex }: MyPageItemListProps) => {
             {tab.label}
             <div
               className={[
-                `${activeIndex === index ? "bg-main h-0.5" : "opacity-0"}`,
-                "absolute bottom-[-1.5px] w-full",
+                activeIndex === index ? "bg-main h-0.5" : "opacity-0",
+                "absolute -bottom-0.5 w-full",
               ].join(" ")}
             />
           </button>

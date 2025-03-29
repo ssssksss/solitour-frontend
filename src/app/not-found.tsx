@@ -30,7 +30,7 @@ export default function NotFound() {
           <p>{"삭제되어 찾을 수 없습니다."}</p>
         </div>
       </div>
-      <div className="flex flex-row items-center gap-[0.625rem]">
+      <div className="flex flex-row items-center gap-2.5">
         <Link
           className="border-gray3 flex h-10.5 w-[6.625rem] flex-row items-center justify-center rounded-full border hover:scale-105"
           href="/"

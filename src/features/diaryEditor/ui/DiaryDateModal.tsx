@@ -28,7 +28,7 @@ export const DiaryDateModal = ({ closeModal }: DiaryDateModalProps) => {
             setDate(date);
           }}
         />
-        <div className="absolute top-10 left-[50%] translate-x-[-50%] font-semibold">
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 font-semibold">
           <input
             className="w-32 outline-hidden"
             type="month"

@@ -32,18 +32,17 @@ export const InformationItem = ({
     <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline duration-300 max-[744px]:min-w-[19.183125rem]">
       <Link className="h-[12.6875rem]" href={`/informations/${informationId}`}>
         <Image
-          className="-z-10 rounded-[0.875rem]"
+          className="-z-10 rounded-[0.875rem] object-cover"
           src={image}
           alt="information-image"
           fill={true}
-          style={{ objectFit: "cover" }}
         />
         <div className="rounded-0 flex flex-row items-center justify-between px-5 pt-5">
           {categoryName !== undefined ? (
             <p
               className={[
                 CATEGORY_TAG_STYLE[categoryName],
-                "w-fit rounded-full border px-4 py-[0.375rem] text-xs font-semibold",
+                "w-fit rounded-full border px-4 py-1.5 text-xs font-semibold",
               ].join(" ")}
             >
               {categoryName}
@@ -74,7 +73,7 @@ export const InformationItem = ({
                 isLike
                   ? "fill-[#F85E5E] stroke-[#F85E5E] text-[#F85E5E]"
                   : "stroke-gray2 text-gray2 fill-none",
-                "flex flex-row items-center gap-[0.3125rem] text-xs",
+                "flex flex-row items-center gap-1.25 text-xs",
               ].join(" ")}
             >
               <HeartIcon className="fill-inherit stroke-inherit" />

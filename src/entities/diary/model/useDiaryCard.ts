@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export const useCardFlipAnimation = () => {
+export const useDiaryCard = () => {
   const [flag, setFlag] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
 

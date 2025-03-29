@@ -26,7 +26,7 @@ export const GatheringStatusChangeModal = ({
     >
       <button
         onClick={closeModal}
-        className="absolute top-[2rem] right-[2rem] h-[2rem] w-[2rem] scale-100 transform transition-transform duration-300"
+        className="absolute top-[2rem] right-[2rem] h-8 w-[2rem] scale-100 transform transition-transform duration-300"
         style={{ zIndex: 200 }}
       >
         <MdClose

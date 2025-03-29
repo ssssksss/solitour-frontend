@@ -25,7 +25,7 @@ export const FloatingButton = () => {
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <AddUserInformationForm closeModal={closeModal} />
       </Modal>
-      <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 translate-x-[-100%] flex-col items-center gap-3">
+      <div className="fixed bottom-8 left-[calc(100vw-12px)] z-40 flex w-24 -translate-x-full flex-col items-center gap-3">
         <AnimatePresence>
           {visible && (
             <motion.div

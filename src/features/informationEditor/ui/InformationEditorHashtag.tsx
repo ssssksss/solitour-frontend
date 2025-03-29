@@ -37,7 +37,7 @@ export const InformationEditorHashtag = () => {
             formContext.formState.errors.hashtags
               ? "border-red-500"
               : "border-gray3 hover:border-main focus:border-main",
-            "h-[3.3125rem] w-full rounded-3xl border py-2 pl-5 text-sm font-medium outline-hidden hover:border-b",
+            "h-13.25 w-full rounded-3xl border py-2 pl-5 text-sm font-medium outline-hidden hover:border-b",
           ].join(" ")}
           placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
           disabled={formContext.getValues("hashtags").length >= 10}

@@ -8,7 +8,7 @@ interface BreadcrumbProps {
 
 export const Breadcrumb = ({ categoryList: categories }: BreadcrumbProps) => {
   return (
-    <nav className="text-gray2 flex w-full items-center gap-[.25rem] py-10 text-xs">
+    <nav className="text-gray2 flex w-full items-center gap-1 py-10 text-xs">
       <div className="text-gray1">
         <Link href="/">
           <Image

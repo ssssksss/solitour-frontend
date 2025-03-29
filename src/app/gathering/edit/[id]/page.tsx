@@ -32,7 +32,7 @@ export default async function Page({
   const data = await getGathering(gatheringId);
 
   return (
-    <div className={"min-h-[calc(100vh-25rem)] w-full pt-[2rem] pb-[2rem]"}>
+    <div className="min-h-[calc(100vh-25rem)] w-full pt-8 pb-8">
       <Breadcrumb
         categoryList={[
           { label: "모임", href: "/gathering" },

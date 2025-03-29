@@ -41,9 +41,7 @@ export const UserDropDown = () => {
       ref={outside}
     >
       <UserImage userImageAddress={userStore.userImage.address} size={30} />
-      <span className="overflow-hidden font-bold text-ellipsis whitespace-nowrap">
-        {userStore.nickname}
-      </span>
+      <span className="truncate font-bold">{userStore.nickname}</span>
       <AnimatePresence>
         {isOpen && (
           <motion.section
@@ -64,7 +62,7 @@ export const UserDropDown = () => {
             </div>
             <Link
               href="/mypage?mainCategory=정보&category=owner"
-              className="outline-gray3 1 flex items-center justify-center gap-x-2 rounded-2xl bg-white px-8 py-2 outline outline-offset-[-0.0625rem] hover:scale-105"
+              className="outline-gray3 1 flex items-center justify-center gap-x-2 rounded-2xl bg-white px-8 py-2 outline -outline-offset-1 hover:scale-105"
               onClick={() => closeModal()}
             >
               <Image

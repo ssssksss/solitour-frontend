@@ -90,7 +90,7 @@ export const NewGatheringItem = ({ data }: GatheringItemHomeProps) => {
                     alt="people-icon"
                     width={14}
                     height={14}
-                    className="absolute top-1/2 translate-y-[-50%]"
+                    className="absolute top-1/2 -translate-y-1/2"
                   />
                 </div>
                 <p

@@ -32,7 +32,7 @@ export const InformationEditorTip = () => {
       <div className="relative flex grow flex-col gap-4 max-[744px]:w-full">
         {formContext.getValues("tips").map((tip: string, index: number) => (
           <div key={index} className="relative w-full">
-            <div className="flex h-[3.3125rem] w-full items-center rounded-3xl border bg-gray-100/25 pr-14 pl-5 text-sm outline-hidden">
+            <div className="flex h-13.25 w-full items-center rounded-3xl border bg-gray-100/25 pr-14 pl-5 text-sm outline-hidden">
               {tip}
             </div>
             <MdClose
@@ -50,7 +50,12 @@ export const InformationEditorTip = () => {
         {formContext.getValues("tips").length < 5 && (
           <div className="relative w-full">
             <input
-              className={`${formContext.formState.errors.tips ? "border-red-500 focus:border-red-500" : "border-gray3 hover:border-main focus:border-main"} h-[3.3125rem] w-full rounded-3xl border pr-14 pl-5 text-sm outline-hidden`}
+              className={[
+                formContext.formState.errors.tips
+                  ? "border-red-500 focus:border-red-500"
+                  : "border-gray3 hover:border-main focus:border-main",
+                "h-13.25 w-full rounded-3xl border pr-14 pl-5 text-sm outline-hidden",
+              ].join(" ")}
               type="text"
               placeholder="나만의 혼플 팁을 알려주세요."
               onKeyUp={handleTipChange}

@@ -74,8 +74,8 @@ export const useQuillEditor = () => {
 
   /**
    *
-   * @param imageDataUrl image's dataURL
-   * @param type image's mime type
+   * @param _imageDataUrl image's dataURL
+   * @param _type image's mime type
    * @param imageData provided more functions to handle the image
    * - imageData.toBlob() {function} - convert image to a BLOB Object
    * - imageData.toFile(filename?: string) {function} - convert image to a File Object. filename is optional, it will generate a random name if the original image didn't have a name.
@@ -85,8 +85,8 @@ export const useQuillEditor = () => {
    *   - options.quality {number} - specify the quality of the image, default is 0.8
    */
   const imageDropAndPasteHandler = async (
-    imageDataUrl: string,
-    type: string,
+    _imageDataUrl: string,
+    _type: string,
     imageData: ImageData,
   ) => {
     const file = imageData.toFile();

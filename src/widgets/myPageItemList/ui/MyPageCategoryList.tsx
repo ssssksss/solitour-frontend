@@ -19,11 +19,9 @@ export const MyPageCategoryList = ({
           <button
             key={category.name}
             className={[
-              `${
-                category.value === activeCategory
-                  ? "bg-main text-white outline-0"
-                  : "text-gray1 bg-white outline -outline-offset-1 outline-[#E9EBED]"
-              }`,
+              category.value === activeCategory
+                ? "bg-main text-white outline-0"
+                : "text-gray1 bg-white outline -outline-offset-1 outline-[#E9EBED]",
               "h-9 rounded-full px-4 py-2 text-sm",
             ].join(" ")}
             onClick={() => onClick(category.value)}

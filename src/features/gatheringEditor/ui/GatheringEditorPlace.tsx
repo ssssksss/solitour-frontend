@@ -11,10 +11,10 @@ export const GatheringEditorPlace = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
-    <div className="flex w-full items-center gap-x-[0.625rem] gap-y-[.75rem] max-[400px]:flex-col max-[400px]:items-start">
-      <div className="relative w-[2.625rem] shrink-0">
+    <div className="flex w-full items-center gap-x-2.5 gap-y-3 max-[400px]:flex-col max-[400px]:items-start">
+      <div className="relative w-10.5 shrink-0">
         <span className="text-lg font-semibold">장소</span>
-        <span className="text-main absolute top-[-.5rem] text-lg">*</span>
+        <span className="text-main absolute -top-2 text-lg">*</span>
       </div>
       <div className="relative w-full">
         <button

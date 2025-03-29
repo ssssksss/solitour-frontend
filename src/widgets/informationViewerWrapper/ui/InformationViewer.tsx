@@ -65,7 +65,7 @@ export const InformationViewer = async ({
             <div className="max-[1024px]:hidden">
               <h1 className="text-2xl font-bold break-words">{data.title}</h1>
               <div className="flex flex-row items-end justify-between py-4">
-                <div className="flex h-[3.375rem] flex-row items-center gap-3">
+                <div className="flex h-13.5 flex-row items-center gap-3">
                   <Image
                     className="bg-lightgreen rounded-full border-[0.03125rem] border-[#B8EDD9]"
                     src={data.userImage}

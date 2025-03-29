@@ -25,7 +25,7 @@ export const InformationEditorCategoryList = () => {
           formContext.formState.errors.categoryId
             ? "border-red-500"
             : "border-gray3 hover:border-main",
-          "flex h-[3.3125rem] grow flex-row items-center justify-between gap-1 rounded-full border px-7 py-3 text-lg font-semibold",
+          "flex h-13.25 grow flex-row items-center justify-between gap-1 rounded-full border px-7 py-3 text-lg font-semibold",
         ].join(" ")}
         type="button"
         onClick={openCategoryListModal}

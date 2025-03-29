@@ -32,10 +32,12 @@ export const InformationCategoryListModal = ({
           {categories?.map((category, index) => (
             <button
               key={index}
-              className={
-                `${parentCategory === category.id ? "border-main bg-main font-black text-white" : "text-gray1"} ` +
-                "rounded-full border border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
-              }
+              className={[
+                parentCategory === category.id
+                  ? "border-main bg-main font-black text-white"
+                  : "text-gray1",
+                "rounded-full border border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105",
+              ].join(" ")}
               type="button"
               onClick={() => setParentCategoryId(category.id)}
             >
@@ -54,10 +56,12 @@ export const InformationCategoryListModal = ({
             ?.childrenCategories?.map((category, index) => (
               <button
                 key={index}
-                className={
-                  `${categoryId === category.id ? "border-main bg-main text-white" : "text-gray1"} ` +
-                  "rounded-full border border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105"
-                }
+                className={[
+                  categoryId === category.id
+                    ? "border-main bg-main text-white"
+                    : "text-gray1",
+                  "rounded-full border border-[#E9EBED] px-3 py-1 text-sm font-medium hover:scale-105",
+                ].join(" ")}
                 type="button"
                 onClick={() =>
                   setCategory(
@@ -70,17 +74,17 @@ export const InformationCategoryListModal = ({
               </button>
             ))}
         </div>
-        <div
-          className={`${parentCategory === 0 || categoryId === 0 ? "hidden" : ""} flex w-full flex-row items-center justify-center py-4`}
-        >
-          <button
-            className="bg-main h-10.5 w-[9.5rem] rounded-full font-medium text-white shadow-sm hover:scale-105"
-            type="button"
-            onClick={handleSaveClick}
-          >
-            적용하기
-          </button>
-        </div>
+        {parentCategory !== 0 && categoryId !== 0 && (
+          <div className="flex w-full flex-row items-center justify-center py-4">
+            <button
+              className="bg-main h-10.5 w-[9.5rem] rounded-full font-medium text-white shadow-sm hover:scale-105"
+              type="button"
+              onClick={handleSaveClick}
+            >
+              적용하기
+            </button>
+          </div>
+        )}
       </div>
     </ModalTemplate>
   );

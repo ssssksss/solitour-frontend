@@ -90,11 +90,11 @@ export const GatheringParticipantsFilterModal = ({
       className="max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem]"
       closeModal={closeModal}
     >
-      <h2 className="h-[2rem] text-2xl font-bold text-black">참여자 선택</h2>
-      <section className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
-        <article className="flex max-w-[16.25rem] justify-between gap-y-[1rem]">
-          <div className="h-[2rem] font-bold text-black">인원</div>
-          <div className="flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]">
+      <h2 className="h-8 text-2xl font-bold text-black">참여자 선택</h2>
+      <section className="flex w-full flex-col gap-y-8 pt-12">
+        <article className="flex max-w-[16.25rem] justify-between gap-y-4">
+          <div className="h-8 font-bold text-black">인원</div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <div
               className="flex h-[2.75rem] items-center select-none"
               onClick={() =>
@@ -134,10 +134,10 @@ export const GatheringParticipantsFilterModal = ({
             </div>
           </div>
         </article>
-        <article className={"flex w-full flex-col gap-y-[1rem]"}>
-          <div className="h-[2rem] text-start font-bold text-black">나이</div>
-          <div className="relative flex w-full flex-col gap-[1rem]">
-            <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
+        <article className="flex w-full flex-col gap-y-4">
+          <div className="h-8 text-start font-bold text-black">나이</div>
+          <div className="relative flex w-full flex-col gap-4">
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
               {Object.entries(SETTING_MODAL_AGE).map((i) => (
                 <button
                   key={i[0]}
@@ -147,20 +147,32 @@ export const GatheringParticipantsFilterModal = ({
                       _endAge: i[1].endAge,
                     })
                   }
-                  className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white" : "outline outline-offset-[-1px] outline-[#E9EBED]"} text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-4 py-2 hover:text-white`}
+                  className={[
+                    directInput == false &&
+                    (startAge || 0) <= i[1].startAge &&
+                    (endAge || 0) >= i[1].endAge
+                      ? "bg-main text-white"
+                      : "outline -outline-offset-1 outline-[#E9EBED]",
+                    "text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-4 py-2 hover:text-white",
+                  ].join(" ")}
                 >
                   {i[0]}
                 </button>
               ))}
               <button
-                className={`${directInput ? "bg-main text-white" : "outline outline-offset-[-1px] outline-[#E9EBED]"} text-gray1 hover:bg-main rounded-[4rem] px-4 py-2 hover:text-white`}
+                className={[
+                  directInput
+                    ? "bg-main text-white"
+                    : "outline -outline-offset-1 outline-[#E9EBED]",
+                  "text-gray1 hover:bg-main rounded-[4rem] px-4 py-2 hover:text-white",
+                ].join(" ")}
                 onClick={() => setDirectInput(true)}
               >
                 직접 입력
               </button>
             </div>
-            <div className="flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]">
-              <div className="relative flex w-[5.125rem] py-[.5rem] pr-[0.625rem] after:content-['세']">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
                 <input
                   placeholder="최소 20"
                   type={"text"}
@@ -186,13 +198,13 @@ export const GatheringParticipantsFilterModal = ({
                   value={startAge || undefined}
                   className="w-full text-center text-lg"
                 />
-                <div className="absolute bottom-2 h-[1px] w-[5.125rem] bg-black"></div>
-                <div className="text-main absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold">
+                <div className="absolute bottom-2 h-[1px] w-20.5 bg-black"></div>
+                <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
                   {new Date().getFullYear() - (startAge || 0)} 년생
                 </div>
               </div>
               <div> ~ </div>
-              <div className="relative flex w-[5.125rem] py-[.5rem] pr-[0.625rem] after:content-['세']">
+              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
                 <input
                   placeholder="최대 59"
                   type="text"
@@ -221,30 +233,29 @@ export const GatheringParticipantsFilterModal = ({
                     input.value = input.value.replace(/[^0-9]/g, "");
                   }}
                   value={endAge}
-                  className="w-full pr-[0.625rem] text-center text-lg"
+                  className="w-full pr-2.5 text-center text-lg"
                 />
-                <div className="absolute bottom-2 h-[1px] w-[5.125rem] bg-black"></div>
-                <div className="text-main absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold">
+                <div className="absolute bottom-2 h-[1px] w-20.5 bg-black"></div>
+                <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
                   {new Date().getFullYear() - (endAge || 0)} 년생
                 </div>
               </div>
             </div>
           </div>
         </article>
-        <article className="flex flex-col gap-y-[1rem] pt-[1rem]">
-          <div className="h-[2rem] text-start font-bold text-black">
-            성별 제한
-          </div>
-          <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
+        <article className="flex flex-col gap-y-4 pt-[1rem]">
+          <div className="h-8 text-start font-bold text-black">성별 제한</div>
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
             {Object.entries(GENDER).map((i) => (
               <button
                 key={i[0]}
-                onClick={() => setSex(i[0])}
-                className={`${
+                className={[
                   sex == i[0]
                     ? "bg-main text-white"
-                    : "text-gray-1 outline outline-offset-[-1px] outline-[#E9EBED]"
-                } flex items-center rounded-[4rem] px-4 py-2`}
+                    : "text-gray-1 outline -outline-offset-1 outline-[#E9EBED]",
+                  "flex items-center rounded-[4rem] px-4 py-2",
+                ].join(" ")}
+                onClick={() => setSex(i[0])}
               >
                 {i[1]}
               </button>
@@ -252,9 +263,9 @@ export const GatheringParticipantsFilterModal = ({
           </div>
         </article>
       </section>
-      <div className="flex w-full justify-center gap-[1rem] pt-[2rem]">
+      <div className="flex w-full justify-center gap-4 pt-8">
         <button
-          className="bg-main disabled:bg-gray1 h-[3rem] w-full max-w-[18.625rem] rounded-[4rem] px-[1rem] py-[.5rem] text-white"
+          className="bg-main disabled:bg-gray1 h-12 w-full max-w-[18.625rem] rounded-[4rem] px-4 py-2 text-white"
           disabled={
             !sex ||
             (startAge || 0) < 20 ||

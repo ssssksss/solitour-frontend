@@ -16,8 +16,6 @@ export {
 export { getMyPageInformationList } from "./api/myPageInformationList";
 export { getTopInformationTitleList } from "./api/topInformationTitleList";
 
-export { INFORMATION_CATEGORY } from "./config/informationCategory";
-
 export type { Information } from "./model/information";
 export type { InformationCategory } from "./model/informationCategory";
 export type { InformationList } from "./model/informationList";

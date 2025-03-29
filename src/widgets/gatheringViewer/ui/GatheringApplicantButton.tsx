@@ -30,7 +30,7 @@ export const GatheringApplicantButton = ({
 
   return (
     <div className="h-full w-full">
-      <article className="flex h-full items-center justify-center gap-x-[.5rem] px-[.5rem] max-[576px]:hidden">
+      <article className="flex h-full items-center justify-center gap-x-2 px-2 max-[576px]:hidden">
         {[
           {
             status: "CONSENT",
@@ -53,7 +53,7 @@ export const GatheringApplicantButton = ({
         ].map((i, index) => (
           <button
             key={i.status + index}
-            className={`aspect-square h-[3.25rem] rounded-[2rem] py-2 max-[576px]:h-[2.75rem] min-[800px]:w-full ${i.hoverStyle} ${applicant.gatheringStatus === i.status ? i.style : "bg-white outline outline-offset-[-1px] outline-[#E3E3E3]"}`}
+            className={`aspect-square h-[3.25rem] rounded-[2rem] py-2 max-[576px]:h-[2.75rem] min-[800px]:w-full ${i.hoverStyle} ${applicant.gatheringStatus === i.status ? i.style : "bg-white outline -outline-offset-1 outline-[#E3E3E3]"}`}
             disabled={applicant.gatheringStatus === i.status}
             onClick={async () => {
               if (isFullParticipants && i.status == "CONSENT") {
@@ -77,7 +77,7 @@ export const GatheringApplicantButton = ({
         ))}
       </article>
       <article
-        className={`flex h-full items-center justify-center gap-x-[.5rem] px-[.5rem] duration-1000 min-[577px]:hidden ${isStatusOpen ? "bg-gray3/70 absolute right-0" : "bg-transparent transition-transform"}`}
+        className={`flex h-full items-center justify-center gap-x-2 px-2 duration-1000 min-[577px]:hidden ${isStatusOpen ? "bg-gray3/70 absolute right-0" : "bg-transparent transition-transform"}`}
       >
         {[
           {
@@ -101,11 +101,12 @@ export const GatheringApplicantButton = ({
         ].map((i) => (
           <button
             key={i.status}
-            className={`aspect-square h-[3.25rem] rounded-[2rem] max-[576px]:h-[2.75rem] min-[800px]:w-full ${
+            className={[
               applicant.gatheringStatus == i.status
                 ? `${i.style} order-3`
-                : `bg-white outline outline-offset-[-1px] outline-[#E3E3E3] ${i.hoverStyle} ${isStatusOpen ? "" : "max-[576px]:hidden"}`
-            }`}
+                : `bg-white outline -outline-offset-1 outline-[#E3E3E3] ${i.hoverStyle} ${isStatusOpen ? "" : "max-[576px]:hidden"}`,
+              "aspect-square h-[3.25rem] rounded-[2rem] max-[576px]:h-[2.75rem] min-[800px]:w-full",
+            ].join(" ")}
             onClick={async () => {
               // 모바일 너비에서 버튼이 1개라 여러 버튼을 보여주는 함수
               if (applicant.gatheringStatus === i.status) {

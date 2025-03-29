@@ -24,7 +24,7 @@ export const SignIn = () => {
         href="/api/auth/kakao"
       >
         <Image
-          className="absolute top-[50%] left-4 h-4 w-4 -translate-y-1/2"
+          className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2"
           src="/icons/kakao-icon.svg"
           alt="kakao-icon"
           width={16}

@@ -11,13 +11,13 @@ export const MyPageLinkedAccount = ({
 }: MyPageLinkedAccountProps) => {
   return (
     <section>
-      <div className="grid h-10 w-full grid-cols-[6rem_auto] gap-x-[1.75rem]">
+      <div className="grid h-10 w-full grid-cols-[6rem_auto] gap-x-7">
         <div className="flex items-center text-lg font-semibold">
           연동된 계정
         </div>
         <div className="flex items-center justify-between">
           <span>{provider}</span>
-          <div className="flex items-center gap-x-[.875rem]">
+          <div className="flex items-center gap-x-3.5">
             <span className="text-gray1 font-medium">{createdDate}</span>
             {provider === "kakao" && (
               <div className="relative flex h-10 w-10 items-center justify-center rounded-[50%] bg-[#FEE501] p-4">

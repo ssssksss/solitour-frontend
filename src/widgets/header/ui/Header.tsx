@@ -23,8 +23,8 @@ export const Header = () => {
       <HeaderSidebar visible={visible} onClose={handleCloseButton} />
       <div
         className={[
+          isTransparent ? "bg-white/30 backdrop-blur-md" : "bg-white",
           "fixed top-0 z-40 flex w-full justify-center shadow",
-          `${isTransparent ? "bg-white/30 backdrop-blur-md" : "bg-white"}`,
         ].join(" ")}
       >
         <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
@@ -44,7 +44,10 @@ export const Header = () => {
               <ul className="flex h-full items-center">
                 <li>
                   <Link
-                    className={`${pathname === "/" ? "font-bold" : "font-medium"} hover:text-main flex h-full w-full items-center justify-center px-5 text-sm text-black max-[1024px]:px-3`}
+                    className={[
+                      pathname === "/" ? "font-bold" : "font-medium",
+                      "hover:text-main flex h-full w-full items-center justify-center px-5 text-sm text-black max-[1024px]:px-3",
+                    ].join(" ")}
                     href="/"
                   >
                     홈
@@ -73,7 +76,7 @@ export const Header = () => {
                   <li key={href}>
                     <Link
                       className={[
-                        `${pathname.includes(path) ? "font-bold" : "font-medium"}`,
+                        pathname.includes(path) ? "font-bold" : "font-medium",
                         "hover:text-main flex h-full w-full items-center justify-center px-5 text-sm text-black max-[1024px]:px-3",
                       ].join(" ")}
                       href={href}
@@ -87,11 +90,11 @@ export const Header = () => {
             </nav>
           </div>
           <MdOutlineMenu
-            className="hover:text-main absolute left-[calc(100vw-24px)] hidden translate-x-[-100%] cursor-pointer max-[744px]:flex"
+            className="hover:text-main absolute left-[calc(100vw-24px)] hidden -translate-x-full cursor-pointer max-[744px]:flex"
             size="1.5rem"
             onClick={handleMenuClick}
           />
-          <div className="absolute left-[calc(100vw-24px)] flex h-9 w-32 translate-x-[-100%] items-center gap-2 rounded-lg p-2 text-sm max-[744px]:hidden">
+          <div className="absolute left-[calc(100vw-24px)] flex h-9 w-32 -translate-x-full items-center gap-2 rounded-lg p-2 text-sm max-[744px]:hidden">
             {id == 0 ? (
               <>
                 <div className="animate-pulse-auth relative aspect-square w-7.5 rounded-[50%] shadow" />

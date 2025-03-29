@@ -63,6 +63,7 @@ export const useAuthKakao = () => {
   const handleHomeButtonClick = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     router.push("/");
+    router.refresh();
   };
 
   // 숫자만 입력되게 필터링

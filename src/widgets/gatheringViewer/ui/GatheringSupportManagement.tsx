@@ -84,7 +84,7 @@ export const GatheringSupportManagement = ({
   }
   if (postUserId !== userStore.id && userStore.id > 0) {
     return (
-      <div className={"flex gap-2 max-[960px]:flex-col min-[960px]:flex-row"}>
+      <div className="flex gap-2 max-[960px]:flex-col min-[960px]:flex-row">
         <Modal isOpen={modalState1.isOpen} closeModal={modalState1.closeModal}>
           <GatheringChattingLinkCheckModal
             openChattingUrl={openChattingUrl}
@@ -134,20 +134,21 @@ export const GatheringSupportManagement = ({
         )}
         {gatheringStatus == null && (
           <button
-            className={`${
+            className={[
               gatheringStore.personCount ==
                 gatheringStore.currentParticipants ||
-              !(
-                allowedGender == "ALL" ||
-                userStore?.sex?.toUpperCase() == allowedGender
-              ) ||
-              (!(
-                userStore.age !== null &&
-                userStore.age <= allowedAgeRange.startAge &&
-                userStore.age >= allowedAgeRange.endAge
-              ) &&
-                "bg-gray3")
-            } flex h-12.5 w-30 items-center justify-center rounded-[2.125rem] text-sm outline -outline-offset-1 outline-[#D9D9D9]`}
+                !(
+                  allowedGender == "ALL" ||
+                  userStore?.sex?.toUpperCase() == allowedGender
+                ) ||
+                (!(
+                  userStore.age !== null &&
+                  userStore.age <= allowedAgeRange.startAge &&
+                  userStore.age >= allowedAgeRange.endAge
+                ) &&
+                  "bg-gray3"),
+              "flex h-12.5 w-30 items-center justify-center rounded-[2.125rem] text-sm outline -outline-offset-1 outline-[#D9D9D9]",
+            ].join(" ")}
             onClick={handleApplyButtonClick}
             disabled={
               gatheringStore.personCount ==

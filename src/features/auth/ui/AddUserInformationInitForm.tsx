@@ -17,7 +17,7 @@ export const AddUserInformationInitForm = ({
   const formContext = useFormContext();
 
   return (
-    <div className="fixed inset-0 z-[100] flex h-full w-full flex-col items-center justify-center bg-white px-14">
+    <div className="fixed inset-0 z-100 flex h-full w-full flex-col items-center justify-center bg-white px-14">
       <section className="scrollbar-hide outline-gray2 flex max-h-[calc(100vh-1rem)] w-full max-w-200 flex-col items-center overflow-y-scroll rounded-2xl rounded-b-2xl bg-white px-14 pt-2 pb-4 outline -outline-offset-1">
         <div className="flex w-full py-2">
           <button
@@ -44,10 +44,10 @@ export const AddUserInformationInitForm = ({
             <h3 className="text-lg font-bold text-black">이름</h3>
             <input
               className="text-main focus:outline-main mt-3 h-12 w-full rounded-3xl px-3 py-2 text-center"
+              {...formContext.register("name")}
               type="text"
               placeholder="이름을 입력해주세요"
               maxLength={10}
-              {...formContext.register("name")}
             />
           </article>
           <article className="flex flex-col">

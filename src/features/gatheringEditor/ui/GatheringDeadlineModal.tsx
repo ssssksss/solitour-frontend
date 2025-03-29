@@ -69,7 +69,7 @@ export const GatheringDeadlineModal = ({
       className="max-h-[38rem] w-[calc(100vw-1rem)] max-w-[25rem]"
       closeModal={closeModal}
     >
-      <h2 className="mt-[2rem] h-[2rem] text-2xl font-bold text-black">
+      <h2 className="mt-[2rem] h-8 text-2xl font-bold text-black">
         모임 마감일 선택
       </h2>
       <section className="flex flex-col items-center gap-[1.875rem]">
@@ -86,14 +86,14 @@ export const GatheringDeadlineModal = ({
               setYear(e.getFullYear());
             }}
           />
-          <div className="absolute top-10 left-[50%] translate-x-[-50%] font-semibold">
+          <div className="absolute top-10 left-1/2 -translate-x-1/2 font-semibold">
             {year}.{month}
           </div>
         </div>
       </section>
       <div className="flex w-full justify-center pt-[1rem]">
         <button
-          className="bg-main disabled:bg-gray1 h-[3.375rem] min-w-[18.625rem] rounded-[1.75rem] px-[3.5rem] py-[1rem] text-white"
+          className="bg-main disabled:bg-gray1 h-13.5 min-w-[18.625rem] rounded-[1.75rem] px-[3.5rem] py-[1rem] text-white"
           onClick={() => submitHandler()}
           disabled={
             !(

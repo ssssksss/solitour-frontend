@@ -12,11 +12,11 @@ export const DiaryEditorDate = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
-    <div className="relative flex h-[3.3125rem] flex-row items-center gap-2.5 max-[1024px]:w-full">
+    <div className="relative flex h-13.25 flex-row items-center gap-2.5 max-[1024px]:w-full">
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <DiaryDateModal closeModal={closeModal} />
       </Modal>
-      <h2 className="w-[2.625rem] text-lg font-semibold text-nowrap text-black">
+      <h2 className="w-10.5 text-lg font-semibold text-nowrap text-black">
         날짜<span className="text-main">*</span>
       </h2>
       <button
@@ -25,7 +25,7 @@ export const DiaryEditorDate = () => {
           formContext.formState.errors.startDate
             ? "border-red-500"
             : "border-gray3 hover:border-main",
-          "h-[3.3125rem] w-[21.75rem] grow rounded-full border bg-transparent pl-5 text-start text-sm",
+          "h-13.25 w-87 grow rounded-full border bg-transparent pl-5 text-start text-sm",
         ].join(" ")}
         type="button"
         onClick={openModal}

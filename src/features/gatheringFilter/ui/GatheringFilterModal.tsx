@@ -106,39 +106,49 @@ export const GatheringFilterModal = ({
       closeModal={closeModal}
     >
       <h2 className="h-8 text-2xl font-bold text-black">조건 선택</h2>
-      <div className="flex w-full flex-col gap-y-[2rem] pt-[3rem]">
-        <div className="flex flex-col gap-y-[1rem]">
+      <div className="flex w-full flex-col gap-y-8 pt-12">
+        <div className="flex flex-col gap-y-4">
           <div className="h-8 font-bold text-black">지역</div>
-          <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
             {regions.map((i) => (
               <button
                 key={i.id}
+                className={[
+                  location === i.id
+                    ? "bg-main text-white outline-0"
+                    : "text-gray1 outline -outline-offset-1 outline-[#E9EBED]",
+                  "flex items-center rounded-[4rem] px-4 py-2",
+                ].join(" ")}
                 onClick={() => setLocation(i.id)}
-                className={`${location === i.id ? "bg-main text-white outline-0" : "text-gray1 outline outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
               >
                 {i.name}
               </button>
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-y-[1rem]">
+        <div className="flex flex-col gap-y-4">
           <div className="h-8 font-bold text-black">성별</div>
-          <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
             {SEX.map((i) => (
               <button
                 key={i[1]}
+                className={[
+                  sex == i[1]
+                    ? "bg-main text-white"
+                    : "text-gray1 outline -outline-offset-1 outline-[#E9EBED]",
+                  "flex items-center rounded-[4rem] px-4 py-2",
+                ].join(" ")}
                 onClick={() => setSex(i[1])}
-                className={`${sex == i[1] ? "bg-main text-white" : "text-gray1 outline outline-offset-[-1px] outline-[#E9EBED]"} flex items-center rounded-[4rem] px-4 py-2`}
               >
                 {i[0]}
               </button>
             ))}
           </div>
         </div>
-        <article className="flex w-full flex-col gap-y-[1rem]">
+        <article className="flex w-full flex-col gap-y-4">
           <div className="h-8 text-start font-bold text-black">나이</div>
-          <div className="relative flex w-full flex-col gap-[1rem]">
-            <div className="flex flex-wrap gap-x-[1rem] gap-y-[.5rem]">
+          <div className="relative flex w-full flex-col gap-4">
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
               {Object.entries(AGE_RANGE).map((i) => (
                 <button
                   key={i[0]}
@@ -148,23 +158,35 @@ export const GatheringFilterModal = ({
                       _endAge: i[1].endAge,
                     })
                   }
-                  className={`${directInput == false && (startAge || 0) <= i[1].startAge && (endAge || 0) >= i[1].endAge ? "bg-main text-white outline-0" : "outline outline-offset-[-1px] outline-[#E9EBED]"} text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-4 py-2 hover:text-white`}
+                  className={[
+                    directInput == false &&
+                    (startAge || 0) <= i[1].startAge &&
+                    (endAge || 0) >= i[1].endAge
+                      ? "bg-main text-white outline-0"
+                      : "outline -outline-offset-1 outline-[#E9EBED]",
+                    "text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-4 py-2 hover:text-white",
+                  ].join(" ")}
                 >
                   {i[0]}
                 </button>
               ))}
               <button
-                className={`${directInput ? "bg-main text-white outline-0" : "outline outline-offset-[-1px] outline-[#E9EBED]"} text-gray1 hover:bg-main rounded-[4rem] px-4 py-2 hover:text-white`}
+                className={[
+                  directInput
+                    ? "bg-main text-white outline-0"
+                    : "outline -outline-offset-1 outline-[#E9EBED]",
+                  "text-gray1 hover:bg-main rounded-[4rem] px-4 py-2 hover:text-white",
+                ].join(" ")}
                 onClick={() => setDirectInput(true)}
               >
                 직접 입력
               </button>
             </div>
-            <div className="flex flex-wrap items-center gap-x-[1rem] gap-y-[.5rem]">
-              <div className="relative flex w-[5.125rem] py-[.5rem] pr-[0.625rem] after:content-['세']">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
                 <input
                   placeholder="최소 20"
-                  type={"text"}
+                  type="text"
                   disabled={!directInput}
                   onChange={(e) => {
                     let num = Number(e.target.value);
@@ -187,13 +209,13 @@ export const GatheringFilterModal = ({
                   value={startAge || undefined}
                   className="w-full text-center text-lg"
                 />
-                <div className="absolute bottom-2 h-[1px] w-[5.125rem] bg-black" />
-                <div className="text-main absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold">
+                <div className="absolute bottom-2 h-[1px] w-20.5 bg-black" />
+                <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
                   {new Date().getFullYear() - (startAge || 0)} 년생
                 </div>
               </div>
               <div>~</div>
-              <div className="relative flex w-[5.125rem] py-[.5rem] pr-[0.625rem] after:content-['세']">
+              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
                 <input
                   placeholder="최대 59"
                   type="text"
@@ -222,17 +244,17 @@ export const GatheringFilterModal = ({
                     input.value = input.value.replace(/[^0-9]/g, "");
                   }}
                   value={endAge}
-                  className="w-full pr-[0.625rem] text-center text-lg"
+                  className="w-full pr-2.5 text-center text-lg"
                 />
-                <div className="absolute bottom-2 h-[1px] w-[5.125rem] bg-black" />
-                <div className="text-main absolute bottom-[-1.5rem] left-[50%] flex w-full translate-x-[-50%] justify-center font-semibold">
+                <div className="absolute bottom-2 h-[1px] w-20.5 bg-black" />
+                <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
                   {new Date().getFullYear() - (endAge || 0)} 년생
                 </div>
               </div>
             </div>
           </div>
         </article>
-        <div className="flex flex-col items-center gap-[.5rem] pt-[2rem]">
+        <div className="flex flex-col items-center gap-2 pt-8">
           <div className="flex h-8 w-full items-center justify-between gap-4 font-bold text-black">
             <span>일정</span>
             <button
@@ -263,7 +285,7 @@ export const GatheringFilterModal = ({
                 {SELECTED_SCHEDULE_DATA.map((i) => (
                   <button
                     key={i.name}
-                    className="bg-main rounded-lg px-[.5rem] py-[.125rem] text-white"
+                    className="bg-main rounded-lg px-2 py-0.5 text-white"
                     onClick={() => {
                       setCalendarDate([
                         {
@@ -309,11 +331,11 @@ export const GatheringFilterModal = ({
                     setYear(e.getFullYear());
                   }}
                 />
-                <div className="absolute top-6 left-[50%] translate-x-[-50%] font-semibold">
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 font-semibold">
                   {year}.{month}
                 </div>
               </div>
-              <div className="flex h-[1.5rem] w-full justify-center gap-[.25rem]">
+              <div className="flex h-[1.5rem] w-full justify-center gap-1">
                 <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
                 <div>~</div>
                 <div>{format(calendarDate[0].endDate, "yyyy-MM-dd")}</div>
@@ -330,15 +352,15 @@ export const GatheringFilterModal = ({
           )}
         </div>
       </div>
-      <div className="flex w-full justify-center gap-[1rem] pt-[2rem]">
+      <div className="flex w-full justify-center gap-4 pt-8">
         <button
-          className="bg-main h-[3rem] min-w-[8rem] rounded-[4rem] px-[1rem] py-[.5rem] text-white"
+          className="bg-main h-12 min-w-[8rem] rounded-[4rem] px-4 py-2 text-white"
           onClick={() => handleInitButtonClick()}
         >
           설정 초기화
         </button>
         <button
-          className="bg-main h-[3rem] min-w-[8rem] rounded-[4rem] px-[1rem] py-[.5rem] text-white"
+          className="bg-main h-12 min-w-[8rem] rounded-[4rem] px-4 py-2 text-white"
           onClick={() => handleSubmit()}
         >
           적용하기

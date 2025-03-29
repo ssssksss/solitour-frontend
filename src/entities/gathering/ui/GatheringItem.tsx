@@ -1,10 +1,10 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { Gathering } from "@/entities/gathering";
 import { convertNumberToShortForm } from "@/shared/lib/utils";
-import React from "react";
 import { CATEGORY_TAG_STYLE } from "../config/categoryTagStyle";
 import { STATUS_STYLE } from "../config/statusStyle";
 
@@ -35,7 +35,6 @@ export const GatheringItem = ({
 }: GatheringItemProps) => {
   return (
     <Link
-      href={`/gathering/${gathering.gatheringId}`}
       className={[
         gathering.isFinish ||
         format(new Date(gathering.deadline), "yyyyMMdd") <
@@ -44,6 +43,7 @@ export const GatheringItem = ({
           : "text-black",
         "outline-gray3 hover:bg-lightgreen hover:outline-main flex h-full max-h-[19.6875rem] w-full flex-col gap-5 rounded-2xl p-5 outline -outline-offset-2 duration-300",
       ].join(" ")}
+      href={`/gathering/${gathering.gatheringId}`}
       onClick={(e) => {
         if (!isAccessGathering) {
           e.preventDefault();
@@ -130,7 +130,13 @@ export const GatheringItem = ({
               <div className="flex min-w-fit gap-2">
                 <div className="relative flex items-center">
                   <Image
-                    src={`${gathering.isFinish || format(new Date(gathering.deadline), "yyyyMMdd") < format(new Date(), "yyyyMMdd") ? "/icons/people-gray-icon.svg" : "/icons/people-icon.svg"}`}
+                    src={
+                      gathering.isFinish ||
+                      format(new Date(gathering.deadline), "yyyyMMdd") <
+                        format(new Date(), "yyyyMMdd")
+                        ? "/icons/people-gray-icon.svg"
+                        : "/icons/people-icon.svg"
+                    }
                     alt="people-icon"
                     width={16}
                     height={16}
@@ -175,6 +181,7 @@ export const GatheringItem = ({
             <article className="flex h-5 items-center gap-2 leading-[100%]">
               <div className="relative">
                 <Image
+                  className="translate-y-px"
                   src={
                     gathering.isFinish ||
                     format(new Date(gathering.deadline), "yyyyMMdd") <
@@ -185,7 +192,6 @@ export const GatheringItem = ({
                   alt="clock-icon"
                   width={16}
                   height={16}
-                  className="translate-y-px"
                 />
               </div>
               <span className="flex h-full items-center text-sm">

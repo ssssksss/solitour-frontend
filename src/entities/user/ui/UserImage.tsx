@@ -10,7 +10,7 @@ export const UserImage = ({ userImageAddress, size }: UserImageProps) => {
     <Image
       className="bg-lightgreen rounded-[50%] border-[0.03125rem] border-[#B8EDD9]"
       src={userImageAddress}
-      alt="user_image"
+      alt="user-image"
       width={size}
       height={size}
     />

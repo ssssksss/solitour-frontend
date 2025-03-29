@@ -6,14 +6,14 @@ import sanitizeHtml from "sanitize-html";
 import { TiLocation } from "react-icons/ti";
 import { Diary } from "../model/diary";
 import { FEELING_STATUS } from "../config/feelingStatus";
-import { useCardFlipAnimation } from "../model/useCardFlipAnimation";
+import { useDiaryCard } from "../model/useDiaryCard";
 
 interface DiaryCardProps {
   diary: Diary;
 }
 
 export const DiaryCard = ({ diary }: DiaryCardProps) => {
-  const { flag, isFlipped, handleFlip } = useCardFlipAnimation();
+  const { flag, isFlipped, handleFlip } = useDiaryCard();
 
   // 뒷면
   if (isFlipped) {
@@ -35,7 +35,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
             {diary.diaryDayContentResponses.diaryDayContentDetail[0].place}
           </p>
         </div>
-        <div className="mt-[8.75rem] flex flex-col max-[972px]:mt-[5.375rem]">
+        <div className="mt-35 flex flex-col max-[972px]:mt-[5.375rem]">
           <div className="relative h-20 w-16">
             <Image
               className="object-contain"
@@ -47,9 +47,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
           <Link
             className="hover:text-main mt-12 w-full truncate text-2xl font-bold max-[845px]:mt-5"
             href={`/diary/${diary.diaryId}`}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
+            onClick={(e) => e.stopPropagation()}
           >
             {diary.title}
           </Link>
@@ -95,7 +93,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
         alt="image"
         fill={true}
       />
-      <div className="absolute bottom-0 h-[11.5rem] w-full rounded-b-2xl bg-linear-to-b from-black/0 to-black/50" />
+      <div className="absolute bottom-0 h-46 w-full rounded-b-2xl bg-linear-to-b from-black/0 to-black/50" />
       <div className="absolute bottom-9 left-9 flex flex-col items-start gap-1 pr-9 text-white">
         <Link
           className="hover:text-main text-start text-2xl font-bold"
@@ -104,7 +102,11 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
         >
           {diary.title}
         </Link>
-        <p className="text-lg">{`${new Date(new Date(diary.startDatetime).getTime() + 1000 * 60 * 60 * 24).toLocaleDateString("ko-KR")}`}</p>
+        <p className="text-lg">
+          {new Date(
+            new Date(diary.startDatetime).getTime() + 1000 * 60 * 60 * 24,
+          ).toLocaleDateString("ko-KR")}
+        </p>
       </div>
     </button>
   );
