@@ -18,7 +18,7 @@ export const MyPageAccountDeleteModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-96 max-w-160 flex-col gap-y-4 px-16"
+      className="max-h-96 max-w-160 flex-col gap-y-4 p-6"
       closeModal={closeModal}
     >
       <div className="flex flex-col gap-y-2">

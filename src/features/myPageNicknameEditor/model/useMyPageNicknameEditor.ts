@@ -21,17 +21,17 @@ export const useMyPageNicknameEditor = (initialNickname: string) => {
       return;
     }
 
-    setLoading(true);
-    const result = await updateNickname(nickname);
-
-    if (result === 200) {
+    try {
+      setLoading(true);
+      await updateNickname(nickname);
       setUserState({ nickname });
       setDefaultNickname(nickname);
       setMessage("성공");
-    } else {
+    } catch (error) {
       setMessage("실패");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return {

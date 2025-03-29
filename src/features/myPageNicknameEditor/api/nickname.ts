@@ -12,5 +12,7 @@ export async function updateNickname(nickname: string) {
     },
   );
 
-  return response.status;
+  if (!response.ok) {
+    throw new Error("Failed to update data.");
+  }
 }
