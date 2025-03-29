@@ -66,8 +66,8 @@ export const useMyPageUserImage = (
     onDragLeave,
     onDragOver,
     onDropOrInputEvent,
-    handleDeleteClick,
     closeCropModal,
+    handleDeleteClick,
     handleImageUrlChange,
   };
 };

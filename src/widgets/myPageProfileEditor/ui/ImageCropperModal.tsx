@@ -1,48 +1,34 @@
 "use client";
 
-import { useState } from "react";
 import Cropper from "react-easy-crop";
 import { ModalTemplate } from "@/shared/ui/modal";
-import { getCroppedImage } from "../model/getCroppedImage";
+import { useImageCropperModal } from "../model/useImageCropperModal";
 
-interface CropperComponentProps {
+interface ImageCropperModalProps {
   imageBase64Data: string;
   closeCropModal: () => void;
   onChangeImageUrl: (_: string) => void;
 }
 
-export const CropperComponent = ({
+export const ImageCropperModal = ({
   imageBase64Data,
   closeCropModal,
   onChangeImageUrl,
-}: CropperComponentProps) => {
-  const [crop, setCrop] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-  const [rotation, setRotation] = useState<number>(0);
-  const [zoom, setZoom] = useState<number>(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
-
-  const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  };
-
-  const showCroppedImage = async () => {
-    if (!imageBase64Data || !croppedAreaPixels) return;
-
-    const croppedImage = await getCroppedImage(
-      imageBase64Data,
-      croppedAreaPixels,
-      rotation,
-    );
-    onChangeImageUrl(croppedImage as string);
-    closeCropModal();
-  };
+}: ImageCropperModalProps) => {
+  const {
+    crop,
+    rotation,
+    zoom,
+    setCrop,
+    setRotation,
+    setZoom,
+    onCropComplete,
+    showCroppedImage,
+  } = useImageCropperModal(imageBase64Data, closeCropModal, onChangeImageUrl);
 
   return (
     <ModalTemplate
-      className="flex h-[calc(100vh-1rem)] max-w-[calc(100vw-1rem)] flex-col justify-between"
+      className="flex h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] flex-col justify-between p-6"
       closeModal={closeCropModal}
     >
       <div className="relative h-[calc(100%-5rem)] w-full">
@@ -62,7 +48,7 @@ export const CropperComponent = ({
       </div>
       <div className="flex w-full">
         <button
-          className="bg-main h-16 w-full rounded-lg text-white shadow-md"
+          className="bg-main h-16 w-full rounded-lg text-white shadow-md hover:scale-101"
           onClick={showCroppedImage}
         >
           편집 완료

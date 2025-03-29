@@ -4,7 +4,7 @@ import Image from "next/image";
 import { UserImage } from "@/entities/user";
 import { useMyPageUserImage } from "../model/useMyPageUserImage";
 import { Modal } from "@/shared/ui/modal";
-import { CropperComponent } from "./CropperComponent";
+import { ImageCropperModal } from "./ImageCropperModal";
 
 interface MyPageUserImageProps {
   userImageUrl: string;
@@ -23,8 +23,8 @@ export const MyPageUserImage = ({
     onDragLeave,
     onDragOver,
     onDropOrInputEvent,
-    handleDeleteClick,
     closeCropModal,
+    handleDeleteClick,
     handleImageUrlChange,
   } = useMyPageUserImage(userImageUrl, userSex);
 
@@ -50,7 +50,7 @@ export const MyPageUserImage = ({
             </div>
           </div>
           <button
-            className="invisible absolute top-0 right-0 z-10 flex aspect-square w-4 items-center justify-center rounded-[50%] bg-black group-hover:visible"
+            className="invisible absolute top-0 right-0 z-10 flex aspect-square w-4 items-center justify-center rounded-full bg-black group-hover:visible hover:bg-black/25"
             onClick={handleDeleteClick}
           >
             <Image
@@ -70,7 +70,7 @@ export const MyPageUserImage = ({
         </label>
       </div>
       <Modal isOpen={isOpen} closeModal={closeCropModal}>
-        <CropperComponent
+        <ImageCropperModal
           imageBase64Data={imageBase64Data}
           closeCropModal={closeCropModal}
           onChangeImageUrl={handleImageUrlChange}

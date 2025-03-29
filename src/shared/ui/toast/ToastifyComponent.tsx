@@ -6,33 +6,34 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const ToastifyComponent = () => {
-  const toastifyStore = useToastifyStore();
+  const { type, message, count } = useToastifyStore();
 
   useEffect(() => {
-    if (toastifyStore.message === "") {
+    if (message === "") {
       return;
     }
 
-    switch (toastifyStore.type) {
+    switch (type) {
       case "success":
-        toast.success(toastifyStore.message);
+        toast.success(message);
         break;
       case "error":
-        toast.error(toastifyStore.message);
+        toast.error(message);
         break;
       case "warning":
-        toast.warning(toastifyStore.message);
+        toast.warning(message);
         break;
       case "info":
-        toast.info(toastifyStore.message);
+        toast.info(message);
         break;
       case "default":
-        toast(toastifyStore.message);
+        toast(message);
         break;
       default:
         break;
     }
-  }, [toastifyStore.message, toastifyStore.type]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
 
   return (
     <div className="fixed z-50 w-full translate-y-16 text-base">
