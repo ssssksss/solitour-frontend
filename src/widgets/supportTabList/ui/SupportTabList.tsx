@@ -18,12 +18,13 @@ export const SupportTabList = ({ menu }: SupportTabListProps) => {
         {SUPPORT_TABS.map((tab) => (
           <Link
             key={tab.value}
-            href={`/support?menu=${tab.value}`}
-            className={`flex max-w-fit flex-shrink-0 transform items-center justify-center rounded-full px-6 py-3 text-lg font-medium outline-[1px] -outline-offset-1 outline-[#e3e3e3b8] transition-transform duration-300 ease-in-out ${
+            className={[
               tab.value === menu
                 ? "bg-main text-white outline-0"
-                : "hover:text-main text-gray-700 outline hover:bg-gray-200"
-            }`}
+                : "hover:text-main text-gray-700 outline hover:bg-gray-200",
+              "flex max-w-fit flex-shrink-0 transform items-center justify-center rounded-full px-6 py-3 text-lg font-medium outline -outline-offset-1 outline-[#e3e3e3b8] transition-transform duration-300 ease-in-out",
+            ].join(" ")}
+            href={`/support?menu=${tab.value}`}
           >
             {tab.name}
           </Link>

@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import CropperComponent from "./CropperComponent";
 import { UserImage } from "@/entities/user";
 import { useMyPageUserImage } from "../model/useMyPageUserImage";
 import { Modal } from "@/shared/ui/modal";
+import { CropperComponent } from "./CropperComponent";
 
 interface MyPageUserImageProps {
   userImageUrl: string;

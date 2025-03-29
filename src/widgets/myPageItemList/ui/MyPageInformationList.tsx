@@ -12,7 +12,7 @@ import { InformationBookmark } from "@/features/informationBookmark";
 
 export const MyPageInformationList = () => {
   const {
-    activeCategory,
+    category,
     currentPage,
     elements,
     totalElements,
@@ -24,7 +24,7 @@ export const MyPageInformationList = () => {
     <div className="w-full">
       <MyPageCategoryList
         categoryList={INFORMATION_CATEGORY_LIST}
-        activeCategory={activeCategory}
+        activeCategory={category}
         onClick={handleCategoryClick}
       />
       <div className="flex w-full flex-col">
@@ -39,7 +39,7 @@ export const MyPageInformationList = () => {
                   <InformationItem
                     key={value.informationId}
                     informationId={value.informationId}
-                    categoryName={value.zoneCategoryParentName}
+                    categoryName={value.categoryName}
                     isLike={false}
                     title={value.title}
                     image={value.thumbNailImage}

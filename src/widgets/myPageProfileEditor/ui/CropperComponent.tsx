@@ -11,7 +11,7 @@ interface CropperComponentProps {
   onChangeImageUrl: (_: string) => void;
 }
 
-const CropperComponent = ({
+export const CropperComponent = ({
   imageBase64Data,
   closeCropModal,
   onChangeImageUrl,
@@ -71,4 +71,3 @@ const CropperComponent = ({
     </ModalTemplate>
   );
 };
-export default CropperComponent;

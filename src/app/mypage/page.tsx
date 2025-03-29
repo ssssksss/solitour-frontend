@@ -25,7 +25,7 @@ export default async function Page({
   return (
     <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-10">
       <MyPageHeader />
-      <MyPageItemList defaultActiveIndex={mainCategory === "정보" ? 0 : 1} />
+      <MyPageItemList mainCategory={mainCategory} />
     </main>
   );
 }

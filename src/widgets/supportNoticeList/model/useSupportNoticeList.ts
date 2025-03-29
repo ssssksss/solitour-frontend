@@ -48,8 +48,7 @@ export const useSupportNoticeList = () => {
     setViewedNoticeList(
       JSON.parse(localStorage.getItem("viewedNotices") || "[]"),
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchParams, setToastifyState]);
 
   return {
     loading,

@@ -50,9 +50,9 @@ export const SupportNoticeList = () => {
         <div className="w-full border-t border-t-black">
           {noticeList.map((notice, index) => (
             <Link
-              href={`/support/notice/${notice.id}`}
               key={notice.id}
               className="border-b-gray3 relative grid h-18.5 w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 hover:shadow-sm"
+              href={`/support/notice/${notice.id}`}
               onClick={() => handleNoticeClick(notice.id)}
             >
               {
@@ -77,7 +77,7 @@ export const SupportNoticeList = () => {
                 >
                   {`[${notice.categoryName}]`}
                 </div>
-                <div className="block truncate overflow-hidden text-lg font-semibold whitespace-nowrap">
+                <div className="block truncate text-lg font-semibold">
                   {notice.title}
                 </div>
               </div>

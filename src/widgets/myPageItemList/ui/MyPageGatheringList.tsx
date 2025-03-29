@@ -12,7 +12,7 @@ import { GatheringLike } from "@/features/gatheringLike";
 
 export const MyPageGatheringList = () => {
   const {
-    activeCategory,
+    category,
     currentPage,
     elements,
     totalElements,
@@ -31,7 +31,7 @@ export const MyPageGatheringList = () => {
       </Modal>
       <MyPageCategoryList
         categoryList={GATHERING_CATEGORY_LIST}
-        activeCategory={activeCategory}
+        activeCategory={category}
         onClick={handleCategoryClick}
       />
       <div

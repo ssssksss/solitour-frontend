@@ -2,12 +2,12 @@
 
 import { useUserStore } from "@/entities/user";
 import { useEffect, useState } from "react";
-import useInformationLikeStore from "./informationLikeStore";
 import {
   createInformationLike,
   deleteInformationLike,
 } from "../api/informationLike";
 import { useToastifyStore } from "@/shared/model";
+import { useInformationLikeStore } from "./informationLikeStore";
 
 export const useInformationLike = (
   informationId: number,

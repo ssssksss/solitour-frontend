@@ -8,7 +8,7 @@ interface InformationLikeState {
 }
 
 // 액션 인터페이스 정의
-interface InformationLikeActions {
+interface InformationLikeAction {
   initialize: () => void;
   setInformationLikeState: (data: Partial<InformationLikeState>) => void;
 }
@@ -19,25 +19,18 @@ const initialState: InformationLikeState = {
   isLike: false,
 };
 
+type InformationLikeStoreType = InformationLikeState & InformationLikeAction;
+
 // 상태 및 액션 생성
-const InformationLikeStore: StateCreator<
-  InformationLikeState & InformationLikeActions
-> = (set) => ({
+const informationLikeStore: StateCreator<InformationLikeStoreType> = (set) => ({
   ...initialState,
   initialize: () => set({ ...initialState }),
   setInformationLikeState: (data: Partial<InformationLikeState>) =>
     set(() => ({ ...data })),
 });
 
-const useInformationLikeStore = create<
-  InformationLikeState & InformationLikeActions
->()<any>(
+export const useInformationLikeStore = create<InformationLikeStoreType>(
   process.env.NODE_ENV === "development"
-    ? devtools(InformationLikeStore)
-    : InformationLikeStore,
+    ? (devtools(informationLikeStore) as StateCreator<InformationLikeStoreType>)
+    : informationLikeStore,
 );
-
-export type useInformationLikeStoreType = InformationLikeState &
-  InformationLikeActions;
-
-export default useInformationLikeStore;

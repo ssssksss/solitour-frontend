@@ -1,6 +1,4 @@
-"use client";
-
-import { useMyPageItemList } from "../model/useMyPageItemList";
+import Link from "next/link";
 import { MyPageGatheringList } from "./MyPageGatheringList";
 import { MyPageInformationList } from "./MyPageInformationList";
 
@@ -20,41 +18,37 @@ const tabList = [
 ];
 
 interface MyPageItemListProps {
-  defaultActiveIndex: number;
+  mainCategory: "정보" | "모임";
 }
 
-export const MyPageItemList = ({ defaultActiveIndex }: MyPageItemListProps) => {
-  const { activeIndex, handleTabClick } = useMyPageItemList(
-    tabList,
-    defaultActiveIndex,
-  );
-
+export const MyPageItemList = ({ mainCategory }: MyPageItemListProps) => {
   return (
     <div>
       <div className="flex w-full gap-6.5 border-b border-gray-200">
-        {tabList.map((tab, index) => (
-          <button
+        {tabList.map((tab) => (
+          <Link
             key={tab.label}
             className={[
-              activeIndex === index
+              mainCategory === tab.label
                 ? "text-main font-bold"
                 : "text-gray1 font-medium",
               "relative h-8 w-16 text-center",
             ].join(" ")}
-            onClick={() => handleTabClick(index)}
+            href={tab.href}
+            scroll={false}
           >
             {tab.label}
             <div
               className={[
-                activeIndex === index ? "bg-main h-0.5" : "opacity-0",
+                mainCategory === tab.label ? "bg-main h-0.5" : "opacity-0",
                 "absolute -bottom-0.5 w-full",
               ].join(" ")}
             />
-          </button>
+          </Link>
         ))}
       </div>
       <div className="transform whitespace-nowrap transition-all duration-300 ease-in-out">
-        {tabList[activeIndex].content}
+        {tabList.find((tab) => tab.label === mainCategory)?.content}
       </div>
     </div>
   );

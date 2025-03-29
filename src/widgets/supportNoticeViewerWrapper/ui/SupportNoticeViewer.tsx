@@ -6,11 +6,13 @@ interface SupportNoticeViewerProps {
   noticeId: number;
 }
 
-const SupportNoticeViewer = async ({ noticeId }: SupportNoticeViewerProps) => {
+export const SupportNoticeViewer = async ({
+  noticeId,
+}: SupportNoticeViewerProps) => {
   const notice = await getNotice(noticeId);
 
   return (
-    <div className="mb-8 flex min-h-[calc(100vh-160px)] w-full flex-col rounded-lg border border-gray-300 bg-white p-6 shadow-lg">
+    <div className="mb-8 flex min-h-[calc(100vh-10rem)] w-full flex-col rounded-lg border border-gray-300 bg-white p-6 shadow-lg">
       <div className="mb-6 flex items-center justify-between">
         <div
           className={[
@@ -35,5 +37,3 @@ const SupportNoticeViewer = async ({ noticeId }: SupportNoticeViewerProps) => {
     </div>
   );
 };
-
-export default SupportNoticeViewer;
