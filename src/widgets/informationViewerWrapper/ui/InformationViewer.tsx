@@ -58,10 +58,10 @@ export const InformationViewer = async ({
               </div>
             </div>
           </div>
-          <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
+          <div className="h-138 w-117.5 max-[1024px]:w-full max-[744px]:h-110.25">
             <ImageList imageList={data.imageResponses} />
           </div>
-          <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
+          <div className="flex h-138 w-117.5 flex-col overflow-y-auto px-5 max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
             <div className="max-[1024px]:hidden">
               <h1 className="text-2xl font-bold break-words">{data.title}</h1>
               <div className="flex flex-row items-end justify-between py-4">
@@ -98,7 +98,7 @@ export const InformationViewer = async ({
               </div>
             </div>
             <div className="flex flex-row items-center gap-1 py-3">
-              <TiLocation className="text-main" size={"1.1rem"} />
+              <TiLocation className="text-main" size="1.1rem" />
               <p className="text-gray1 text-xs font-medium">{data.address}</p>
             </div>
             <p className="text-gray1 py-4 font-medium break-words whitespace-pre-wrap">
@@ -114,7 +114,7 @@ export const InformationViewer = async ({
                 />
               ))}
             </div>
-            <div className="border-gray3 flex flex-col gap-3 border-y-[0.0625rem] px-6 py-4">
+            <div className="border-gray3 flex flex-col gap-3 border-y px-6 py-4">
               <div className="text-bold text-lg font-bold">
                 생생한 혼플 <span className="text-main">TIP</span>
               </div>

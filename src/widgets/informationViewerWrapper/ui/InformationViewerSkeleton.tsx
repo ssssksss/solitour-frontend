@@ -27,18 +27,18 @@ export const InformationViewerSkeleton = () => {
               </div>
             </div>
           </div>
-          <div className="h-[34.5rem] w-[29.375rem] max-[1024px]:w-full max-[744px]:h-[27.5625rem]">
-            <div className="h-[26.0625rem] w-full rounded-2xl bg-gray-100 max-[744px]:h-[19.125rem]" />
-            <div className="flex w-fit flex-row items-center gap-[0.875rem] overflow-x-hidden pt-[0.875rem]">
+          <div className="h-138 w-117.5 max-[1024px]:w-full max-[744px]:h-110.25">
+            <div className="h-104.25 w-full rounded-2xl bg-gray-100 max-[744px]:h-76.5" />
+            <div className="flex w-fit flex-row items-center gap-3.5 overflow-x-hidden pt-3.5">
               {[1, 2, 3, 4].map((value) => (
                 <div
                   key={value}
-                  className="h-[6.6875rem] w-[6.6875rem] rounded-lg bg-gray-100"
+                  className="h-26.75 w-26.75 rounded-lg bg-gray-100"
                 />
               ))}
             </div>
           </div>
-          <div className="flex h-[34.5rem] w-[29.375rem] flex-col overflow-y-auto px-[1.25rem] max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
+          <div className="flex h-138 w-117.5 flex-col overflow-y-auto px-5 max-[1024px]:h-fit max-[1024px]:w-full max-[1024px]:px-0 max-[1024px]:pt-8">
             <div className="max-[1024px]:hidden">
               <div className="h-10 w-96 bg-gray-100" />
               <div className="flex flex-row items-end justify-between py-4">
@@ -91,7 +91,7 @@ export const InformationViewerSkeleton = () => {
         <div className="mt-20 flex h-48 flex-col">
           <div className="h-48 w-full rounded-2xl border bg-gray-100" />
         </div>
-        <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x-[0.0625rem] border-b-[0.0625rem] px-6 pt-12 pb-10">
+        <div className="-mt-4 flex h-fit w-full flex-col justify-center gap-2 rounded-b-2xl border-x border-b px-6 pt-12 pb-10">
           <div className="h-8 w-40 bg-gray-100" />
           <div className="flex flex-row items-start gap-1">
             <div className="h-5 w-5 bg-gray-100" />

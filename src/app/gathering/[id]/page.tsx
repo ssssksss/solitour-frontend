@@ -32,7 +32,7 @@ export default async function Page({
   const gatheringDetail = await getGathering(gatheringId);
 
   return (
-    <div className="m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-[60rem] flex-col pb-[2.5rem]">
+    <div className="m-auto flex min-h-[calc(100vh-25rem)] w-full max-w-240 flex-col pb-10">
       <Breadcrumb
         categoryList={[
           { label: "모임", href: "/gathering" },

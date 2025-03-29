@@ -8,7 +8,7 @@ export const GatheringExcludeToggle = () => {
 
   if (loading) {
     return (
-      <div className="relative flex h-8 w-[4rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
+      <div className="relative flex h-8 w-16 shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
     );
   }
 

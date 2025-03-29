@@ -20,12 +20,12 @@ export default async function Page() {
       <div className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-10">
         <div className="flex w-full flex-col items-center">
           <GatheringBanner />
-          <div className="mt-[26.25rem] max-[744px]:mt-[31rem]" />
+          <div className="mt-105 max-[744px]:mt-124" />
         </div>
         <div className="flex w-full flex-col items-center">
           <TopGatheringTitleListWrapper />
         </div>
-        <div className="flex w-full min-w-[19.1875rem] flex-col pt-22">
+        <div className="flex w-full min-w-76.75 flex-col pt-22">
           <article className="flex flex-col gap-y-4 min-[960px]:flex-row-reverse min-[960px]:gap-x-6">
             <div className="flex w-full flex-row justify-between gap-x-2 gap-y-5 max-[744px]:flex-col min-[960px]:gap-x-6">
               <GatheringSearch />

@@ -32,14 +32,14 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
           />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem]"> </div>
+        <div className="aspect-square w-3.5"> </div>
       )}
       {currentPage > 1 ? (
         <button onClick={() => pageHandler(currentPage - 1)}>
           <IoIosArrowBack className="hover:text-main" />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem]" />
+        <div className="aspect-square w-3.5" />
       )}
       {leftPage > 1 && (
         <div className="flex flex-row items-center gap-3">
@@ -80,7 +80,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
           <IoIosArrowForward className="hover:text-main" />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem]"> </div>
+        <div className="aspect-square w-3.5"> </div>
       )}
       {currentPage < totalPages ? (
         <button onClick={() => pageHandler(totalPages)}>
@@ -90,7 +90,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
           />
         </button>
       ) : (
-        <div className="aspect-square w-[0.875rem]" />
+        <div className="aspect-square w-3.5" />
       )}
     </div>
   );

@@ -27,13 +27,10 @@ export const InformationSort = () => {
       dropdownHandler={handleSortClick}
       value={sort}
       defaultValue={sort}
-      dropdownContainerStyle={{
-        w: "w-[3.5rem]",
-        style: "",
-      }}
+      dropdownContainerStyle={{ w: "w-14" }}
       dropdownOptionStyle={{
-        w: "w-[8rem]",
-        style: "mt-[2rem] rounded-xl",
+        w: "w-32",
+        style: "mt-8 rounded-xl",
         z: "z-20",
         transformX: "translateX(calc(3.5rem - 100%))",
       }}

@@ -87,16 +87,16 @@ export const GatheringParticipantsFilterModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-[40rem] w-[calc(100vw-1rem)] max-w-[40rem]"
+      className="max-h-160 w-[calc(100vw-1rem)] max-w-160"
       closeModal={closeModal}
     >
       <h2 className="h-8 text-2xl font-bold text-black">참여자 선택</h2>
       <section className="flex w-full flex-col gap-y-8 pt-12">
-        <article className="flex max-w-[16.25rem] justify-between gap-y-4">
+        <article className="flex max-w-65 justify-between gap-y-4">
           <div className="h-8 font-bold text-black">인원</div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <div
-              className="flex h-[2.75rem] items-center select-none"
+              className="flex h-11 items-center select-none"
               onClick={() =>
                 setPeopleCount(peopleCount <= 2 ? 2 : peopleCount - 1)
               }
@@ -243,7 +243,7 @@ export const GatheringParticipantsFilterModal = ({
             </div>
           </div>
         </article>
-        <article className="flex flex-col gap-y-4 pt-[1rem]">
+        <article className="flex flex-col gap-y-4 pt-4">
           <div className="h-8 text-start font-bold text-black">성별 제한</div>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {Object.entries(GENDER).map((i) => (
@@ -265,7 +265,7 @@ export const GatheringParticipantsFilterModal = ({
       </section>
       <div className="flex w-full justify-center gap-4 pt-8">
         <button
-          className="bg-main disabled:bg-gray1 h-12 w-full max-w-[18.625rem] rounded-[4rem] px-4 py-2 text-white"
+          className="bg-main disabled:bg-gray1 h-12 w-full max-w-74.5 rounded-[4rem] px-4 py-2 text-white"
           disabled={
             !sex ||
             (startAge || 0) < 20 ||

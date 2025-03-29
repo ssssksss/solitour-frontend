@@ -27,7 +27,7 @@ export const GatheringViewer = ({
 
   return (
     <div className="w-full">
-      <div className="flex w-full max-w-[60rem] flex-col">
+      <div className="flex w-full max-w-240 flex-col">
         {/* 제목 부분 */}
         <article className="w-full px-1 pb-9">
           {/* 제목, 신청 버튼 */}
@@ -48,13 +48,13 @@ export const GatheringViewer = ({
             />
           </div>
           {/* 프로필 이미지, 닉네임, 좋아요, 조회수 */}
-          <div className="mt-[0.375rem] flex w-full justify-between pt-[1rem]">
+          <div className="mt-1.5 flex w-full justify-between pt-4">
             <div className="flex items-center gap-x-3">
               <UserImage
                 userImageAddress={gatheringDetail.userImage}
                 size={52}
               />
-              <div className="flex flex-col gap-y-[0.125rem]">
+              <div className="flex flex-col gap-y-0.5">
                 <div className="text-xs font-semibold text-black">
                   {gatheringDetail.userPostingResponse?.nickname}
                 </div>
@@ -86,7 +86,7 @@ export const GatheringViewer = ({
           </div>
         </article>
         {/* 제한 부분(날짜, 장소, 인원, 시간) */}
-        <article className="grid grid-cols-1 gap-y-4 border-y-[1px] border-[#d9d9d9] p-[1.25rem] text-sm min-[800px]:grid-cols-2 sm:grid-cols-[320px_auto]">
+        <article className="grid grid-cols-1 gap-y-4 border-y border-[#d9d9d9] p-5 text-sm min-[800px]:grid-cols-2 sm:grid-cols-[320px_auto]">
           <div className="flex gap-x-3">
             <Image
               src="/icons/gathering-calendar-icon.svg"
@@ -183,7 +183,7 @@ export const GatheringViewer = ({
           </div>
         </article>
         {/* 내용 부분 */}
-        <div className="text-gray1 my-[1rem] flex gap-1">
+        <div className="text-gray1 my-4 flex gap-1">
           <Image
             src="/icons/pin-green-icon.svg"
             alt="pin-green-icon"

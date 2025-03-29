@@ -13,7 +13,7 @@ export const SignIn = () => {
       </p>
       <Lottie animationData={introLottie} />
       <Image
-        className="-mt-36 mb-8 h-[6.875rem] w-44 self-center"
+        className="-mt-36 mb-8 h-27.5 w-44 self-center"
         src="/icons/solitour-auth-intro-icon.svg"
         alt="solitour-auth-intro-icon"
         width={176}

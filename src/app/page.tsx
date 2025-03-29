@@ -9,7 +9,7 @@ export default function Page() {
       <div className="absolute w-full">
         <HomeCarousel />
       </div>
-      <div className="mt-[32.5rem] max-[1024px]:mt-60" />
+      <div className="mt-130 max-[1024px]:mt-60" />
       <HomeShortcuts />
       <BestInformationListWrapper />
       <NewGatheringListWrapper />

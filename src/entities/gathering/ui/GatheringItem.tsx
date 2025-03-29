@@ -41,7 +41,7 @@ export const GatheringItem = ({
           format(new Date(), "yyyyMMdd")
           ? "text-gray2"
           : "text-black",
-        "outline-gray3 hover:bg-lightgreen hover:outline-main flex h-full max-h-[19.6875rem] w-full flex-col gap-5 rounded-2xl p-5 outline -outline-offset-2 duration-300",
+        "outline-gray3 hover:bg-lightgreen hover:outline-main flex h-full max-h-78.75 w-full flex-col gap-5 rounded-2xl p-5 outline -outline-offset-2 duration-300",
       ].join(" ")}
       href={`/gathering/${gathering.gatheringId}`}
       onClick={(e) => {

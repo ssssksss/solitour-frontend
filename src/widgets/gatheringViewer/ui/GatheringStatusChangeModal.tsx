@@ -21,16 +21,16 @@ export const GatheringStatusChangeModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-[20rem] w-full max-w-[28rem]"
+      className="max-h-80 w-full max-w-112"
       closeModal={closeModal}
     >
       <button
         onClick={closeModal}
-        className="absolute top-[2rem] right-[2rem] h-8 w-[2rem] scale-100 transform transition-transform duration-300"
+        className="absolute top-8 right-8 h-8 w-8 scale-100 transform transition-transform duration-300"
         style={{ zIndex: 200 }}
       >
         <MdClose
-          className="bg-red-60 text-gray2 hover:text-main cursor-pointer"
+          className="text-gray2 hover:text-main cursor-pointer"
           size="2.5rem"
           onClick={closeModal}
         />

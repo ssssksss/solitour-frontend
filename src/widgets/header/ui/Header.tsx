@@ -27,19 +27,19 @@ export const Header = () => {
           "fixed top-0 z-40 flex w-full justify-center shadow",
         ].join(" ")}
       >
-        <div className="flex h-20 w-[90rem] flex-row items-center justify-between px-6">
+        <div className="flex h-20 w-360 flex-row items-center justify-between px-6">
           <Link
-            className="relative h-8 w-[6.9375rem] font-black max-[1024px]:ml-[1.875rem] max-[744px]:ml-0"
+            className="relative h-8 w-27.75 font-black max-[1024px]:ml-7.5 max-[744px]:ml-0"
             href="/"
           >
             <Image
+              className="object-contain"
               src="/logos/solitour-logo.svg"
               alt="solitour-logo"
               fill={true}
-              style={{ objectFit: "contain" }}
             />
           </Link>
-          <div className="flex h-full flex-grow flex-row justify-between pl-[5.625rem] max-[1024px]:pl-[3.375rem] max-[744px]:hidden">
+          <div className="flex h-full flex-grow flex-row justify-between pl-22.5 max-[1024px]:pl-13.5 max-[744px]:hidden">
             <nav>
               <ul className="flex h-full items-center">
                 <li>

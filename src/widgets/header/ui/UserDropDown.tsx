@@ -66,7 +66,7 @@ export const UserDropDown = () => {
               onClick={() => closeModal()}
             >
               <Image
-                className="aspect-square h-[1.25rem] w-[1.25rem]"
+                className="aspect-square h-5 w-5"
                 src="/icons/mypage-empty-icon.svg"
                 alt="mypage-empty-icon"
                 width={20}

@@ -22,13 +22,13 @@ export const HomeCarousel = () => {
             <h1 className="font-bold">솔리투어</h1>
           </div>
           <Link
-            className="flex h-[2.6875rem] w-30 items-center justify-center rounded-3xl bg-black font-medium text-white hover:scale-105"
+            className="flex h-11 w-30 items-center justify-center rounded-3xl bg-black font-medium text-white hover:scale-105"
             href="/informations/list?page=1&parentCategoryId=1"
           >
             둘러보기
           </Link>
         </div>
-        <div className="flex w-[60rem] flex-row items-center justify-center max-[1024px]:w-[90%]">
+        <div className="flex w-240 flex-row items-center justify-center max-[1024px]:w-[90%]">
           {imageList.map((_, index) => (
             <button
               key={index}

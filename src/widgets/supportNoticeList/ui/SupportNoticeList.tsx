@@ -41,18 +41,18 @@ export const SupportNoticeList = () => {
   return (
     <div>
       <div className="flex w-full flex-col pt-6">
-        <div className="flex h-[2.75rem] items-center justify-between pb-5">
+        <div className="flex h-11 items-center justify-between pb-5">
           <span className="font-sm flex gap-x-1 font-bold text-black">
             총 {totalNotices}건
           </span>
           <NoticeSearch loading={loading} />
         </div>
-        <div className="w-full border-t-[1px] border-t-black">
+        <div className="w-full border-t border-t-black">
           {noticeList.map((notice, index) => (
             <Link
               href={`/support/notice/${notice.id}`}
               key={notice.id}
-              className="border-b-gray3 relative grid h-[4.625rem] w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 hover:shadow-sm"
+              className="border-b-gray3 relative grid h-18.5 w-full grid-cols-[7.3125rem_auto_7.5rem] items-center border-b-2 hover:shadow-sm"
               onClick={() => handleNoticeClick(notice.id)}
             >
               {

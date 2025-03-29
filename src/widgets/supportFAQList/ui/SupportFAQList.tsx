@@ -18,7 +18,7 @@ export const SupportFAQList = () => {
           className="border-b-gray3 flex w-full flex-col border-b px-5"
         >
           <button
-            className="grid h-[4.625rem] w-full grid-cols-[6.0625rem_auto] items-center rounded-md"
+            className="grid h-18.5 w-full grid-cols-[6.0625rem_auto] items-center rounded-md"
             onClick={() => handleToggle(topic)}
           >
             <div className="text-main text-start font-bold"> Q </div>
@@ -33,7 +33,7 @@ export const SupportFAQList = () => {
             {FAQList.filter((faq) => faq.topic === topic).map((faq) => (
               <div
                 key={faq.topic}
-                className="ml-[5.0625rem] rounded-lg border border-gray-200 p-4 shadow-xs transition-shadow duration-300 ease-in-out hover:shadow-lg"
+                className="ml-20.25 rounded-lg border border-gray-200 p-4 shadow-xs transition-shadow duration-300 ease-in-out hover:shadow-lg"
               >
                 <h3 className="mb-2 text-lg font-semibold">{faq.question}</h3>
                 <p>{faq.answer}</p>

@@ -10,7 +10,7 @@ export const DiaryWriteLink = () => {
       transition={{ duration: 0.5, ease: "linear" }}
     >
       <Link
-        className="border-gray3 hover:border-main flex aspect-3/4 w-full flex-col items-center justify-center rounded-2xl border bg-[#FBFBFB] max-[744px]:aspect-auto max-[744px]:h-[29rem]"
+        className="border-gray3 hover:border-main flex aspect-3/4 w-full flex-col items-center justify-center rounded-2xl border bg-[#FBFBFB] max-[744px]:aspect-auto max-[744px]:h-116"
         href="/diary/write"
       >
         <motion.div
@@ -26,9 +26,7 @@ export const DiaryWriteLink = () => {
             height={42}
           />
           <h2 className="mt-7 text-2xl font-semibold text-black">일기 쓰기</h2>
-          <p className="text-gray1 mt-[0.625rem] text-lg">
-            이번 여행을 기록해보세요.
-          </p>
+          <p className="text-gray1 mt-2.5 text-lg">이번 여행을 기록해보세요.</p>
         </motion.div>
       </Link>
     </motion.div>

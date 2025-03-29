@@ -5,8 +5,8 @@ interface MyPageEmailProps {
 export const MyPageEmail = ({ email }: MyPageEmailProps) => {
   return (
     <section>
-      <div className="flex w-full items-center gap-x-[2.375rem]">
-        <div className="relative w-[3.5rem] shrink-0">
+      <div className="flex w-full items-center gap-x-9.5">
+        <div className="relative w-14 shrink-0">
           <span className="text-lg font-semibold">이메일</span>
         </div>
         <input

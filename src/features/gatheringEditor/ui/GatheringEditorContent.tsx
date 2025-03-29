@@ -14,7 +14,7 @@ export const GatheringEditorContent = () => {
             formContext.formState.errors.content
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "min-h-[17.5rem] w-full resize-none rounded-[1rem] p-6 outline -outline-offset-1",
+            "min-h-70 w-full resize-none rounded-2xl p-6 outline -outline-offset-1",
           ].join(" ")}
           placeholder="어떤 모임을 만들어볼까요? 모임 정보 및 목표를 작성해 새로운 솔리들과 함께해보세요."
           {...formContext.register("content")}
@@ -24,7 +24,7 @@ export const GatheringEditorContent = () => {
           }}
           maxLength={500}
         />
-        <div className="flex w-full justify-end pt-[0.75rem]">
+        <div className="flex w-full justify-end pt-3">
           {formContext.formState.errors.content && (
             <span className="absolute left-4 text-sm text-red-500">
               {formContext.formState.errors.content.message as String}

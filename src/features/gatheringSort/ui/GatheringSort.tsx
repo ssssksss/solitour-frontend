@@ -28,12 +28,12 @@ export const GatheringSort = () => {
       value={sort}
       defaultValue={sort}
       dropdownContainerStyle={{
-        w: "w-[3.5rem]",
+        w: "w-14",
         style: "",
       }}
       dropdownOptionStyle={{
-        w: "w-[8rem]",
-        style: "mt-[2rem] rounded-xl",
+        w: "w-32",
+        style: "mt-8 rounded-xl",
         transformX: "translateX(calc(3.5rem - 100%))",
       }}
     />

@@ -36,7 +36,7 @@ export const AddUserInformationInitForm = ({
         <h2 className="text-[1.625rem] font-bold text-black">
           안녕하세요 솔리투어입니다
         </h2>
-        <p className="text-gray1 mt-2.5 max-w-[15.875rem] text-center">
+        <p className="text-gray1 mt-2.5 max-w-63.5 text-center">
           신뢰할 수 있는 이용 환경을 위해 필요한 정보를 입력해 주세요
         </p>
         <div className="mt-5 flex w-full flex-col gap-y-9.5 rounded-[1.125rem] bg-[#ececec] px-9 pt-6 pb-7.5">
@@ -108,7 +108,7 @@ export const AddUserInformationInitForm = ({
             </div>
           </article>
         </div>
-        <p className="text-gray1 mt-3.5 max-w-[18.125rem] text-center text-sm">
+        <p className="text-gray1 mt-3.5 max-w-72.5 text-center text-sm">
           정보를 입력하지 않아도 서비스를 이용할 수 있으나 일부 서비스 이용이
           제한될 수 있습니다
         </p>

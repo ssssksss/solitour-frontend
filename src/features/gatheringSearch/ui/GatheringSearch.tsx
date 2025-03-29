@@ -28,20 +28,20 @@ export const GatheringSearch = () => {
             value={dropdownValue}
             defaultValue={dropdownValue}
             dropdownContainerStyle={{
-              style: "pl-[1.125rem]",
-              w: "w-[5rem]",
-              h: "h-[2.75rem]",
+              style: "pl-4.5",
+              w: "w-20",
+              h: "h-11",
             }}
             dropdownOptionStyle={{
-              w: "w-[5rem]",
+              w: "w-20",
               z: "-z-1",
-              style: "pt-[2.75rem] rounded-[1.375rem_0rem_0.75rem_0.75rem]",
+              style: "pt-11 rounded-[1.375rem_0rem_0.75rem_0.75rem]",
             }}
           />
         </div>
-        <p className="text-gray3 absolute top-2 left-[4.6875rem] text-lg">|</p>
+        <p className="text-gray3 absolute top-2 left-18.75 text-lg">|</p>
         <input
-          className="border-gray3 placeholder:text-gray2 h-[2.75rem] w-[21.4375rem] rounded-full border bg-white pr-12 pl-[5.8125rem] text-sm outline-hidden placeholder:font-medium max-[1024px]:w-full"
+          className="border-gray3 placeholder:text-gray2 h-11 w-85.75 rounded-full border bg-white pr-12 pl-23.25 text-sm outline-hidden placeholder:font-medium max-[1024px]:w-full"
           type="text"
           autoComplete="search"
           placeholder="검색하기"
@@ -55,7 +55,7 @@ export const GatheringSearch = () => {
           }}
         />
         <button
-          className="bg-lightGreen absolute top-[0.3125rem] right-[0.375rem] flex h-[2.125rem] w-[2.125rem] items-center justify-center rounded-full hover:scale-110"
+          className="bg-lightGreen absolute top-1.5 right-1.5 flex h-8.5 w-8.5 items-center justify-center rounded-full hover:scale-110"
           onClick={() => handleSearchClick()}
         >
           <Image

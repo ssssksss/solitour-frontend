@@ -16,7 +16,7 @@ export const GatheringRecommendationList = ({
   const userStore = useUserStore();
 
   return (
-    <div className="mt-[4.875rem] flex w-full flex-col">
+    <div className="mt-19.5 flex w-full flex-col">
       <h2 className="text-2xl font-bold text-black">추천 모임 정보</h2>
       {data.length === 0 ? (
         <div className="flex w-full flex-col items-center">

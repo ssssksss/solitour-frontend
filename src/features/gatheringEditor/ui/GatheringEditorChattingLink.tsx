@@ -8,7 +8,7 @@ export const GatheringEditorChattingLink = () => {
 
   return (
     <div className="relative flex w-full shrink-0 items-center gap-2.5">
-      <div className="relative w-[2.75rem] shrink-0">
+      <div className="relative w-11 shrink-0">
         <span className="text-lg font-semibold">링크</span>
         <span className="text-main absolute -top-2 text-lg">*</span>
       </div>
@@ -18,7 +18,7 @@ export const GatheringEditorChattingLink = () => {
             formContext.formState.errors.openChattingUrl
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "h-[3.25rem] w-full rounded-[3rem] px-4 outline -outline-offset-1",
+            "h-13 w-full rounded-[3rem] px-4 outline -outline-offset-1",
           ].join(" ")}
           placeholder="참여 인원과 소통을 위해 오픈 채팅 링크를 추가해주세요."
           maxLength={255}

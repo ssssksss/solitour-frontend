@@ -17,7 +17,7 @@ export const MyPageProfileEditor = ({ userInfo }: MyPageProfileProps) => {
         userImageUrl={userInfo.userImage.address}
         userSex={userInfo.sex}
       />
-      <article className="mt-4 flex flex-col gap-y-[2.375rem]">
+      <article className="mt-4 flex flex-col gap-y-9.5">
         <MyPageNicknameEditor initialNickname={userInfo.nickname} />
         <MyPageEmail email={userInfo.email} />
         <MyPageLinkedAccount

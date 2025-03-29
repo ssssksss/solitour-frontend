@@ -29,10 +29,10 @@ export const MyPageUserImage = ({
   } = useMyPageUserImage(userImageUrl, userSex);
 
   return (
-    <article className="flex items-center justify-center pt-[4.25rem] pb-[5.25rem]">
+    <article className="flex items-center justify-center pt-17 pb-21">
       <div className="group flex flex-col items-center">
         <label
-          className="bg-lightgreen relative aspect-square w-[6.75rem] cursor-pointer rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]"
+          className="bg-lightgreen relative aspect-square w-27 cursor-pointer rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]"
           htmlFor="imageUpload"
           onDragEnter={onDragEnter}
           onDragLeave={onDragLeave}
@@ -40,7 +40,7 @@ export const MyPageUserImage = ({
           onDrop={onDropOrInputEvent}
         >
           <UserImage userImageAddress={imageUrl} size={108} />
-          <div className="absolute right-0 bottom-0 flex aspect-square w-[2.375rem] items-center justify-center rounded-[50%] bg-[#F4F4F4]">
+          <div className="absolute right-0 bottom-0 flex aspect-square w-9.5 items-center justify-center rounded-[50%] bg-[#F4F4F4]">
             <div className="relative h-5 w-5">
               <Image
                 src="/icons/camera-icon.svg"

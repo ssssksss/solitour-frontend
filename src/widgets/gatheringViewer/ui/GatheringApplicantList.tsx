@@ -33,7 +33,7 @@ export const GatheringApplicantList = ({
   }
 
   return (
-    <div className="mt-[3.625rem] flex h-auto w-full flex-col rounded-[1rem] text-sm outline -outline-offset-1 outline-[#E3E3E3]">
+    <div className="mt-14.5 flex h-auto w-full flex-col rounded-2xl text-sm outline -outline-offset-1 outline-[#E3E3E3]">
       <div
         className={[
           isFinish
@@ -93,11 +93,11 @@ export const GatheringApplicantList = ({
         )}
       </div>
       {gatheringApplicantsResponses.length < 1 ? (
-        <div className="flex h-[4rem] w-full items-center justify-center text-lg">
+        <div className="flex h-16 w-full items-center justify-center text-lg">
           지원자가 없습니다.
         </div>
       ) : (
-        <div className="scrollbar-hide max-h-[25rem] overflow-y-scroll">
+        <div className="scrollbar-hide max-h-100 overflow-y-scroll">
           {gatheringApplicantsResponses
             .filter((i) => {
               if (isFinish) return i.gatheringStatus == "CONSENT";

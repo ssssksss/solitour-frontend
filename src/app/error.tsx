@@ -24,7 +24,7 @@ export default function Error() {
           </div>
           <div className="flex flex-row items-center gap-2.5">
             <Link
-              className="border-gray3 flex h-10.5 w-[6.625rem] flex-row items-center justify-center rounded-full border hover:scale-105"
+              className="border-gray3 flex h-10.5 w-26.5 flex-row items-center justify-center rounded-full border hover:scale-105"
               href="/"
             >
               홈으로
@@ -33,12 +33,12 @@ export default function Error() {
           </div>
         </div>
         <div className="flex w-full flex-row justify-end">
-          <div className="relative h-[14.375rem] w-[18.375rem] max-[1024px]:w-[16rem] max-[744px]:w-[14rem]">
+          <div className="relative h-57.5 w-73.5 max-[1024px]:w-64 max-[744px]:w-56">
             <Image
+              className="object-contain"
               src="/images/error-sign.webp"
               alt="error-sign"
               fill={true}
-              style={{ objectFit: "contain" }}
             />
           </div>
         </div>

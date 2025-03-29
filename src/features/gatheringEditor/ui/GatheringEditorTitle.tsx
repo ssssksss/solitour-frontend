@@ -20,7 +20,7 @@ export const GatheringEditorTitle = () => {
             formContext.formState.errors.title
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "h-[3.25rem] w-full rounded-[3rem] pl-7 outline -outline-offset-1",
+            "h-13 w-full rounded-[3rem] pl-7 outline -outline-offset-1",
           ].join(" ")}
           {...formContext.register("title")}
           onChange={(e) => {

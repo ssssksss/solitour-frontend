@@ -36,7 +36,7 @@ export const InformationEditorTip = () => {
               {tip}
             </div>
             <MdClose
-              className="text-main absolute top-[0.625rem] right-[0.875rem] cursor-pointer rounded-full bg-gray-100 p-2 hover:scale-110"
+              className="text-main absolute top-2.5 right-3.5 cursor-pointer rounded-full bg-gray-100 p-2 hover:scale-110"
               size="2rem"
               onClick={() => {
                 const tips: string[] = formContext.getValues("tips");
@@ -68,7 +68,7 @@ export const InformationEditorTip = () => {
               ref={inputTipRef}
             />
             <FaCheck
-              className="text-main absolute top-[0.625rem] right-[0.875rem] cursor-pointer rounded-full bg-gray-100 p-2 hover:scale-110"
+              className="text-main absolute top-2.5 right-3.5 cursor-pointer rounded-full bg-gray-100 p-2 hover:scale-110"
               size="2rem"
               onClick={() => {
                 if (

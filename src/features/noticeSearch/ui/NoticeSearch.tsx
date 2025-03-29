@@ -12,12 +12,12 @@ export const NoticeSearch = ({ loading }: NoticeSearchProps) => {
 
   if (loading) {
     return (
-      <div className="relative flex h-11 w-[21.4375rem] shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
+      <div className="relative flex h-11 w-85.75 shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
     );
   }
 
   return (
-    <div className="flex max-w-[21.4375rem] flex-row items-center gap-4">
+    <div className="flex max-w-85.75 flex-row items-center gap-4">
       <div className="relative z-1 flex flex-row items-center max-[744px]:w-full">
         <input
           className="border-gray3 placeholder:text-gray2 h-11 rounded-full border bg-white pl-4.5 text-sm outline-hidden placeholder:font-medium max-[1024px]:w-full"

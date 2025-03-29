@@ -23,7 +23,7 @@ export const InformationCategoryListModal = ({
 
   return (
     <ModalTemplate
-      className="w-[31.25rem] gap-8 p-6 max-[744px]:w-[calc(100%_-_48px)]"
+      className="w-125 gap-8 p-6 max-[744px]:w-[calc(100%_-_48px)]"
       closeModal={handleCancelClick}
     >
       <div className="flex w-full flex-col gap-1">
@@ -77,7 +77,7 @@ export const InformationCategoryListModal = ({
         {parentCategory !== 0 && categoryId !== 0 && (
           <div className="flex w-full flex-row items-center justify-center py-4">
             <button
-              className="bg-main h-10.5 w-[9.5rem] rounded-full font-medium text-white shadow-sm hover:scale-105"
+              className="bg-main h-10.5 w-38 rounded-full font-medium text-white shadow-sm hover:scale-105"
               type="button"
               onClick={handleSaveClick}
             >

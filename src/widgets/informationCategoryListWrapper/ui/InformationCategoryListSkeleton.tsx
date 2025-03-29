@@ -1,7 +1,7 @@
 export const InformationCategoryListSkeleton = () => {
   return (
     <div className="mt-6 flex w-full animate-pulse flex-col gap-6">
-      <div className="mt-[5.5rem] flex w-full flex-row items-center justify-between border-b-[0.0625rem] pb-2">
+      <div className="mt-22 flex w-full flex-row items-center justify-between border-b pb-2">
         <div className="flex flex-row items-center gap-9">
           {[1, 2, 3].map((value) => (
             <div key={value} className="h-7 w-8 bg-gray-100" />

@@ -21,12 +21,12 @@ export const HomeShortcuts = () => {
             <p className="text-gray1 text-sm">{shortcut.description}</p>
           </div>
           <div className="flex items-center justify-end">
-            <div className="relative h-[7.875rem] w-[7.875rem] max-[1024px]:h-20 max-[1024px]:w-20">
+            <div className="relative h-31.5 w-31.5 max-[1024px]:h-20 max-[1024px]:w-20">
               <Image
+                className="object-contain"
                 src={shortcut.imageSrc}
                 alt={shortcut.imageAlt}
                 fill={true}
-                style={{ objectFit: "contain" }}
               />
             </div>
           </div>

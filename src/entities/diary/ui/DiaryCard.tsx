@@ -21,7 +21,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
       <div
         className={[
           flag ? "animate-card-flip" : "animate-card-flip2",
-          "border-gray3 hover:border-main hover:bg-lightgreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-[29rem]",
+          "border-gray3 hover:border-main hover:bg-lightgreen aspect-3/4 w-full flex-col overflow-y-hidden rounded-2xl border px-9 py-9 max-[744px]:aspect-auto max-[744px]:h-116",
         ].join(" ")}
         onClick={() => {
           if (flag) {
@@ -35,7 +35,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
             {diary.diaryDayContentResponses.diaryDayContentDetail[0].place}
           </p>
         </div>
-        <div className="mt-35 flex flex-col max-[972px]:mt-[5.375rem]">
+        <div className="mt-35 flex flex-col max-[972px]:mt-21.5">
           <div className="relative h-20 w-16">
             <Image
               className="object-contain"
@@ -75,7 +75,7 @@ export const DiaryCard = ({ diary }: DiaryCardProps) => {
     <button
       className={[
         flag ? "animate-card-flip2" : "animate-card-flip",
-        "border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border max-[744px]:aspect-auto max-[744px]:h-[29rem] max-[518px]:w-full",
+        "border-gray3 hover:border-main relative aspect-3/4 w-full rounded-2xl border max-[744px]:aspect-auto max-[744px]:h-116 max-[518px]:w-full",
       ].join(" ")}
       onClick={() => {
         if (!flag) {

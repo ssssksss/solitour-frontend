@@ -53,7 +53,7 @@ export const GatheringApplicantButton = ({
         ].map((i, index) => (
           <button
             key={i.status + index}
-            className={`aspect-square h-[3.25rem] rounded-[2rem] py-2 max-[576px]:h-[2.75rem] min-[800px]:w-full ${i.hoverStyle} ${applicant.gatheringStatus === i.status ? i.style : "bg-white outline -outline-offset-1 outline-[#E3E3E3]"}`}
+            className={`aspect-square h-13 rounded-4xl py-2 max-[576px]:h-11 min-[800px]:w-full ${i.hoverStyle} ${applicant.gatheringStatus === i.status ? i.style : "bg-white outline -outline-offset-1 outline-[#E3E3E3]"}`}
             disabled={applicant.gatheringStatus === i.status}
             onClick={async () => {
               if (isFullParticipants && i.status == "CONSENT") {
@@ -105,7 +105,7 @@ export const GatheringApplicantButton = ({
               applicant.gatheringStatus == i.status
                 ? `${i.style} order-3`
                 : `bg-white outline -outline-offset-1 outline-[#E3E3E3] ${i.hoverStyle} ${isStatusOpen ? "" : "max-[576px]:hidden"}`,
-              "aspect-square h-[3.25rem] rounded-[2rem] max-[576px]:h-[2.75rem] min-[800px]:w-full",
+              "aspect-square h-13 rounded-4xl max-[576px]:h-11 min-[800px]:w-full",
             ].join(" ")}
             onClick={async () => {
               // 모바일 너비에서 버튼이 1개라 여러 버튼을 보여주는 함수
@@ -132,11 +132,14 @@ export const GatheringApplicantButton = ({
           >
             {applicant.gatheringStatus === i.status && isStatusOpen ? (
               <div
-                className={`relative flex h-full items-center justify-center rounded-[2rem] text-xl ${i.style} focus:border-0`}
+                className={[
+                  i.style,
+                  "relative flex h-full items-center justify-center rounded-4xl text-xl focus:border-0",
+                ].join(" ")}
               >
                 <div className="relative h-6 w-6">
-                  <span className="absolute top-1/2 left-0 block h-[0.1875rem] w-full -translate-y-1/2 rotate-45 transform bg-current"></span>
-                  <span className="absolute top-1/2 left-0 block h-[0.1875rem] w-full -translate-y-1/2 -rotate-45 transform bg-current"></span>
+                  <span className="absolute top-1/2 left-0 block h-0.75 w-full -translate-y-1/2 rotate-45 transform bg-current"></span>
+                  <span className="absolute top-1/2 left-0 block h-0.75 w-full -translate-y-1/2 -rotate-45 transform bg-current"></span>
                 </div>
               </div>
             ) : (

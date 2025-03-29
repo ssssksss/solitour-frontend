@@ -18,7 +18,7 @@ export const ConfirmModal = ({
 }: ConfirmModalProps) => {
   return (
     <ModalTemplate
-      className="max-h-[340px] w-[calc(100vw-1rem)] max-w-[40rem]"
+      className="max-h-[340px] w-[calc(100vw-1rem)] max-w-160"
       closeModal={onCancelClick}
     >
       <HashSpinner loading={loading} />

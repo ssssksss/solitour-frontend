@@ -102,7 +102,7 @@ export const GatheringFilterModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-[47.5rem] w-[calc(100vw-1rem)] max-w-[40rem]"
+      className="max-h-190 w-[calc(100vw-1rem)] max-w-160"
       closeModal={closeModal}
     >
       <h2 className="h-8 text-2xl font-bold text-black">조건 선택</h2>
@@ -281,7 +281,7 @@ export const GatheringFilterModal = ({
           </div>
           {isFilterSchedule && (
             <div>
-              <div className="flex gap-1 py-[1rem]">
+              <div className="flex gap-1 py-4">
                 {SELECTED_SCHEDULE_DATA.map((i) => (
                   <button
                     key={i.name}
@@ -335,7 +335,7 @@ export const GatheringFilterModal = ({
                   {year}.{month}
                 </div>
               </div>
-              <div className="flex h-[1.5rem] w-full justify-center gap-1">
+              <div className="flex h-6 w-full justify-center gap-1">
                 <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
                 <div>~</div>
                 <div>{format(calendarDate[0].endDate, "yyyy-MM-dd")}</div>
@@ -354,13 +354,13 @@ export const GatheringFilterModal = ({
       </div>
       <div className="flex w-full justify-center gap-4 pt-8">
         <button
-          className="bg-main h-12 min-w-[8rem] rounded-[4rem] px-4 py-2 text-white"
+          className="bg-main h-12 min-w-32 rounded-[4rem] px-4 py-2 text-white"
           onClick={() => handleInitButtonClick()}
         >
           설정 초기화
         </button>
         <button
-          className="bg-main h-12 min-w-[8rem] rounded-[4rem] px-4 py-2 text-white"
+          className="bg-main h-12 min-w-32 rounded-[4rem] px-4 py-2 text-white"
           onClick={() => handleSubmit()}
         >
           적용하기

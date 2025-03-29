@@ -34,15 +34,15 @@ export const DiaryViewer = ({
         />
       </Modal>
       <motion.div
-        className="relative mt-[5.5rem] h-20 w-16"
+        className="relative mt-22 h-20 w-16"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
         <Image
+          className="object-contain"
           src={`/icons/mood-icon${FEELING_STATUS[diary.diaryDayContentResponses.diaryDayContentDetail[0].feelingStatus]}.svg`}
           alt="mood-icon"
           fill={true}
-          style={{ objectFit: "contain" }}
         />
       </motion.div>
       <motion.h1
@@ -63,7 +63,7 @@ export const DiaryViewer = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <TiLocation className="text-main" size={"1.3rem"} />
+          <TiLocation className="text-main" size="1.3rem" />
           <p>{diary.diaryDayContentResponses.diaryDayContentDetail[0].place}</p>
         </motion.div>
       </div>

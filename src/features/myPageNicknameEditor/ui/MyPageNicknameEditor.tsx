@@ -21,7 +21,7 @@ export const MyPageNicknameEditor = ({
 
   return (
     <section>
-      <div className="flex w-full items-center gap-x-[2.375rem]">
+      <div className="flex w-full items-center gap-x-9.5">
         <div className="relative w-14 shrink-0">
           <span className="text-lg font-semibold">닉네임</span>
           <span className="text-main absolute -top-2 text-lg">*</span>
@@ -48,7 +48,7 @@ export const MyPageNicknameEditor = ({
               nickname === defaultNickname
                 ? "bg-gray-400"
                 : "bg-main hover:scale-105",
-              "absolute top-1/2 right-2 h-[2.4rem] -translate-y-1/2 rounded-[28px] px-3 text-white opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100",
+              "absolute top-1/2 right-2 h-10 -translate-y-1/2 rounded-[28px] px-3 text-white opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100",
             ].join(" ")}
             type="button"
             disabled={loading}
@@ -61,7 +61,7 @@ export const MyPageNicknameEditor = ({
       <div
         className={[
           message ? "justify-between" : "justify-end",
-          "text-gray1 flex w-full pt-3 pl-[7.75rem] text-sm",
+          "text-gray1 flex w-full pt-3 pl-31 text-sm",
         ].join(" ")}
       >
         {message !== "" && (

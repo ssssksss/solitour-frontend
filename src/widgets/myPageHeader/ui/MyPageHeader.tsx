@@ -7,9 +7,9 @@ export const MyPageHeader = async () => {
   return (
     <div className="flex w-full max-w-240 flex-col pt-10">
       <h1 className="text-3xl font-bold">마이페이지</h1>
-      <article className="flex flex-col gap-8.5 pt-[4.875rem] pb-[2.375rem]">
+      <article className="flex flex-col gap-8.5 pt-19.5 pb-9.5">
         <div className="flex flex-row items-center gap-7.5">
-          <div className="bg-lightgreen relative aspect-square w-[6.75rem] rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]">
+          <div className="bg-lightgreen relative aspect-square w-27 rounded-[50%] outline -outline-offset-1 outline-[#B8EDD9]">
             <UserImage
               userImageAddress={userInfo.userImage.address}
               size={108}
@@ -23,7 +23,7 @@ export const MyPageHeader = async () => {
           </div>
         </div>
         <Link
-          className="flex h-[3.625rem] w-full items-center justify-center rounded-xl bg-[#F7F7F7] text-black duration-500 hover:scale-105"
+          className="flex h-14.5 w-full items-center justify-center rounded-xl bg-[#F7F7F7] text-black duration-500 hover:scale-105"
           href="/mypage/profile"
         >
           프로필 수정

@@ -31,7 +31,7 @@ export const ImageList = ({ imageList }: ImageListProps) => {
           closeViewer={closeViewer}
         />
       )}
-      <div className="relative h-[26.0625rem] w-full max-[744px]:h-[19.125rem]">
+      <div className="relative h-104.25 w-full max-[744px]:h-76.5">
         <Image
           className="hover:border-main cursor-pointer rounded-2xl border object-cover"
           src={mainImageUrl}
@@ -57,7 +57,7 @@ export const ImageList = ({ imageList }: ImageListProps) => {
         {imageList.map((image, index) => (
           <div
             key={index}
-            className="relative min-h-[6.6875rem] min-w-[6.6875rem] rounded-lg border"
+            className="relative min-h-26.75 min-w-26.75 rounded-lg border"
             onClick={() => setMainImageUrl(image.address)}
             onTouchEnd={() => setMainImageUrl(image.address)}
           >

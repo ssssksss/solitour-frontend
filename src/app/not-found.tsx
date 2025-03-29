@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="flex flex-col items-center justify-center gap-6 py-20">
-      <div className="relative aspect-75/46 w-[23.4375rem] max-[744px]:w-80">
+      <div className="relative aspect-75/46 w-93.75 max-[744px]:w-80">
         <Image
+          className="object-contain"
           src="/logos/404-logo.svg"
           alt="404-logo"
           fill={true}
-          style={{ objectFit: "contain" }}
         />
       </div>
       <div className="flex flex-row items-center justify-center gap-x-3 text-3xl font-bold text-black max-[744px]:flex-col">
@@ -32,7 +32,7 @@ export default function NotFound() {
       </div>
       <div className="flex flex-row items-center gap-2.5">
         <Link
-          className="border-gray3 flex h-10.5 w-[6.625rem] flex-row items-center justify-center rounded-full border hover:scale-105"
+          className="border-gray3 flex h-10.5 w-26.5 flex-row items-center justify-center rounded-full border hover:scale-105"
           href="/"
         >
           홈으로

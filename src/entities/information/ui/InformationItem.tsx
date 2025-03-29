@@ -29,8 +29,8 @@ export const InformationItem = ({
   children,
 }: InformationItemProps) => {
   return (
-    <div className="outline-gray3 hover:outline-main relative flex h-[19.6875rem] w-full flex-col justify-between rounded-2xl outline duration-300 max-[744px]:min-w-[19.183125rem]">
-      <Link className="h-[12.6875rem]" href={`/informations/${informationId}`}>
+    <div className="outline-gray3 hover:outline-main relative flex h-78.75 w-full flex-col justify-between rounded-2xl outline duration-300 max-[744px]:min-w-[19.183125rem]">
+      <Link className="h-50.75" href={`/informations/${informationId}`}>
         <Image
           className="-z-10 rounded-[0.875rem] object-cover"
           src={image}

@@ -54,7 +54,7 @@ export const InformationPlaceModal = ({
       {!isCustom ? (
         <div className="flex w-full flex-col gap-2">
           <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
-          <div className="flex h-80 flex-col rounded-3xl border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]">
+          <div className="flex h-80 flex-col rounded-3xl border-r border-b border-l">
             <input
               className="bg-search-icon hover:border-main focus:border-main h-13.25 rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
               type="text"
@@ -88,9 +88,7 @@ export const InformationPlaceModal = ({
           <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
           <div
             className={[
-              canTypePlaceName
-                ? "h-fit"
-                : "h-80 border-r-[0.0625rem] border-b-[0.0625rem] border-l-[0.0625rem]",
+              canTypePlaceName ? "h-fit" : "h-80 border-r border-b border-l",
               "flex flex-col rounded-3xl",
             ].join(" ")}
           >

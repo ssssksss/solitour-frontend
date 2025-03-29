@@ -162,14 +162,14 @@ export const GatheringPlaceModal = ({
     <ModalTemplate
       className={[
         menu === "address" ? "max-h-[874px]" : "max-h-[800px]",
-        "w-[calc(100vw-1rem)] max-w-[40rem]",
+        "w-[calc(100vw-1rem)] max-w-160",
       ].join(" ")}
       closeModal={closeModal}
     >
       <h2 className="mt-8 mb-7.5 h-8 text-2xl font-bold text-black">
         장소 선택
       </h2>
-      <section className="flex w-full flex-col items-center gap-[1.875rem]">
+      <section className="flex w-full flex-col items-center gap-7.5">
         <div className="flex w-full">
           <button
             className={`h-12 w-full px-4 py-2 ${menu == "search" ? "bg-main text-white" : "text-black outline -outline-offset-1 outline-black"}`}
@@ -182,7 +182,12 @@ export const GatheringPlaceModal = ({
             검색으로 찾기
           </button>
           <button
-            className={`h-12 w-full px-4 py-2 ${menu == "address" ? "bg-main text-white" : "text-black outline -outline-offset-1 outline-black"}`}
+            className={[
+              menu === "address"
+                ? "bg-main text-white"
+                : "text-black outline -outline-offset-1 outline-black",
+              "h-12 w-full px-4 py-2",
+            ].join(" ")}
             onClick={() => {
               setMenu("address");
               setResults([]);
@@ -193,7 +198,9 @@ export const GatheringPlaceModal = ({
           </button>
         </div>
         <div
-          className={`w-full ${menu == "address" ? "h-[30rem]" : "h-[37rem]"}`}
+          className={[menu === "address" ? "h-120" : "h-148", "w-full"].join(
+            " ",
+          )}
         >
           {menu == "search" && (
             <>
@@ -230,7 +237,7 @@ export const GatheringPlaceModal = ({
                       {results.map((result: PlaceElement, index) => (
                         <li
                           key={index}
-                          className="outline-main flex h-12 w-full cursor-pointer flex-col px-2 py-1 hover:rounded-[1rem] hover:outline hover:-outline-offset-1"
+                          className="outline-main flex h-12 w-full cursor-pointer flex-col px-2 py-1 hover:rounded-2xl hover:outline hover:-outline-offset-1"
                           onClick={() => pickLocation(result)}
                         >
                           <div className="flex gap-1">
@@ -248,7 +255,7 @@ export const GatheringPlaceModal = ({
                         </li>
                       ))}
                       {results.length == 0 && (
-                        <div className="flex justify-center py-[2rem]">
+                        <div className="flex justify-center py-8">
                           결과가 없습니다.
                         </div>
                       )}
@@ -306,7 +313,7 @@ export const GatheringPlaceModal = ({
                         .map((result: PlaceElement1, index) => (
                           <li
                             key={index}
-                            className="outline-main grid h-12 w-full cursor-pointer grid-cols-[auto_8rem] px-2 py-1 hover:rounded-[1rem] hover:outline hover:-outline-offset-1"
+                            className="outline-main grid h-12 w-full cursor-pointer grid-cols-[auto_8rem] px-2 py-1 hover:rounded-2xl hover:outline hover:-outline-offset-1"
                             onClick={() => pickAddress(result)}
                           >
                             <div className="flex items-center gap-1">
@@ -332,7 +339,7 @@ export const GatheringPlaceModal = ({
                         (i: { road_address: { address_name: string } }) =>
                           i?.road_address?.address_name != undefined,
                       ).length == 0 && (
-                        <div className="flex justify-center py-[2rem]">
+                        <div className="flex justify-center py-8">
                           결과가 없습니다.
                         </div>
                       )}
@@ -355,7 +362,7 @@ export const GatheringPlaceModal = ({
               type="text"
               placeholder="장소명을 입력하세요"
               onChange={(e) => setPlaceCustomName(e.target.value)}
-              className="h-13 w-full rounded-[1rem] bg-transparent px-4 outline -outline-offset-1 outline-[#E3E3E3]"
+              className="h-13 w-full rounded-2xl bg-transparent px-4 outline -outline-offset-1 outline-[#E3E3E3]"
             />
             <button
               className="bg-main disabled:bg-gray1 h-12 w-full rounded-[4rem] px-4 py-2 text-white"
