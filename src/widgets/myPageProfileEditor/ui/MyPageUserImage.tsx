@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { UserImage } from "@/entities/user";
+import { UserImage, useUserStore } from "@/entities/user";
 import { useMyPageUserImage } from "../model/useMyPageUserImage";
 import { Modal } from "@/shared/ui/modal";
 import { ImageCropperModal } from "./ImageCropperModal";
@@ -27,6 +27,7 @@ export const MyPageUserImage = ({
     handleDeleteClick,
     handleImageUrlChange,
   } = useMyPageUserImage(userImageUrl, userSex);
+  const { sex } = useUserStore();
 
   return (
     <article className="flex items-center justify-center pt-17 pb-21">
@@ -49,17 +50,19 @@ export const MyPageUserImage = ({
               />
             </div>
           </div>
-          <button
-            className="invisible absolute top-0 right-0 z-10 flex aspect-square w-4 items-center justify-center rounded-full bg-black group-hover:visible hover:bg-black/25"
-            onClick={handleDeleteClick}
-          >
-            <Image
-              src="/icons/close-icon.svg"
-              alt="close-icon"
-              width={8}
-              height={8}
-            />
-          </button>
+          {sex !== null && (
+            <button
+              className="invisible absolute top-0 right-0 z-10 flex aspect-square w-4 items-center justify-center rounded-full bg-black group-hover:visible hover:bg-black/25"
+              onClick={handleDeleteClick}
+            >
+              <Image
+                src="/icons/close-icon.svg"
+                alt="close-icon"
+                width={8}
+                height={8}
+              />
+            </button>
+          )}
           <input
             id="imageUpload"
             type="file"
