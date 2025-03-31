@@ -9,6 +9,7 @@ import {
   InformationItemSkeleton,
 } from "@/entities/information";
 import { InformationBookmark } from "@/features/informationBookmark";
+import { LottieNotFound } from "@/shared/ui/lottie";
 
 export const MyPageInformationList = () => {
   const {
@@ -28,38 +29,45 @@ export const MyPageInformationList = () => {
         onClick={handleCategoryClick}
       />
       <div className="flex w-full flex-col">
-        <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
-          {
-            loading
-              ? /* eslint-disable indent */
-                Array.from({ length: 6 }).map((_, index) => (
-                  <InformationItemSkeleton key={index} />
-                ))
-              : elements.map((value) => (
-                  <InformationItem
-                    key={value.informationId}
-                    informationId={value.informationId}
-                    categoryName={value.categoryName}
-                    isLike={false}
-                    title={value.title}
-                    image={value.thumbNailImage}
-                    address={
-                      value.zoneCategoryParentName +
-                      ", " +
-                      value.zoneCategoryChildName
-                    }
-                    likeCount={value.likeCount}
-                    viewCount={value.viewCount}
-                  >
-                    <InformationBookmark
+        {loading || elements.length > 0 ? (
+          <div className="mt-6 grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[744px]:grid-cols-1">
+            {
+              loading
+                ? /* eslint-disable indent */
+                  Array.from({ length: 6 }).map((_, index) => (
+                    <InformationItemSkeleton key={index} />
+                  ))
+                : elements.map((value) => (
+                    <InformationItem
+                      key={value.informationId}
                       informationId={value.informationId}
-                      initialIsBookmarked={value.isBookMark}
-                    />
-                  </InformationItem>
-                ))
-            /* eslint-enable indent */
-          }
-        </div>
+                      categoryName={value.categoryName}
+                      isLike={false}
+                      title={value.title}
+                      image={value.thumbNailImage}
+                      address={
+                        value.zoneCategoryParentName +
+                        ", " +
+                        value.zoneCategoryChildName
+                      }
+                      likeCount={value.likeCount}
+                      viewCount={value.viewCount}
+                    >
+                      <InformationBookmark
+                        informationId={value.informationId}
+                        initialIsBookmarked={value.isBookMark}
+                      />
+                    </InformationItem>
+                  ))
+
+              /* eslint-enable indent */
+            }
+          </div>
+        ) : (
+          <div className="flex w-full items-center justify-center">
+            <LottieNotFound text="찾는 내용이 없습니다." />
+          </div>
+        )}
       </div>
       <Pagination
         currentPage={currentPage}

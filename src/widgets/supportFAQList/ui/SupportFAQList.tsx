@@ -21,7 +21,7 @@ export const SupportFAQList = () => {
             className="grid h-18.5 w-full grid-cols-[6.0625rem_auto] items-center rounded-md"
             onClick={() => handleToggle(topic)}
           >
-            <div className="text-main text-start font-bold"> Q </div>
+            <div className="text-main text-start font-bold">Q</div>
             <div className="text-start text-lg font-bold">{topic}</div>
           </button>
           <div
