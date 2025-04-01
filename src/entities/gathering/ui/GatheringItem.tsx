@@ -222,7 +222,7 @@ export const GatheringItem = ({
               })}
             </p>
           </div>
-          <div className="flex justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {
                 /* eslint-disable indent */
@@ -247,10 +247,10 @@ export const GatheringItem = ({
                 <Image
                   src="/icons/eyes-icon.svg"
                   alt="eyes-icon"
-                  width={16}
-                  height={16}
+                  width={15}
+                  height={15}
                 />
-                <p className="text-sm">
+                <p className="text-gray2 text-xs">
                   {convertNumberToShortForm(gathering.viewCount)}
                 </p>
               </div>

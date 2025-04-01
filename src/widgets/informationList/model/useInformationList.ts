@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export const useInformationList = () => {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = Number(searchParams.get("page") ?? 1);
   const [informationList, setInformationList] =
     useState<InformationList | null>(null);
 
@@ -20,15 +20,13 @@ export const useInformationList = () => {
       try {
         setLoading(true);
 
-        const page = Number(searchParams.get("page"));
-        if (page < 1 || !Number.isSafeInteger(page)) {
+        if (currentPage < 1 || !Number.isSafeInteger(currentPage)) {
           setInformationList(null);
           return;
         }
-        setCurrentPage(page);
 
         const url = new URL(window.location.href);
-        url.searchParams.set("page", (page - 1).toString());
+        url.searchParams.set("page", (currentPage - 1).toString());
 
         if (searchParams.get("tagName")) {
           const data = await getInformationListByTagName(url.search);
@@ -43,6 +41,7 @@ export const useInformationList = () => {
         setLoading(false);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return { loading, currentPage, informationList };

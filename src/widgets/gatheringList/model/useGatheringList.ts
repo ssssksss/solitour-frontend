@@ -1,6 +1,10 @@
 "use client";
 
-import { Gathering, getGatheringList } from "@/entities/gathering";
+import {
+  Gathering,
+  getGatheringList,
+  getGatheringListByTagName,
+} from "@/entities/gathering";
 import { useUserStore } from "@/entities/user";
 import { useModal } from "@/shared/lib/hooks";
 import { useToastifyStore } from "@/shared/model";
@@ -32,7 +36,7 @@ export const useGatheringList = () => {
   useEffect(() => {
     (async () => {
       try {
-        const url = new URL(window.location.href);
+        setLoading(true);
 
         if (currentPage < 1 || !Number.isSafeInteger(currentPage)) {
           setElements([]);
@@ -40,13 +44,18 @@ export const useGatheringList = () => {
           return;
         }
 
+        const url = new URL(window.location.href);
         url.searchParams.set("page", (currentPage - 1).toString());
 
-        setLoading(true);
-        const gatheringList = await getGatheringList(url.search);
-
-        setElements(gatheringList.content);
-        setTotalElements(gatheringList.page.totalElements);
+        if (searchParams.get("tagName")) {
+          const gatheringList = await getGatheringListByTagName(url.search);
+          setElements(gatheringList.content);
+          setTotalElements(gatheringList.page.totalElements);
+        } else {
+          const gatheringList = await getGatheringList(url.search);
+          setElements(gatheringList.content);
+          setTotalElements(gatheringList.page.totalElements);
+        }
       } catch (error) {
         setToastifyState({
           type: "error",

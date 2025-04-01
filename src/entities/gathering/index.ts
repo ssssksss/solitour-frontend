@@ -10,7 +10,10 @@ export {
   type GatheringCategory,
   getGatheringCategoryList,
 } from "./api/gatheringCategoryList";
-export { getGatheringList } from "./api/gatheringList";
+export {
+  getGatheringList,
+  getGatheringListByTagName,
+} from "./api/gatheringList";
 export { getMyPageGatheringList } from "./api/myPageGatheringList";
 export { getNewGatheringList } from "./api/newGatheringList";
 export { getTopGatheringTitleList } from "./api/topGatheringTitleList";
