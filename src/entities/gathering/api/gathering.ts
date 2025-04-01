@@ -82,7 +82,7 @@ export async function createGathering(data: GatheringCreateRequest) {
     throw new Error("Failed to create data.");
   }
 
-  return response.json() as Promise<{ data: { id: number } }>;
+  return response.json() as Promise<{ id: number }>;
 }
 
 export async function updateGathering(

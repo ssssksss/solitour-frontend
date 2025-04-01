@@ -41,7 +41,9 @@ export const UserDropDown = () => {
       ref={outside}
     >
       <UserImage userImageAddress={userStore.userImage.address} size={30} />
-      <span className="truncate font-bold">{userStore.nickname}</span>
+      <span className="hover:text-main truncate font-bold">
+        {userStore.nickname}
+      </span>
       <AnimatePresence>
         {isOpen && (
           <motion.section

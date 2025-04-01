@@ -76,7 +76,7 @@ export const useGatheringCreateEditor = () => {
       };
 
       const result = await createGathering(data);
-      router.replace(`/gathering/${result.data.id}`);
+      router.replace(`/gathering/${result.id}`);
     } catch (error) {
       setToastifyState({
         type: "error",
