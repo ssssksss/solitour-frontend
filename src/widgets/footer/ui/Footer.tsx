@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 
 export const Footer = () => {
   return (
@@ -21,14 +22,13 @@ export const Footer = () => {
           </p>
           <p>솔리투어에서 새로운 나를 찾아보세요.</p>
         </div>
-        <div className="flex flex-row items-center justify-between">
-          <Link
-            className="flex h-10.5 w-30 items-center justify-center rounded-3xl bg-black text-sm font-medium text-white hover:scale-105"
-            href="/informations/list?page=1&parentCategoryId=1"
-          >
-            둘러보기
-          </Link>
-        </div>
+        <a
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow hover:scale-105"
+          href="https://github.com/TripInfoWeb/solitour-frontend"
+          target="_blank"
+        >
+          <FaGithub />
+        </a>
         <div className="text-gray1 flex flex-row items-center justify-between pt-8 max-[744px]:flex-col-reverse max-[744px]:gap-4">
           <p className="text-xs font-medium">
             Copyright Solitour. All rights reserved

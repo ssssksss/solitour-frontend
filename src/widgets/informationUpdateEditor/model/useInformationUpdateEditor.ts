@@ -14,6 +14,7 @@ import {
 } from "@/entities/information";
 import { useInformationEditorStore } from "@/features/informationEditor";
 import { InformationUpdateFormSchema } from "./InformationUpdateFormSchema";
+import { useToastifyStore } from "@/shared/model";
 
 export const useInformationUpdateEditor = (
   informationId: number,
@@ -26,6 +27,7 @@ export const useInformationUpdateEditor = (
   const [loading, setLoading] = useState(false);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState("");
   const [originalContentUrl, setOriginalContentUrl] = useState<string[]>([]);
+  const { setToastifyState } = useToastifyStore();
 
   const methods = useForm<{
     userId: number;
@@ -187,19 +189,15 @@ export const useInformationUpdateEditor = (
       })),
     };
 
-    setLoading(true);
-
-    const response = await updateInformation(informationId, data);
-
-    if (!response.ok) {
-      alert("정보 수정에 실패하였습니다.");
+    try {
+      setLoading(true);
+      await updateInformation(informationId, data);
+      router.replace(`/informations/${informationId}`);
+    } catch (error) {
+      setToastifyState({ type: "error", message: "정보 수정에 실패했습니다." });
+    } finally {
       setLoading(false);
-      throw new Error(response.statusText);
     }
-
-    const result: { id: number } = await response.json();
-    router.push(`/informations/${result.id}`);
-    router.refresh();
   };
 
   // 로그인을 하지 않은 사용자의 경우 로그인 페이지로 리다이렉트.

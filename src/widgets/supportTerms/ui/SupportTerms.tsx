@@ -27,7 +27,7 @@ export const SupportTerms = () => {
   }, []);
 
   return (
-    <section className="mt-10 mb-20">
+    <section className="mt-10 mb-20 flex flex-col gap-20">
       <article className="flex w-full flex-col gap-10">
         <h2 className="text-main text-3xl font-bold" id="terms-of-service">
           이용약관
