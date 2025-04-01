@@ -12,16 +12,12 @@ export const GatheringEditorContent = () => {
         <textarea
           className={[
             formContext.formState.errors.content
-              ? "outline-red-500"
-              : "outline-[#E3E3E3]",
-            "min-h-70 w-full resize-none rounded-2xl p-6 outline -outline-offset-1",
+              ? "border-red-500"
+              : "hover:border-main focus:border-main border-[#E3E3E3]",
+            "min-h-70 w-full resize-none rounded-2xl border p-4 outline-none",
           ].join(" ")}
-          placeholder="어떤 모임을 만들어볼까요? 모임 정보 및 목표를 작성해 새로운 솔리들과 함께해보세요."
           {...formContext.register("content")}
-          onChange={(e) => {
-            formContext.setValue("content", e.target.value);
-            formContext.trigger("content");
-          }}
+          placeholder="어떤 모임을 만들어볼까요? 모임 정보 및 목표를 작성해 새로운 솔리들과 함께해보세요."
           maxLength={500}
         />
         <div className="flex w-full justify-end pt-3">
@@ -30,15 +26,9 @@ export const GatheringEditorContent = () => {
               {formContext.formState.errors.content.message as String}
             </span>
           )}
-          <span
-            className={
-              formContext.getValues("content").length >= 500
-                ? "text-red-600"
-                : ""
-            }
-          >
-            {formContext.getValues("content").length} / 500
-          </span>
+          <p className="text-gray1 text-end text-sm font-medium">
+            {formContext.getValues("content").length}/500
+          </p>
         </div>
       </div>
     </article>

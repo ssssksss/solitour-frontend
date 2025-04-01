@@ -14,19 +14,15 @@ export const GatheringEditorTitle = () => {
       </div>
       <div className="relative w-full">
         <input
-          placeholder="제목을 입력하세요. (최대 50자)"
-          maxLength={50}
           className={[
             formContext.formState.errors.title
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "h-13 w-full rounded-[3rem] pl-7 outline -outline-offset-1",
+            "h-13 w-full rounded-[3rem] px-5 text-sm outline -outline-offset-1",
           ].join(" ")}
           {...formContext.register("title")}
-          onChange={(e) => {
-            formContext.setValue("title", e.target.value);
-            formContext.trigger("title");
-          }}
+          placeholder="제목을 입력하세요. (최대 50자)"
+          maxLength={50}
         />
         {formContext.formState.errors.title && (
           <span className="absolute -bottom-6 left-4 mt-1 text-xs text-red-500">

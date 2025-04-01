@@ -8,8 +8,8 @@ import { GatheringForm } from "../model/gatheringForm";
 import { useGatheringEditorCategoryList } from "../model/useGatheringEditorCategoryList";
 
 export const GatheringEditorCategoryList = () => {
-  const { isOpen, openModal, closeModal } = useModal();
   const formContext = useFormContext<GatheringForm>();
+  const { isOpen, openModal, closeModal } = useModal();
   const { categoryList } = useGatheringEditorCategoryList();
 
   return (

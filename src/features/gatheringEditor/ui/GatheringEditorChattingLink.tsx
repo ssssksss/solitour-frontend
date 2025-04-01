@@ -18,7 +18,7 @@ export const GatheringEditorChattingLink = () => {
             formContext.formState.errors.openChattingUrl
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "h-13 w-full rounded-[3rem] px-4 outline -outline-offset-1",
+            "h-13 w-full rounded-[3rem] px-5 text-sm outline -outline-offset-1",
           ].join(" ")}
           placeholder="참여 인원과 소통을 위해 오픈 채팅 링크를 추가해주세요."
           maxLength={255}

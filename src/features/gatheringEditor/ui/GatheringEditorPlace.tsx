@@ -19,13 +19,13 @@ export const GatheringEditorPlace = () => {
         <span className="text-lg font-semibold">장소</span>
         <span className="text-main absolute -top-2 text-lg">*</span>
       </div>
-      <div className="relative w-full">
+      <div className="relative grow">
         <button
           className={[
             formContext.formState.errors.placeName
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "flex h-13 w-full items-center justify-start truncate rounded-[3rem] pl-7 outline -outline-offset-1",
+            "flex h-13 w-full items-center justify-start truncate rounded-[3rem] px-5 text-sm outline -outline-offset-1",
           ].join(" ")}
           onClick={openModal}
         >

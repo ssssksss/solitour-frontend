@@ -86,7 +86,7 @@ export const GatheringPeriodModal = ({
           </div>
         </div>
         <button
-          className="bg-main disabled:bg-gray1 h-12 rounded-[4rem] px-4 py-2 text-white"
+          className="bg-main disabled:bg-gray1 h-12 rounded-[4rem] px-4 py-2 text-white hover:scale-105"
           disabled={
             !(
               isAfter(new Date(calendarDate[0].startDate), new Date()) &&

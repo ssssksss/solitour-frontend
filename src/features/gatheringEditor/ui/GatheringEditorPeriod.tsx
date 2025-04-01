@@ -28,7 +28,7 @@ export const GatheringEditorPeriod = () => {
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "flex h-13 w-full items-center justify-start rounded-[3rem] pl-7 outline -outline-offset-1",
+            "flex h-13 w-full items-center justify-start rounded-[3rem] px-5 text-sm outline -outline-offset-1",
           ].join(" ")}
         >
           {formContext.getValues("scheduleStartDate") ? (

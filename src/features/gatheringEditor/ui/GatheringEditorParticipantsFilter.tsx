@@ -13,6 +13,9 @@ export const GatheringEditorParticipantsFilter = () => {
 
   return (
     <div className="flex w-full items-center">
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <GatheringParticipantsFilterModal closeModal={closeModal} />
+      </Modal>
       <div className="relative w-full">
         <button
           className={[
@@ -59,9 +62,6 @@ export const GatheringEditorParticipantsFilter = () => {
           )}
         </button>
       </div>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        <GatheringParticipantsFilterModal closeModal={closeModal} />
-      </Modal>
     </div>
   );
 };

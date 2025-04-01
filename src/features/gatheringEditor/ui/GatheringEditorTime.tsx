@@ -13,6 +13,9 @@ export const GatheringEditorTime = () => {
 
   return (
     <div className="flex w-full items-center gap-x-2.5 gap-y-3 max-[400px]:flex-col max-[400px]:items-start">
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <GatheringTimeModal closeModal={closeModal} />
+      </Modal>
       <div className="relative w-10.5 shrink-0">
         <span className="text-lg font-semibold">시간</span>
         <span className="text-main absolute -top-2 text-lg">*</span>
@@ -25,7 +28,7 @@ export const GatheringEditorTime = () => {
             formContext.formState.errors.scheduleStartDate
               ? "outline-red-500"
               : "outline-[#E3E3E3]",
-            "flex h-13 w-full items-center justify-start rounded-[3rem] pl-7 outline -outline-offset-1",
+            "flex h-13 w-full items-center justify-start rounded-[3rem] px-5 text-sm outline -outline-offset-1",
           ].join(" ")}
           onClick={openModal}
           disabled={!formContext.getValues("scheduleStartDate")}
@@ -47,9 +50,6 @@ export const GatheringEditorTime = () => {
           </span>
         )}
       </div>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        <GatheringTimeModal closeModal={closeModal} />
-      </Modal>
     </div>
   );
 };

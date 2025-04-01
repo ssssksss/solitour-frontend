@@ -1,34 +1,11 @@
 "use client";
 
-import { GENDER } from "@/entities/user";
+import { AGE_RANGE, GENDER } from "@/entities/user";
 import { ModalTemplate } from "@/shared/ui/modal";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { GatheringForm } from "../model/gatheringForm";
-
-const SETTING_MODAL_AGE = {
-  전체: {
-    startAge: 20,
-    endAge: 59,
-  },
-  "20대": {
-    startAge: 20,
-    endAge: 29,
-  },
-  "30대": {
-    startAge: 30,
-    endAge: 39,
-  },
-  "40대": {
-    startAge: 40,
-    endAge: 49,
-  },
-  "50대": {
-    startAge: 50,
-    endAge: 59,
-  },
-};
 
 interface GatheringParticipantsFilterModalProps {
   closeModal: () => void;
@@ -87,58 +64,58 @@ export const GatheringParticipantsFilterModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-160 w-[calc(100vw-1rem)] max-w-160"
+      className="max-h-160 w-[calc(100vw-1rem)] max-w-140 p-6"
       closeModal={closeModal}
     >
       <h2 className="h-8 text-2xl font-bold text-black">참여자 선택</h2>
       <section className="flex w-full flex-col gap-y-8 pt-12">
-        <article className="flex max-w-65 justify-between gap-y-4">
-          <div className="h-8 font-bold text-black">인원</div>
+        <article className="flex items-center gap-20">
+          <div className="flex h-11 items-center justify-center font-bold text-black">
+            인원
+          </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <div
-              className="flex h-11 items-center select-none"
+            <button
+              className={[
+                peopleCount <= 2 && "invisible",
+                "flex h-11 items-center hover:scale-105",
+              ].join(" ")}
+              type="button"
               onClick={() =>
                 setPeopleCount(peopleCount <= 2 ? 2 : peopleCount - 1)
               }
             >
-              {peopleCount > 2 ? (
-                <Image
-                  src="/icons/minus-icon.svg"
-                  alt="minus-icon"
-                  width={28}
-                  height={28}
-                />
-              ) : (
-                <div className="aspect-square w-5" />
-              )}
-            </div>
-            <div className="flex h-11 w-10 items-center justify-center select-none">
-              <div className="w-4"> {peopleCount} </div> 명
-            </div>
-            <div
-              className="flex h-11 items-center select-none"
-              onClick={() => {
-                setPeopleCount(peopleCount >= 10 ? 10 : peopleCount + 1);
-              }}
+              <Image
+                src="/icons/minus-icon.svg"
+                alt="minus-icon"
+                width={28}
+                height={28}
+              />
+            </button>
+            <p className="w-12 text-center">{peopleCount} 명</p>
+            <button
+              className={[
+                peopleCount >= 10 && "invisible",
+                "flex h-11 items-center hover:scale-105",
+              ].join(" ")}
+              type="button"
+              onClick={() =>
+                setPeopleCount(peopleCount >= 10 ? 10 : peopleCount + 1)
+              }
             >
-              {peopleCount < 10 ? (
-                <Image
-                  src="/icons/plus-icon.svg"
-                  alt="plus-icon"
-                  width={28}
-                  height={28}
-                />
-              ) : (
-                <div className="aspect-square w-5" />
-              )}
-            </div>
+              <Image
+                src="/icons/plus-icon.svg"
+                alt="plus-icon"
+                width={28}
+                height={28}
+              />
+            </button>
           </div>
         </article>
         <article className="flex w-full flex-col gap-y-4">
           <div className="h-8 text-start font-bold text-black">나이</div>
           <div className="relative flex w-full flex-col gap-4">
             <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {Object.entries(SETTING_MODAL_AGE).map((i) => (
+              {Object.entries(AGE_RANGE).map((i) => (
                 <button
                   key={i[0]}
                   onClick={() =>
@@ -172,10 +149,11 @@ export const GatheringParticipantsFilterModal = ({
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
+              <div className="relative flex w-20.5 items-center py-2 pr-2.5 after:content-['세']">
                 <input
+                  className="w-full text-center text-lg outline-none placeholder:text-sm"
                   placeholder="최소 20"
-                  type={"text"}
+                  type="text"
                   disabled={!directInput}
                   onChange={(e) => {
                     let num = Number(e.target.value);
@@ -196,7 +174,6 @@ export const GatheringParticipantsFilterModal = ({
                     setStartAge(num || undefined);
                   }}
                   value={startAge || undefined}
-                  className="w-full text-center text-lg"
                 />
                 <div className="absolute bottom-2 h-[1px] w-20.5 bg-black"></div>
                 <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
@@ -204,8 +181,9 @@ export const GatheringParticipantsFilterModal = ({
                 </div>
               </div>
               <div> ~ </div>
-              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
+              <div className="relative flex w-20.5 items-center py-2 pr-2.5 after:content-['세']">
                 <input
+                  className="w-full pr-2.5 text-center text-lg outline-none placeholder:text-sm"
                   placeholder="최대 59"
                   type="text"
                   max={59}
@@ -233,7 +211,6 @@ export const GatheringParticipantsFilterModal = ({
                     input.value = input.value.replace(/[^0-9]/g, "");
                   }}
                   value={endAge}
-                  className="w-full pr-2.5 text-center text-lg"
                 />
                 <div className="absolute bottom-2 h-[1px] w-20.5 bg-black"></div>
                 <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">

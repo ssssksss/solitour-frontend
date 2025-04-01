@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDebounce } from "@/shared/lib/hooks";
+import { GatheringForm } from "./gatheringForm";
 
 export const useGatheringPlaceModal = (closeModal: () => void) => {
-  const formContext = useFormContext();
+  const formContext = useFormContext<GatheringForm>();
   const [isCustom, setIsCustom] = useState(false);
 
   // 장소 검색 객체 (place search)
@@ -62,8 +63,8 @@ export const useGatheringPlaceModal = (closeModal: () => void) => {
   const handlePlaceReset = () => {
     formContext.setValue("roadAddressName", "");
     formContext.setValue("searchId", "");
-    formContext.setValue("xAxis", "");
-    formContext.setValue("yAxis", "");
+    formContext.setValue("xAxis", 0);
+    formContext.setValue("yAxis", 0);
     formContext.setValue("placeName", "");
     formContext.trigger("placeName");
     closeModal();
@@ -78,8 +79,8 @@ export const useGatheringPlaceModal = (closeModal: () => void) => {
   }) => {
     formContext.setValue("roadAddressName", placeInfo.address_name);
     formContext.setValue("searchId", placeInfo.id);
-    formContext.setValue("xAxis", placeInfo.x);
-    formContext.setValue("yAxis", placeInfo.y);
+    formContext.setValue("xAxis", Number(placeInfo.x));
+    formContext.setValue("yAxis", Number(placeInfo.y));
     formContext.setValue("placeName", placeInfo.place_name);
     formContext.trigger("placeName");
     closeModal();
@@ -90,15 +91,9 @@ export const useGatheringPlaceModal = (closeModal: () => void) => {
     x: string;
     y: string;
   }) => {
-    const temp = addressInfo.address_name.split(" ");
-    formContext.setValue("province", temp[0].slice(0, 2) ?? "");
-    formContext.setValue(
-      "city",
-      temp[0].slice(0, 2) === "세종" ? "세종" : (temp[1] ?? ""),
-    );
     formContext.setValue("roadAddressName", addressInfo.address_name);
-    formContext.setValue("xAxis", addressInfo.x);
-    formContext.setValue("yAxis", addressInfo.y);
+    formContext.setValue("xAxis", Number(addressInfo.x));
+    formContext.setValue("yAxis", Number(addressInfo.y));
     formContext.setValue("searchId", "0");
     formContext.watch();
   };

@@ -48,6 +48,7 @@ export const useGatheringUpdateEditor = (gatheringDetail: GatheringDetail) => {
       gatheringCategoryId: gatheringDetail.gatheringCategoryResponse.id,
       openChattingUrl: gatheringDetail.openChattingUrl,
     },
+    mode: "onChange",
   });
   const { id } = useParams<{ id: string }>();
 

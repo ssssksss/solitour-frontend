@@ -13,8 +13,8 @@ export const GatheringEditorHashtag = () => {
         <div className="relative w-11 shrink-0 text-lg font-semibold">태그</div>
         <div className="relative w-full">
           <input
+            className="h-13 w-full rounded-[3rem] px-5 text-sm outline -outline-offset-1 outline-[#E3E3E3]" // 오른쪽 padding 추가
             placeholder="태그로 키워드를 써보세요! (2 ~ 15자)"
-            className="h-13 w-full rounded-[3rem] px-4 pr-12 outline -outline-offset-1 outline-[#E3E3E3]" // 오른쪽 padding 추가
             onKeyUp={(e) => handleEnterKey(e)}
             disabled={tagList.length > 9}
             maxLength={15}
@@ -39,9 +39,10 @@ export const GatheringEditorHashtag = () => {
             tagName={tag}
             borderColor="border-main"
             textColor="text-main"
+            cursorPointer={true}
+            hover="hover:scale-105"
             removable={true}
             onClick={() => handleHashtagClick(tag)}
-            cursorPointer={true}
           />
         ))}
       </div>

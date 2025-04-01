@@ -31,7 +31,7 @@ export const Hashtag = ({
     >
       <p className={[textColor, "text-sm"].join(" ")}>#{tagName}</p>
       {removable && (
-        <MdClose className="text-main rounded-full bg-gray-100 p-1" />
+        <MdClose className="text-main rounded-full bg-gray-100 p-px" />
       )}
     </div>
   );

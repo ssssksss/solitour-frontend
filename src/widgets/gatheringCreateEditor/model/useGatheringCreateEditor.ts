@@ -34,6 +34,7 @@ export const useGatheringCreateEditor = () => {
       gatheringCategoryId: 0,
       openChattingUrl: "",
     },
+    mode: "onChange",
   });
 
   const handleSubmit = async () => {

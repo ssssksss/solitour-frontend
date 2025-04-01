@@ -16,7 +16,7 @@ export const DiaryEditorTitle = () => {
           formContext.formState.errors.title
             ? "border-red-500"
             : "border-gray3 hover:border-main focus:border-main",
-          "h-full w-full rounded-full border bg-transparent pl-5 text-sm outline-hidden",
+          "h-full w-full rounded-full border bg-transparent px-5 text-sm outline-hidden",
         ].join(" ")}
         {...formContext.register("title")}
         type="text"
