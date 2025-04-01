@@ -27,11 +27,12 @@ export const GatheringPeriodModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-200 w-[calc(100vw-1rem)] max-[799px]:max-w-100 min-[800px]:max-h-144 min-[800px]:w-196"
+      className="max-h-200 w-[calc(100vw-1rem)] p-6 max-[799px]:max-w-100 min-[800px]:w-196"
       closeModal={closeModal}
     >
-      <h2 className="mt-8 h-8 text-2xl font-bold text-black">날짜 선택</h2>
-      <div className="flex flex-col items-center gap-7.5">
+      <div className="flex w-full flex-col items-center">
+        <h2 className="mt-8 h-8 text-2xl font-bold text-black">날짜 선택</h2>
+
         <div className="relative">
           <DateRangePicker
             onChange={(rangesByKey) => {
@@ -84,28 +85,28 @@ export const GatheringPeriodModal = ({
             {year + Math.floor((month + 1) / 12)}.{(month % 12) + 1}
           </div>
         </div>
-        <div className="flex w-full justify-center gap-4">
-          <button
-            className="bg-main disabled:bg-gray1 h-12 rounded-[4rem] px-4 py-2 text-white"
-            disabled={
-              !(
-                isAfter(new Date(calendarDate[0].startDate), new Date()) &&
-                isAfter(
-                  new Date(calendarDate[0].startDate),
-                  new Date(formContext.getValues("deadline")),
-                )
+        <button
+          className="bg-main disabled:bg-gray1 h-12 rounded-[4rem] px-4 py-2 text-white"
+          disabled={
+            !(
+              isAfter(new Date(calendarDate[0].startDate), new Date()) &&
+              isAfter(
+                new Date(calendarDate[0].startDate),
+                formContext.getValues("deadline") === ""
+                  ? new Date()
+                  : new Date(formContext.getValues("deadline")),
               )
-            }
-            onClick={handleSubmit}
-          >
-            <span>{format(calendarDate[0].startDate, "yy.MM.dd")}</span>
-            {format(calendarDate[0].startDate, "yy.MM.dd") !=
-              format(calendarDate[0].endDate, "yy.MM.dd") && (
-              <span>{format(calendarDate[0].endDate, "~ yy.MM.dd")}</span>
-            )}
-            <span className="pl-2 text-[1.1rem]"> 적용하기 </span>
-          </button>
-        </div>
+            )
+          }
+          onClick={handleSubmit}
+        >
+          <span>{format(calendarDate[0].startDate, "yy.MM.dd")}</span>
+          {format(calendarDate[0].startDate, "yy.MM.dd") !=
+            format(calendarDate[0].endDate, "yy.MM.dd") && (
+            <span>{format(calendarDate[0].endDate, "~ yy.MM.dd")}</span>
+          )}
+          <span className="pl-2 text-lg">적용하기</span>
+        </button>
       </div>
     </ModalTemplate>
   );

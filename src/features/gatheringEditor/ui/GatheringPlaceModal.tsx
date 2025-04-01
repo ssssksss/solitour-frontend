@@ -1,60 +1,8 @@
 "use client";
 
+import { TiLocation } from "react-icons/ti";
 import { ModalTemplate } from "@/shared/ui/modal";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
-import { GatheringForm } from "../model/gatheringForm";
-
-type PlaceElement = {
-  address_name: string;
-  category_group_code: string;
-  category_group_name: string;
-  category_name: string;
-  distance: string;
-  id: string;
-  phone: string;
-  place_name: string;
-  place_url: string;
-  road_address_name: string;
-  x: string;
-  y: string;
-};
-
-type PlaceElement1 = {
-  address: {
-    address_name: string;
-    b_code: string;
-    h_code: string;
-    main_address_no: string;
-    mountain_yn: string;
-    region_1depth_name: string;
-    region_2depth_name: string;
-    region_3depth_h_name: string;
-    region_3depth_name: string;
-    sub_address_no: string;
-    x: string;
-    y: string;
-  };
-  address_name: string;
-  address_type: string;
-  road_address: {
-    address_name: string;
-    building_name: string;
-    main_building_no: string;
-    region_1depth_name: string;
-    region_2depth_name: string;
-    region_3depth_name: string;
-    road_name: string;
-    sub_building_no: string;
-    underground_yn: string;
-    x: string;
-    y: string;
-    zone_no: string;
-  };
-  x: string;
-  y: string;
-};
+import { useGatheringPlaceModal } from "../model/useGatheringPlaceModal";
 
 interface GatheringPlaceModalProps {
   closeModal: () => void;
@@ -63,320 +11,140 @@ interface GatheringPlaceModalProps {
 export const GatheringPlaceModal = ({
   closeModal,
 }: GatheringPlaceModalProps) => {
-  const [menu, setMenu] = useState("search");
-  const [keyword, setKeyword] = useState("");
-  const [placeCustomName, setPlaceCustomName] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [placeData, setPlaceData] = useState<PlaceElement1>();
-  const formContext = useFormContext<GatheringForm>();
-
-  const handleSearch = async (keyword: string) => {
-    setLoading(true);
-
-    try {
-      const response = await fetch(
-        `/api/gathering/searchPlace?keyword=${encodeURIComponent(keyword)}`,
-        {
-          credentials: "omit",
-        },
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setResults(data.documents);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAddressSearch = async (address: string) => {
-    setLoading(true);
-
-    try {
-      const response = await fetch(
-        `/api/gathering/searchAddress?address=${encodeURIComponent(address)}`,
-        {
-          credentials: "omit",
-        },
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setResults(data.documents);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const pickLocation = (element: PlaceElement) => {
-    formContext.setValue("placeName", element.place_name);
-    formContext.setValue("xAxis", Number(element.x));
-    formContext.setValue("yAxis", Number(element.y));
-    formContext.setValue("searchId", element.id);
-    formContext.setValue("roadAddressName", element.address_name);
-    formContext.trigger([
-      "placeName",
-      "xAxis",
-      "yAxis",
-      "searchId",
-      "roadAddressName",
-    ]);
-    closeModal();
-  };
-
-  const pickAddress = (element: PlaceElement1) => {
-    setPlaceData(element);
-  };
-
-  const applyAddressHandler = () => {
-    formContext.setValue("placeName", placeCustomName);
-    formContext.setValue("xAxis", Number(placeData?.x));
-    formContext.setValue("yAxis", Number(placeData?.y));
-    formContext.setValue("roadAddressName", placeData?.address_name ?? "");
-    formContext.setValue("searchId", "");
-    formContext.trigger([
-      "placeName",
-      "xAxis",
-      "yAxis",
-      "searchId",
-      "roadAddressName",
-    ]);
-    closeModal();
-  };
-
-  useEffect(() => {
-    if (keyword) {
-      if (menu == "search") {
-        handleSearch(keyword);
-      }
-      if (menu == "address") {
-        handleAddressSearch(keyword);
-      }
-    }
-  }, [keyword, menu]);
+  const {
+    formContext,
+    placeInfos,
+    addressInfos,
+    isCustom,
+    canTypePlaceName,
+    canRegister,
+    setIsCustom,
+    handleLocationSearch,
+    handleAddressSearch,
+    handlePlaceReset,
+    handlePlaceChange,
+    handleAddressChange,
+    handleCustomPlaceNameChange,
+  } = useGatheringPlaceModal(closeModal);
 
   return (
     <ModalTemplate
-      className={[
-        menu === "address" ? "max-h-[874px]" : "max-h-[800px]",
-        "w-[calc(100vw-1rem)] max-w-160",
-      ].join(" ")}
-      closeModal={closeModal}
+      className="w-159 gap-8 p-6 max-[744px]:w-[calc(100%_-_48px)]"
+      closeModal={handlePlaceReset}
     >
-      <h2 className="mt-8 mb-7.5 h-8 text-2xl font-bold text-black">
-        장소 선택
-      </h2>
-      <section className="flex w-full flex-col items-center gap-7.5">
-        <div className="flex w-full">
+      <div className="flex w-full flex-col gap-2">
+        <h3 className="text-lg font-medium text-black">장소 선택</h3>
+        <div className="flex h-11 flex-row items-center border text-sm">
           <button
-            className={`h-12 w-full px-4 py-2 ${menu == "search" ? "bg-main text-white" : "text-black outline -outline-offset-1 outline-black"}`}
-            onClick={() => {
-              setMenu("search");
-              setResults([]);
-              setKeyword("");
-            }}
+            className={`h-11 flex-1/2 ${isCustom ? "text-gray1" : "bg-main text-white"}`}
+            type="button"
+            onClick={() => setIsCustom(false)}
           >
             검색으로 찾기
           </button>
           <button
-            className={[
-              menu === "address"
-                ? "bg-main text-white"
-                : "text-black outline -outline-offset-1 outline-black",
-              "h-12 w-full px-4 py-2",
-            ].join(" ")}
-            onClick={() => {
-              setMenu("address");
-              setResults([]);
-              setKeyword("");
-            }}
+            className={`h-11 flex-1/2 ${isCustom ? "bg-main text-white" : "text-gray1"}`}
+            type="button"
+            onClick={() => setIsCustom(true)}
           >
-            직접 주소 입력하기
+            직접 장소 입력하기
           </button>
         </div>
-        <div
-          className={[menu === "address" ? "h-120" : "h-148", "w-full"].join(
-            " ",
-          )}
-        >
-          {menu == "search" && (
-            <>
-              <article className="flex h-full w-full flex-col rounded-3xl outline -outline-offset-1 outline-[#E3E3E3]">
-                <label className="flex h-13 gap-1.5 rounded-[1.5rem_1.5rem_0_1.5rem] px-4 outline -outline-offset-1 outline-[#E3E3E3]">
-                  <Image
-                    src="/icons/search-icon.svg"
-                    alt={"search-icon"}
-                    width={16}
-                    height={16}
-                  />
-                  <input
-                    type="text"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="장소나 건물명을 입력해주세요"
-                    className={
-                      "h-12 w-full bg-transparent focus:outline-hidden"
-                    }
-                  />
-                </label>
-
-                <ul className="flex h-full flex-col gap-2 overflow-scroll px-2 py-4">
-                  {loading ? (
-                    <p
-                      className={
-                        "flex h-full w-full items-center justify-center"
-                      }
-                    >
-                      Loading...
-                    </p>
-                  ) : (
-                    <>
-                      {results.map((result: PlaceElement, index) => (
-                        <li
-                          key={index}
-                          className="outline-main flex h-12 w-full cursor-pointer flex-col px-2 py-1 hover:rounded-2xl hover:outline hover:-outline-offset-1"
-                          onClick={() => pickLocation(result)}
-                        >
-                          <div className="flex gap-1">
-                            <Image
-                              src="/icons/location-icon.svg"
-                              alt="location-icon"
-                              width={14}
-                              height={14}
-                            />
-                            <span> {result.place_name} </span>
-                          </div>
-                          <div className="text-gray2 text-sm">
-                            {result.address_name}
-                          </div>
-                        </li>
-                      ))}
-                      {results.length == 0 && (
-                        <div className="flex justify-center py-8">
-                          결과가 없습니다.
-                        </div>
-                      )}
-                    </>
-                  )}
-                </ul>
-              </article>
-            </>
-          )}
-          {menu == "address" && (
-            <>
-              <article className="flex h-full w-full flex-col rounded-3xl outline -outline-offset-1 outline-[#E3E3E3]">
-                <label className="flex h-13 gap-1.5 rounded-[1.5rem_1.5rem_0_1.5rem] px-4 outline -outline-offset-1 outline-[#E3E3E3]">
-                  <Image
-                    src="/icons/search-icon.svg"
-                    alt={"search-icon"}
-                    width={16}
-                    height={16}
-                  />
-                  <input
-                    type="text"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="도로명을 입력해주세요. ex) 올림픽로, 수목원길"
-                    className={
-                      "h-12 w-full bg-transparent focus:outline-hidden"
-                    }
-                  />
-                </label>
-                <ul className="flex h-full flex-col gap-2 overflow-scroll px-2 py-4">
-                  {loading ? (
-                    <p className="flex h-full w-full items-center justify-center">
-                      Loading...
-                    </p>
-                  ) : (
-                    <>
-                      <li className="outline-main grid h-12 w-full grid-cols-[auto_8rem] px-2 py-1">
-                        <div className="flex items-center justify-center">
-                          주소명
-                        </div>
-                        <div className="grid grid-cols-[3rem_5rem]">
-                          <div className="flex items-center justify-center">
-                            구분1
-                          </div>
-                          <div className="flex items-center justify-center">
-                            구분2
-                          </div>
-                        </div>
-                      </li>
-                      {results
-                        .filter(
-                          (i: { road_address: { address_name: string } }) =>
-                            i?.road_address?.address_name != undefined,
-                        )
-                        .map((result: PlaceElement1, index) => (
-                          <li
-                            key={index}
-                            className="outline-main grid h-12 w-full cursor-pointer grid-cols-[auto_8rem] px-2 py-1 hover:rounded-2xl hover:outline hover:-outline-offset-1"
-                            onClick={() => pickAddress(result)}
-                          >
-                            <div className="flex items-center gap-1">
-                              <Image
-                                src="/icons/location-icon.svg"
-                                alt="location-icon"
-                                width={14}
-                                height={14}
-                              />
-                              <div> {result.address_name} </div>
-                            </div>
-                            <div className="text-gray2 grid grid-cols-[3rem_5rem] text-sm">
-                              <div className="flex items-center justify-center">
-                                {result?.road_address?.region_1depth_name}
-                              </div>
-                              <div className="flex items-center justify-center">
-                                {result?.road_address?.region_2depth_name}
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      {results.filter(
-                        (i: { road_address: { address_name: string } }) =>
-                          i?.road_address?.address_name != undefined,
-                      ).length == 0 && (
-                        <div className="flex justify-center py-8">
-                          결과가 없습니다.
-                        </div>
-                      )}
-                    </>
-                  )}
-                </ul>
-              </article>
-            </>
+      </div>
+      {!isCustom ? (
+        <div className="flex w-full flex-col gap-2">
+          <h3 className="text-lg font-medium text-black">장소 검색하기</h3>
+          <div className="flex h-80 flex-col rounded-3xl border-r border-b border-l">
+            <input
+              className="bg-search-icon hover:border-main focus:border-main h-13.25 rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
+              type="text"
+              autoComplete="off"
+              name="location"
+              placeholder="장소명을 입력하세요. (Ex. 테라로사 포스코센터점)"
+              onChange={(e) => handleLocationSearch(e.target.value)}
+            />
+            <div className="flex h-64 flex-col items-start gap-2 overflow-y-auto px-6 py-4">
+              {placeInfos?.map((placeInfo, index) => (
+                <button
+                  key={index}
+                  className="flex w-full flex-col items-start gap-1 hover:bg-gray-100"
+                  type="button"
+                  onClick={() => handlePlaceChange(placeInfo)}
+                >
+                  <div className="flex flex-row items-center gap-2 text-sm text-black">
+                    <TiLocation />
+                    {placeInfo.place_name}
+                  </div>
+                  <span className="text-gray1 text-xs">
+                    {placeInfo.address_name}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex w-full flex-col gap-2">
+          <h3 className="text-lg font-medium text-black">도로명주소 찾기</h3>
+          <div
+            className={[
+              canTypePlaceName ? "h-fit" : "h-80 border-r border-b border-l",
+              "flex flex-col rounded-3xl",
+            ].join(" ")}
+          >
+            <input
+              className={[
+                canTypePlaceName ? "bg-gray-100/25" : "",
+                "bg-search-icon hover:border-main focus:border-main h-13.25 rounded-[21px] border bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full",
+              ].join(" ")}
+              type="text"
+              autoComplete="off"
+              {...formContext.register("roadAddressName")}
+              placeholder="도로명주소를 입력하세요. (Ex. 용산구 청파로)"
+              onChange={(e) => handleAddressSearch(e.target.value)}
+              disabled={canTypePlaceName}
+            />
+            {!canTypePlaceName && (
+              <div className="flex h-64 flex-col items-start gap-2 overflow-y-auto px-6 py-4">
+                {addressInfos?.map((addressInfo, index) => (
+                  <button
+                    key={index}
+                    className="flex w-full flex-col gap-1 hover:bg-gray-100"
+                    type="button"
+                    onClick={() => handleAddressChange(addressInfo)}
+                  >
+                    <div className="flex flex-row items-center gap-2 text-sm text-black">
+                      <TiLocation />
+                      {addressInfo.address_name}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          {canTypePlaceName && (
+            <div className="flex flex-row items-center justify-between gap-2">
+              <input
+                className="bg-search-icon hover:border-main focus:border-main h-13.25 w-96 rounded-[21px] border bg-transparent bg-[length:1rem] bg-[left_1rem_center] bg-no-repeat pr-6 pl-10 text-sm outline-hidden max-[480px]:w-full"
+                type="text"
+                autoComplete="off"
+                name="location"
+                placeholder="장소명을 입력하세요."
+                onChange={(e) => handleCustomPlaceNameChange(e.target.value)}
+              />
+              {canRegister && (
+                <button
+                  className="bg-main h-13.25 w-40 rounded-full text-[0.9375rem] text-white hover:scale-105"
+                  type="button"
+                  onClick={() => closeModal()}
+                >
+                  적용하기
+                </button>
+              )}
+            </div>
           )}
         </div>
-        {menu == "address" && (
-          <div className="flex w-full flex-col gap-4">
-            <h3 className="flex items-center gap-4 font-medium text-black">
-              <span className="text-lg font-bold text-black">장소명 입력</span>
-              <span className="text-gray1">
-                {placeData?.road_address.address_name}
-              </span>
-            </h3>
-            <input
-              type="text"
-              placeholder="장소명을 입력하세요"
-              onChange={(e) => setPlaceCustomName(e.target.value)}
-              className="h-13 w-full rounded-2xl bg-transparent px-4 outline -outline-offset-1 outline-[#E3E3E3]"
-            />
-            <button
-              className="bg-main disabled:bg-gray1 h-12 w-full rounded-[4rem] px-4 py-2 text-white"
-              onClick={() => applyAddressHandler()}
-              disabled={
-                placeCustomName == "" ||
-                placeData?.road_address.address_name == undefined
-              }
-            >
-              장소 적용하기
-            </button>
-          </div>
-        )}
-      </section>
+      )}
     </ModalTemplate>
   );
 };

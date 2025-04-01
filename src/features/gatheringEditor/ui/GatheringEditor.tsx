@@ -34,7 +34,7 @@ export const GatheringEditor = ({
       <div className="flex flex-col gap-6">
         <h1 className="text-3xl font-semibold">{`모임 ${text}하기`}</h1>
         <p>
-          새로운 사람들과 <span className="text-main"> 모임을 만들어 </span>
+          새로운 사람들과 <span className="text-main">모임을 만들어 </span>
           여행을 다채롭게 경험해보세요!
         </p>
       </div>
@@ -51,18 +51,20 @@ export const GatheringEditor = ({
         <GatheringEditorContent />
         <GatheringEditorChattingLink />
         <GatheringEditorHashtag />
-        <SubmitButton
-          text={text}
-          onClick={() => {
-            if (!formContext.formState.isValid) {
-              formContext.trigger();
-              return;
-            }
-            handleSubmit();
-          }}
-          disabled={loading}
-          loading={loading}
-        />
+        <div className="flex w-full justify-end">
+          <SubmitButton
+            text={text}
+            onClick={() => {
+              if (!formContext.formState.isValid) {
+                formContext.trigger();
+                return;
+              }
+              handleSubmit();
+            }}
+            disabled={loading}
+            loading={loading}
+          />
+        </div>
       </section>
     </div>
   );

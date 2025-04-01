@@ -2,9 +2,9 @@
 
 import { useFormContext } from "react-hook-form";
 import { useModal } from "@/shared/lib/hooks";
-import { GatheringPlaceModal } from "./GatheringPlaceModal";
 import { Modal } from "@/shared/ui/modal";
 import { GatheringForm } from "../model/gatheringForm";
+import { GatheringPlaceModal } from "./GatheringPlaceModal";
 
 export const GatheringEditorPlace = () => {
   const formContext = useFormContext<GatheringForm>();
@@ -12,6 +12,9 @@ export const GatheringEditorPlace = () => {
 
   return (
     <div className="flex w-full items-center gap-x-2.5 gap-y-3 max-[400px]:flex-col max-[400px]:items-start">
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <GatheringPlaceModal closeModal={closeModal} />
+      </Modal>
       <div className="relative w-10.5 shrink-0">
         <span className="text-lg font-semibold">장소</span>
         <span className="text-main absolute -top-2 text-lg">*</span>
@@ -34,9 +37,6 @@ export const GatheringEditorPlace = () => {
           </span>
         )}
       </div>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        <GatheringPlaceModal closeModal={closeModal} />
-      </Modal>
     </div>
   );
 };

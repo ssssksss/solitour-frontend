@@ -3,20 +3,20 @@
 import { Gathering, getGatheringList } from "@/entities/gathering";
 import { useUserStore } from "@/entities/user";
 import { useModal } from "@/shared/lib/hooks";
+import { useToastifyStore } from "@/shared/model";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const useGatheringList = () => {
   const searchParams = useSearchParams();
-  const [totalElements, setTotalElements] = useState(1);
+  const currentPage = Number(searchParams.get("page") ?? 1);
+  const [totalElements, setTotalElements] = useState(0);
   const [elements, setElements] = useState<Gathering[]>([]);
   const [loading, setLoading] = useState(true);
   const userStore = useUserStore();
   const router = useRouter();
   const { isOpen, openModal, closeModal } = useModal();
-  const [currentPage, setCurrentPage] = useState(
-    searchParams.get("page") ? Number(searchParams.get("page")) : 1,
-  );
+  const { setToastifyState } = useToastifyStore();
 
   const checkAccessGathering = async (e: React.MouseEvent<HTMLDivElement>) => {
     if (userStore.id > 0 && (!userStore.sex || !userStore.age)) {
@@ -31,23 +31,32 @@ export const useGatheringList = () => {
 
   useEffect(() => {
     (async () => {
-      const url = new URL(window.location.href);
-      const page = Number(searchParams.get("page"));
+      try {
+        const url = new URL(window.location.href);
 
-      if (page < 1 || !Number.isSafeInteger(page)) {
-        return;
+        if (currentPage < 1 || !Number.isSafeInteger(currentPage)) {
+          setElements([]);
+          setTotalElements(0);
+          return;
+        }
+
+        url.searchParams.set("page", (currentPage - 1).toString());
+
+        setLoading(true);
+        const gatheringList = await getGatheringList(url.search);
+
+        setElements(gatheringList.content);
+        setTotalElements(gatheringList.page.totalElements);
+      } catch (error) {
+        setToastifyState({
+          type: "error",
+          message: "모임 목록 조회에 실패했습니다.",
+        });
+      } finally {
+        setLoading(false);
       }
-
-      url.searchParams.set("page", (page - 1).toString());
-
-      setLoading(true);
-      const gatheringList = await getGatheringList(url.search);
-
-      setElements(gatheringList.content);
-      setTotalElements(gatheringList.page.totalElements);
-      setCurrentPage(page);
-      setLoading(false);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return {

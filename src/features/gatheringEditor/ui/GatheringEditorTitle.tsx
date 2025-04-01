@@ -14,8 +14,8 @@ export const GatheringEditorTitle = () => {
       </div>
       <div className="relative w-full">
         <input
-          placeholder="제목을 입력하세요(최대50자)"
-          maxLength={50} // 최대 50자 입력 가능
+          placeholder="제목을 입력하세요. (최대 50자)"
+          maxLength={50}
           className={[
             formContext.formState.errors.title
               ? "outline-red-500"

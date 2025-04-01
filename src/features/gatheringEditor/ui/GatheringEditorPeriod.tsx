@@ -14,6 +14,9 @@ export const GatheringEditorPeriod = () => {
 
   return (
     <div className="flex w-full items-center gap-x-2.5 gap-y-3 max-[400px]:flex-col max-[400px]:items-start">
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <GatheringPeriodModal closeModal={closeModal} />
+      </Modal>
       <div className="relative w-10.5 shrink-0">
         <span className="text-lg font-semibold">날짜</span>
         <span className="text-main absolute -top-2 text-lg">*</span>
@@ -70,9 +73,6 @@ export const GatheringEditorPeriod = () => {
           </span>
         )}
       </div>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        <GatheringPeriodModal closeModal={closeModal} />
-      </Modal>
     </div>
   );
 };
