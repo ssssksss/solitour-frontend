@@ -5,13 +5,8 @@ import Link from "next/link";
 import { Pagination } from "@/shared/ui/pagination";
 import { useSupportNoticeList } from "../model/useSupportNoticeList";
 import { NoticeSearch } from "@/features/noticeSearch";
-
-const categoryStyles: { [key: string]: string } = {
-  이벤트: "text-green-800",
-  공지: "text-blue-800",
-  점검: "text-yellow-800",
-  기타: "text-gray-800",
-} as const;
+import { CATEGORY_STYLE_LIST } from "../config/categoryStyleList";
+import { SupportNoticeListSkeleton } from "./SupportNoticeListSkeleton";
 
 export const SupportNoticeList = () => {
   const {
@@ -24,18 +19,7 @@ export const SupportNoticeList = () => {
   } = useSupportNoticeList();
 
   if (loading) {
-    <div className="flex w-full flex-col space-y-4 pb-8">
-      {Array.from({ length: 10 }).map((_, index) => (
-        <div
-          key={index}
-          className="flex animate-pulse flex-col gap-y-2 rounded-lg border border-gray-200 bg-gray-100 p-4 shadow-xs"
-        >
-          <div className="mb-2 h-4 w-24 rounded-lg bg-gray-300"></div>
-          <div className="mb-2 h-6 w-48 rounded-lg bg-gray-300"></div>
-          <div className="h-4 w-32 rounded-lg bg-gray-300"></div>
-        </div>
-      ))}
-    </div>;
+    return <SupportNoticeListSkeleton />;
   }
 
   return (
@@ -71,7 +55,7 @@ export const SupportNoticeList = () => {
               <div className="grid w-full grid-cols-[3.5rem_auto] items-center gap-x-4 pr-2">
                 <div
                   className={[
-                    categoryStyles[notice.categoryName],
+                    CATEGORY_STYLE_LIST[notice.categoryName],
                     "shrink-0",
                   ].join(" ")}
                 >

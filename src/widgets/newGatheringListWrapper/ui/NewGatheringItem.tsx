@@ -25,8 +25,8 @@ const categoryStyle: { [key: string]: string } = {
 export const NewGatheringItem = ({ data }: GatheringItemHomeProps) => {
   return (
     <Link
-      href={`/gathering/${data.gatheringId}`}
       className="outline-gray3 hover:bg-lightgreen hover:outline-main flex h-78.75 flex-col gap-5 rounded-2xl border-0 p-6 text-black outline duration-300 max-[744px]:min-w-[19.183125rem]"
+      href={`/gathering/${data.gatheringId}`}
     >
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-between">
