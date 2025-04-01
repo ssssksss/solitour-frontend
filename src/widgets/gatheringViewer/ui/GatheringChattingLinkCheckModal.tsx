@@ -11,7 +11,7 @@ export const GatheringChattingLinkCheckModal = ({
 }: GatheringChattingLinkCheckModalProps) => {
   return (
     <ModalTemplate
-      className="max-h-[340px] w-[calc(100vw-1rem)] max-w-160"
+      className="max-h-[340px] w-[calc(100vw-1rem)] max-w-160 p-6"
       closeModal={closeModal}
     >
       <article className="flex w-full flex-col">

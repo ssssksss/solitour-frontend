@@ -97,8 +97,8 @@ export const Header = () => {
           <div className="absolute left-[calc(100vw-24px)] flex h-9 w-32 -translate-x-full items-center gap-2 rounded-lg p-2 text-sm max-[744px]:hidden">
             {id === 0 ? (
               <>
-                <div className="animate-pulse-auth relative aspect-square w-7.5 rounded-[50%] shadow" />
-                <div className="animate-pulse-auth h-7.5 w-16" />
+                <div className="relative aspect-square w-7.5 animate-pulse rounded-[50%] bg-gray-100 shadow" />
+                <div className="h-7.5 w-16 animate-pulse bg-gray-100" />
               </>
             ) : id > 0 ? (
               <UserDropDown />

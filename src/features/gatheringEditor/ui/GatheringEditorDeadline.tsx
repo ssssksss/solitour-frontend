@@ -32,7 +32,7 @@ export const GatheringEditorDeadline = () => {
           onClick={openModal}
         >
           {formContext.getValues("deadline") ? (
-            format(new Date(formContext.getValues("deadline")), "yyyy-MM-dd")
+            format(new Date(formContext.getValues("deadline")), "yyyy. MM. dd.")
           ) : (
             <div className="flex justify-center gap-x-2 max-[360px]:justify-start max-[360px]:pl-3">
               <span>YY.MM.DD</span>

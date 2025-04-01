@@ -20,7 +20,6 @@
   --animate-banner-image: bannerImage 1.8s ease-in-out infinite;
   --animate-card-flip: cardFlip 0.5s linear;
   --animate-card-flip2: cardFlip2 0.5s linear;
-  --animate-pulse-auth: pulseAuth 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-arrow: arrow 1s linear infinite alternate;
   --animate-rotate: rotate 15s linear infinite;
   --animate-rotate-reversed: rotateReversed 15s linear infinite;

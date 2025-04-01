@@ -23,7 +23,7 @@ export const SupportNoticeViewer = async ({
           {notice.categoryName}
         </div>
         <div className="text-sm text-gray-600">
-          {format(new Date(notice.createdAt), "yyyy-MM-dd")}
+          {format(new Date(notice.createdAt), "yyyy. MM. dd.")}
         </div>
       </div>
       <div className="mb-4 text-3xl font-extrabold text-gray-900">

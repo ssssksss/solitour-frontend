@@ -59,7 +59,7 @@ export const GatheringViewer = ({
                   {gatheringDetail.userPostingResponse?.nickname}
                 </div>
                 <div className="text-gray1 w-fit shrink-0 text-xs whitespace-nowrap">
-                  {format(new Date(gatheringDetail.createdAt), "yyyy-MM-dd")}
+                  {format(new Date(gatheringDetail.createdAt), "yyyy. MM. dd.")}
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ export const GatheringViewer = ({
           </div>
         </article>
         {/* 내용 부분 */}
-        <div className="text-gray1 my-4 flex gap-1">
+        <div className="text-gray1 my-4 flex gap-1 text-sm">
           <Image
             src="/icons/pin-green-icon.svg"
             alt="pin-green-icon"
@@ -192,7 +192,7 @@ export const GatheringViewer = ({
           />
           {format(
             new Date(gatheringDetail.deadline),
-            "모집 마감일 : yyyy-MM-dd HH:mm(EE) 까지",
+            "모집 마감일 : yyyy.MM.dd. HH:mm(EE) 까지",
             {
               locale: ko,
             },

@@ -4,13 +4,7 @@ import Image from "next/image";
 import { useGatheringExcludeToggle } from "../model/useGatheringExcludeToggle";
 
 export const GatheringExcludeToggle = () => {
-  const { loading, isExclude, handleToggleClick } = useGatheringExcludeToggle();
-
-  if (loading) {
-    return (
-      <div className="relative flex h-8 w-16 shrink-0 animate-pulse items-center rounded-xl bg-gray-300 text-left" />
-    );
-  }
+  const { isExclude, handleToggleClick } = useGatheringExcludeToggle();
 
   return (
     <button

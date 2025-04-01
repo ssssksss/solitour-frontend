@@ -55,7 +55,7 @@ export const GatheringSearch = () => {
           }}
         />
         <button
-          className="bg-lightGreen absolute top-1.5 right-1.5 flex h-8.5 w-8.5 items-center justify-center rounded-full hover:scale-110"
+          className="bg-lightgreen absolute top-1.5 right-1.5 flex h-8.5 w-8.5 items-center justify-center rounded-full hover:scale-110"
           onClick={() => handleSearchClick()}
         >
           <Image

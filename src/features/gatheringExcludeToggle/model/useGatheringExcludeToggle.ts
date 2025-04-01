@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export const useGatheringExcludeToggle = () => {
   const searchParams = useSearchParams();
   const [isExclude, setIsExclude] = useState(true);
-  const [loading, setLoading] = useState(true);
 
   const handleToggleClick = () => {
     setIsExclude((prev) => !prev);
@@ -23,8 +22,7 @@ export const useGatheringExcludeToggle = () => {
 
   useEffect(() => {
     setIsExclude(searchParams.get("isExclude") ? false : true);
-    setLoading(false);
   }, [searchParams]);
 
-  return { loading, isExclude, handleToggleClick };
+  return { isExclude, handleToggleClick };
 };

@@ -14,7 +14,7 @@ export const AddUserInformationForm = ({
     useAddUserInformationForm(closeModal);
 
   return (
-    <ModalTemplate className="max-w-125 px-14" closeModal={closeModal}>
+    <ModalTemplate className="max-w-125 p-6" closeModal={closeModal}>
       <h2 className="text-[1.625rem] font-bold text-black">
         안녕하세요 솔리투어입니다.
       </h2>
@@ -88,7 +88,7 @@ export const AddUserInformationForm = ({
       </p>
       <button
         className={[
-          methods.formState.isValid ? "bg-main" : "bg-gray2",
+          methods.formState.isValid ? "bg-main hover:scale-105" : "bg-gray2",
           "mt-5 min-h-16 w-full rounded-[1.875rem] text-white",
         ].join(" ")}
         onClick={handleSubmit}

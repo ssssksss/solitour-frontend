@@ -102,14 +102,14 @@ export const GatheringFilterModal = ({
 
   return (
     <ModalTemplate
-      className="max-h-190 w-[calc(100vw-1rem)] max-w-160"
+      className="max-h-190 w-[calc(100vw-1rem)] max-w-160 p-6"
       closeModal={closeModal}
     >
       <h2 className="h-8 text-2xl font-bold text-black">조건 선택</h2>
-      <div className="flex w-full flex-col gap-y-8 pt-12">
-        <div className="flex flex-col gap-y-4">
+      <div className="flex w-full flex-col gap-y-8 pt-4">
+        <div className="flex flex-col gap-1">
           <div className="h-8 font-bold text-black">지역</div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <div className="flex flex-wrap gap-2">
             {regions.map((i) => (
               <button
                 key={i.id}
@@ -117,7 +117,7 @@ export const GatheringFilterModal = ({
                   location === i.id
                     ? "bg-main text-white outline-0"
                     : "text-gray1 outline -outline-offset-1 outline-[#E9EBED]",
-                  "flex items-center rounded-[4rem] px-4 py-2",
+                  "flex items-center rounded-[4rem] px-3 py-1.5",
                 ].join(" ")}
                 onClick={() => setLocation(i.id)}
               >
@@ -126,9 +126,9 @@ export const GatheringFilterModal = ({
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-1">
           <div className="h-8 font-bold text-black">성별</div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <div className="flex flex-wrap gap-2">
             {SEX.map((i) => (
               <button
                 key={i[1]}
@@ -136,7 +136,7 @@ export const GatheringFilterModal = ({
                   sex == i[1]
                     ? "bg-main text-white"
                     : "text-gray1 outline -outline-offset-1 outline-[#E9EBED]",
-                  "flex items-center rounded-[4rem] px-4 py-2",
+                  "flex items-center rounded-[4rem] px-3 py-1.5",
                 ].join(" ")}
                 onClick={() => setSex(i[1])}
               >
@@ -145,27 +145,27 @@ export const GatheringFilterModal = ({
             ))}
           </div>
         </div>
-        <article className="flex w-full flex-col gap-y-4">
+        <article className="flex w-full flex-col gap-1">
           <div className="h-8 text-start font-bold text-black">나이</div>
           <div className="relative flex w-full flex-col gap-4">
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <div className="flex flex-wrap gap-2">
               {Object.entries(AGE_RANGE).map((i) => (
                 <button
                   key={i[0]}
-                  onClick={() =>
-                    handleAgeChange({
-                      _startAge: i[1].startAge,
-                      _endAge: i[1].endAge,
-                    })
-                  }
                   className={[
                     directInput == false &&
                     (startAge || 0) <= i[1].startAge &&
                     (endAge || 0) >= i[1].endAge
                       ? "bg-main text-white outline-0"
                       : "outline -outline-offset-1 outline-[#E9EBED]",
-                    "text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-4 py-2 hover:text-white",
+                    "text-gray1 hover:bg-main flex shrink-0 items-center rounded-[4rem] px-3 py-1.5 hover:text-white",
                   ].join(" ")}
+                  onClick={() =>
+                    handleAgeChange({
+                      _startAge: i[1].startAge,
+                      _endAge: i[1].endAge,
+                    })
+                  }
                 >
                   {i[0]}
                 </button>
@@ -183,8 +183,9 @@ export const GatheringFilterModal = ({
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
+              <div className="relative flex w-20.5 items-center py-2 pr-2.5 after:content-['세']">
                 <input
+                  className="w-full text-center text-lg outline-none placeholder:text-sm"
                   placeholder="최소 20"
                   type="text"
                   disabled={!directInput}
@@ -207,7 +208,6 @@ export const GatheringFilterModal = ({
                     setStartAge(num);
                   }}
                   value={startAge || undefined}
-                  className="w-full text-center text-lg"
                 />
                 <div className="absolute bottom-2 h-[1px] w-20.5 bg-black" />
                 <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
@@ -215,8 +215,9 @@ export const GatheringFilterModal = ({
                 </div>
               </div>
               <div>~</div>
-              <div className="relative flex w-20.5 py-2 pr-2.5 after:content-['세']">
+              <div className="relative flex w-20.5 items-center py-2 pr-2.5 after:content-['세']">
                 <input
+                  className="w-full pr-2.5 text-center text-lg outline-none placeholder:text-sm"
                   placeholder="최대 59"
                   type="text"
                   max={59}
@@ -244,7 +245,6 @@ export const GatheringFilterModal = ({
                     input.value = input.value.replace(/[^0-9]/g, "");
                   }}
                   value={endAge}
-                  className="w-full pr-2.5 text-center text-lg"
                 />
                 <div className="absolute bottom-2 h-[1px] w-20.5 bg-black" />
                 <div className="text-main absolute -bottom-6 left-1/2 flex w-full -translate-x-1/2 justify-center font-semibold">
@@ -336,9 +336,9 @@ export const GatheringFilterModal = ({
                 </div>
               </div>
               <div className="flex h-6 w-full justify-center gap-1">
-                <div>{format(calendarDate[0].startDate, "yyyy-MM-dd")}</div>
+                <div>{format(calendarDate[0].startDate, "yyyy.MM.dd.")}</div>
                 <div>~</div>
-                <div>{format(calendarDate[0].endDate, "yyyy-MM-dd")}</div>
+                <div>{format(calendarDate[0].endDate, "yyyy.MM.dd.")}</div>
                 <div>
                   (
                   {calculateDateDifference(
