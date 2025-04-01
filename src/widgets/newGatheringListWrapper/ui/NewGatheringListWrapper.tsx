@@ -2,8 +2,11 @@ import { Suspense } from "react";
 import { NewGatheringList } from "./NewGatheringList";
 import { ListWrapper } from "@/shared/ui/listWrapper";
 import { NewGatheringListSkeleton } from "./NewGatheringListSkeleton";
+import { getNewGatheringList } from "@/entities/gathering";
 
 export const NewGatheringListWrapper = () => {
+  const newGatheringListPromise = getNewGatheringList();
+
   return (
     <ListWrapper
       titles={["새로움을 발견할,", "NEW", "모임"]}
@@ -11,7 +14,7 @@ export const NewGatheringListWrapper = () => {
       href="/gathering"
     >
       <Suspense fallback={<NewGatheringListSkeleton />}>
-        <NewGatheringList />
+        <NewGatheringList newGatheringListPromise={newGatheringListPromise} />
       </Suspense>
     </ListWrapper>
   );

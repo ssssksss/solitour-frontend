@@ -95,11 +95,12 @@ export const GatheringItem = ({
                 width={16}
                 height={16}
               />
-              {format(new Date(gathering.scheduleStartDate), "yyyy.MM.dd")}
+              {format(new Date(gathering.scheduleStartDate), "yyyy.MM.dd.")}
+              <span>~</span>
               {format(new Date(gathering.scheduleStartDate), "yyyyMMdd") !=
                 format(new Date(gathering.scheduleEndDate), "yyyyMMdd") && (
                 <span>
-                  {format(new Date(gathering.scheduleEndDate), "- yyyy.MM.dd")}
+                  {format(new Date(gathering.scheduleEndDate), "yyyy.MM.dd.")}
                 </span>
               )}
             </article>
@@ -215,7 +216,7 @@ export const GatheringItem = ({
               height={16}
             />
             <p className="text-sm">
-              마감일:
+              {"마감일: "}
               {format(new Date(gathering.deadline), "yy.MM.dd(EE)", {
                 locale: ko,
               })}

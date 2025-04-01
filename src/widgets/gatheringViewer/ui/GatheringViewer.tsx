@@ -86,7 +86,7 @@ export const GatheringViewer = ({
           </div>
         </article>
         {/* 제한 부분(날짜, 장소, 인원, 시간) */}
-        <article className="grid grid-cols-1 gap-y-4 border-y border-[#d9d9d9] p-5 text-sm min-[800px]:grid-cols-2 sm:grid-cols-[320px_auto]">
+        <article className="grid grid-cols-1 gap-4 border-y border-[#d9d9d9] p-5 text-sm text-nowrap min-[800px]:grid-cols-2">
           <div className="flex gap-x-3">
             <Image
               src="/icons/gathering-calendar-icon.svg"
@@ -97,13 +97,13 @@ export const GatheringViewer = ({
             <div>
               {format(
                 new Date(gatheringDetail.scheduleStartDate),
-                "yyyy.MM.dd HH:mm (EE) ~ ",
+                "yyyy.MM.dd. HH:mm (EE) ~ ",
                 { locale: ko },
               )}
               {gatheringDetail.scheduleEndDate &&
                 format(
                   new Date(gatheringDetail.scheduleEndDate),
-                  "yyyy.MM.dd HH:mm (EE)",
+                  "yyyy.MM.dd. HH:mm (EE)",
                   {
                     locale: ko,
                   },
