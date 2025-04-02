@@ -1,0 +1,17 @@
+export const CATEGORY_TAG_STYLE: Record<string, string> = {
+  맛집: "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]",
+  혼카페: "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]",
+  혼밥: "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]",
+  혼술: "border-[#FFDDEF] bg-[#FFF2F9] text-[#C5006A]",
+  숙박: "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]",
+  "호텔/펜션": "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]",
+  게스트하우스: "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]",
+  모텔: "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]",
+  "홈/빌라": "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]",
+  한옥: "border-[#BEEDEA] bg-[#E7FFFB] text-[#009CBE]",
+  액티비티: "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
+  레저: "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
+  관광지: "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
+  전시: "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
+  "편집/소품샵": "border-[#DDE5FF] bg-[#F2F6FF] text-[#0036C2]",
+} as const;

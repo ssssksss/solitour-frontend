@@ -1,12 +1,7 @@
-
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className={"pt-[6rem]"}>
-      {children}
-    </div>
-  );
+  return <div className="pt-24">{children}</div>;
 }

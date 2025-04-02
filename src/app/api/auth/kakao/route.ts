@@ -10,8 +10,9 @@ export function GET() {
       return NextResponse.redirect("/auth/signin");
     }
 
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&timestamp=${timestamp}`;
-    return NextResponse.redirect(kakaoAuthUrl);
+    return NextResponse.redirect(
+      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&timestamp=${timestamp}`,
+    );
   } catch (error) {
     return NextResponse.redirect("/auth/signin");
   }

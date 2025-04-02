@@ -1,0 +1,18 @@
+# 의존성 파일
+node_modules
+
+# Git 관련 파일
+.git
+.gitignore
+.github
+
+# Next.js 빌드 결과물
+.next
+
+.eslintrc.json
+.prettierrc.json
+LICENSE
+README.md
+build.sh
+Dockerfile
+.dockerignore

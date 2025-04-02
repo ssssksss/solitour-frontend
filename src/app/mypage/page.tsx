@@ -1,40 +1,31 @@
-import MyPageHeaderContainer from "@/containers/mypage/MyPageHeaderContainer";
-import MyPageMainContainer from "@/containers/mypage/MyPageMainContainer";
-import { userResponseDto } from "@/types/UserDto";
-import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
+import { MyPageHeader } from "@/widgets/myPageHeader";
+import { MyPageItemList } from "@/widgets/myPageItemList";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "마이페이지",
   description: "Solitour 사용자 마이페이지",
 };
 
-async function getUserInfo() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
+  const { mainCategory, category } = await searchParams;
 
-  const access_token = cookies().get("access_token");
-  const refresh_token = cookies().get("refresh_token");
-  const response = await fetchWithTokenRefreshSSR<userResponseDto>({
-    url: `${process.env.BACKEND_URL}/api/users/info`,
-    accessToken: access_token,
-    refreshToken: refresh_token,
-  });
+  if (
+    (mainCategory !== "정보" && mainCategory !== "모임") ||
+    category === undefined
+  ) {
+    notFound();
+  }
 
-  return response;
-}
-
-
-export default async function page() {
-  const userInfo = await getUserInfo();
   return (
-    <main
-      className={
-        "flex min-h-[calc(100vh-25rem)] w-full flex-col pb-[2.5rem]"
-      }
-    >
-      <MyPageHeaderContainer userInfo={userInfo} /> 
-      <MyPageMainContainer />
+    <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col pb-10">
+      <MyPageHeader />
+      <MyPageItemList mainCategory={mainCategory} />
     </main>
   );
 }
-              

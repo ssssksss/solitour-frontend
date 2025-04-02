@@ -1,31 +1,28 @@
-import MyProfileContainer from "@/containers/mypage/MyProfileContainer";
-import { userResponseDto } from "@/types/UserDto";
-import { fetchWithTokenRefreshSSR } from "@/utils/getNewAccessTokenAndRerequest";
+import { getUserInfo } from "@/entities/user";
+import { MyPageProfileEditor } from "@/widgets/myPageProfileEditor";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "마이페이지-프로필 설정",
+  title: "프로필 설정",
   description: "Solitour 사용자 마이페이지-프로필 설정",
 };
 
-async function getUserInfo() {
-  const response = fetchWithTokenRefreshSSR<userResponseDto>({
-    accessToken: cookies().get("access_token"),
-    refreshToken: cookies().get("refresh_token"),
-    url: `${process.env.BACKEND_URL}/api/users/info`,
-    cache: "no-store",
-  });
-
-  return response;
-}
-
-export default async function page() {
+export default async function Page() {
   const userInfo = await getUserInfo();
 
   return (
-    <div className={"min-h-[calc(100vh-25rem)] w-full px-[.5rem] pb-[2.5rem]"}>
-      <MyProfileContainer userInfo={userInfo} />
-    </div>
+    <main className="flex min-h-[calc(100vh-25rem)] w-full flex-col px-2 pb-10">
+      <Breadcrumb
+        categoryList={[
+          {
+            label: "마이페이지",
+            href: "/mypage?mainCategory=정보&category=owner",
+          },
+          { label: "프로필 설정", href: "" },
+        ]}
+      />
+      <MyPageProfileEditor userInfo={userInfo} />
+    </main>
   );
 }
