@@ -1,37 +1,16 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
-import InformationEditorContainer from "@/containers/informations/edit/InformationEditorContainer";
-import { InformationDetailDto } from "@/types/InformationDto";
-import { cookies } from "next/headers";
+import { getInformation } from "@/entities/information";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
+import { InformationUpdateEditor } from "@/widgets/informationUpdateEditor";
+import { notFound } from "next/navigation";
 
-async function getInformation(id: number) {
-  const cookie = cookies().get("access_token");
-  const response = await fetch(
-    `${process.env.BACKEND_URL}/api/informations/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Cookie: `${cookie?.name}=${cookie?.value}`,
-      },
-      next: { revalidate: 60, tags: [`getInformation/${id}`] },
-    },
-  );
-
-  if (!response.ok) {
-    // This will activate the closest 'error.tsx' Error Boundary.
-    throw new Error(response.statusText);
-  }
-
-  return response.json() as Promise<InformationDetailDto>;
-}
-
-interface Props {
-  params: { id: string };
-}
-
-export async function generateMetadata({ params: { id } }: Props) {
-  const informationId = Number(id);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const informationId = Number((await params).id);
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
-    throw new Error("Not Found");
+    notFound();
   }
 
   return {
@@ -40,18 +19,22 @@ export async function generateMetadata({ params: { id } }: Props) {
   };
 }
 
-export default async function page({ params: { id } }: Props) {
-  const informationId = Number(id);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const informationId = Number((await params).id);
   if (informationId <= 0 || !Number.isSafeInteger(informationId)) {
-    throw Error("Not Found");
+    notFound();
   }
 
   const data = await getInformation(informationId);
 
   return (
     <div className="flex w-full flex-col items-center">
-      <Breadcrumbs
-        categories={[
+      <Breadcrumb
+        categoryList={[
           {
             label: "정보",
             href: "/informations/list?page=1&parentCategoryId=1",
@@ -59,7 +42,7 @@ export default async function page({ params: { id } }: Props) {
           { label: "정보 수정하기", href: "" },
         ]}
       />
-      <InformationEditorContainer informationId={informationId} data={data} />
+      <InformationUpdateEditor informationId={informationId} data={data} />
     </div>
   );
 }

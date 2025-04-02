@@ -1,6 +1,10 @@
-import AuthKaKaoContainer from "@/containers/auth/AuthKaKaoContainer";
+import { AuthLoading } from "@/features/auth";
+import { Suspense } from "react";
 
-const Page = () => {
-  return <AuthKaKaoContainer />;
-};
-export default Page;
+export default function Page() {
+  return (
+    <Suspense>
+      <AuthLoading />
+    </Suspense>
+  );
+}

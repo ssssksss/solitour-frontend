@@ -1,5 +1,5 @@
-import Breadcrumbs from "@/components/common/Breadcrumb";
-import InformationEditorContainer from "@/containers/informations/write/InformationEditorContainer";
+import { Breadcrumb } from "@/shared/ui/breadcrumb";
+import { InformationCreateEditor } from "@/widgets/informationCreateEditor";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   description: "Solitour의 정보 등록하기 페이지",
 };
 
-export default function page() {
+export default function Page() {
   return (
     <div className="flex w-full flex-col items-center">
-      <Breadcrumbs
-        categories={[
+      <Breadcrumb
+        categoryList={[
           {
             label: "정보",
             href: "/informations/list?page=1&parentCategoryId=1",
@@ -19,7 +19,7 @@ export default function page() {
           { label: "정보 등록하기", href: "" },
         ]}
       />
-      <InformationEditorContainer />
+      <InformationCreateEditor />
     </div>
   );
 }
