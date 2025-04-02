@@ -37,6 +37,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  if (pathname.startsWith("/informations/write") && !accessToken) {
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
+  }
+
+  if (pathname.startsWith("/informations/edit") && !accessToken) {
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
+  }
+
   if (pathname.startsWith("/gathering/write") && !accessToken) {
     return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
