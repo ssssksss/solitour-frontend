@@ -64,7 +64,10 @@ export const useInformationCreateEditor = () => {
 
   const handleSubmit = async () => {
     if (imageList.filter((image) => image !== "").length === 0) {
-      alert("최소 한 장의 사진을 추가해 주세요.");
+      setToastifyState({
+        type: "warning",
+        message: "최소 한 장의 사진을 추가해 주세요.",
+      });
       return;
     }
 
@@ -78,8 +81,6 @@ export const useInformationCreateEditor = () => {
 
     await methods.trigger();
     if (!methods.formState.isValid) {
-      methods.trigger();
-      alert("모든 정보를 입력해 주세요.");
       return;
     }
 

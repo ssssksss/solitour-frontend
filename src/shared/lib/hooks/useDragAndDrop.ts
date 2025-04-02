@@ -1,5 +1,6 @@
 "use client";
 
+import { useToastifyStore } from "@/shared/model";
 import { ChangeEvent, useCallback, useState } from "react";
 
 interface UseDragAndDropProps {
@@ -8,6 +9,7 @@ interface UseDragAndDropProps {
 
 export const useDragAndDrop = ({ imageUpload }: UseDragAndDropProps) => {
   const [isDragging, setIsDragging] = useState(false);
+  const { setToastifyState } = useToastifyStore();
 
   const onDragEnter = useCallback((e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
@@ -42,10 +44,15 @@ export const useDragAndDrop = ({ imageUpload }: UseDragAndDropProps) => {
       e.stopPropagation();
       file = e.dataTransfer.files?.[0];
     }
+
     if (!file) {
-      alert("파일이 없습니다!");
+      setToastifyState({
+        type: "warning",
+        message: "파일이 없습니다!",
+      });
       return;
     }
+
     const imageDataUrl = await readFile(file);
     imageUpload(imageDataUrl);
     if ("target" in e && e.target instanceof HTMLInputElement) {
