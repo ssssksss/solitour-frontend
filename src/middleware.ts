@@ -24,7 +24,11 @@ export async function middleware(request: NextRequest) {
       }
       return response;
     } else {
-      return NextResponse.redirect(new URL("/auth/signin", request.url));
+      const response = NextResponse.redirect(
+        new URL("/auth/signin", request.url),
+      );
+      response.cookies.delete("refresh_token");
+      return response;
     }
   }
 
