@@ -117,7 +117,7 @@ export const GatheringFilterModal = ({
                   location === i.id
                     ? "bg-main text-white outline-0"
                     : "text-gray1 outline -outline-offset-1 outline-[#E9EBED]",
-                  "flex items-center rounded-[4rem] px-3 py-1.5",
+                  "hover:bg-main hover:outline-main flex items-center rounded-[4rem] px-3 py-1.5 hover:text-white",
                 ].join(" ")}
                 onClick={() => setLocation(i.id)}
               >
@@ -354,13 +354,13 @@ export const GatheringFilterModal = ({
       </div>
       <div className="flex w-full justify-center gap-4 pt-8">
         <button
-          className="bg-main h-12 min-w-32 rounded-[4rem] px-4 py-2 text-white"
+          className="bg-main h-12 min-w-32 rounded-[4rem] px-4 py-2 text-white hover:scale-105"
           onClick={() => handleInitButtonClick()}
         >
           설정 초기화
         </button>
         <button
-          className="bg-main h-12 min-w-32 rounded-[4rem] px-4 py-2 text-white"
+          className="bg-main h-12 min-w-32 rounded-[4rem] px-4 py-2 text-white hover:scale-105"
           onClick={() => handleSubmit()}
         >
           적용하기
