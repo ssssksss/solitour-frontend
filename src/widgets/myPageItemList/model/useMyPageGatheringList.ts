@@ -52,7 +52,7 @@ export const useMyPageGatheringList = () => {
       } catch (error) {
         setToastifyState({
           type: "error",
-          message: "모임 조회에 실패했습니다.",
+          message: "모임 목록 조회에 실패했습니다.",
         });
         setElements([]);
         setTotalElements(0);

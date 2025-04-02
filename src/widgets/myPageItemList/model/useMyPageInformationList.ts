@@ -35,7 +35,7 @@ export const useMyPageInformationList = () => {
       } catch (error) {
         setToastifyState({
           type: "error",
-          message: "정보 조회에 실패했습니다.",
+          message: "정보 목록 조회에 실패했습니다.",
         });
         setElements([]);
         setTotalElements(0);

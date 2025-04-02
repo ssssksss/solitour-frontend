@@ -74,7 +74,7 @@ export const useDiaryCreateEditor = () => {
 
     try {
       const diaryId = await createDiary(data);
-      router.push(`/diary/${diaryId}`);
+      router.replace(`/diary/${diaryId}`);
       router.refresh();
     } catch (error) {
       setToastifyState({ type: "error", message: "일기 작성에 실패했습니다." });

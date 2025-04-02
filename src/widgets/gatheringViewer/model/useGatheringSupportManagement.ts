@@ -34,7 +34,7 @@ export const useGatheringSupportManagement = (
     } catch (error) {
       setToastifyState({
         type: "error",
-        message: "모임을 신청에 실패했습니다.",
+        message: "모임 신청에 실패했습니다.",
       });
     }
   };
