@@ -1,15 +1,19 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { GatheringList } from "../model/gatheringList";
+import { cookies } from "next/headers";
 
 export async function getMyPageGatheringList(
   category: string,
   currentPage: number,
 ) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/mypage/gathering/${category}?page=${currentPage - 1}`,
+    `${process.env.BACKEND_URL}/api/users/mypage/gathering/${category}?page=${currentPage - 1}`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );

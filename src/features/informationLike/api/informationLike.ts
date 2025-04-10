@@ -1,16 +1,22 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
+import { cookies } from "next/headers";
 
 export async function createInformationLike(informationId: number) {
   const data = new URLSearchParams();
   data.append("infoId", informationId.toString());
 
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/information/great`,
+    `${process.env.BACKEND_URL}/api/information/great`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: data.toString(),
-      credentials: "include",
       cache: "no-store",
     },
   );
@@ -24,13 +30,16 @@ export async function deleteInformationLike(informationId: number) {
   const data = new URLSearchParams();
   data.append("infoId", informationId.toString());
 
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/information/great`,
+    `${process.env.BACKEND_URL}/api/information/great`,
     {
       method: "DELETE",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: data.toString(),
-      credentials: "include",
       cache: "no-store",
     },
   );

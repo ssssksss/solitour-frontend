@@ -1,12 +1,16 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { User } from "../model/user";
+import { cookies } from "next/headers";
 
 export async function getUserInfo() {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/info`,
+    `${process.env.BACKEND_URL}/api/users/info`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );

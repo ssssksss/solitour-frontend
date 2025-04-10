@@ -1,4 +1,7 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
+import { cookies } from "next/headers";
 
 export interface AgreeRequestData {
   name: string;
@@ -14,13 +17,16 @@ export interface DisagreeRequestData {
 }
 
 export async function agree(requestData: AgreeRequestData) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/info/agree`,
+    `${process.env.BACKEND_URL}/api/users/info/agree`,
     {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: JSON.stringify(requestData),
-      credentials: "include",
       cache: "no-store",
     },
   );
@@ -31,13 +37,16 @@ export async function agree(requestData: AgreeRequestData) {
 }
 
 export async function disagree(requestData: DisagreeRequestData) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/info/disagree`,
+    `${process.env.BACKEND_URL}/api/users/info/disagree`,
     {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: JSON.stringify(requestData),
-      credentials: "include",
       cache: "no-store",
     },
   );
