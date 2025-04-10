@@ -1,12 +1,16 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { InformationList } from "../model/informationList";
+import { cookies } from "next/headers";
 
 export async function getInformationList(urlSearch: string) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations${urlSearch}`,
+    `${process.env.BACKEND_URL}/api/informations${urlSearch}`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
@@ -19,11 +23,12 @@ export async function getInformationList(urlSearch: string) {
 }
 
 export async function getInformationListByTagName(urlSearch: string) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/tag/search${urlSearch}`,
+    `${process.env.BACKEND_URL}/api/informations/tag/search${urlSearch}`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );

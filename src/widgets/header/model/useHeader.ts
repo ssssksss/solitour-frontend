@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePreventBodyScroll, useThrottle } from "@/shared/lib/hooks";
 import { getUserInfo, useUserStore } from "@/entities/user";
-import { fetchWithAuth } from "@/shared/api";
 
 export const useHeader = () => {
   const pathname = usePathname();
@@ -43,13 +42,13 @@ export const useHeader = () => {
       try {
         const userInfo = await getUserInfo();
         if (userInfo.userStatus === "대기") {
-          await fetchWithAuth("/api/auth/logout", { method: "POST" });
+          await fetch("/api/auth/logout", { method: "POST" });
           setUserState({ id: -1 });
         } else {
           setUserState(userInfo);
         }
       } catch (error) {
-        await fetchWithAuth("/api/auth/logout", { method: "POST" });
+        await fetch("/api/auth/logout", { method: "POST" });
         setUserState({ id: -1 });
       }
     })();

@@ -1,3 +1,5 @@
+"use server";
+
 import { getNewAccessToken } from "./getNewAccessToken";
 
 export async function fetchWithAuth(
