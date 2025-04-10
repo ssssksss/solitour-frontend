@@ -6,7 +6,7 @@ interface BreadcrumbProps {
   categoryList: { label: string; href: string }[];
 }
 
-export const Breadcrumb = ({ categoryList: categories }: BreadcrumbProps) => {
+export const Breadcrumb = ({ categoryList }: BreadcrumbProps) => {
   return (
     <nav className="text-gray2 flex w-full items-center gap-1 py-10 text-xs">
       <div className="text-gray1">
@@ -19,10 +19,10 @@ export const Breadcrumb = ({ categoryList: categories }: BreadcrumbProps) => {
           />
         </Link>
       </div>
-      {categories.map((i, index) => (
+      {categoryList.map((i, index) => (
         <div key={index} className="flex flex-row items-center gap-1">
           <IoIosArrowForward />
-          {categories.length == index + 1 ? (
+          {categoryList.length == index + 1 ? (
             <span className="text-gray1 font-semibold">{i.label}</span>
           ) : (
             <Link href={i.href}> {i.label} </Link>

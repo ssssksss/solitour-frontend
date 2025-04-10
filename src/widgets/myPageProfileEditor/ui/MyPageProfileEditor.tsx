@@ -1,9 +1,9 @@
 import { User } from "@/entities/user";
-import { MyPageUserImage } from "./MyPageUserImage";
 import { MyPageNicknameEditor } from "@/features/myPageNicknameEditor";
 import { DeleteAccount } from "@/features/deleteAccount";
 import { MyPageEmail } from "./MyPageEmail";
 import { MyPageLinkedAccount } from "./MyPageLinkedAccount";
+import { MyPageUserImage } from "./MyPageUserImage";
 
 interface MyPageProfileProps {
   userInfo: User;
