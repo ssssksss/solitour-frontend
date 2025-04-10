@@ -1,5 +1,8 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { GatheringDetail } from "../model/gathering";
+import { cookies } from "next/headers";
 
 export interface GatheringCreateRequest {
   title: string;
@@ -50,11 +53,12 @@ export interface GatheringUpdateRequest {
 }
 
 export async function getGathering(gatheringId: number) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/${gatheringId}`,
+    `${process.env.BACKEND_URL}/api/gatherings/${gatheringId}`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
@@ -67,13 +71,16 @@ export async function getGathering(gatheringId: number) {
 }
 
 export async function createGathering(data: GatheringCreateRequest) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings`,
+    `${process.env.BACKEND_URL}/api/gatherings`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: JSON.stringify(data),
-      credentials: "include",
       cache: "no-store",
     },
   );
@@ -89,13 +96,16 @@ export async function updateGathering(
   gatheringId: number,
   data: GatheringUpdateRequest,
 ) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/${gatheringId}`,
+    `${process.env.BACKEND_URL}/api/gatherings/${gatheringId}`,
     {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: JSON.stringify(data),
-      credentials: "include",
       cache: "no-store",
     },
   );
@@ -106,11 +116,12 @@ export async function updateGathering(
 }
 
 export async function deleteGathering(gatheringId: number) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/${gatheringId}`,
+    `${process.env.BACKEND_URL}/api/gatherings/${gatheringId}`,
     {
       method: "DELETE",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );

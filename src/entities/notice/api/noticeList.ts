@@ -1,3 +1,5 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { Notice } from "../model/notice";
 
@@ -7,7 +9,7 @@ interface NoticeList {
 
 export async function getNoticeList(page: number) {
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/notice?page=${page - 1}`,
+    `${process.env.BACKEND_URL}/api/notice?page=${page - 1}`,
     {
       method: "GET",
       next: { revalidate: 60 * 10, tags: ["noticeList"] },

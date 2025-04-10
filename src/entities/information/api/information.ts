@@ -1,5 +1,8 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { Information } from "../model/information";
+import { cookies } from "next/headers";
 
 export interface InformationDetailResponse {
   title: string;
@@ -84,11 +87,12 @@ export interface InformationUpdateRequest {
 }
 
 export async function getInformation(informationId: number) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/${informationId}`,
+    `${process.env.BACKEND_URL}/api/informations/${informationId}`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );
@@ -101,13 +105,16 @@ export async function getInformation(informationId: number) {
 }
 
 export async function createInformation(data: InformationCreateRequest) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations`,
+    `${process.env.BACKEND_URL}/api/informations`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: JSON.stringify(data),
-      credentials: "include",
       cache: "no-store",
     },
   );
@@ -123,13 +130,16 @@ export async function updateInformation(
   informationId: number,
   data: InformationUpdateRequest,
 ) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/${informationId}`,
+    `${process.env.BACKEND_URL}/api/informations/${informationId}`,
     {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `${accessToken?.name}=${accessToken?.value}`,
+      },
       body: JSON.stringify(data),
-      credentials: "include",
       cache: "no-store",
     },
   );
@@ -140,11 +150,12 @@ export async function updateInformation(
 }
 
 export async function deleteInformation(informationId: number) {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/informations/${informationId}`,
+    `${process.env.BACKEND_URL}/api/informations/${informationId}`,
     {
       method: "DELETE",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );

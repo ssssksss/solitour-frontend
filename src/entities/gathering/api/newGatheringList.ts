@@ -1,12 +1,16 @@
+"use server";
+
 import { fetchWithAuth } from "@/shared/api";
 import { Gathering } from "../model/gathering";
+import { cookies } from "next/headers";
 
 export async function getNewGatheringList() {
+  const accessToken = (await cookies()).get("access_token");
   const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/gatherings/home`,
+    `${process.env.BACKEND_URL}/api/gatherings/home`,
     {
       method: "GET",
-      credentials: "include",
+      headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
       cache: "no-store",
     },
   );

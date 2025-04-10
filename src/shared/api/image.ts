@@ -1,3 +1,6 @@
+"use server";
+
+import { cookies } from "next/headers";
 import { fetchWithAuth } from "./fetchWithAuth";
 
 export async function uploadImage(file: File, type: "INFORMATION" | "DIARY") {
@@ -5,15 +8,13 @@ export async function uploadImage(file: File, type: "INFORMATION" | "DIARY") {
   formData.append("image", file);
   formData.append("type", type);
 
-  const response = await fetchWithAuth(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/image`,
-    {
-      method: "POST",
-      body: formData,
-      credentials: "include",
-      cache: "no-store",
-    },
-  );
+  const accessToken = (await cookies()).get("access_token");
+  const response = await fetchWithAuth(`${process.env.BACKEND_URL}/api/image`, {
+    method: "POST",
+    headers: { Cookie: `${accessToken?.name}=${accessToken?.value}` },
+    body: formData,
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to upload an image.");
