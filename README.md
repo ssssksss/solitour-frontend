@@ -1,6 +1,6 @@
 <h1>Solitour - 새로운 나를 찾는 여행</h1>
 
-![394534337-e65f5376-ecf0-4b69-aab0-df5920130856](https://github.com/user-attachments/assets/806b95bd-ab25-462c-adde-e292e36a4754)
+![image](https://github.com/user-attachments/assets/4a434355-af92-481c-9af2-a114145b5733)
 
 > 배포 링크 <br/> **https://www.solitourist.com**
 
@@ -20,17 +20,21 @@
 - [💾 주요 기능](#-주요-기능)
   - [메인 페이지](#메인-페이지)
   - [정보 목록 조회](#정보-목록-조회)
-  - [정보 생성](#정보-생성)
   - [정보 상세 조회](#정보-상세-조회)
+  - [정보 생성](#정보-생성)
   - [정보 수정](#정보-수정)
   - [모임 목록 조회](#모임-목록-조회)
   - [모임 상세 조회](#모임-상세-조회)
   - [모임 수정](#모임-수정)
   - [모임 삭제](#모임-삭제)
   - [모임 참가](#모임-참가)
+  - [여행일기 목록 조회](#여행일기-목록-조회)
+  - [여행일기 상세 조회](#여행일기-상세-조회)
+  - [여행일기 생성](#여행일기-생성)
   - [로그인](#로그인)
   - [마이페이지](#마이페이지)
   - [고객지원](#고객지원)
+- [✏️ 개발 기록](#️-개발-기록)
 - [🏛️️ 아키텍처](#️️-아키텍처)
 - [📚 기술스택](#-기술스택)
 - [👤 팀원 소개](#-팀원-소개)
@@ -78,23 +82,22 @@
 
 <br/>
 
-### 정보 생성
-
-![정보생성](https://github.com/user-attachments/assets/0f0aed95-a886-40c1-8774-fcee5722f9b7)
-
-- 제목, 장소, 카테고리, 이미지, 내용, 해시태그, 정보 Tip을 등록할 수 있습니다.
-- 이미지는 최대 12개까지 등록할 수 있습니다.
-
-<br/>
-
 ### 정보 상세 조회
 
 ![정보상세](https://github.com/user-attachments/assets/553b23ad-f79d-4e9c-a958-2b280cee33b5)
 
 - 다른 사용자가 작성한 여행 상세 정보를 조회할 수 있습니다.
 - 좋아요수, 조회수를 확인할 수 있습니다.
-- 해당 정보 글에 댓글을 작성하거나 댓글 목록을 확인할 수 있습니다.
 - 동일한 카테고리에 속하는 추천 여행 정보 목록을 확인할 수 있습니다.
+
+<br/>
+
+### 정보 생성
+
+![정보생성](https://github.com/user-attachments/assets/0f0aed95-a886-40c1-8774-fcee5722f9b7)
+
+- 제목, 장소, 카테고리, 이미지, 내용, 해시태그, 정보 Tip을 등록할 수 있습니다.
+- 이미지는 최대 12개까지 등록할 수 있습니다.
 
 <br/>
 
@@ -155,6 +158,32 @@
 
 <br/>
 
+### 여행일기 목록 조회
+
+![여행일기목록](https://github.com/user-attachments/assets/06c0cfac-b7cf-4c99-af3a-8ddce32332ff)
+
+- 자신이 작성한 여행일기 목록을 조회할 수 있습니다.
+- 여행일기를 카드 형식으로 표시합니다.
+
+<br />
+
+### 여행일기 상세 조회
+
+![여행일기상세조회](https://github.com/user-attachments/assets/fcdc25b6-704c-47c7-b992-beb618f48164)
+
+- 자신이 작성한 여행일기 내용을 상세하게 확인할 수 있습니다.
+
+<br />
+
+### 여행일기 생성
+
+![여행일기생성](https://github.com/user-attachments/assets/6aba0fa8-3486-4706-8541-a455476e3582)
+
+- 제목, 날짜, 장소, 기분, 내용을 입력하여 여행일기를 작성할 수 있습니다.
+- 업로드할 수 있는 이미지 개수에는 제한이 없습니다.
+
+<br />
+
 ### 로그인
 
 ![로그인](https://github.com/user-attachments/assets/093e6cc5-eccb-4ac3-b2fb-e711447f081e)
@@ -183,6 +212,34 @@
 <br/>
 <br/>
 
+## ✏️ 개발 기록
+
+| 제목                                                                                                                                                                                                                                                                                                              | 핵심 키워드                     | 작성자                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------- |
+| [🧭Next.js에서 Kakao 지도 API 적용 방법](https://hyunjinno.github.io/posts/kakao-map/)                                                                                                                                                                                                                            | `Kakao Map`                     | [HyunJinNo](https://github.com/HyunJinNo) |
+| [📝Next.js에서 ReactQuill 사용 방법](https://hyunjinno.github.io/posts/react-quill/)                                                                                                                                                                                                                              | `Quill`                         | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🔛좌우 드래그 스크롤 구현 방법](https://hyunjinno.github.io/posts/horizontal-drag-scroll/)                                                                                                                                                                                                                       | `Scroll`                        | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🖼Next.js Quill 이미지 처리 방법](https://hyunjinno.github.io/posts/react-quill-image/)                                                                                                                                                                                                                          | `Image` `Quill`                 | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🪟모달 창(Modal Window) 뒤로가기 이벤트 처리 방법](https://hyunjinno.github.io/posts/modal-back-button/)                                                                                                                                                                                                         | `Modal`                         | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🐻Zustand 사용 방법](https://hyunjinno.github.io/posts/zustand/)                                                                                                                                                                                                                                                 | `Zustand`                       | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🐋Docker의 개념과 사용 방법](https://hyunjinno.github.io/posts/docker/)                                                                                                                                                                                                                                          | `Docker` `Standalone`           | [HyunJinNo](https://github.com/HyunJinNo) |
+| [✅GitHub PR & Issue Template 생성 방법](https://hyunjinno.github.io/posts/github-template/)                                                                                                                                                                                                                      | `GitHub` `Pull Request` `Issue` | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🧱(리팩토링 전) Presentational & Container Components 패턴](<https://github.com/TripInfoWeb/solitour-frontend/wiki/%F0%9F%A7%B1(%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%EC%A0%84)-Presentational-&-Container-Components-%ED%8C%A8%ED%84%B4>)                                                                       | `FE Architecture`               | [HyunJinNo](https://github.com/HyunJinNo) |
+| [🧱(리팩토링 후) Presentational & Container Components 패턴을 제거한 이유](<https://github.com/TripInfoWeb/solitour-frontend/wiki/%F0%9F%A7%B1(%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%ED%9B%84)-Presentational-&-Container-Components-%ED%8C%A8%ED%84%B4%EC%9D%84-%EC%A0%9C%EA%B1%B0%ED%95%9C-%EC%9D%B4%EC%9C%A0>) | `FE Architecture`               | [HyunJinNo](https://github.com/HyunJinNo) |
+| [📘Next.js 프로젝트에 FSD 아키텍처 적용하기](https://hyunjinno.github.io/posts/fsd-example-nextjs/)                                                                                                                                                                                                               | `FE Architecture` `FSD`         | [HyunJinNo](https://github.com/HyunJinNo) |
+| [📆react-date-range 사용 방법](https://blog.ssssksss.xyz/blog2/56?menu=%EA%B8%B0%EC%B4%88)                                                                                                                                                                                                                        | `react-date-range`              | [ssssksss](https://github.com/ssssksss)   |
+| [🕛date-fns 사용 방법](https://blog.ssssksss.xyz/blog2/66?menu=%EA%B8%B0%EC%B4%88)                                                                                                                                                                                                                                | `date-fns`                      | [ssssksss](https://github.com/ssssksss)   |
+| [🔡긴 문자열을 처리하는 방법](https://blog.ssssksss.xyz/blog2/11?menu=%EA%B2%B0%EA%B3%BC)                                                                                                                                                                                                                         | `Tailwind CSS` `String`         | [ssssksss](https://github.com/ssssksss)   |
+| [✂react-easy-crop 사용 방법](https://blog.ssssksss.xyz/blog/665)                                                                                                                                                                                                                                                 | `react-easy-crop`               | [ssssksss](https://github.com/ssssksss)   |
+| [🔑nextjs middleware 사용 방법](https://blog.ssssksss.xyz/blog/669)                                                                                                                                                                                                                                               | `middleware`                    | [ssssksss](https://github.com/ssssksss)   |
+| [💻주소에 쿼리스트링 파라미터를 추가, 수정 및 삭제하는 방법](https://blog.ssssksss.xyz/blog/666)                                                                                                                                                                                                                  | `URLSearchParams`               | [ssssksss](https://github.com/ssssksss)   |
+| [🧱Dropdown 컴포넌트 만들기](https://blog.ssssksss.xyz/blog/670)                                                                                                                                                                                                                                                  | `Dropdown`                      | [ssssksss](https://github.com/ssssksss)   |
+| [🔓카카오, 구글, 네이버 등 여러 oauth 처리하는 방법](https://blog.ssssksss.xyz/blog/656)                                                                                                                                                                                                                          | `OAuth`                         | [ssssksss](https://github.com/ssssksss)   |
+| [🚀organization repository에서 vercel에 배포하는 방법](https://blog.ssssksss.xyz/blog/652)                                                                                                                                                                                                                        | `CI/CD`                         | [ssssksss](https://github.com/ssssksss)   |
+
+<br />
+<br />
+
 ## 🏛️️ 아키텍처
 
 ![architecture](https://github.com/user-attachments/assets/b543874f-f861-4ad5-9c9e-32a58a2648f9)
@@ -205,8 +262,8 @@
 
 ## 👤 팀원 소개
 
-|       김수아        |                                 노현진                                 |                                이수경                                 |                                원동훈                                |                                 정재현                                 |
-| :-----------------: | :--------------------------------------------------------------------: | :-------------------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-|                     | <img src="https://github.com/HyunJinNo.png" width="100" height="100"/> | <img src="https://github.com/ssssksss.png" width="100" height="100"/> | <img src="https://github.com/Astin01.png" width="100" height="100"/> | <img src="https://github.com/hyeonjaez.png" width="100" height="100"/> |
-| Sua0714@hotmail.com |               [@HyunJinNo](https://github.com/HyunJinNo)               |               [@ssssksss](https://github.com/ssssksss)                |                [@Astin01](https://github.com/Astin01)                |               [@hyeonjaez](https://github.com/hyeonjaez)               |
-|      Designer       |                               Front-end                                |                               Front-end                               |                               Back-end                               |                                Back-end                                |
+|       김수아       |                                 노현진                                 |                                이수경                                 |                                원동훈                                |                                 정재현                                 |
+| :----------------: | :--------------------------------------------------------------------: | :-------------------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+|                    | <img src="https://github.com/HyunJinNo.png" width="100" height="100"/> | <img src="https://github.com/ssssksss.png" width="100" height="100"/> | <img src="https://github.com/Astin01.png" width="100" height="100"/> | <img src="https://github.com/hyeonjaez.png" width="100" height="100"/> |
+| Sua0714hotmail.com |               [HyunJinNo](https://github.com/HyunJinNo)                |                [ssssksss](https://github.com/ssssksss)                |                [Astin01](https://github.com/Astin01)                 |               [hyeonjaez](https://github.com/hyeonjaez)                |
+|      Designer      |                               Front-end                                |                               Front-end                               |                               Back-end                               |                                Back-end                                |
