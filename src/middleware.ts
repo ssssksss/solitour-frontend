@@ -61,18 +61,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
-  if (pathname.startsWith("/support")) {
-    const validMenus = ["about", "notice", "faq", "terms"];
-    const url = new URL(request.url);
-    const menu = url.searchParams.get("menu");
-    if (!menu && url.pathname == "/support") {
-      return NextResponse.redirect(new URL("/404", request.url));
-    }
-    if (menu && !validMenus.includes(menu)) {
-      return NextResponse.redirect(new URL("/404", request.url));
-    }
-  }
-
   return NextResponse.next();
 }
 
@@ -84,6 +72,5 @@ export const config = {
     "/diary/:path*",
     "/auth/:path*",
     "/mypage/:path*",
-    "/support",
   ],
 };
